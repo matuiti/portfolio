@@ -39,3 +39,23 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Sass
+.sass-cache/
+*.css.map
+
+# コンパイル済みCSS（SCSSから自動生成されるもの）
+public/ui-collection-static/**/*.css
+public/animation-gallery/**/*.css
+
+# エディタ
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# パフォーマンス計測結果
+.lighthouse/
