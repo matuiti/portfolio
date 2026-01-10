@@ -45,8 +45,8 @@ next-env.d.ts
 *.css.map
 
 # コンパイル済みCSS（SCSSから自動生成されるもの）
-public/ui-collection-static/**/*.css
-public/animation-gallery/**/*.css
+public/galleries/ui/**/*.css
+public/galleries/animation/**/*.css
 
 # エディタ
 .vscode/
