@@ -13,6 +13,7 @@
     "compile:scss:animation": "sass public/gallery-parts/animation:public/gallery-parts/animation --no-source-map --style=compressed",
     "compile:scss:common": "sass public/gallery-parts/common/css:public/gallery-parts/common/css --no-source-map --style=compressed",
     "compile:scss": "npm run compile:scss:common && npm run compile:scss:ui && npm run compile:scss:animation",
+
     "watch:scss:ui": "sass public/gallery-parts/ui:public/gallery-parts/ui --watch --style=expanded",
     "watch:scss:animation": "sass public/gallery-parts/animation:public/gallery-parts/animation --watch --style=expanded",
     "watch:scss:common": "sass public/gallery-parts/common/css:public/gallery-parts/common/css --watch --style=expanded",
