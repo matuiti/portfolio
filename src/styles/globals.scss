@@ -1,8 +1,8 @@
 // Global Styles
 // サイト全体のグローバルスタイル
 
-@import './base/_variables';
-@import './base/_mixins';
-@import './base/_reset';
-@import './theme/_light';
-@import './theme/_dark';
+@use "./base/_variables";
+@use "./base/_mixins";
+@use "./base/_reset";
+@use "./theme/_light";
+@use "./theme/_dark";
