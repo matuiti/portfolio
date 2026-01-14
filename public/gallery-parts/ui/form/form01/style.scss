@@ -1,6 +1,5 @@
 // form01 のスタイル
-@use '../../common/css/variables';
-@use '../../common/css/mixins';
+@use '../../../common/css/index';
 
 .form01 {
   // Mobile First (375px)
