@@ -15,7 +15,7 @@ if (!categoryArg || !nameArg) {
 const category = categoryArg.split('=')[1];
 const name = nameArg.split('=')[1];
 
-// プロジェクトルートからの相対パス（process.cwd() を使用）
+// プロジェクトルートからの相対パス
 const basePath = path.join(process.cwd(), 'public', 'gallery-parts', 'ui', category, name);
 
 // ディレクトリ作成
@@ -25,6 +25,10 @@ if (fs.existsSync(basePath)) {
 }
 
 fs.mkdirSync(basePath, { recursive: true });
+
+// カテゴリからcommon/cssまでの相対パス計算
+// 例: button/button01 → ../../../common/css
+const relativePathToCommon = '../../../common/css';
 
 // テンプレートファイル作成
 const templates = {
@@ -46,8 +50,7 @@ const templates = {
 </html>`,
 
   'style.scss': `// ${name} のスタイル
-@use '../../common/css/variables';
-@use '../../common/css/mixins';
+@use '${relativePathToCommon}/index';
 
 .${name} {
   // Mobile First (375px)
@@ -97,3 +100,5 @@ console.log(`\nNext steps:`);
 console.log(`1. Edit files in: ${basePath}`);
 console.log(`2. Compile SCSS: npm run compile:scss:ui`);
 console.log(`3. Add metadata to: src/data/gallery/ui-parts.ts`);
+console.log(`\nPreview:`);
+console.log(`npm run preview:ui -- --category=${category} --name=${name}`);
