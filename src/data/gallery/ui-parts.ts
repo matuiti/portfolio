@@ -1,15 +1,15 @@
-import { UIPart } from "@/types/gallery";
+import { UIPart } from "@/types/gallery/ui-part";
 
-// 仮置き
-export const uiParts: UIPart[] = [
+export const UI_PARTS: UIPart[] = [
   {
-    id: 'header01',
-    category: 'header',
-    title: 'シンプルヘッダー',
-    description: '...',
-    tags: ['responsive', 'minimal'],
-    path: '/gallery-parts/ui/header/header01',
-    difficulty: 'basic',
-    technologies: ['HTML', 'SCSS', 'Vanilla JS']
-  }
-]
+    id: "button01",
+    category: "button",
+    title: "グラデーションボタン",
+    description: "ホバーで光るグラデーションボタン。",
+    tags: ["ホバー", "グラデーション", "CSSのみ"],
+    difficulty: "basic",
+    path: "/gallery-parts/ui/button/button01/index.html",
+    createdAt: "2025-12-01",
+  },
+  // ...追加していく
+];
