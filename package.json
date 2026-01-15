@@ -3,28 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:full": "npm run watch:scss & next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+  "dev": "next dev",
+  "dev:full": "npm run watch:scss & next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
 
-    "compile:scss:ui": "sass public/gallery-parts/ui:public/gallery-parts/ui --no-source-map --style=compressed",
-    "compile:scss:animation": "sass public/gallery-parts/animation:public/gallery-parts/animation --no-source-map --style=compressed",
-    "compile:scss:common": "sass public/gallery-parts/common/css:public/gallery-parts/common/css --no-source-map --style=compressed",
-    "compile:scss": "npm run compile:scss:common && npm run compile:scss:ui && npm run compile:scss:animation",
+  "compile:scss:common": "sass public/gallery-parts/common/css:public/gallery-parts/common/css --no-source-map --style=compressed",
+  "compile:scss:ui:common": "sass public/gallery-parts/ui/common/css:public/gallery-parts/ui/common/css --no-source-map --style=compressed",
+  "compile:scss:ui:parts": "sass public/gallery-parts/ui:public/gallery-parts/ui --no-source-map --style=compressed",
+  "compile:scss": "npm run compile:scss:common && npm run compile:scss:ui:common && npm run compile:scss:ui:parts",
 
-    "watch:scss:ui": "sass public/gallery-parts/ui:public/gallery-parts/ui --watch --style=expanded",
-    "watch:scss:animation": "sass public/gallery-parts/animation:public/gallery-parts/animation --watch --style=expanded",
-    "watch:scss:common": "sass public/gallery-parts/common/css:public/gallery-parts/common/css --watch --style=expanded",
-    "watch:scss": "npm run watch:scss:common & npm run watch:scss:ui & npm run watch:scss:animation",
+  "watch:scss:common": "sass public/gallery-parts/common/css:public/gallery-parts/common/css --watch --style=expanded",
+  "watch:scss:ui:common": "sass public/gallery-parts/ui/common/css:public/gallery-parts/ui/common/css --watch --style=expanded",
+  "watch:scss:ui:parts": "sass public/gallery-parts/ui:public/gallery-parts/ui --watch --style=expanded",
+  "watch:scss": "npm run watch:scss:common & npm run watch:scss:ui:common & npm run watch:scss:ui:parts",
 
-    "generate:ui": "node scripts/generate-ui-part.js",
-    "preview:ui": "node scripts/preview-ui-parts.js",
-    
-    "prebuild": "npm run compile:scss",
-    "postinstall": "npm run compile:scss"
-  },
+  "generate:ui": "node scripts/generate-ui-part.js",
+  "preview:ui": "node scripts/preview-ui-parts.js",
+
+  "prebuild": "npm run compile:scss",
+  "postinstall": "npm run compile:scss"
+},
   "dependencies": {
     "next": "16.1.1",
     "react": "19.2.3",
