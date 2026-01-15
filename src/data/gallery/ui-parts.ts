@@ -9,7 +9,6 @@ export const UI_PARTS: UIPart[] = [
     tags: ["ホバー", "グラデーション", "CSSのみ"],
     difficulty: "basic",
     path: "/gallery-parts/ui/button/button01/index.html",
-    createdAt: "2025-12-01",
   },
   // ...追加していく
 ];
