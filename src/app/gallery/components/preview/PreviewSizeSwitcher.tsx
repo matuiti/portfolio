@@ -6,6 +6,10 @@
 
 "use client";
 
-export default function PreviewSizeSwitcher() {
-  return <div>Size Switcher</div>;
+export function PreviewSizeSwitcher() {
+  return (
+    <div className="h-10 bg-neutral-100 rounded-md mb-6 flex items-center justify-center text-neutral-400">
+      PreviewSizeSwitcher（後で実装）
+    </div>
+  );
 }
