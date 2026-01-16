@@ -5,5 +5,13 @@
 // - 一覧の見た目がここで決まる
 
 export default function ItemCard() {
-  return <div className="item-card">Item</div>;
+  return (
+    <div className="item-card">
+      <div className="border-b flex gap-4">
+        <button>説明</button>
+        <button>コード</button>
+        <button className="md:hidden">プレビュー</button>
+      </div>
+    </div>
+  );
 }

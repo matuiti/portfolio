@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import { GalleryLayout } from "./components/layout/GalleryLayout";
 
 export default function GalleryRootLayout({
   children,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
 }) {
-  return <section className="gallery-root">{children}</section>;
+  return <GalleryLayout>{children}</GalleryLayout>;
 }
