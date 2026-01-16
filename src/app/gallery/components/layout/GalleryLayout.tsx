@@ -10,15 +10,22 @@
 import { useState } from "react";
 import { GallerySidebar } from "./GallerySidebar";
 import { GalleryDrawerMenu } from "./GalleryDrawerMenu";
+import { Filtering } from "@/types/gallery/filtering";
 
-export function GalleryLayout({ children }: { children: React.ReactNode }) {
+type GalleryLayoutProps = {
+  children: React.ReactNode;
+  filtering: Filtering;
+};
+
+
+export function GalleryLayout({ children, filtering }: GalleryLayoutProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-white">
       {/* PC：左固定サイドバー */}
       <aside className="hidden md:block w-72 border-r border-neutral-200">
-        <GallerySidebar />
+        <GallerySidebar filtering={filtering} />
       </aside>
 
       {/* SP：ヘッダー（ハンバーガー） */}
@@ -33,6 +40,7 @@ export function GalleryLayout({ children }: { children: React.ReactNode }) {
       <GalleryDrawerMenu
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
+        filtering={filtering}
       />
 
       {/* メインコンテンツ */}

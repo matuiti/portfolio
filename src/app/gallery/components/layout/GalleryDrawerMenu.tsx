@@ -4,14 +4,18 @@
 // - レスポンシブ設計の方向性がここで決まる
 
 "use client";
+import { Filtering } from "@/types/gallery/filtering";
+import { CategoryList } from "../filter/CategoryList";
 
-export function GalleryDrawerMenu({
-  isOpen,
-  onClose,
-}: {
+type Props = {
+  filtering: Filtering;
   isOpen: boolean;
   onClose: () => void;
-}) {
+};
+
+export function GalleryDrawerMenu({ filtering, isOpen, onClose }: Props) {
+  const { selectedCategory, setSelectedCategory } = filtering;
+
   return (
     <>
       {/* オーバーレイ */}
@@ -32,6 +36,10 @@ export function GalleryDrawerMenu({
           </button>
         </div>
 
+        <CategoryList
+          selected={selectedCategory}
+          onChange={setSelectedCategory}
+        />
         {/* Sidebar と同じ中身を後で入れる */}
         <div className="p-4 space-y-4">
           <div className="h-32 bg-neutral-100 rounded" />

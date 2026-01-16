@@ -4,16 +4,27 @@
 // - ギャラリーの“顔”になる部分
 // - ここができるとページの印象が一気に固まる
 
-export function GallerySidebar() {
+"use client";
+
+import { Filtering } from "@/types/gallery/filtering";
+import { CategoryList } from "../filter/CategoryList";
+
+type Props = {
+  filtering: Filtering;
+};
+
+
+export function GallerySidebar({ filtering }: Props) {
+  const { selectedCategory, setSelectedCategory } = filtering;
+
   return (
     <div className="p-4">
       <h2 className="text-lg font-bold mb-4">UI Gallery</h2>
 
-      {/* CategoryList（後で実装） */}
-      <div className="mb-6">
-        {/* CategoryList placeholder */}
-        <div className="h-32 bg-neutral-100 rounded" />
-      </div>
+      <CategoryList
+        selected={selectedCategory}
+        onChange={setSelectedCategory}
+      />
 
       {/* TagGroups（後で実装） */}
       <div className="space-y-4">
