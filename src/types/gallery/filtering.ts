@@ -9,6 +9,7 @@ export type FilteringState = {
   totalPages: number;
   filteredItems: UIPart[];
   paginatedItems: UIPart[];
+  noResultsMessage: string;
 };
 
 export type FilteringActions = {
