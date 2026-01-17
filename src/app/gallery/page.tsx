@@ -5,6 +5,7 @@ import { TitleAndCount } from "./components/ui/TitleAndCount";
 import { UI_PARTS } from "@/data/gallery/ui-parts";
 import { GalleryLayout } from "./components/layout/GalleryLayout";
 import { ItemList } from "./components/list/ItemList";
+import { useURLSync } from "@/lib/hooks/useURLSync";
 // import { Pagination } from "./components/list/Pagination";
 
 export default function GalleryPage() {
@@ -16,6 +17,9 @@ export default function GalleryPage() {
     noResultsMessage,
     // currentPage, totalPages, setCurrentPage (ページネーション実装時に使用)
   } = filtering;
+
+  // URL同期を開始
+  useURLSync(filtering);
 
   return (
     <GalleryLayout filtering={filtering}>
