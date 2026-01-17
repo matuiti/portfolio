@@ -1,0 +1,43 @@
+// Global Styles
+// サイト全体のグローバルスタイル
+@use "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* スクロールバー全体の幅 */
+::-webkit-scrollbar {
+  width: 6px; /* 縦スクロールの幅 */
+  height: 6px; /* 横スクロールの高さ */
+}
+
+/* スクロールバーの通り道（レール） */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 動くバーの部分（つまみ） */
+::-webkit-scrollbar-thumb {
+  background: #e5e5e5; /* neutral-200 相当 */
+  border-radius: 10px;
+}
+
+/* ホバーした時に少し濃くする */
+::-webkit-scrollbar-thumb:hover {
+  background: #d4d4d4; /* neutral-300 相当 */
+}
+
+/* スクロールエリアをホバーしていない時はバーを透明に近づける */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0);
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}

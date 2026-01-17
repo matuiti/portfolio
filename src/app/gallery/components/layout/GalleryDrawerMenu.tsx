@@ -93,15 +93,6 @@ export function GalleryDrawerMenu({ filtering, isOpen, onClose }: Props) {
           </section>
         </div>
 
-        {/* フッター: 適用ボタン（ドロワーを閉じる導線） */}
-        <div className="p-4 border-t bg-neutral-50">
-          <button
-            onClick={onClose}
-            className="w-full py-3 bg-neutral-900 text-white rounded-xl font-bold text-sm shadow-lg shadow-neutral-200 active:scale-[0.98] transition-all"
-          >
-            結果を表示する
-          </button>
-        </div>
       </div>
     </>
   );

@@ -17,26 +17,24 @@ type GalleryLayoutProps = {
   filtering: Filtering;
 };
 
-
 export function GalleryLayout({ children, filtering }: GalleryLayoutProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-white">
-      {/* PC：左固定サイドバー */}
-      <aside className="hidden md:block w-72 border-r border-neutral-200">
+    <div className="flex h-screen overflow-hidden bg-white">
+      {/* PC：検索サイドバー */}
+      <aside className="hidden md:block w-80 flex-shrink-0 border-r border-neutral-200">
         <GallerySidebar filtering={filtering} />
       </aside>
 
-      {/* SP：ヘッダー（ハンバーガー） */}
+      {/* SP：検索ドロワーメニュー開閉ボタン */}
       <header className="md:hidden fixed top-0 left-0 right-0 h-14 bg-white border-b border-neutral-200 flex items-center px-4 z-30">
         <button onClick={() => setIsDrawerOpen(true)} className="text-xl">
-          ☰
+          ▶<span className="ml-4 font-bold">検索メニューを開く</span>
         </button>
-        <span className="ml-4 font-bold">UI Gallery</span>
       </header>
 
-      {/* SP：ドロワーメニュー */}
+      {/* SP：検索ドロワーメニュー */}
       <GalleryDrawerMenu
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
@@ -44,8 +42,8 @@ export function GalleryLayout({ children, filtering }: GalleryLayoutProps) {
       />
 
       {/* メインコンテンツ */}
-      <main className="flex-1 md:ml-0 mt-14 md:mt-0 p-6 overflow-y-auto">
-        {children}
+      <main className="flex-1 min-w-0 overflow-y-auto bg-white">
+        <div className="max-w-7xl mx-auto px-6 py-10">{children}</div>
       </main>
     </div>
   );
