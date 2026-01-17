@@ -11,9 +11,6 @@ import type { UIPart } from "@/types/gallery/ui-part";
 import { Filtering } from "@/types/gallery/filtering";
 
 export function useFiltering(allItems: UIPart[]): Filtering {
-  // -----------------------------
-  // 状態
-  // -----------------------------
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -21,60 +18,77 @@ export function useFiltering(allItems: UIPart[]): Filtering {
   const itemsPerPage = 12;
 
   // -----------------------------
-  // フィルタリング処理
+  // フィルタリング処理（段階的に計算）
   // -----------------------------
-  const filteredItems = useMemo(() => {
+  const { filteredItems, noResultsMessage } = useMemo(() => {
     let items = [...allItems];
 
-    // カテゴリ
+    // 1. カテゴリ絞り込み
     if (selectedCategory !== "all") {
-      items = items.filter((item) => item.category === selectedCategory);
+      const categoryFiltered = items.filter(
+        (item) => item.category === selectedCategory
+      );
+      if (categoryFiltered.length === 0) {
+        return {
+          filteredItems: [],
+          noResultsMessage: "指定されたカテゴリのアイテムはまだありません。",
+        };
+      }
+      items = categoryFiltered;
     }
 
-    // タグ
+    // 2. タグ絞り込み (AND検索)
     if (selectedTags.length > 0) {
-      items = items.filter((item) =>
+      const tagFiltered = items.filter((item) =>
         selectedTags.every((tag) => item.tags.includes(tag))
       );
+      if (tagFiltered.length === 0) {
+        return {
+          filteredItems: [],
+          noResultsMessage:
+            "選択されたタグの組み合わせに一致するアイテムはありません。",
+        };
+      }
+      items = tagFiltered;
     }
 
-    // 検索
+    // 3. 検索キーワード絞り込み
     if (searchQuery.trim() !== "") {
       const q = searchQuery.toLowerCase();
-      items = items.filter(
+      const searchFiltered = items.filter(
         (item) =>
           item.title.toLowerCase().includes(q) ||
           item.description.toLowerCase().includes(q)
       );
+      if (searchFiltered.length === 0) {
+        return {
+          filteredItems: [],
+          noResultsMessage: `「${searchQuery}」に一致する結果は見つかりませんでした。`,
+        };
+      }
+      items = searchFiltered;
     }
 
-    return items;
+    return { filteredItems: items, noResultsMessage: "" };
   }, [allItems, selectedCategory, selectedTags, searchQuery]);
 
   // -----------------------------
   // ページネーション
   // -----------------------------
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-
   const paginatedItems = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
     return filteredItems.slice(start, start + itemsPerPage);
   }, [filteredItems, currentPage]);
 
-  // -----------------------------
-  // ページ変更時のリセット
-  // -----------------------------
   const resetPage = () => setCurrentPage(1);
 
   return {
-    // state
     selectedCategory,
     selectedTags,
     searchQuery,
     currentPage,
     itemsPerPage,
-
-    // setters
     setSelectedCategory: (cat: string) => {
       setSelectedCategory(cat);
       resetPage();
@@ -88,10 +102,9 @@ export function useFiltering(allItems: UIPart[]): Filtering {
       resetPage();
     },
     setCurrentPage,
-
-    // 結果
     filteredItems,
     paginatedItems,
     totalPages,
+    noResultsMessage
   };
 }

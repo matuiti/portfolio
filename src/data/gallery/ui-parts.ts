@@ -10,5 +10,14 @@ export const UI_PARTS: UIPart[] = [
     difficulty: "basic",
     path: "/gallery-parts/ui/button/button01/index.html",
   },
+  {
+    id: "button02",
+    category: "button",
+    title: "スケールボタン",
+    description: "ホバーでスケールするボタン。",
+    tags: ["ホバー", "スケール", "CSSのみ"],
+    difficulty: "basic",
+    path: "/gallery-parts/ui/button/button02/index.html",
+  },
   // ...追加していく
 ];
