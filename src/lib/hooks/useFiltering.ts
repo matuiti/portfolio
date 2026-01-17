@@ -15,7 +15,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = 2;
 
   // -----------------------------
   // フィルタリング処理（段階的に計算）
