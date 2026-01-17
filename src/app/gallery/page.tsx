@@ -6,25 +6,28 @@ import { UI_PARTS } from "@/data/gallery/ui-parts";
 import { GalleryLayout } from "./components/layout/GalleryLayout";
 import { ItemList } from "./components/list/ItemList";
 import { useURLSync } from "@/lib/hooks/useURLSync";
-// import { Pagination } from "./components/list/Pagination";
+import { Pagination } from "./components/filter/Pagination"; // パスは適宜調整してください
 
 export default function GalleryPage() {
   const filtering = useFiltering(UI_PARTS);
 
-  // useFilteringから必要な値を展開
+  // useFilteringから必要な値をすべて展開
   const {
-    filteredItems,
+    filteredItems, // 全体のヒット件数用
+    paginatedItems, // 現在のページに表示する分
     noResultsMessage,
-    // currentPage, totalPages, setCurrentPage (ページネーション実装時に使用)
+    currentPage,
+    totalPages,
+    setCurrentPage,
   } = filtering;
 
-  // URL同期を開始
+  // URL同期を開始（category, tags, q, page を監視）
   useURLSync(filtering);
 
   return (
     <GalleryLayout filtering={filtering}>
       <div className="space-y-8">
-        {/* 1. ヘッダーエリア：現在のヒット件数と状況メッセージ */}
+        {/* 1. ヘッダーエリア：全体のヒット件数を表示 */}
         <TitleAndCount count={filteredItems.length} />
 
         {/* 3. メインコンテンツエリア */}
@@ -40,19 +43,19 @@ export default function GalleryPage() {
         ) : (
           /* ヒットありの場合のリスト表示 */
           <div className="space-y-10">
-            <ItemList />
+            {/* ページ分割されたアイテムのみをリストに渡す */}
+            <ItemList items={paginatedItems} />
 
-            {/* ページネーション（実装時にコメント解除） */}
-            {/* {filtering.totalPages > 1 && (
+            {/* 2ページ以上ある場合のみページネーションを表示 */}
+            {totalPages > 1 && (
               <div className="pt-8 border-t border-neutral-100">
-                <Pagination 
-                  current={filtering.currentPage} 
-                  total={filtering.totalPages} 
-                  onChange={filtering.setCurrentPage} 
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
                 />
               </div>
-            )} 
-            */}
+            )}
           </div>
         )}
       </div>
