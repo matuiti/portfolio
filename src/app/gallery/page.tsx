@@ -17,12 +17,12 @@ export default function GalleryPage() {
   const {
     selectedCategory,
     selectedTags,
-    searchQuery,
+    // searchQuery,
     filteredItems,
     noResultsMessage,
     setSelectedCategory,
     setSelectedTags,
-    setSearchQuery,
+    // setSearchQuery,
     // currentPage, totalPages, setCurrentPage (ページネーション実装時に使用)
   } = filtering;
 
@@ -40,14 +40,6 @@ export default function GalleryPage() {
           {/* 自由ワード検索 */}
           {/* <SearchBox value={searchQuery} onChange={setSearchQuery} /> */}
 
-          {/* 大カテゴリ選択 */}
-          <CategoryList
-            selected={selectedCategory}
-            onChange={setSelectedCategory}
-          />
-
-          {/* タグフィルタセクション（司令塔である TagGroup を並べる） */}
-          <TagFilters selectedTags={selectedTags} onChange={setSelectedTags} />
         </div>
 
         {/* 3. メインコンテンツエリア */}

@@ -1,11 +1,12 @@
 // 3.
-// SP のナビゲーション。
-// - Sidebar と構造を共有するため早めに作ると効率が良い
-// - レスポンシブ設計の方向性がここで決まる
+// SP のUI検索ナビゲーション。
 
 "use client";
+
 import { Filtering } from "@/types/gallery/filtering";
 import { CategoryList } from "../filter/CategoryList";
+import { TagFilters } from "../filter/TagFilters";
+import { SearchBox } from "../filter/SearchBox";
 
 type Props = {
   filtering: Filtering;
@@ -14,37 +15,92 @@ type Props = {
 };
 
 export function GalleryDrawerMenu({ filtering, isOpen, onClose }: Props) {
-  const { selectedCategory, setSelectedCategory } = filtering;
+  const {
+    selectedCategory,
+    selectedTags,
+    searchQuery,
+    setSelectedCategory,
+    setSelectedTags,
+    setSearchQuery,
+    filteredItems,
+  } = filtering;
 
   return (
     <>
-      {/* オーバーレイ */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-black/40 z-40" onClick={onClose} />
-      )}
+      {/* オーバーレイ（背景）: アニメーションを滑らかにするため opacity を制御 */}
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose}
+      />
 
       {/* ドロワー本体 */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-white border-r border-neutral-200 z-50 transform transition-transform duration-200 ${
+        className={`fixed top-0 left-0 h-full w-[85%] max-w-[320px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-out flex flex-col ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-4 flex items-center justify-between border-b">
-          <span className="font-bold">UI Gallery</span>
-          <button onClick={onClose} className="text-xl">
-            ×
+        {/* ヘッダー: 閉じるボタンを大きく、押しやすく */}
+        <div className="p-4 flex items-center justify-between border-b sticky top-0 bg-white z-10">
+          <div>
+            <span className="font-bold text-neutral-800">Filter Settings</span>
+            <p className="text-[10px] text-neutral-400 font-medium tracking-tight">
+              {filteredItems.length} items found
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-neutral-100 active:bg-neutral-200 transition-colors"
+            aria-label="Close menu"
+          >
+            <span className="text-2xl text-neutral-500">×</span>
           </button>
         </div>
 
-        <CategoryList
-          selected={selectedCategory}
-          onChange={setSelectedCategory}
-        />
-        {/* Sidebar と同じ中身を後で入れる */}
-        <div className="p-4 space-y-4">
-          <div className="h-32 bg-neutral-100 rounded" />
-          <div className="h-20 bg-neutral-100 rounded" />
-          <div className="h-20 bg-neutral-100 rounded" />
+        {/* コンテンツエリア: スクロール可能にする */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-8 pb-20">
+          {/* 1. キーワード検索 */}
+          <section className="space-y-2">
+            <h3 className="text-xs font-bold text-neutral-400 uppercase px-1">
+              Search
+            </h3>
+            <SearchBox value={searchQuery} onChange={setSearchQuery} />
+          </section>
+
+          {/* 2. カテゴリ選択 */}
+          <section className="space-y-2">
+            <h3 className="text-xs font-bold text-neutral-400 uppercase px-1">
+              Category
+            </h3>
+            <CategoryList
+              selected={selectedCategory}
+              onChange={setSelectedCategory}
+            />
+          </section>
+
+          {/* 3. タグフィルタ */}
+          <section className="space-y-2">
+            <h3 className="text-xs font-bold text-neutral-400 uppercase px-1">
+              Tags
+            </h3>
+            <TagFilters
+              selectedTags={selectedTags}
+              onChange={setSelectedTags}
+            />
+          </section>
+        </div>
+
+        {/* フッター: 適用ボタン（ドロワーを閉じる導線） */}
+        <div className="p-4 border-t bg-neutral-50">
+          <button
+            onClick={onClose}
+            className="w-full py-3 bg-neutral-900 text-white rounded-xl font-bold text-sm shadow-lg shadow-neutral-200 active:scale-[0.98] transition-all"
+          >
+            結果を表示する
+          </button>
         </div>
       </div>
     </>
