@@ -1,6 +1,7 @@
-import { Category } from "@/types/gallery/category";
+import type { Category } from "@/types/gallery/category";
 
 export const CATEGORIES: { id: Category; label: string }[] = [
+  { id: "all", label: "すべて" },
   { id: "button", label: "ボタン" },
   { id: "card", label: "カード" },
   { id: "form", label: "フォーム" },

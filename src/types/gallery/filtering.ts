@@ -1,7 +1,9 @@
+// src/types/gallery/filtering.ts
+import type { Category } from "./category";
 import type { UIPart } from "./ui-part";
 
 export type FilteringState = {
-  selectedCategory: string;
+  selectedCategory: Category;
   selectedTags: string[];
   searchQuery: string;
   currentPage: number;
@@ -10,10 +12,11 @@ export type FilteringState = {
   filteredItems: UIPart[];
   paginatedItems: UIPart[];
   noResultsMessage: string;
+  categoryCounts: Record<string, number>;
 };
 
 export type FilteringActions = {
-  setSelectedCategory: (cat: string) => void;
+  setSelectedCategory: (cat: Category) => void;
   setSelectedTags: (tags: string[]) => void;
   setSearchQuery: (q: string) => void;
   setCurrentPage: (page: number) => void;

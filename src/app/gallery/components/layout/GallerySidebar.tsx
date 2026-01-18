@@ -42,6 +42,7 @@ export function GallerySidebar({ filtering }: { filtering: Filtering }) {
           <CategoryList
             selected={filtering.selectedCategory}
             onChange={filtering.setSelectedCategory}
+            counts={filtering.categoryCounts}
           />
         </section>
 

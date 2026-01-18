@@ -1,59 +1,80 @@
-// 7. ItemCard
-// UIパーツのカード。
-// - タイトル・説明・タグの配置を決める重要部分
-// - モーダルの入口にもなる
-// - 一覧の見た目がここで決まる
-
 // src/app/gallery/components/list/ItemCard.tsx
 "use client";
 
+import { useState } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
-import { PreviewSizeSwitcher } from "../preview/PreviewSizeSwitcher";
+import { DescriptionPanel } from "../tabs/DescriptionPanel";
+import { CodePanel } from "../tabs/CodePanel";
+import { PreviewPanel } from "../tabs/PreviewPanel";
+import { DifficultyBadge } from "../ui/DifficultyBadge";
+import { TagBadge } from "../ui/TagBadge";
+import { TabSwitcher, GalleryTab } from "../tabs/TabSwitcher";
 
-// 名前付きエクスポートに変更し、Propsを受け取る
-export function ItemCard({ item }: { item: UIPart }) {
+interface ItemCardProps {
+  item: UIPart;
+  onExpand: (item: UIPart) => void;
+}
+
+export const ItemCard = ({ item, onExpand }: ItemCardProps) => {
+  const [activeTab, setActiveTab] = useState<GalleryTab>("description");
+
   return (
-    <div className="group bg-white border border-neutral-100 rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-neutral-200/50 transition-all duration-300">
-      {/* プレビューエリア（仮のグレー背景） */}
-      <div className="aspect-video bg-neutral-50 flex items-center justify-center relative">
-        <span className="text-neutral-300 font-medium">Preview Area</span>
-        
-        {/* ホバー時に表示されるボタンなどの演出をここに追加予定 */}
+    <div className="group bg-white rounded-[40px] border border-neutral-200 shadow-sm overflow-hidden flex flex-col lg:flex-row w-full h-auto lg:h-[580px] transition-all duration-500 hover:shadow-2xl hover:border-blue-100">
+      {/* 左側：テキスト・情報セクション */}
+      <div className="lg:w-[45%] p-8 lg:p-12 flex flex-col border-b lg:border-b-0 lg:border-r border-neutral-100 bg-white flex-shrink-0">
+        <header className="mb-8 flex-shrink-0">
+          <div className="flex items-center gap-3 mb-4">
+            <DifficultyBadge level={item.difficulty} />
+            <span className="text-neutral-400 font-mono text-[10px] tracking-widest uppercase">
+              ID: {item.id}
+            </span>
+          </div>
+          <h3 className="text-2xl lg:text-3xl font-black text-neutral-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors">
+            {item.title}
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {item.tags.map((tag) => (
+              <TagBadge key={tag} label={tag} />
+            ))}
+          </div>
+        </header>
+
+        <div className="mb-8 flex-shrink-0">
+          <TabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
+        </div>
+
+        {/* コンテンツエリア：コード時は親のスクロールを止めて CodePanel 内に任せる */}
+        <div
+          className={`flex-1 min-h-0 ${
+            activeTab === "code"
+              ? "overflow-hidden"
+              : "overflow-y-auto custom-scrollbar pr-2 lg:pr-6"
+          }`}
+        >
+          <div className="h-full animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col">
+            {activeTab === "description" && <DescriptionPanel item={item} />}
+
+            {activeTab === "code" && (
+              <div className="flex-1 h-full min-h-0">
+                <CodePanel item={item} />
+              </div>
+            )}
+
+            {activeTab === "preview" && (
+              <div className="lg:hidden h-[400px] rounded-3xl overflow-hidden border border-neutral-100 shadow-inner bg-neutral-50">
+                <PreviewPanel item={item} onExpand={() => onExpand(item)} />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* コンテンツエリア */}
-      <div className="p-5 space-y-3">
-        <div className="flex items-start justify-between">
-          <div>
-            <h3 className="font-bold text-neutral-800 leading-tight">
-              {item.title}
-            </h3>
-            <p className="text-xs text-neutral-400 mt-1 line-clamp-2">
-              {item.description}
-            </p>
-          </div>
-        </div>
-
-        {/* タグ表示 */}
-        <div className="flex flex-wrap gap-1.5">
-          {item.tags.map((tag) => (
-            <span key={tag} className="text-[10px] px-2 py-0.5 bg-neutral-100 text-neutral-500 rounded-md">
-              #{tag}
-            </span>
-          ))}
-        </div>
-
-        {/* 下部アクションエリア */}
-        <div className="pt-3 border-t border-neutral-50 flex items-center justify-between text-xs">
-          <div className="flex gap-3">
-            <button className="text-neutral-500 hover:text-blue-600 transition-colors font-medium">説明</button>
-            <button className="text-neutral-500 hover:text-blue-600 transition-colors font-medium">コード</button>
-          </div>
-          <div className="md:hidden">
-             <PreviewSizeSwitcher />
-          </div>
+      {/* 右側：PC専用巨大プレビューセクション */}
+      <div className="hidden lg:flex flex-[1.1] min-w-0 bg-neutral-50 p-10 flex-col overflow-hidden">
+        <div className="relative w-full h-full rounded-[32px] overflow-hidden shadow-2xl border border-white bg-white group-hover:scale-[1.01] transition-all duration-700">
+          <PreviewPanel item={item} onExpand={() => onExpand(item)} />
         </div>
       </div>
     </div>
   );
-}
+};
