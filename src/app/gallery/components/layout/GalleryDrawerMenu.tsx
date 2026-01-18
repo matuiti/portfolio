@@ -78,6 +78,7 @@ export function GalleryDrawerMenu({ filtering, isOpen, onClose }: Props) {
             <CategoryList
               selected={selectedCategory}
               onChange={setSelectedCategory}
+              counts={filtering.categoryCounts}
             />
           </section>
 
@@ -92,7 +93,6 @@ export function GalleryDrawerMenu({ filtering, isOpen, onClose }: Props) {
             />
           </section>
         </div>
-
       </div>
     </>
   );

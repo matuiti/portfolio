@@ -1,80 +1,52 @@
-// フィルタリングの流れ（ロジック）
-// - カテゴリで絞る
-// - タグで絞る
-// - 検索ワードで絞る
-// - ページネーションで分割する
-
+// src/hooks/gallery/useFiltering.ts
 "use client";
 
 import { useState, useMemo } from "react";
+import type { Category } from "@/types/gallery/category";
 import type { UIPart } from "@/types/gallery/ui-part";
-import { Filtering } from "@/types/gallery/filtering";
 
-export function useFiltering(allItems: UIPart[]): Filtering {
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+export function useFiltering(allItems: UIPart[]) {
+  const [selectedCategory, setSelectedCategory] = useState<Category>("all");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 2;
 
-  // -----------------------------
-  // フィルタリング処理（段階的に計算）
-  // -----------------------------
+  // 各カテゴリの件数カウント（採用担当者向け）
+  const categoryCounts = useMemo(() => {
+    const counts = allItems.reduce((acc, item) => {
+      acc[item.category] = (acc[item.category] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    return { all: allItems.length, ...counts };
+  }, [allItems]);
+
+  // フィルタリング処理
   const { filteredItems, noResultsMessage } = useMemo(() => {
     let items = [...allItems];
-
-    // 1. カテゴリ絞り込み
     if (selectedCategory !== "all") {
-      const categoryFiltered = items.filter(
-        (item) => item.category === selectedCategory
-      );
-      if (categoryFiltered.length === 0) {
-        return {
-          filteredItems: [],
-          noResultsMessage: "指定されたカテゴリのアイテムはまだありません。",
-        };
-      }
-      items = categoryFiltered;
+      items = items.filter((item) => item.category === selectedCategory);
     }
-
-    // 2. タグ絞り込み (AND検索)
     if (selectedTags.length > 0) {
-      const tagFiltered = items.filter((item) =>
+      items = items.filter((item) =>
         selectedTags.every((tag) => item.tags.includes(tag))
       );
-      if (tagFiltered.length === 0) {
-        return {
-          filteredItems: [],
-          noResultsMessage:
-            "選択されたタグの組み合わせに一致するアイテムはありません。",
-        };
-      }
-      items = tagFiltered;
     }
-
-    // 3. 検索キーワード絞り込み
     if (searchQuery.trim() !== "") {
       const q = searchQuery.toLowerCase();
-      const searchFiltered = items.filter(
+      items = items.filter(
         (item) =>
           item.title.toLowerCase().includes(q) ||
           item.description.toLowerCase().includes(q)
       );
-      if (searchFiltered.length === 0) {
-        return {
-          filteredItems: [],
-          noResultsMessage: `「${searchQuery}」に一致する結果は見つかりませんでした。`,
-        };
-      }
-      items = searchFiltered;
     }
-
-    return { filteredItems: items, noResultsMessage: "" };
+    return {
+      filteredItems: items,
+      noResultsMessage:
+        items.length === 0 ? "該当するアイテムがありません。" : "",
+    };
   }, [allItems, selectedCategory, selectedTags, searchQuery]);
 
-  // -----------------------------
-  // ページネーション
-  // -----------------------------
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
   const paginatedItems = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
@@ -85,26 +57,27 @@ export function useFiltering(allItems: UIPart[]): Filtering {
 
   return {
     selectedCategory,
-    selectedTags,
-    searchQuery,
-    currentPage,
-    itemsPerPage,
-    setSelectedCategory: (cat: string) => {
+    setSelectedCategory: (cat: Category) => {
       setSelectedCategory(cat);
       resetPage();
     },
+    selectedTags,
     setSelectedTags: (tags: string[]) => {
       setSelectedTags(tags);
       resetPage();
     },
+    searchQuery,
     setSearchQuery: (q: string) => {
       setSearchQuery(q);
       resetPage();
     },
+    currentPage,
     setCurrentPage,
+    itemsPerPage,
     filteredItems,
     paginatedItems,
     totalPages,
-    noResultsMessage
+    noResultsMessage,
+    categoryCounts,
   };
 }

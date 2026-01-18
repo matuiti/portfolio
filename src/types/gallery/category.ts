@@ -1,4 +1,5 @@
 export type Category =
+  | "all"
   | "button"
   | "card"
   | "form"
