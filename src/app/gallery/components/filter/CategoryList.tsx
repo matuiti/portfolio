@@ -13,10 +13,6 @@ type Props = {
 export function CategoryList({ selected, onChange, counts = {} }: Props) {
   return (
     <div className="space-y-4">
-      <h3 className="text-[10px] font-black text-neutral-400 uppercase tracking-[0.2em] px-4">
-        Category
-      </h3>
-
       <ul className="space-y-1">
         {CATEGORIES.map(({ id, label }) => {
           const count = counts[id] || 0;

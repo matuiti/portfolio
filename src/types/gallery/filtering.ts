@@ -13,6 +13,9 @@ export type FilteringState = {
   paginatedItems: UIPart[];
   noResultsMessage: string;
   categoryCounts: Record<string, number>;
+  displayTitle: string;
+  totalHitCount: number;
+  isEmpty: boolean;
 };
 
 export type FilteringActions = {
@@ -20,6 +23,7 @@ export type FilteringActions = {
   setSelectedTags: (tags: string[]) => void;
   setSearchQuery: (q: string) => void;
   setCurrentPage: (page: number) => void;
+  clearFilters: () => void;
 };
 
 export type Filtering = FilteringState & FilteringActions;
