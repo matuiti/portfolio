@@ -1,4 +1,3 @@
-// 2.
 // UI検索ナビゲーション左固定サイドバー
 
 "use client";
@@ -21,6 +20,12 @@ export function GallerySidebar({ filtering }: { filtering: Filtering }) {
           <span className="text-xs text-neutral-500 font-medium">
             検索結果：{filtering.filteredItems.length} 件
           </span>
+          <button
+            onClick={filtering.clearFilters}
+            className="ml-2 mt-6 px-6 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-600 rounded-full text-xs font-bold transition-colors"
+          >
+            フィルターをリセット
+          </button>
         </div>
         <section className="p-6 pt-4">
           <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-widest px-1 mb-3">
@@ -47,6 +52,9 @@ export function GallerySidebar({ filtering }: { filtering: Filtering }) {
         </section>
 
         <section className="bg-neutral-50 p-4 rounded-2xl">
+          <h3 className="text-xs font-bold text-neutral-400 uppercase tracking-widest px-1">
+            Tags
+          </h3>
           <TagFilters
             selectedTags={filtering.selectedTags}
             onChange={filtering.setSelectedTags}

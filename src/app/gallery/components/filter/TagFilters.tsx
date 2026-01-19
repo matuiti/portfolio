@@ -15,18 +15,12 @@ export function TagFilters({ selectedTags, onChange }: TagFiltersProps) {
   return (
     <div className="space-y-2">
       {" "}
-      {/* 枠組みは消し、中身の並びだけを管理 */}
       <div className="flex items-center justify-between mb-2 px-1">
-        {/* 見出しは「タグ」であることを示す最小限のものに */}
-        <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
-          Tags
-        </span>
         {selectedTags.length > 0 && (
           <button
             onClick={() => onChange([])}
-            className="text-[10px] text-blue-600 hover:underline"
-          >
-            Reset
+            className="text-[10px] text-blue-600 hover:underline ml-auto"
+          >タグの選択を解除する
           </button>
         )}
       </div>
