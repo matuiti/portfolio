@@ -20,7 +20,7 @@ export function NoResults({ message, onReset }: NoResultsProps) {
         onClick={onReset}
         className="mt-6 px-6 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-600 rounded-full text-xs font-bold transition-colors"
       >
-        {GALLERY_MESSAGES.RESET_BUTTON}
+        {GALLERY_MESSAGES.RESET_BUTTON_ALL}
       </button>
     </div>
   );
