@@ -6,13 +6,14 @@ import type { Category } from "@/types/gallery/category";
 import type { UIPart } from "@/types/gallery/ui-part";
 import type { Filtering } from "@/types/gallery/filtering";
 import { CATEGORIES } from "@/data/gallery/categories";
+import { GALLERY_SETTINGS } from "@/lib/constants/gallery";
 
 export function useFiltering(allItems: UIPart[]): Filtering {
-  const [selectedCategory, setSelectedCategory] = useState<Category>("all");
+  const [selectedCategory, setSelectedCategory] = useState<Category>(GALLERY_SETTINGS.DEFAULT_CATEGORY);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 12; // 実用的な件数に調整（必要に応じて変更してください）
+  const itemsPerPage = GALLERY_SETTINGS.ITEMS_PER_PAGE;
 
   // ヘルパー：状態変更時にページを1に戻す
   const resetPage = () => setCurrentPage(1);
@@ -63,7 +64,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
   const paginatedItems = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
     return filteredItems.slice(start, start + itemsPerPage);
-  }, [filteredItems, currentPage]);
+  }, [filteredItems, currentPage, itemsPerPage]);
 
   // 4. 表示用タイトルの確定（検索ワードがある場合は引用符で強調）
   const displayTitle = useMemo(() => {

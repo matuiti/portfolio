@@ -6,6 +6,7 @@ import { ViewportSlider } from "./ViewportSlider";
 import { PreviewFrame } from "../preview/PreviewFrame";
 import { ModalNavigation } from "./ModalNavigation";
 import { useModalNavigation } from "@/lib/hooks/useModalNavigation";
+import { PREVIEW_SETTINGS } from "@/lib/constants/gallery";
 
 interface PreviewModalProps {
   isOpen: boolean;
@@ -23,7 +24,11 @@ export const PreviewModal = ({
   onNavigate,
 }: PreviewModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [viewportWidth, setViewportWidth] = useState(1200);
+
+  // 1. 状態管理: key属性の恩恵により、マウント時に常にデフォルト幅になります
+  const [viewportWidth, setViewportWidth] = useState<number>(
+    PREVIEW_SETTINGS.DEFAULT_WIDTH,
+  );
 
   const { hasPrev, hasNext, goToPrev, goToNext, currentIndex, totalCount } =
     useModalNavigation({
@@ -33,6 +38,8 @@ export const PreviewModal = ({
       isOpen,
     });
 
+  // 2. モーダル開閉と背面スクロール禁止の制御
+  // ここでの setState (setViewportWidth) は削除し、DOM制御に専念します
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
@@ -40,7 +47,6 @@ export const PreviewModal = ({
     if (isOpen) {
       if (!dialog.open) {
         dialog.showModal();
-        // モーダルが開いた時に背面スクロールを禁止
         document.body.style.overflow = "hidden";
       }
     } else {
@@ -58,23 +64,16 @@ export const PreviewModal = ({
       ref={dialogRef}
       onClose={onClose}
       className={`
-        /* 1. 基本配置とサイズ */
         fixed inset-0 m-auto
         w-[95vw] h-[90vh] max-w-[1600px] max-h-[1000px]
-        
-        /* 2. スタイル */
         rounded-[32px] overflow-hidden bg-neutral-100 shadow-2xl p-0 border-none
-        
-        /* 3. 背景（オーバーレイ）の設定 */
         backdrop:bg-neutral-900/60 backdrop:backdrop-blur-sm
-        
-        /* 4. アニメーション（任意） */
         animate-in fade-in zoom-in-95 duration-300
       `}
       onClick={(e) => e.target === dialogRef.current && onClose()}
     >
       <div className="flex flex-col h-full w-full">
-        {/* ヘッダーセクション（高さ固定） */}
+        {/* ヘッダーセクション */}
         <header className="flex-shrink-0 flex flex-wrap items-center justify-between px-6 py-4 bg-white border-b border-neutral-200 gap-4 z-20">
           <div className="flex items-center gap-6">
             <div>
@@ -90,7 +89,12 @@ export const PreviewModal = ({
               {currentIndex + 1} / {totalCount}
             </span>
 
-            <ViewportSlider value={viewportWidth} onChange={setViewportWidth} />
+            <ViewportSlider
+              value={viewportWidth}
+              onChange={setViewportWidth}
+              min={PREVIEW_SETTINGS.MIN_WIDTH}
+              max={PREVIEW_SETTINGS.MAX_WIDTH}
+            />
           </div>
 
           <div className="flex items-center gap-4">
@@ -127,18 +131,9 @@ export const PreviewModal = ({
 
         {/* メインプレビューエリア */}
         <main className="flex-1 bg-neutral-200/50 relative overflow-hidden flex flex-col">
-          {/* 背景グリッド */}
           <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
 
-          {/* 1. プレビューを囲む「ステージ」エリア 
-    ここを flex + items-center にすることで、拡縮されたコンテンツが常に中央に来るようにします。
-  */}
           <div className="flex-1 relative z-10 p-4 lg:p-10 flex items-center justify-center overflow-hidden">
-            {/* 2. プレビューフレーム容器
-      この div は ViewportSlider で決めた「仮想的な幅」を持ちます。
-      PreviewFrame コンポーネント側で、この幅をモーダルの実寸に合わせて
-      transform: scale() で縮小しているはずです。
-    */}
             <div
               style={{ width: `${viewportWidth}px` }}
               className="relative h-full max-w-none transition-[width] duration-300 ease-out shadow-2xl bg-white flex items-center"
@@ -150,7 +145,7 @@ export const PreviewModal = ({
           </div>
         </main>
 
-        {/* フッター（高さ固定） */}
+        {/* フッターセクション */}
         <footer className="flex-shrink-0 px-6 py-2 bg-white border-t border-neutral-100 text-[10px] text-neutral-400 flex justify-between z-20">
           <span>ID: {currentItem.id}</span>
           <span>Category: {currentItem.category}</span>
