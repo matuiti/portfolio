@@ -42,10 +42,7 @@ export default function GalleryPage() {
         <TitleAndCount title={displayTitle} count={totalHitCount} />
 
         {isEmpty ? (
-          <NoResults
-            message={noResultsMessage}
-            onReset={clearFilters}
-          />
+          <NoResults message={noResultsMessage} onReset={clearFilters} />
         ) : (
           /* アイテム一覧表示 */
           <div className="space-y-12">
@@ -65,6 +62,7 @@ export default function GalleryPage() {
 
       {selectedItem && (
         <PreviewModal
+          key={selectedItem.id} // これにより、アイテムごとに内部の状態（幅など）がクリーンに初期化されます
           isOpen={!!selectedItem}
           onClose={() => setSelectedItem(null)}
           currentItem={selectedItem}
