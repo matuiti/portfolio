@@ -4,8 +4,8 @@
  * ギャラリー全体の基本設定
  */
 export const GALLERY_SETTINGS = {
-  ITEMS_PER_PAGE: 12,
-  DEFAULT_CATEGORY: "all" as const,
+  ITEMS_PER_PAGE: 4,
+  DEFAULT_CATEGORY: "all",
 } as const;
 
 /**

@@ -5,7 +5,7 @@ import { Category } from "./category";
 
 export interface UIPart {
   id: string;
-  category: Category; // stringではなくCategory型を直接使う
+  category: Category;
   title: string;
   description: string;
   difficulty: "basic" | "advanced" | "expert";
