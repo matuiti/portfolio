@@ -1,14 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
-  // 型チェックとESLintをビルド時にスキップ（実行時エラーではありません）
+
+  // TypeScriptのビルドエラーを無視する設定
   typescript: {
     ignoreBuildErrors: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  // トップからギャラリーへのリダイレクト
+
   async redirects() {
     return [
       {

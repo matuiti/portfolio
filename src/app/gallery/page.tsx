@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react"; // Suspenseを追加
+import { useState, Suspense } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
 import { UI_PARTS } from "@/data/gallery/ui-parts";
 import { useFiltering } from "@/lib/hooks/useFiltering";
@@ -11,8 +11,9 @@ import { Pagination } from "./components/list/Pagination";
 import { PreviewModal } from "./components/modal/PreviewModal";
 import { useURLSync } from "@/lib/hooks/useURLSync";
 import { NoResults } from "./components/list/NoResults";
+import { LoadingGallery } from "./components/ui/LoadingGallery";
 
-// 1. 元々のロジックを「GalleryContent」として切り出す
+// 1. ロジックを「GalleryContent」として切り出す
 function GalleryContent() {
   const filtering = useFiltering(UI_PARTS || []);
   useURLSync(filtering);
@@ -72,13 +73,7 @@ function GalleryContent() {
 // 2. 本体の Export は Suspense でラップするだけにする
 export default function GalleryPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center min-h-screen">
-          <p className="text-neutral-500">Loading Gallery...</p>
-        </div>
-      }
-    >
+    <Suspense fallback={<LoadingGallery />}>
       <GalleryContent />
     </Suspense>
   );
