@@ -1,4 +1,3 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -8,21 +7,27 @@ export function middleware(req: NextRequest) {
   if (basicAuth) {
     try {
       const authValue = basicAuth.split(" ")[1];
-      // atobを使ってデコード（Edge Runtimeで推奨される方法）
+      // atob でデコード
       const decoded = atob(authValue);
       const [user, pwd] = decoded.split(":");
 
-      // 環境変数が存在することを確認してから比較
-      const expectedUser = process.env.BASIC_AUTH_USER;
-      const expectedPwd = process.env.BASIC_AUTH_PASSWORD;
+      // 環境変数を取得（設定されていない場合は空文字にする）
+      const expectedUser = process.env.BASIC_AUTH_USER || "";
+      const expectedPwd = process.env.BASIC_AUTH_PASSWORD || "";
 
-      if (user === expectedUser && pwd === expectedPwd) {
+      // ID/PW が設定されており、かつ入力と一致する場合のみ許可
+      if (
+        expectedUser &&
+        expectedPwd &&
+        user === expectedUser &&
+        pwd === expectedPwd
+      ) {
         const response = NextResponse.next();
         response.headers.set("x-robots-tag", "noindex, nofollow");
         return response;
       }
     } catch {
-      // デコード失敗などのエラー時は何もしない
+      // デコード失敗時はスルーして下の 401 を返す
     }
   }
 
