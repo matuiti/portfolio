@@ -5,6 +5,7 @@
 
 import { TAG_GROUPS } from "@/data/gallery/tag-groups";
 import { TagGroup } from "./TagGroup";
+import { GALLERY_MESSAGES } from "@/lib/constants/gallery";
 
 interface TagFiltersProps {
   selectedTags: string[];
@@ -20,7 +21,8 @@ export function TagFilters({ selectedTags, onChange }: TagFiltersProps) {
           <button
             onClick={() => onChange([])}
             className="text-[10px] text-blue-600 hover:underline ml-auto"
-          >タグの選択を解除する
+          >
+            {GALLERY_MESSAGES.RESET_BUTTON_TAG}
           </button>
         )}
       </div>
