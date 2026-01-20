@@ -3,7 +3,7 @@
 
 import { GALLERY_MESSAGES } from "@/lib/constants/gallery";
 
-interface NoResultsProps {
+type NoResultsProps = {
   message: string;
   onReset: () => void;
 }

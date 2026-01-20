@@ -10,7 +10,7 @@
 // タブの型を明示的に定義
 export type GalleryTab = "description" | "code" | "preview";
 
-interface TabSwitcherProps {
+type TabSwitcherProps = {
   activeTab: GalleryTab;
   onTabChange: (tab: GalleryTab) => void;
 }

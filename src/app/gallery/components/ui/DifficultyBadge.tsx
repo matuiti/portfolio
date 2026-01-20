@@ -1,7 +1,7 @@
 // src/app/gallery/components/ui/DifficultyBadge.tsx
 import { UIPart } from "@/types/gallery/ui-part";
 
-interface DifficultyBadgeProps {
+type DifficultyBadgeProps = {
   level: UIPart["difficulty"];
 }
 

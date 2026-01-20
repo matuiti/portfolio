@@ -1,4 +1,4 @@
-interface TitleAndCountProps {
+type TitleAndCountProps = {
   title: string;
   count: number;
 }

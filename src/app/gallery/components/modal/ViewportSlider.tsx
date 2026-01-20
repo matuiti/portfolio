@@ -2,7 +2,7 @@
 
 import { PREVIEW_SETTINGS } from "@/lib/constants/gallery";
 
-interface ViewportSliderProps {
+type ViewportSliderProps = {
   value: number;
   // 親から渡されない場合は定数の値を使用する設計
   min?: number;

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { useLazyIframe } from "@/lib/hooks/useLazyIframe";
 
-interface PreviewFrameProps {
+type PreviewFrameProps = {
   url: string;
   baseWidth?: number;
 }

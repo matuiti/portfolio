@@ -7,7 +7,7 @@ import { TAG_GROUPS } from "@/data/gallery/tag-groups";
 import { TagGroup } from "./TagGroup";
 import { GALLERY_MESSAGES } from "@/lib/constants/gallery";
 
-interface TagFiltersProps {
+type TagFiltersProps = {
   selectedTags: string[];
   onChange: (tags: string[]) => void;
 }

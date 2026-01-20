@@ -7,7 +7,7 @@
 
 import { TagList } from "./TagList";
 
-interface TagGroupProps {
+type TagGroupProps = {
   label: string;
   icon: string;
   tags: string[];

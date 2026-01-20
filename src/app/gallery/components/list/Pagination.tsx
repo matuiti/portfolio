@@ -1,5 +1,5 @@
 // src/app/gallery/components/list/Pagination.tsx
-interface PaginationProps {
+type PaginationProps = {
   current: number;
   total: number;
   onPageChange: (page: number) => void;

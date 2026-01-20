@@ -1,6 +1,6 @@
 // src/app/gallery/components/filter/CategoryNav.tsx
 import type { Category } from "@/types/gallery/category";
-interface CategoryNavProps {
+type CategoryNavProps = {
   selected: Category;
   onSelect: (cat: Category) => void;
   counts: Record<string, number>;
