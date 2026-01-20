@@ -6,7 +6,7 @@
 // src/app/gallery/components/modal/ModalNavigation.tsx
 "use client";
 
-interface ModalNavigationProps {
+type ModalNavigationProps = {
   onPrev: () => void;
   onNext: () => void;
   hasPrev: boolean;

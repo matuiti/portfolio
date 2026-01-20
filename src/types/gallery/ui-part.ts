@@ -3,7 +3,7 @@
 import { Category } from "./category";
 
 
-export interface UIPart {
+export type UIPart = {
   id: string;
   category: Category;
   title: string;

@@ -4,7 +4,7 @@
 import { UIPart } from "@/types/gallery/ui-part";
 import { ItemCard } from "./ItemCard";
 
-interface ItemListProps {
+type ItemListProps = {
   items: UIPart[];
   onItemClick: (item: UIPart) => void; // page.tsxのプロパティ名に合わせる
 }

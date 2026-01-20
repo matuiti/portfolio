@@ -9,7 +9,7 @@ import { DifficultyBadge } from "../ui/DifficultyBadge";
 import { TagBadge } from "../ui/TagBadge";
 import { TabSwitcher, GalleryTab } from "../tabs/TabSwitcher";
 
-interface ItemCardProps {
+type ItemCardProps = {
   item: UIPart;
   onExpand: (item: UIPart) => void;
 }

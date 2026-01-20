@@ -5,7 +5,7 @@
 
 "use client";
 
-interface TagListProps {
+type TagListProps = {
   tags: string[]; // 表示すべきタグの配列
   selected: string[]; // 現在選択されているタグの配列（ハイライト判定用）
   onTagClick: (tag: string) => void; // クリックされた時に「タグ名」を上に報告する関数

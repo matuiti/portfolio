@@ -11,7 +11,7 @@ import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-markup"; // HTML用
 
-interface CodePanelProps {
+type CodePanelProps = {
   item: UIPart;
 }
 

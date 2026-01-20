@@ -1,5 +1,5 @@
 // src/app/gallery/components/ui/TagBadge.tsx
-interface TagBadgeProps {
+type TagBadgeProps = {
   label: string;
 }
 

@@ -1,15 +1,14 @@
-// src/lib/hooks/useModalNavigation.ts
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
 
-interface UseModalNavigationProps {
+type UseModalNavigationProps = {
   currentItem: UIPart;
   allItems: UIPart[];
   onNavigate: (item: UIPart) => void;
   isOpen: boolean;
-}
+};
 
 export function useModalNavigation({
   currentItem,
@@ -22,13 +21,18 @@ export function useModalNavigation({
   const hasPrev = currentIndex > 0;
   const hasNext = currentIndex < allItems.length - 1;
 
-  const goToPrev = () => {
-    if (hasPrev) onNavigate(allItems[currentIndex - 1]);
-  };
+  // useCallbackで関数をメモ化する
+  const goToPrev = useCallback(() => {
+    if (hasPrev) {
+      onNavigate(allItems[currentIndex - 1]);
+    }
+  }, [hasPrev, onNavigate, allItems, currentIndex]);
 
-  const goToNext = () => {
-    if (hasNext) onNavigate(allItems[currentIndex + 1]);
-  };
+  const goToNext = useCallback(() => {
+    if (hasNext) {
+      onNavigate(allItems[currentIndex + 1]);
+    }
+  }, [hasNext, onNavigate, allItems, currentIndex]);
 
   // キーボードイベントの登録
   useEffect(() => {
@@ -41,7 +45,7 @@ export function useModalNavigation({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, currentIndex, allItems]); // 依存配列に注意
+  }, [isOpen, goToPrev, goToNext]); // 必要最小限かつ正確な依存配列
 
   return {
     currentIndex,

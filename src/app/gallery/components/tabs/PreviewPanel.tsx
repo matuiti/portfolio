@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
 import { PreviewFrame } from "../preview/PreviewFrame";
 
-interface PreviewPanelProps {
+type PreviewPanelProps = {
   item: UIPart;
   onExpand: () => void;
 }

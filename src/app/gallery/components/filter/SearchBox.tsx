@@ -2,7 +2,7 @@
 // 設計のポイントは、**「入力のしやすさ」と「リセットのしやすさ」**です。
 "use client";
 
-interface SearchBoxProps {
+type SearchBoxProps = {
   value: string;
   onChange: (value: string) => void;
 }

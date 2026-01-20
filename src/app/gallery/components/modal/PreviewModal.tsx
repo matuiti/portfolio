@@ -8,7 +8,7 @@ import { ModalNavigation } from "./ModalNavigation";
 import { useModalNavigation } from "@/lib/hooks/useModalNavigation";
 import { PREVIEW_SETTINGS } from "@/lib/constants/gallery";
 
-interface PreviewModalProps {
+type PreviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
   currentItem: UIPart;
