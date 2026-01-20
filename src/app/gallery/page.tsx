@@ -1,7 +1,6 @@
-// src/app/gallery/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react"; // Suspenseを追加
 import { UIPart } from "@/types/gallery/ui-part";
 import { UI_PARTS } from "@/data/gallery/ui-parts";
 import { useFiltering } from "@/lib/hooks/useFiltering";
@@ -13,14 +12,11 @@ import { PreviewModal } from "./components/modal/PreviewModal";
 import { useURLSync } from "@/lib/hooks/useURLSync";
 import { NoResults } from "./components/list/NoResults";
 
-export default function GalleryPage() {
-  // すべての知能をフックに集約
+// 1. 元々のロジックを「GalleryContent」として切り出す
+function GalleryContent() {
   const filtering = useFiltering(UI_PARTS || []);
-
-  // URL同期の副作用を実行
   useURLSync(filtering);
 
-  // フックから必要な情報のみを取り出す
   const {
     displayTitle,
     totalHitCount,
@@ -31,7 +27,7 @@ export default function GalleryPage() {
     currentPage,
     totalPages,
     clearFilters,
-    setCurrentPage
+    setCurrentPage,
   } = filtering;
 
   const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
@@ -44,7 +40,6 @@ export default function GalleryPage() {
         {isEmpty ? (
           <NoResults message={noResultsMessage} onReset={clearFilters} />
         ) : (
-          /* アイテム一覧表示 */
           <div className="space-y-12">
             <ItemList items={paginatedItems} onItemClick={setSelectedItem} />
             {totalPages > 1 && (
@@ -62,7 +57,7 @@ export default function GalleryPage() {
 
       {selectedItem && (
         <PreviewModal
-          key={selectedItem.id} // これにより、アイテムごとに内部の状態（幅など）がクリーンに初期化されます
+          key={selectedItem.id}
           isOpen={!!selectedItem}
           onClose={() => setSelectedItem(null)}
           currentItem={selectedItem}
@@ -71,5 +66,20 @@ export default function GalleryPage() {
         />
       )}
     </GalleryLayout>
+  );
+}
+
+// 2. 本体の Export は Suspense でラップするだけにする
+export default function GalleryPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <p className="text-neutral-500">Loading Gallery...</p>
+        </div>
+      }
+    >
+      <GalleryContent />
+    </Suspense>
   );
 }
