@@ -13,7 +13,7 @@ export interface UIPart {
   features: string[];
   techStack: string[];
   path: string;
-  codes: {
+  code: {
     html: string;
     css: string;
     js: string;

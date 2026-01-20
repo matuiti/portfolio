@@ -1,7 +1,6 @@
-// src/app/gallery/components/list/ItemCard.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
 import { DescriptionPanel } from "../tabs/DescriptionPanel";
 import { CodePanel } from "../tabs/CodePanel";
@@ -15,8 +14,19 @@ interface ItemCardProps {
   onExpand: (item: UIPart) => void;
 }
 
+const subscribe = () => () => {};
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export const ItemCard = ({ item, onExpand }: ItemCardProps) => {
   const [activeTab, setActiveTab] = useState<GalleryTab>("description");
+  const isClient = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
+
+  if (!item) return null;
 
   return (
     <div className="group bg-white rounded-[40px] border border-neutral-200 shadow-sm overflow-hidden flex flex-col lg:flex-row w-full h-auto lg:h-[580px] transition-all duration-500 hover:shadow-2xl hover:border-blue-100">
@@ -33,7 +43,7 @@ export const ItemCard = ({ item, onExpand }: ItemCardProps) => {
             {item.title}
           </h3>
           <div className="flex flex-wrap gap-2">
-            {item.tags.map((tag) => (
+            {item.tags?.map((tag) => (
               <TagBadge key={tag} label={tag} />
             ))}
           </div>
@@ -43,7 +53,7 @@ export const ItemCard = ({ item, onExpand }: ItemCardProps) => {
           <TabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
         </div>
 
-        {/* コンテンツエリア：コード時は親のスクロールを止めて CodePanel 内に任せる */}
+        {/* コンテンツエリア */}
         <div
           className={`flex-1 min-h-0 ${
             activeTab === "code"
@@ -60,7 +70,7 @@ export const ItemCard = ({ item, onExpand }: ItemCardProps) => {
               </div>
             )}
 
-            {activeTab === "preview" && (
+            {activeTab === "preview" && isClient && (
               <div className="lg:hidden h-[400px] rounded-3xl overflow-hidden border border-neutral-100 shadow-inner bg-neutral-50">
                 <PreviewPanel item={item} onExpand={() => onExpand(item)} />
               </div>
@@ -72,7 +82,9 @@ export const ItemCard = ({ item, onExpand }: ItemCardProps) => {
       {/* 右側：PC専用巨大プレビューセクション */}
       <div className="hidden lg:flex flex-[1.1] min-w-0 bg-neutral-50 p-10 flex-col overflow-hidden">
         <div className="relative w-full h-full rounded-[32px] overflow-hidden shadow-2xl border border-white bg-white group-hover:scale-[1.01] transition-all duration-700">
-          <PreviewPanel item={item} onExpand={() => onExpand(item)} />
+          {isClient && (
+            <PreviewPanel item={item} onExpand={() => onExpand(item)} />
+          )}
         </div>
       </div>
     </div>

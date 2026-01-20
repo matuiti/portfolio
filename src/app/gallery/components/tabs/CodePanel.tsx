@@ -1,7 +1,6 @@
-// src/app/gallery/components/tabs/CodePanel.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
 
 interface CodePanelProps {
@@ -12,29 +11,35 @@ type Lang = "html" | "css" | "js";
 
 export const CodePanel = ({ item }: CodePanelProps) => {
   const [activeLang, setActiveLang] = useState<Lang>("html");
+  // コピー状態を管理するステート
+  const [isCopied, setIsCopied] = useState(false);
 
-  // スクロール確認用の大量のダミーコード
-  const dummyCodes = {
-    html: `${item.codes.html}\n${Array(30)
-      .fill('\n<div class="test-item">...</div>')
-      .join("\n")}`,
-    css: `${item.codes.css}\n${Array(30)
-      .fill("/* Scroll Test Style */\n.test-item {\n  padding: 1rem;\n}")
-      .join("\n")}`,
-    js: `${item.codes.js}\n${Array(30)
-      .fill('// Scroll Test Script\nconsole.log("Visual testing...");')
-      .join("\n")}`,
+  // コピー状態を一定時間後にリセットする
+  useEffect(() => {
+    if (isCopied) {
+      const timer = setTimeout(() => setIsCopied(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isCopied]);
+
+  const getCode = (lang: Lang): string => {
+    const source = item.code;
+    if (!source) return `// No code content found.`;
+    return source[lang] || `// No ${lang.toUpperCase()} code provided`;
   };
 
-  const copyToClipboard = () => {
-    const code = dummyCodes[activeLang];
-    if (code) {
-      navigator.clipboard.writeText(code);
+  const copyToClipboard = async () => {
+    const code = getCode(activeLang);
+    try {
+      await navigator.clipboard.writeText(code);
+      setIsCopied(true); // コピー成功状態にする
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
     }
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-neutral-50 rounded-[24px] border border-neutral-200 overflow-hidden">
+    <div className="flex flex-col h-full w-full bg-neutral-50 rounded-[24px] border border-neutral-200 overflow-hidden shadow-inner">
       {/* ヘッダー */}
       <div className="flex items-center justify-between px-5 py-3 bg-white border-b border-neutral-200 flex-shrink-0">
         <div className="flex gap-1.5">
@@ -53,40 +58,64 @@ export const CodePanel = ({ item }: CodePanelProps) => {
           ))}
         </div>
 
+        {/* コピーボタン（演出付き） */}
         <button
           onClick={copyToClipboard}
-          className="p-2 text-neutral-400 hover:text-blue-500 transition-colors bg-neutral-50 rounded-lg hover:bg-white border border-transparent hover:border-neutral-200"
+          className={`p-2 rounded-lg border transition-all duration-300 flex items-center gap-2 ${
+            isCopied
+              ? "bg-green-50 border-green-200 text-green-600"
+              : "bg-neutral-50 border-transparent text-neutral-400 hover:text-blue-500 hover:bg-white hover:border-neutral-200"
+          }`}
         >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 16H6a2 2 0 00-2 2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-            />
-          </svg>
+          {isCopied ? (
+            // チェックマーク（✅）
+            <svg
+              className="w-4 h-4 animate-in zoom-in duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          ) : (
+            // 通常のコピーアイコン
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 16H6a2 2 0 00-2 2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+          )}
+          {isCopied && (
+            <span className="text-[10px] font-bold uppercase animate-in fade-in slide-in-from-right-1">
+              Copied!
+            </span>
+          )}
         </button>
       </div>
 
-      {/* コード表示エリア：
-          flex-1 で余ったスペースを使い切り、pre 自体にスクロールを持たせることで
-          スクロールバーをグレー背景の最右端に配置します。
-      */}
+      {/* コード表示エリア */}
       <div className="flex-1 flex flex-col min-h-0 bg-neutral-50 overflow-hidden">
-        <pre className="flex-1 overflow-auto custom-scrollbar p-6 font-mono text-[13px] leading-relaxed text-neutral-700 whitespace-pre lg:whitespace-pre focus:outline-none">
-          <code>{dummyCodes[activeLang]}</code>
+        <pre className="flex-1 overflow-auto custom-scrollbar p-6 font-mono text-[13px] leading-relaxed text-neutral-700 whitespace-pre">
+          <code>{getCode(activeLang)}</code>
         </pre>
       </div>
 
-      {/* フッター */}
       <div className="px-5 py-2 bg-white border-t border-neutral-100 flex justify-between items-center flex-shrink-0">
         <span className="text-[9px] text-neutral-300 font-mono tracking-widest uppercase italic">
-          Scrolling in {activeLang}
+          {activeLang} source
         </span>
       </div>
     </div>
