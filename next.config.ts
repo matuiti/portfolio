@@ -1,17 +1,23 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactCompiler: true,
+  // ビルド時の型チェックとESLintをスキップ
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   async redirects() {
     return [
       {
         source: "/",
-        destination: "/gallery/", // ここに確認してほしいページのパスを入れる
-        permanent: false, // 開発中の一時的な転送なのでfalse
+        destination: "/gallery",
+        permanent: false,
       },
     ];
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

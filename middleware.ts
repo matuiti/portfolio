@@ -7,18 +7,17 @@ export function middleware(req: NextRequest) {
   if (basicAuth) {
     try {
       const authValue = basicAuth.split(" ")[1];
-      // atob でデコード
       const decoded = atob(authValue);
       const [user, pwd] = decoded.split(":");
 
-      // 環境変数を取得（設定されていない場合は空文字にする）
-      const expectedUser = process.env.BASIC_AUTH_USER || "";
-      const expectedPwd = process.env.BASIC_AUTH_PASSWORD || "";
+      // 型エラー回避のため、環境変数が undefined の場合は空文字を代入
+      const expectedUser = process.env.BASIC_AUTH_USER ?? "";
+      const expectedPwd = process.env.BASIC_AUTH_PASSWORD ?? "";
 
-      // ID/PW が設定されており、かつ入力と一致する場合のみ許可
+      // 両方の値が設定されており、かつ一致する場合のみ通過
       if (
-        expectedUser &&
-        expectedPwd &&
+        expectedUser !== "" &&
+        expectedPwd !== "" &&
         user === expectedUser &&
         pwd === expectedPwd
       ) {
@@ -27,7 +26,7 @@ export function middleware(req: NextRequest) {
         return response;
       }
     } catch {
-      // デコード失敗時はスルーして下の 401 を返す
+      // デコード失敗時はエラーを投げず、下の 401 を返す
     }
   }
 
