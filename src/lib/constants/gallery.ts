@@ -24,5 +24,5 @@ export const GALLERY_MESSAGES = {
   NO_RESULTS_DEFAULT: "該当するアイテムがありません。",
   EMPTY_HINT: "条件をクリアするか、別のキーワードを試してみてください。",
   RESET_BUTTON_ALL: "フィルターをリセット",
-  RESET_BUTTON_TAG: "タグの選択を解除する",
+  RESET_BUTTON_TAG: "タグをリセットする",
 } as const;
