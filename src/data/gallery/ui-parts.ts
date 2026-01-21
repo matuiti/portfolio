@@ -3,6 +3,22 @@ import { UIPart } from "@/types/gallery/ui-part";
 
 export const UI_PARTS: UIPart[] = [
   {
+    id: "button-primary",
+    category: "button",
+    title: "button-primary",
+    description: "",
+    difficulty: "basic",
+    tags: ["Vanilla JS", "SCSS"],
+    features: ["特徴１", "特徴２"],
+    techStack: ["HTML", "SCSS", "JavaScript"],
+    path: "/gallery-parts/ui/button/button-primary/index.html",
+    code: {
+      html: ``,
+      css: ``,
+      js: ``,
+    },
+  },
+  {
     id: "card04",
     category: "card",
     title: "card04",
