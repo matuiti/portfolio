@@ -1,26 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { UI_PARTS } from "@/data/gallery/ui-parts";
+import { useIsMounted } from "@/lib/hooks/useIsMounted";
 
 export default function WorkbenchPage() {
-  const [selectedId, setSelectedId] = useState("");
+  const isMounted = useIsMounted();
+
+  // 修正ポイント：useStateの初期値として関数を渡し、マウントに関わらず値を決める
+  // これにより useEffect + setSelectedId が不要になります
+  const [selectedId, setSelectedId] = useState(() =>
+    UI_PARTS.length > 0 ? UI_PARTS[0].id : "",
+  );
+
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [previewBg, setPreviewBg] = useState<"white" | "gray" | "dark">(
     "white",
   );
-  const [isMounted, setIsMounted] = useState(false);
-
-  // マウント完了を待つ（Hydration Error対策）
-useEffect(() => {
-  // ESLintの警告を意図的に抑制：マウント判定のためのsetStateは許容されるべきパターンです
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  setIsMounted(true);
-
-  if (UI_PARTS.length > 0) {
-    setSelectedId(UI_PARTS[0].id);
-  }
-}, []);
 
   const currentPart = UI_PARTS.find((p) => p.id === selectedId) || UI_PARTS[0];
 
@@ -28,13 +24,10 @@ useEffect(() => {
     setRefreshTrigger(Date.now());
   };
 
-  // マウントされる前は何も表示しない（サーバーとクライアントの差異をゼロにする）
   if (!isMounted) return null;
 
   if (!currentPart) {
-    return (
-      <div className="p-10 text-white font-sans">パーツが見つかりません。</div>
-    );
+    return <div className="p-10 text-white">パーツが見つかりません。</div>;
   }
 
   const bgColors = {
@@ -54,7 +47,7 @@ useEffect(() => {
           <select
             value={selectedId}
             onChange={(e) => setSelectedId(e.target.value)}
-            className="bg-[#2a2a2a] border border-white/20 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-500"
+            className="bg-[#2a2a2a] border border-white/20 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-500 text-white"
           >
             {UI_PARTS.map((part) => (
               <option key={part.id} value={part.id}>
@@ -86,24 +79,31 @@ useEffect(() => {
         </div>
       </header>
 
-      <main className="flex-1 flex gap-10 p-10 overflow-x-auto items-start bg-[radial-gradient(#222_1px,transparent_1px)] [background-size:20px_20px]">
-        <DevicePreview
-          name="Mobile"
-          width={375}
-          src={currentPart.path}
-          refreshKey={refreshTrigger}
-          bgColor={bgColors[previewBg]}
-        />
-        <DevicePreview
-          name="Desktop"
-          width={1200}
-          src={currentPart.path}
-          refreshKey={refreshTrigger}
-          bgColor={bgColors[previewBg]}
-        />
+      <main className="flex-1 flex gap-8 p-10 overflow-x-auto items-start bg-[radial-gradient(#222_1px,transparent_1px)] [background-size:20px_20px]">
+        {(["Mobile", "Tablet", "Desktop"] as const).map((name) => {
+          const widths = { Mobile: 375, Tablet: 768, Desktop: 1200 };
+          return (
+            <DevicePreview
+              key={name}
+              name={name}
+              width={widths[name]}
+              src={currentPart.path}
+              refreshKey={refreshTrigger}
+              bgColor={bgColors[previewBg]}
+            />
+          );
+        })}
       </main>
     </div>
   );
+}
+
+type DevicePreviewProps = {
+  name: string;
+  width: number;
+  src: string;
+  refreshKey: number;
+  bgColor: string;
 }
 
 function DevicePreview({
@@ -112,15 +112,8 @@ function DevicePreview({
   src,
   refreshKey,
   bgColor,
-}: {
-  name: string;
-  width: number;
-  src: string;
-  refreshKey: number;
-  bgColor: string;
-}) {
+}: DevicePreviewProps) {
   const finalSrc = refreshKey ? `${src}?v=${refreshKey}` : src;
-
   return (
     <div className="flex flex-col gap-3 shrink-0">
       <div className="flex justify-between items-center px-1">
@@ -131,10 +124,9 @@ function DevicePreview({
           {width}px
         </span>
       </div>
-
       <div
         className={`${bgColor} rounded-xl shadow-2xl overflow-hidden border border-white/5 transition-colors duration-500`}
-        style={{ width: `${width}px`, height: "75vh" }}
+        style={{ width: `${width}px`, height: "70vh" }}
       >
         <iframe
           key={`${src}-${refreshKey}`}

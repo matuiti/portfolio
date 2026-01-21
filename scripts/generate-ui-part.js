@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { exec } from 'child_process'; // ブラウザ起動用に追加
+import { exec } from 'child_process';
 
 // --- 設定 ---
 const METADATA_PATH = path.join(process.cwd(), 'src/data/gallery/ui-parts.ts');
@@ -17,8 +17,10 @@ if (!category || !name) {
 }
 
 const targetDir = path.join(PUBLIC_BASE_PATH, category, name);
+
+// --- 重複チェック (ディレクトリ) ---
 if (fs.existsSync(targetDir)) {
-  console.error(`❌ Error: ${targetDir} already exists`);
+  console.error(`❌ Error: Directory already exists at ${targetDir}`);
   process.exit(1);
 }
 
@@ -41,28 +43,61 @@ const newItem = `  {
   },`;
 
 try {
-  // 1. ディレクトリ作成
+  // 1. ui-parts.ts の更新と重複チェック
+  const currentMetadata = fs.readFileSync(METADATA_PATH, 'utf8');
+
+  // IDが既に登録されていないかチェック
+  if (currentMetadata.includes(`id: "${name}"`)) {
+    console.error(`❌ Error: ID "${name}" is already registered in ui-parts.ts`);
+    process.exit(1);
+  }
+
+  const updatedMetadata = currentMetadata.replace(
+    /(export const UI_PARTS: UIPart\[\] = \[)/,
+    `$1\n${newItem}`
+  );
+  fs.writeFileSync(METADATA_PATH, updatedMetadata);
+  console.log(`✅ Updated: ui-parts.ts`);
+
+  // 2. ディレクトリ作成
   fs.mkdirSync(targetDir, { recursive: true });
 
-  // 2. テンプレートファイル生成
+  // 3. テンプレートファイル生成 (Viewport設定を追加)
   const templates = {
-    'index.html': `<!DOCTYPE html>\n<html lang="ja">\n<head>\n  <meta charset="UTF-8">\n  <title>${name}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <div class="${name}">\n    <p>${name} - Coming Soon</p>\n  </div>\n  <script src="script.js"></script>\n</body>\n</html>`,
-    'style.scss': `@use '../../../common/css/index';\n\n.${name} {\n  padding: 1rem;\n}`,
-    'script.js': `(function() {\n  'use strict';\n  console.log('${name} initialized');\n})();`
+    'index.html': `<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${name}</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="${name}">
+    <p>${name} - Coming Soon</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>`,
+    'style.scss': `@use '../../../common/css/index';
+
+.${name} {
+  padding: 1rem;
+  // ここにスタイルを記述
+}`,
+    'script.js': `(function() {
+  'use strict';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('${name} initialized');
+  });
+})();`
   };
 
   Object.entries(templates).forEach(([file, content]) => {
     fs.writeFileSync(path.join(targetDir, file), content);
     console.log(`✅ Created: ${file}`);
   });
-
-  // 3. ui-parts.ts の更新
-  const currentMetadata = fs.readFileSync(METADATA_PATH, 'utf8');
-  const updatedMetadata = currentMetadata.replace(
-    /(export const UI_PARTS: UIPart\[\] = \[)/,
-    `$1\n${newItem}`
-  );
-  fs.writeFileSync(METADATA_PATH, updatedMetadata);
 
   console.log(`\n✨ Successfully generated "${name}"!`);
   console.log(`📂 Path: ${targetDir}`);

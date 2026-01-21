@@ -63,5 +63,6 @@ public/gallery-parts/animation/**/*.css
 # テキストを一旦整形する仮置き場
 memo.txt
 
-# レポジトリ解析結果
+# レポジトリ解析ツール repomix の出力結果
+.repomix/
 repomix-output.xml
