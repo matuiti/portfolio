@@ -1,104 +1,73 @@
-// scripts/generate-ui-part.js
 import fs from 'fs';
 import path from 'path';
 
-// コマンドライン引数から取得
+// --- 設定 ---
+const METADATA_PATH = path.join(process.cwd(), 'src/data/gallery/ui-parts.ts');
+const PUBLIC_BASE_PATH = path.join(process.cwd(), 'public', 'gallery-parts', 'ui');
+
+// --- 引数取得 ---
 const args = process.argv.slice(2);
-const categoryArg = args.find(arg => arg.startsWith('--category='));
-const nameArg = args.find(arg => arg.startsWith('--name='));
+const category = args.find(arg => arg.startsWith('--category='))?.split('=')[1];
+const name = args.find(arg => arg.startsWith('--name='))?.split('=')[1];
 
-if (!categoryArg || !nameArg) {
-  console.error('Usage: npm run generate:ui -- --category=button --name=button03');
+if (!category || !name) {
+  console.error('❌ Usage: npm run generate:ui -- --category=button --name=button03');
   process.exit(1);
 }
 
-const category = categoryArg.split('=')[1];
-const name = nameArg.split('=')[1];
-
-// プロジェクトルートからの相対パス
-const basePath = path.join(process.cwd(), 'public', 'gallery-parts', 'ui', category, name);
-
-// ディレクトリ作成
-if (fs.existsSync(basePath)) {
-  console.error(`Error: ${basePath} already exists`);
+const targetDir = path.join(PUBLIC_BASE_PATH, category, name);
+if (fs.existsSync(targetDir)) {
+  console.error(`❌ Error: ${targetDir} already exists`);
   process.exit(1);
 }
 
-fs.mkdirSync(basePath, { recursive: true });
+// --- メタデータ生成 (ご提示の構造をベース) ---
+const newItem = `  {
+    id: "${name}",
+    category: "${category}",
+    title: "${name}",
+    description: "",
+    difficulty: "basic",
+    tags: ["Vanilla JS", "SCSS"],
+    features: [
+    "特徴１","特徴２"
+    ],
+    techStack: ["HTML", "SCSS", "JavaScript"],
+    path: "/gallery-parts/ui/${category}/${name}/index.html",
+    code: {
+      html: \`\`,
+      css: \`\`,
+      js: \`\`,
+    },
+  },`;
 
-// カテゴリからcommon/cssまでの相対パス計算
-// 例: button/button01 → ../../../common/css
-const relativePathToCommon = '../../../common/css';
+// --- ファイル生成処理 ---
+try {
+  // 1. ディレクトリ作成
+  fs.mkdirSync(targetDir, { recursive: true });
 
-// テンプレートファイル作成
-const templates = {
-  'index.html': `<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${name}</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="${name}">
-    <!-- UIパーツの内容 -->
-    <p>${name} - Coming Soon</p>
-  </div>
-  <script src="script.js"></script>
-</body>
-</html>`,
+  // 2. テンプレートファイル
+  const templates = {
+    'index.html': `<!DOCTYPE html>\n<html lang="ja">\n<head>\n  <meta charset="UTF-8">\n  <title>${name}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <div class="${name}">\n    <p>${name} - Coming Soon</p>\n  </div>\n  <script src="script.js"></script>\n</body>\n</html>`,
+    'style.scss': `@use '../../../common/css/index';\n\n.${name} {\n  padding: 1rem;\n}`,
+    'script.js': `(function() {\n  'use strict';\n  console.log('${name} initialized');\n})();`
+  };
 
-  'style.scss': `// ${name} のスタイル
-@use '${relativePathToCommon}/index';
-
-.${name} {
-  // Mobile First (375px)
-  padding: 1rem;
-
-  // Tablet (768px)
-  @media (min-width: 768px) {
-    padding: 2rem;
-  }
-
-  // Desktop (1200px)
-  @media (min-width: 1200px) {
-    padding: 3rem;
-  }
-}`,
-
-  'script.js': `// ${name} のスクリプト
-(function() {
-  'use strict';
-
-  // DOM読み込み完了後に実行
-  document.addEventListener('DOMContentLoaded', function() {
-    const element = document.querySelector('.${name}');
-    
-    if (!element) return;
-
-    // 初期化処理
-    init();
-
-    function init() {
-      console.log('${name} initialized');
-      // ここに初期化ロジックを追加
-    }
+  Object.entries(templates).forEach(([file, content]) => {
+    fs.writeFileSync(path.join(targetDir, file), content);
+    console.log(`✅ Created: ${file}`);
   });
-})();`
-};
 
-// ファイル書き込み
-Object.entries(templates).forEach(([filename, content]) => {
-  const filepath = path.join(basePath, filename);
-  fs.writeFileSync(filepath, content, 'utf8');
-  console.log(`✓ Created: ${filepath}`);
-});
+  // 3. ui-parts.ts の更新
+  const currentMetadata = fs.readFileSync(METADATA_PATH, 'utf8');
+  const updatedMetadata = currentMetadata.replace(
+    /(export const UI_PARTS: UIPart\[\] = \[)/,
+    `$1\n${newItem}`
+  );
+  fs.writeFileSync(METADATA_PATH, updatedMetadata);
 
-console.log(`\n✨ Successfully generated ${name} in ${category} category`);
-console.log(`\nNext steps:`);
-console.log(`1. Edit files in: ${basePath}`);
-console.log(`2. Compile SCSS: npm run compile:scss:ui`);
-console.log(`3. Add metadata to: src/data/gallery/ui-parts.ts`);
-console.log(`\nPreview:`);
-console.log(`npm run preview:ui -- --category=${category} --name=${name}`);
+  console.log(`\n✨ Successfully generated "${name}"!`);
+  console.log(`📂 Path: ${targetDir}`);
+} catch (err) {
+  console.error(`❌ Error: ${err.message}`);
+}
