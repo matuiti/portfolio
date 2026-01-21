@@ -9,6 +9,7 @@ import { CATEGORIES } from "@/data/gallery/categories";
 import { GALLERY_SETTINGS } from "@/lib/constants/gallery";
 
 export function useFiltering(allItems: UIPart[]): Filtering {
+  const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<Category>(GALLERY_SETTINGS.DEFAULT_CATEGORY);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -94,6 +95,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
 
   return {
     // State
+    selectedItem,
     selectedCategory,
     selectedTags,
     searchQuery,
@@ -110,6 +112,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     
     // Actions
     clearFilters,
+    setSelectedItem,
     setSelectedCategory: (cat: Category) => {
       setSelectedCategory(cat);
       resetPage();

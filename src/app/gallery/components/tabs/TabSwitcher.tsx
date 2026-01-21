@@ -27,7 +27,7 @@ export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          onClick={() => onTabChange(tab.id)} // any を使わずに済む
+          onClick={() => onTabChange(tab.id)}
           className={`
             relative z-10 flex-1 flex items-center justify-center gap-2 py-2 text-[11px] font-bold transition-all duration-300
             ${tab.isMobileOnly ? "lg:hidden" : ""}
