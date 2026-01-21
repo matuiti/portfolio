@@ -3,6 +3,22 @@ import { UIPart } from "@/types/gallery/ui-part";
 
 export const UI_PARTS: UIPart[] = [
   {
+    id: "button03",
+    category: "button",
+    title: "button03",
+    description: "",
+    difficulty: "basic",
+    tags: ["Vanilla JS", "SCSS"],
+    features: [],
+    techStack: ["HTML", "SCSS", "JavaScript"],
+    path: "/gallery-parts/ui/button/button03/index.html",
+    code: {
+      html: ``,
+      css: ``,
+      js: ``,
+    },
+  },
+  {
     id: "btn-001",
     category: "button",
     title: "Magnetic Animated Button",
