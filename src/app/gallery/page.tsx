@@ -1,15 +1,14 @@
 "use client";
 
-import { useState, Suspense } from "react";
-import { UIPart } from "@/types/gallery/ui-part";
+import { Suspense } from "react";
 import { UI_PARTS } from "@/data/gallery/ui-parts";
 import { useFiltering } from "@/lib/hooks/useFiltering";
+import { useURLSync } from "@/lib/hooks/useURLSync";
 import { GalleryLayout } from "./components/layout/GalleryLayout";
 import { ItemList } from "./components/list/ItemList";
 import { TitleAndCount } from "./components/ui/TitleAndCount";
 import { Pagination } from "./components/list/Pagination";
 import { PreviewModal } from "./components/modal/PreviewModal";
-import { useURLSync } from "@/lib/hooks/useURLSync";
 import { NoResults } from "./components/list/NoResults";
 import { LoadingGallery } from "./components/ui/LoadingGallery";
 
@@ -19,6 +18,7 @@ function GalleryContent() {
   useURLSync(filtering);
 
   const {
+    selectedItem,
     displayTitle,
     totalHitCount,
     isEmpty,
@@ -28,10 +28,9 @@ function GalleryContent() {
     currentPage,
     totalPages,
     clearFilters,
+    setSelectedItem,
     setCurrentPage,
   } = filtering;
-
-  const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
 
   return (
     <GalleryLayout filtering={filtering}>

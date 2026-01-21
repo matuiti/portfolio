@@ -13,7 +13,7 @@ export const UI_PARTS: UIPart[] = [
     features: ["マグネティック効果", "光沢アニメーション"],
     techStack: ["React", "Framer Motion", "Tailwind CSS"],
     path: "/previews/buttons/magnetic",
-    codes: {
+    code: {
       html: `<button class="magnetic">Hover Me</button>`,
       css: `.magnetic { transition: transform 0.2s ease-out; }`,
       js: `// Framer Motion logic here...`,
@@ -30,7 +30,7 @@ export const UI_PARTS: UIPart[] = [
     features: ["Backdrop Blur", "Glass Border"],
     techStack: ["Tailwind CSS"],
     path: "/previews/cards/glass",
-    codes: {
+    code: {
       html: `<div class="glass">Content</div>`,
       css: `.glass { backdrop-filter: blur(12px); }`,
       js: "",
@@ -46,7 +46,7 @@ export const UI_PARTS: UIPart[] = [
     features: ["Sticky Positioning", "Z-index management"],
     techStack: ["HTML", "CSS"],
     path: "/previews/nav/sticky",
-    codes: {
+    code: {
       html: "<header>Header</header>",
       css: "header { position: sticky; top: 0; }",
       js: "",
@@ -63,7 +63,7 @@ export const UI_PARTS: UIPart[] = [
     features: ["Smooth Transition", "Zero-JS logic"],
     techStack: ["CSS", "HTML"],
     path: "/previews/form/floating",
-    codes: {
+    code: {
       html: "<div class='field'><input id='n' placeholder=' '><label>Name</label></div>",
       css: "input:placeholder-shown + label { transform: translateY(0); }",
       js: "",
@@ -80,7 +80,7 @@ export const UI_PARTS: UIPart[] = [
     features: ["Shimmer Effect", "Flexible Size"],
     techStack: ["Tailwind CSS"],
     path: "/previews/loading/skeleton",
-    codes: {
+    code: {
       html: "<div class='skeleton animate-pulse'></div>",
       css: ".skeleton { background: #eee; height: 200px; }",
       js: "",

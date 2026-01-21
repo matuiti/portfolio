@@ -1,3 +1,6 @@
+/**
+ * カテゴリー名（リテラル型）
+ */
 export type Category =
   | "all"
   | "button"
