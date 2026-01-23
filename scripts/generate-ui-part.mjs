@@ -2,9 +2,22 @@ import fs from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
 
-// --- 設定 ---
-const METADATA_PATH = path.join(process.cwd(), 'src/data/gallery/ui-parts.ts');
-const PUBLIC_BASE_PATH = path.join(process.cwd(), 'public', 'gallery-parts', 'ui');
+// --- 定数設定---
+const CONFIG = {
+  PATHS: {
+    METADATA: path.join(process.cwd(), 'src/data/gallery/ui-parts.ts'),
+    PUBLIC_BASE: path.join(process.cwd(), 'public', 'gallery-parts', 'ui'),
+  },
+  URL: {
+    WORKBENCH: 'http://localhost:3000/workbench',
+  },
+  REGEXP: {
+    // 挿入位置を特定する正規表現
+    INSERT_POINT: /(export const UI_PARTS: UIPart\[\] = \[)/,
+    // 入力バリデーション（英数字、ハイフン、アンダースコア）
+    SAFE_PATTERN: /^[a-zA-Z0-9-_]+$/,
+  }
+};
 
 // --- 引数取得 ---
 const args = process.argv.slice(2);
@@ -16,7 +29,13 @@ if (!category || !name) {
   process.exit(1);
 }
 
-const targetDir = path.join(PUBLIC_BASE_PATH, category, name);
+// バリデーション
+if (!CONFIG.REGEXP.SAFE_PATTERN.test(category) || !CONFIG.REGEXP.SAFE_PATTERN.test(name)) {
+  console.error('❌ Error: Category and Name must be alphanumeric, hyphen, or underscore.');
+  process.exit(1);
+}
+
+const targetDir = path.join(CONFIG.PATHS.PUBLIC_BASE, category, name);
 
 // --- 重複チェック (ディレクトリ) ---
 if (fs.existsSync(targetDir)) {
@@ -44,7 +63,7 @@ const newItem = `  {
 
 try {
   // 1. ui-parts.ts の更新と重複チェック
-  const currentMetadata = fs.readFileSync(METADATA_PATH, 'utf8');
+  const currentMetadata = fs.readFileSync(CONFIG.PATHS.METADATA, 'utf8');
 
   // IDが既に登録されていないかチェック
   if (currentMetadata.includes(`id: "${name}"`)) {
@@ -53,16 +72,16 @@ try {
   }
 
   const updatedMetadata = currentMetadata.replace(
-    /(export const UI_PARTS: UIPart\[\] = \[)/,
+    CONFIG.REGEXP.INSERT_POINT,
     `$1\n${newItem}`
   );
-  fs.writeFileSync(METADATA_PATH, updatedMetadata);
+  fs.writeFileSync(CONFIG.PATHS.METADATA, updatedMetadata);
   console.log(`✅ Updated: ui-parts.ts`);
 
   // 2. ディレクトリ作成
   fs.mkdirSync(targetDir, { recursive: true });
 
-  // 3. テンプレートファイル生成 (Viewport設定を追加)
+  // 3. テンプレートファイル生成
   const templates = {
     'index.html': `<!DOCTYPE html>
 <html lang="ja">
@@ -87,7 +106,7 @@ try {
 }`,
     'script.js': `(function() {
   'use strict';
-  
+
   document.addEventListener('DOMContentLoaded', () => {
     console.log('${name} initialized');
   });
@@ -103,15 +122,14 @@ try {
   console.log(`📂 Path: ${targetDir}`);
 
   // --- 4. ブラウザを自動で開く ---
-  const workbenchUrl = 'http://localhost:3000/workbench';
   const startCommand = process.platform === 'darwin' ? 'open' :
     process.platform === 'win32' ? 'start' : 'xdg-open';
 
-  exec(`${startCommand} ${workbenchUrl}`, (err) => {
+  exec(`${startCommand} ${CONFIG.URL.WORKBENCH}`, (err) => {
     if (err) {
       console.warn(`⚠️ Could not open browser automatically: ${err.message}`);
     } else {
-      console.log(`🚀 Opening Workbench: ${workbenchUrl}`);
+      console.log(`🚀 Opening Workbench: ${CONFIG.URL.WORKBENCH}`);
     }
   });
 
