@@ -10,7 +10,7 @@
 
     "// --- Development Environment ---": "",
     "dev:work": "npm-run-all --parallel watch:scss dev",
-    "new": "node scripts/generate-ui-part.js",
+    "new": "node scripts/generate-ui-part.mjs",
 
     "// --- Sass & Watchers ---": "",
     "watch:scss": "sass public/gallery-parts:public/gallery-parts --watch --style=expanded --load-path=public/gallery-parts/common/css",
