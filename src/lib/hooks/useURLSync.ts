@@ -38,7 +38,7 @@ export function useURLSync(filtering: Filtering) {
       if (isValid) setSelectedCategory(category as Category);
     }
 
-    // 提案1：空文字ガード付きのタグ読み込み
+    // 空文字ガード付きのタグ読み込み
     if (tags) {
       const tagList = tags.split(",").filter((t) => t !== "");
       if (tagList.length > 0) setSelectedTags(tagList);
@@ -49,7 +49,7 @@ export function useURLSync(filtering: Filtering) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 提案2：デバウンス処理
+  // デバウンス処理
   // 入力が止まってから300ms後にURL反映用のStateを更新
   useEffect(() => {
     const timer = setTimeout(() => {

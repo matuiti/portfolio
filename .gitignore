@@ -60,7 +60,7 @@ public/gallery-parts/animation/**/*.css
 # パフォーマンス計測結果
 .lighthouse/
 
-# テキストを一旦整形する仮置き場
+# 気軽にテキストを整形する場所
 memo.txt
 
 # レポジトリ解析ツール repomix の出力結果
