@@ -1,30 +1,24 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
 import { DescriptionPanel } from "../tabs/DescriptionPanel";
 import { CodePanel } from "../tabs/CodePanel";
 import { PreviewPanel } from "../tabs/PreviewPanel";
 import { DifficultyBadge } from "../ui/DifficultyBadge";
 import { TagBadge } from "../ui/TagBadge";
-import { TabSwitcher, GalleryTab } from "../tabs/TabSwitcher";
+import { TabSwitcher } from "../tabs/TabSwitcher";
+import { useIsClient } from "@/lib/hooks/useIsClient";
+import { TabType } from "@/types/gallery/tab";
 
-type ItemCardProps = {
+type ItemProps = {
   item: UIPart;
   onExpand: (item: UIPart) => void;
-}
+};
 
-const subscribe = () => () => {};
-const getSnapshot = () => true;
-const getServerSnapshot = () => false;
-
-export const ItemCard = ({ item, onExpand }: ItemCardProps) => {
-  const [activeTab, setActiveTab] = useState<GalleryTab>("description");
-  const isClient = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+export const Item = ({ item, onExpand }: ItemProps) => {
+  const [activeTab, setActiveTab] = useState<TabType>("description");
+  const isClient = useIsClient();
 
   if (!item) return null;
 

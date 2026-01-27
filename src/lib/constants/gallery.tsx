@@ -1,5 +1,7 @@
 // src/lib/constants/gallery.ts
 
+import { TabItem } from "@/types/gallery/tab";
+
 /**
  * ギャラリー全体の基本設定
  */
@@ -26,3 +28,12 @@ export const GALLERY_MESSAGES = {
   RESET_BUTTON_ALL: "フィルターをリセット",
   RESET_BUTTON_TAG: "タグをリセットする",
 } as const;
+
+/**
+ * ギャラリー内で使用するタブの基本設定
+ */
+export const GALLERY_TABS: TabItem[] = [
+  { id: "description", label: "説明", icon: /* SVG */ <svg>...</svg> },
+  { id: "code", label: "コード", icon: /* SVG */ <svg>...</svg> },
+  { id: "preview", label: "プレビュー", isMobileOnly: true, icon: /* SVG */ <svg>...</svg> }
+];
