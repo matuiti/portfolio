@@ -61,8 +61,8 @@ public/gallery-parts/animation/**/*.css
 .lighthouse/
 
 # 気軽にテキストを整形する場所
-memo.txt
+memo.*
 
 # レポジトリ解析ツール repomix の出力結果
 .repomix/
-repomix-output.xml
+repomix-*

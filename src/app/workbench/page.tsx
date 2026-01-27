@@ -7,7 +7,7 @@ import { useIsMounted } from "@/lib/hooks/useIsMounted";
 export default function WorkbenchPage() {
   const isMounted = useIsMounted();
 
-  // 修正ポイント：useStateの初期値として関数を渡し、マウントに関わらず値を決める
+  // useStateの初期値として関数を渡し、マウントに関わらず値を決める
   // これにより useEffect + setSelectedId が不要になります
   const [selectedId, setSelectedId] = useState(() =>
     UI_PARTS.length > 0 ? UI_PARTS[0].id : "",

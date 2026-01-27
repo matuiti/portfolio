@@ -1,26 +1,14 @@
-// ここから装飾・補助的な UI
-
-// 15. TabSwitcher
-// 説明 / コード / プレビューの切り替え。
-// - コア機能ではない
-// - モーダルと一覧が完成してからでOK
-
 // src/app/gallery/components/tabs/TabSwitcher.tsx
-
-// タブの型を明示的に定義
-export type GalleryTab = "description" | "code" | "preview";
+import { GALLERY_TABS } from "@/lib/constants/gallery";
+import { TabType, TabItem } from "@/types/gallery/tab";
 
 type TabSwitcherProps = {
-  activeTab: GalleryTab;
-  onTabChange: (tab: GalleryTab) => void;
-}
+  activeTab: TabType;
+  onTabChange: (tab: TabType) => void;
+};
 
 export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
-  const tabs: { id: GalleryTab; label: string; isMobileOnly?: boolean; icon: React.ReactNode }[] = [
-    { id: "description", label: "説明", icon: (/* 省略 */ <svg>...</svg>) },
-    { id: "code", label: "コード", icon: (/* 省略 */ <svg>...</svg>) },
-    { id: "preview", label: "プレビュー", isMobileOnly: true, icon: (/* 省略 */ <svg>...</svg>) },
-  ];
+  const tabs: TabItem[] = GALLERY_TABS;
 
   return (
     <div className="relative flex p-1.5 bg-neutral-100 rounded-2xl w-full lg:max-w-[240px]">
