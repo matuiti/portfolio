@@ -2,10 +2,9 @@
 
 import { Category } from "./category";
 
-
 /**
  * UIパーツの型定義
- * difficulty(難易度)：HTML/CSS中心の軽めの実装 | JSやアニメーションを含む中級実装 | 複雑な動き・高度な構造・ライブラリ活用など上級実装
+ * difficulty(難易度)の選択基準の参考に：（basic）HTML/CSS中心の軽めの実装 |（advanced）JSやアニメーションを含む中級実装 |（expert）複雑な動き・高度な構造・ライブラリ活用など上級実装
  */
 export type UIPart = {
   id: string;

@@ -1,32 +1,38 @@
 // src/app/gallery/components/ui/DifficultyBadge.tsx
+
 import { UIPart } from "@/types/gallery/ui-part";
+
+type DifficultyConfig = {
+  label: string;
+  color: string;
+  dots: number;
+};
+
+const DIFFICULTY_MAP: Record<UIPart["difficulty"], DifficultyConfig> = {
+  basic: {
+    label: "Basic",
+    color: "text-emerald-600 bg-emerald-50 border-emerald-100",
+    dots: 1,
+  },
+  advanced: {
+    label: "Advanced",
+    color: "text-blue-600 bg-blue-50 border-blue-100",
+    dots: 2,
+  },
+  expert: {
+    label: "Expert",
+    color: "text-rose-600 bg-rose-50 border-rose-100",
+    dots: 3,
+  },
+} as const;
 
 type DifficultyBadgeProps = {
   level: UIPart["difficulty"];
-}
+};
 
 export const DifficultyBadge = ({ level }: DifficultyBadgeProps) => {
-  // 新しい定義に合わせた設定
-  const config = {
-    basic: {
-      label: "Basic",
-      color: "text-emerald-600 bg-emerald-50 border-emerald-100",
-      dots: 1,
-    },
-    advanced: {
-      label: "Advanced",
-      color: "text-blue-600 bg-blue-50 border-blue-100",
-      dots: 2,
-    },
-    expert: {
-      label: "Expert",
-      color: "text-rose-600 bg-rose-50 border-rose-100",
-      dots: 3,
-    },
-  };
-
-  // 万が一定義外の文字列が来た場合のフォールバック
-  const current = config[level] || config.basic;
+  // 定義外が来ても安心なようにフォールバック
+  const current = DIFFICULTY_MAP[level] || DIFFICULTY_MAP.basic;
 
   return (
     <div

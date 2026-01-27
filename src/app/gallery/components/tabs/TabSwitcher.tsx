@@ -1,6 +1,6 @@
 // src/app/gallery/components/tabs/TabSwitcher.tsx
 import { GALLERY_TABS } from "@/lib/constants/gallery";
-import { TabType, TabItem } from "@/types/gallery/tab";
+import { TabItem, TabType } from "@/types/gallery/tab";
 
 type TabSwitcherProps = {
   activeTab: TabType;
@@ -8,8 +8,7 @@ type TabSwitcherProps = {
 };
 
 export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
-  const tabs: TabItem[] = GALLERY_TABS;
-
+  const tabs: readonly TabItem[] = GALLERY_TABS;
   return (
     <div className="relative flex p-1.5 bg-neutral-100 rounded-2xl w-full lg:max-w-[240px]">
       {tabs.map((tab) => (

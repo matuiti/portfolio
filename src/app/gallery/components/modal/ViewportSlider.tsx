@@ -1,6 +1,6 @@
 "use client";
 
-import { PREVIEW_SETTINGS } from "@/lib/constants/gallery";
+import { PREVIEW_MODAL_SETTINGS } from "@/lib/constants/gallery";
 
 type ViewportSliderProps = {
   value: number;
@@ -8,12 +8,12 @@ type ViewportSliderProps = {
   min?: number;
   max?: number;
   onChange: (val: number) => void;
-}
+};
 
 export const ViewportSlider = ({
   value,
-  min = PREVIEW_SETTINGS.MIN_WIDTH,
-  max = PREVIEW_SETTINGS.MAX_WIDTH,
+  min = PREVIEW_MODAL_SETTINGS.MIN_WIDTH,
+  max = PREVIEW_MODAL_SETTINGS.MAX_WIDTH,
   onChange,
 }: ViewportSliderProps) => {
   // 入力値のバリデーション（最小・最大を超えないように制限）

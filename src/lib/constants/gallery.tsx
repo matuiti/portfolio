@@ -1,5 +1,4 @@
 // src/lib/constants/gallery.ts
-
 import { TabItem } from "@/types/gallery/tab";
 
 /**
@@ -11,9 +10,21 @@ export const GALLERY_SETTINGS = {
 } as const;
 
 /**
- * プレビューモーダル内の制限値
+ * プレビューパネル内の設定
  */
-export const PREVIEW_SETTINGS = {
+export const PREVIEW_PANEL_SETTINGS = {
+  VIEWPORTS: [
+    { label: "SP", width: 375 },
+    { label: "TAB", width: 768 },
+    { label: "PC", width: 1280 },
+  ],
+  DEFAULT_WIDTH: 1280,
+} as const;
+
+/**
+ * プレビューモーダル内の設定
+ */
+export const PREVIEW_MODAL_SETTINGS = {
   MIN_WIDTH: 350,
   MAX_WIDTH: 1920,
   DEFAULT_WIDTH: 1200,
@@ -32,8 +43,13 @@ export const GALLERY_MESSAGES = {
 /**
  * ギャラリー内で使用するタブの基本設定
  */
-export const GALLERY_TABS: TabItem[] = [
-  { id: "description", label: "説明", icon: /* SVG */ <svg>...</svg> },
-  { id: "code", label: "コード", icon: /* SVG */ <svg>...</svg> },
-  { id: "preview", label: "プレビュー", isMobileOnly: true, icon: /* SVG */ <svg>...</svg> }
-];
+export const GALLERY_TABS = [
+  { id: "description", label: "説明", icon: <svg>...</svg> },
+  { id: "code", label: "コード", icon: <svg>...</svg> },
+  {
+    id: "preview",
+    label: "プレビュー",
+    isMobileOnly: true,
+    icon: <svg>...</svg>,
+  },
+] as const satisfies readonly TabItem[];

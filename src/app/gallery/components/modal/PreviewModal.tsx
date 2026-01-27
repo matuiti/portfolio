@@ -6,7 +6,7 @@ import { ViewportSlider } from "./ViewportSlider";
 import { PreviewFrame } from "../preview/PreviewFrame";
 import { ModalNavigation } from "./ModalNavigation";
 import { useModalNavigation } from "@/lib/hooks/useModalNavigation";
-import { PREVIEW_SETTINGS } from "@/lib/constants/gallery";
+import { PREVIEW_MODAL_SETTINGS } from "@/lib/constants/gallery";
 
 type PreviewModalProps = {
   isOpen: boolean;
@@ -14,7 +14,7 @@ type PreviewModalProps = {
   currentItem: UIPart;
   allFilteredItems: UIPart[];
   onNavigate: (item: UIPart) => void;
-}
+};
 
 export const PreviewModal = ({
   isOpen,
@@ -27,7 +27,7 @@ export const PreviewModal = ({
 
   // 1. 状態管理: key属性の恩恵により、マウント時に常にデフォルト幅になります
   const [viewportWidth, setViewportWidth] = useState<number>(
-    PREVIEW_SETTINGS.DEFAULT_WIDTH,
+    PREVIEW_MODAL_SETTINGS.DEFAULT_WIDTH,
   );
 
   const { hasPrev, hasNext, goToPrev, goToNext, currentIndex, totalCount } =
@@ -92,8 +92,8 @@ export const PreviewModal = ({
             <ViewportSlider
               value={viewportWidth}
               onChange={setViewportWidth}
-              min={PREVIEW_SETTINGS.MIN_WIDTH}
-              max={PREVIEW_SETTINGS.MAX_WIDTH}
+              min={PREVIEW_MODAL_SETTINGS.MIN_WIDTH}
+              max={PREVIEW_MODAL_SETTINGS.MAX_WIDTH}
             />
           </div>
 
