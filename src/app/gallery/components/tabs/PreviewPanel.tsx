@@ -4,15 +4,17 @@
 import { useState, useRef, useEffect } from "react";
 import { UIPart } from "@/types/gallery/ui-part";
 import { PreviewFrame } from "../preview/PreviewFrame";
+import { PREVIEW_PANEL_SETTINGS } from "@/lib/constants/gallery";
 
 type PreviewPanelProps = {
   item: UIPart;
   onExpand: () => void;
-}
+};
 
 export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
-  // デフォルトは 1280 (PC)
-  const [viewportWidth, setViewportWidth] = useState(1280);
+  const [viewportWidth, setViewportWidth] = useState<number>(
+    PREVIEW_PANEL_SETTINGS.DEFAULT_WIDTH,
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
@@ -38,11 +40,7 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
       {/* 1. ビューポートコントローラー */}
       <div className="flex items-center justify-between bg-white/50 p-2 rounded-2xl border border-neutral-200/50">
         <div className="flex gap-1">
-          {[
-            { label: "SP", width: 375 },
-            { label: "TAB", width: 768 },
-            { label: "PC", width: 1280 },
-          ].map((v) => (
+          {PREVIEW_PANEL_SETTINGS.VIEWPORTS.map((v) => (
             <button
               key={v.label}
               onClick={() => setViewportWidth(v.width)}
