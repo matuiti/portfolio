@@ -23,7 +23,7 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
     const updateScale = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
-        // 表示エリア幅 / 仮想解像度 = 倍率
+        // 実サイズ / 仮想サイズ = 倍率
         const newScale = containerWidth / viewportWidth;
         // 1倍以上（等倍以上）にはしない（ボケ防止）
         setScale(Math.min(newScale, 1));
