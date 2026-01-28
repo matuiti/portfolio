@@ -7,20 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-
     "// --- Development Environment ---": "",
     "dev:work": "npm-run-all --parallel watch:scss dev",
     "new": "node scripts/generate-ui-part.mjs",
-
     "// --- Sass & Watchers ---": "",
     "watch:scss": "sass public/gallery-parts:public/gallery-parts --watch --style=expanded --load-path=public/gallery-parts/common/css",
     "compile:scss": "sass public/gallery-parts:public/gallery-parts --no-source-map --style=compressed --load-path=public/gallery-parts/common/css",
-
     "// --- Lifecycle Hooks ---": "",
     "prebuild": "npm run compile:scss",
     "postinstall": "npm run compile:scss"
   },
   "dependencies": {
+    "lucide-react": "^0.563.0",
     "next": "16.1.1",
     "prismjs": "^1.30.0",
     "react": "19.2.3",

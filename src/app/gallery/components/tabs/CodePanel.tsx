@@ -9,7 +9,7 @@ import "prismjs/themes/prism-tomorrow.css";
 // 必要な言語のみインポート
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-css";
-import "prismjs/components/prism-markup"; // HTML用
+import "prismjs/components/prism-markup";
 
 type CodePanelProps = {
   item: UIPart;
@@ -21,7 +21,7 @@ export const CodePanel = ({ item }: CodePanelProps) => {
   const [activeLang, setActiveLang] = useState<Lang>("html");
   const [isCopied, setIsCopied] = useState(false);
 
-  // 【追加】言語が切り替わったり、コンポーネントが表示された時にハイライトを適用
+  // 【追加】言語が切り替わったり、コンポーネントが表示された時にコードを色付けし直す
   useEffect(() => {
     Prism.highlightAll();
   }, [activeLang, item]);

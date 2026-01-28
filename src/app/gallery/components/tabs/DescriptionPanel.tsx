@@ -3,13 +3,7 @@ import { UIPart } from "@/types/gallery/ui-part";
 
 export const DescriptionPanel = ({ item }: { item: UIPart }) => {
   return (
-    /* CodePanelと同じく h-full を指定。
-      rounded や border のデザインを揃えることで、タブ切り替え時の違和感を消します。
-    */
     <div className="flex flex-col h-full w-full bg-neutral-50/50 rounded-[24px] border border-neutral-100 overflow-hidden">
-      {/* スクロール領域を pre と同じ位置（内側）に設定。
-        custom-scrollbar を適用します。
-      */}
       <div className="flex-1 overflow-auto custom-scrollbar p-8 space-y-10">
         {/* 1. 概要テキスト */}
         <section className="animate-in fade-in slide-in-from-bottom-2 duration-500">
