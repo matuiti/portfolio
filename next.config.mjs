@@ -7,15 +7,15 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/works',
-        permanent: false,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/',
+  //       destination: '/works',
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;
