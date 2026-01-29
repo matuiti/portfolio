@@ -2,7 +2,7 @@
 "use client";
 
 import { Category } from "@/gallery/_types/category";
-import { CATEGORIES } from "@/gallery/_data/categories";
+import { CATEGORIES } from "@/gallery/data/categories";
 
 type Props = {
   selected: Category;

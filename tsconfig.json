@@ -20,9 +20,10 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@/home/*": ["src/app/(home)/*"],
       "@/gallery/*": ["src/app/gallery/*"],
-      "@/skills/*": ["src/app/skills/*"],
       "@/works/*": ["src/app/works/*"],
+      "@/skills/*": ["src/app/skills/*"],
       "@/*": ["src/*"]
     }
   },
