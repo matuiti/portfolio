@@ -1,7 +1,7 @@
 // src/app/gallery/components/ui/TagBadge.tsx
 type TagBadgeProps = {
   label: string;
-}
+};
 
 export const TagBadge = ({ label }: TagBadgeProps) => {
   return (

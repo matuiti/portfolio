@@ -1,6 +1,6 @@
 // src/app/gallery/components/ui/DifficultyBadge.tsx
 
-import { UIPart } from "@/types/gallery/ui-part";
+import { UIPart } from "@/gallery/_types/ui-part";
 
 type DifficultyConfig = {
   label: string;

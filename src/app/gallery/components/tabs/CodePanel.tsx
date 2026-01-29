@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { UIPart } from "@/types/gallery/ui-part";
 import Prism from "prismjs";
 
 // Prismのテーマ（お好みのものを選べます。ここではシンプルでモダンな明日系を使用）
@@ -10,6 +9,7 @@ import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-markup";
+import { UIPart } from "@/gallery/_types/ui-part";
 
 type CodePanelProps = {
   item: UIPart;
@@ -21,7 +21,7 @@ export const CodePanel = ({ item }: CodePanelProps) => {
   const [activeLang, setActiveLang] = useState<Lang>("html");
   const [isCopied, setIsCopied] = useState(false);
 
-  // 【追加】言語が切り替わったり、コンポーネントが表示された時にコードを色付けし直す
+  // 言語が切り替わったり、コンポーネントが表示された時にコードを色付けし直す
   useEffect(() => {
     Prism.highlightAll();
   }, [activeLang, item]);

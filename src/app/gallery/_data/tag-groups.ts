@@ -1,4 +1,4 @@
-import { TagGroup } from "@/types/gallery/tag";
+import { TagGroup } from "../_types/tag";
 
 export const TAG_GROUPS: Record<string, TagGroup> = {
   motion: {
