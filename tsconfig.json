@@ -20,6 +20,8 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@/data/*": ["src/data/*"],
+      "@/types/*": ["src/types/*"],
       "@/home/*": ["src/app/(home)/*"],
       "@/gallery/*": ["src/app/gallery/*"],
       "@/works/*": ["src/app/works/*"],
