@@ -1,5 +1,7 @@
 // src/lib/constants/gallery.ts
-import { TabItem } from "@/types/gallery/tab";
+
+import { TabItem } from "@/gallery/_types/tab";
+
 
 /**
  * ギャラリー全体の基本設定

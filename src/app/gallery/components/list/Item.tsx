@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { UIPart } from "@/types/gallery/ui-part";
 import { DescriptionPanel } from "../tabs/DescriptionPanel";
 import { CodePanel } from "../tabs/CodePanel";
 import { PreviewPanel } from "../tabs/PreviewPanel";
@@ -9,7 +8,8 @@ import { DifficultyBadge } from "../ui/DifficultyBadge";
 import { TagBadge } from "../ui/TagBadge";
 import { TabSwitcher } from "../tabs/TabSwitcher";
 import { useIsClient } from "@/lib/hooks/useIsClient";
-import { TabType } from "@/types/gallery/tab";
+import { UIPart } from "@/gallery/_types/ui-part";
+import { TabType } from "@/gallery/_types/tab";
 
 type ItemProps = {
   item: UIPart;

@@ -1,6 +1,6 @@
 // src/app/gallery/components/tabs/TabSwitcher.tsx
-import { GALLERY_TABS } from "@/lib/constants/gallery";
-import { TabItem, TabType } from "@/types/gallery/tab";
+import { GALLERY_TABS } from "@/gallery/_lib/constants/gallery";
+import { TabItem, TabType } from "@/gallery/_types/tab";
 
 type TabSwitcherProps = {
   activeTab: TabType;

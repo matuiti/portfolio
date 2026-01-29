@@ -1,5 +1,6 @@
 // src/app/gallery/components/filter/CategoryNav.tsx
-import type { Category } from "@/types/gallery/category";
+
+import { Category } from "@/gallery/_types/category";
 type CategoryNavProps = {
   selected: Category;
   onSelect: (cat: Category) => void;

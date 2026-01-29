@@ -2,15 +2,17 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import type { Category } from "@/types/gallery/category";
-import type { UIPart } from "@/types/gallery/ui-part";
-import type { Filtering } from "@/types/gallery/filtering";
-import { CATEGORIES } from "@/data/gallery/categories";
-import { GALLERY_SETTINGS } from "@/lib/constants/gallery";
+import { UIPart } from "@/gallery/_types/ui-part";
+import { Filtering } from "@/gallery/_types/filtering";
+import { Category } from "@/gallery/_types/category";
+import { CATEGORIES } from "@/gallery/_data/categories";
+import { GALLERY_SETTINGS } from "../constants/gallery";
 
 export function useFiltering(allItems: UIPart[]): Filtering {
   const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Category>(GALLERY_SETTINGS.DEFAULT_CATEGORY);
+  const [selectedCategory, setSelectedCategory] = useState<Category>(
+    GALLERY_SETTINGS.DEFAULT_CATEGORY,
+  );
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -109,7 +111,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     displayTitle,
     totalHitCount,
     isEmpty,
-    
+
     // Actions
     clearFilters,
     setSelectedItem,

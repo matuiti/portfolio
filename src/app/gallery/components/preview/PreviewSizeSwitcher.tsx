@@ -1,16 +1,10 @@
-// 9. PreviewSizeSwitcher
-// 375 / 768 / 1200 の切り替え UI。
-// - PreviewFrame と密接に関係
-// - レスポンシブ対応のアピールポイント
-
-
 // src/app/gallery/components/preview/PreviewSizeSwitcher.tsx
-export const PreviewSizeSwitcher = ({ 
-  currentWidth, 
-  onWidthChange 
-}: { 
-  currentWidth: string, 
-  onWidthChange: (w: string) => void 
+export const PreviewSizeSwitcher = ({
+  currentWidth,
+  onWidthChange,
+}: {
+  currentWidth: string;
+  onWidthChange: (w: string) => void;
 }) => {
   const sizes = [
     { label: "SP", value: "375px" },
@@ -25,8 +19,8 @@ export const PreviewSizeSwitcher = ({
           key={s.label}
           onClick={() => onWidthChange(s.value)}
           className={`px-3 py-1 text-[10px] font-bold rounded-md transition-all ${
-            currentWidth === s.value 
-              ? "bg-white text-neutral-800 shadow-sm" 
+            currentWidth === s.value
+              ? "bg-white text-neutral-800 shadow-sm"
               : "text-neutral-500 hover:text-neutral-700"
           }`}
         >

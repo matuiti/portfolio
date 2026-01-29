@@ -1,7 +1,7 @@
 "use client";
 
+import { UIPart } from "@/gallery/_types/ui-part";
 import { useEffect, useCallback } from "react";
-import { UIPart } from "@/types/gallery/ui-part";
 
 type UseModalNavigationProps = {
   currentItem: UIPart;

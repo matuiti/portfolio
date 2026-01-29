@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
-import { useLazyIframe } from "@/lib/hooks/useLazyIframe";
+import { useLazyIframe } from "@/gallery/_lib/hooks/useLazyIframe";
 
 type PreviewFrameProps = {
   url: string;
   baseWidth?: number;
-}
+};
 
 export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
   const [status, setStatus] = useState<"loading" | "success" | "error">(

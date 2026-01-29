@@ -18,8 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/gallery/*": ["src/app/gallery/*"],
+      "@/skills/*": ["src/app/skills/*"],
+      "@/works/*": ["src/app/works/*"],
+      "@/*": ["src/*"]
     }
   },
   "include": [
