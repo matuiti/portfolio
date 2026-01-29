@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UI_PARTS } from "@/gallery/_data/ui-parts";
+import { UI_PARTS } from "@/gallery/data/ui-parts";
 import { useIsMounted } from "@/lib/hooks/useIsMounted";
 
 export default function WorkbenchPage() {

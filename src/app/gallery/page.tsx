@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { UI_PARTS } from "@/gallery/_data/ui-parts";
+import { UI_PARTS } from "@/gallery/data/ui-parts";
 import { GalleryLayout } from "./components/layout/GalleryLayout";
 import { ItemList } from "./components/list/ItemList";
 import { TitleAndCount } from "./components/ui/TitleAndCount";

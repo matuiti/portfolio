@@ -5,7 +5,7 @@ import { useState, useMemo } from "react";
 import { UIPart } from "@/gallery/_types/ui-part";
 import { Filtering } from "@/gallery/_types/filtering";
 import { Category } from "@/gallery/_types/category";
-import { CATEGORIES } from "@/gallery/_data/categories";
+import { CATEGORIES } from "@/gallery/data/categories";
 import { GALLERY_SETTINGS } from "../constants/gallery";
 
 export function useFiltering(allItems: UIPart[]): Filtering {

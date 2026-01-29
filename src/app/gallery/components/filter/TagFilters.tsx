@@ -4,7 +4,7 @@
 "use client";
 import { GALLERY_MESSAGES } from "@/gallery/_lib/constants/gallery";
 import { TagGroup } from "./TagGroup";
-import { TAG_GROUPS } from "@/gallery/_data/tag-groups";
+import { TAG_GROUPS } from "@/gallery/data/tag-groups";
 
 type TagFiltersProps = {
   selectedTags: string[];

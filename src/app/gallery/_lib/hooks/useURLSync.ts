@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Filtering } from "@/gallery/_types/filtering";
-import { CATEGORIES } from "@/gallery/_data/categories";
+import { CATEGORIES } from "@/gallery/data/categories";
 import { Category } from "@/gallery/_types/category";
 
 export function useURLSync(filtering: Filtering) {
@@ -80,7 +80,6 @@ export function useURLSync(filtering: Filtering) {
     const url = query ? `${pathname}?${query}` : pathname;
 
     router.replace(url, { scroll: false });
-
   }, [
     selectedCategory,
     selectedTags,
