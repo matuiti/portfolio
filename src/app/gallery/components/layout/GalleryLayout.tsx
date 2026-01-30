@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { GallerySidebar } from "./GallerySidebar";
 import { GalleryDrawerMenu } from "./GalleryDrawerMenu";
-import { Filtering } from "@/gallery/_types/filtering";
+import { Filtering } from "@/gallery/types/filtering";
 
 type GalleryLayoutProps = {
   children: React.ReactNode;

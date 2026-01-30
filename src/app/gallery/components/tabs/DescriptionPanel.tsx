@@ -1,6 +1,6 @@
 // src/app/gallery/components/tabs/DescriptionPanel.tsx
 
-import { UIPart } from "@/gallery/_types/ui-part";
+import { UIPart } from "@/gallery/types/ui-part";
 
 export const DescriptionPanel = ({ item }: { item: UIPart }) => {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
-import { useLazyIframe } from "@/gallery/_lib/hooks/useLazyIframe";
+import { useLazyIframe } from "@/gallery/lib/hooks/useLazyIframe";
 
 type PreviewFrameProps = {
   url: string;

@@ -9,11 +9,11 @@ import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-markup";
-import { UIPart } from "@/gallery/_types/ui-part";
+import { UIPart } from "@/gallery/types/ui-part";
 
 type CodePanelProps = {
   item: UIPart;
-}
+};
 
 type Lang = "html" | "css" | "js";
 

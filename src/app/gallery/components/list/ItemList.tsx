@@ -1,7 +1,7 @@
 // src/app/gallery/components/list/ItemList.tsx
 "use client";
 
-import { UIPart } from "@/gallery/_types/ui-part";
+import { UIPart } from "@/gallery/types/ui-part";
 import { Item } from "./Item";
 
 type ItemListProps = {

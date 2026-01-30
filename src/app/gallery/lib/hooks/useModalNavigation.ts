@@ -1,6 +1,6 @@
 "use client";
 
-import { UIPart } from "@/gallery/_types/ui-part";
+import { UIPart } from "@/gallery/types/ui-part";
 import { useEffect, useCallback } from "react";
 
 type UseModalNavigationProps = {

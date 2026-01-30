@@ -2,7 +2,7 @@
 // タグフィルタという「一つの機能エリア」を定義するコンポーネントです。データのループと、便利な機能（リセットなど）を管理します。
 // 枠組み管理：タグセクションの背景、タイトル、全リセット機能。
 "use client";
-import { GALLERY_MESSAGES } from "@/gallery/_lib/constants/gallery";
+import { GALLERY_MESSAGES } from "@/gallery/lib/constants/gallery";
 import { TagGroup } from "./TagGroup";
 import { TAG_GROUPS } from "@/gallery/data/tag-groups";
 

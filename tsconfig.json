@@ -22,6 +22,7 @@
     "paths": {
       "@/data/*": ["src/data/*"],
       "@/types/*": ["src/types/*"],
+      "@/components/*": ["src/components/*"],
       "@/home/*": ["src/app/(home)/*"],
       "@/gallery/*": ["src/app/gallery/*"],
       "@/works/*": ["src/app/works/*"],

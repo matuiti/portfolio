@@ -1,11 +1,11 @@
 // src/app/gallery/components/filter/CategoryNav.tsx
 
-import { Category } from "@/gallery/_types/category";
+import { Category } from "@/gallery/types/category";
 type CategoryNavProps = {
   selected: Category;
   onSelect: (cat: Category) => void;
   counts: Record<string, number>;
-}
+};
 
 // UIに表示するカテゴリーリスト
 const CATEGORY_ITEMS: { label: string; value: Category }[] = [
