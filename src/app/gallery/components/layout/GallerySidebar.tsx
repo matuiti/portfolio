@@ -3,7 +3,7 @@
 import { CategoryList } from "../filter/CategoryList";
 import { TagFilters } from "../filter/TagFilters";
 import { SearchBox } from "../filter/SearchBox";
-import { Filtering } from "@/gallery/_types/filtering";
+import { Filtering } from "@/gallery/types/filtering";
 
 export function GallerySidebar({ filtering }: { filtering: Filtering }) {
   const {

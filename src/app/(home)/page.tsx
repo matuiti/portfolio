@@ -1,9 +1,34 @@
+import { Button } from "@/components/ui/Button";
+import { ContactSection } from "./components/ContactSection";
+
 export default function Home() {
   return (
-    <div className="flex flex-col mt-8 min-h-screen items-center justify-center bg-zinc-50 font-sans gap-8">
-      <h1>ようこそ　リンク使ってください！</h1>
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center gap-6">
-      </main>
+    <div className="p-10 space-y-4">
+      <h1 className="text-2xl font-bold">Button Gallery</h1>
+
+      <div className="flex flex-wrap gap-4">
+        {/* 標準 */}
+        <Button>プロジェクトを見る</Button>
+
+        {/* サイズと色を変更 */}
+        <Button intent="outline" size="lg">
+          お問い合わせ
+        </Button>
+
+        {/* ゴーストボタン */}
+        <Button intent="ghost" size="sm">
+          キャンセル
+        </Button>
+
+        {/* 横幅いっぱい */}
+        <Button intent="secondary" fullWidth={true}>
+          もっと詳しく
+        </Button>
+      </div>
+
+      <section id="contact" className="py-24 bg-slate-50/50">
+        <ContactSection />
+      </section>
     </div>
   );
 }

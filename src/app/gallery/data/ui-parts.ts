@@ -1,6 +1,6 @@
 // src/data/gallery/ui-parts.ts
 
-import { UIPart } from "../_types/ui-part";
+import { UIPart } from "../types/ui-part";
 
 export const UI_PARTS: UIPart[] = [
   {

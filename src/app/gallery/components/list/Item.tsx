@@ -8,8 +8,8 @@ import { DifficultyBadge } from "../ui/DifficultyBadge";
 import { TagBadge } from "../ui/TagBadge";
 import { TabSwitcher } from "../tabs/TabSwitcher";
 import { useIsClient } from "@/lib/hooks/useIsClient";
-import { UIPart } from "@/gallery/_types/ui-part";
-import { TabType } from "@/gallery/_types/tab";
+import { UIPart } from "@/gallery/types/ui-part";
+import { TabType } from "@/gallery/types/tab";
 
 type ItemProps = {
   item: UIPart;

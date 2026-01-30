@@ -9,8 +9,8 @@ import { Pagination } from "./components/list/Pagination";
 import { PreviewModal } from "./components/modal/PreviewModal";
 import { NoResults } from "./components/list/NoResults";
 import { LoadingGallery } from "./components/ui/LoadingGallery";
-import { useFiltering } from "./_lib/hooks/useFiltering";
-import { useURLSync } from "./_lib/hooks/useURLSync";
+import { useFiltering } from "./lib/hooks/useFiltering";
+import { useURLSync } from "./lib/hooks/useURLSync";
 
 // 1. ロジックを「GalleryContent」として切り出す
 function GalleryContent() {

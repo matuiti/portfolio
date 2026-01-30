@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { ViewportSlider } from "./ViewportSlider";
 import { PreviewFrame } from "../preview/PreviewFrame";
 import { ModalNavigation } from "./ModalNavigation";
-import { UIPart } from "@/gallery/_types/ui-part";
-import { PREVIEW_MODAL_SETTINGS } from "@/gallery/_lib/constants/gallery";
-import { useModalNavigation } from "@/gallery/_lib/hooks/useModalNavigation";
+import { UIPart } from "@/gallery/types/ui-part";
+import { PREVIEW_MODAL_SETTINGS } from "@/gallery/lib/constants/gallery";
+import { useModalNavigation } from "@/gallery/lib/hooks/useModalNavigation";
 
 type PreviewModalProps = {
   isOpen: boolean;

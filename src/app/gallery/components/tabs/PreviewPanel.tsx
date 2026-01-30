@@ -3,8 +3,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { PreviewFrame } from "../preview/PreviewFrame";
-import { UIPart } from "@/gallery/_types/ui-part";
-import { PREVIEW_PANEL_SETTINGS } from "@/gallery/_lib/constants/gallery";
+import { UIPart } from "@/gallery/types/ui-part";
+import { PREVIEW_PANEL_SETTINGS } from "@/gallery/lib/constants/gallery";
 
 type PreviewPanelProps = {
   item: UIPart;

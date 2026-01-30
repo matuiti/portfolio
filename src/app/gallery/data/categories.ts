@@ -1,4 +1,4 @@
-import type { Category } from "../_types/category";
+import type { Category } from "../types/category";
 
 export const CATEGORIES: { id: Category; label: string }[] = [
   { id: "all", label: "すべて" },
