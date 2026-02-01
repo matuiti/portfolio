@@ -1,0 +1,99 @@
+/* 全てのTailwind設定（@theme）とベーススタイルをここに集約。 */
+@import "tailwindcss";
+
+/* 1. スキャン対象の指定 */
+@source "../app/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../components/**/*.{js,ts,jsx,tsx,mdx}";
+
+/* 2. プロジェクト専用テーマ設定 */
+@theme {
+  /* --- ブレイクポイント --- */
+  --breakpoint-mini: 350px;
+  --breakpoint-mobile: 540px;
+  --breakpoint-tablet: 840px;
+  --breakpoint-small: 1140px;
+  --breakpoint-default: 1280px;
+  --breakpoint-large: 1920px;
+
+  /* --- ブランドカラー --- */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray: #737373;
+  --color-light-gray: #f5f5f5;
+  --color-error: #ef4444;
+
+  /* --- タイポグラフィ --- */
+  --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
+
+  /* --- カスタムスペーシング --- */
+  --spacing-header-sm: 65px;
+  --spacing-header-lg: 90px;
+  --spacing-icon-20: 20px;
+  --spacing-icon-24: 24px;
+  --spacing-icon-30: 30px;
+  --spacing-icon-50: 50px;
+  --spacing-container-max: 1200px;
+}
+
+/* 3. ベーススタイルの定義 */
+@layer base {
+  :root {
+    --background: var(--color-white);
+    --foreground: var(--color-black);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply antialiased m-0 p-0; /* Tailwindのユーティリティを使用 */
+  }
+}
+
+/* 4. 有用なカスタムユーティリティの復帰 */
+@layer components {
+  /* 共通コンテナ */
+  .main-container {
+    @apply w-full mx-auto px-[15px];
+    max-width: var(--spacing-container-max);
+  }
+
+  /* ブレイクポイントごとのコンテナ余白調整 */
+  @media (min-width: 540px) { .main-container { @apply px-5; } }
+  @media (min-width: 840px) { .main-container { @apply px-[30px]; } }
+  @media (min-width: 1140px) { .main-container { @apply px-10; } }
+
+  /* セクション余白 */
+  .section-padding {
+    @apply py-[100px];
+  }
+  @media (min-width: 1140px) {
+    .section-padding { @apply py-[120px]; }
+  }
+
+  /* スクロールバー設定 */
+  ::-webkit-scrollbar { 
+    @apply w-[6px] h-[6px]; 
+  }
+  ::-webkit-scrollbar-track { 
+    background: transparent; 
+  }
+  ::-webkit-scrollbar-thumb { 
+    background: #e5e5e5; 
+    border-radius: 10px; 
+  }
+  ::-webkit-scrollbar-thumb:hover { 
+    background: #d4d4d4; 
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0);
+  }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
