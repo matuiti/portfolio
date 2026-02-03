@@ -1,0 +1,7 @@
+@use '../../../common/css/index';
+
+// プレフィックス p- を付与したクラス
+.p-card-new {
+  padding: 1rem;
+  // BEM記法例: &____inner { ... }
+}
