@@ -5,7 +5,7 @@ import { exec } from 'child_process';
 // --- 定数設定---
 const CONFIG = {
   PATHS: {
-    METADATA: path.join(process.cwd(), 'src/data/gallery/ui-parts.ts'),
+    METADATA: path.join(process.cwd(), 'src/app/gallery/data/ui-parts.ts'),
     PUBLIC_BASE: path.join(process.cwd(), 'public', 'gallery-parts', 'ui'),
   },
   URL: {
@@ -36,6 +36,8 @@ if (!CONFIG.REGEXP.SAFE_PATTERN.test(category) || !CONFIG.REGEXP.SAFE_PATTERN.te
 }
 
 const targetDir = path.join(CONFIG.PATHS.PUBLIC_BASE, category, name);
+// 作品用プレフィックスを付与したクラス名
+const prefixClassName = `p-${name}`;
 
 // --- 重複チェック (ディレクトリ) ---
 if (fs.existsSync(targetDir)) {
@@ -92,7 +94,7 @@ try {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="${name}">
+  <div class="${prefixClassName}">
     <p>${name} - Coming Soon</p>
   </div>
   <script src="script.js"></script>
@@ -100,9 +102,10 @@ try {
 </html>`,
     'style.scss': `@use '../../../common/css/index';
 
-.${name} {
+// プレフィックス p- を付与したクラス
+.${prefixClassName} {
   padding: 1rem;
-  // ここにスタイルを記述
+  // BEM記法例: &____inner { ... }
 }`,
     'script.js': `(function() {
   'use strict';
@@ -120,6 +123,7 @@ try {
 
   console.log(`\n✨ Successfully generated "${name}"!`);
   console.log(`📂 Path: ${targetDir}`);
+  console.log(`🏷️  Class name: .${prefixClassName}`);
 
   // --- 4. ブラウザを自動で開く ---
   const startCommand = process.platform === 'darwin' ? 'open' :

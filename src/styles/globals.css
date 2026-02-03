@@ -25,7 +25,7 @@
   /* --- タイポグラフィ --- */
   --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 
-  /* --- カスタムスペーシング --- */
+  /* --- カスタムスペーシング (Tailwind v4) --- */
   --spacing-header-sm: 65px;
   --spacing-header-lg: 90px;
   --spacing-icon-20: 20px;
@@ -50,46 +50,68 @@
     font-family: var(--font-sans);
     background-color: var(--background);
     color: var(--foreground);
-    @apply antialiased m-0 p-0; /* Tailwindのユーティリティを使用 */
+    @apply antialiased m-0 p-0;
   }
 }
 
-/* 4. 有用なカスタムユーティリティの復帰 */
+/* 4. 有用なカスタムユーティリティ */
 @layer components {
-  /* 共通コンテナ */
+  /* 共通コンテナ（インテリセンス推奨値 px-3.75 = 15px に修正） */
   .main-container {
-    @apply w-full mx-auto px-[15px];
+    @apply w-full mx-auto px-3.75;
     max-width: var(--spacing-container-max);
   }
 
   /* ブレイクポイントごとのコンテナ余白調整 */
-  @media (min-width: 540px) { .main-container { @apply px-5; } }
-  @media (min-width: 840px) { .main-container { @apply px-[30px]; } }
-  @media (min-width: 1140px) { .main-container { @apply px-10; } }
-
-  /* セクション余白 */
-  .section-padding {
-    @apply py-[100px];
+  @media (min-width: 540px) {
+    .main-container {
+      @apply px-5;
+    }
+  }
+  /* カスタム変数 --spacing-icon-30 を活用 */
+  @media (min-width: 840px) {
+    .main-container {
+      @apply px-icon-30;
+    }
   }
   @media (min-width: 1140px) {
-    .section-padding { @apply py-[120px]; }
+    .main-container {
+      @apply px-10;
+    }
   }
 
-  /* スクロールバー設定 */
-  ::-webkit-scrollbar { 
-    @apply w-[6px] h-[6px]; 
+  /* セクション余白（インテリセンス推奨値 py-25 = 100px に修正） */
+  .section-padding {
+    @apply py-25;
   }
-  ::-webkit-scrollbar-track { 
-    background: transparent; 
-  }
-  ::-webkit-scrollbar-thumb { 
-    background: #e5e5e5; 
-    border-radius: 10px; 
-  }
-  ::-webkit-scrollbar-thumb:hover { 
-    background: #d4d4d4; 
+  @media (min-width: 1140px) {
+    /* インテリセンス推奨値 py-30 = 120px に修正 */
+    .section-padding {
+      @apply py-30;
+    }
   }
 
+  /* 特別ルール：Contactセクション（以前の要望を復帰） */
+  .section-contact {
+    @apply mobile:max-sm:mt-5; /* 540px未満の時に margin-top: 20px (mt-5) */
+  }
+
+  /* --- スクロールバー設定 (インテリセンス推奨値 1.5 = 6px に修正) --- */
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e5e5e5;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d4d4d4;
+  }
+
+  /* ホバー時のみ表示されるカスタムスクロールバー */
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0);
   }
