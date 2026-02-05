@@ -1,34 +1,85 @@
-import { Button } from "@/components/ui/Button";
-import { ContactSection } from "./components/ContactSection";
+import { MainVisual } from "./components/MainVisual";
+import { WorksSection } from "./components/WorksSection";
+// 今後作成していくセクション群（仮インポート含む）
+// import { GallerySection } from "./components/GallerySection";
+// import { SkillsSection } from "./components/SkillsSection";
+// import { ServiceSection } from "./components/ServiceSection";
+// import { AboutSection } from "./components/AboutSection";
+// import { BlogSection } from "./components/BlogSection";
+// import { ContactSection } from "./components/ContactSection";
 
 export default function Home() {
   return (
-    <div className="p-10 space-y-4">
-      <h1 className="text-2xl font-bold">Button Gallery</h1>
+    <div className="relative w-full overflow-hidden bg-white text-neutral-900">
+      {/* 1. メインビジュアル：ヘッダー・雫と連動する初期演出を含む */}
+      <MainVisual />
 
-      <div className="flex flex-wrap gap-4">
-        {/* 標準 */}
-        <Button>プロジェクトを見る</Button>
+      <div className="space-y-0">
+        {/* 2. WORKS：データ共有・カテゴリスイッチング機能付き */}
+        <section id="works" className="relative scroll-mt-20">
+          <WorksSection />
+        </section>
 
-        {/* サイズと色を変更 */}
-        <Button intent="outline" size="lg">
-          お問い合わせ
-        </Button>
+        {/* 3. GALLERY：準備中コンポーネントを配置予定 */}
+        <section id="gallery" className="py-24 bg-neutral-50 scroll-mt-20">
+          <div className="container mx-auto px-6">
+            {/* <GallerySection /> */}
+            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
+              GALLERY SECTION (COMING SOON)
+            </div>
+          </div>
+        </section>
 
-        {/* ゴーストボタン */}
-        <Button intent="ghost" size="sm">
-          キャンセル
-        </Button>
+        {/* 4. SERVICE：メディアカードレイアウト */}
+        <section id="service" className="py-24 scroll-mt-20">
+          <div className="container mx-auto px-6">
+            {/* <ServiceSection /> */}
+            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
+              SERVICE SECTION (COMING SOON)
+            </div>
+          </div>
+        </section>
 
-        {/* 横幅いっぱい */}
-        <Button intent="secondary" fullWidth={true}>
-          もっと詳しく
-        </Button>
+        {/* 5. SKILLS：ゲージ表示付きカードレイアウト */}
+        <section id="skills" className="py-24 bg-neutral-50 scroll-mt-20">
+          <div className="container mx-auto px-6">
+            {/* <SkillsSection /> */}
+            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
+              SKILLS SECTION (COMING SOON)
+            </div>
+          </div>
+        </section>
+
+        {/* 6. ABOUT：2カラム・プロフィール */}
+        <section id="about" className="py-24 scroll-mt-20">
+          <div className="container mx-auto px-6">
+            {/* <AboutSection /> */}
+            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
+              ABOUT SECTION (COMING SOON)
+            </div>
+          </div>
+        </section>
+
+        {/* 7. BLOG：準備中コンポーネントを配置予定 */}
+        <section id="blog" className="py-24 bg-neutral-50 scroll-mt-20">
+          <div className="container mx-auto px-6">
+            {/* <BlogSection /> */}
+            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
+              BLOG SECTION (COMING SOON)
+            </div>
+          </div>
+        </section>
+
+        {/* 8. CONTACT：フォームセクション */}
+        <section id="contact" className="py-24 scroll-mt-20">
+          <div className="container mx-auto px-6">
+            {/* <ContactSection /> */}
+            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
+              CONTACT SECTION (COMING SOON)
+            </div>
+          </div>
+        </section>
       </div>
-
-      <section id="contact" className="py-24 bg-slate-50/50">
-        <ContactSection />
-      </section>
     </div>
   );
 }

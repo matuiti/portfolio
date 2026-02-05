@@ -1,57 +1,22 @@
-// src/components/ui/Button/index.tsx
-import React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+import { tv } from "tailwind-variants";
 
-// 1. FigmaのVariantを定義する
-const button = tv({
-  // 全てのボタンに共通するベーススタイル
-  base: "inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none",
-
+export const button = tv({
+  base: "inline-flex items-center justify-center font-bold transition-all active:scale-95 disabled:opacity-50",
   variants: {
-    // Figmaの「Intent」プロパティ
     intent: {
-      primary:
-        "bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-200",
-      secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200",
+      primary: "bg-primary text-white hover:bg-primary/90",
       outline:
-        "border-2 border-slate-200 bg-transparent hover:border-slate-900 hover:bg-slate-900 hover:text-white",
-      ghost: "bg-transparent text-slate-600 hover:bg-slate-100",
+        "border-2 border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white",
+      underline:
+        "text-neutral-900 border-b-2 border-neutral-900 hover:text-primary hover:border-primary px-0 pb-1",
     },
-    // Figmaの「Size」プロパティ
     size: {
-      sm: "text-xs px-3 py-1.5 rounded",
-      md: "text-sm px-5 py-2.5 rounded-md",
-      lg: "text-base px-8 py-3 rounded-lg",
-    },
-    // Figmaの「Full Width」スイッチ
-    fullWidth: {
-      true: "w-full",
+      short: "px-6 py-3 text-sm",
+      long: "px-12 py-4 text-base w-full md:w-auto", // WORKS等で使用
     },
   },
-  // デフォルトの設定
   defaultVariants: {
     intent: "primary",
-    size: "md",
+    size: "short",
   },
 });
-
-// 2. TypeScriptの型を定義
-type ButtonVariants = VariantProps<typeof button>;
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  ButtonVariants;
-
-// 3. コンポーネント本体
-export const Button = ({
-  intent,
-  size,
-  fullWidth,
-  className,
-  ...props
-}: ButtonProps) => {
-  return (
-    <button
-      className={button({ intent, size, fullWidth, className })}
-      {...props}
-    />
-  );
-};

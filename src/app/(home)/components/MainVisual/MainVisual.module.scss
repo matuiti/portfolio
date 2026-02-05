@@ -1,0 +1,61 @@
+// src/app/(home)/components/MainVisual/MainVisual.module.scss
+
+.scrollIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.scrollText {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  color: var(--color-neutral-500);
+}
+
+.dropLineTrack {
+  width: 1px;
+  height: 96px;
+  background-color: var(--color-neutral-200);
+  position: relative;
+  overflow: hidden;
+
+  // 雫（流れ落ちる線）の本体
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-blue-600), // プロジェクトのメインカラー
+      transparent
+    );
+    animation: dropMove 2.5s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+  }
+}
+
+@keyframes dropMove {
+  0% {
+    transform: translateY(-100%) scaleY(0.1);
+    transform-origin: top;
+  }
+  30% {
+    transform: translateY(0) scaleY(1.5);
+    transform-origin: top;
+  }
+  60% {
+    transform: translateY(100%) scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: translateY(200%) scaleY(0.1);
+    transform-origin: bottom;
+  }
+}
