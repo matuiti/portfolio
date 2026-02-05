@@ -3,7 +3,7 @@
 
 import React from "react";
 import { FormInput } from "@/components/ui/FormInput";
-import { Button } from "@/components/ui/Button";
+// import { Button } from "@/components/ui/Button";
 
 export const ContactForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -51,9 +51,9 @@ export const ContactForm = () => {
         />
       </div>
 
-      <Button type="submit" intent="primary" fullWidth size="lg">
+      {/* <Button type="submit" intent="primary" fullWidth size="lg">
         メッセージを送信する
-      </Button>
+      </Button> */}
     </form>
   );
 };
