@@ -11,27 +11,30 @@ export const MainVisual = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const setPhase = useUIStore((state) => state.setPhase);
 
+  // コンポーネントがマウントされ、ブラウザが画面を書き換える直前にこのフックが発火
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        onComplete: () => setPhase("header-entry"),
+        onComplete: () => setPhase("header-entry"), // ➃
       });
 
-      setPhase("mv-playing");
+      setPhase("mv-playing"); // ➀
 
+      // ➁
       tl.to(".js-mv-item", {
         opacity: 1,
         y: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power4.out",
+        duration: 1.2, // 1つの要素につき設定秒かけて動く
+        stagger: 0.2, // 複数要素に対して設定秒ずつずらして順差表示
+        ease: "power4.out", // 最初は速く、最後はゆっくりと止まる
       }).to(
+        // ➂
         ".js-scroll-indicator",
         {
           opacity: 1,
           duration: 1,
         },
-        "-=0.4",
+        "-=0.4", // 前の要素のアニメーションが終わる設定秒前に、このアニメーションを開始させる
       );
     }, rootRef);
 
@@ -41,21 +44,21 @@ export const MainVisual = () => {
   return (
     <section
       ref={rootRef}
-      className="relative h-svh w-full overflow-hidden bg-neutral-50 flex items-center"
+      className="relative h-svh w-full overflow-hidden bg-black flex items-center"
     >
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center small:pt-header-lg pt-header-sm">
         <div className="space-y-6 z-10">
           <div className="js-mv-item opacity-0 translate-y-8">
-            <p className="text-blue-600 font-bold tracking-widest mb-4 text-sm">
+            <p className="text-white font-bold tracking-widest mb-4 text-sm">
               FRONTEND ENGINEER
             </p>
-            <h1 className="text-5xl md:text-8xl font-bold leading-[1.1] text-neutral-900 tracking-tight">
+            <h1 className="text-5xl md:text-8xl font-bold leading-[1.1] text-white tracking-tight">
               Design meets
               <br />
               Implementation.
             </h1>
           </div>
-          <p className="js-mv-item opacity-0 translate-y-8 text-neutral-600 max-w-md text-lg">
+          <p className="js-mv-item opacity-0 translate-y-8 text-white max-w-md text-lg">
             「実装力」と「設計力」で、アイデアを確かな形にする。
           </p>
         </div>

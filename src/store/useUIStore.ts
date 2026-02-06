@@ -1,8 +1,11 @@
 // src/store/useUIStore.ts
 import { create } from "zustand";
 
-// 演出のフェーズ定義
-// initial: 非表示 | mv-playing: MV再生中 | header-entry: ヘッダー参入 | ready: 全表示完了
+// フェーズの定義:
+// initial: 初期状態（非表示）
+// mv-playing: メインビジュアル（MV）のアニメーション中
+// header-entry: MV完了後、ヘッダーが参入する段階
+// ready: スクロールインジケータが表示され、全機能が有効化された状態
 type AnimationPhase = "initial" | "mv-playing" | "header-entry" | "ready";
 
 type UIState = {
