@@ -10,6 +10,39 @@ export function useWorkFilter(limit?: number) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // ページ管理用のステート
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  // --- 修正のポイント: useEffectを使わない ---
+  // 検索条件を一つの文字列にまとめて、以前の条件と比較するための仕組みを作ることもできますが、
+  // 最もシンプルで確実な方法は、各setter関数をラップして「変更時にページをリセットする」ことです。
+
+  const handleSetCategory = useCallback((cat: WorkFilterCategory) => {
+    setSelectedCategory(cat);
+    setCurrentPage(1); // 変更と同時にリセット
+  }, []);
+
+  const handleSetTags = useCallback((tags: string[]) => {
+    setSelectedTags(tags);
+    setCurrentPage(1); // 変更と同時にリセット
+  }, []);
+
+  const handleSetSearchQuery = useCallback((q: string) => {
+    setSearchQuery(q);
+    setCurrentPage(1); // 変更と同時にリセット
+  }, []);
+
+  const toggleTag = useCallback((tag: string) => {
+    setSelectedTags((prev) => {
+      const next = prev.includes(tag)
+        ? prev.filter((t) => t !== tag)
+        : [...prev, tag];
+      setCurrentPage(1); // 変更と同時にリセット
+      return next;
+    });
+  }, []);
+
   // カテゴリごとの件数算出
   const categoryCounts = useMemo(() => {
     const counts = ALL_WORKS.reduce(
@@ -24,7 +57,7 @@ export function useWorkFilter(limit?: number) {
     return { all: ALL_WORKS.length, ...counts };
   }, []);
 
-  // フィルタリング実行
+  // 1. フィルタリング実行
   const filteredWorks = useMemo(() => {
     return ALL_WORKS.filter((work: Work) => {
       const matchCategory =
@@ -46,35 +79,45 @@ export function useWorkFilter(limit?: number) {
     });
   }, [selectedCategory, selectedTags, searchQuery]);
 
-  // トップページ互換性のためのデータ作成 [cite: 6]
-  const displayWorks = limit ? filteredWorks.slice(0, limit) : filteredWorks;
+  // 2. ページネーション実行
+  const paginatedWorks = useMemo(() => {
+    if (limit) return filteredWorks.slice(0, limit);
+
+    // 現在のフィルタ結果に対して、指定したページ番号が範囲外にならないよう調整
+    const maxPage = Math.ceil(filteredWorks.length / itemsPerPage) || 1;
+    const safePage = Math.min(currentPage, maxPage);
+
+    const startIndex = (safePage - 1) * itemsPerPage;
+    return filteredWorks.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredWorks, currentPage, limit]);
+
+  const totalPages = Math.ceil(filteredWorks.length / itemsPerPage);
 
   const clearFilters = useCallback(() => {
     setSelectedCategory("all");
     setSelectedTags([]);
     setSearchQuery("");
+    setCurrentPage(1);
   }, []);
 
   return {
-    // States
     selectedCategory,
     selectedTags,
     searchQuery,
-    filteredWorks, // 全結果（WORKSページ用）
-    displayWorks, // 制限あり（トップページ用） [cite: 6]
+    currentPage,
+    totalPages,
+    filteredWorks,
+    paginatedWorks,
     categoryCounts,
     totalCount: ALL_WORKS.length,
 
-    // Actions (トップページ互換のため toggleCategory も残す)
-    setSelectedCategory,
-    toggleCategory: (cat: WorkFilterCategory) => setSelectedCategory(cat),
-    setSelectedTags,
-    setSearchQuery,
+    // Actions: ページリセットロジックを含んだ関数を返す
+    setSelectedCategory: handleSetCategory,
+    toggleCategory: handleSetCategory,
+    setSelectedTags: handleSetTags,
+    setSearchQuery: handleSetSearchQuery,
+    setCurrentPage,
     clearFilters,
-    toggleTag: (tag: string) => {
-      setSelectedTags((prev) =>
-        prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
-      );
-    },
+    toggleTag,
   };
 }
