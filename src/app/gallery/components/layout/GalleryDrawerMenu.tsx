@@ -1,9 +1,9 @@
 "use client";
 
-import { Filtering } from "@/types/gallery/filtering";
 import { CategoryList } from "../filter/CategoryList";
 import { TagFilters } from "../filter/TagFilters";
 import { SearchBox } from "../filter/SearchBox";
+import { Filtering } from "@/gallery/types/filtering";
 
 type Props = {
   filtering: Filtering;

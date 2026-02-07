@@ -2,9 +2,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { UIPart } from "@/types/gallery/ui-part";
 import { PreviewFrame } from "../preview/PreviewFrame";
-import { PREVIEW_PANEL_SETTINGS } from "@/lib/constants/gallery";
+import { UIPart } from "@/gallery/types/ui-part";
+import { PREVIEW_PANEL_SETTINGS } from "@/gallery/lib/constants/gallery";
 
 type PreviewPanelProps = {
   item: UIPart;

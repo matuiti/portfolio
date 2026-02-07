@@ -1,8 +1,3 @@
-// 5.
-// タグ選択 UI。
-// - AND 条件の複雑な UI
-// ロジックの司令塔：グループ名の表示と、タグの追加・削除の計算。
-
 "use client";
 
 import { TagList } from "./TagList";
@@ -12,7 +7,7 @@ type TagGroupProps = {
   icon: string;
   tags: string[];
   selected: string[];
-  onChange: (newTags: string[]) => void; // 最終的に「新しくなった全選択タグ」を親へ返す
+  onChange: (newTags: string[]) => void;
 }
 
 export function TagGroup({
@@ -42,8 +37,6 @@ export function TagGroup({
           {label}
         </span>
       </div>
-
-      {/* 描画は部下（TagList）に任せる */}
       <TagList tags={tags} selected={selected} onTagClick={handleTagClick} />
     </div>
   );

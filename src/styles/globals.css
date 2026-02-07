@@ -1,0 +1,108 @@
+/* 全てのTailwind設定（@theme）とベーススタイルをここに集約。 */
+@import "tailwindcss";
+
+/* 1. スキャン対象の指定 */
+@source "../app/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../components/**/*.{js,ts,jsx,tsx,mdx}";
+
+/* 2. プロジェクト専用テーマ設定 */
+@theme {
+  /* --- ブレイクポイント (emを使用: ユーザーのフォントサイズ設定に追従) --- */
+  --breakpoint-mini: calc(350 / 16 * 1em);
+  --breakpoint-mobile: calc(540 / 16 * 1em);
+  --breakpoint-tablet: calc(840 / 16 * 1em);
+  --breakpoint-small: calc(1140 / 16 * 1em);
+  --breakpoint-default: calc(1280 / 16 * 1em);
+  --breakpoint-large: calc(1920 / 16 * 1em);
+
+  /* --- ブランドカラー --- */
+  --color-black: #0a0a0a;
+  --color-white: #ffffff;
+  --color-gray: #757575;
+  --color-light-gray: #f3f4f6;
+  --color-red: #ff6262;
+
+  /* --- タイポグラフィ --- */
+  --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
+
+  /* --- カスタムスペーシング (remを使用: calcでpx値を可視化) --- */
+  --spacing-header-sm: calc(65 / 16 * 1rem);
+  --spacing-header-lg: calc(90 / 16 * 1rem);
+  --spacing-section-padding-x-mini: calc(15 / 16 * 1rem);
+  --spacing-section-padding-x-mobile: calc(20 / 16 * 1rem);
+  --spacing-section-padding-x-tablet: calc(30 / 16 * 1rem);
+  --spacing-section-padding-x-small: calc(40 / 16 * 1rem);
+  --spacing-section-padding-y-mini: calc(100 / 16 * 1rem);
+  --spacing-section-padding-y-small: calc(120 / 16 * 1rem);
+  --spacing-icon-20: calc(20 / 16 * 1rem);
+  --spacing-icon-24: calc(24 / 16 * 1rem);
+  --spacing-icon-30: calc(30 / 16 * 1rem);
+  --spacing-icon-50: calc(50 / 16 * 1rem);
+  --spacing-container-max: calc(1200 / 16 * 1rem);
+}
+
+/* 3. ベーススタイルの定義 */
+@layer base {
+  :root {
+    --background: var(--color-white);
+    --foreground: var(--color-black);
+    /* スクロールバーの色：視認性を確保 */
+    --scrollbar-thumb: #cccccc;
+    --scrollbar-thumb-hover: #aaaaaa;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* ブラウザ設定のフォントサイズを基準にするため100%を維持 */
+    font-size: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+    /* macOS/iOS向けの滑らかなフォント描画 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* 4. 有用なカスタムユーティリティ */
+@layer utilities {
+  /* --- 標準スクロールバー (Firefox / モダンブラウザ) --- */
+  @supports (scrollbar-width: thin) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb) transparent;
+    }
+  }
+
+  /* --- Webkit系 (Chrome / Safari) スクロールバー (脱@apply) --- */
+  ::-webkit-scrollbar {
+    width: calc(6 / 16 * 1rem); /* 6px */
+    height: calc(6 / 16 * 1rem); /* 6px */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 100vmax;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+
+  /* 特定要素用：ホバー時のみスクロールバーを表示 */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}

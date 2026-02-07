@@ -1,8 +1,8 @@
 // src/app/gallery/components/filter/CategoryList.tsx
 "use client";
 
-import { CATEGORIES } from "@/data/gallery/categories";
-import { Category } from "@/types/gallery/category";
+import { Category } from "@/gallery/types/category";
+import { CATEGORIES } from "@/gallery/data/categories";
 
 type Props = {
   selected: Category;

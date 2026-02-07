@@ -1,43 +1,103 @@
-// Global Styles
-// サイト全体のグローバルスタイル
-@use "tailwindcss";
+// /* Tailwindに関連しない純粋なSCSS定義
+//   (例: 複雑なmixinやアニメーション、特定のサードパーティ用スタイル)
+// // */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+// @theme {
+//   /* --- ブレイクポイント --- */
+//   --breakpoint-mini: 350px;
+//   --breakpoint-mobile: 540px;
+//   --breakpoint-tablet: 840px;
+//   --breakpoint-small: 1140px;
+//   --breakpoint-default: 1280px;
+//   --breakpoint-large: 1920px;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
+//   /* --- 色 (Colors) --- */
+//   --color-black: #000000;
+//   --color-white: #ffffff;
+//   --color-gray: #737373; // neutral-500相当
+//   --color-light-gray: #f5f5f5; // neutral-100相当（背景・ボタン用）
+//   --color-error: #ef4444; // red-500相当（エラー・必須用）
 
-/* スクロールバー全体の幅 */
-::-webkit-scrollbar {
-  width: 6px; /* 縦スクロールの幅 */
-  height: 6px; /* 横スクロールの高さ */
-}
+//   /* --- タイポグラフィ --- */
+//   --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 
-/* スクロールバーの通り道（レール） */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+//   /* --- その他カスタム数値 (spacing / size) --- */
+//   // ヘッダー高 (h-header-sm, h-header-lg)
+//   --spacing-header-sm: 65px;
+//   --spacing-header-lg: 90px;
 
-/* 動くバーの部分（つまみ） */
-::-webkit-scrollbar-thumb {
-  background: #e5e5e5; /* neutral-200 相当 */
-  border-radius: 10px;
-}
+//   // アイコン座布団 (w-icon-20, h-icon-20等)
+//   --spacing-icon-20: 20px;
+//   --spacing-icon-24: 24px;
+//   --spacing-icon-30: 30px;
+//   --spacing-icon-50: 50px;
 
-/* ホバーした時に少し濃くする */
-::-webkit-scrollbar-thumb:hover {
-  background: #d4d4d4; /* neutral-300 相当 */
-}
+//   // コンテナ最大幅
+//   --spacing-container-max: 1200px;
+// }
 
-/* スクロールエリアをホバーしていない時はバーを透明に近づける */
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0);
-}
+// /* --- ベーススタイル & ユーティリティ --- */
+// :root {
+//   --background: var(--color-white);
+//   --foreground: var(--color-black);
+// }
 
-.custom-scrollbar:hover::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-}
+// html {
+//   scroll-behavior: smooth;
+// }
+
+// body {
+//   font-family: var(--font-sans);
+//   background-color: var(--background);
+//   color: var(--foreground);
+//   padding: 0;
+//   margin: 0;
+// }
+
+// /* 共通コンテナ（max-width 1200px + 左右余白の自動切り替え） */
+// .main-container {
+//   width: 100%;
+//   max-width: var(--spacing-container-max);
+//   margin-left: auto;
+//   margin-right: auto;
+  
+//   // デザインカンプの左右余白ルールを適用
+//   padding-left: 15px;
+//   padding-right: 15px;
+//   @media (min-width: 540px) { padding-left: 20px; padding-right: 20px; }
+//   @media (min-width: 840px) { padding-left: 30px; padding-right: 30px; }
+//   @media (min-width: 1140px) { padding-left: 40px; padding-right: 40px; }
+// }
+
+// /* セクション共通余白 */
+// .section-padding {
+//   padding-top: 100px;
+//   padding-bottom: 100px;
+//   @media (min-width: 1140px) {
+//     padding-top: 120px;
+//     padding-bottom: 120px;
+//   }
+// }
+
+// /* 特別ルール：Contactセクション（mini時） */
+// .section-contact {
+//   @media (max-width: 539px) {
+//     margin-top: 20px;
+//     // 下部余白の注意点は実装時にここで調整
+//   }
+// }
+
+// /* --- スクロールバー（前回の設定を維持） --- */
+// ::-webkit-scrollbar { width: 6px; height: 6px; }
+// ::-webkit-scrollbar-track { background: transparent; }
+// ::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 10px; }
+// ::-webkit-scrollbar-thumb:hover { background: #d4d4d4; }
+
+// /* スクロールエリアをホバーしていない時はバーを透明に近づける */
+// .custom-scrollbar::-webkit-scrollbar-thumb {
+//   background: rgba(0, 0, 0, 0);
+// }
+
+// .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+//   background: rgba(0, 0, 0, 0.2);
+// }

@@ -1,9 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { UI_PARTS } from "@/data/gallery/ui-parts";
-import { useFiltering } from "@/lib/hooks/useFiltering";
-import { useURLSync } from "@/lib/hooks/useURLSync";
+import { UI_PARTS } from "@/gallery/data/ui-parts";
 import { GalleryLayout } from "./components/layout/GalleryLayout";
 import { ItemList } from "./components/list/ItemList";
 import { TitleAndCount } from "./components/ui/TitleAndCount";
@@ -11,6 +9,8 @@ import { Pagination } from "./components/list/Pagination";
 import { PreviewModal } from "./components/modal/PreviewModal";
 import { NoResults } from "./components/list/NoResults";
 import { LoadingGallery } from "./components/ui/LoadingGallery";
+import { useFiltering } from "./lib/hooks/useFiltering";
+import { useURLSync } from "./lib/hooks/useURLSync";
 
 // 1. ロジックを「GalleryContent」として切り出す
 function GalleryContent() {
