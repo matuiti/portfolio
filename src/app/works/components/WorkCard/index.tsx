@@ -14,12 +14,9 @@ export function WorkCard({ work, onClick }: WorkCardProps) {
   return (
     <div
       onClick={() => onClick(work)}
-      className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden border border-slate-100 flex flex-col h-full"
+      className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl has-[.tag-link:hover]:hover:shadow-sm transition-all duration-300 cursor-pointer overflow-hidden border border-slate-100 flex flex-col h-full"
     >
-      {/* カード全体のホバー演出を管理するコンテナ。
-         `has-[:hover]`（タグエリア）にマウスがある時は、`.card-content` の演出を無効化する。
-      */}
-      <div className="relative flex flex-col h-full group/main has-[.tag-link:hover]:shadow-sm">
+      <div className="relative flex flex-col h-full">
         {/* サムネイルエリア */}
         <div className="aspect-video bg-slate-100 relative overflow-hidden">
           {work.disclosureLevel === "NDA" ? (
@@ -28,22 +25,16 @@ export function WorkCard({ work, onClick }: WorkCardProps) {
             </div>
           ) : (
             <>
+              {/* className内の改行を排除し、ハイドレーションエラーを防止 */}
               <Image
                 src={work.thumbnail}
                 alt={work.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 
-                           group-hover:scale-110 
-                           group-has-[.tag-link:hover]:scale-100"
+                className="object-cover transition-transform duration-500 group-hover:scale-110 group-has-[.tag-link:hover]:scale-100"
               />
-              {/* ホバー時のオーバーレイ：タグをホバーしている時は opacity-0 に強制 */}
-              <div
-                className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 
-                              group-hover:opacity-100 
-                              group-has-[.tag-link:hover]:opacity-0 
-                              transition-opacity duration-300"
-              >
+              {/* ホバー時のオーバーレイ */}
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 group-has-[.tag-link:hover]:opacity-0 transition-opacity duration-300">
                 <div className="flex items-center gap-1 text-white font-bold text-sm tracking-wider">
                   詳しく見る
                   <ArrowUpRight size={14} />
@@ -80,12 +71,7 @@ export function WorkCard({ work, onClick }: WorkCardProps) {
             ))}
           </div>
 
-          <h2
-            className="text-lg font-black text-slate-900 line-clamp-1 
-                         group-hover:text-blue-600 
-                         group-has-[.tag-link:hover]:text-slate-900 
-                         transition-colors"
-          >
+          <h2 className="text-lg font-black text-slate-900 line-clamp-1 group-hover:text-blue-600 group-has-[.tag-link:hover]:text-slate-900 transition-colors">
             {work.title}
           </h2>
 
@@ -93,7 +79,7 @@ export function WorkCard({ work, onClick }: WorkCardProps) {
             {work.summary}
           </p>
 
-          {/* タグエリア：タグにホバーしたことを親に伝えるためのクラス .tag-link を付与 */}
+          {/* タグエリア */}
           <div className="flex flex-wrap gap-1.5 pt-2 relative z-20">
             {work.tags.map((tag) => (
               <Link
@@ -117,18 +103,6 @@ export function WorkCard({ work, onClick }: WorkCardProps) {
           </div>
         </div>
       </div>
-
-      {/* カード全体のシャドウ削除ロジック：
-          通常ホバー時は shadow-none だが、タグホバー時は shadow-xl を維持（または元の状態に戻す）
-      */}
-      <style jsx rotate-internal-style>{`
-        .group:hover {
-          box-shadow: none;
-        }
-        .group:has(.tag-link:hover):hover {
-          box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); /* shadow-sm の値 */
-        }
-      `}</style>
     </div>
   );
 }
