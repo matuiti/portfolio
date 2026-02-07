@@ -1,5 +1,6 @@
 // src/types/skill.ts
 
+export type SkillLevelValue = 1 | 2 | 3 | 4 | 5;
 export type SkillLinkType = "project" | "github" | "cert";
 
 export type SkillLink = {
@@ -10,7 +11,7 @@ export type SkillLink = {
 
 export type SkillItem = {
   name: string;
-  level: number;
+  level: SkillLevelValue;
   label: string;
   experience: string;
   description: string;
@@ -22,9 +23,6 @@ export type SkillCategory = {
   items: SkillItem[];
 };
 
-/**
- * モジュールからエクスポートされていなかったためエラーが出ていた型
- */
 export type SkillGroup = {
   id: string;
   title: string;
