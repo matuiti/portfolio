@@ -5,59 +5,25 @@ import { ALL_WORKS } from "@/data/works";
 import { Work, WorkFilterCategory, WorkCategory } from "@/types/work";
 
 export function useWorkFilter(limit?: number) {
+  // ステートに適切なリテラル型を指定し、"any" を回避します
   const [selectedCategory, setSelectedCategory] =
     useState<WorkFilterCategory>("all");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-
-  // ページ管理用のステート
   const [currentPage, setCurrentPage] = useState(1);
+
   const itemsPerPage = 6;
 
-  // --- 修正のポイント: useEffectを使わない ---
-  // 検索条件を一つの文字列にまとめて、以前の条件と比較するための仕組みを作ることもできますが、
-  // 最もシンプルで確実な方法は、各setter関数をラップして「変更時にページをリセットする」ことです。
-
-  const handleSetCategory = useCallback((cat: WorkFilterCategory) => {
-    setSelectedCategory(cat);
-    setCurrentPage(1); // 変更と同時にリセット
-  }, []);
-
-  const handleSetTags = useCallback((tags: string[]) => {
-    setSelectedTags(tags);
-    setCurrentPage(1); // 変更と同時にリセット
-  }, []);
-
-  const handleSetSearchQuery = useCallback((q: string) => {
-    setSearchQuery(q);
-    setCurrentPage(1); // 変更と同時にリセット
-  }, []);
-
-  const toggleTag = useCallback((tag: string) => {
-    setSelectedTags((prev) => {
-      const next = prev.includes(tag)
-        ? prev.filter((t) => t !== tag)
-        : [...prev, tag];
-      setCurrentPage(1); // 変更と同時にリセット
-      return next;
+  // 全データからユニークなタグ一覧を抽出 [cite: 18]
+  const availableTags = useMemo(() => {
+    const tags = new Set<string>();
+    ALL_WORKS.forEach((work) => {
+      work.tags.forEach((tag) => tags.add(tag));
     });
+    return Array.from(tags).sort();
   }, []);
 
-  // カテゴリごとの件数算出
-  const categoryCounts = useMemo(() => {
-    const counts = ALL_WORKS.reduce(
-      (acc, work) => {
-        work.category.forEach((cat: WorkCategory) => {
-          acc[cat] = (acc[cat] || 0) + 1;
-        });
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-    return { all: ALL_WORKS.length, ...counts };
-  }, []);
-
-  // 1. フィルタリング実行
+  // フィルタリング実行 [cite: 19, 20]
   const filteredWorks = useMemo(() => {
     return ALL_WORKS.filter((work: Work) => {
       const matchCategory =
@@ -79,19 +45,27 @@ export function useWorkFilter(limit?: number) {
     });
   }, [selectedCategory, selectedTags, searchQuery]);
 
-  // 2. ページネーション実行
+  // ページネーション [cite: 20]
   const paginatedWorks = useMemo(() => {
     if (limit) return filteredWorks.slice(0, limit);
-
-    // 現在のフィルタ結果に対して、指定したページ番号が範囲外にならないよう調整
     const maxPage = Math.ceil(filteredWorks.length / itemsPerPage) || 1;
     const safePage = Math.min(currentPage, maxPage);
-
     const startIndex = (safePage - 1) * itemsPerPage;
     return filteredWorks.slice(startIndex, startIndex + itemsPerPage);
   }, [filteredWorks, currentPage, limit]);
 
   const totalPages = Math.ceil(filteredWorks.length / itemsPerPage);
+
+  // ハンドラー
+  const toggleTag = useCallback((tag: string) => {
+    setSelectedTags((prev) => {
+      const next = prev.includes(tag)
+        ? prev.filter((t) => t !== tag)
+        : [...prev, tag];
+      setCurrentPage(1);
+      return next;
+    });
+  }, []);
 
   const clearFilters = useCallback(() => {
     setSelectedCategory("all");
@@ -100,24 +74,24 @@ export function useWorkFilter(limit?: number) {
     setCurrentPage(1);
   }, []);
 
+  const handleSetCategory = useCallback((cat: WorkFilterCategory) => {
+    setSelectedCategory(cat);
+    setCurrentPage(1);
+  }, []);
+
   return {
     selectedCategory,
     selectedTags,
     searchQuery,
     currentPage,
-    totalPages,
     filteredWorks,
     paginatedWorks,
-    categoryCounts,
-    totalCount: ALL_WORKS.length,
-
-    // Actions: ページリセットロジックを含んだ関数を返す
+    totalPages,
+    availableTags, // ここで返却
     setSelectedCategory: handleSetCategory,
-    toggleCategory: handleSetCategory,
-    setSelectedTags: handleSetTags,
-    setSearchQuery: handleSetSearchQuery,
-    setCurrentPage,
-    clearFilters,
+    setSearchQuery,
     toggleTag,
+    clearFilters,
+    setCurrentPage,
   };
 }
