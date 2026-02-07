@@ -2,30 +2,27 @@
 "use client";
 
 import React from "react";
-import { Search, RotateCcw, Tag } from "lucide-react";
+import { Search, RotateCcw } from "lucide-react";
 import { WorkFilterCategory } from "@/types/work";
+import { useWorkStore } from "@/store/useWorkStore";
+import { ALL_WORKS } from "@/data/works";
 
-type Props = {
-  searchQuery: string;
-  setSearchQuery: (q: string) => void;
-  selectedCategory: WorkFilterCategory;
-  setSelectedCategory: (cat: WorkFilterCategory) => void;
-  selectedTags: string[];
-  toggleTag: (tag: string) => void;
-  clearFilters: () => void;
-  availableTags: string[];
-};
+export const WorkSearchPanel = () => {
+  const {
+    searchQuery,
+    setSearchQuery,
+    selectedCategory,
+    setSelectedCategory,
+    selectedTags,
+    toggleTag,
+    clearFilters,
+  } = useWorkStore();
 
-export const WorkSearchPanel = ({
-  searchQuery,
-  setSearchQuery,
-  selectedCategory,
-  setSelectedCategory,
-  selectedTags,
-  toggleTag,
-  clearFilters,
-  availableTags,
-}: Props) => {
+  // 全作品から利用可能なタグを抽出（ストアに持たせてもOK）
+  const availableTags = Array.from(
+    new Set(ALL_WORKS.flatMap((w) => w.tags)),
+  ).sort();
+
   const categories: { label: string; value: WorkFilterCategory }[] = [
     { label: "All", value: "all" },
     { label: "Web制作", value: "web" },
@@ -35,9 +32,8 @@ export const WorkSearchPanel = ({
   ];
 
   return (
-    <div className="space-y-8 mb-12">
-      {/* 1. カテゴリ選択（中央寄せで整列） */}
-      <div className="flex flex-wrap justify-center md:justify-start gap-3">
+    <div className="space-y-8 bg-white p-8 rounded-4xl border border-slate-100 shadow-sm">
+      <div className="flex flex-wrap justify-center gap-3">
         {categories.map((cat) => (
           <button
             key={cat.value}
@@ -53,9 +49,8 @@ export const WorkSearchPanel = ({
         ))}
       </div>
 
-      {/* 2. 検索とタグ（モバイルでは縦並び、PCでは横並び） */}
-      <div className="flex flex-col lg:flex-row gap-6 p-6 bg-slate-50 rounded-3xl border border-slate-100">
-        <div className="relative w-full lg:w-80 shrink-0">
+      <div className="flex flex-col md:flex-row gap-6">
+        <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
@@ -65,37 +60,28 @@ export const WorkSearchPanel = ({
             className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all"
           />
         </div>
+        <button
+          onClick={clearFilters}
+          className="flex items-center gap-2 px-6 py-3 text-[10px] font-black text-blue-600 hover:bg-blue-50 rounded-xl transition-all uppercase tracking-widest"
+        >
+          <RotateCcw className="w-3 h-3" /> Reset
+        </button>
+      </div>
 
-        <div className="flex-1">
-          <div className="flex items-center gap-2 mb-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            <Tag size={12} /> Filter by Technology
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {availableTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                className={`px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all border ${
-                  selectedTags.includes(tag)
-                    ? "bg-slate-900 text-white border-slate-900 shadow-md"
-                    : "bg-white text-slate-400 border-slate-200 hover:text-slate-600 hover:border-slate-300"
-                }`}
-              >
-                #{tag}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="lg:border-l lg:pl-6 flex items-center">
+      <div className="flex flex-wrap gap-2">
+        {availableTags.map((tag) => (
           <button
-            onClick={clearFilters}
-            className="flex items-center gap-2 px-4 py-2 text-[10px] font-black text-blue-600 hover:bg-blue-50 rounded-xl transition-all uppercase tracking-widest"
+            key={tag}
+            onClick={() => toggleTag(tag)}
+            className={`px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all border ${
+              selectedTags.includes(tag)
+                ? "bg-slate-900 text-white border-slate-900"
+                : "bg-white text-slate-400 border-slate-200"
+            }`}
           >
-            <RotateCcw className="w-3.5 h-3.5" />
-            Reset
+            #{tag}
           </button>
-        </div>
+        ))}
       </div>
     </div>
   );
