@@ -1,107 +1,82 @@
-// src/app/works/lib/hooks/useWorkURLSync.ts
-
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useWorkStore } from "@/store/useWorkStore";
 import { WorkFilterCategory } from "@/types/work";
 
-// useWorkFilterの戻り値の型（必要に応じて調整）
-type WorkFiltering = {
-  selectedCategory: WorkFilterCategory;
-  selectedTags: string[];
-  searchQuery: string;
-  currentPage: number;
-  setSelectedCategory: (cat: WorkFilterCategory) => void;
-  setSelectedTags: (tags: string[]) => void;
-  setSearchQuery: (q: string) => void;
-  setCurrentPage: (page: number) => void;
-};
-
-export function useWorkURLSync(filtering: WorkFiltering) {
+/**
+ * URLパラメータとZustandストアを同期させるフック
+ */
+export function useWorkURLSync() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const isInitialMount = useRef(true);
 
   const {
     selectedCategory,
     selectedTags,
     searchQuery,
-    currentPage,
-    setSelectedCategory,
-    setSelectedTags,
     setSearchQuery,
-    setCurrentPage,
-  } = filtering;
+    selectOnlyTag,
+    selectOnlyCategory,
+  } = useWorkStore();
 
-  // 【対策】検索クエリのデバウンス用State
-  // UI上の searchQuery とは別に、URL反映用の値を管理します
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
-
-  // 1. URLから初期値を読み込む (初回マウント時)
+  // 1. 初回マウント時：URLパラメータをストアに反映
   useEffect(() => {
-    const category = searchParams.get("category");
-    const tags = searchParams.get("tags");
-    const q = searchParams.get("q");
-    const page = searchParams.get("page");
+    const categoryParam = searchParams.get("category");
+    const tagsParam = searchParams.get("tags");
+    const qParam = searchParams.get("q");
 
-    if (category) {
-      setSelectedCategory(category as WorkFilterCategory);
+    // タグの同期処理
+    if (tagsParam) {
+      // カンマ区切りで配列化し、空文字を除去
+      const tagsArray = tagsParam.split(",").filter(Boolean);
+      if (tagsArray.length > 0) {
+        // 【修正ポイント】配列全体ではなく、最初の1要素 (string) を渡す
+        selectOnlyTag(tagsArray[0]);
+      }
+    }
+    // カテゴリの同期
+    else if (categoryParam) {
+      selectOnlyCategory(categoryParam as WorkFilterCategory);
+    }
+    // 検索クエリの同期
+    else if (qParam) {
+      setSearchQuery(qParam);
     }
 
-    if (tags) {
-      const tagList = tags.split(",").filter((t) => t !== "");
-      if (tagList.length > 0) setSelectedTags(tagList);
-    }
-
-    if (q) setSearchQuery(q);
-    if (page) setCurrentPage(Number(page));
-
+    isInitialMount.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // ページマウント時の初期化として1回だけ実行
 
-  // 2. 【重要】デバウンス処理
-  // 入力が止まってから300ms後にのみURL反映用のStateを更新する
+  // 2. ストアの変化をURLに反映（WORKSページ内での操作を同期）
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedSearchQuery(searchQuery);
-    }, 300); // 300ms待機
+    // 初期化中はURLを上書きしない
+    if (isInitialMount.current) return;
 
-    return () => clearTimeout(timer);
-  }, [searchQuery]);
-
-  // 3. 各Stateの変化をURLに反映する
-  useEffect(() => {
     const params = new URLSearchParams();
 
-    if (selectedCategory && selectedCategory !== "all") {
+    // カテゴリが "all" 以外ならパラメータに追加
+    if (selectedCategory !== "all") {
       params.set("category", selectedCategory);
     }
 
+    // タグがあればカンマ区切りで追加
     if (selectedTags.length > 0) {
       params.set("tags", selectedTags.join(","));
     }
 
-    // 生の searchQuery ではなく、デバウンスされた値を使用してURLを更新
-    if (debouncedSearchQuery) {
-      params.set("q", debouncedSearchQuery);
-    }
-
-    if (currentPage > 1) {
-      params.set("page", currentPage.toString());
+    // 検索語句があれば追加
+    if (searchQuery) {
+      params.set("q", searchQuery);
     }
 
     const query = params.toString();
     const url = query ? `${pathname}?${query}` : pathname;
 
-    // URLを書き換える（scroll: false で位置を保持し、再レンダリングの影響を抑える）
+    // ブラウザの履歴を汚さずにURLを更新
     router.replace(url, { scroll: false });
-  }, [
-    selectedCategory,
-    selectedTags,
-    debouncedSearchQuery, // 依存配列をデバウンス版にする
-    currentPage,
-    pathname,
-    router,
-  ]);
+  }, [selectedCategory, selectedTags, searchQuery, pathname, router]);
 }
