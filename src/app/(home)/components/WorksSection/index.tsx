@@ -1,49 +1,57 @@
 "use client";
 
 import React, { useState } from "react";
-import { ALL_WORKS } from "@/data/works"; // インポートを確認
-import { useWorkFilter } from "@/app/works/lib/hooks/useWorkFilter";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { WorkCard } from "@/app/works/components/WorkCard";
 import { WorkDetailModal } from "@/app/works/components/WorkDetailModal";
+import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import { ALL_WORKS } from "@/data/works";
 import { Work } from "@/types/work";
 
 export const WorksSection = () => {
-  // 【重要】ALL_WORKS（配列）を確実に渡す
-  const { filteredWorks, selectOnlyTag, selectOnlyCategory } =
-    useWorkFilter(ALL_WORKS);
-
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  // 最新3件のみ表示
-  const displayWorks = filteredWorks.slice(0, 3);
+  // トップページには最新の3件のみ表示
+  const displayWorks = ALL_WORKS.slice(0, 3);
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-24 bg-slate-50">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <SectionTitle
+            title="Selected Works"
+            description="実務案件から個人プロジェクトまで、これまでの制作実績の一部をご紹介します。"
+          />
+          <Link href="/works">
+            <Button intent="outline" size="long">
+              View All Projects
+            </Button>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayWorks.map((work) => (
             <WorkCard
               key={work.id}
               work={work}
               onClick={() => setSelectedWork(work)}
-              onCategorySelectOnly={selectOnlyCategory}
-              onTagSelectOnly={selectOnlyTag}
+              // 不要になった callback プロパティを削除しました
             />
           ))}
         </div>
-
-        {selectedWork && (
-          <WorkDetailModal
-            isOpen={!!selectedWork}
-            onClose={() => setSelectedWork(null)}
-            work={selectedWork}
-            allFilteredWorks={filteredWorks}
-            onNavigate={setSelectedWork}
-            onCategorySelectOnly={selectOnlyCategory}
-            onTagSelectOnly={selectOnlyTag}
-          />
-        )}
       </div>
+
+      {/* 詳細モーダル */}
+      {selectedWork && (
+        <WorkDetailModal
+          isOpen={!!selectedWork}
+          onClose={() => setSelectedWork(null)}
+          work={selectedWork}
+          allFilteredWorks={displayWorks} // 型定義に追加する必要があります
+          onNavigate={setSelectedWork}
+        />
+      )}
     </section>
   );
 };
