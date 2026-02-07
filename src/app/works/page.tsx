@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import {
   Zap,
   ShieldCheck,
@@ -241,7 +241,7 @@ export default function WorksPage() {
               </div>
 
               {/* カード情報 */}
-              <div className="p-6 flex-grow flex flex-col">
+              <div className="p-6 grow flex flex-col">
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {work.category.map((cat) => (
                     <span

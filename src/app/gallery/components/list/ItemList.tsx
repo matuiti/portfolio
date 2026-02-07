@@ -1,17 +1,16 @@
 // src/app/gallery/components/list/ItemList.tsx
 "use client";
 
-import { UIPart } from "@/types/gallery/ui-part";
+import { UIPart } from "@/gallery/types/ui-part";
 import { Item } from "./Item";
 
 type ItemListProps = {
   items: UIPart[];
-  onItemClick: (item: UIPart) => void; // page.tsxのプロパティ名に合わせる
+  onItemClick: (item: UIPart) => void;
 };
 
 export const ItemList = ({ items, onItemClick }: ItemListProps) => {
   return (
-    // カラム数は常に1。gapを大きめにとることで、1つ1つの独立性を高めます。
     <div className="flex flex-col gap-10 lg:gap-16">
       {items.map((item) => (
         <Item key={item.id} item={item} onExpand={onItemClick} />

@@ -1,12 +1,12 @@
 // src/app/gallery/components/list/NoResults.tsx
 "use client";
 
-import { GALLERY_MESSAGES } from "@/lib/constants/gallery";
+import { GALLERY_MESSAGES } from "@/gallery/lib/constants/gallery";
 
 type NoResultsProps = {
   message: string;
   onReset: () => void;
-}
+};
 
 export function NoResults({ message, onReset }: NoResultsProps) {
   return (
