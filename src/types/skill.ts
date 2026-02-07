@@ -1,12 +1,33 @@
 // src/types/skill.ts
 
+export type SkillLinkType = "project" | "github" | "cert";
+
+export type SkillLink = {
+  label: string;
+  url: string;
+  type: SkillLinkType;
+};
+
 export type SkillItem = {
   name: string;
-  level: number; // 0-100の数値
+  level: number;
+  label: string;
+  experience: string;
+  description: string;
+  links?: SkillLink[];
 };
 
 export type SkillCategory = {
+  label: string;
+  items: SkillItem[];
+};
+
+/**
+ * モジュールからエクスポートされていなかったためエラーが出ていた型
+ */
+export type SkillGroup = {
   id: string;
-  title: string; // 「Front-end」など
-  skills: SkillItem[];
+  title: string;
+  icon: string;
+  categories: SkillCategory[];
 };
