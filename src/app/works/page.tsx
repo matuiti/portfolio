@@ -1,20 +1,31 @@
-// src/app/works/page.tsx
 "use client";
 
 import { useState, useMemo, Suspense } from "react";
-import Image from "next/image";
-import { X, Zap, ShieldCheck } from "lucide-react";
+import { X } from "lucide-react";
 import { ALL_WORKS } from "@/data/works";
 import { Work } from "@/types/work";
+
+// 以前作成したパーツのインポート
 import { useWorkFilter } from "./lib/hooks/useWorkFilter";
 import { useWorkURLSync } from "./lib/hooks/useWorkURLSync";
 import { WorkSearchPanel } from "./components/WorkSearchPanel";
+import { WorkCard } from "./components/WorkCard";
+import { Pagination } from "./components/Pagination";
 
+/**
+ * メインコンテンツコンポーネント
+ * フィルタリング、リスト表示、ページネーション、詳細モーダルを統括します。
+ */
 function WorksContent() {
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
+
+  // 1. フィルタリングロジックの呼び出し
   const filter = useWorkFilter();
+
+  // 2. URLパラメータとの同期（検索条件やページ番号をURLに反映）
   useWorkURLSync(filter);
 
+  // 3. 全データから重複なしのタグ一覧を抽出（検索パネル用）
   const availableTags = useMemo(() => {
     const tags = new Set<string>();
     ALL_WORKS.forEach((w: Work) => w.tags.forEach((t) => tags.add(t)));
@@ -22,7 +33,8 @@ function WorksContent() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container mx-auto px-4 py-20">
+      {/* ヘッダーエリア */}
       <header className="mb-12">
         <p className="text-blue-600 font-black tracking-widest mb-2">
           PORTFOLIO
@@ -32,98 +44,104 @@ function WorksContent() {
         </h1>
       </header>
 
+      {/* 検索・絞り込みパネル */}
       <WorkSearchPanel {...filter} availableTags={availableTags} />
 
+      {/* 作品グリッド表示 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filter.filteredWorks.map((work: Work) => (
-          <div
+        {filter.paginatedWorks.map((work: Work) => (
+          <WorkCard
             key={work.id}
-            onClick={() => setSelectedWork(work)}
-            className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden border border-slate-100 flex flex-col"
-          >
-            {/* サムネイル（NDA判定含む） [cite: 34] */}
-            <div className="aspect-video bg-slate-100 relative overflow-hidden">
-              {work.disclosureLevel === "NDA" ? (
-                <div className="w-full h-full flex items-center justify-center bg-slate-900 text-white/20 font-black text-2xl tracking-tighter">
-                  NDA_PROTECTED
-                </div>
-              ) : (
-                <Image
-                  src={work.thumbnail}
-                  alt={work.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              )}
-              {/* バッジ表示 [cite: 35] */}
-              <div className="absolute top-4 left-4 flex flex-col gap-2">
-                {work.isSpeedyWork && (
-                  <span className="bg-amber-400 text-[8px] font-black text-white px-2 py-1 rounded uppercase tracking-tighter flex items-center gap-1">
-                    <Zap size={10} fill="currentColor" /> Speedy
-                  </span>
-                )}
-                {work.isLongTerm && (
-                  <span className="bg-emerald-500 text-[8px] font-black text-white px-2 py-1 rounded uppercase tracking-tighter flex items-center gap-1">
-                    <ShieldCheck size={10} fill="currentColor" /> Accomplished
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* カード情報（元の構成） [cite: 35] */}
-            <div className="p-6 space-y-3">
-              <div className="flex flex-wrap gap-1.5">
-                {work.category.map((cat) => (
-                  <span
-                    key={cat}
-                    className="text-[9px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded font-bold uppercase tracking-wider"
-                  >
-                    {cat}
-                  </span>
-                ))}
-              </div>
-              <h2 className="text-lg font-black text-slate-900 line-clamp-1">
-                {work.title}
-              </h2>
-              <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
-                {work.summary}
-              </p>
-              <div className="pt-5 mt-auto flex items-center justify-between border-t border-slate-50">
-                <span className="text-[10px] font-bold text-slate-400 uppercase">
-                  {work.role}
-                </span>
-                <span className="text-[10px] font-black text-blue-600">
-                  {work.duration}
-                </span>
-              </div>
-            </div>
-          </div>
+            work={work}
+            onClick={(w) => setSelectedWork(w)}
+          />
         ))}
       </div>
 
-      {/* 詳細モーダル（元の構成を維持） [cite: 35-38] */}
+      {/* ページネーション */}
+      <div className="mt-4">
+        <Pagination
+          current={filter.currentPage}
+          total={filter.totalPages}
+          onPageChange={filter.setCurrentPage}
+        />
+      </div>
+
+      {/* 詳細モーダル */}
       {selectedWork && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* 背景オーバーレイ */}
           <div
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             onClick={() => setSelectedWork(null)}
           />
-          <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-4xl p-8 shadow-2xl">
+
+          {/* モーダルコンテンツ */}
+          <div className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-8 md:p-12 shadow-2xl animate-in fade-in zoom-in duration-300">
             <button
               onClick={() => setSelectedWork(null)}
-              className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full text-slate-400"
+              className="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors"
+              aria-label="閉じる"
             >
               <X size={24} />
             </button>
-            {/* モーダル内コンテンツ（既存通り）... */}
-            <div className="space-y-6">
-              <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
-                {selectedWork.category}
-              </span>
-              <h2 className="text-3xl font-black text-slate-900">
-                {selectedWork.title}
-              </h2>
-              {/* 略：background, solution, technologies などの表示 */}
+
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <div className="flex gap-2">
+                  {selectedWork.category.map((cat) => (
+                    <span
+                      key={cat}
+                      className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-2 py-1 rounded"
+                    >
+                      {cat}
+                    </span>
+                  ))}
+                </div>
+                <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight">
+                  {selectedWork.title}
+                </h2>
+                <p className="text-slate-600 leading-relaxed text-lg">
+                  {selectedWork.summary}
+                </p>
+              </div>
+
+              {/* プロジェクト詳細情報（適宜項目を追加してください） */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-slate-100">
+                <section className="space-y-3">
+                  <h3 className="font-bold text-slate-900">Description</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed whitespace-pre-wrap">
+                    {selectedWork.description}
+                  </p>
+                </section>
+                <section className="space-y-3">
+                  <h3 className="font-bold text-slate-900">Tech Stack</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedWork.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded-md font-bold"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              </div>
+
+              {/* URLがある場合のボタン */}
+              {selectedWork.url && selectedWork.disclosureLevel !== "NDA" && (
+                <div className="pt-6">
+                  <a
+                    href={selectedWork.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all active:scale-95"
+                  >
+                    Visit Project Site
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -132,10 +150,20 @@ function WorksContent() {
   );
 }
 
+/**
+ * ページのエントリーポイント
+ * useSearchParams等を使用するためSuspenseでラップします。
+ */
 export default function WorksPage() {
   return (
     <Suspense
-      fallback={<div className="p-20 text-center font-bold">Loading...</div>}
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-slate-400 font-bold animate-pulse">
+            Loading Works...
+          </div>
+        </div>
+      }
     >
       <WorksContent />
     </Suspense>
