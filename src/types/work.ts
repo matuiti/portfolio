@@ -1,29 +1,29 @@
 // src/types/work.ts
 
-/**
- * データが持つカテゴリ（Allは含めない）
- */
-export type WorkCategory = "Web制作" | "WordPress" | "Next.js" | "スポット修正";
+/** 内部管理用のカテゴリID */
+export type WorkCategory = "web" | "wordpress" | "app" | "game";
 
-/**
- * 検索UI用のカテゴリ（Allを含める）
- */
-export type WorkFilterCategory = WorkCategory | "All";
+/** フィルタ用 (カテゴリ + all) */
+export type WorkFilterCategory = WorkCategory | "all";
+
+/** 公開レベルの定義 [cite: 7] */
+export type DisclosureLevel = "Full" | "NDA";
 
 export type Work = {
   id: string;
-  /**
-   * エラー解消：以前の型定義では 'title' が必須でしたが、
-   * 新しい設計の 'displayTitle' と 'summary' に合わせて更新します。
-   */
-  displayTitle: string;
+  title: string;
   category: WorkCategory[];
   tags: string[];
   thumbnail: string;
-  summary: string; // カードに表示する短い説明
-  description?: string; // モーダル等で表示する詳細
-  duration: string;
-  role: string;
+  summary: string; // カード用の短い説明 [cite: 7, 16]
+  duration: string; // 制作期間 [cite: 7, 16]
+  role: string; // 担当役割 [cite: 7, 16]
+
+  disclosureLevel: DisclosureLevel;
+  isSpeedyWork: boolean;
+  isLongTerm: boolean; // 中長期プロジェクト（Accomplished）用フラグ
+
   url?: string;
   github?: string;
+  description?: string; // 詳細ページ・モーダル用 [cite: 131]
 };

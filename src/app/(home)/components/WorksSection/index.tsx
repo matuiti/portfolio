@@ -3,15 +3,14 @@
 import { useWorkFilter } from "@/app/works/lib/hooks/useWorkFilter";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { button as buttonStyle } from "@/components/ui/Button";
-import { WorkCategory } from "@/types/work"; // 型をインポート
+import { WorkFilterCategory } from "@/types/work";
 import Link from "next/link";
 
 export const WorksSection = () => {
   // トップページ用：3件制限
   const { displayWorks, selectedCategory, toggleCategory } = useWorkFilter(3);
 
-  // categories 配列に型を明示。value は string ではなく WorkCategory であると指定します
-  const categories: { label: string; value: WorkCategory }[] = [
+  const categories: { label: string; value: WorkFilterCategory }[] = [
     { label: "Web制作", value: "web" },
     { label: "アプリケーション", value: "app" },
     { label: "ゲーム", value: "game" },
@@ -27,7 +26,6 @@ export const WorksSection = () => {
         {categories.map((cat) => (
           <button
             key={cat.value}
-            // 型が一致しているため、as any なしで安全に渡せます
             onClick={() => toggleCategory(cat.value)}
             className={`px-6 py-2 rounded-full border transition-all ${
               selectedCategory === cat.value
