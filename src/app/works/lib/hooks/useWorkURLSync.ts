@@ -53,7 +53,7 @@ export function useWorkURLSync(actions: FilterActions) {
   useEffect(() => {
     const params = new URLSearchParams();
 
-    if (selectedCategory !== "All") params.set("category", selectedCategory);
+    if (selectedCategory !== "all") params.set("category", selectedCategory);
     if (selectedTags.length > 0) params.set("tags", selectedTags.join(","));
     if (debouncedQuery) params.set("q", debouncedQuery);
 
