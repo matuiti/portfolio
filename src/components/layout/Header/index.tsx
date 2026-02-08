@@ -1,26 +1,25 @@
 // src/components/layout/Header/index.tsx
+
 "use client";
 
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { siteConfig } from "@/data/site-config";
 import { NAV_ITEMS } from "@/data/navigation";
 import { useUIStore } from "@/store/useUIStore";
 import { useScrollThreshold } from "@/lib/hooks/useScrollThreshold";
 import { tv } from "tailwind-variants";
 
-// 1. バリアント定義
+// 1. スタイルバリアントの定義
 export const headerStyles = tv({
   base: "fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out",
   variants: {
-    // スクロール状態（MVを超えたかどうか）
     isScrolled: {
       true: "bg-white/80 backdrop-blur-md py-3 shadow-sm border-b border-neutral-100",
       false: "bg-transparent py-6 border-transparent",
     },
-    // トップページでの初期非表示状態（GSAPで操作するために opacity-0 にしておく）
     isInitialHidden: {
       true: "opacity-0 -translate-y-full",
       false: "opacity-100 translate-y-0",
@@ -32,7 +31,6 @@ export const headerStyles = tv({
   },
 });
 
-// 2. Propsの型定義
 type HeaderProps = {
   onMenuOpen: () => void;
 };
@@ -40,7 +38,12 @@ type HeaderProps = {
 export const Header = ({ onMenuOpen }: HeaderProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
-  const { phase, setPhase } = useUIStore();
+
+  const { phase, setPhase, setSearchDrawerOpen } = useUIStore();
+
+  // 検索ドロワーが必要なページか判定
+  const isSearchablePage =
+    pathname.startsWith("/works") || pathname.startsWith("/gallery");
 
   const isVisible =
     !isHomePage || phase === "header-entry" || phase === "ready";
@@ -54,21 +57,23 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
     <header
       className={headerStyles({ isScrolled, isInitialHidden: !isVisible })}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        <div className="flex">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold tracking-tight text-slate-900">
-              {siteConfig.name}
-            </span>
-          </Link>
-        </div>
+      <div className="main-container flex items-center justify-between">
+        {/* ロゴ */}
+        <Link
+          href="/"
+          className="text-xl font-black tracking-tighter hover:opacity-70 transition-opacity"
+        >
+          {siteConfig.name}
+        </Link>
 
-        <nav className="hidden md:flex md:items-center md:gap-8">
+        {/* 【PC専用】デスクトップ用ナビゲーション (md以上で表示) */}
+        <nav className="hidden md:flex items-center gap-8">
           {NAV_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(item.href));
-            if (!item.isPublished)
+
+            if (!item.isPublished) {
               return (
                 <span
                   key={item.href}
@@ -77,6 +82,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
                   {item.label}
                 </span>
               );
+            }
 
             return (
               <Link
@@ -94,14 +100,28 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
           })}
         </nav>
 
-        {/* onMenuOpen をここで使用することで ESLint 警告を解消 */}
-        <div className="flex md:hidden">
+        {/* 【スマホ・タブレット専用】アクションボタンエリア (md未満のみ表示) */}
+        <div className="flex items-center gap-2 md:hidden">
+          {/* 検索ボタン: WORKS/GALLERYページかつモバイルサイズのみ表示 */}
+          {isSearchablePage && (
+            <button
+              type="button"
+              className="p-2 text-slate-600 hover:bg-slate-100 rounded-md transition-colors"
+              onClick={() => setSearchDrawerOpen(true)}
+              aria-label="検索フィルターを開く"
+            >
+              <Search className="w-6 h-6" />
+            </button>
+          )}
+
+          {/* メニューボタン: モバイルサイズのみ表示 */}
           <button
             type="button"
             className="p-2 text-slate-600 hover:bg-slate-100 rounded-md transition-colors"
             onClick={onMenuOpen}
+            aria-label="メニューを開く"
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="w-6 h-6" />
           </button>
         </div>
       </div>
