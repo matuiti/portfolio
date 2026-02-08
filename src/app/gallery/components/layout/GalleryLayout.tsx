@@ -17,7 +17,7 @@ export function GalleryLayout({ children, filtering }: GalleryLayoutProps) {
   return (
     <div className="flex h-[calc(100vh-64px)] overflow-hidden">
       {/* PC: ギャラリー専用サイドバー */}
-      <aside className="hidden md:block w-80 flex-shrink-0 border-r border-neutral-200 overflow-y-auto bg-neutral-50">
+      <aside className="hidden md:block w-80 shrink-0 border-r border-neutral-200 overflow-y-auto bg-neutral-50">
         <GallerySidebar filtering={filtering} />
       </aside>
 
