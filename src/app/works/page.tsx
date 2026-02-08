@@ -1,3 +1,4 @@
+// src/app/works/page.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -6,23 +7,27 @@ import { useWorkURLSync } from "./lib/hooks/useWorkURLSync";
 import { WorkCard } from "./components/WorkCard";
 import { WorkDetailModal } from "./components/WorkDetailModal";
 import { Pagination } from "./components/Pagination";
+import { WorksLayout } from "./components/WorksLayout"; // ステップ1・2で作成
 import { Work } from "@/types/work";
-import { WorkSearchPanel } from "./components/WorkSearchPanel";
 
+/**
+ * WORKS ページコンポーネント
+ * UIギャラリーと統一されたサイドバー/ドロワー形式の検索UIを採用しています。
+ */
 export default function WorksPage() {
-  // 1. URL同期の有効化
+  // 1. URL同期の有効化 (category, tags, q パラメータをストアと同期)
   useWorkURLSync();
 
-  // 2. フィルタリング済みデータの取得
+  // 2. フィルタリング済みデータの取得 (Zustandストアの状態に連動)
   const filteredWorks = useFilteredWorks();
 
   // 3. ページネーション用状態の取得
   const { currentPage, itemsPerPage, setCurrentPage } = useWorkStore();
 
-  // 4. 詳細表示用の状態
+  // 4. 詳細モーダル表示用の状態
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  // ページネーション処理
+  // ページネーション計算
   const totalPages = Math.ceil(filteredWorks.length / itemsPerPage);
   const displayWorks = filteredWorks.slice(
     (currentPage - 1) * itemsPerPage,
@@ -30,23 +35,22 @@ export default function WorksPage() {
   );
 
   return (
-    <main className="min-h-screen pt-24 pb-20 bg-slate-50">
-      <div className="container mx-auto px-6">
-        {/* ヘッダー・検索パネル */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-black text-slate-900 mb-4 tracking-tighter">
-            WORKS
-          </h1>
-          <p className="text-slate-500 text-sm max-w-2xl mb-10">
-            プロジェクト実績のアーカイブ。
-            特定の技術スタックやカテゴリで絞り込み検索が可能です。
-          </p>
-          <WorkSearchPanel />
-        </div>
+    <WorksLayout>
+      {/* ページヘッダーエリア */}
+      <header className="mb-12">
+        <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter mb-4">
+          WORKS
+        </h1>
+        <p className="text-sm md:text-base text-slate-500 font-medium max-w-2xl leading-relaxed">
+          プロジェクト実績のアーカイブ。
+          サイドバーのフィルターを使用することで、特定の技術スタックやカテゴリで瞬時に絞り込むことが可能です。
+        </p>
+      </header>
 
-        {/* ワークカード一覧 */}
+      {/* 実績グリッド一覧 */}
+      <section aria-label="実績一覧">
         {displayWorks.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {displayWorks.map((work) => (
               <WorkCard
                 key={work.id}
@@ -56,14 +60,20 @@ export default function WorksPage() {
             ))}
           </div>
         ) : (
-          <div className="py-20 text-center">
+          /* 検索結果ゼロ時の表示 */
+          <div className="py-20 text-center bg-white rounded-4xl border border-dashed border-slate-200">
             <p className="text-slate-400 font-bold">
               該当する実績は見つかりませんでした。
             </p>
+            <p className="text-xs text-slate-400 mt-2">
+              条件を変えて再度お試しください。
+            </p>
           </div>
         )}
+      </section>
 
-        {/* ページネーション */}
+      {/* ページネーション */}
+      <footer className="mt-12">
         {totalPages > 1 && (
           <Pagination
             current={currentPage}
@@ -71,18 +81,18 @@ export default function WorksPage() {
             onPageChange={setCurrentPage}
           />
         )}
-      </div>
+      </footer>
 
-      {/* 詳細モーダル：ここが修正箇所です */}
+      {/* 詳細モーダル (フィルタリング結果を保持したまま前後移動が可能) */}
       {selectedWork && (
         <WorkDetailModal
           isOpen={!!selectedWork}
           onClose={() => setSelectedWork(null)}
           work={selectedWork}
-          allFilteredWorks={filteredWorks} // 現在表示（フィルタ）されている全リストを渡す
+          allFilteredWorks={filteredWorks}
           onNavigate={setSelectedWork}
         />
       )}
-    </main>
+    </WorksLayout>
   );
 }
