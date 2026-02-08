@@ -20,7 +20,7 @@ export const ALL_SKILLS: SkillGroup[] = [
             links: [
               {
                 label: "Related Works",
-                url: "/works?category=All&q=Next.js",
+                url: "/works?category=all&q=Next.js",
                 type: "project",
               },
               {
@@ -40,7 +40,7 @@ export const ALL_SKILLS: SkillGroup[] = [
             links: [
               {
                 label: "Related Works",
-                url: "/works?category=All&q=React",
+                url: "/works?category=all&q=React",
                 type: "project",
               },
             ],

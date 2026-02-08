@@ -1,3 +1,4 @@
+// src/app/skills/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -11,6 +12,22 @@ import {
 import { SkillGroup, SkillLink, SkillLevelValue } from "@/types/skill";
 import { ALL_SKILLS } from "@/data/skills";
 
+// --- ヘルパー: カテゴリー/タグの自動判別リンク生成 ---
+const getProjectLink = (itemName: string) => {
+  // WORKS側で定義されている有効なカテゴリー値 [cite: 79]
+  const WORK_CATEGORIES = ["web", "wordpress", "app", "game"];
+  const name = itemName.toLowerCase();
+
+  // 1. カテゴリー名と一致する場合 (例: WordPress, Web)
+  if (WORK_CATEGORIES.includes(name)) {
+    return `/works?category=${name}`;
+  }
+
+  // 2. それ以外は「タグ」として扱う (例: Next.js, React)
+  // 検索キーワード(q)ではなくタグパラメータにすることで、WORKS側のUIでタグが選択状態になります
+  return `/works?tags=${encodeURIComponent(itemName)}`;
+};
+
 // --- ゲージ表示コンポーネント ---
 const LevelBar = ({
   level,
@@ -19,9 +36,9 @@ const LevelBar = ({
   level: SkillLevelValue;
   label: string;
 }) => (
-  <div className="flex items-center gap-4">
+  <div className="flex flex-col gap-1">
     <div className="flex">
-      {[1, 2, 3, 4, 5].map((s) => (
+      {[1 - 5].map((s) => (
         <div
           key={s}
           className={`w-3.5 h-3 md:w-4 md:h-3.5 border-r border-y border-slate-900 ${
@@ -49,40 +66,37 @@ export default function SkillsPage() {
   );
 
   return (
-    <div className="container bg-slate-50 min-h-screen">
-      <header className="mb-16">
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4">
-          Tech_Stack_Verified_2025
-        </p>
-        <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6">
-          Proof of
-          <br />
-          Capability.
-        </h1>
-        <p className="max-w-xl text-sm text-slate-600 leading-relaxed font-medium">
-          実務における技術的習熟度と、それを証明するエビデンスのカタログ。
-          <br />
-          エンジニアリング品質を「透明化」するための仕様書です。
-        </p>
-      </header>
+    <div className="min-h-screen bg-white pt-24 pb-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-16 border-l-8 border-slate-900 pl-6">
+          <div className="text-[10px] font-black tracking-[0.3em] text-slate-400 mb-2 uppercase">
+            Tech_Stack_Verified_2025
+          </div>
+          <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-4 tracking-tighter">
+            Proof of <br />
+            Capability.
+          </h1>
+          <p className="text-slate-600 max-w-2xl text-sm md:text-base leading-relaxed font-medium">
+            実務における技術的習熟度と、それを証明するエビデンスのカタログ。
+            <br />
+            エンジニアリング品質を「透明化」するための仕様書です。
+          </p>
+        </div>
 
-      <div className="space-y-12">
+        {/* Skill Groups */}
         {ALL_SKILLS.map((group: SkillGroup) => (
-          <section key={group.id} className="border-t-2 border-slate-900 pt-8">
+          <div key={group.id} className="mb-12">
             <button
               onClick={() =>
                 setOpenGroups((p) => ({ ...p, [group.id]: !p[group.id] }))
               }
               className="w-full flex items-center justify-between bg-slate-900 text-white px-6 py-3 mb-8 group hover:scale-[1.005] transition-transform"
             >
-              <div className="flex items-center gap-4">
-                <span className="text-xs font-black opacity-50">
-                  SECTION_{group.id.toUpperCase()}
-                </span>
-                <h2 className="text-sm font-black uppercase tracking-widest">
-                  {group.title}
-                </h2>
-              </div>
+              <span className="text-xs font-black tracking-widest uppercase">
+                SECTION_{group.id.toUpperCase()}
+                {group.title}
+              </span>
               {openGroups[group.id] ? (
                 <ChevronUp size={18} />
               ) : (
@@ -91,56 +105,58 @@ export default function SkillsPage() {
             </button>
 
             <div
-              className={`transition-all duration-500 ${openGroups[group.id] ? "opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}
+              className={`transition-all duration-500 ${
+                openGroups[group.id]
+                  ? "opacity-100"
+                  : "max-h-0 opacity-0 overflow-hidden"
+              }`}
             >
               {group.categories.map((cat, idx) => (
                 <div key={idx} className="mb-12">
-                  <h3 className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-6 px-1">
+                  <h3 className="text-lg font-black text-slate-900 mb-6 flex items-center gap-3">
+                    <span className="w-8 h-px bg-slate-900"></span>
                     {cat.label}
                   </h3>
 
-                  {/* Desktop Table [cite: 91, 92] */}
-                  <div className="hidden md:block overflow-hidden border border-slate-900 bg-white">
-                    <table className="w-full text-left border-collapse">
+                  {/* Desktop Table */}
+                  <div className="hidden md:block overflow-x-auto mb-8">
+                    <table className="w-full border-collapse">
                       <thead>
-                        <tr className="bg-slate-50 border-b border-slate-900">
-                          <th className="p-4 text-[10px] font-black uppercase tracking-widest w-1/4">
+                        <tr className="border-b-2 border-slate-900 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                          <th className="py-4 text-left w-[25%]">
                             Technical_Item
                           </th>
-                          <th className="p-4 text-[10px] font-black uppercase tracking-widest w-1/4">
-                            Grade
-                          </th>
-                          <th className="p-4 text-[10px] font-black uppercase tracking-widest">
+                          <th className="py-4 text-left w-[20%]">Grade</th>
+                          <th className="py-4 text-left">
                             Description & Evidence
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200">
+                      <tbody className="divide-y divide-slate-100">
                         {cat.items.map((item) => (
                           <tr
                             key={item.name}
                             className="hover:bg-slate-50 transition-colors"
                           >
-                            <td className="p-5 align-top">
+                            <td className="py-6 align-top">
                               <div className="font-black text-slate-900">
                                 {item.name}
                               </div>
-                              <div className="text-[10px] font-bold text-slate-400 mt-1 uppercase">
+                              <div className="text-[10px] text-slate-400 mt-1 font-bold">
                                 {item.experience}
                               </div>
                             </td>
-                            <td className="p-5 align-top">
+                            <td className="py-6 align-top">
                               <LevelBar
                                 level={item.level as SkillLevelValue}
                                 label={item.label}
                               />
                             </td>
-                            <td className="p-5 align-top">
-                              <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                            <td className="py-6 align-top">
+                              <p className="text-sm text-slate-600 mb-4 leading-relaxed font-medium">
                                 {item.description}
                               </p>
-
-                              {/* 動的リンク表示 [cite: 92] */}
+                              {/* 動的リンク表示 [cite: 252] */}
                               {item.links && item.links.length > 0 && (
                                 <div className="flex flex-wrap gap-2">
                                   {item.links.map((link, lIdx) => (
@@ -148,7 +164,7 @@ export default function SkillsPage() {
                                       key={lIdx}
                                       href={
                                         link.type === "project"
-                                          ? `/works?category=all&q=${encodeURIComponent(item.name)}`
+                                          ? getProjectLink(item.name) // 修正ポイント
                                           : link.url
                                       }
                                       target={
@@ -172,8 +188,8 @@ export default function SkillsPage() {
                     </table>
                   </div>
 
-                  {/* Mobile Cards (350px対応) [cite: 92, 93] */}
-                  <div className="md:hidden space-y-4">
+                  {/* Mobile Cards */}
+                  <div className="md:hidden space-y-6">
                     {cat.items.map((item) => (
                       <div
                         key={item.name}
@@ -181,35 +197,40 @@ export default function SkillsPage() {
                       >
                         <div className="flex justify-between items-start">
                           <div>
-                            <div className="font-black text-slate-900">
+                            <div className="font-black text-slate-900 text-lg">
                               {item.name}
                             </div>
-                            <div className="text-[9px] font-bold text-slate-400 uppercase mt-0.5">
+                            <div className="text-[10px] text-slate-400 font-bold tracking-tight">
                               {item.experience}
                             </div>
                           </div>
-                          <div className="text-[10px] font-black text-blue-600 uppercase border-b border-blue-600">
-                            {item.label}
+                          <div className="text-right">
+                            <div className="text-[10px] font-black text-slate-900 uppercase">
+                              {item.label}
+                            </div>
                           </div>
                         </div>
                         <LevelBar
                           level={item.level as SkillLevelValue}
                           label=""
                         />
-                        <p className="text-xs text-slate-600 leading-relaxed">
+                        <p className="text-xs text-slate-600 leading-relaxed font-medium">
                           {item.description}
                         </p>
-
                         {item.links && item.links.length > 0 && (
-                          <div className="pt-2 flex flex-wrap gap-2">
+                          <div className="flex flex-col gap-2 pt-2">
                             {item.links.map((link, lIdx) => (
                               <a
                                 key={lIdx}
                                 href={
                                   link.type === "project"
-                                    ? `/works?category=all&q=${encodeURIComponent(item.name)}`
+                                    ? getProjectLink(item.name) // 修正ポイント
                                     : link.url
                                 }
+                                target={
+                                  link.type === "github" ? "_blank" : "_self"
+                                }
+                                rel="noreferrer"
                                 className="flex items-center gap-2 px-3 py-2 border border-slate-900 text-[9px] font-black uppercase tracking-tighter bg-white shadow-[2px_2px_0px_0px_rgba(15,23,42,1)] active:shadow-none active:translate-x-px active:translate-y-px"
                               >
                                 <LinkIcon type={link.type} />
@@ -224,19 +245,18 @@ export default function SkillsPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         ))}
-      </div>
 
-      <footer className="mt-20 pt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-        <div>Certified_Spec_Inventory_v4.2</div>
-        <div className="flex items-center gap-4">
-          <span>Verified_Link_Active</span>
-          <span className="text-slate-900">
-            Precision_Ref: CODE_V4.2_LINKED
-          </span>
+        {/* Footer info */}
+        <div className="mt-20 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between gap-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
+          <div>Certified_Spec_Inventory_v4.2</div>
+          <div className="flex gap-6">
+            <span className="text-blue-600">Verified_Link_Active</span>
+            <span>Precision_Ref: CODE_V4.2_LINKED</span>
+          </div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { WorkFilterCategory } from "@/types/work";
 
 /**
  * URLパラメータとZustandストアを同期させるフック
+ * SKILLSページ等からの検索パラメータ（category, q, tags）を確実に反映させます。
  */
 export function useWorkURLSync() {
   const router = useRouter();
@@ -19,8 +20,8 @@ export function useWorkURLSync() {
     selectedTags,
     searchQuery,
     setSearchQuery,
-    selectOnlyTag,
-    selectOnlyCategory,
+    setSelectedCategory,
+    setSelectedTags,
   } = useWorkStore();
 
   // 1. 初回マウント時：URLパラメータをストアに反映
@@ -29,21 +30,24 @@ export function useWorkURLSync() {
     const tagsParam = searchParams.get("tags");
     const qParam = searchParams.get("q");
 
-    // タグの同期処理
+    // 複数のパラメータが同時に存在する場合を考慮し、独立して判定を行う
+    // （旧ロジック：if-else if による排他処理を解消）
+
+    // カテゴリの同期
+    if (categoryParam) {
+      setSelectedCategory(categoryParam as WorkFilterCategory);
+    }
+
+    // タグの同期
     if (tagsParam) {
-      // カンマ区切りで配列化し、空文字を除去
       const tagsArray = tagsParam.split(",").filter(Boolean);
       if (tagsArray.length > 0) {
-        // 【修正ポイント】配列全体ではなく、最初の1要素 (string) を渡す
-        selectOnlyTag(tagsArray[0]);
+        setSelectedTags(tagsArray);
       }
     }
-    // カテゴリの同期
-    else if (categoryParam) {
-      selectOnlyCategory(categoryParam as WorkFilterCategory);
-    }
-    // 検索クエリの同期
-    else if (qParam) {
+
+    // 検索クエリの同期（SKILLSページからの ?q=Keyword 等を反映）
+    if (qParam) {
       setSearchQuery(qParam);
     }
 
@@ -51,9 +55,9 @@ export function useWorkURLSync() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // ページマウント時の初期化として1回だけ実行
 
-  // 2. ストアの変化をURLに反映（WORKSページ内での操作を同期）
+  // 2. ストアの変化をURLに反映（WORKSページ内での操作をURLに同期）
   useEffect(() => {
-    // 初期化中はURLを上書きしない
+    // 初期化完了前、または初期読み込み中はURLを上書きしない
     if (isInitialMount.current) return;
 
     const params = new URLSearchParams();
