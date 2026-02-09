@@ -40,7 +40,7 @@ export function Footer() {
                   {/* 公開フラグが明示的に false の場合のみ「未公開スタイル」 */}
                   {item.isPublished === false ? (
                     <div className="flex items-center gap-2 text-slate-300 select-none">
-                      <Lock className="h-3 w-3 flex-shrink-0" />
+                      <Lock className="h-3 w-3 shrink-0" />
                       <span className="text-sm line-through decoration-slate-200">
                         {item.label}
                       </span>

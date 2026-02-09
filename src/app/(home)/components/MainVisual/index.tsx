@@ -1,7 +1,7 @@
 // src/app/(home)/components/MainVisual/index.tsx
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 import { useUIStore } from "@/store/useUIStore";
@@ -11,40 +11,41 @@ export const MainVisual = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const setPhase = useUIStore((state) => state.setPhase);
 
-  // コンポーネントがマウントされ、ブラウザが画面を書き換える直前にこのフックが発火
-  useLayoutEffect(() => {
+  useEffect(() => {
+    // 1. useEffectはブラウザでしか実行されないため、ここでGSAPを開始すれば
+    //    サーバー/クライアントの不一致（Hydration Error）は発生しません。
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        onComplete: () => setPhase("header-entry"), // ➃
+        onComplete: () => setPhase("header-entry"),
       });
 
-      setPhase("mv-playing"); // ➀
+      // アニメーション開始フェーズへ
+      setPhase("mv-playing");
 
-      // ➁
       tl.to(".js-mv-item", {
         opacity: 1,
         y: 0,
-        duration: 1.2, // 1つの要素につき設定秒かけて動く
-        stagger: 0.2, // 複数要素に対して設定秒ずつずらして順差表示
-        ease: "power4.out", // 最初は速く、最後はゆっくりと止まる
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power4.out",
       }).to(
-        // ➂
         ".js-scroll-indicator",
         {
           opacity: 1,
           duration: 1,
         },
-        "-=0.4", // 前の要素のアニメーションが終わる設定秒前に、このアニメーションを開始させる
+        "-=0.4",
       );
-    }, rootRef);
+    }, rootRef); // rootRefの範囲内のみを対象にする
 
+    // 2. クリーンアップ関数（コンポーネントが消える時にアニメーションを停止させる）
     return () => ctx.revert();
-  }, [setPhase]);
+  }, [setPhase]); // setPhaseはZustandの関数なので依存配列に入れて安全です
 
   return (
     <section
       ref={rootRef}
-      className="relative h-svh w-full overflow-hidden bg-black flex items-center"
+      className="relative w-full overflow-hidden flex items-center bg-black h-svh min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
     >
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center small:pt-header-lg pt-header-sm">
         <div className="space-y-6 z-10">
@@ -77,7 +78,6 @@ export const MainVisual = () => {
         </div>
       </div>
 
-      {/* styles を適用することで警告を解消 */}
       <div
         className={`js-scroll-indicator opacity-0 absolute bottom-12 right-12 ${styles.scrollIndicator}`}
       >

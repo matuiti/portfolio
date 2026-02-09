@@ -26,19 +26,39 @@
   --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 
   /* --- カスタムスペーシング (remを使用: calcでpx値を可視化) --- */
+
+  /* ヘッダー高 */
   --spacing-header-sm: calc(65 / 16 * 1rem);
   --spacing-header-lg: calc(90 / 16 * 1rem);
+  /* MV高 */
+  --spacing-mv-height-mini: calc(570 / 16 * 1rem);
+  --spacing-mv-height-mobile: calc(650 / 16 * 1rem);
+  --spacing-mv-height-tablet: calc(600 / 16 * 1rem);
+  --spacing-mv-height-small: calc(640 / 16 * 1rem);
+  /* セクション横余白 */
   --spacing-section-padding-x-mini: calc(15 / 16 * 1rem);
   --spacing-section-padding-x-mobile: calc(20 / 16 * 1rem);
   --spacing-section-padding-x-tablet: calc(30 / 16 * 1rem);
   --spacing-section-padding-x-small: calc(40 / 16 * 1rem);
+  /* セクション縦余白 */
   --spacing-section-padding-y-mini: calc(100 / 16 * 1rem);
   --spacing-section-padding-y-small: calc(120 / 16 * 1rem);
+  /* アイコンの座布団サイズ */
   --spacing-icon-20: calc(20 / 16 * 1rem);
   --spacing-icon-24: calc(24 / 16 * 1rem);
   --spacing-icon-30: calc(30 / 16 * 1rem);
   --spacing-icon-50: calc(50 / 16 * 1rem);
+  /* 基本コンテナの最大幅 */
   --spacing-container-max: calc(1200 / 16 * 1rem);
+  /* --- z-index の階層管理 --- */
+  --z-index-base: 1;
+  --z-index-dropdown: 10;
+  --z-index-sticky: 20;
+  --z-index-header: 50;
+  --z-index-overlay: 100;
+  --z-index-drawer: 110;
+  --z-index-modal: 200;
+  --z-index-popover: 300;
 }
 
 /* 3. ベーススタイルの定義 */
@@ -61,7 +81,7 @@
     font-family: var(--font-sans);
     background-color: var(--background);
     color: var(--foreground);
-    line-height: 1.6;
+    line-height: 1;
     /* macOS/iOS向けの滑らかなフォント描画 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -70,6 +90,16 @@
 
 /* 4. 有用なカスタムユーティリティ */
 @layer utilities {
+  .section-padding-x {
+    @apply px-section-padding-x-mini
+           mobile:px-section-padding-x-mobile
+           tablet:px-section-padding-x-tablet
+           small:px-section-padding-x-small;
+  }
+  .section-padding-y {
+    @apply py-section-padding-y-mini
+           small:py-section-padding-y-small;
+  }
   .container {
     width: 100%;
     max-width: var(--spacing-container-max);
