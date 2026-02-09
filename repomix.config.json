@@ -5,6 +5,7 @@
     "removeComments": false,
     "showLineNumbers": false
   },
+  "include": ["src/app/(home)/**/*"],
   "ignore": {
     "customPatterns": [
       "node_modules",

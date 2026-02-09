@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Search } from "lucide-react";
@@ -14,11 +14,11 @@ import { tv } from "tailwind-variants";
 
 // 1. スタイルバリアントの定義
 export const headerStyles = tv({
-  base: "fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out",
+  base: "fixed top-0 left-0 w-full z-header transition-all duration-500 ease-in-out",
   variants: {
     isScrolled: {
-      true: "bg-white/80 backdrop-blur-md py-3 shadow-sm border-b border-neutral-100",
-      false: "bg-transparent py-6 border-transparent",
+      true: "bg-white/80 backdrop-blur-md shadow-sm border-b border-neutral-100",
+      false: "bg-transparent border-transparent",
     },
     isInitialHidden: {
       true: "opacity-0 -translate-y-full",
@@ -47,11 +47,25 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
 
   const isVisible =
     !isHomePage || phase === "header-entry" || phase === "ready";
-  const isScrolled = useScrollThreshold(isHomePage ? 400 : 20);
 
   useEffect(() => {
     if (!isHomePage) setPhase("ready");
   }, [isHomePage, setPhase]);
+
+  // 動的な閾値の状態管理
+  const [dynamicThreshold, setDynamicThreshold] = useState(0);
+
+  useEffect(() => {
+    if (!isHomePage) return;
+
+    const updateHeight = () => setDynamicThreshold(window.innerHeight);
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [isHomePage]);
+
+  // 100svh (window.innerHeight) を超過したか判定 [cite: 116, 300]
+  const isScrolled = useScrollThreshold(isHomePage ? dynamicThreshold : 20);
 
   return (
     <header
