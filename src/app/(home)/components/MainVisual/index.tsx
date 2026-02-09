@@ -26,7 +26,7 @@ export const MainVisual = () => {
         opacity: 1,
         y: 0,
         duration: 1.2,
-        stagger: 0.2,
+        stagger: 0.6,
         ease: "power4.out",
       }).to(
         ".js-scroll-indicator",
@@ -47,7 +47,7 @@ export const MainVisual = () => {
       ref={rootRef}
       className="relative w-full overflow-hidden flex items-center bg-black h-svh min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
     >
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center small:pt-header-lg pt-header-sm">
+      <div className="container-center grid grid-cols-1 md:grid-cols-2 gap-12 items-center small:pt-header-small pt-header-mini">
         <div className="space-y-6 z-10">
           <div className="js-mv-item opacity-0 translate-y-8">
             <p className="text-white font-bold tracking-widest mb-4 text-sm">

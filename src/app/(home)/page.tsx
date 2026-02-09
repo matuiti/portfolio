@@ -22,7 +22,7 @@ export default function Home() {
 
         {/* 3. GALLERY：準備中コンポーネントを配置予定 */}
         <section id="gallery" className="py-24 bg-neutral-50 scroll-mt-20">
-          <div className="container mx-auto px-6">
+          <div className="container-center px-6">
             {/* <GallerySection /> */}
             <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
               GALLERY SECTION (COMING SOON)
@@ -32,7 +32,7 @@ export default function Home() {
 
         {/* 4. SERVICE：メディアカードレイアウト */}
         <section id="service" className="py-24 scroll-mt-20">
-          <div className="container mx-auto px-6">
+          <div className="container-center px-6">
             {/* <ServiceSection /> */}
             <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
               SERVICE SECTION (COMING SOON)
@@ -42,7 +42,7 @@ export default function Home() {
 
         {/* 5. SKILLS：ゲージ表示付きカードレイアウト */}
         <section id="skills" className="py-24 bg-neutral-50 scroll-mt-20">
-          <div className="container mx-auto px-6">
+          <div className="container-center px-6">
             {/* <SkillsSection /> */}
             <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
               SKILLS SECTION (COMING SOON)
@@ -52,7 +52,7 @@ export default function Home() {
 
         {/* 6. ABOUT：2カラム・プロフィール */}
         <section id="about" className="py-24 scroll-mt-20">
-          <div className="container mx-auto px-6">
+          <div className="container-center px-6">
             {/* <AboutSection /> */}
             <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
               ABOUT SECTION (COMING SOON)
@@ -62,7 +62,7 @@ export default function Home() {
 
         {/* 7. BLOG：準備中コンポーネントを配置予定 */}
         <section id="blog" className="py-24 bg-neutral-50 scroll-mt-20">
-          <div className="container mx-auto px-6">
+          <div className="container-center px-6">
             {/* <BlogSection /> */}
             <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
               BLOG SECTION (COMING SOON)
@@ -72,7 +72,7 @@ export default function Home() {
 
         {/* 8. CONTACT：フォームセクション */}
         <section id="contact" className="py-24 scroll-mt-20">
-          <div className="container mx-auto px-6">
+          <div className="container-center px-6">
             {/* <ContactSection /> */}
             <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
               CONTACT SECTION (COMING SOON)

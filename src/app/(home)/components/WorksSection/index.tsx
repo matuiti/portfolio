@@ -17,7 +17,7 @@ export const WorksSection = () => {
 
   return (
     <section className="py-24 bg-slate-50">
-      <div className="container mx-auto px-6">
+      <div className="container-center px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <SectionTitle
             title="Selected Works"
