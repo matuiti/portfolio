@@ -1,24 +1,25 @@
-// src/components/layout/Header/index.tsx
-
+// src / components / layout / Header / index.tsx;
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import { tv } from "tailwind-variants";
+
 import { NAV_ITEMS } from "@/data/navigation";
 import { useUIStore } from "@/store/useUIStore";
 import { useScrollThreshold } from "@/lib/hooks/useScrollThreshold";
-import { tv } from "tailwind-variants";
 import { Logo } from "@/components/ui/Logo";
+import { MenuItem } from "@/components/ui/MenuItem";
 
-// 1. スタイルバリアントの定義
 export const headerStyles = tv({
-  base: "section-padding-x bg-white fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-500 ease-in-out",
+  base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-500 ease-in-out",
   variants: {
     isScrolled: {
       true: "glass-effect",
-      false: "border-transparent",
+      false: "bg-white",
     },
     isInitialHidden: {
       true: "opacity-0 -translate-y-full",
@@ -38,12 +39,7 @@ type HeaderProps = {
 export const Header = ({ onMenuOpen }: HeaderProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
-
   const { phase, setPhase, setSearchDrawerOpen } = useUIStore();
-
-  // 検索ドロワーが必要なページか判定
-  const isSearchablePage =
-    pathname.startsWith("/works") || pathname.startsWith("/gallery");
 
   const isVisible =
     !isHomePage || phase === "header-entry" || phase === "ready";
@@ -52,90 +48,75 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
     if (!isHomePage) setPhase("ready");
   }, [isHomePage, setPhase]);
 
-  // 動的な閾値の状態管理
   const [dynamicThreshold, setDynamicThreshold] = useState(0);
-
   useEffect(() => {
     if (!isHomePage) return;
-
     const updateHeight = () => setDynamicThreshold(window.innerHeight);
     updateHeight();
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
   }, [isHomePage]);
 
-  // 100svh (window.innerHeight) を超過したか判定 [cite: 116, 300]
   const isScrolled = useScrollThreshold(isHomePage ? dynamicThreshold : 20);
+  const isSearchablePage =
+    pathname.startsWith("/works") || pathname.startsWith("/gallery");
 
   return (
     <header
       className={headerStyles({ isScrolled, isInitialHidden: !isVisible })}
     >
       <div className="container-center flex items-center justify-between">
-        {/* ロゴ */}
-        <Link
-          href="/"
-          className="hover:opacity-70 transition-opacity"
-        >
-          <Logo size="large" color="black"/>
+        <Link href="/" className="hover:opacity-70 transition-opacity">
+          <Logo color="black" type="header" />
         </Link>
 
-        {/* 【PC専用】デスクトップ用ナビゲーション */}
-        <nav className="hidden small:flex items-center gap-4">
+        {/* 【PC専用】デスクトップナビゲーション：smallサイズ以上で表示 [cite: 49] */}
+        <nav className="hidden small:flex items-center gap-6">
           {NAV_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(item.href));
 
-            if (!item.isPublished) {
-              return (
-                <span
-                  key={item.href}
-                  className="text-sm font-medium text-slate-400 opacity-60 px-1"
-                >
-                  {item.label}
-                </span>
-              );
-            }
-
             return (
-              <Link
+              <MenuItem
                 key={item.href}
+                label={item.label}
                 href={item.href}
-                className={`text-sm font-bold transition-colors hover:text-blue-600 ${
-                  isActive
-                    ? "text-blue-600 underline underline-offset-8 decoration-2"
-                    : "text-slate-600"
-                }`}
-              >
-                {item.label}
-              </Link>
+                isPublished={item.isPublished}
+                isActive={isActive}
+                color="black"
+                dotLayout="fixed"
+              />
             );
           })}
         </nav>
 
-        {/* 【スマホ・タブレット専用】アクションボタンエリア */}
         <div className="flex items-center gap-2 small:hidden">
-          {/* 検索ボタン: WORKS/GALLERYページかつモバイルサイズのみ表示 */}
+          {/* 検索ボタン：モバイル・タブレット時のみ表示 [cite: 50] */}
           {isSearchablePage && (
             <button
               type="button"
-              className="p-2 text-slate-600 hover:bg-slate-100 rounded-md transition-colors"
+              className={`p-2 rounded-md transition-colors text-black`}
               onClick={() => setSearchDrawerOpen(true)}
               aria-label="検索フィルターを開く"
             >
-              <Search className="w-6 h-6" />
+              <Search size={20} />
             </button>
           )}
 
-          {/* メニューボタン: モバイルサイズのみ表示 */}
+          {/* ハンバーガーメニュー：small以上で非表示 [cite: 51, 117] */}
           <button
             type="button"
-            className="p-2 text-slate-600 hover:bg-slate-100 rounded-md transition-colors"
+            className={`small:hidden`}
             onClick={onMenuOpen}
             aria-label="メニューを開く"
           >
-            <Menu className="w-6 h-6" />
+            <Image
+              src="assets/images/common/menu.svg" // public/images/common/menu.svg に配置してください [cite: 40]
+              alt="メニュー"
+              width={50}
+              height={50}
+            />
           </button>
         </div>
       </div>

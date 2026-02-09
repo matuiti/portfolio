@@ -1,45 +1,46 @@
-// src / components / ui / Logo / index.tsx;
+// src/components/ui/Logo/index.tsx
 import { tv, type VariantProps } from "tailwind-variants";
 import React from "react";
-import { siteConfig } from "@/data/site-config"; // SSoTの徹底 [cite: 79, 323]
+import { siteConfig } from "@/data/site-config";
 
 /**
- * ロゴのスタイル定義 (tailwind-variants)
- * デザイン上のpx根拠をコード内に明示 [cite: 322]
+ * ロゴのスタイル定義
+ * 設置場所に応じたレスポンシブサイズを定義
  */
 const logoStyles = tv({
-  base: "inline-block h-auto transition-colors duration-300 ease-in-out",
+  base: "inline-block h-auto transition-all duration-300 ease-in-out",
   variants: {
     color: {
       black: "text-black",
       white: "text-white",
     },
-    size: {
-      small: "w-logo-small",
-      large: "w-logo-large",
+    type: {
+      header: "w-logo-small small:w-logo-large", // 120px相当 / 160px相当
+      footer: "w-logo-small mobile:w-logo-large", // 120px相当 / 160px相当
     },
   },
   defaultVariants: {
     color: "black",
-    size: "small",
+    type: "header",
   },
 });
 
-type LogoProps = VariantProps<typeof logoStyles> &
-  React.SVGAttributes<SVGSVGElement>;
+type LogoVariantProps = VariantProps<typeof logoStyles>;
 
-/**
- * プロジェクト共通ロゴコンポーネント
- * バリアントにより「大・小・黒・白」を管理
- */
-export const Logo = ({ color, size }: LogoProps) => {
+type LogoProps = Omit<React.SVGAttributes<SVGSVGElement>, "color"> & {
+  color?: LogoVariantProps["color"];
+  type?: LogoVariantProps["type"];
+};
+
+export const Logo = ({ color, type, className, ...props }: LogoProps) => {
   return (
     <svg
       viewBox="0 0 163.54 46.23"
       xmlns="http://www.w3.org/2000/svg"
-      className={logoStyles({ color, size })}
-      aria-label={siteConfig.name} // Single Source of Truth [cite: 79]
+      className={logoStyles({ color, type, className })}
+      aria-label={siteConfig.name}
       role="img"
+      {...props}
     >
       {/*
         fill="currentColor" を指定することで、

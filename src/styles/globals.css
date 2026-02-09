@@ -33,7 +33,7 @@
 
   /* --- カスタムスペーシング (remを使用: デザイン上のpx根拠を明示) [1, 5] --- */
 
-  /* ロゴ高 */
+  /* ロゴ幅 */
   --spacing-logo-small: calc(120 / 16 * 1rem);
   --spacing-logo-large: calc(163.54 / 16 * 1rem);
 
@@ -89,7 +89,7 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply font-sans bg-white text-black text-base leading-relaxed;
+    @apply font-sans bg-white text-black text-base leading-none tracking-wider;
   }
 
   /* 見出しの共通設定 [21] */
