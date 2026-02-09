@@ -14,11 +14,11 @@ import { tv } from "tailwind-variants";
 
 // 1. スタイルバリアントの定義
 export const headerStyles = tv({
-  base: "fixed top-0 left-0 w-full z-header transition-all duration-500 ease-in-out",
+  base: "section-padding-x bg-white fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-500 ease-in-out",
   variants: {
     isScrolled: {
-      true: "bg-white/80 backdrop-blur-md shadow-sm border-b border-neutral-100",
-      false: "bg-transparent border-transparent",
+      true: "glass-effect",
+      false: "border-transparent",
     },
     isInitialHidden: {
       true: "opacity-0 -translate-y-full",
@@ -71,7 +71,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
     <header
       className={headerStyles({ isScrolled, isInitialHidden: !isVisible })}
     >
-      <div className="main-container flex items-center justify-between">
+      <div className="container-center flex items-center justify-between">
         {/* ロゴ */}
         <Link
           href="/"
@@ -80,8 +80,8 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
           {siteConfig.name}
         </Link>
 
-        {/* 【PC専用】デスクトップ用ナビゲーション (md以上で表示) */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* 【PC専用】デスクトップ用ナビゲーション */}
+        <nav className="hidden small:flex items-center gap-4">
           {NAV_ITEMS.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -114,8 +114,8 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
           })}
         </nav>
 
-        {/* 【スマホ・タブレット専用】アクションボタンエリア (md未満のみ表示) */}
-        <div className="flex items-center gap-2 md:hidden">
+        {/* 【スマホ・タブレット専用】アクションボタンエリア */}
+        <div className="flex items-center gap-2 small:hidden">
           {/* 検索ボタン: WORKS/GALLERYページかつモバイルサイズのみ表示 */}
           {isSearchablePage && (
             <button

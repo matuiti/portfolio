@@ -1,13 +1,13 @@
 /* 全てのTailwind設定（@theme）とベーススタイルをここに集約。 */
 @import "tailwindcss";
 
-/* 1. スキャン対象の指定 */
+/* 1. スキャン対象の指定：srcディレクトリ内の全コンポーネントを対象に設定 [3, 4] */
 @source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 
 /* 2. プロジェクト専用テーマ設定 */
 @theme {
-  /* --- ブレイクポイント (emを使用: ユーザーのフォントサイズ設定に追従) --- */
+  /* --- ブレイクポイント (emを使用: ユーザーのフォントサイズ設定に追従) [5, 6] --- */
   --breakpoint-mini: calc(350 / 16 * 1em);
   --breakpoint-mobile: calc(540 / 16 * 1em);
   --breakpoint-tablet: calc(840 / 16 * 1em);
@@ -15,42 +15,52 @@
   --breakpoint-default: calc(1280 / 16 * 1em);
   --breakpoint-large: calc(1920 / 16 * 1em);
 
-  /* --- ブランドカラー --- */
+  /* --- ブランドカラー：実装コード内で頻出する色を定義 [7-9] --- */
   --color-black: #0a0a0a;
   --color-white: #ffffff;
   --color-gray: #757575;
   --color-light-gray: #f3f4f6;
-  --color-red: #ff6262;
+  --color-red: #ff6262; /* エラー・必須項目用 */
 
-  /* --- タイポグラフィ --- */
+  /* ニュートラル系（スクロールインジケーター等で使用） [10, 11] */
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-500: #737373;
+  --color-neutral-900: #171717;
+
+  /* --- タイポグラフィ：Next.js Fontと連動 [12, 13] --- */
   --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 
-  /* --- カスタムスペーシング (remを使用: calcでpx値を可視化) --- */
+  /* --- カスタムスペーシング (remを使用: デザイン上のpx根拠を明示) [1, 5] --- */
 
-  /* ヘッダー高 */
-  --spacing-header-sm: calc(65 / 16 * 1rem);
-  --spacing-header-lg: calc(90 / 16 * 1rem);
-  /* MV高 */
+  /* ヘッダー高 [14, 15] */
+  --spacing-header-mini: calc(65 / 16 * 1rem);
+  --spacing-header-small: calc(90 / 16 * 1rem);
+
+  /* メインビジュアル(MV)高：各デバイスの最小高さ [16, 17] */
   --spacing-mv-height-mini: calc(570 / 16 * 1rem);
   --spacing-mv-height-mobile: calc(650 / 16 * 1rem);
   --spacing-mv-height-tablet: calc(600 / 16 * 1rem);
   --spacing-mv-height-small: calc(640 / 16 * 1rem);
-  /* セクション横余白 */
+
+  /* セクション余白 [18, 19] */
   --spacing-section-padding-x-mini: calc(15 / 16 * 1rem);
   --spacing-section-padding-x-mobile: calc(20 / 16 * 1rem);
   --spacing-section-padding-x-tablet: calc(30 / 16 * 1rem);
   --spacing-section-padding-x-small: calc(40 / 16 * 1rem);
-  /* セクション縦余白 */
   --spacing-section-padding-y-mini: calc(100 / 16 * 1rem);
   --spacing-section-padding-y-small: calc(120 / 16 * 1rem);
-  /* アイコンの座布団サイズ */
+
+  /* アイコン・パーツ用数値 [14] */
   --spacing-icon-20: calc(20 / 16 * 1rem);
   --spacing-icon-24: calc(24 / 16 * 1rem);
   --spacing-icon-30: calc(30 / 16 * 1rem);
   --spacing-icon-50: calc(50 / 16 * 1rem);
-  /* 基本コンテナの最大幅 */
+
+  /* 最大コンテナ幅 */
   --spacing-container-max: calc(1200 / 16 * 1rem);
-  /* --- z-index の階層管理 --- */
+
+  /* --- z-index の階層管理 [15, 20] --- */
   --z-index-base: 1;
   --z-index-dropdown: 10;
   --z-index-sticky: 20;
@@ -59,54 +69,61 @@
   --z-index-drawer: 110;
   --z-index-modal: 200;
   --z-index-popover: 300;
+
+  /* --- 特殊効果 --- */
+  --scrollbar-thumb: #cccccc;
+  --scrollbar-thumb-hover: #aaaaaa;
 }
 
 /* 3. ベーススタイルの定義 */
 @layer base {
-  :root {
-    --background: var(--color-white);
-    --foreground: var(--color-black);
-    /* スクロールバーの色：視認性を確保 */
-    --scrollbar-thumb: #cccccc;
-    --scrollbar-thumb-hover: #aaaaaa;
-  }
-
   html {
     scroll-behavior: smooth;
-    /* ブラウザ設定のフォントサイズを基準にするため100%を維持 */
-    font-size: 100%;
+    font-size: 100%; /* ブラウザ設定を尊重 */
   }
 
   body {
-    font-family: var(--font-sans);
-    background-color: var(--background);
-    color: var(--foreground);
-    line-height: 1;
-    /* macOS/iOS向けの滑らかなフォント描画 */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    @apply font-sans bg-white text-black text-base leading-relaxed;
+  }
+
+  /* 見出しの共通設定 [21] */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight;
   }
 }
 
-/* 4. 有用なカスタムユーティリティ */
+/* 4. カスタムユーティリティ */
 @layer utilities {
+  /* 共通セクション余白 [6, 18, 19] */
   .section-padding-x {
     @apply px-section-padding-x-mini
            mobile:px-section-padding-x-mobile
            tablet:px-section-padding-x-tablet
            small:px-section-padding-x-small;
   }
+
   .section-padding-y {
     @apply py-section-padding-y-mini
            small:py-section-padding-y-small;
   }
-  .container {
-    width: 100%;
-    max-width: var(--spacing-container-max);
-    margin-left: auto;
-    margin-right: auto;
+
+  .container-center {
+    @apply w-full max-w-container-max mx-auto;
   }
-  /* --- 標準スクロールバー (Firefox / モダンブラウザ) --- */
+
+  /* ガラス質感（ヘッダー・モーダル用） [15, 22, 23] */
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border-b border-neutral-100 shadow-sm;
+  }
+
+  /* スクロールバー制御 (Firefox) */
   @supports (scrollbar-width: thin) {
     * {
       scrollbar-width: thin;
@@ -114,10 +131,10 @@
     }
   }
 
-  /* --- Webkit系 (Chrome / Safari) スクロールバー (脱@apply) --- */
+  /* Webkit系スクロールバー設定 [5, 19, 24] */
   ::-webkit-scrollbar {
-    width: calc(6 / 16 * 1rem); /* 6px */
-    height: calc(6 / 16 * 1rem); /* 6px */
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -133,7 +150,7 @@
     background-color: var(--scrollbar-thumb-hover);
   }
 
-  /* 特定要素用：ホバー時のみスクロールバーを表示 */
+  /* ホバー時のみ表示するカスタムスクロールバー [5, 24] */
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
