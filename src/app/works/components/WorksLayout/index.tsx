@@ -4,6 +4,7 @@
 
 import { useUIStore } from "@/store/useUIStore";
 import { WorksDrawerMenu } from "./WorksDrawerMenu";
+import { WorksSidebar } from "./WorksSidebar";
 
 type WorksLayoutProps = {
   children: React.ReactNode;
@@ -14,14 +15,11 @@ export function WorksLayout({ children }: WorksLayoutProps) {
   const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();
 
   return (
-    <div className="relative">
-      {/*
-         以前ここにあった「実績を絞り込む」ボタンは削除されました。
-         ヘッダーの虫眼鏡アイコンがその役割を担います。
-      */}
-
-      {children}
-
+    <div className="relative flex flex-col lg:flex-row gap-8">
+      <aside className="hidden lg:block w-80 shrink-0">
+        <WorksSidebar />
+      </aside>
+      <main className="flex-1 min-w-0">{children}</main>
       <WorksDrawerMenu
         isOpen={isSearchDrawerOpen}
         onClose={() => setSearchDrawerOpen(false)}
