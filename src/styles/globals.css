@@ -33,6 +33,10 @@
 
   /* --- カスタムスペーシング (remを使用: デザイン上のpx根拠を明示) [1, 5] --- */
 
+  /* ロゴ高 */
+  --spacing-logo-small: calc(120 / 16 * 1rem);
+  --spacing-logo-large: calc(163.54 / 16 * 1rem);
+
   /* ヘッダー高 [14, 15] */
   --spacing-header-mini: calc(65 / 16 * 1rem);
   --spacing-header-small: calc(90 / 16 * 1rem);

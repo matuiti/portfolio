@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Search } from "lucide-react";
-import { siteConfig } from "@/data/site-config";
 import { NAV_ITEMS } from "@/data/navigation";
 import { useUIStore } from "@/store/useUIStore";
 import { useScrollThreshold } from "@/lib/hooks/useScrollThreshold";
 import { tv } from "tailwind-variants";
+import { Logo } from "@/components/ui/Logo";
 
 // 1. スタイルバリアントの定義
 export const headerStyles = tv({
@@ -75,9 +75,9 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
         {/* ロゴ */}
         <Link
           href="/"
-          className="text-xl font-black tracking-tighter hover:opacity-70 transition-opacity"
+          className="hover:opacity-70 transition-opacity"
         >
-          {siteConfig.name}
+          <Logo size="large" color="black"/>
         </Link>
 
         {/* 【PC専用】デスクトップ用ナビゲーション */}
