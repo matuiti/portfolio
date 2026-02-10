@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import { tv } from "tailwind-variants";
@@ -13,6 +13,7 @@ import { useUIStore } from "@/store/useUIStore";
 import { useScrollThreshold } from "@/lib/hooks/useScrollThreshold";
 import { Logo } from "@/components/ui/Logo";
 import { MenuItem } from "@/components/ui/MenuItem";
+import { Hamburger } from "@/components/ui/Icons";
 
 export const headerStyles = tv({
   base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-500 ease-in-out",
@@ -111,12 +112,13 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
             onClick={onMenuOpen}
             aria-label="メニューを開く"
           >
-            <Image
+            {/* <Image
               src="assets/images/common/menu.svg" // public/images/common/menu.svg に配置してください [cite: 40]
               alt="メニュー"
               width={50}
               height={50}
-            />
+            /> */}
+            <Hamburger />
           </button>
         </div>
       </div>

@@ -10,6 +10,7 @@
     "// --- Development Environment ---": "",
     "dev:work": "npm-run-all --parallel watch:scss dev",
     "new": "node scripts/generate-ui-part.mjs",
+    "new:icon": "node scripts/generate-svg-icon.mjs",
     "// --- Sass & Watchers ---": "",
     "watch:scss": "sass public/gallery-parts:public/gallery-parts --watch --style=expanded --load-path=public/gallery-parts/common/css",
     "compile:scss": "sass public/gallery-parts:public/gallery-parts --no-source-map --style=compressed --load-path=public/gallery-parts/common/css",
