@@ -74,6 +74,9 @@
   --z-index-modal: 200;
   --z-index-popover: 300;
 
+  /* --- シャドー --- */
+  --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+
   /* --- 特殊効果 --- */
   --scrollbar-thumb: #cccccc;
   --scrollbar-thumb-hover: #aaaaaa;
@@ -120,11 +123,6 @@
 
   .container-center {
     @apply w-full max-w-container-max mx-auto;
-  }
-
-  /* ガラス質感（ヘッダー・モーダル用） [15, 22, 23] */
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-md border-b border-neutral-100 shadow-sm;
   }
 
   /* スクロールバー制御 (Firefox) */

@@ -3,7 +3,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-// import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import { tv } from "tailwind-variants";
@@ -19,17 +18,21 @@ export const headerStyles = tv({
   base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-500 ease-in-out",
   variants: {
     isScrolled: {
-      true: "glass-effect",
+      true: "bg-white/90 shadow-default",
       false: "bg-white",
     },
     isInitialHidden: {
       true: "opacity-0 -translate-y-full",
       false: "opacity-100 translate-y-0",
     },
+    isSearchablePage: {
+      true: "shadow-default",
+    },
   },
   defaultVariants: {
     isScrolled: false,
     isInitialHidden: false,
+    isSearchablePage: false,
   },
 });
 
@@ -64,7 +67,11 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
 
   return (
     <header
-      className={headerStyles({ isScrolled, isInitialHidden: !isVisible })}
+      className={headerStyles({
+        isScrolled,
+        isInitialHidden: !isVisible,
+        isSearchablePage,
+      })}
     >
       <div className="container-center flex items-center justify-between">
         <Link href="/" className="hover:opacity-70 transition-opacity">
@@ -112,12 +119,6 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
             onClick={onMenuOpen}
             aria-label="メニューを開く"
           >
-            {/* <Image
-              src="assets/images/common/menu.svg" // public/images/common/menu.svg に配置してください [cite: 40]
-              alt="メニュー"
-              width={50}
-              height={50}
-            /> */}
             <Hamburger />
           </button>
         </div>
