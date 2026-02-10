@@ -55,7 +55,7 @@ export const menuItemStyles = tv({
       },
       // floating: ドットが「浮遊」し、テキストの位置に影響を与えない設定
       floating: {
-        dot: "w-2 h-2 absolute -left-4",
+        dot: "w-2 h-2 absolute -left-3",
       },
     },
   },
