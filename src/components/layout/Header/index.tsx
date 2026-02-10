@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search } from "lucide-react";
 import { tv } from "tailwind-variants";
 
 import { NAV_ITEMS } from "@/data/navigation";
@@ -12,13 +11,13 @@ import { useUIStore } from "@/store/useUIStore";
 import { useScrollThreshold } from "@/lib/hooks/useScrollThreshold";
 import { Logo } from "@/components/ui/Logo";
 import { MenuItem } from "@/components/ui/MenuItem";
-import { Hamburger } from "@/components/ui/Icons";
+import { Hamburger, IconSearchLarge } from "@/components/ui/Icons";
 
 export const headerStyles = tv({
   base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-500 ease-in-out",
   variants: {
     isScrolled: {
-      true: "bg-white/90 shadow-default",
+      true: "backdrop-blur-default shadow-default",
       false: "bg-white",
     },
     isInitialHidden: {
@@ -99,23 +98,21 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
           })}
         </nav>
 
-        <div className="flex items-center gap-2 small:hidden">
+        <div className="flex items-center gap-2.5 small:hidden">
           {/* 検索ボタン：モバイル・タブレット時のみ表示 [cite: 50] */}
           {isSearchablePage && (
             <button
               type="button"
-              className={`p-2 rounded-md transition-colors text-black`}
               onClick={() => setSearchDrawerOpen(true)}
               aria-label="検索フィルターを開く"
             >
-              <Search size={20} />
+              <IconSearchLarge />
             </button>
           )}
 
           {/* ハンバーガーメニュー：small以上で非表示 [cite: 51, 117] */}
           <button
             type="button"
-            className={`small:hidden`}
             onClick={onMenuOpen}
             aria-label="メニューを開く"
           >

@@ -3,8 +3,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X } from "lucide-react";
 import { NAV_ITEMS } from "@/data/navigation";
+import { ArrowRight, MobileMenuClose } from "@/components/ui/Icons";
 
 type MobileDrawerMenuProps = {
   isOpen: boolean;
@@ -17,52 +17,66 @@ export const MobileDrawerMenu = ({
 }: MobileDrawerMenuProps) => {
   const pathname = usePathname();
 
-  // 閉じている時はDOM自体を描画しない（またはアニメーション用にスタイル制御）
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 md:hidden">
+    <div className="fixed inset-0 z-drawer small:hidden">
       {/* 背景オーバーレイ */}
-      <div
-        className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm"
-        onClick={onClose}
-      />
+      <div className="fixed inset-0 bg-menu-backdrop" onClick={onClose} />
 
       {/* メニュー本体 */}
-      <nav className="fixed inset-y-0 right-0 w-full max-w-xs bg-white p-6 shadow-xl">
-        <div className="flex items-center justify-between mb-8">
-          <span className="text-lg font-bold">Menu</span>
-          <button onClick={onClose} className="p-2 text-slate-600">
-            <X className="h-6 w-6" />
+      <nav className="fixed inset-y-0 right-0 w-full max-w-mobile-drawer-max-w bg-white/95 shadow-default backdrop-blur-default flex flex-col">
+        {/* 1. 上部：ボタンエリア */}
+        <div className="flex items-center justify-end pt-5 px-7.5 mb-5">
+          <button
+            onClick={onClose}
+          >
+            <MobileMenuClose />
           </button>
         </div>
 
-        <div className="flex flex-col gap-4">
-          {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href;
+        {/* 2. 中央：リストアイテム（可変エリア） */}
+        <div className="flex-1 overflow-y-auto px-7.5">
+          <div className="flex flex-col">
+            {NAV_ITEMS.map((item) => {
+              const isActive = pathname === item.href;
 
-            return (
-              <Link
-                key={item.href}
-                href={item.isPublished ? item.href : "#"}
-                onClick={item.isPublished ? onClose : undefined}
-                className={`text-lg font-medium p-2 rounded-lg transition-colors ${
-                  isActive
-                    ? "bg-blue-50 text-blue-600"
-                    : "text-slate-600 hover:bg-slate-50"
-                } ${!item.isPublished ? "opacity-40 cursor-not-allowed" : ""}`}
-              >
-                <div className="flex items-center justify-between">
-                  {item.label}
-                  {!item.isPublished && (
-                    <span className="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded">
-                      Coming Soon
-                    </span>
-                  )}
-                </div>
-              </Link>
-            );
-          })}
+              return (
+                <Link
+                  key={item.href}
+                  href={item.isPublished ? item.href : "#"}
+                  onClick={item.isPublished ? onClose : undefined}
+                  className={`group flex items-center justify-between font-bold py-4 pl-4 border-b first:border-t border-gray ${
+                    isActive ? "text-blue-600" : "text-slate-600"
+                  } ${!item.isPublished ? "opacity-40 cursor-not-allowed" : "hover:text-blue-500"}`}
+                >
+                  <div className="flex items-center gap-x-2">
+                    {item.label}
+                    {!item.isPublished && (
+                      <span className="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
+
+                  {/* 右端のアローアイコン */}
+                  <ArrowRight isPublished={item.isPublished} />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 3. 下部：ボタン2つ横並びブロック */}
+        <div className="p-7.5 mt-auto bg-slate-50/50">
+          <div className="flex gap-x-3">
+            <button className="flex-1 py-3 px-4 bg-white border border-slate-200 text-slate-700 rounded-lg font-bold text-sm hover:bg-slate-100 transition-colors">
+              ログイン
+            </button>
+            <button className="flex-1 py-3 px-4 bg-blue-600 text-white rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors">
+              無料登録
+            </button>
+          </div>
         </div>
       </nav>
     </div>
