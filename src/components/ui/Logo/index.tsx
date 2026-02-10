@@ -8,7 +8,7 @@ import { siteConfig } from "@/data/site-config";
  * 設置場所に応じたレスポンシブサイズを定義
  */
 const logoStyles = tv({
-  base: "inline-block h-auto transition-all duration-300 ease-in-out",
+  base: "inline-block h-auto transition-all duration-300 ease-in-out overflow-visible",
   variants: {
     color: {
       black: "text-black",
