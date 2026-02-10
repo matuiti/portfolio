@@ -20,16 +20,19 @@ export const menuItemStyles = tv({
     // 1. カラーバリアント (黒・白) [cite: 411]
     color: {
       black: {
-        base: "text-black hover:text-blue-600",
+        base: "text-black",
         statusBadge: "border-slate-300 text-slate-500",
       },
       white: {
-        base: "text-white hover:text-white/70",
+        base: "text-white",
         statusBadge: "border-white/40 text-white/80",
       },
     },
     // 2. 公開ステータス (未公開時は不透明度を下げる) [cite: 407, 423]
     isPublished: {
+      true: {
+        base: "cursor-pointer",
+      },
       false: {
         base: "text-gray cursor-not-allowed",
       },
@@ -58,6 +61,23 @@ export const menuItemStyles = tv({
   },
   // 複合バリアント: 「fixedレイアウト」かつ「アクティブ」の時だけ幅と隙間を生成
   compoundVariants: [
+    // 1. 公開中 かつ 黒 の時だけホバー色をつける
+    {
+      isPublished: true,
+      color: "black",
+      class: {
+        base: "hover:text-blue-600",
+      },
+    },
+    // 2. 公開中 かつ 白 の時だけホバー色をつける
+    {
+      isPublished: true,
+      color: "white",
+      class: {
+        base: "hover:text-white/70",
+      },
+    },
+    // 固定レイアウト用の既存設定
     {
       dotLayout: "fixed",
       isActive: true,
