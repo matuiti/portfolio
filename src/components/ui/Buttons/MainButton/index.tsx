@@ -30,6 +30,6 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 /**
  * 汎用ボタンコンポーネント
  */
-export const Button = ({ className, intent, size, ...props }: ButtonProps) => (
+export const MainButton = ({ className, intent, size, ...props }: ButtonProps) => (
   <button className={button({ intent, size, className })} {...props} />
 );

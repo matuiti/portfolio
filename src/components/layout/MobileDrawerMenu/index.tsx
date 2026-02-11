@@ -4,7 +4,13 @@
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/data/navigation";
 import { MenuItem } from "@/components/ui/MenuItem";
-import { ArrowRight, MobileMenuClose } from "@/components/ui/Icons";
+import {
+  ArrowRight,
+  GitHub,
+  Mail,
+  MobileMenuClose,
+} from "@/components/ui/Icons";
+import { SubButton } from "@/components/ui/Buttons/SubButton";
 
 type MobileDrawerMenuProps = {
   isOpen: boolean;
@@ -19,7 +25,7 @@ export const MobileDrawerMenu = ({
 
   return (
     <div
-      className={`fixed inset-0 z-header transition-all duration-300 ${
+      className={`fixed inset-0 z-drawer transition-all duration-300 ${
         isOpen
           ? "visible opacity-100"
           : "invisible opacity-0 pointer-events-none"
@@ -33,19 +39,20 @@ export const MobileDrawerMenu = ({
 
       {/* メニュー本体 */}
       <div
-        className={`absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default backdrop-blur-default flex flex-col
+        className={`section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default backdrop-blur-default flex flex-col
         isOpen ? "translate-x-0" : "-translate-x-full"
         `}
       >
         {/* 1. 上部：ボタンエリア */}
-        <div className="flex items-center justify-end pt-5 px-7.5 mb-5">
+        {/* <div className="flex items-center justify-end pt-5 mb-5"> */}
+        <div className="flex items-center justify-end min-h-header-mini small:min-h-header-small mb-5">
           <button onClick={onClose} aria-label="メニューを閉じる">
             <MobileMenuClose />
           </button>
         </div>
 
         {/* 2. 中央：リストアイテム */}
-        <nav className="flex-1 overflow-y-auto px-7.5">
+        <nav className="flex-1 overflow-y-auto">
           <div className="flex flex-col">
             {NAV_ITEMS.map((item) => {
               const isActive =
@@ -73,7 +80,7 @@ export const MobileDrawerMenu = ({
                     indicatorLayout="floating"
                   />
 
-                  <ArrowRight size="md" isPublished={item.isPublished} />
+                  <ArrowRight isPublished={item.isPublished} />
                 </div>
               );
             })}
@@ -81,14 +88,10 @@ export const MobileDrawerMenu = ({
         </nav>
 
         {/* 1. 下部：ボタンエリア */}
-        <div className="p-7.5 bg-slate-50/50">
-          <div className="flex gap-x-3">
-            <button className="flex-1 py-3 px-4 bg-white border border-slate-200 text-slate-700 rounded-lg font-bold text-sm hover:bg-slate-100 transition-colors">
-              ログイン
-            </button>
-            <button className="flex-1 py-3 px-4 bg-blue-600 text-white rounded-lg font-bold text-sm hover:bg-blue-700 transition-colors">
-              無料登録
-            </button>
+        <div className="mt-5">
+          <div className="flex gap-x-2.5 justify-end">
+            <SubButton leftIcon={GitHub}>GitHub</SubButton>
+            <SubButton leftIcon={Mail}>お問い合わせ</SubButton>
           </div>
         </div>
       </div>
