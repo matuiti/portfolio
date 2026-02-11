@@ -39,19 +39,18 @@ const iconStyles = tv({
   base: "inline-block shrink-0 transition-all duration-300",
   variants: {
     color: {
-      primary: "text-blue-600",
-      neutral: "text-slate-600",
-      white: "text-white",
+      black: "text-black",
     },
     size: {
-      sm: "w-4 h-4",
-      md: "w-6 h-6",
-      lg: "w-10 h-10",
+      sm: "w-icon-20 h-icon-20",
+      md: "w-icon-24 h-icon-24",
+      lg: "w-icon-30 h-icon-30",
+      xl: "w-icon-50 h-icon-50",
     },
   },
   defaultVariants: {
-    color: "neutral",
-    size: "md",
+    color: "black",
+    size: "sm",
   },
 });
 
@@ -60,7 +59,7 @@ export type ${name}Props = React.SVGProps<SVGSVGElement> & VariantProps<typeof i
 export const ${name} = ({ color, size, className, ...props }: ${name}Props) => {
   return (
     <svg
-      viewBox="0 0 24 24"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={iconStyles({ color, size, className })}

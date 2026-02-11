@@ -8,29 +8,30 @@ const iconStyles = tv({
       black: "text-black",
     },
     size: {
-      md: "w-icon-50 h-icon-50",
+      sm: "w-icon-20 h-icon-20",
+      md: "w-icon-24 h-icon-24",
+      lg: "w-icon-30 h-icon-30",
+      xl: "w-icon-50 h-icon-50",
     },
   },
   defaultVariants: {
     color: "black",
-    size: "md",
+    size: "xl",
   },
 });
 
-export type IconSearchLargeProps = React.SVGProps<SVGSVGElement> &
+export type SearchLargeProps = React.SVGProps<SVGSVGElement> &
   VariantProps<typeof iconStyles>;
 
-export const IconSearchLarge = ({
+export const SearchLarge = ({
   color,
   size,
   className,
   ...props
-}: IconSearchLargeProps) => {
+}: SearchLargeProps) => {
   return (
     <svg
       viewBox="0 0 50 50"
-      width="50"
-      height="50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={iconStyles({ color, size, className })}
