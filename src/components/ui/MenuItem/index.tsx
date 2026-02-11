@@ -100,7 +100,7 @@ export const MenuItem = ({
   isActive,
   indicatorLayout,
   renderIndicator = <DefaultIndicator />,
-  indicatorOffsetClass = "-left-4",
+  indicatorOffsetClass = "-left-3",
 }: MenuItemProps) => {
   const {
     base,
