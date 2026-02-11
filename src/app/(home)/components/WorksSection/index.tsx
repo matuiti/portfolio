@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { WorkCard } from "@/app/works/components/WorkCard";
 import { WorkDetailModal } from "@/app/works/components/WorkDetailModal";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Buttons/Main";
 import Link from "next/link";
 import { ALL_WORKS } from "@/data/works";
 import { Work } from "@/types/work";

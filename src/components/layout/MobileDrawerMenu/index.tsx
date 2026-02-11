@@ -3,7 +3,7 @@
 
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/data/navigation";
-import { MenuItem } from "@/components/ui/MenuItem"; // MenuItemをインポート [cite: 60]
+import { MenuItem } from "@/components/ui/MenuItem";
 import { ArrowRight, MobileMenuClose } from "@/components/ui/Icons";
 
 type MobileDrawerMenuProps = {
@@ -17,27 +17,35 @@ export const MobileDrawerMenu = ({
 }: MobileDrawerMenuProps) => {
   const pathname = usePathname();
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-drawer small:hidden">
+    <div
+      className={`fixed inset-0 z-header transition-all duration-300 ${
+        isOpen
+          ? "visible opacity-100"
+          : "invisible opacity-0 pointer-events-none"
+      }`}
+    >
       {/* 背景オーバーレイ */}
       <div
-        className="fixed inset-0 bg-menu-backdrop backdrop-blur-default"
+        className="absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-opacity duration-300"
         onClick={onClose}
       />
 
       {/* メニュー本体 */}
-      <nav className="fixed inset-y-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default backdrop-blur-default flex flex-col">
+      <div
+        className={`absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default backdrop-blur-default flex flex-col
+        isOpen ? "translate-x-0" : "-translate-x-full"
+        `}
+      >
         {/* 1. 上部：ボタンエリア */}
         <div className="flex items-center justify-end pt-5 px-7.5 mb-5">
-          <button onClick={onClose}>
+          <button onClick={onClose} aria-label="メニューを閉じる">
             <MobileMenuClose />
           </button>
         </div>
 
         {/* 2. 中央：リストアイテム */}
-        <div className="flex-1 overflow-y-auto px-7.5">
+        <nav className="flex-1 overflow-y-auto px-7.5">
           <div className="flex flex-col">
             {NAV_ITEMS.map((item) => {
               const isActive =
@@ -52,7 +60,7 @@ export const MobileDrawerMenu = ({
                   }`}
                   onClick={() => {
                     if (item.isPublished) {
-                      onClose(); // 公開済みなら遷移時にメニューを閉じる
+                      onClose();
                     }
                   }}
                 >
@@ -70,7 +78,7 @@ export const MobileDrawerMenu = ({
               );
             })}
           </div>
-        </div>
+        </nav>
 
         {/* 1. 下部：ボタンエリア */}
         <div className="p-7.5 bg-slate-50/50">
@@ -83,7 +91,7 @@ export const MobileDrawerMenu = ({
             </button>
           </div>
         </div>
-      </nav>
+      </div>
     </div>
   );
 };
