@@ -5,15 +5,18 @@ const iconStyles = tv({
   base: "inline-block shrink-0 transition-all duration-300",
   variants: {
     color: {
-      black: "text-balck",
+      black: "text-black",
     },
     size: {
-      md: "w-icon-50 h-icon-50",
+      sm: "w-icon-20 h-icon-20",
+      md: "w-icon-24 h-icon-24",
+      lg: "w-icon-30 h-icon-30",
+      xl: "w-icon-50 h-icon-50",
     },
   },
   defaultVariants: {
     color: "black",
-    size: "md",
+    size: "xl",
   },
 });
 

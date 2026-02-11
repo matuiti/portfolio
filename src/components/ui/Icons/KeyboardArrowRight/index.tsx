@@ -6,6 +6,7 @@ const iconStyles = tv({
   variants: {
     color: {
       black: "text-black",
+      gray: "text-gray",
     },
     size: {
       sm: "w-icon-20 h-icon-20",
@@ -15,32 +16,26 @@ const iconStyles = tv({
     },
   },
   defaultVariants: {
-    color: "black",
-    size: "xl",
+    color: "gray",
+    size: "sm",
   },
 });
 
-export type MobileMenuCloseProps = React.SVGProps<SVGSVGElement> &
-  VariantProps<typeof iconStyles>;
+export type KeyboardArrowRightProps = React.SVGProps<SVGSVGElement> & VariantProps<typeof iconStyles>;
 
-export const MobileMenuClose = ({
-  color,
-  size,
-  className,
-  ...props
-}: MobileMenuCloseProps) => {
+export const KeyboardArrowRight = ({ color, size, className, ...props }: KeyboardArrowRightProps) => {
   return (
     <svg
-      viewBox="0 0 50 50"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={iconStyles({ color, size, className })}
       {...props}
     >
-      <path
-        d="M35 17.0143L32.9857 15L25 22.9857L17.0143 15L15 17.0143L22.9857 25L15 32.9857L17.0143 35L25 27.0143L32.9857 35L35 32.9857L27.0143 25L35 17.0143Z"
-        fill="currentColor"
-      />
+        <path
+          d="M7 13.825L10.7085 10L7 6.175L8.1417 5L13 10L8.1417 15L7 13.825Z"
+          fill="currentColor"
+        />
     </svg>
   );
 };

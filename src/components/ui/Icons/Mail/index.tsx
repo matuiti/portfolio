@@ -6,6 +6,7 @@ const iconStyles = tv({
   variants: {
     color: {
       black: "text-black",
+      white: "text-white",
     },
     size: {
       sm: "w-icon-20 h-icon-20",
@@ -16,31 +17,25 @@ const iconStyles = tv({
   },
   defaultVariants: {
     color: "black",
-    size: "xl",
+    size: "sm",
   },
 });
 
-export type MobileMenuCloseProps = React.SVGProps<SVGSVGElement> &
-  VariantProps<typeof iconStyles>;
+export type MailProps = React.SVGProps<SVGSVGElement> & VariantProps<typeof iconStyles>;
 
-export const MobileMenuClose = ({
-  color,
-  size,
-  className,
-  ...props
-}: MobileMenuCloseProps) => {
+export const Mail = ({ color, size, className, ...props }: MailProps) => {
   return (
     <svg
-      viewBox="0 0 50 50"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={iconStyles({ color, size, className })}
       {...props}
     >
-      <path
-        d="M35 17.0143L32.9857 15L25 22.9857L17.0143 15L15 17.0143L22.9857 25L15 32.9857L17.0143 35L25 27.0143L32.9857 35L35 32.9857L27.0143 25L35 17.0143Z"
-        fill="currentColor"
-      />
+        <path
+          d="M16 4H4C3.175 4 2.5075 4.675 2.5075 5.5L2.5 14.5C2.5 15.325 3.175 16 4 16H16C16.825 16 17.5 15.325 17.5 14.5V5.5C17.5 4.675 16.825 4 16 4ZM16 14.5H4V7L10 10.75L16 7V14.5ZM10 9.25L4 5.5H16L10 9.25Z"
+          fill="currentColor"
+        />
     </svg>
   );
 };

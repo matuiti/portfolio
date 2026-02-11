@@ -16,29 +16,24 @@ const iconStyles = tv({
   },
   defaultVariants: {
     color: "black",
-    size: "xl",
+    size: "sm",
   },
 });
 
-export type MobileMenuCloseProps = React.SVGProps<SVGSVGElement> &
+export type LaunchProps = React.SVGProps<SVGSVGElement> &
   VariantProps<typeof iconStyles>;
 
-export const MobileMenuClose = ({
-  color,
-  size,
-  className,
-  ...props
-}: MobileMenuCloseProps) => {
+export const Launch = ({ color, size, className, ...props }: LaunchProps) => {
   return (
     <svg
-      viewBox="0 0 50 50"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={iconStyles({ color, size, className })}
       {...props}
     >
       <path
-        d="M35 17.0143L32.9857 15L25 22.9857L17.0143 15L15 17.0143L22.9857 25L15 32.9857L17.0143 35L25 27.0143L32.9857 35L35 32.9857L27.0143 25L35 17.0143Z"
+        d="M15.4444 15.4444H4.55556V4.55556H10V3H4.55556C3.69222 3 3 3.7 3 4.55556V15.4444C3 16.3 3.69222 17 4.55556 17H15.4444C16.3 17 17 16.3 17 15.4444V10H15.4444V15.4444ZM11.5556 3V4.55556H14.3478L6.70222 12.2011L7.79889 13.2978L15.4444 5.65222V8.44444H17V3H11.5556Z"
         fill="currentColor"
       />
     </svg>

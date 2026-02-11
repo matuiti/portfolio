@@ -11,7 +11,7 @@ import { useUIStore } from "@/store/useUIStore";
 import { useScrollThreshold } from "@/lib/hooks/useScrollThreshold";
 import { Logo } from "@/components/ui/Logo";
 import { MenuItem } from "@/components/ui/MenuItem";
-import { Hamburger, IconSearchLarge } from "@/components/ui/Icons";
+import { Hamburger, SearchLarge } from "@/components/ui/Icons";
 
 export const headerStyles = tv({
   base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-500 ease-in-out",
@@ -92,7 +92,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
                 isPublished={item.isPublished}
                 isActive={isActive}
                 color="black"
-                dotLayout="fixed"
+                indicatorLayout="fixed"
               />
             );
           })}
@@ -106,7 +106,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
               onClick={() => setSearchDrawerOpen(true)}
               aria-label="検索フィルターを開く"
             >
-              <IconSearchLarge />
+              <SearchLarge />
             </button>
           )}
 

@@ -62,10 +62,10 @@ export const MobileDrawerMenu = ({
                     isPublished={item.isPublished}
                     isActive={isActive}
                     color="black"
-                    dotLayout="floating"
+                    indicatorLayout="floating"
                   />
 
-                  <ArrowRight isPublished={item.isPublished} />
+                  <ArrowRight size="md" isPublished={item.isPublished} />
                 </div>
               );
             })}
