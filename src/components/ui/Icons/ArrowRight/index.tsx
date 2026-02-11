@@ -6,6 +6,7 @@ const iconStyles = tv({
   variants: {
     color: {
       black: "text-black",
+      white: "text-white",
     },
     size: {
       sm: "w-icon-20 h-icon-20",
