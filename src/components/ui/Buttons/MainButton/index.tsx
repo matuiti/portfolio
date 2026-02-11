@@ -1,4 +1,4 @@
-// src / components / ui / Button / index.tsx;
+// src / components / ui / Buttons / MainButton / index.tsx;
 import { tv, type VariantProps } from "tailwind-variants";
 import React from "react";
 import { ArrowRight } from "@/components/ui/Icons";

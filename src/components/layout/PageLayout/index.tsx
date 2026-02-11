@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Header } from "../Header";
 import { Footer } from "../Footer";
 import { MobileDrawerMenu } from "../MobileDrawerMenu";
+import { PageTopButton } from "@/components/ui/Buttons/PageTopButton";
 
 export function PageLayout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +19,7 @@ export function PageLayout({ children }: { children: React.ReactNode }) {
       />
       <main>{children}</main>
       <Footer />
+      <PageTopButton />
     </div>
   );
 }

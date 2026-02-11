@@ -70,6 +70,7 @@
   --z-index-base: 1;
   --z-index-dropdown: 10;
   --z-index-sticky: 20;
+  --z-index-pagetop: 30;
   --z-index-header: 50;
   --z-index-overlay: 100;
   --z-index-drawer: 110;
