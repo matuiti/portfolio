@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { WorkCard } from "@/app/works/components/WorkCard";
 import { WorkDetailModal } from "@/app/works/components/WorkDetailModal";
-import { Button } from "@/components/ui/Buttons/Main";
-import Link from "next/link";
+// import { Button } from "@/components/ui/Buttons/MainButton";
+// import Link from "next/link";
 import { ALL_WORKS } from "@/data/works";
 import { Work } from "@/types/work";
 
@@ -23,11 +23,11 @@ export const WorksSection = () => {
             title="Selected Works"
             description="実務案件から個人プロジェクトまで、これまでの制作実績の一部をご紹介します。"
           />
-          <Link href="/works">
+          {/* <Link href="/works">
             <Button intent="outline" size="long">
               View All Projects
             </Button>
-          </Link>
+          </Link> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
