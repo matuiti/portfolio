@@ -39,7 +39,7 @@ export const MobileDrawerMenu = ({
 
       {/* メニュー本体 */}
       <div
-        className={`section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default backdrop-blur-default flex flex-col
+        className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default backdrop-blur-default flex flex-col justify-start
         isOpen ? "translate-x-0" : "-translate-x-full"
         `}
       >
@@ -52,7 +52,7 @@ export const MobileDrawerMenu = ({
         </div>
 
         {/* 2. 中央：リストアイテム */}
-        <nav className="flex-1 overflow-y-auto">
+        <nav className="overflow-y-auto">
           <ul className="flex flex-col">
             {NAV_ITEMS.map((item) => {
               const isActive =
