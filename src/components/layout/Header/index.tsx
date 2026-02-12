@@ -78,24 +78,27 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
         </Link>
 
         {/* 【PC専用】デスクトップナビゲーション：smallサイズ以上で表示 [cite: 49] */}
-        <nav className="hidden small:flex items-center gap-6">
-          {NAV_ITEMS.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/" && pathname.startsWith(item.href));
+        <nav>
+          <ul className="hidden small:flex items-center gap-6">
+            {NAV_ITEMS.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/" && pathname.startsWith(item.href));
 
-            return (
-              <MenuItem
-                key={item.href}
-                label={item.label}
-                href={item.href}
-                isPublished={item.isPublished}
-                isActive={isActive}
-                color="black"
-                indicatorLayout="fixed"
-              />
-            );
-          })}
+              return (
+                <li key={item.href}>
+                  <MenuItem
+                    label={item.label}
+                    href={item.href}
+                    isPublished={item.isPublished}
+                    isActive={isActive}
+                    color="black"
+                    indicatorLayout="fixed"
+                  />
+                </li>
+              );
+            })}
+          </ul>
         </nav>
 
         <div className="flex items-center gap-2.5 small:hidden">

@@ -53,14 +53,14 @@ export const MobileDrawerMenu = ({
 
         {/* 2. 中央：リストアイテム */}
         <nav className="flex-1 overflow-y-auto">
-          <div className="flex flex-col">
+          <ul className="flex flex-col">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 pathname === item.href ||
                 (item.href !== "/" && pathname.startsWith(item.href));
 
               return (
-                <div
+                <li
                   key={item.href}
                   className={`group flex items-center justify-between py-4 pl-4 border-b first:border-t border-gray ${
                     !item.isPublished ? "cursor-not-allowed" : "cursor-pointer"
@@ -81,10 +81,10 @@ export const MobileDrawerMenu = ({
                   />
 
                   <ArrowRight isPublished={item.isPublished} />
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </nav>
 
         {/* 1. 下部：ボタンエリア */}

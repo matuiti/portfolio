@@ -39,7 +39,7 @@ export function Footer() {
                       isPublished={item.isPublished}
                       isActive={isActive}
                       color="white"
-                      indicatorLayout="floating"
+                      indicatorLayout="responsive"
                     />
                   </li>
                 );
