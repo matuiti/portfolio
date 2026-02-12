@@ -1,10 +1,47 @@
 // src/app/(home)/components/MainVisual/MainVisual.module.scss
 
+.mv-container {
+  width: 100%;
+  margin-top: calc(60 / 16 * 1rem);
+  margin-left: calc(43 / 16 * 1rem);
+  margin-right: calc(44 / 16 * 1rem);
+
+  @media (min-width: calc(540 / 16 * 1em)) {
+    margin-top: calc(61 / 16 * 1rem);
+    margin-left: calc(48 / 16 * 1rem);
+    margin-right: calc(49 / 16 * 1rem);
+  }
+
+  @media (min-width: calc(840 / 16 * 1em)) {
+    margin-top: calc(174 / 16 * 1rem);
+    margin-left: calc(99 / 16 * 1rem);
+    margin-right: calc(99 / 16 * 1rem);
+  }
+
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    margin-top: calc(170 / 16 * 1rem);
+    margin-left: calc(118.5 / 16 * 1rem);
+    margin-right: calc(118.5 / 16 * 1rem);
+  }
+
+  @media (min-width: calc(1280 / 16 * 1em)) {
+    margin-left: calc(142 / 16 * 1rem);
+    margin-right: calc(142 / 16 * 1rem);
+    max-width: calc(1200 / 16 * 1rem);
+  }
+}
+
 .scrollIndicator {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: calc(20 / 16 * 1rem);
+    /*
+   * 物理配置の補正:
+   * インジケーターの「右端」を親の指定位置に合わせるため、
+   * 自身の幅分（18px）を右方向にオフセットします。
+   */
+  transform: translateX(calc(18 / 16 * 1rem));
 }
 
 .scrollText {
@@ -50,11 +87,11 @@
     transform: scale(1, 0);
     transform-origin: 0 0;
   }
-  50% {
+  69% {
     transform: scale(1, 1);
     transform-origin: 0 0;
   }
-  51% {
+  70% {
     transform: scale(1, 1);
     transform-origin: 0 100%;
   }
