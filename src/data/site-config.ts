@@ -5,7 +5,7 @@ export const siteConfig: SiteConfig = {
   name: "My Portfolio",
   url: "https://your-portfolio.com",
   description: "Next.jsとTypeScriptで構築されたポートフォリオサイト",
-  author:"",
+  author: "Kazuya Matuba",
   links: {
     github: "https://github.com/your-id",
   },

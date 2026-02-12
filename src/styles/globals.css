@@ -21,7 +21,7 @@
   --color-gray: #757575;
   --color-light-gray: #f3f4f6;
   --color-red: #ff6262; /* エラー・必須項目用 */
-  --color-menu-backdrop:rgba(0,0,0,0.5);
+  --color-menu-backdrop: rgba(0, 0, 0, 0.5);
 
   /* ニュートラル系（スクロールインジケーター等で使用） [10, 11] */
   --color-neutral-100: #f5f5f5;
@@ -129,6 +129,28 @@
 
   .container-center {
     @apply w-full max-w-container-max mx-auto;
+  }
+
+  .footer-container {
+    /* ベース（mini〜） */
+    padding-left: calc(20 / 16 * 1rem);
+    padding-right: calc(20 / 16 * 1rem);
+    padding-top: calc(20 / 16 * 1rem);
+    padding-bottom: calc(20 / 16 * 1rem);
+
+    /* Tablet (840px以上) */
+    @media (min-width: 52.5em) {
+      padding-top: calc(20.62 / 16 * 1rem);
+      padding-bottom: calc(20.62 / 16 * 1rem);
+    }
+
+    /* Small (1140px以上) */
+    @media (min-width: 71.25em) {
+      padding-top: calc(40.5 / 16 * 1rem);
+      padding-bottom: calc(20.5 / 16 * 1rem);
+      padding-left: calc(40 / 16 * 1rem);
+      padding-right: calc(40 / 16 * 1rem);
+    }
   }
 
   /* スクロールバー制御 (Firefox) */

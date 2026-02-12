@@ -7,22 +7,22 @@ import React from "react";
  */
 export const menuItemStyles = tv({
   slots: {
-    base: "group relative inline-flex items-center transition-all duration-300",
+    base: "group relative flex items-center transition-all duration-300",
     indicator:
       "w-2 h-2 transition-all duration-300 flex items-center justify-center",
     label: "font-bold",
-    statusBadge:
-      "text-[10px] ml-2 px-1 border rounded-sm leading-tight uppercase",
+    // statusBadge:
+    //   "text-[10px] ml-2 px-1 border rounded-sm leading-tight uppercase",
   },
   variants: {
     color: {
       black: {
         base: "text-black",
-        statusBadge: "border-slate-300 text-slate-500",
+        // statusBadge: "border-slate-300 text-slate-500",
       },
       white: {
         base: "text-white",
-        statusBadge: "border-white/40 text-white/80",
+        // statusBadge: "border-white/40 text-white/80",
       },
     },
     isPublished: {
@@ -106,7 +106,7 @@ export const MenuItem = ({
     base,
     indicator,
     label: labelStyle,
-    statusBadge,
+    // statusBadge,
   } = menuItemStyles({
     color,
     isPublished,
@@ -125,7 +125,7 @@ export const MenuItem = ({
         {renderIndicator}
       </span>
       <span className={labelStyle()}>{label}</span>
-      {!isPublished && <span className={statusBadge()}>Soon</span>}
+      {/* {!isPublished && <span className={statusBadge()}>Soon</span>} */}
     </>
   );
 
