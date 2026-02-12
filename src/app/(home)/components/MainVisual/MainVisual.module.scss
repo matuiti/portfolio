@@ -4,58 +4,62 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: calc(20 / 16 * 1rem);
 }
 
 .scrollText {
-  font-size: 10px;
+  font-size: calc(18 / 16 * 1rem);
   font-weight: 700;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   writing-mode: vertical-rl;
-  color: var(--color-neutral-500);
+  color: var(--color-white);
 }
 
 .dropLineTrack {
-  width: 1px;
-  height: 96px;
-  background-color: var(--color-neutral-200);
+  width: calc(1 / 16 * 1rem);
+  background-color: var(--color-gray); // 線の背景色
   position: relative;
   overflow: hidden;
+  height: calc(60 / 16 * 1rem);
 
-  // 雫（流れ落ちる線）の本体
+  @media (min-width: calc(540 / 16 * 1em)) {
+    height: calc(80 / 16 * 1rem);
+  }
+
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    height: calc(100 / 16 * 1rem);
+  }
+
+  // 線のアニメーション部分
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 40px;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--color-blue-600), // プロジェクトのメインカラー
-      transparent
-    );
-    animation: dropMove 2.5s cubic-bezier(0.76, 0, 0.24, 1) infinite;
+    height: 100%;
+    background-color: var(--color-white);
+    animation: scroll 3.8s ease-out infinite;
   }
 }
 
-@keyframes dropMove {
+/* 線のアニメーション */
+@keyframes scroll {
   0% {
-    transform: translateY(-100%) scaleY(0.1);
-    transform-origin: top;
+    transform: scale(1, 0);
+    transform-origin: 0 0;
   }
-  30% {
-    transform: translateY(0) scaleY(1.5);
-    transform-origin: top;
+  50% {
+    transform: scale(1, 1);
+    transform-origin: 0 0;
   }
-  60% {
-    transform: translateY(100%) scaleY(1);
-    transform-origin: bottom;
+  51% {
+    transform: scale(1, 1);
+    transform-origin: 0 100%;
   }
   100% {
-    transform: translateY(200%) scaleY(0.1);
-    transform-origin: bottom;
+    transform: scale(1, 0);
+    transform-origin: 0 100%;
   }
 }
