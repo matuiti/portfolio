@@ -21,7 +21,6 @@
 
   @media (min-width: calc(840 / 16 * 1em)) {
     // margin-top: calc(174 / 16 * 1rem);
-    /* タブレット以上は中央の有効幅を意識 */
     max-width: calc(800 / 16 * 1rem);
   }
 
@@ -31,8 +30,97 @@
   }
 
   @media (min-width: calc(1280 / 16 * 1em)) {
-    /* デザインカンプの最大幅（1200px）を上限にする */
     max-width: calc(1200 / 16 * 1rem);
+  }
+
+  @media (min-width: calc(1920 / 16 * 1em)) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.mv-content-wrapper {
+  // 基本スタイル (Base / Mini〜)
+  display: flex;
+  flex-direction: column; // flex-col
+  justify-content: center; // justify-center
+  align-items: flex-start; // items-start
+  gap: calc(20 / 16 * 1rem); // gap-5 (20px)
+  padding-top: calc(60 / 16 * 1rem); // pt-header-mini (デザイン上のヘッダー高: 60px) [4]
+
+  // Mobile (540px〜)
+  @media (min-width: calc(540 / 16 * 1em)) {
+    gap: calc(26 / 16 * 1rem); // mobile:gap-6.5 (26px)
+  }
+
+  // Tablet (840px〜)
+  @media (min-width: calc(840 / 16 * 1em)) {
+    flex-direction: row; // tablet:flex-row
+  }
+
+  // Small (1140px〜)
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    gap: calc(40 / 16 * 1rem); // small:gap-10 (40px)
+    padding-top: calc(170 / 16 * 1rem); // small:pt-header-small (デザイン上のヘッダー高: 170px) [5]
+  }
+}
+
+.main-copy-text {
+  // 基本スタイル (Mobile未満 / Mini)
+  color: var(--color-white);
+  font-weight: 900; // font-black
+  line-height: normal; // leading-normal
+  font-size: calc(28 / 16 * 1rem);
+
+  // 各ブレイクポイントでの調整 [2]
+  
+  // Mobile (540px〜)
+  @media (min-width: calc(540 / 16 * 1em)) {
+    font-size: calc(32 / 16 * 1rem);
+    line-height: 1.7; // mobile:leading-[1.7]
+  }
+
+  // Tablet (840px〜)
+  @media (min-width: calc(840 / 16 * 1em)) {
+    font-size: calc(45 / 16 * 1rem);
+  }
+
+  // Small (1140px〜)
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    font-size: calc(60 / 16 * 1rem);
+  }
+
+  // Default (1280px〜)
+  @media (min-width: calc(1280 / 16 * 1em)) {
+    font-size: calc(70 / 16 * 1rem);
+  }
+
+  // Large (1920px〜)
+  @media (min-width: calc(1920 / 16 * 1em)) {
+    font-size: calc(80 / 16 * 1rem);
+  }
+}
+
+.sub-copy-text {
+  // 基本スタイル (Base / Mini〜Tablet)
+  color: var(--color-white); // text-white [4, 5]
+  font-weight: 500; // font-medium
+  letter-spacing: 0.1em; // tracking-widest [4]
+  font-size: calc(14 / 16 * 1rem);
+
+  // Small (1140px〜)
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    font-size: calc(17 / 16 * 1rem);
+  }
+
+  // Default (1280px〜)
+  @media (min-width: calc(1280 / 16 * 1em)) {
+    font-size: calc(20 / 16 * 1rem);
+  }
+
+  // Large (1920px〜)
+  @media (min-width: calc(1920 / 16 * 1em)) {
+    font-size: calc(24 / 16 * 1rem);
   }
 }
 

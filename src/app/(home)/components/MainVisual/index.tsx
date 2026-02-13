@@ -36,20 +36,20 @@ export const MainVisual = () => {
           {
             opacity: 1,
             duration: 1.2,
-            ease: "slow",
+            ease: "power4.out",
           },
-          "-=0.1",
+          "-=0.3",
         )
         .to(
           ".js-mv-item-image",
           {
             opacity: 1,
             duration: 2,
-            ease: "slow",
+            ease: "power4.out",
           },
-          "-=3",
+          "-=0.3",
         )
-        .add(() => setPhase("header-entry"))
+        .add(() => setPhase("header-entry"), "-=0.8")
         .to(
           ".js-scroll-indicator",
           {
@@ -66,32 +66,31 @@ export const MainVisual = () => {
 
   const mainItemClass = `js-mv-item-main-copy ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
   const subItemClass = `js-mv-item-sub-copy ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
-  const imageItemClass = `js-mv-item-main-image ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
+  const imageItemClass = `js-mv-item-image ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
   const scrollClass = `js-scroll-indicator ${isAllFinished ? "opacity-100" : "opacity-0"} ${styles.scrollIndicator}`;
 
   return (
     <section
       ref={rootRef}
       // small:h-svh
-      className="relative w-full overflow-hidden flex items-start justify-center bg-black min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
+      className="small:h-svh relative w-full overflow-hidden flex items-start justify-center bg-black min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
     >
       <div className={`${styles["mv-container"]} relative mx-auto self-center`}>
-        <div
-          className={`flex flex-col tablet:flex-row justify-center gap-5 mobile:gap-6.5 small:gap-10 items-start pt-header-mini small:pt-header-small`}
-        >
+        <div className={`${styles["mv-content-wrapper"]}`}>
+          {/* コピー */}
           <div className="space-y-4 mobile:space-y-5">
-            <h1 className="text-[calc(28/16*1rem)] mobile:text-[calc(32/16*1rem)] tablet:text-[calc(45/16*1rem)] small:text-[calc(60/16*1rem)] default:text-[calc(70/16*1rem)] font-black leading-normal mobile:leading-[1.7] text-white">
+            {/* メインコピー */}
+            <h1 className={`${styles["main-copy-text"]}`}>
               <span className={`${mainItemClass}`}>安心して任せられる</span>
               <br />
               <span className={`${mainItemClass}`}>技術者でありたい</span>
             </h1>
-            <p
-              className={`${subItemClass} text-white text-[calc(14/16*1rem)] small:text-[calc(17/16*1rem)] default:text-[calc(20/16*1rem)] font-medium tracking-widest`}
-            >
+            {/* サブコピー */}
+            <p className={`${subItemClass} ${styles["sub-copy-text"]}`}>
               ユーザーに寄り添った、品質の高いコーディングを提供します。
             </p>
           </div>
-
+          {/* 画像 */}
           <div
             className={`${imageItemClass} w-full tablet:w-auto flex justify-start`}
           >
@@ -108,14 +107,14 @@ export const MainVisual = () => {
             </div>
 
             {/* PC用画像コンテナ */}
-            <div className="hidden tablet:block w-50 h-50 small:w-75 small:h-75 relative overflow-hidden">
+            <div className="hidden tablet:block w-50 h-50 small:w-75 small:h-75 large:w-87.5 large:h-87.5 relative overflow-hidden">
               <Image
-                src="/assets/images/home/mv-pc.jpg"
+                src="/assets/images/home/mv-pc-l.jpg"
                 alt="メインビジュアル"
                 fill
                 priority
                 className="object-cover"
-                sizes="300px"
+                sizes="350px"
               />
             </div>
           </div>
