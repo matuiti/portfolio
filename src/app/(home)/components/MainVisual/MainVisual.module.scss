@@ -46,7 +46,7 @@
    * インジケーターの「右端」を親の指定位置に合わせるため、
    * 自身の幅分（18px）を右方向にオフセットします。
    */
-  transform: translateX(calc(18 / 16 * 1rem));
+  transform: translateX(calc(14 / 16 * 1rem));
 
   position: absolute;
   bottom: 0;
@@ -67,6 +67,7 @@
   /* Small (コンテナ外に出す) */
   @media (min-width: calc(1140 / 16 * 1em)) {
     right: -1%;
+    transform: translateX(calc(18 / 16 * 1rem));
   }
 
   /* Default (さらにはみ出す) */
@@ -76,12 +77,16 @@
 }
 
 .scrollText {
-  font-size: calc(18 / 16 * 1rem);
+  font-size: calc(14 / 16 * 1rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   writing-mode: vertical-rl;
   color: var(--color-white);
+  /* Small */
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    font-size: calc(18 / 16 * 1rem);
+  }
 }
 
 .dropLineTrack {

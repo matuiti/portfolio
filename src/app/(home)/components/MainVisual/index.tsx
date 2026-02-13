@@ -16,79 +16,97 @@ export const MainVisual = () => {
   const isMvItemVisible = phase === "ready" || phase === "header-entry";
 
   useEffect(() => {
-    // すでに演出済みならGSAPを実行しない
     if (isAllFinished) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        // すべてのアニメーション完了後に phase を "ready" に更新 [ソース118, 184]
         onComplete: () => setPhase("ready"),
       });
 
-      // 1. 演出開始フェーズへ [ソース34, 184]
       setPhase("mv-playing");
 
-      // 2. メインコンテンツの登場アニメーション
-      tl.to(".js-mv-item", {
+      tl.to(".js-mv-item-main-copy", {
         opacity: 1,
-        y: 0,
-        duration: 1.4,
-        stagger: 0.7,
+        duration: 1,
+        stagger: 0.5,
         ease: "power4.out",
       })
-        // 3. ヘッダーを登場させる（コンテンツの演出中に少し早めに開始） [ソース118, 185]
-        .add(() => setPhase("header-entry"), "-=0.8")
-
-        // 4. スクロールインジケーターの登場
+        .to(
+          ".js-mv-item-sub-copy",
+          {
+            opacity: 1,
+            duration: 1.2,
+            ease: "slow",
+          },
+          "-=0.1",
+        )
+        .to(
+          ".js-mv-item-image",
+          {
+            opacity: 1,
+            duration: 1.2,
+            ease: "slow",
+          },
+          "-=3",
+        )
+        .add(() => setPhase("header-entry"))
         .to(
           ".js-scroll-indicator",
           {
             opacity: 1,
-            duration: 1.2,
-            ease: "power2.out",
+            duration: 2,
+            ease: "power4.out",
           },
-          "+=0.5",
+          "+=2.6",
         );
     }, rootRef);
 
     return () => ctx.revert();
   }, [setPhase, isAllFinished]);
 
-  // クラス名の動的生成
-  const itemClass = `js-mv-item ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
+  const mainItemClass = `js-mv-item-main-copy ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
+  const subItemClass = `js-mv-item-sub-copy ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
+  const imageItemClass = `js-mv-item-main-image ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
   const scrollClass = `js-scroll-indicator ${isAllFinished ? "opacity-100" : "opacity-0"} ${styles.scrollIndicator}`;
 
   return (
     <section
       ref={rootRef}
-      className="relative w-full overflow-hidden flex items-start justify-center bg-black h-svh min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
+      className="relative w-full overflow-hidden flex items-start justify-center bg-black small:h-svh min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
     >
       <div className={`${styles["mv-container"]} relative mx-auto`}>
         <div
-          className={`${itemClass} flex flex-col tablet:flex-row gap-4 small:gap-10 items-center pt-header-mini small:pt-header-small`}
+          className={`flex flex-col tablet:flex-row justify-center gap-5 mobile:gap-6.5 small:gap-10 items-start pt-header-mini small:pt-header-small`}
         >
-          <div className="flex-1 space-y-6 z-10">
-            <h1 className="text-[calc(28/16*1em)] mobile:text-[calc(32/16*1em)] tablet:text-[calc(45/16*1em)] small:text-[calc(60/16*1em)] default:text-[calc(70/16*1em)] font-black leading-normal mobile:leading-[1.7] text-white">
-              安心して任せられる
+          <div className="space-y-4 mobile:space-y-5">
+            <h1 className="text-[calc(28/16*1rem)] mobile:text-[calc(32/16*1rem)] tablet:text-[calc(45/16*1rem)] small:text-[calc(60/16*1rem)] default:text-[calc(70/16*1rem)] font-black leading-normal mobile:leading-[1.7] text-white">
+              <span className={`${mainItemClass}`}>安心して任せられる</span>
               <br />
-              技術者でありたい
+              <span className={`${mainItemClass}`}>技術者でありたい</span>
             </h1>
-            <p className="text-white max-w-md text-lg">
+            <p
+              className={`${subItemClass} text-white text-[calc(14/16*1rem)] small:text-[calc(17/16*1rem)] default:text-[calc(20/16*1rem)] font-medium tracking-widest`}
+            >
               ユーザーに寄り添った、品質の高いコーディングを提供します。
             </p>
           </div>
 
-          <div className={`${itemClass}`}>
-            <div className="block tablet:hidden w-full aspect-video relative">
+          <div
+            className={`${imageItemClass} w-full tablet:w-auto flex justify-start`}
+          >
+            {/* スマホ用画像コンテナ */}
+            <div className="block tablet:hidden w-full h-auto aspect-video relative">
               <Image
                 src="/assets/images/home/mv-sp.jpg"
                 alt="メインビジュアル"
                 fill
                 priority
                 className="object-cover"
-                sizes="100vw"
+                sizes="(max-width: 540px) 100vw, 443px"
               />
             </div>
+
+            {/* PC用画像コンテナ */}
             <div className="hidden tablet:block w-50 h-50 small:w-75 small:h-75 relative overflow-hidden">
               <Image
                 src="/assets/images/home/mv-pc.jpg"
