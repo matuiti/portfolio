@@ -91,6 +91,8 @@
 /* 3. ベーススタイルの定義 */
 @layer base {
   html {
+    /* スクロールバーが表示されてもレイアウトがガタつかないように領域を固定する */
+    scrollbar-gutter: stable;
     scroll-behavior: smooth;
     font-size: 100%; /* ブラウザ設定を尊重 */
   }
@@ -108,7 +110,7 @@
   h4,
   h5,
   h6 {
-    @apply font-bold tracking-tight;
+    @apply font-bold;
   }
 }
 

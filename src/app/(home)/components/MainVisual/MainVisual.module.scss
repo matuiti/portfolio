@@ -1,32 +1,37 @@
 // src/app/(home)/components/MainVisual/MainVisual.module.scss
-
 .mv-container {
   width: 100%;
+  max-width: 90%;
+  /* 1. 左右中央寄せを基本にする */
+  margin-left: auto;
+  margin-right: auto;
+
+  /* 2. 左右の最小余白を確保（画面が狭い時用） */
+  padding-left: calc(20 / 16 * 1rem);
+  padding-right: calc(20 / 16 * 1rem);
+
+  /* 3. 各ブレイクポイントでの最大幅と上部余白の調整 */
   margin-top: calc(60 / 16 * 1rem);
-  margin-left: calc(43 / 16 * 1rem);
-  margin-right: calc(44 / 16 * 1rem);
 
   @media (min-width: calc(540 / 16 * 1em)) {
-    margin-top: calc(61 / 16 * 1rem);
-    margin-left: calc(48 / 16 * 1rem);
-    margin-right: calc(49 / 16 * 1rem);
+    padding-left: calc(32 / 16 * 1rem);
+    padding-right: calc(32 / 16 * 1rem);
+    max-width: 82%;
   }
 
   @media (min-width: calc(840 / 16 * 1em)) {
     margin-top: calc(174 / 16 * 1rem);
-    margin-left: calc(99 / 16 * 1rem);
-    margin-right: calc(99 / 16 * 1rem);
+    /* タブレット以上は中央の有効幅を意識 */
+    max-width: calc(800 / 16 * 1rem);
   }
 
   @media (min-width: calc(1140 / 16 * 1em)) {
     margin-top: calc(170 / 16 * 1rem);
-    margin-left: calc(118.5 / 16 * 1rem);
-    margin-right: calc(118.5 / 16 * 1rem);
+    max-width: calc(1000 / 16 * 1rem);
   }
 
   @media (min-width: calc(1280 / 16 * 1em)) {
-    margin-left: calc(142 / 16 * 1rem);
-    margin-right: calc(142 / 16 * 1rem);
+    /* デザインカンプの最大幅（1200px）を上限にする */
     max-width: calc(1200 / 16 * 1rem);
   }
 }
@@ -36,12 +41,38 @@
   flex-direction: column;
   align-items: center;
   gap: calc(20 / 16 * 1rem);
-    /*
+  /*
    * 物理配置の補正:
    * インジケーターの「右端」を親の指定位置に合わせるため、
    * 自身の幅分（18px）を右方向にオフセットします。
    */
   transform: translateX(calc(18 / 16 * 1rem));
+
+  position: absolute;
+  bottom: 0;
+  /* 横位置の制御：メディアクエリを昇順に並べることで確実に上書き */
+  /* Mini / Base */
+  right: 1%;
+
+  /* Mobile */
+  @media (min-width: calc(540 / 16 * 1em)) {
+    right: -2%;
+  }
+
+  /* Tablet (コンテナ右端に揃える) */
+  @media (min-width: calc(840 / 16 * 1em)) {
+    right: 1%;
+  }
+
+  /* Small (コンテナ外に出す) */
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    right: -1%;
+  }
+
+  /* Default (さらにはみ出す) */
+  @media (min-width: calc(1280 / 16 * 1em)) {
+    right: -1%;
+  }
 }
 
 .scrollText {
