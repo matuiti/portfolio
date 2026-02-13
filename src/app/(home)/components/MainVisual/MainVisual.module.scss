@@ -46,7 +46,7 @@
   justify-content: center; // justify-center
   align-items: flex-start; // items-start
   gap: calc(20 / 16 * 1rem); // gap-5 (20px)
-  padding-top: calc(60 / 16 * 1rem); // pt-header-mini (デザイン上のヘッダー高: 60px) [4]
+  // padding-top: calc(60 / 16 * 1rem); // pt-header-mini (デザイン上のヘッダー高: 60px) [4]
 
   // Mobile (540px〜)
   @media (min-width: calc(540 / 16 * 1em)) {
@@ -61,7 +61,7 @@
   // Small (1140px〜)
   @media (min-width: calc(1140 / 16 * 1em)) {
     gap: calc(40 / 16 * 1rem); // small:gap-10 (40px)
-    padding-top: calc(170 / 16 * 1rem); // small:pt-header-small (デザイン上のヘッダー高: 170px) [5]
+    // padding-top: calc(170 / 16 * 1rem); // small:pt-header-small (デザイン上のヘッダー高: 170px) [5]
   }
 }
 
