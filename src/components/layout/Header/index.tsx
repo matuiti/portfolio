@@ -15,7 +15,7 @@ import { Hamburger, SearchLarge } from "@/components/ui/Icons";
 import { useIsMounted } from "@/lib/hooks/useIsMounted";
 
 export const headerStyles = tv({
-  base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-1500 ease-in",
+  base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-1000 ease-in",
   variants: {
     isScrolled: {
       true: "backdrop-blur-default shadow-default",
