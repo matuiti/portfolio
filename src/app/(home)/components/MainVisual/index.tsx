@@ -73,7 +73,7 @@ export const MainVisual = () => {
     <section
       ref={rootRef}
       // small:h-svh
-      className="relative w-full overflow-hidden flex items-start justify-center bg-black min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
+      className={`${styles["mv-section-container"]} relative w-full overflow-hidden flex items-start justify-center bg-black`}
     >
       <div className={`${styles["mv-container"]} relative mx-auto self-center`}>
         <div className={`${styles["mv-content-wrapper"]}`}>

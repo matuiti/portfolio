@@ -1,4 +1,28 @@
 // src/app/(home)/components/MainVisual/MainVisual.module.scss
+.mv-section-container {
+  // 1. 基本サイズ (Mini: 350px〜)
+  // デザイン根拠: 570px [1, 2]
+  min-height: var(--spacing-mv-height-mini);
+
+  // 2. Mobile (540px〜) [3]
+  // デザイン根拠: 650px [1, 2]
+  @media (min-width: calc(540 / 16 * 1em)) {
+    min-height: var(--spacing-mv-height-mobile);
+  }
+
+  // 3. Tablet (840px〜) [3]
+  // デザイン根拠: 600px [1, 2]
+  @media (min-width: calc(840 / 16 * 1em)) {
+    min-height: var(--spacing-mv-height-tablet);
+  }
+
+  // 4. Small (1140px〜) [3]
+  // デザイン根拠: 640px [1, 2]
+  @media (min-width: calc(1140 / 16 * 1em)) {
+    min-height: var(--spacing-mv-height-small);
+  }
+}
+
 .mv-container {
   width: 100%;
   max-width: 90%;
@@ -20,12 +44,12 @@
   }
 
   @media (min-width: calc(840 / 16 * 1em)) {
-    // margin-top: calc(174 / 16 * 1rem);
+    margin-top: calc(174 / 16 * 1rem);
     max-width: calc(800 / 16 * 1rem);
   }
 
   @media (min-width: calc(1140 / 16 * 1em)) {
-    // margin-top: calc(170 / 16 * 1rem);
+    margin-top: calc(170 / 16 * 1rem);
     max-width: calc(1000 / 16 * 1rem);
   }
 
@@ -155,7 +179,7 @@
   /* Small (コンテナ外に出す) */
   @media (min-width: calc(1140 / 16 * 1em)) {
     right: -1%;
-    transform: translateX(calc(18 / 16 * 1rem));
+    transform: translateX(calc(16 / 16 * 1rem));
   }
 
   /* Default (さらにはみ出す) */
