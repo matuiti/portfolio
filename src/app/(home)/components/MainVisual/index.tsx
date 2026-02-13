@@ -12,15 +12,7 @@ export const MainVisual = () => {
   const setPhase = useUIStore((state) => state.setPhase);
   const phase = useUIStore((state) => state.phase);
 
-  /**
-   * 演出スキップ判定（他ページから戻った際などの挙動）
-   */
   const isAllFinished = phase === "ready";
-
-  /**
-   * コンテンツ（メインテキスト等）の表示判定
-   * ヘッダー登場フェーズ（header-entry）以降であれば表示状態にする
-   */
   const isMvItemVisible = phase === "ready" || phase === "header-entry";
 
   useEffect(() => {
