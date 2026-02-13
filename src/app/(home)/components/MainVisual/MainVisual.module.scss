@@ -11,7 +11,7 @@
   padding-right: calc(20 / 16 * 1rem);
 
   /* 3. 各ブレイクポイントでの最大幅と上部余白の調整 */
-  margin-top: calc(60 / 16 * 1rem);
+  // margin-top: calc(60 / 16 * 1rem);
 
   @media (min-width: calc(540 / 16 * 1em)) {
     padding-left: calc(32 / 16 * 1rem);
@@ -20,13 +20,13 @@
   }
 
   @media (min-width: calc(840 / 16 * 1em)) {
-    margin-top: calc(174 / 16 * 1rem);
+    // margin-top: calc(174 / 16 * 1rem);
     /* タブレット以上は中央の有効幅を意識 */
     max-width: calc(800 / 16 * 1rem);
   }
 
   @media (min-width: calc(1140 / 16 * 1em)) {
-    margin-top: calc(170 / 16 * 1rem);
+    // margin-top: calc(170 / 16 * 1rem);
     max-width: calc(1000 / 16 * 1rem);
   }
 

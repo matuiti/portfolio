@@ -74,7 +74,7 @@ export const MainVisual = () => {
       ref={rootRef}
       className="relative w-full overflow-hidden flex items-start justify-center bg-black small:h-svh min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
     >
-      <div className={`${styles["mv-container"]} relative mx-auto`}>
+      <div className={`${styles["mv-container"]} relative mx-auto self-center`}>
         <div
           className={`flex flex-col tablet:flex-row justify-center gap-5 mobile:gap-6.5 small:gap-10 items-start pt-header-mini small:pt-header-small`}
         >
