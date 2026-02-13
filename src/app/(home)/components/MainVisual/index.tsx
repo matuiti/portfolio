@@ -64,67 +64,55 @@ export const MainVisual = () => {
 
   // クラス名の動的生成
   const itemClass = `js-mv-item ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
-
-  /**
-   * スクロールインジケーターのスタイル
-   * 物理配置は親の「配置用コンテナ」が制御するため、ここでは位置微調整（-right-3等）と表示制御を行う
-   */
-  const scrollClass = `js-scroll-indicator ${
-    isAllFinished ? "opacity-100" : "opacity-0"
-  } absolute bottom-0 -right-3 mobile:-right-4.5 tablet:-right-10.5 small:-right-14.125 default:-right-20 ${styles.scrollIndicator}`;
+  const scrollClass = `js-scroll-indicator ${isAllFinished ? "opacity-100" : "opacity-0"} ${styles.scrollIndicator}`;
 
   return (
     <section
       ref={rootRef}
       className="relative w-full overflow-hidden flex items-start justify-center bg-black h-svh min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
     >
-      {/* --- 1. メインコンテンツ層 --- */}
-      <div className={`${styles["mv-container"]}`}>
+      <div className={`${styles["mv-container"]} relative mx-auto`}>
         <div
-          className={`${itemClass} grid grid-cols-1 md:grid-cols-2 gap-12 items-center small:pt-header-small pt-header-mini`}
+          className={`${itemClass} flex flex-col tablet:flex-row gap-4 small:gap-10 items-center pt-header-mini small:pt-header-small`}
         >
-          {/* テキストコンテンツ */}
-          <div className="space-y-6 z-10">
-            <h1 className="text-5xl md:text-8xl font-bold leading-[1.1] text-white tracking-tight">
-              Design meets
+          <div className="flex-1 space-y-6 z-10">
+            <h1 className="text-[calc(28/16*1em)] mobile:text-[calc(32/16*1em)] tablet:text-[calc(45/16*1em)] small:text-[calc(60/16*1em)] default:text-[calc(70/16*1em)] font-black leading-normal mobile:leading-[1.7] text-white">
+              安心して任せられる
               <br />
-              Implementation.
+              技術者でありたい
             </h1>
             <p className="text-white max-w-md text-lg">
-              「実装力」と「設計力」で、アイデアを確かな形にする。
+              ユーザーに寄り添った、品質の高いコーディングを提供します。
             </p>
           </div>
 
-          {/* メイン画像エリア */}
-          <div
-            className={`${itemClass} relative aspect-square w-full max-w-125 mx-auto`}
-          >
-            <div className="absolute inset-0 border border-blue-600 translate-x-6 translate-y-6 -z-10" />
-            <div className="relative w-full h-full bg-neutral-200 overflow-hidden shadow-2xl">
+          <div className={`${itemClass}`}>
+            <div className="block tablet:hidden w-full aspect-video relative">
               <Image
-                src="/assets/images/mv-main.jpg"
-                alt="Main Visual"
+                src="/assets/images/home/mv-sp.jpg"
+                alt="メインビジュアル"
                 fill
-                className="object-cover"
                 priority
+                className="object-cover"
+                sizes="100vw"
+              />
+            </div>
+            <div className="hidden tablet:block w-50 h-50 small:w-75 small:h-75 relative overflow-hidden">
+              <Image
+                src="/assets/images/home/mv-pc.jpg"
+                alt="メインビジュアル"
+                fill
+                priority
+                className="object-cover"
+                sizes="300px"
               />
             </div>
           </div>
         </div>
       </div>
 
-      {/* --- 2. スクロールインジケーター配置専用レイヤー --- */}
-      {/* セクション（h-svh）の全域を覆う絶対配置の枠 */}
       <div className="pointer-events-none absolute inset-0 flex justify-center">
-        {/*
-            既存の .mv-container を再利用して横幅・横位置を完全に同期。
-            mt-0! で上部マージンを消し、h-full でセクション下部（bottom-0）まで領域を伸ばす。
-        */}
         <div className={`${styles["mv-container"]} relative h-full mt-0!`}>
-          {/*
-              この div の「右下（bottom-0, -right-X）」が基準点となる。
-              雫のアニメーション（物理演算的な演出）は styles.scrollIndicator 内で定義されている。
-          */}
           <div className={scrollClass}>
             <span className={styles.scrollText}>Scroll</span>
             <div className={styles.dropLineTrack} />
