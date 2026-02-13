@@ -44,7 +44,7 @@ export const MainVisual = () => {
           ".js-mv-item-image",
           {
             opacity: 1,
-            duration: 1.2,
+            duration: 2,
             ease: "slow",
           },
           "-=3",
@@ -57,7 +57,7 @@ export const MainVisual = () => {
             duration: 2,
             ease: "power4.out",
           },
-          "+=2.6",
+          "+=1",
         );
     }, rootRef);
 
@@ -72,7 +72,8 @@ export const MainVisual = () => {
   return (
     <section
       ref={rootRef}
-      className="relative w-full overflow-hidden flex items-start justify-center bg-black small:h-svh min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
+      // small:h-svh
+      className="relative w-full overflow-hidden flex items-start justify-center bg-black min-h-mv-height-mini mobile:min-h-mv-height-mobile tablet:min-h-mv-height-tablet small:min-h-mv-height-small"
     >
       <div className={`${styles["mv-container"]} relative mx-auto self-center`}>
         <div
