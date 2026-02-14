@@ -2,40 +2,42 @@
 .mv-section-container {
   // 1. 基本サイズ (Mini: 350px〜)
   // デザイン根拠: 570px [1, 2]
-  min-height: var(--spacing-mv-height-mini);
+  min-height: calc(570 / 16 * 1rem);
+  padding-top: calc(
+    65 / 16 * 1rem
+  ); // pt-header-mini (ヘッダー高: 65px)
 
   // 2. Mobile (540px〜) [3]
   // デザイン根拠: 650px [1, 2]
   @media (min-width: calc(540 / 16 * 1em)) {
-    min-height: var(--spacing-mv-height-mobile);
+    min-height: calc(650 / 16 * 1rem);
   }
 
   // 3. Tablet (840px〜) [3]
   // デザイン根拠: 600px [1, 2]
   @media (min-width: calc(840 / 16 * 1em)) {
-    min-height: var(--spacing-mv-height-tablet);
+    min-height: calc(600 / 16 * 1rem);
   }
 
   // 4. Small (1140px〜) [3]
   // デザイン根拠: 640px [1, 2]
   @media (min-width: calc(1140 / 16 * 1em)) {
-    min-height: var(--spacing-mv-height-small);
+    min-height: calc(640 / 16 * 1rem);
+    padding-top: calc(90 / 16 * 1rem); // pt-header-small (ヘッダー高: 90px)
+    // padding-top: calc(170 / 16 * 1rem);
   }
 }
 
 .mv-container {
   width: 100%;
   max-width: 90%;
-  /* 1. 左右中央寄せを基本にする */
+  /* 3. 各ブレイクポイントでの最大幅と上部余白の調整 */
+  margin-top: calc(60 / 16 * 1rem);
   margin-left: auto;
   margin-right: auto;
-
-  /* 2. 左右の最小余白を確保（画面が狭い時用） */
+  // margin-bottom: 9%;
   padding-left: calc(20 / 16 * 1rem);
   padding-right: calc(20 / 16 * 1rem);
-
-  /* 3. 各ブレイクポイントでの最大幅と上部余白の調整 */
-  // margin-top: calc(60 / 16 * 1rem);
 
   @media (min-width: calc(540 / 16 * 1em)) {
     padding-left: calc(32 / 16 * 1rem);
@@ -44,12 +46,15 @@
   }
 
   @media (min-width: calc(840 / 16 * 1em)) {
-    margin-top: calc(174 / 16 * 1rem);
+    // margin-top: calc(174 / 16 * 1rem);
+    margin-top: calc(158 / 16 * 1rem);
     max-width: calc(800 / 16 * 1rem);
   }
 
   @media (min-width: calc(1140 / 16 * 1em)) {
-    margin-top: calc(170 / 16 * 1rem);
+    align-self: center;
+    margin-top: 0;
+    // margin-top: calc(170 / 16 * 1rem);
     max-width: calc(1000 / 16 * 1rem);
   }
 
@@ -66,42 +71,44 @@
 .mv-content-wrapper {
   // 基本スタイル (Base / Mini〜)
   display: flex;
-  flex-direction: column; // flex-col
-  justify-content: center; // justify-center
-  align-items: flex-start; // items-start
-  gap: calc(20 / 16 * 1rem); // gap-5 (20px)
-  // padding-top: calc(60 / 16 * 1rem); // pt-header-mini (デザイン上のヘッダー高: 60px) [4]
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: calc(20 / 16 * 1rem);
+  // margin-top: calc(65 / 16 * 1rem); // pt-header-mini (デザイン上のヘッダー高: 65px) [4]
 
   // Mobile (540px〜)
   @media (min-width: calc(540 / 16 * 1em)) {
-    gap: calc(26 / 16 * 1rem); // mobile:gap-6.5 (26px)
+    gap: calc(26 / 16 * 1rem);
+    margin-bottom: 9%;
   }
 
   // Tablet (840px〜)
   @media (min-width: calc(840 / 16 * 1em)) {
-    flex-direction: row; // tablet:flex-row
+    flex-direction: row;
+    margin-bottom: 0;
   }
 
   // Small (1140px〜)
   @media (min-width: calc(1140 / 16 * 1em)) {
-    gap: calc(40 / 16 * 1rem); // small:gap-10 (40px)
-    // padding-top: calc(170 / 16 * 1rem); // small:pt-header-small (デザイン上のヘッダー高: 170px) [5]
+    gap: calc(40 / 16 * 1rem);
+    // margin-top: calc(170 / 16 * 1rem); // small:pt-header-small (デザイン上のヘッダー高: 170px) [5]
   }
 }
 
 .main-copy-text {
   // 基本スタイル (Mobile未満 / Mini)
   color: var(--color-white);
-  font-weight: 900; // font-black
-  line-height: normal; // leading-normal
+  font-weight: 900;
+  line-height: normal;
   font-size: calc(28 / 16 * 1rem);
 
   // 各ブレイクポイントでの調整 [2]
-  
+
   // Mobile (540px〜)
   @media (min-width: calc(540 / 16 * 1em)) {
     font-size: calc(32 / 16 * 1rem);
-    line-height: 1.7; // mobile:leading-[1.7]
+    line-height: 1.7;
   }
 
   // Tablet (840px〜)
@@ -120,16 +127,16 @@
   }
 
   // Large (1920px〜)
-  @media (min-width: calc(1920 / 16 * 1em)) {
-    font-size: calc(80 / 16 * 1rem);
-  }
+  // @media (min-width: calc(1920 / 16 * 1em)) {
+  //   font-size: calc(80 / 16 * 1rem);
+  // }
 }
 
 .sub-copy-text {
   // 基本スタイル (Base / Mini〜Tablet)
-  color: var(--color-white); // text-white [4, 5]
-  font-weight: 500; // font-medium
-  letter-spacing: 0.1em; // tracking-widest [4]
+  color: var(--color-white);
+  font-weight: 500;
+  letter-spacing: 0.1em;
   font-size: calc(14 / 16 * 1rem);
 
   // Small (1140px〜)
@@ -143,9 +150,9 @@
   }
 
   // Large (1920px〜)
-  @media (min-width: calc(1920 / 16 * 1em)) {
-    font-size: calc(24 / 16 * 1rem);
-  }
+  // @media (min-width: calc(1920 / 16 * 1em)) {
+  //   font-size: calc(24 / 16 * 1rem);
+  // }
 }
 
 .scrollIndicator {
@@ -164,7 +171,7 @@
   bottom: 0;
   /* 横位置の制御：メディアクエリを昇順に並べることで確実に上書き */
   /* Mini / Base */
-  right: 1%;
+  right: 1.5%;
 
   /* Mobile */
   @media (min-width: calc(540 / 16 * 1em)) {
@@ -184,7 +191,12 @@
 
   /* Default (さらにはみ出す) */
   @media (min-width: calc(1280 / 16 * 1em)) {
-    right: -1%;
+    right: 3%;
+  }
+
+  /* Large (さらにはみ出す) */
+  @media (min-width: calc(1920 / 16 * 1em)) {
+    right: -5%;
   }
 }
 
