@@ -11,7 +11,7 @@ import { WorksSection } from "./components/WorksSection";
 export default function Home() {
   return (
     <div className="relative w-full overflow-hidden bg-white text-neutral-900">
-      {/* 1. メインビジュアル：ヘッダー・雫と連動する初期演出を含む */}
+      {/* 1. メインビジュアル：初期演出を含む */}
       <MainVisual />
 
       <div className="space-y-0">
