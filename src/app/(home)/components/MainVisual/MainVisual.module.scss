@@ -196,7 +196,7 @@
 
   /* Large (さらにはみ出す) */
   @media (min-width: calc(1920 / 16 * 1em)) {
-    right: -5%;
+    right: 0;
   }
 }
 
@@ -237,7 +237,7 @@
     width: 100%;
     height: 100%;
     background-color: var(--color-white);
-    animation: scroll 3.8s ease-out infinite;
+    animation: scroll 2.8s ease-out infinite;
   }
 }
 

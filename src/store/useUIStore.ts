@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 
-type AnimationPhase = "initial" | "mv-playing" | "header-entry" | "ready";
+type AnimationPhase = "initial" | "playing" | "ready";
 
 type UIState = {
   phase: AnimationPhase;

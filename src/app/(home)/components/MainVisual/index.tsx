@@ -13,9 +13,10 @@ export const MainVisual = () => {
   const phase = useUIStore((state) => state.phase);
 
   const isAllFinished = phase === "ready";
-  const isMvItemVisible = phase === "ready" || phase === "header-entry";
+  const isMvItemVisible = phase === "ready";
 
   useEffect(() => {
+    // 既に演出が完了している場合は実行しない
     if (isAllFinished) return;
 
     const ctx = gsap.context(() => {
@@ -23,44 +24,71 @@ export const MainVisual = () => {
         onComplete: () => setPhase("ready"),
       });
 
-      setPhase("mv-playing");
+      setPhase("playing");
 
+      // --- 初期状態のセット ---
+      // 全アイテムを一括で「ぼかし20px・透明・少し下配置」に固定
+      tl.set(
+        [
+          ".js-mv-item-main-copy",
+          ".js-mv-item-sub-copy",
+          ".js-mv-item-image",
+        ],
+        {
+          filter: "blur(8px)",
+          opacity: 0,
+        },
+      );
+      tl.set(
+        [
+          ".js-scroll-indicator",
+        ],
+        {
+          opacity: 0,
+        },
+      );
+
+      // --- 2. コンテンツのアニメーション ---
       tl.to(".js-mv-item-main-copy", {
         opacity: 1,
-        duration: 1,
-        stagger: 0.5,
-        ease: "power4.out",
+        filter: "blur(0px)", // モザイク（ぼかし）を解除
+        y: 0,
+        duration: 2.0, // より「じわっと」させるため長めに設定
+        // stagger: 0.8,
+        ease: "power2.out",
       })
         .to(
           ".js-mv-item-sub-copy",
           {
             opacity: 1,
-            duration: 1.2,
-            ease: "power4.out",
+            filter: "blur(0px)",
+            duration: 2.0,
+            ease: "power2.out",
           },
-          "-=0.3",
+          "-=2.0", // メインコピーの登場中に重ねる
         )
         .to(
           ".js-mv-item-image",
           {
             opacity: 1,
-            duration: 2,
-            ease: "power4.out",
+            filter: "blur(0px)",
+            duration: 2.0, // 画像はさらにゆっくり
+            ease: "power2.out",
           },
-          "-=0.3",
+          "-=2.0",
         )
-        .add(() => setPhase("header-entry"), "-=0.8")
+        // --- 3. スクロールインジケーターのアニメーション ---
         .to(
           ".js-scroll-indicator",
           {
             opacity: 1,
-            duration: 2,
-            ease: "power4.out",
+            filter: "blur(0px)",
+            duration: 1.2,
+            ease: "slow",
           },
-          "+=1",
+          "-=1.4", // すべてが晴れた後に静かに登場
         );
     }, rootRef);
-
     return () => ctx.revert();
   }, [setPhase, isAllFinished]);
 
