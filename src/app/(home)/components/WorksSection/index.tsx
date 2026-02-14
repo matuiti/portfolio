@@ -1,57 +1,70 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { WorkCard } from "@/app/works/components/WorkCard";
 import { WorkDetailModal } from "@/app/works/components/WorkDetailModal";
-// import { Button } from "@/components/ui/Buttons/MainButton";
-// import Link from "next/link";
 import { ALL_WORKS } from "@/data/works";
-import { Work } from "@/types/work";
+import { Work, WorkCategory, WorkFilterCategory } from "@/types/work";
+import { CategoryTabs } from "./CategoryTabs";
+// import styles from "./WorksSection.module.scss";
 
 export const WorksSection = () => {
+  // 1. 状態管理：選択中のカテゴリと、モーダル表示用の実績
+  const [activeCategory, setActiveCategory] =
+    useState<WorkFilterCategory>("web");
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  // トップページには最新の3件のみ表示
-  const displayWorks = ALL_WORKS.slice(0, 3);
+  // 2. フィルタリングロジック：カテゴリに基づいてデータを抽出
+  // パフォーマンス最適化のため useMemo を使用
+  const displayWorks = useMemo(() => {
+    const filtered = ALL_WORKS.filter((work) => {
+      // "all" の場合は全てのデータを通す
+      if (activeCategory === "all") return true;
+
+      // activeCategory が "all" でない場合、その型は WorkCategory と一致するため、
+      // WorkCategory にキャストすることで型安全に includes を実行できます。
+      return work.category.includes(activeCategory as WorkCategory);
+    });
+
+    return filtered.slice(0, 3);
+  }, [activeCategory]);
 
   return (
-    <section className="py-24 bg-slate-50">
-      <div className="container-center px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <SectionTitle
-            title="Selected Works"
-            description="実務案件から個人プロジェクトまで、これまでの制作実績の一部をご紹介します。"
+    <section className="section-padding-y section-padding-x">
+      <div className="container-center">
+        <div className="flex flex-col small:flex-row small:justify-between small:items-baseline-last gap-10 mb-5 tablet:mb-10 small:mb-15">
+          {/* セクション見出し */}
+          <SectionTitle enTitle="works" jpTitle="制作実績" variant="default" />
+          {/* 3. カテゴリスイッチ */}
+          <CategoryTabs
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
           />
-          {/* <Link href="/works">
-            <Button intent="outline" size="long">
-              View All Projects
-            </Button>
-          </Link> */}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 4. 実績グリッド表示 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 small:grid-cols-3 gap-[calc(30/16*1rem)]">
           {displayWorks.map((work) => (
             <WorkCard
               key={work.id}
               work={work}
               onClick={() => setSelectedWork(work)}
-              // 不要になった callback プロパティを削除しました
             />
           ))}
         </div>
-      </div>
 
-      {/* 詳細モーダル */}
-      {selectedWork && (
-        <WorkDetailModal
-          isOpen={!!selectedWork}
-          onClose={() => setSelectedWork(null)}
-          work={selectedWork}
-          allFilteredWorks={displayWorks} // 型定義に追加する必要があります
-          onNavigate={setSelectedWork}
-        />
-      )}
+        {/* 詳細モーダル */}
+        {selectedWork && (
+          <WorkDetailModal
+            isOpen={!!selectedWork}
+            onClose={() => setSelectedWork(null)}
+            work={selectedWork}
+            allFilteredWorks={displayWorks}
+            onNavigate={setSelectedWork}
+          />
+        )}
+      </div>
     </section>
   );
 };

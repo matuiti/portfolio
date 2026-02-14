@@ -3,7 +3,7 @@
 
 import { Search, X } from "lucide-react";
 import { WorkFilterCategory, WorkCategory } from "@/types/work"; // WorkCategoryを追加
-import { ALL_WORKS } from "@/data/works";
+import { ALL_WORKS, WORK_CATEGORIES } from "@/data/works";
 
 // --- 検索ボックス (変更なし) ---
 export const WorksSearchBox = ({
@@ -45,13 +45,7 @@ export const WorksCategoryList = ({
   onSelect,
   counts = {}, // デフォルト値を設定
 }: CategoryListProps) => {
-  const categories: { label: string; value: WorkFilterCategory }[] = [
-    { label: "すべて", value: "all" },
-    { label: "Web制作", value: "web" },
-    { label: "WordPress", value: "wordpress" },
-    { label: "アプリケーション", value: "app" },
-    { label: "ゲーム", value: "game" },
-  ];
+  const categories: { label: string; value: WorkFilterCategory }[] = WORK_CATEGORIES;
 
   // countsが渡されていない場合の内部計算用ロジック (anyを排除) [cite: 202]
   const internalCounts = categories.reduce(

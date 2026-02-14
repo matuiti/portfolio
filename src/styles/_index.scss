@@ -1,2 +1,3 @@
-// @forward "base";
-// @forward "reset";
+// 変数とミックスインを外部（各コンポーネント）から使えるように転送
+@forward "variables";
+@forward "mixins";

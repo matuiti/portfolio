@@ -67,20 +67,20 @@ export const MainVisual = () => {
   return (
     <section
       ref={rootRef}
-      className={`${styles["mv-section-container"]} relative w-full overflow-hidden flex items-start justify-center bg-black`}
+      className={`${styles.mvSectionContainer} relative w-full overflow-hidden flex items-start justify-center bg-black`}
     >
-      <div className={`${styles["mv-container"]} relative mx-auto`}>
-        <div className={`${styles["mv-content-wrapper"]}`}>
+      <div className={`${styles.mvContainer} relative mx-auto`}>
+        <div className={`${styles.mvContentWrapper}`}>
           {/* コピー */}
           <div className="space-y-4 mobile:space-y-5">
             {/* メインコピー */}
-            <h1 className={`${styles["main-copy-text"]}`}>
+            <h1 className={`${styles.mainCopyText}`}>
               <span className={`${mvItemClass}`}>安心して任せられる</span>
               <br />
               <span className={`${mvItemClass}`}>技術者でありたい</span>
             </h1>
             {/* サブコピー */}
-            <p className={`${mvItemClass} ${styles["sub-copy-text"]}`}>
+            <p className={`${mvItemClass} ${styles.subCopyText}`}>
               ユーザーに寄り添った、品質の高いコーディングを提供します。
             </p>
           </div>
@@ -115,7 +115,7 @@ export const MainVisual = () => {
       </div>
 
       <div className="pointer-events-none absolute inset-0 flex justify-center">
-        <div className={`${styles["mv-container"]} relative h-full mt-0!`}>
+        <div className={`${styles.mvContainer} relative h-full mt-0!`}>
           <div className={scrollClass}>
             <span className={styles.scrollText}>Scroll</span>
             <div className={styles.dropLineTrack} />
