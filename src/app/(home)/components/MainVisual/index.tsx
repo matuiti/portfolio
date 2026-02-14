@@ -72,10 +72,9 @@ export const MainVisual = () => {
   return (
     <section
       ref={rootRef}
-      // small:h-svh
       className={`${styles["mv-section-container"]} relative w-full overflow-hidden flex items-start justify-center bg-black`}
     >
-      <div className={`${styles["mv-container"]} relative mx-auto self-center`}>
+      <div className={`${styles["mv-container"]} relative mx-auto`}>
         <div className={`${styles["mv-content-wrapper"]}`}>
           {/* コピー */}
           <div className="space-y-4 mobile:space-y-5">
@@ -105,16 +104,16 @@ export const MainVisual = () => {
                 sizes="(max-width: 540px) 100vw, 443px"
               />
             </div>
-
             {/* PC用画像コンテナ */}
-            <div className="hidden tablet:block w-50 h-50 small:w-75 small:h-75 large:w-87.5 large:h-87.5 relative overflow-hidden">
+            {/* large:w-87.5 large:h-87.5 */}
+            <div className="hidden tablet:block w-50 h-50 small:w-75 small:h-75 relative overflow-hidden">
               <Image
-                src="/assets/images/home/mv-pc-l.jpg"
+                src="/assets/images/home/mv-pc.jpg"
                 alt="メインビジュアル"
                 fill
                 priority
                 className="object-cover"
-                sizes="350px"
+                sizes="300px"
               />
             </div>
           </div>
