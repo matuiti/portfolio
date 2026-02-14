@@ -1,21 +1,23 @@
 // src/app/(home)/components/MainVisual/MainVisual.module.scss
+@use "../../../../styles" as *;
+
 .mvSectionContainer {
   // 1. 基本サイズ (Mini: 350px〜)
   min-height: calc(570 / 16 * 1rem);
   padding-top: calc(65 / 16 * 1rem); // pt-header-mini (ヘッダー高: 65px)
 
   // 2. Mobile (540px〜) [3]
-  @media (min-width: calc(540 / 16 * 1em)) {
+  @include mq(mobile) {
     min-height: calc(650 / 16 * 1rem);
   }
 
   // 3. Tablet (840px〜) [3]
-  @media (min-width: calc(840 / 16 * 1em)) {
+  @include mq(tablet) {
     min-height: calc(600 / 16 * 1rem);
   }
 
   // 4. Small (1140px〜) [3]
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     min-height: calc(640 / 16 * 1rem);
     padding-top: calc(90 / 16 * 1rem); // pt-header-small (ヘッダー高: 90px)
     // padding-top: calc(170 / 16 * 1rem);
@@ -31,30 +33,30 @@
   padding-left: calc(20 / 16 * 1rem);
   padding-right: calc(20 / 16 * 1rem);
 
-  @media (min-width: calc(540 / 16 * 1em)) {
+  @include mq(mobile) {
     padding-left: calc(32 / 16 * 1rem);
     padding-right: calc(32 / 16 * 1rem);
     max-width: 82%;
   }
 
-  @media (min-width: calc(840 / 16 * 1em)) {
+  @include mq(tablet) {
     // margin-top: calc(174 / 16 * 1rem);
     margin-top: calc(158 / 16 * 1rem);
     max-width: calc(800 / 16 * 1rem);
   }
 
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     align-self: center;
     margin-top: 0;
     // margin-top: calc(170 / 16 * 1rem);
     max-width: calc(1000 / 16 * 1rem);
   }
 
-  @media (min-width: calc(1280 / 16 * 1em)) {
+  @include mq(default) {
     max-width: calc(1200 / 16 * 1rem);
   }
 
-  @media (min-width: calc(1920 / 16 * 1em)) {
+  @include mq(large) {
     padding-left: 0;
     padding-right: 0;
   }
@@ -69,19 +71,19 @@
   gap: calc(20 / 16 * 1rem);
 
   // Mobile (540px〜)
-  @media (min-width: calc(540 / 16 * 1em)) {
+  @include mq(mobile) {
     gap: calc(26 / 16 * 1rem);
     margin-bottom: 9%;
   }
 
   // Tablet (840px〜)
-  @media (min-width: calc(840 / 16 * 1em)) {
+  @include mq(tablet) {
     flex-direction: row;
     margin-bottom: 0;
   }
 
   // Small (1140px〜)
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     gap: calc(40 / 16 * 1rem);
   }
 }
@@ -94,23 +96,23 @@
   font-size: calc(28 / 16 * 1rem);
 
   // Mobile (540px〜)
-  @media (min-width: calc(540 / 16 * 1em)) {
+  @include mq(mobile) {
     font-size: calc(32 / 16 * 1rem);
     line-height: 1.7;
   }
 
   // Tablet (840px〜)
-  @media (min-width: calc(840 / 16 * 1em)) {
+  @include mq(tablet) {
     font-size: calc(45 / 16 * 1rem);
   }
 
   // Small (1140px〜)
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     font-size: calc(60 / 16 * 1rem);
   }
 
   // Default (1280px〜)
-  @media (min-width: calc(1280 / 16 * 1em)) {
+  @include mq(default) {
     font-size: calc(70 / 16 * 1rem);
   }
 }
@@ -123,12 +125,12 @@
   font-size: calc(14 / 16 * 1rem);
 
   // Small (1140px〜)
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     font-size: calc(17 / 16 * 1rem);
   }
 
   // Default (1280px〜)
-  @media (min-width: calc(1280 / 16 * 1em)) {
+  @include mq(default) {
     font-size: calc(20 / 16 * 1rem);
   }
 }
@@ -151,28 +153,28 @@
   right: 1.5%;
 
   /* Mobile */
-  @media (min-width: calc(540 / 16 * 1em)) {
+  @include mq(mobile) {
     right: -2%;
   }
 
   /* Tablet */
-  @media (min-width: calc(840 / 16 * 1em)) {
+  @include mq(tablet) {
     right: 1%;
   }
 
   /* Small */
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     right: -1%;
     transform: translateX(calc(16 / 16 * 1rem));
   }
 
   /* Default */
-  @media (min-width: calc(1280 / 16 * 1em)) {
+  @include mq(default) {
     right: 3%;
   }
 
-  /* Larg */
-  @media (min-width: calc(1920 / 16 * 1em)) {
+  /* Large */
+  @include mq(large) {
     right: 0;
   }
 }
@@ -185,7 +187,7 @@
   writing-mode: vertical-rl;
   color: var(--color-white);
   /* Small */
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     font-size: calc(16 / 16 * 1rem);
   }
 }
@@ -197,11 +199,11 @@
   overflow: hidden;
   height: calc(60 / 16 * 1rem);
 
-  @media (min-width: calc(540 / 16 * 1em)) {
+  @include mq(mobile) {
     height: calc(80 / 16 * 1rem);
   }
 
-  @media (min-width: calc(1140 / 16 * 1em)) {
+  @include mq(small) {
     height: calc(100 / 16 * 1rem);
   }
 

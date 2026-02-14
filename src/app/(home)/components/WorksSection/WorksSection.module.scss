@@ -1,0 +1,63 @@
+@use "../../../../styles" as *;
+
+.sectionHead {
+  // 基本スタイル (flex flex-col gap-10 mb-5)
+  display: flex;
+  flex-direction: column;
+  gap: calc(40 / 16 * 1rem); // gap-10 (40px)
+  margin-bottom: calc(20 / 16 * 1rem); // mb-5 (20px)
+
+  // タブレットサイズ以上 (tablet:mb-10)
+  @include mq("tablet") {
+    margin-bottom: calc(40 / 16 * 1rem); // tablet:mb-10 (40px)
+  }
+
+  // スモールPCサイズ以上 (small:flex-row small:justify-between small:items-baseline-last small:mb-15)
+  @include mq("small") {
+    flex-direction: row; // small:flex-row
+    justify-content: space-between; // small:justify-between
+    align-items: last baseline; // small:items-baseline-last
+    margin-bottom: calc(60 / 16 * 1rem); // small:mb-15 (60px)
+  }
+}
+
+.cards {
+  display: grid;
+  // ポイント1: 数値のみを変数に格納し、px根拠を明確にする
+  --gap-px: 20;
+  gap: calc(var(--gap-px) / 16 * 1rem);
+
+  grid-template-columns: 1fr;
+  justify-content: center;
+
+  @include mq("tablet") {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include mq("small") {
+    grid-template-columns: repeat(3, minmax(0, calc(300 / 16 * 1rem)));
+  }
+
+  @include mq("default") {
+    grid-template-columns: repeat(3, minmax(0, calc(346.67 / 16 * 1rem)));
+  }
+
+  // ポイント2: ボタンラッパーを .cards 内にネストさせ、変数スコープを有効にする
+  .moreButtonWrapper {
+    grid-column: 1 / -1;
+    width: 100%;
+
+    // 正しい計算式: 数値同士で引き算してから単位を付与
+    // デザイン意図: 目標余白(40px) - グリッドの溝(20px) = 実質の追加マージン
+    margin-top: calc((40 - var(--gap-px)) / 16 * 1rem);
+
+    @include mq("small") {
+      margin-top: calc((60 - var(--gap-px)) / 16 * 1rem);
+    }
+
+    & > button,
+    & > a {
+      width: 100%;
+    }
+  }
+}
