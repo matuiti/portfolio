@@ -1,26 +1,20 @@
 // src/app/(home)/components/MainVisual/MainVisual.module.scss
 .mv-section-container {
   // 1. 基本サイズ (Mini: 350px〜)
-  // デザイン根拠: 570px [1, 2]
   min-height: calc(570 / 16 * 1rem);
-  padding-top: calc(
-    65 / 16 * 1rem
-  ); // pt-header-mini (ヘッダー高: 65px)
+  padding-top: calc(65 / 16 * 1rem); // pt-header-mini (ヘッダー高: 65px)
 
   // 2. Mobile (540px〜) [3]
-  // デザイン根拠: 650px [1, 2]
   @media (min-width: calc(540 / 16 * 1em)) {
     min-height: calc(650 / 16 * 1rem);
   }
 
   // 3. Tablet (840px〜) [3]
-  // デザイン根拠: 600px [1, 2]
   @media (min-width: calc(840 / 16 * 1em)) {
     min-height: calc(600 / 16 * 1rem);
   }
 
   // 4. Small (1140px〜) [3]
-  // デザイン根拠: 640px [1, 2]
   @media (min-width: calc(1140 / 16 * 1em)) {
     min-height: calc(640 / 16 * 1rem);
     padding-top: calc(90 / 16 * 1rem); // pt-header-small (ヘッダー高: 90px)
@@ -31,11 +25,9 @@
 .mv-container {
   width: 100%;
   max-width: 90%;
-  /* 3. 各ブレイクポイントでの最大幅と上部余白の調整 */
   margin-top: calc(60 / 16 * 1rem);
   margin-left: auto;
   margin-right: auto;
-  // margin-bottom: 9%;
   padding-left: calc(20 / 16 * 1rem);
   padding-right: calc(20 / 16 * 1rem);
 
@@ -75,7 +67,6 @@
   justify-content: center;
   align-items: flex-start;
   gap: calc(20 / 16 * 1rem);
-  // margin-top: calc(65 / 16 * 1rem); // pt-header-mini (デザイン上のヘッダー高: 65px) [4]
 
   // Mobile (540px〜)
   @media (min-width: calc(540 / 16 * 1em)) {
@@ -92,7 +83,6 @@
   // Small (1140px〜)
   @media (min-width: calc(1140 / 16 * 1em)) {
     gap: calc(40 / 16 * 1rem);
-    // margin-top: calc(170 / 16 * 1rem); // small:pt-header-small (デザイン上のヘッダー高: 170px) [5]
   }
 }
 
@@ -102,8 +92,6 @@
   font-weight: 900;
   line-height: normal;
   font-size: calc(28 / 16 * 1rem);
-
-  // 各ブレイクポイントでの調整 [2]
 
   // Mobile (540px〜)
   @media (min-width: calc(540 / 16 * 1em)) {
@@ -125,11 +113,6 @@
   @media (min-width: calc(1280 / 16 * 1em)) {
     font-size: calc(70 / 16 * 1rem);
   }
-
-  // Large (1920px〜)
-  // @media (min-width: calc(1920 / 16 * 1em)) {
-  //   font-size: calc(80 / 16 * 1rem);
-  // }
 }
 
 .sub-copy-text {
@@ -148,11 +131,6 @@
   @media (min-width: calc(1280 / 16 * 1em)) {
     font-size: calc(20 / 16 * 1rem);
   }
-
-  // Large (1920px〜)
-  // @media (min-width: calc(1920 / 16 * 1em)) {
-  //   font-size: calc(24 / 16 * 1rem);
-  // }
 }
 
 .scrollIndicator {
@@ -169,7 +147,6 @@
 
   position: absolute;
   bottom: 0;
-  /* 横位置の制御：メディアクエリを昇順に並べることで確実に上書き */
   /* Mini / Base */
   right: 1.5%;
 
@@ -178,23 +155,23 @@
     right: -2%;
   }
 
-  /* Tablet (コンテナ右端に揃える) */
+  /* Tablet */
   @media (min-width: calc(840 / 16 * 1em)) {
     right: 1%;
   }
 
-  /* Small (コンテナ外に出す) */
+  /* Small */
   @media (min-width: calc(1140 / 16 * 1em)) {
     right: -1%;
     transform: translateX(calc(16 / 16 * 1rem));
   }
 
-  /* Default (さらにはみ出す) */
+  /* Default */
   @media (min-width: calc(1280 / 16 * 1em)) {
     right: 3%;
   }
 
-  /* Large (さらにはみ出す) */
+  /* Larg */
   @media (min-width: calc(1920 / 16 * 1em)) {
     right: 0;
   }
