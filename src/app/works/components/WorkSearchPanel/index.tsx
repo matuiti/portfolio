@@ -5,7 +5,7 @@ import React from "react";
 import { Search, RotateCcw } from "lucide-react";
 import { WorkFilterCategory } from "@/types/work";
 import { useWorkStore } from "@/store/useWorkStore";
-import { ALL_WORKS } from "@/data/works";
+import { ALL_WORKS, WORK_CATEGORIES } from "@/data/works";
 
 export const WorkSearchPanel = () => {
   const {
@@ -23,13 +23,8 @@ export const WorkSearchPanel = () => {
     new Set(ALL_WORKS.flatMap((w) => w.tags)),
   ).sort();
 
-  const categories: { label: string; value: WorkFilterCategory }[] = [
-    { label: "All", value: "all" },
-    { label: "Web制作", value: "web" },
-    { label: "WordPress", value: "wordpress" },
-    { label: "アプリケーション", value: "app" },
-    { label: "ゲーム", value: "game" },
-  ];
+  const categories: { label: string; value: WorkFilterCategory }[] =
+    WORK_CATEGORIES;
 
   return (
     <div className="space-y-8 bg-white p-8 rounded-4xl border border-slate-100 shadow-sm">

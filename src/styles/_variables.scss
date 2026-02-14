@@ -1,0 +1,8 @@
+$breakpoints: (
+  "mini": "calc(350 / 16 * 1em)",    // 350px [4]
+  "mobile": "calc(540 / 16 * 1em)",  // 540px [4]
+  "tablet": "calc(840 / 16 * 1em)",  // 840px [4]
+  "small": "calc(1140 / 16 * 1em)",  // 1140px [4]
+  "default": "calc(1280 / 16 * 1em)",// 1280px [4]
+  "large": "calc(1920 / 16 * 1em)"   // 1920px [5]
+);

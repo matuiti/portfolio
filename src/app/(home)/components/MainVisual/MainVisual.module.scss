@@ -1,5 +1,5 @@
 // src/app/(home)/components/MainVisual/MainVisual.module.scss
-.mv-section-container {
+.mvSectionContainer {
   // 1. 基本サイズ (Mini: 350px〜)
   min-height: calc(570 / 16 * 1rem);
   padding-top: calc(65 / 16 * 1rem); // pt-header-mini (ヘッダー高: 65px)
@@ -22,7 +22,7 @@
   }
 }
 
-.mv-container {
+.mvContainer {
   width: 100%;
   max-width: 90%;
   margin-top: calc(60 / 16 * 1rem);
@@ -60,7 +60,7 @@
   }
 }
 
-.mv-content-wrapper {
+.mvContentWrapper {
   // 基本スタイル (Base / Mini〜)
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@
   }
 }
 
-.main-copy-text {
+.mainCopyText {
   // 基本スタイル (Mobile未満 / Mini)
   color: var(--color-white);
   font-weight: 900;
@@ -115,7 +115,7 @@
   }
 }
 
-.sub-copy-text {
+.subCopyText {
   // 基本スタイル (Base / Mini〜Tablet)
   color: var(--color-white);
   font-weight: 500;
