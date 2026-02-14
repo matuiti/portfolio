@@ -16,7 +16,7 @@ export const MainVisual = () => {
   const isMvItemVisible = phase === "ready";
 
   useEffect(() => {
-    // 既に演出が完了している場合は実行しない
+    // 既に演出が完了している場合は実行しない [1]
     if (isAllFinished) return;
 
     const ctx = gsap.context(() => {
@@ -26,57 +26,25 @@ export const MainVisual = () => {
 
       setPhase("playing");
 
-      // --- 初期状態のセット ---
-      // 全アイテムを一括で「ぼかし20px・透明・少し下配置」に固定
-      tl.set(
-        [
-          ".js-mv-item-main-copy",
-          ".js-mv-item-sub-copy",
-          ".js-mv-item-image",
-        ],
-        {
-          filter: "blur(8px)",
-          opacity: 0,
-        },
-      );
-      tl.set(
-        [
-          ".js-scroll-indicator",
-        ],
-        {
-          opacity: 0,
-        },
-      );
+      // --- 1. 初期状態のセット ---
+      tl.set(".js-mv-item", {
+        filter: "blur(8px)",
+        opacity: 0,
+      });
+
+      tl.set(".js-scroll-indicator", {
+        opacity: 0,
+      });
 
       // --- 2. コンテンツのアニメーション ---
-      tl.to(".js-mv-item-main-copy", {
+      tl.to(".js-mv-item", {
         opacity: 1,
-        filter: "blur(0px)", // モザイク（ぼかし）を解除
+        filter: "blur(0px)",
         y: 0,
-        duration: 2.0, // より「じわっと」させるため長めに設定
-        // stagger: 0.8,
+        duration: 2.0, // じわっとさせる演出を維持
+        stagger: 0, // 同時に開始
         ease: "power2.out",
       })
-        .to(
-          ".js-mv-item-sub-copy",
-          {
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 2.0,
-            ease: "power2.out",
-          },
-          "-=2.0", // メインコピーの登場中に重ねる
-        )
-        .to(
-          ".js-mv-item-image",
-          {
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 2.0, // 画像はさらにゆっくり
-            ease: "power2.out",
-          },
-          "-=2.0",
-        )
         // --- 3. スクロールインジケーターのアニメーション ---
         .to(
           ".js-scroll-indicator",
@@ -86,15 +54,14 @@ export const MainVisual = () => {
             duration: 1.2,
             ease: "slow",
           },
-          "-=1.4", // すべてが晴れた後に静かに登場
+          "-=1.4",
         );
     }, rootRef);
+
     return () => ctx.revert();
   }, [setPhase, isAllFinished]);
 
-  const mainItemClass = `js-mv-item-main-copy ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
-  const subItemClass = `js-mv-item-sub-copy ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
-  const imageItemClass = `js-mv-item-image ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
+  const mvItemClass = `js-mv-item ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
   const scrollClass = `js-scroll-indicator ${isAllFinished ? "opacity-100" : "opacity-0"} ${styles.scrollIndicator}`;
 
   return (
@@ -108,18 +75,18 @@ export const MainVisual = () => {
           <div className="space-y-4 mobile:space-y-5">
             {/* メインコピー */}
             <h1 className={`${styles["main-copy-text"]}`}>
-              <span className={`${mainItemClass}`}>安心して任せられる</span>
+              <span className={`${mvItemClass}`}>安心して任せられる</span>
               <br />
-              <span className={`${mainItemClass}`}>技術者でありたい</span>
+              <span className={`${mvItemClass}`}>技術者でありたい</span>
             </h1>
             {/* サブコピー */}
-            <p className={`${subItemClass} ${styles["sub-copy-text"]}`}>
+            <p className={`${mvItemClass} ${styles["sub-copy-text"]}`}>
               ユーザーに寄り添った、品質の高いコーディングを提供します。
             </p>
           </div>
           {/* 画像 */}
           <div
-            className={`${imageItemClass} w-full tablet:w-auto flex justify-start`}
+            className={`${mvItemClass} w-full tablet:w-auto flex justify-start`}
           >
             {/* スマホ用画像コンテナ */}
             <div className="block tablet:hidden w-full h-auto aspect-video relative">
@@ -133,7 +100,6 @@ export const MainVisual = () => {
               />
             </div>
             {/* PC用画像コンテナ */}
-            {/* large:w-87.5 large:h-87.5 */}
             <div className="hidden tablet:block w-50 h-50 small:w-75 small:h-75 relative overflow-hidden">
               <Image
                 src="/assets/images/home/mv-pc.jpg"
