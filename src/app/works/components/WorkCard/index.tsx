@@ -1,7 +1,8 @@
 // src/app/works/components/WorkCard/index.tsx
+
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { Work, WorkFilterCategory } from "@/types/work";
@@ -10,19 +11,46 @@ import { useWorkStore } from "@/store/useWorkStore";
 type Props = {
   work: Work;
   onClick: () => void;
+  onCategoryClick?: (cat: WorkFilterCategory) => void;
 };
 
-export const WorkCard = memo(({ work, onClick }: Props) => {
+// パス定義
+const NDA_THUMBNAIL_PATH = "/assets/images/common/noimage.jpg";
+const PLACEHOLDER_THUMBNAIL_PATH = "/assets/images/common/noimage.jpg";
+
+export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
-
-  const selectOnlyTag = useWorkStore((state) => state.selectOnlyTag);
   const selectOnlyCategory = useWorkStore((state) => state.selectOnlyCategory);
-
   const isWorksPage = pathname.startsWith("/works");
+
+  const [isTagHovered, setIsTagHovered] = useState(false);
+
+  /**
+   * 画像のソースを管理するステート
+   * 初期値の決定ロジック：
+   * 1. NDA案件なら専用画像
+   * 2. サムネイルが未設定（空文字など）ならプレースホルダー
+   * 3. それ以外は設定されたサムネイル
+   */
+  const initialSrc =
+    work.disclosureLevel === "NDA"
+      ? NDA_THUMBNAIL_PATH
+      : work.thumbnail || PLACEHOLDER_THUMBNAIL_PATH;
+
+  const [imgSrc, setImgSrc] = useState(initialSrc);
+
+  // フィルタリング等で work が切り替わった際に画像をリセット
+  useEffect(() => {
+    setImgSrc(initialSrc);
+  }, [initialSrc]);
 
   const handleCategoryClick = (e: React.MouseEvent, cat: string) => {
     e.stopPropagation();
+    if (onCategoryClick) {
+      onCategoryClick(cat as WorkFilterCategory);
+      return;
+    }
     if (isWorksPage) {
       selectOnlyCategory(cat as WorkFilterCategory);
     } else {
@@ -30,77 +58,95 @@ export const WorkCard = memo(({ work, onClick }: Props) => {
     }
   };
 
-  const handleTagClick = (e: React.MouseEvent, tag: string) => {
-    e.stopPropagation();
-    if (isWorksPage) {
-      selectOnlyTag(tag);
-    } else {
-      // 期待通り「そのタグ1つのみ」の状態を作るため tags パラメータに付与して遷移
-      router.push(`/works?tags=${encodeURIComponent(tag)}`);
-    }
-  };
-
   return (
-    <div
+    <article
       onClick={onClick}
-      className="group relative bg-white rounded-4xl border border-slate-100 overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-slate-200/50 hover:-translate-y-2 cursor-pointer"
+      className={`group flex flex-col bg-white overflow-hidden transition-all duration-500 cursor-pointer shadow-sm ${
+        !isTagHovered ? "hover:shadow-none" : ""
+      }`}
+      style={{
+        borderRadius: "calc(24 / 16 * 1rem)",
+      }}
     >
-      <div className="relative aspect-16/10 overflow-hidden bg-slate-100">
-        {work.disclosureLevel === "NDA" ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900 text-white p-6 text-center">
-            <span className="text-xs font-black tracking-[0.2em] mb-2 opacity-50">
-              CONFIDENTIAL
-            </span>
-            <p className="text-sm font-bold">NDA Protected</p>
-          </div>
-        ) : (
-          <Image
-            src={work.thumbnail}
-            alt={work.title}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-        )}
+      {/* 上部：サムネイルエリア */}
+      <div className="relative aspect-video overflow-hidden bg-slate-100">
+        <Image
+          src={imgSrc}
+          alt={work.title}
+          fill
+          className={`object-cover transition-transform duration-700 ${
+            !isTagHovered ? "group-hover:scale-110" : ""
+          }`}
+          // パスの間違いなどで読み込みエラーが発生した際にプレースホルダーに差し替える
+          onError={() => setImgSrc(PLACEHOLDER_THUMBNAIL_PATH)}
+        />
 
-        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-          {work.category.map((cat) => (
-            <button
-              key={cat}
-              onClick={(e) => handleCategoryClick(e, cat)}
-              className="px-4 py-1.5 bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-slate-900 rounded-full shadow-sm hover:bg-blue-600 hover:text-white transition-all cursor-pointer"
-            >
-              {cat}
-            </button>
-          ))}
+        {/* 「詳しく見る」オーバーレイ */}
+        <div
+          className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-opacity duration-500 z-10 ${
+            !isTagHovered ? "opacity-0 group-hover:opacity-100" : "opacity-0"
+          }`}
+        >
+          <span className="text-white font-bold tracking-widest text-[calc(14 / 16 * 1rem)]">
+            詳しく見る
+          </span>
         </div>
       </div>
 
-      <div className="p-6 md:p-8">
-        <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+      {/* 下部：情報エリア (既存のスタイルを維持) */}
+      <div
+        className="flex flex-col flex-1"
+        style={{ padding: "calc(24 / 16 * 1rem)" }}
+      >
+        <div
+          className="flex flex-wrap gap-2 mb-3 relative z-20"
+          onMouseEnter={() => setIsTagHovered(true)}
+          onMouseLeave={() => setIsTagHovered(false)}
+        >
+          {work.category.map((cat) => (
+            <span
+              key={cat}
+              onClick={(e) => handleCategoryClick(e, cat)}
+              className="text-[calc(10 / 16 * 1rem)] font-black uppercase tracking-widest text-blue-600 hover:text-blue-400 transition-colors cursor-pointer"
+            >
+              {cat}
+            </span>
+          ))}
+        </div>
+
+        <h3
+          className="font-bold text-slate-900 mb-[calc(8 / 16 * 1rem)]"
+          style={{ fontSize: "calc(18 / 16 * 1rem)" }}
+        >
           {work.title}
         </h3>
-        <p className="text-sm text-slate-500 line-clamp-2 mb-6 leading-relaxed">
+
+        <p
+          className="text-slate-600 mb-[calc(20 / 16 * 1rem)] line-clamp-2"
+          style={{ fontSize: "calc(14 / 16 * 1rem)", lineHeight: "1.6" }}
+        >
           {work.summary}
         </p>
 
-        <div className="flex flex-wrap gap-2">
-          {work.tags.slice(0, 3).map((tag) => (
-            <button
-              key={tag}
-              onClick={(e) => handleTagClick(e, tag)}
-              className="text-[10px] font-bold text-slate-400 bg-slate-50 px-3 py-1.5 rounded-xl hover:bg-slate-900 hover:text-white transition-all cursor-pointer"
-            >
-              #{tag}
-            </button>
-          ))}
-          {work.tags.length > 3 && (
-            <span className="text-[10px] font-bold text-slate-300 py-1.5">
-              +{work.tags.length - 3}
+        <div
+          className="mt-auto pt-[calc(16 / 16 * 1rem)] border-t border-slate-100 flex flex-col gap-1"
+          style={{ fontSize: "calc(12 / 16 * 1rem)" }}
+        >
+          <div className="flex">
+            <span className="text-slate-400 w-[calc(60 / 16 * 1rem)] shrink-0 font-medium">
+              Role
             </span>
-          )}
+            <span className="text-slate-700 font-bold">{work.role}</span>
+          </div>
+          <div className="flex">
+            <span className="text-slate-400 w-[calc(60 / 16 * 1rem)] shrink-0 font-medium">
+              Period
+            </span>
+            <span className="text-slate-700 font-bold">{work.duration}</span>
+          </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 });
 

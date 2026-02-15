@@ -27,7 +27,7 @@ export const ALL_WORKS: Work[] = [
       "パフォーマンスとSEOを最優先に設計. Server Componentsを活用し、従来のReact構成よりLCPを40%改善しました。",
     duration: "4ヶ月",
     role: "リードエンジニア",
-    disclosureLevel: "Full",
+    disclosureLevel: "NDA",
     isSpeedyWork: false,
     isLongTerm: true,
     github: "https://github.com/your-id/next-ec-project",
