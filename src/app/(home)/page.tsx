@@ -1,12 +1,6 @@
+import { GallerySection } from "./components/GallerySection";
 import { MainVisual } from "./components/MainVisual";
 import { WorksSection } from "./components/WorksSection";
-// 今後作成していくセクション群（仮インポート含む）
-// import { GallerySection } from "./components/GallerySection";
-// import { SkillsSection } from "./components/SkillsSection";
-// import { ServiceSection } from "./components/ServiceSection";
-// import { AboutSection } from "./components/AboutSection";
-// import { BlogSection } from "./components/BlogSection";
-// import { ContactSection } from "./components/ContactSection";
 
 export default function Home() {
   return (
@@ -16,18 +10,13 @@ export default function Home() {
 
       <div className="space-y-0">
         {/* 2. WORKS：データ共有・カテゴリスイッチング機能付き */}
-        <section id="works" className="relative scroll-mt-20">
+        <section id="works" className="scroll-mt-20">
           <WorksSection />
         </section>
 
         {/* 3. GALLERY：準備中コンポーネントを配置予定 */}
-        <section id="gallery" className="py-24 bg-neutral-50 scroll-mt-20">
-          <div className="container-center px-6">
-            {/* <GallerySection /> */}
-            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
-              GALLERY SECTION (COMING SOON)
-            </div>
-          </div>
+        <section id="gallery" className="scroll-mt-20">
+          <GallerySection />
         </section>
 
         {/* 4. SERVICE：メディアカードレイアウト */}
