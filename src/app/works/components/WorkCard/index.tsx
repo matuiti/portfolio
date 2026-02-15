@@ -61,15 +61,12 @@ export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
   return (
     <article
       onClick={onClick}
-      className={`group flex flex-col bg-white overflow-hidden transition-all duration-500 cursor-pointer shadow-sm ${
+      className={`group flex flex-col bg-white overflow-hidden transition-all duration-500 cursor-pointer shadow-card rounded-lg ${
         !isTagHovered ? "hover:shadow-none" : ""
       }`}
-      style={{
-        borderRadius: "calc(24 / 16 * 1rem)",
-      }}
     >
       {/* 上部：サムネイルエリア */}
-      <div className="relative aspect-video overflow-hidden bg-slate-100">
+      <div className="relative aspect-video overflow-hidden bg-gray">
         <Image
           src={imgSrc}
           alt={work.title}
@@ -83,23 +80,18 @@ export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
 
         {/* 「詳しく見る」オーバーレイ */}
         <div
-          className={`absolute inset-0 bg-black/60 flex items-center justify-center transition-opacity duration-500 z-10 ${
+          className={`absolute inset-0 bg-menu-backdrop flex items-center justify-center transition-opacity duration-500 z-image-overlay ${
             !isTagHovered ? "opacity-0 group-hover:opacity-100" : "opacity-0"
           }`}
         >
-          <span className="text-white font-bold tracking-widest text-[calc(14 / 16 * 1rem)]">
-            詳しく見る
-          </span>
+          <span className="text-white text-[calc(18/16*1rem)]">詳しく見る</span>
         </div>
       </div>
 
       {/* 下部：情報エリア (既存のスタイルを維持) */}
-      <div
-        className="flex flex-col flex-1"
-        style={{ padding: "calc(24 / 16 * 1rem)" }}
-      >
+      <div className="flex flex-col flex-1 pt-[calc(28/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] gap-4">
         <div
-          className="flex flex-wrap gap-2 mb-3 relative z-20"
+          className="flex flex-wrap gap-2 relative"
           onMouseEnter={() => setIsTagHovered(true)}
           onMouseLeave={() => setIsTagHovered(false)}
         >
@@ -107,42 +99,27 @@ export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
             <span
               key={cat}
               onClick={(e) => handleCategoryClick(e, cat)}
-              className="text-[calc(10 / 16 * 1rem)] font-black uppercase tracking-widest text-blue-600 hover:text-blue-400 transition-colors cursor-pointer"
+              className="text-[calc(12/16*1rem)] bg-light-gray hover:bg-gray hover:text-white transition cursor-pointer py-1 px-3"
             >
               {cat}
             </span>
           ))}
         </div>
 
-        <h3
-          className="font-bold text-slate-900 mb-[calc(8 / 16 * 1rem)]"
-          style={{ fontSize: "calc(18 / 16 * 1rem)" }}
-        >
-          {work.title}
-        </h3>
+        <h3 className="text-[calc(18/16*1rem)] leading-tight">{work.title}</h3>
 
-        <p
-          className="text-slate-600 mb-[calc(20 / 16 * 1rem)] line-clamp-2"
-          style={{ fontSize: "calc(14 / 16 * 1rem)", lineHeight: "1.6" }}
-        >
+        <p className="text-[calc(16/16*1rem)] line-clamp-2 leading-normal">
           {work.summary}
         </p>
 
-        <div
-          className="mt-auto pt-[calc(16 / 16 * 1rem)] border-t border-slate-100 flex flex-col gap-1"
-          style={{ fontSize: "calc(12 / 16 * 1rem)" }}
-        >
+        <div className="mt-auto  border-t border-light-gray flex flex-wrap gap-x-5 gap-y-2.5 text-[calc(12/16*1rem)] text-gray">
           <div className="flex">
-            <span className="text-slate-400 w-[calc(60 / 16 * 1rem)] shrink-0 font-medium">
-              Role
-            </span>
-            <span className="text-slate-700 font-bold">{work.role}</span>
+            <span className="shrink-0">担当範囲：</span>
+            <span>{work.role}</span>
           </div>
           <div className="flex">
-            <span className="text-slate-400 w-[calc(60 / 16 * 1rem)] shrink-0 font-medium">
-              Period
-            </span>
-            <span className="text-slate-700 font-bold">{work.duration}</span>
+            <span className="shrink-0">制作期間：</span>
+            <span>{work.duration}</span>
           </div>
         </div>
       </div>
