@@ -1,0 +1,39 @@
+@use "../../../styles" as *;
+
+.container {
+  position: relative;
+  width: 100%;
+  // 300px固定を規約に従いrem換算 [1]
+  height: calc(300 / 16 * 1rem);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  // next/imageのfillを使用するため、親のスタイルを制御 [2]
+  :global(img) {
+    object-fit: cover;
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  // 背景画像と文字の間のオーバーレイ（必要に応じて不透明度を調整）
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.text {
+  position: relative;
+  z-index: 2;
+  color: var(--color-white); // グローバル変数を使用 [3]
+  font-weight: 700;
+  font-size: calc(18 / 16 * 1rem);
+}

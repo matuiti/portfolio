@@ -29,7 +29,7 @@ export const WorksSection = () => {
   }, [activeCategory]);
 
   return (
-    <section className="section-padding-y section-padding-x">
+    <div className="section-padding-y section-padding-x">
       <div className="container-center">
         <div className={styles.sectionHead}>
           {/* セクション見出し */}
@@ -69,6 +69,6 @@ export const WorksSection = () => {
           />
         )}
       </div>
-    </section>
+    </div>
   );
 };
