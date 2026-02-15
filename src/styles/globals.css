@@ -5,6 +5,15 @@
 @source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 
+:root {
+  /* プロジェクト規約に基づき、定義済みの色変数を使用 */
+  --color-bg-gradation: linear-gradient(
+    180deg,
+    var(--color-white) 0%,
+    var(--color-neutral-200) 100%
+  );
+}
+
 /* 2. プロジェクト専用テーマ設定 */
 @theme {
   /* --- ブレイクポイント (emを使用: ユーザーのフォントサイズ設定に追従) [5, 6] --- */
@@ -88,6 +97,8 @@
   /* --- 特殊効果 --- */
   --scrollbar-thumb: #cccccc;
   --scrollbar-thumb-hover: #aaaaaa;
+
+  --background-image-bg-gradation: var(--color-bg-gradation);
 }
 
 /* 3. ベーススタイルの定義 */

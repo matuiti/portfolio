@@ -29,7 +29,7 @@ export const WorksSection = () => {
   }, [activeCategory]);
 
   return (
-    <div className="section-padding-y section-padding-x">
+    <div className="section-padding-y section-padding-x bg-white">
       <div className="container-center">
         <div className={styles.sectionHead}>
           {/* セクション見出し */}

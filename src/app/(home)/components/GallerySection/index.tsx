@@ -1,13 +1,22 @@
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ComingSoon } from "@/components/ui/ComingSoon";
+import styles from "./GallerySection.module.scss";
 
 export const GallerySection = () => {
-
   return (
-    <div className="container-center px-6">
-      {/* <GallerySection /> */}
-      <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
-        <ComingSoon />
+    <div className="section-padding-y section-padding-x bg-light-gray">
+      <div className="container-center">
+        <div className={styles.sectionHead}>
+          {/* セクション見出し */}
+          <SectionTitle enTitle="works" jpTitle="制作実績" variant="default" />
+          <p className="leading-normal text-[calc(16/16*1rem)]">
+            UIパーツやアニメーションなどのギャラリーは準備中です
+          </p>
+        </div>
+        <div className="flex items-center justify-center">
+          <ComingSoon />
+        </div>
       </div>
     </div>
   );
-}
+};
