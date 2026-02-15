@@ -48,6 +48,7 @@ export const WorksSection = () => {
               key={work.id}
               work={work}
               onClick={() => setSelectedWork(work)}
+              onCategoryClick={(cat) => setActiveCategory(cat)}
             />
           ))}
 
