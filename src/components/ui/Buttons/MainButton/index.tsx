@@ -23,7 +23,7 @@ export const mainButtonStyles = tv({
       },
       /** ショート：背景黒、文字白。標準的なパディング */
       short: {
-        base: "bg-black text-white hover:bg-neutral-800 px-4 py-3 rounded-lg",
+        base: "bg-black text-white hover:bg-neutral-800 px-7.5 py-[calc(15.5/16*1rem)] rounded-lg",
         separator: "ml-3 mr-2",
       },
       /** 下線：背景なし。縦線は表示されません */

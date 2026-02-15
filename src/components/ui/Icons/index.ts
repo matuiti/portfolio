@@ -9,3 +9,7 @@ export * from "./Send";
 export * from "./MoreHoriz";
 export * from "./KeyboardArrowRight";
 export * from "./SearchSmall";
+export * from "./ServiceWeb";
+export * from "./ServiceResponsive";
+export * from "./ServiceCMS";
+export * from "./ServicePerformance";
