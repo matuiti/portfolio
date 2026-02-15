@@ -1,23 +1,20 @@
 @use "../../../../styles" as *;
 
 .sectionHead {
-  // 基本スタイル (flex flex-col gap-10 mb-5)
   display: flex;
   flex-direction: column;
-  gap: calc(40 / 16 * 1rem); // gap-10 (40px)
-  margin-bottom: calc(20 / 16 * 1rem); // mb-5 (20px)
+  gap: calc(40 / 16 * 1rem);
+  margin-bottom: calc(20 / 16 * 1rem);
 
-  // タブレットサイズ以上 (tablet:mb-10)
   @include mq("tablet") {
-    margin-bottom: calc(40 / 16 * 1rem); // tablet:mb-10 (40px)
+    margin-bottom: calc(40 / 16 * 1rem);
   }
 
-  // スモールPCサイズ以上 (small:flex-row small:justify-between small:items-baseline-last small:mb-15)
   @include mq("small") {
-    flex-direction: row; // small:flex-row
-    justify-content: space-between; // small:justify-between
-    align-items: last baseline; // small:items-baseline-last
-    margin-bottom: calc(60 / 16 * 1rem); // small:mb-15 (60px)
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: last baseline;
+    margin-bottom: calc(60 / 16 * 1rem);
   }
 }
 

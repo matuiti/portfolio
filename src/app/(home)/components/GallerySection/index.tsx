@@ -8,7 +8,7 @@ export const GallerySection = () => {
       <div className="container-center">
         <div className={styles.sectionHead}>
           {/* セクション見出し */}
-          <SectionTitle enTitle="works" jpTitle="制作実績" variant="default" />
+          <SectionTitle enTitle="gallery" jpTitle="ギャラリー" variant="default" />
           <p className="leading-normal text-[calc(16/16*1rem)]">
             UIパーツやアニメーションなどのギャラリーは準備中です
           </p>

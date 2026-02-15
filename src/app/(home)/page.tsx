@@ -1,5 +1,6 @@
 import { GallerySection } from "./components/GallerySection";
 import { MainVisual } from "./components/MainVisual";
+import { ServiceSection } from "./components/ServiceSection";
 import { WorksSection } from "./components/WorksSection";
 
 export default function Home() {
@@ -20,13 +21,8 @@ export default function Home() {
         </section>
 
         {/* 4. SERVICE：メディアカードレイアウト */}
-        <section id="service" className="py-24 scroll-mt-20">
-          <div className="container-center px-6">
-            {/* <ServiceSection /> */}
-            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
-              SERVICE SECTION (COMING SOON)
-            </div>
-          </div>
+        <section id="service" className=" scroll-mt-20">
+          <ServiceSection />
         </section>
 
         {/* 5. SKILLS：ゲージ表示付きカードレイアウト */}
