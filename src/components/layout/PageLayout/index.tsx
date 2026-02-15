@@ -11,7 +11,7 @@ export function PageLayout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white text-slate-900">
+    <div className="flex flex-col">
       <Header onMenuOpen={() => setIsMenuOpen(true)} />
       <MobileDrawerMenu
         isOpen={isMenuOpen}
