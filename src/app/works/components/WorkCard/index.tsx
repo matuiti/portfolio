@@ -99,7 +99,7 @@ export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
             <span
               key={cat}
               onClick={(e) => handleCategoryClick(e, cat)}
-              className="text-[calc(12/16*1rem)] bg-light-gray hover:bg-gray hover:text-white transition cursor-pointer py-1 px-3"
+              className="text-[calc(12/16*1rem)] bg-white hover:bg-gray hover:text-white border border-gray transition cursor-pointer py-1 px-3 rounded-sm"
             >
               {cat}
             </span>

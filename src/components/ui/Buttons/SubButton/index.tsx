@@ -8,7 +8,7 @@ import Link from "next/link";
  * サブボタンのスタイル定義
  */
 export const subButtonStyles = tv({
-  base: "inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 rounded-lg",
+  base: "inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 rounded-sm",
   variants: {
     variant: {
       white: "bg-black text-white hover:bg-neutral-800",
