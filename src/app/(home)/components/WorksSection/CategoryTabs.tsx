@@ -9,8 +9,7 @@ import { WorkFilterCategory } from "@/types/work";
  */
 const tabStyles = tv({
   slots: {
-    container:
-      "flex flex-wrap items-center gap-[calc(10/16*1rem)]",
+    container: "flex flex-wrap items-center gap-[calc(10/16*1rem)]",
     button: [
       "px-[calc(16/16*1rem)] py-[calc(8/16*1rem)]",
       "rounded-[calc(20/16*1rem)] text-black text-[calc(14/16*1rem)] transition-all duration-300",
@@ -20,12 +19,10 @@ const tabStyles = tv({
   variants: {
     isActive: {
       true: {
-        button:
-          "bg-black text-white",
+        button: "bg-black text-white border border-black",
       },
       false: {
-        button:
-          "bg-light-gray text-black",
+        button: "bg-white text-black border border-gray",
       },
     },
   },
