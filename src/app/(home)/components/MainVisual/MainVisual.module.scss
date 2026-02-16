@@ -194,7 +194,7 @@
 
 .dropLineTrack {
   width: calc(1 / 16 * 1rem);
-  background-color: var(--color-gray); // 線の背景色
+  background-color: var(--color-dark-gray); // 線の背景色
   position: relative;
   overflow: hidden;
   height: calc(60 / 16 * 1rem);

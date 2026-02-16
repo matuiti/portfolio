@@ -62,7 +62,7 @@ export const MobileDrawerMenu = ({
               return (
                 <li
                   key={item.href}
-                  className={`group flex items-center justify-between py-4 pl-4 border-b first:border-t border-gray ${
+                  className={`group flex items-center justify-between py-4 pl-4 border-b first:border-t border-medium-gray hover:bg-medium-gray ${
                     !item.isPublished ? "cursor-not-allowed" : "cursor-pointer"
                   }`}
                   onClick={() => {

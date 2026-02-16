@@ -22,7 +22,7 @@ const tabStyles = tv({
         button: "bg-black text-white border border-black",
       },
       false: {
-        button: "bg-white text-black border border-gray",
+        button: "bg-white text-black border border-dark-gray",
       },
     },
   },

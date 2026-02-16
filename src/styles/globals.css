@@ -27,7 +27,8 @@
   /* --- ブランドカラー：実装コード内で頻出する色を定義 [7-9] --- */
   --color-black: #0a0a0a;
   --color-white: #ffffff;
-  --color-gray: #757575;
+  --color-dark-gray: #757575;
+  --color-medium-gray: #D1D5DB;
   --color-light-gray: #f3f4f6;
   --color-red: #ff6262; /* エラー・必須項目用 */
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);

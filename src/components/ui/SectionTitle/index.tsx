@@ -13,7 +13,7 @@ const sectionTitleStyles = tv({
     jpWrapper: "flex items-center gap-x-[calc(8/16*1rem)]",
     jpTitle: "text-[calc(18/16*1rem)]",
     bullet:
-      "shrink-0 rounded-full bg-gray w-[calc(8/16*1rem)] h-[calc(8/16*1rem)]", // 日本語タイトルの左の丸ポチ
+      "shrink-0 rounded-full bg-dark-gray w-[calc(8/16*1rem)] h-[calc(8/16*1rem)]", // 日本語タイトルの左の丸ポチ
   },
   variants: {
     variant: {
@@ -22,7 +22,7 @@ const sectionTitleStyles = tv({
         jpWrapper: "mt-[calc(12/16*1rem)]",
       },
       underlined: {
-        base: "items-start border-b border-gray pb-[calc(20/16*1rem)]",
+        base: "items-start border-b border-dark-gray pb-[calc(20/16*1rem)]",
         jpWrapper: "mt-[calc(12/16*1rem)]",
       },
       center: {
