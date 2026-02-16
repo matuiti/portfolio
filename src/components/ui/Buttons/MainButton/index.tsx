@@ -20,18 +20,18 @@ export const mainButtonStyles = tv({
     variant: {
       /** ロング：背景薄灰、文字黒。テキストとアイコンを両端に配置 */
       long: {
-        base: "justify-end bg-black text-white px-6 py-3.5 w-full rounded-lg",
-        separator: "ml-6 mr-3",
+        base: "justify-end bg-black text-white px-2 py-3.25 w-full rounded-lg",
+        separator: "ml-2.5 mr-1.75",
       },
       /** ショート：背景黒、文字白。標準的なパディング */
       short: {
-        base: "bg-black text-white hover:bg-neutral-800 px-7.5 py-[calc(15.5/16*1rem)] rounded-lg",
-        separator: "ml-3 mr-2",
+        base: "bg-black text-white hover:bg-neutral-800 py-3.25 px-4 rounded-lg",
+        separator: "ml-3 mr-1.75",
       },
       /** 下線：背景なし。縦線は表示されません */
       underline: {
         base: "text-black border-b border-black hover:text-blue-600 hover:border-blue-600 px-0 pb-1",
-        icon: "ml-2",
+        icon: "ml-6",
       },
     },
   },

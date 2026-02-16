@@ -13,7 +13,7 @@ export const GallerySection = () => {
             jpTitle="ギャラリー"
             variant="default"
           />
-          <p className={styles.sectionHead}>
+          <p className={styles.description}>
             UIパーツやアニメーションなどのギャラリーは準備中です
           </p>
         </div>
