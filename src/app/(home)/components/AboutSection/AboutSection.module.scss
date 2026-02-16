@@ -1,0 +1,113 @@
+@use "../../../../styles" as *;
+
+.inner {
+  display: grid;
+  align-content: start;
+  align-items: start;
+
+  // mini~tablet: 1カラム配置
+  grid-template-areas:
+    "title-sp"
+    "head"
+    "image-sp"
+    "desc"
+    "btns";
+  gap: 0;
+
+  @include mq("small") {
+    // small~ (1140px以上): 2カラム
+    grid-template-columns: calc(500 / 16 * 1rem) 1fr;
+    grid-template-rows: repeat(4, auto);
+
+    grid-template-areas:
+      "image-pc title-pc"
+      "image-pc head"
+      "image-pc desc"
+      "image-pc btns"
+      "image-pc ."; // 5行目（余白吸収用）
+
+    column-gap: calc(60 / 16 * 1rem);
+    align-content: start;
+  }
+
+  @include mq("default") {
+    grid-template-columns: calc(570 / 16 * 1rem) 1fr;
+  }
+}
+
+// --- 表示制御 ---
+.isSP {
+  display: block;
+  @include mq("small") {
+    display: none !important;
+  }
+}
+
+.isPC {
+  display: none !important;
+  @include mq("small") {
+    display: block !important;
+  }
+}
+
+// --- エリア割り当て ---
+
+.titleArea {
+  margin-bottom: calc(40 / 16 * 1rem);
+  &.isSP {
+    grid-area: title-sp;
+  }
+  &.isPC {
+    grid-area: title-pc;
+  }
+}
+
+.profileHead {
+  grid-area: head;
+  font-size: calc(24 / 16 * 1rem);
+  font-weight: 700;
+  margin-bottom: calc(20 / 16 * 1rem);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &.isSP {
+    grid-area: image-sp;
+    aspect-ratio: 16 / 9;
+    margin-bottom: calc(20 / 16 * 1rem);
+  }
+
+  &.isPC {
+    grid-area: image-pc;
+    @include mq("small") {
+      width: calc(500 / 16 * 1rem);
+      aspect-ratio: 1 / 1;
+      align-self: start;
+      margin-bottom: 0;
+    }
+    @include mq("default") {
+      width: calc(570 / 16 * 1rem);
+    }
+  }
+
+  .image {
+    object-fit: cover;
+  }
+}
+
+.description {
+  grid-area: desc;
+  font-size: calc(16 / 16 * 1rem);
+  line-height: 2;
+  margin-bottom: calc(40 / 16 * 1rem);
+}
+
+.buttonArea {
+  grid-area: btns;
+  display: flex;
+  gap: calc(10 / 16 * 1rem);
+  justify-content: flex-start;
+}

@@ -3,6 +3,7 @@ import { MainVisual } from "./components/MainVisual";
 import { ServiceSection } from "./components/ServiceSection";
 import { SkillsSection } from "./components/SkillsSection";
 import { WorksSection } from "./components/WorksSection";
+import { AboutSection } from "./components/AboutSection";
 
 export default function Home() {
   return (
@@ -28,17 +29,12 @@ export default function Home() {
 
         {/* 5. SKILLS：ゲージ表示付きカードレイアウト */}
         <section id="skills" className="scroll-mt-20">
-            <SkillsSection />
+          <SkillsSection />
         </section>
 
         {/* 6. ABOUT：2カラム・プロフィール */}
-        <section id="about" className="py-24 scroll-mt-20">
-          <div className="container-center px-6">
-            {/* <AboutSection /> */}
-            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
-              ABOUT SECTION (COMING SOON)
-            </div>
-          </div>
+        <section id="about" className="scroll-mt-20">
+          <AboutSection />
         </section>
 
         {/* 7. BLOG：準備中コンポーネントを配置予定 */}
