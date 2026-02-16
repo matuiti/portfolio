@@ -114,7 +114,7 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply font-sans bg-white text-black text-base leading-none tracking-wider;
+    @apply font-sans bg-white text-black text-base leading-none tracking-wider font-medium;
   }
 
   /* 見出しの共通設定 [21] */

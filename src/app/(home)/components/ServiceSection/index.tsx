@@ -34,7 +34,7 @@ export const ServiceSection = () => {
           <p className="leading-normal">
             その他、ご要望に応じて柔軟に対応いたします。
           </p>
-          <MainButton>お問い合わせはこちら</MainButton>
+          <MainButton href="/#contact">お問い合わせはこちら</MainButton>
         </div>
       </div>
     </div>

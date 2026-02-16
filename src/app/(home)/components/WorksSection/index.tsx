@@ -54,7 +54,9 @@ export const WorksSection = () => {
 
           {/* ボタンをグリッドの最後の子要素として配置 */}
           <div className={styles.moreButtonWrapper}>
-            <MainButton variant="long">View All Projects</MainButton>
+            <MainButton variant="long" href="/works">
+              一覧を見る
+            </MainButton>
           </div>
         </div>
 

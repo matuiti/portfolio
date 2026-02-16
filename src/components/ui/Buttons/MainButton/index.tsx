@@ -1,11 +1,13 @@
-// src / components / ui / Buttons / MainButton / index.tsx;
+// src/components/ui/Buttons/MainButton/index.tsx
+
 import { tv, type VariantProps } from "tailwind-variants";
 import React from "react";
+import Link from "next/link"; // Linkをインポート
 import { ArrowRight } from "@/components/ui/Icons";
 
 /**
  * ボタンのスタイル定義
- * ユーティリティクラスを優先し、slots を用いて各パーツの余白を管理します。
+ * 既存のスタイル設定を一切変更せずに維持します [1, 2]。
  */
 export const mainButtonStyles = tv({
   slots: {
@@ -38,45 +40,46 @@ export const mainButtonStyles = tv({
   },
 });
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+/**
+ * プロップスの定義
+ * button属性からアンカー（Link）属性ベースへ変更し、hrefを追加します [3]。
+ */
+type MainButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
   VariantProps<typeof mainButtonStyles> & {
     children: React.ReactNode;
+    href?: string; // hrefを必須に近い形で扱えるよう定義
   };
 
 /**
  * MainButtonコンポーネント
- *
- * プロジェクト規約に従い type を使用して型定義を行います [1]。
+ * 要素を button から Link に変更しました。
  */
 export const MainButton = ({
   variant = "short",
+  href = "/", // デフォルト値を設定
   className,
   children,
   ...props
-}: ButtonProps) => {
+}: MainButtonProps) => {
   const { base, separator, icon } = mainButtonStyles({ variant, className });
 
   /**
    * ArrowRight の色同期解決
-   * アイコンコンポーネントのデフォルトが color="black" であるため [2]、
-   * ボタンの背景色に合わせて明示的に color プロップを渡します [3]。
+   * 既存のロジックを維持します [4]。
    */
   const iconColor =
     variant === "short" || variant === "long" ? "white" : "black";
 
   return (
-    <button className={base()} {...props}>
+    <Link href={href} className={base()} {...props}>
       {children}
 
-      {/* ロングとショートの時のみ、テキストとアイコンの間に縦線を表示 */}
+      {/* ロングとショートの時のみ、テキストとアイコンの間に縦線を表示（既存ロジック） */}
       {(variant === "long" || variant === "short") && (
         <span className={separator()} aria-hidden="true" />
       )}
 
-      <ArrowRight
-        className={icon()}
-        color={iconColor}
-      />
-    </button>
+      <ArrowRight className={icon()} color={iconColor} />
+    </Link>
   );
 };
