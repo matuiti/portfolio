@@ -13,7 +13,7 @@
   @include mq("small") {
     flex-direction: row;
     justify-content: space-between;
-    align-items: last baseline;
+    align-items: end;
     margin-bottom: calc(60 / 16 * 1rem);
   }
 }
