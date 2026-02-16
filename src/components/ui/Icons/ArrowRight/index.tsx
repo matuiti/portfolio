@@ -19,7 +19,7 @@ const iconStyles = tv({
         base: "text-black",
       },
       false: {
-        base: "text-gray",
+        base: "text-dark-gray",
       },
     },
   },

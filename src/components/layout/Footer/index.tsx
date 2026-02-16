@@ -49,8 +49,8 @@ export function Footer() {
         </div>
 
         {/* 下部エリア：コピーライト */}
-        <div className="mt-5 pt-5 border-t border-gray">
-          <p className="text-xs leading-none font-normal text-gray text-center tracking-normal">
+        <div className="mt-5 pt-5 border-t border-dark-gray">
+          <p className="text-xs leading-none font-normal text-dark-gray text-center tracking-normal">
             &copy; {currentYear} {siteConfig.author || siteConfig.name}
           </p>
         </div>

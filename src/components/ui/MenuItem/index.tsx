@@ -25,7 +25,7 @@ export const menuItemStyles = tv({
     },
     isPublished: {
       true: { base: "cursor-pointer" },
-      false: { base: "text-gray cursor-not-allowed" },
+      false: { base: "text-dark-gray cursor-not-allowed" },
     },
     isActive: {
       true: { indicator: "opacity-100" },
