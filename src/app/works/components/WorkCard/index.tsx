@@ -61,12 +61,12 @@ export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
   return (
     <article
       onClick={onClick}
-      className={`group flex flex-col bg-white overflow-hidden transition-all duration-500 cursor-pointer shadow-card rounded-lg ${
+      className={`group flex flex-col overflow-hidden transition-all duration-500 cursor-pointer shadow-card rounded-lg ${
         !isTagHovered ? "hover:shadow-none" : ""
       }`}
     >
       {/* 上部：サムネイルエリア */}
-      <div className="relative aspect-video overflow-hidden bg-gray">
+      <div className="relative aspect-video overflow-hidden bg-white">
         <Image
           src={imgSrc}
           alt={work.title}
@@ -89,7 +89,9 @@ export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
       </div>
 
       {/* 下部：情報エリア (既存のスタイルを維持) */}
-      <div className="flex flex-col flex-1 pt-[calc(28/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] gap-4">
+      <div className={`bg-white flex flex-col flex-1 pt-[calc(28/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] gap-4 ${
+            !isTagHovered ? "group-hover:bg-light-gray" : ""
+          }`}>
         <div
           className="flex flex-wrap gap-2 relative"
           onMouseEnter={() => setIsTagHovered(true)}
@@ -112,7 +114,7 @@ export const WorkCard = memo(({ work, onClick, onCategoryClick }: Props) => {
           {work.summary}
         </p>
 
-        <div className="mt-auto  border-t border-light-gray flex flex-wrap gap-x-5 gap-y-2.5 text-[calc(12/16*1rem)] text-gray">
+        <div className="mt-auto  border-t border-gray pt-4 flex flex-col gap-y-2.5 text-[calc(12/16*1rem)] text-gray">
           <div className="flex">
             <span className="shrink-0">担当範囲：</span>
             <span>{work.role}</span>

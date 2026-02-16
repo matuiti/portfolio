@@ -5,13 +5,13 @@ import { Work, WorkFilterCategory } from "@/types/work";
  * WORKSセクション全体で使用する共通カテゴリ定義 (SSoT)
  */
 export const WORK_CATEGORIES: { label: string; value: WorkFilterCategory }[] = [
+  { label: "すべて", value: "all" },
   { label: "Web制作", value: "web" },
   { label: "WordPress", value: "wordpress" },
   { label: "アプリケーション", value: "app" },
   { label: "ゲーム", value: "game" },
   { label: "実案件", value: "client" },
   { label: "非公開", value: "nda" },
-  { label: "すべて", value: "all" },
 ];
 
 export const ALL_WORKS: Work[] = [

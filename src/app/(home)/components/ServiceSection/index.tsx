@@ -19,7 +19,7 @@ export const ServiceSection = () => {
             variant="default"
           />
         </div>
-        <div className="grid grid-cols-1 small:grid-cols-2 gap-[calc(20/16*1rem)]">
+        <div className={styles.cardGrid}>
           {SERVICES.map((service, index) => (
             <ServiceCard
               key={service.id}

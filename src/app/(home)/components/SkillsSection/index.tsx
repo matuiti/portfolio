@@ -22,7 +22,7 @@ const SKILLS_HIGHLIGHT: HighlightSkillGroup[] = [
     items: [
       { name: "Next.js / React", percentage: 85 },
       { name: "WordPress", percentage: 90 },
-      { name: "LongName LongName LongName", percentage: 70 },
+      { name: "LongName LongName", percentage: 70 },
       { name: "Astro", percentage: 70 },
     ],
   },
