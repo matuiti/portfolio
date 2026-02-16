@@ -16,7 +16,7 @@ export const subButtonStyles = tv({
     },
     isSubmit: {
       true: "py-2.5 px-4 text-base gap-2.5",
-      false: "py-1 px-2 text-sm gap-1",
+      false: "py-1.5 px-2.5 text-sm gap-1",
     },
   },
   defaultVariants: {
