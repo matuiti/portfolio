@@ -120,9 +120,9 @@
 .subCopyText {
   // 基本スタイル (Base / Mini〜Tablet)
   color: var(--color-white);
-  font-weight: 500;
   letter-spacing: 0.1em;
   font-size: calc(14 / 16 * 1rem);
+  line-height: 1.5;
 
   // Small (1140px〜)
   @include mq(small) {

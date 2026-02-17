@@ -13,9 +13,8 @@
     "btns";
   gap: 0;
 
-  @include mq("small") {
-    // small~ (1140px以上): 2カラム
-    grid-template-columns: calc(500 / 16 * 1rem) 1fr;
+  @include mq("tablet") {
+    grid-template-columns: calc(350 / 16 * 1rem) 1fr;
     grid-template-rows: repeat(4, auto);
     grid-template-areas:
       "image-pc title-pc"
@@ -23,26 +22,31 @@
       "image-pc desc"
       "image-pc btns"
       "image-pc ."; // 5行目（余白吸収用）
-    column-gap: calc(60 / 16 * 1rem);
+    column-gap: calc(40 / 16 * 1rem);
     align-content: start;
   }
 
+  @include mq("small") {
+    grid-template-columns: calc(400 / 16 * 1rem) 1fr;
+    column-gap: calc(50 / 16 * 1rem);
+  }
+
   @include mq("default") {
-    grid-template-columns: calc(570 / 16 * 1rem) 1fr;
+    grid-template-columns: calc(500 / 16 * 1rem) 1fr;
   }
 }
 
 // --- 表示制御 ---
 .isSP {
   display: block;
-  @include mq("small") {
+  @include mq("tablet") {
     display: none !important;
   }
 }
 
 .isPC {
   display: none !important;
-  @include mq("small") {
+  @include mq("tablet") {
     display: block !important;
   }
 }
@@ -53,7 +57,7 @@
   margin-bottom: calc(40 / 16 * 1rem);
   grid-area: title-sp;
 
-  @include mq("small") {
+  @include mq("tablet") {
     grid-area: title-pc;
   }
 }
@@ -78,14 +82,11 @@
 
   &.isPC {
     grid-area: image-pc;
-    @include mq("small") {
-      width: calc(500 / 16 * 1rem);
+    @include mq("tablet") {
+      width: 100%;
       aspect-ratio: 1 / 1;
       align-self: start;
       margin-bottom: 0;
-    }
-    @include mq("default") {
-      width: calc(570 / 16 * 1rem);
     }
   }
 

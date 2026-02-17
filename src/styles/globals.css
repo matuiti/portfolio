@@ -28,7 +28,7 @@
   --color-black: #0a0a0a;
   --color-white: #ffffff;
   --color-dark-gray: #757575;
-  --color-medium-gray: #D1D5DB;
+  --color-medium-gray: #d1d5db;
   --color-light-gray: #f3f4f6;
   --color-red: #ff6262; /* エラー・必須項目用 */
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);
@@ -100,6 +100,10 @@
   --scrollbar-thumb: #cccccc;
   --scrollbar-thumb-hover: #aaaaaa;
 
+  /* --- ホバー --- */
+  --opacity-hover: 0.8;
+
+  /* --- グラデーション --- */
   --background-image-bg-gradation: var(--color-bg-gradation);
 }
 

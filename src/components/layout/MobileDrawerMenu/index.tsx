@@ -25,26 +25,25 @@ export const MobileDrawerMenu = ({
 
   return (
     <div
-      className={`fixed inset-0 z-drawer transition-all duration-300 ${
-        isOpen
-          ? "visible opacity-100"
-          : "invisible opacity-0 pointer-events-none"
+      className={`fixed inset-0 z-drawer ${
+        isOpen ? "visible" : "invisible pointer-events-none"
       }`}
     >
-      {/* 背景オーバーレイ */}
+      {/* 背景オーバーレイ：独自にopacityとtransitionを管理 */}
       <div
-        className="absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-opacity duration-300"
+        className={`absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-opacity duration-500 ease-in-out ${
+          isOpen ? "opacity-100" : "opacity-0"
+        }`}
         onClick={onClose}
       />
 
-      {/* メニュー本体 */}
+      {/* メニュー本体：opacityも加えることで、より「ふわっと」した登場に */}
       <div
-        className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default backdrop-blur-default flex flex-col justify-start
-        isOpen ? "translate-x-0" : "-translate-x-full"
-        `}
+        className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default flex flex-col justify-start transition-all duration-500 ease-in-out ${
+          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+        }`}
       >
         {/* 1. 上部：ボタンエリア */}
-        {/* <div className="flex items-center justify-end pt-5 mb-5"> */}
         <div className="flex items-center justify-end min-h-header-mini small:min-h-header-small mb-5">
           <button onClick={onClose} aria-label="メニューを閉じる">
             <MobileMenuClose />
@@ -53,7 +52,7 @@ export const MobileDrawerMenu = ({
 
         {/* 2. 中央：リストアイテム */}
         <nav className="overflow-y-auto">
-          <ul className="flex flex-col">
+          <ul className="flex flex-col overflow-x-hidden">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 pathname === item.href ||
@@ -62,7 +61,7 @@ export const MobileDrawerMenu = ({
               return (
                 <li
                   key={item.href}
-                  className={`group flex items-center justify-between py-4 pl-4 border-b first:border-t border-medium-gray hover:bg-medium-gray ${
+                  className={`group flex items-center justify-between py-4 pl-4 border-b first:border-t border-medium-gray ${
                     !item.isPublished ? "cursor-not-allowed" : "cursor-pointer"
                   }`}
                   onClick={() => {

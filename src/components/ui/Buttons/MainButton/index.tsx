@@ -25,12 +25,12 @@ export const mainButtonStyles = tv({
       },
       /** ショート：背景黒、文字白。標準的なパディング */
       short: {
-        base: "bg-black text-white hover:bg-neutral-800 py-3.25 px-4 rounded-lg",
+        base: "bg-black text-white py-3.25 px-4 rounded-lg",
         separator: "ml-3 mr-1.75",
       },
       /** 下線：背景なし。縦線は表示されません */
       underline: {
-        base: "text-black border-b border-black hover:text-blue-600 hover:border-blue-600 px-0 pb-1",
+        base: "text-black border-b border-black px-0 pb-1",
         icon: "ml-6",
       },
     },

@@ -8,11 +8,11 @@ import Link from "next/link";
  * サブボタンのスタイル定義
  */
 export const subButtonStyles = tv({
-  base: "inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 rounded-sm",
+  base: "inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 rounded-sm cursor-pointer hover:opacity-hover",
   variants: {
     variant: {
-      white: "bg-black text-white hover:bg-neutral-800",
-      black: "bg-light-gray text-black hover:bg-slate-200",
+      white: "bg-black text-white",
+      gray: "bg-dark-gray text-white",
     },
     isSubmit: {
       true: "py-2.5 px-4 text-base gap-2.5",
