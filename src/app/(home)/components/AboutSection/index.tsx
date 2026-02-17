@@ -57,7 +57,7 @@ export const AboutSection = () => {
               alt={PROFILE_DATA.name}
               fill
               className={styles.image}
-              sizes="(max-width: 1139px) 100vw, 1px"
+              sizes="(max-width: 839px) 100vw, 1px"
             />
           </div>
 
@@ -68,7 +68,7 @@ export const AboutSection = () => {
               alt={PROFILE_DATA.name}
               fill
               className={styles.image}
-              sizes="(min-width: 1140px) 570px, 1px"
+              sizes="(min-width: 840px) 570px, 1px"
             />
           </div>
 
@@ -80,14 +80,12 @@ export const AboutSection = () => {
             <SubButton
               href={PROFILE_DATA.links.github}
               leftIcon={GitHub}
-              variant="white"
             >
               GitHub
             </SubButton>
             <SubButton
               href={PROFILE_DATA.links.contact}
               leftIcon={Mail}
-              variant="black"
             >
               Contact
             </SubButton>

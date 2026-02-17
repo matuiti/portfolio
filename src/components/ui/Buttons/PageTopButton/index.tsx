@@ -15,7 +15,7 @@ const pageTopButtonStyles = tv({
     "flex h-20 w-20 flex-col items-center justify-center rounded-full", // [cite: 7]
     "bg-black text-white shadow-lg",
     "transition-[opacity,transform] duration-500 ease-in-out",
-    "hover:bg-slate-800 active:scale-95",
+    "hover:opacity-hover active:scale-95 cursor-pointer",
   ],
   variants: {
     isVisible: {
