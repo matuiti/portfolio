@@ -37,21 +37,18 @@ export const AboutSection = () => {
             />
           </div>
 
-          {/* 1. タイトルエリア（PC用：small以上） */}
-          <div className={`${styles.titleArea} ${styles.isPC}`}>
-            <SectionTitle
-              enTitle="about"
-              jpTitle="私について"
-              variant="underlined"
-              size="large"
-            />
-          </div>
+          {/* 1. タイトルエリア */}
+          <SectionTitle
+            enTitle="about"
+            jpTitle="私について"
+            variant="underlined"
+            className={styles.titleArea}
+          />
 
           {/* 2. プロフィール見出し */}
-          <div className={styles.profileHead}>
-            <span className={styles.jobTitle}>{PROFILE_DATA.jobTitle} / </span>
-            <span className={styles.name}>{PROFILE_DATA.name}</span>
-          </div>
+          <h3 className={styles.profileHead}>
+            {PROFILE_DATA.jobTitle} / {PROFILE_DATA.name}
+          </h3>
 
           {/* 3. 画像エリア（SP用：1カラム 16:9） */}
           <div className={`${styles.imageWrapper} ${styles.isSP}`}>

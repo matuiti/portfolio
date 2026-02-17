@@ -42,11 +42,14 @@ const sectionTitleStyles = tv({
         jpTitle: "",
         bullet: "",
       },
+      responsive: {
+        enTitle: "",
+        jpTitle: "",
+      },
     },
   },
   /**
    * 複合バリアント設定
-   * ここで「タイプ × サイズ」の全6パターンに対して個別のスタイルをカスタマイズできます。
    */
   compoundVariants: [
     // 1. デフォルト × 大
@@ -103,10 +106,27 @@ const sectionTitleStyles = tv({
         jpTitle: "",
       },
     },
+    // --- responsive 用の定義 ---
+    // 1. デフォルト/下線タイプ × レスポンシブ
+    {
+      variant: ["default", "underlined"],
+      size: "responsive",
+      class: {
+        enTitle: "text-[calc(48/16*1rem)] small:text-[calc(60/16*1rem)]",
+      },
+    },
+    // 2. 中央寄せタイプ × レスポンシブ
+    {
+      variant: "center",
+      size: "responsive",
+      class: {
+        enTitle: "text-[calc(30/16*1rem)] small:text-[calc(36/16*1rem)]",
+      },
+    },
   ],
   defaultVariants: {
     variant: "default",
-    size: "large",
+    size: "responsive",
   },
 });
 
