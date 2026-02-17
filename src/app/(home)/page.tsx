@@ -4,6 +4,7 @@ import { ServiceSection } from "./components/ServiceSection";
 import { SkillsSection } from "./components/SkillsSection";
 import { WorksSection } from "./components/WorksSection";
 import { AboutSection } from "./components/AboutSection";
+import { BlogSection } from "./components/BlogSection";
 
 export default function Home() {
   return (
@@ -38,13 +39,8 @@ export default function Home() {
         </section>
 
         {/* 7. BLOG：準備中コンポーネントを配置予定 */}
-        <section id="blog" className="py-24 bg-neutral-50 scroll-mt-20">
-          <div className="container-center px-6">
-            {/* <BlogSection /> */}
-            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
-              BLOG SECTION (COMING SOON)
-            </div>
-          </div>
+        <section id="blog" className="scroll-mt-20">
+          <BlogSection />
         </section>
 
         {/* 8. CONTACT：フォームセクション */}
