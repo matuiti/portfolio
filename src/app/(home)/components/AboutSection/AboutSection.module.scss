@@ -4,7 +4,6 @@
   display: grid;
   align-content: start;
   align-items: start;
-
   // mini~tablet: 1カラム配置
   grid-template-areas:
     "title-sp"
@@ -18,14 +17,12 @@
     // small~ (1140px以上): 2カラム
     grid-template-columns: calc(500 / 16 * 1rem) 1fr;
     grid-template-rows: repeat(4, auto);
-
     grid-template-areas:
       "image-pc title-pc"
       "image-pc head"
       "image-pc desc"
       "image-pc btns"
       "image-pc ."; // 5行目（余白吸収用）
-
     column-gap: calc(60 / 16 * 1rem);
     align-content: start;
   }
@@ -54,10 +51,9 @@
 
 .titleArea {
   margin-bottom: calc(40 / 16 * 1rem);
-  &.isSP {
-    grid-area: title-sp;
-  }
-  &.isPC {
+  grid-area: title-sp;
+
+  @include mq("small") {
     grid-area: title-pc;
   }
 }
