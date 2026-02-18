@@ -1,0 +1,63 @@
+// src/app/privacy-policy/PrivacyPolicy.module.scss
+@use "../../styles" as *;
+
+.container {
+  // ヘッダー高を考慮した余白（例：Small以上で90px） [15, 16]
+  padding-top: calc(65 / 16 * 1rem);
+  background-color: var(--color-white);
+
+  @include mq("small") {
+    padding-top: calc(90 / 16 * 1rem);
+  }
+}
+
+.inner {
+  max-width: calc(1000 / 16 * 1rem);
+  margin-inline: auto;
+}
+
+.title {
+  margin-bottom: calc(40 / 16 * 1rem);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(40 / 16 * 1rem);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 / 16 * 1rem);
+}
+
+.heading {
+  font-size: calc(18 / 16 * 1rem);
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.text {
+  font-size: calc(15 / 16 * 1rem);
+  line-height: 1.8;
+  color: var(--color-dark-gray);
+}
+
+.list {
+  padding-left: 1.2em;
+  list-style: disc;
+  font-size: calc(15 / 16 * 1rem);
+  line-height: 1.8;
+  color: var(--color-dark-gray);
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center; // 中央寄せ（デザインに応じて flex-start に変更可）
+  margin-top: calc(60 / 16 * 1rem); // コンテンツとの間隔を60px確保
+
+  @include mq("small") {
+    margin-top: calc(80 / 16 * 1rem); // PCサイズでは少し広めに
+  }
+}
