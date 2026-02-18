@@ -38,29 +38,31 @@ const SKILLS_HIGHLIGHT: HighlightSkillGroup[] = [
 
 export const SkillsSection = () => {
   return (
-    <div className="section-padding-y section-padding-x bg-light-gray">
-      <div className="container-center">
-        <div className={styles.sectionHead}>
-          <SectionTitle enTitle="skills" jpTitle="スキル" variant="default" />
-          <p className={styles.description}>
-            常に新しい技術の習得に取り組み、スキルアップを続けています。
-          </p>
-        </div>
+    <section id="skills" className="scroll-mt-20">
+      <div className="section-padding-y section-padding-x bg-light-gray">
+        <div className="container-center">
+          <div className={styles.sectionHead}>
+            <SectionTitle enTitle="skills" jpTitle="スキル" variant="default" />
+            <p className={styles.description}>
+              常に新しい技術の習得に取り組み、スキルアップを続けています。
+            </p>
+          </div>
 
-        {/* カードグリッド */}
-        <div className={styles.cardGrid}>
-          {SKILLS_HIGHLIGHT.map((group) => (
-            <SkillCard key={group.title} group={group} />
-          ))}
-        </div>
+          {/* カードグリッド */}
+          <div className={styles.cardGrid}>
+            {SKILLS_HIGHLIGHT.map((group) => (
+              <SkillCard key={group.title} group={group} />
+            ))}
+          </div>
 
-        {/* 右寄せの下線ボタン */}
-        <div className={styles.buttonWrapper}>
-          <MainButton variant="underline" href="/skills">
-            一覧を見る
-          </MainButton>
+          {/* 右寄せの下線ボタン */}
+          <div className={styles.buttonWrapper}>
+            <MainButton variant="underline" href="/skills">
+              一覧を見る
+            </MainButton>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

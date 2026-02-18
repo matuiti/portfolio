@@ -4,23 +4,25 @@ import styles from "./GallerySection.module.scss";
 
 export const GallerySection = () => {
   return (
-    <div className="section-padding-y section-padding-x bg-light-gray">
-      <div className="container-center">
-        <div className={styles.sectionHead}>
-          {/* セクション見出し */}
-          <SectionTitle
-            enTitle="gallery"
-            jpTitle="ギャラリー"
-            variant="default"
-          />
-          <p className={styles.description}>
-            UIパーツやアニメーションなどのギャラリーは準備中です
-          </p>
-        </div>
-        <div className="flex items-center justify-center">
-          <ComingSoon />
+    <section id="gallery" className="scroll-mt-20">
+      <div className="section-padding-y section-padding-x bg-light-gray">
+        <div className="container-center">
+          <div className={styles.sectionHead}>
+            {/* セクション見出し */}
+            <SectionTitle
+              enTitle="gallery"
+              jpTitle="ギャラリー"
+              variant="default"
+            />
+            <p className={styles.description}>
+              UIパーツやアニメーションなどのギャラリーは準備中です
+            </p>
+          </div>
+          <div className="flex items-center justify-center">
+            <ComingSoon />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
