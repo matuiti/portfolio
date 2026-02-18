@@ -8,4 +8,8 @@ export type SiteConfig = {
     github: string;
     twitter?: string;
   };
-}
+  email: {
+    from: string; // 送信元（独自ドメインのアドレス）
+    admin: string; // 宛先（ichi.animo@gmail.com）
+  };
+};
