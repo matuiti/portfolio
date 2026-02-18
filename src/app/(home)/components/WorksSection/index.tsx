@@ -29,48 +29,54 @@ export const WorksSection = () => {
   }, [activeCategory]);
 
   return (
-    <div className="section-padding-y section-padding-x bg-white">
-      <div className="container-center">
-        <div className={styles.sectionHead}>
-          {/* セクション見出し */}
-          <SectionTitle enTitle="works" jpTitle="制作実績" variant="default" />
-          {/* 3. カテゴリスイッチ */}
-          <CategoryTabs
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
-          />
-        </div>
-
-        {/* 4. 実績グリッド表示 */}
-        <div className={styles.cards}>
-          {displayWorks.map((work) => (
-            <WorkCard
-              key={work.id}
-              work={work}
-              onClick={() => setSelectedWork(work)}
-              onCategoryClick={(cat) => setActiveCategory(cat)}
+    <section id="works" className="scroll-mt-20">
+      <div className="section-padding-y section-padding-x bg-white">
+        <div className="container-center">
+          <div className={styles.sectionHead}>
+            {/* セクション見出し */}
+            <SectionTitle
+              enTitle="works"
+              jpTitle="制作実績"
+              variant="default"
             />
-          ))}
-
-          {/* ボタンをグリッドの最後の子要素として配置 */}
-          <div className={styles.moreButtonWrapper}>
-            <MainButton variant="long" href="/works">
-              一覧を見る
-            </MainButton>
+            {/* 3. カテゴリスイッチ */}
+            <CategoryTabs
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
+            />
           </div>
-        </div>
 
-        {/* 詳細モーダル */}
-        {selectedWork && (
-          <WorkDetailModal
-            isOpen={!!selectedWork}
-            onClose={() => setSelectedWork(null)}
-            work={selectedWork}
-            allFilteredWorks={displayWorks}
-            onNavigate={setSelectedWork}
-          />
-        )}
+          {/* 4. 実績グリッド表示 */}
+          <div className={styles.cards}>
+            {displayWorks.map((work) => (
+              <WorkCard
+                key={work.id}
+                work={work}
+                onClick={() => setSelectedWork(work)}
+                onCategoryClick={(cat) => setActiveCategory(cat)}
+              />
+            ))}
+
+            {/* ボタンをグリッドの最後の子要素として配置 */}
+            <div className={styles.moreButtonWrapper}>
+              <MainButton variant="long" href="/works">
+                一覧を見る
+              </MainButton>
+            </div>
+          </div>
+
+          {/* 詳細モーダル */}
+          {selectedWork && (
+            <WorkDetailModal
+              isOpen={!!selectedWork}
+              onClose={() => setSelectedWork(null)}
+              work={selectedWork}
+              allFilteredWorks={displayWorks}
+              onNavigate={setSelectedWork}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

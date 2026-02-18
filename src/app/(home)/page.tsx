@@ -9,45 +9,24 @@ import { ContactSection } from "./components/ContactSection";
 
 export default function Home() {
   return (
-    <div className="relative w-full overflow-hidden bg-white text-neutral-900">
+    <div className="w-full overflow-hidden">
       {/* 1. メインビジュアル：初期演出を含む */}
       <MainVisual />
-
       <div className="space-y-0">
         {/* 2. WORKS：データ共有・カテゴリスイッチング機能付き */}
-        <section id="works" className="scroll-mt-20">
-          <WorksSection />
-        </section>
-
+        <WorksSection />
         {/* 3. GALLERY：準備中コンポーネントを配置予定 */}
-        <section id="gallery" className="scroll-mt-20">
-          <GallerySection />
-        </section>
-
+        <GallerySection />
         {/* 4. SERVICE：メディアカードレイアウト */}
-        <section id="service" className="scroll-mt-20">
-          <ServiceSection />
-        </section>
-
+        <ServiceSection />
         {/* 5. SKILLS：ゲージ表示付きカードレイアウト */}
-        <section id="skills" className="scroll-mt-20">
-          <SkillsSection />
-        </section>
-
+        <SkillsSection />
         {/* 6. ABOUT：2カラム・プロフィール */}
-        <section id="about" className="scroll-mt-20">
-          <AboutSection />
-        </section>
-
+        <AboutSection />
         {/* 7. BLOG：準備中コンポーネントを配置予定 */}
-        <section id="blog" className="scroll-mt-20">
-          <BlogSection />
-        </section>
-
+        <BlogSection />
         {/* 8. CONTACT：フォームセクション */}
-        <section id="contact" className="py-24 scroll-mt-20">
-            <ContactSection />
-        </section>
+        <ContactSection />
       </div>
     </div>
   );
