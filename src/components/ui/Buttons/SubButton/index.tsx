@@ -57,38 +57,45 @@ export const SubButton = (props: SubButtonProps) => {
     leftIcon: Icon,
     children,
     href,
+    isSubmit: isSubmitProp, // ★ここに追加：propsから抽出して、DOMへ流れるのを防ぐ
     ...rest
   } = props;
 
-  // 型ガードを用いて type="submit" の判定を安全に行う
+  // 型ガードを用いて type="submit" またはプロップスによる判定を行う
   const isSubmit =
-    !href &&
-    (rest as React.ButtonHTMLAttributes<HTMLButtonElement>).type === "submit";
+    isSubmitProp ||
+    (!href &&
+      (rest as React.ButtonHTMLAttributes<HTMLButtonElement>).type ===
+        "submit");
+
   const styles = subButtonStyles({ variant, isSubmit, className });
 
   const content = (
     <>
-      {Icon && <Icon className="shrink-0" size={iconSize} color={variant} />}
+      {Icon && (
+        <Icon size={iconSize} color={variant === "white" ? "white" : "black"} />
+      )}
       {children}
     </>
   );
 
-  // Link としてレンダリングする場合
   if (href) {
-    const { ...anchorProps } =
-      rest as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
-      <Link href={href} className={styles} {...anchorProps}>
+      <Link
+        href={href}
+        className={styles}
+        {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
         {content}
       </Link>
     );
   }
 
-  // button としてレンダリングする場合
-  const { ...buttonProps } =
-    rest as React.ButtonHTMLAttributes<HTMLButtonElement>;
   return (
-    <button className={styles} {...buttonProps}>
+    <button
+      className={styles}
+      {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {content}
     </button>
   );

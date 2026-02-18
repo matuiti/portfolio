@@ -1,0 +1,23 @@
+@use "../../../../styles" as *;
+
+.rippleContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+// GSAPで制御する波紋の本体
+.ripple {
+  position: absolute;
+  width: calc(20 / 16 * 1rem);
+  height: calc(20 / 16 * 1rem);
+  background-color: var(--color-blue-600); // 雫の色
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+}

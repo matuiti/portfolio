@@ -5,6 +5,7 @@ import { SkillsSection } from "./components/SkillsSection";
 import { WorksSection } from "./components/WorksSection";
 import { AboutSection } from "./components/AboutSection";
 import { BlogSection } from "./components/BlogSection";
+import { ContactSection } from "./components/ContactSection";
 
 export default function Home() {
   return (
@@ -45,12 +46,7 @@ export default function Home() {
 
         {/* 8. CONTACT：フォームセクション */}
         <section id="contact" className="py-24 scroll-mt-20">
-          <div className="container-center px-6">
-            {/* <ContactSection /> */}
-            <div className="h-64 flex items-center justify-center border-2 border-dashed border-neutral-200 text-neutral-400 font-bold">
-              CONTACT SECTION (COMING SOON)
-            </div>
-          </div>
+            <ContactSection />
         </section>
       </div>
     </div>

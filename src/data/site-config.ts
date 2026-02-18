@@ -9,4 +9,8 @@ export const siteConfig: SiteConfig = {
   links: {
     github: "https://github.com/your-id",
   },
+  email: {
+    from: "Contact Form <contact@matuba-code.com>", // 認証済み独自ドメイン
+    admin: "removed@example.invalid", // 通知を受け取る実アドレス
+  },
 };
