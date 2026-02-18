@@ -201,7 +201,6 @@ export const ContactForm = () => {
               isSubmit
               disabled={isSubmitting}
               leftIcon={Send}
-              className="w-full tablet:w-auto min-w-[calc(240/16*1rem)]"
             >
               {isSubmitting ? "送信中..." : "内容を確認して送信する"}
             </SubButton>
