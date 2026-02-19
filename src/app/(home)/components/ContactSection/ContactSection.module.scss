@@ -206,8 +206,10 @@
 .directMailArea {
   text-align: center;
   margin-top: calc(80 / 16 * 1rem);
+  margin-bottom: calc(20 / 16 * 1rem);
   .description {
     margin-top: calc(8 / 16 * 1rem);
+    margin-bottom: 0;
     font-size: calc(12 / 16 * 1rem);
     color: var(--color-dark-gray);
     line-height: 1.5;

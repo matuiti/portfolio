@@ -17,7 +17,7 @@ export const menuItemStyles = tv({
     ],
     label: [
       "font-bold transition-all duration-300",
-      "pb-[calc(3/16*1rem)]", // レイアウト維持のためパディングは固定
+      "pb-[calc(6/16*1rem)]", // レイアウト維持のためパディングは固定
     ],
   },
   variants: {
@@ -70,12 +70,12 @@ export const menuItemStyles = tv({
     {
       isPublished: true,
       color: "black",
-      class: { base: "hover:text-blue-600" },
+      class: { base: "hover:black" },
     },
     {
       isPublished: true,
       color: "white",
-      class: { base: "hover:text-white/70" },
+      class: { base: "hover:text-white" },
     },
     // 既存の isActive 時のレイアウト制御を維持 [cite: 146]
     {
