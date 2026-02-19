@@ -17,17 +17,14 @@ import {
 import { sendContactAction } from "./actions";
 import { useUIStore } from "@/store/useUIStore";
 import { ContactRipple } from "./ContactRipple";
+import styles from "./ContactSection.module.scss";
 
-/**
- * CONTACTセクション：フォームコンポーネント
- * 型不整合（Error 2322, 2345）および描画エラーを解消した最終版
- */
 export const ContactForm = () => {
   const [isPending, startTransition] = useTransition();
   const { contactStatus, setContactStatus } = useUIStore();
 
   // 1. React Hook Form の初期化
-  // useForm の第1引数には「入力型 (Values)」を渡し、resolver との型整合性を確保 (Error 2322 対策)
+  // useForm の第1引数には「入力型 (Values)」を渡し、resolver との型整合性を確保
   const {
     register,
     handleSubmit,
@@ -82,17 +79,15 @@ export const ContactForm = () => {
   const isSubmitting = isPending || contactStatus === "submitting";
 
   return (
-    <div className="relative">
+    <div className={styles.formWrapper}>
       <ContactRipple />
 
       {contactStatus === "success" ? (
         /* 送信成功UI */
-        <div className="flex flex-col items-center justify-center py-[calc(60/16*1rem)] space-y-[calc(32/16*1rem)] animate-fade-in">
-          <div className="text-center space-y-[calc(16/16*1rem)]">
-            <h3 className="text-[calc(24/16*1rem)] font-bold text-black">
-              送信が完了しました
-            </h3>
-            <p className="text-slate-600 text-sm leading-relaxed px-4">
+        <div className={styles.successContainer}>
+          <div className={styles.successMessage}>
+            <h3 className={styles.successTitle}>送信が完了しました</h3>
+            <p className={styles.successText}>
               お問い合わせありがとうございます。内容を確認の上、
               <br className="hidden tablet:block" />
               順次メールにてご連絡差し上げます。
@@ -102,7 +97,6 @@ export const ContactForm = () => {
             variant="white"
             onClick={handleBackToForm}
             leftIcon={ArrowRight}
-            className="min-w-[calc(200/16*1rem)]"
           >
             フォームに戻る
           </SubButton>
@@ -111,10 +105,10 @@ export const ContactForm = () => {
         /* 入力フォームUI */
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-2xl mx-auto space-y-[calc(32/16*1rem)]"
+          className={styles.form}
           noValidate
         >
-          <div className="grid grid-cols-1 tablet:grid-cols-2 gap-icon-24">
+          <div className={styles.formGrid}>
             <FormInput
               label="お名前"
               placeholder="山田 太郎"
@@ -132,78 +126,79 @@ export const ContactForm = () => {
               isInvalid={!!errors.email}
               disabled={isSubmitting}
             />
-          </div>
-
-          <FormInput
-            label="件名"
-            placeholder="制作のご依頼について"
-            {...register("subject")}
-            error={errors.subject?.message}
-            isInvalid={!!errors.subject}
-            disabled={isSubmitting}
-          />
-          <FormInput
-            label="メッセージ"
-            isTextArea
-            placeholder="ご相談内容を自由に入力してください"
-            {...register("message")}
-            error={errors.message?.message}
-            isInvalid={!!errors.message}
-            disabled={isSubmitting}
-          />
-
-          <div className="flex flex-col gap-2">
-            <label className="flex items-center gap-3 cursor-pointer group">
-              <input
-                type="checkbox"
-                className="w-5 h-5 border-2 border-dark-gray rounded-sm checked:bg-black transition-all"
-                {...register("privacyPolicy")}
-                disabled={isSubmitting}
-              />
-              <span className="text-sm text-slate-700">
-                <a
-                  href="/privacy-policy"
-                  className="underline hover:no-underline"
-                >
-                  プライバシーポリシー
-                </a>
-                に同意する
-              </span>
-            </label>
-            {/* エラーメッセージの文字列のみを描画 (Error 2322 対策) */}
-            {errors.privacyPolicy?.message && (
-              <p className="text-xs text-red-500">
-                {String(errors.privacyPolicy.message)}
-              </p>
-            )}
-          </div>
-
-          <div className="flex flex-col items-center gap-2">
-            <Turnstile
-              sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-              onVerify={(token) =>
-                setValue("cf-turnstile-response", token, {
-                  shouldValidate: true,
-                })
-              }
-            />
-            {errors["cf-turnstile-response"]?.message && (
-              <p className="text-xs text-red-500">
-                {String(errors["cf-turnstile-response"].message)}
-              </p>
-            )}
-          </div>
-
-          <div className="flex justify-center pt-4">
-            <SubButton
-              type="submit"
-              variant="white"
-              isSubmit
+            <FormInput
+              label="件名"
+              placeholder="制作のご依頼について"
+              {...register("subject")}
+              error={errors.subject?.message}
+              isInvalid={!!errors.subject}
               disabled={isSubmitting}
-              leftIcon={Send}
-            >
-              {isSubmitting ? "送信中..." : "内容を確認して送信する"}
-            </SubButton>
+            />
+            <FormInput
+              label="メッセージ"
+              isTextArea
+              placeholder="ご相談内容を自由に入力してください"
+              {...register("message")}
+              error={errors.message?.message}
+              isInvalid={!!errors.message}
+              disabled={isSubmitting}
+            />
+          </div>
+
+          <div className={styles.formFoot}>
+            {/* プライバシーポリシー */}
+            <div className={styles.privacyArea}>
+              <label className={styles.checkboxLabel}>
+                <input
+                  type="checkbox"
+                  className={styles.checkbox}
+                  {...register("privacyPolicy")}
+                  disabled={isSubmitting}
+                />
+                <span className={styles.agreementText}>
+                  <a href="/privacy-policy" className={styles.policyLink}>
+                    プライバシーポリシー
+                  </a>
+                  に同意する
+                </span>
+              </label>
+              {errors.privacyPolicy?.message && (
+                <p className={styles.errorText}>
+                  {String(errors.privacyPolicy.message)}
+                </p>
+              )}
+            </div>
+
+            {/* セキュリティ検証（Turnstile） */}
+            <div className={styles.securityArea}>
+              <Turnstile
+                sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                onVerify={(token) =>
+                  setValue("cf-turnstile-response", token, {
+                    shouldValidate: true,
+                  })
+                }
+              />
+              {errors["cf-turnstile-response"]?.message && (
+                <p className={styles.errorText}>
+                  {String(errors["cf-turnstile-response"].message)}
+                </p>
+              )}
+            </div>
+
+            {/* 送信ボタン */}
+            <div className={styles.submitArea}>
+              <SubButton
+                type="submit"
+                variant="white"
+                isSubmit
+                disabled={isSubmitting}
+                leftIcon={Send}
+                className={styles.submitButton}
+              >
+                {isSubmitting ? "送信中..." : "送信する"}
+              </SubButton>
+            </div>
           </div>
         </form>
       )}

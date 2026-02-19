@@ -6,14 +6,12 @@ import { MainButton } from "@/components/ui/Buttons/MainButton";
 
 /**
  * プライバシーポリシーページ
- * プロジェクト規約に基づき、PageLayoutで包み、rem換算でスタイリングします。
  */
 export default function PrivacyPolicyPage() {
   return (
     <article className="section-padding-x section-padding-y">
       <div className="container-center">
         <div className={styles.inner}>
-          {/* セクションタイトル: 下線付きのレスポンシブサイズ [7, 8] */}
           <SectionTitle
             enTitle="Privacy Policy"
             jpTitle="プライバシーポリシー"
@@ -60,7 +58,6 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
-            {/* --- 追加：戻るボタンエリア --- */}
             <div className={styles.buttonWrapper}>
               <MainButton variant="underline" href="/#contact">
                 トップページに戻る

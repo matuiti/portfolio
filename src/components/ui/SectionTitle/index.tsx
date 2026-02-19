@@ -19,15 +19,15 @@ const sectionTitleStyles = tv({
     variant: {
       default: {
         base: "items-start",
-        jpWrapper: "mt-[calc(12/16*1rem)]",
+        jpWrapper: "mt-[calc(16/16*1rem)]",
       },
       underlined: {
         base: "items-start border-b border-dark-gray pb-[calc(20/16*1rem)]",
-        jpWrapper: "mt-[calc(12/16*1rem)]",
+        jpWrapper: "mt-[calc(16/16*1rem)]",
       },
       center: {
         base: "items-center text-center",
-        jpWrapper: "mt-[calc(12/16*1rem)] justify-center",
+        jpWrapper: "mt-[calc(16/16*1rem)] justify-center",
         bullet: "hidden", // 中央寄せは丸ポチなし
       },
     },
