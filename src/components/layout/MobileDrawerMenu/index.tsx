@@ -31,7 +31,7 @@ export const MobileDrawerMenu = ({
     >
       {/* 背景オーバーレイ：独自にopacityとtransitionを管理 */}
       <div
-        className={`absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-opacity duration-500 ease-in-out ${
+        className={`absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-all duration-500 ease-in ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
         onClick={onClose}
@@ -39,7 +39,7 @@ export const MobileDrawerMenu = ({
 
       {/* メニュー本体：opacityも加えることで、より「ふわっと」した登場に */}
       <div
-        className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default flex flex-col justify-start transition-all duration-500 ease-in-out ${
+        className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default flex flex-col justify-start transition-all duration-700 ease ${
           isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
       >
