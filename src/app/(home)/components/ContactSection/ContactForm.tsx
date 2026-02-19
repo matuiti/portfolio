@@ -112,6 +112,7 @@ export const ContactForm = () => {
             <FormInput
               label="お名前"
               placeholder="山田 太郎"
+              required
               {...register("name")}
               error={errors.name?.message}
               isInvalid={!!errors.name}
@@ -121,6 +122,7 @@ export const ContactForm = () => {
               label="メールアドレス"
               type="email"
               placeholder="yamada@gmail.com"
+              required
               {...register("email")}
               error={errors.email?.message}
               isInvalid={!!errors.email}
@@ -129,6 +131,7 @@ export const ContactForm = () => {
             <FormInput
               label="件名"
               placeholder="〇〇について相談したい"
+              required
               {...register("subject")}
               error={errors.subject?.message}
               isInvalid={!!errors.subject}
@@ -138,6 +141,7 @@ export const ContactForm = () => {
               label="メッセージ"
               isTextArea
               placeholder="ご要件をお書きください。"
+              required
               {...register("message")}
               error={errors.message?.message}
               isInvalid={!!errors.message}
