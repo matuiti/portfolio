@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "repomix": "repomix",
+    "repomix:home": "repomix --config repomix.home.config.json",
     "// --- Development Environment ---": "",
     "dev:work": "npm-run-all --parallel watch:scss dev",
     "new": "node scripts/generate-ui-part.mjs",

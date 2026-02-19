@@ -1,0 +1,11 @@
+{
+  "output": {
+    "filePath": "repomix-output-home.md"
+  },
+  "include": ["src/app/(home)/**/*"],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultIgnore": true,
+    "customPatterns": ["repomix-*"]
+  }
+}
