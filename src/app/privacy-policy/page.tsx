@@ -23,9 +23,7 @@ export default function PrivacyPolicyPage() {
             <section className={styles.section}>
               <h2 className={styles.heading}>1. 個人情報の収集について</h2>
               <p className={styles.text}>
-                当サイト（以下、「本サイト」）では、お問い合わせフォームを通じて、お名前、メールアドレス等の個人情報を収集する場合があります
-                [9,
-                10]。これらの情報は、お問い合わせへの回答や必要な情報を電子メール等でご連絡する場合にのみ利用し、目的以外では利用いたしません。
+                当サイト（以下、「本サイト」）では、お問い合わせフォームを通じて、お名前、メールアドレス等の個人情報を収集する場合があります。これらの情報は、お問い合わせへの回答や必要な情報を電子メール等でご連絡する場合にのみ利用し、目的以外では利用いたしません。
               </p>
             </section>
 
@@ -33,8 +31,7 @@ export default function PrivacyPolicyPage() {
               <h2 className={styles.heading}>2. スパム対策について</h2>
               <p className={styles.text}>
                 本サイトでは、スパム対策として Cloudflare Turnstile
-                を導入しています [9,
-                11]。このサービスに関連して収集されるデータは、セキュリティ維持の目的でのみ使用されます。
+                を導入しています。このサービスに関連して収集されるデータは、セキュリティ維持の目的でのみ使用されます。
               </p>
             </section>
 

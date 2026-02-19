@@ -22,15 +22,15 @@
 
 // ContactFormのコンテナ
 .formContainer {
-  display: flex;
-  justify-content: center;
+  margin-inline: auto;
+  max-width: calc(800 / 16 * 1rem);
   width: 100%;
 }
 
 // ContactForm内のルート
 .formWrapper {
   position: relative;
-  flex: 1;
+  width: 100%;
   border: 1px solid var(--color-dark-gray);
   border-radius: calc(8 / 16 * 1rem);
   padding-block: calc(20 / 16 * 1rem);
@@ -90,7 +90,6 @@
 
 // フォーム本体のレイアウト
 .form {
-  max-width: calc(800 / 16 * 1rem);
   margin-inline: auto; // mx-auto
   display: flex;
   flex-direction: column;
@@ -167,7 +166,7 @@
       text-decoration: none;
     }
   }
-  .errorText{
+  .errorText {
     font-size: calc(14 / 16 * 1rem);
     color: var(--color-red);
   }
@@ -211,6 +210,24 @@
 //   color: #ef4444; // text-red-500相当
 // }
 
+.directMailArea {
+  text-align: center;
+  margin-top: calc(80 / 16 * 1rem);
+
+  @include mq("small") {
+    margin-top: calc(90 / 16 * 1rem);
+  }
+  .description {
+    margin-top: calc(8 / 16 * 1rem);
+    font-size: calc(12 / 16 * 1rem);
+    color: var(--color-dark-gray);
+    line-height: 1.5;
+    span {
+      display: inline-block;
+    }
+  }
+}
+
 .rippleContainer {
   position: absolute;
   inset: 0;
@@ -220,15 +237,14 @@
   align-items: center;
   justify-content: center;
   z-index: 10;
-}
-
-// GSAPで制御する波紋の本体
-.ripple {
-  position: absolute;
-  width: calc(20 / 16 * 1rem);
-  height: calc(20 / 16 * 1rem);
-  background-color: var(--color-blue-600); // 雫の色
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(0);
+  // GSAPで制御する波紋の本体
+  .ripple {
+    position: absolute;
+    width: calc(20 / 16 * 1rem);
+    height: calc(20 / 16 * 1rem);
+    background-color: var(--color-blue-600); // 雫の色
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+  }
 }
