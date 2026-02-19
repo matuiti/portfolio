@@ -1,0 +1,234 @@
+@use "../../../../styles" as *;
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: calc(40 / 16 * 1rem);
+  margin-bottom: calc(40 / 16 * 1rem);
+
+  @include mq("small") {
+    margin-bottom: calc(60 / 16 * 1rem);
+  }
+}
+
+.description {
+  text-align: center;
+  font-size: calc(16 / 16 * 1rem);
+  line-height: 1.5;
+  span {
+    display: inline-block;
+  }
+}
+
+// ContactFormのコンテナ
+.formContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+// ContactForm内のルート
+.formWrapper {
+  position: relative;
+  flex: 1;
+  border: 1px solid var(--color-dark-gray);
+  border-radius: calc(8 / 16 * 1rem);
+  padding-block: calc(20 / 16 * 1rem);
+  padding-inline: calc(15 / 16 * 1rem);
+
+  @include mq("mobile") {
+    padding-block: calc(40 / 16 * 1rem);
+    padding-inline: calc(25 / 16 * 1rem);
+  }
+  @include mq("tablet") {
+    padding-block: calc(60 / 16 * 1rem);
+    padding-inline: calc(40 / 16 * 1rem);
+  }
+}
+
+// 送信成功時のUIコンテナ
+.successContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: calc(60 / 16 * 1rem);
+  gap: calc(32 / 16 * 1rem);
+  animation: fade-in 0.5s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.successMessage {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 / 16 * 1rem); // space-y-[16px]
+}
+
+.successTitle {
+  font-size: calc(24 / 16 * 1rem);
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.successText {
+  color: #475569; // text-slate-600
+  font-size: calc(14 / 16 * 1rem); // text-sm
+  line-height: 1.5; // leading-normal
+  padding-inline: calc(16 / 16 * 1rem); // px-4
+}
+
+// フォーム本体のレイアウト
+.form {
+  max-width: calc(800 / 16 * 1rem);
+  margin-inline: auto; // mx-auto
+  display: flex;
+  flex-direction: column;
+}
+
+// 入力項目のグリッドレイアウト
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr; // grid-cols-1
+  gap: calc(32 / 16 * 1rem); // gap-icon-24相当
+}
+
+// ボタンの個別調整（SubButtonに渡す用）
+// .backButton {
+//   min-width: calc(180 / 16 * 1rem);
+//   padding-block: calc(8 / 16 * 1rem);
+// }
+
+.formFoot {
+  display: flex;
+  flex-direction: column;
+}
+
+// プライバシーポリシー同意エリア
+.privacyArea {
+  margin-top: calc(32 / 16 * 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 / 16 * 1rem);
+  justify-content: center;
+  align-items: center;
+
+  @include mq("mobile") {
+    margin-top: calc(40 / 16 * 1rem);
+  }
+  @include mq("tablet") {
+    margin-top: calc(50 / 16 * 1rem);
+  }
+
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: calc(8 / 16 * 1rem); // gap-3
+    cursor: pointer;
+  }
+
+  .checkbox {
+    width: calc(16 / 16 * 1rem); // w-5
+    height: calc(16 / 16 * 1rem); // h-5
+    border: 2px solid var(--color-black);
+    border-radius: calc(2 / 16 * 1rem); // rounded-sm相当
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:checked {
+      background-color: var(--color-black);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .agreementText {
+    font-size: calc(14 / 16 * 1rem); // text-sm
+    color: var(--color-black);
+  }
+
+  .policyLink {
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .errorText{
+    font-size: calc(14 / 16 * 1rem);
+    color: var(--color-red);
+  }
+}
+
+// セキュリティ検証（Turnstile）エリア
+.securityArea {
+  margin-top: calc(24 / 16 * 1rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(8 / 16 * 1rem); // gap-2
+
+  @include mq("tablet") {
+    margin-top: calc(32 / 16 * 1rem);
+  }
+}
+
+// 送信ボタンエリア
+.submitArea {
+  margin-top: calc(50 / 16 * 1rem);
+  display: flex;
+  justify-content: center;
+
+  @include mq("tablet") {
+    margin-top: calc(60 / 16 * 1rem);
+  }
+}
+
+// .submitButton {
+//   min-width: calc(240 / 16 * 1rem);
+
+//   @include mq("tablet") {
+//     width: auto;
+//   }
+// }
+
+// エラーメッセージ（共通）
+// .errorText {
+//   font-size: calc(12 / 16 * 1rem); // text-xs
+//   color: #ef4444; // text-red-500相当
+// }
+
+.rippleContainer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+// GSAPで制御する波紋の本体
+.ripple {
+  position: absolute;
+  width: calc(20 / 16 * 1rem);
+  height: calc(20 / 16 * 1rem);
+  background-color: var(--color-blue-600); // 雫の色
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+}

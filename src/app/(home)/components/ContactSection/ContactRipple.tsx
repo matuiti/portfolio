@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useUIStore } from "@/store/useUIStore";
-import styles from "./ContactRipple.module.scss";
+import styles from "./ContactSection.module.scss";
 
 /**
  * 送信完了時の「雫と波紋」演出コンポーネント
