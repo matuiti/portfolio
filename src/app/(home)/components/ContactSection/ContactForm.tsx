@@ -120,7 +120,7 @@ export const ContactForm = () => {
             <FormInput
               label="メールアドレス"
               type="email"
-              placeholder="example@mail.com"
+              placeholder="yamada@gmail.com"
               {...register("email")}
               error={errors.email?.message}
               isInvalid={!!errors.email}
@@ -128,7 +128,7 @@ export const ContactForm = () => {
             />
             <FormInput
               label="件名"
-              placeholder="制作のご依頼について"
+              placeholder="〇〇について相談したい"
               {...register("subject")}
               error={errors.subject?.message}
               isInvalid={!!errors.subject}
@@ -137,7 +137,7 @@ export const ContactForm = () => {
             <FormInput
               label="メッセージ"
               isTextArea
-              placeholder="ご相談内容を自由に入力してください"
+              placeholder="ご要件をお書きください。"
               {...register("message")}
               error={errors.message?.message}
               isInvalid={!!errors.message}

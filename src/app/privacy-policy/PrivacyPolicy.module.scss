@@ -2,7 +2,7 @@
 @use "../../styles" as *;
 
 .container {
-  // ヘッダー高を考慮した余白（例：Small以上で90px） [15, 16]
+  // ヘッダー高を考慮した余白（例：Small以上で90px）
   padding-top: calc(65 / 16 * 1rem);
   background-color: var(--color-white);
 
@@ -54,10 +54,10 @@
 
 .buttonWrapper {
   display: flex;
-  justify-content: center; // 中央寄せ（デザインに応じて flex-start に変更可）
-  margin-top: calc(60 / 16 * 1rem); // コンテンツとの間隔を60px確保
+  justify-content: start;
+  margin-top: calc(60 / 16 * 1rem);
 
   @include mq("small") {
-    margin-top: calc(80 / 16 * 1rem); // PCサイズでは少し広めに
+    margin-top: calc(80 / 16 * 1rem);
   }
 }
