@@ -125,9 +125,6 @@
   @include mq("mobile") {
     margin-top: calc(40 / 16 * 1rem);
   }
-  @include mq("tablet") {
-    margin-top: calc(50 / 16 * 1rem);
-  }
 
   .checkboxLabel {
     display: flex;
@@ -174,15 +171,11 @@
 
 // セキュリティ検証（Turnstile）エリア
 .securityArea {
-  margin-top: calc(24 / 16 * 1rem);
+  margin-top: calc(32 / 16 * 1rem);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: calc(8 / 16 * 1rem); // gap-2
-
-  @include mq("tablet") {
-    margin-top: calc(32 / 16 * 1rem);
-  }
+  gap: calc(8 / 16 * 1rem);
 }
 
 // 送信ボタンエリア
@@ -213,10 +206,6 @@
 .directMailArea {
   text-align: center;
   margin-top: calc(80 / 16 * 1rem);
-
-  @include mq("small") {
-    margin-top: calc(90 / 16 * 1rem);
-  }
   .description {
     margin-top: calc(8 / 16 * 1rem);
     font-size: calc(12 / 16 * 1rem);
