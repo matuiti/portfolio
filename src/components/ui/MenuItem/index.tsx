@@ -38,7 +38,7 @@ export const menuItemStyles = tv({
           "bg-no-repeat",
           "bg-bottom-right",
           "bg-size-[0_1px]",
-          "transition-[background-size] duration-300",
+          "transition-[background-size] duration-500 ease-out",
           "group-hover:bg-bottom-left",
           "group-hover:bg-size-[100%_1px]",
         ],

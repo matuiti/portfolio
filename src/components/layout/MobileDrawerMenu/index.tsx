@@ -52,7 +52,7 @@ export const MobileDrawerMenu = ({
 
         {/* 2. 中央：リストアイテム */}
         <nav className="overflow-y-auto">
-          <ul className="flex flex-col overflow-x-hidden">
+          <ul className="flex flex-col overflow-hidden">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 pathname === item.href ||
