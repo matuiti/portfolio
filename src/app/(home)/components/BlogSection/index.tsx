@@ -9,12 +9,17 @@ export const BlogSection = () => {
         <div className="container-center">
           <div className={styles.sectionHead}>
             {/* セクション見出し */}
-            <SectionTitle enTitle="blog" jpTitle="ブログ" variant="default" />
-            <p className={styles.description}>
+            <SectionTitle
+              enTitle="blog"
+              jpTitle="ブログ"
+              variant="default"
+              className="js-fuwa-fade"
+            />
+            <p className={`${styles.description} js-fuwa-fade`}>
               技術記事や制作に関する情報を発信予定です
             </p>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center js-fuwa-fade">
             <ComingSoon />
           </div>
         </div>

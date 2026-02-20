@@ -15,16 +15,17 @@ export const ContactSection = () => {
               jpTitle="お問い合わせ"
               variant="center"
               size="large"
+              className="js-fuwa-fade"
             />
-            <p className={styles.description}>
+            <p className={`${styles.description} js-fuwa-fade`}>
               <span>ご質問やご相談がございましたら、</span>
               <span>お気軽にお問い合わせください。</span>
             </p>
           </div>
-          <div className={styles.formContainer}>
+          <div className={`${styles.formContainer} js-fuwa-fade`}>
             <ContactForm />
           </div>
-          <div className={styles.directMailArea}>
+          <div className={`${styles.directMailArea} js-fuwa-fade`}>
             {/* 独自ドメインのアドレスをプロップスで分割して渡す */}
             <DirectMailTextLink
               user={siteConfig.email.directUser}

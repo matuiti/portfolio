@@ -42,25 +42,29 @@ export const SkillsSection = () => {
       <div className="section-padding-y section-padding-x bg-light-gray">
         <div className="container-center">
           <div className={styles.sectionHead}>
-            <SectionTitle enTitle="skills" jpTitle="スキル" variant="default" />
-            <p className={styles.description}>
+            <SectionTitle
+              enTitle="skills"
+              jpTitle="スキル"
+              variant="default"
+              className="js-fuwa-fade"
+            />
+            <p className={`${styles.description} js-fuwa-fade`}>
               常に新しい技術の習得に取り組み、スキルアップを続けています。
             </p>
           </div>
 
           {/* カードグリッド */}
-          <div className={styles.cardGrid}>
+          <div className={`${styles.cardGrid} js-fuwa-fade`}>
             {SKILLS_HIGHLIGHT.map((group) => (
               <SkillCard key={group.title} group={group} />
             ))}
-          {/* 右寄せの下線ボタン */}
-          <div className={styles.buttonWrapper}>
-            <MainButton variant="underline" href="/skills">
-              一覧を見る
-            </MainButton>
+            {/* 右寄せの下線ボタン */}
+            <div className={`${styles.buttonWrapper} js-fuwa-fade`}>
+              <MainButton variant="underline" href="/skills">
+                一覧を見る
+              </MainButton>
+            </div>
           </div>
-          </div>
-
         </div>
       </div>
     </section>
