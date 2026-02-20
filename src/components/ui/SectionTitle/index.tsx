@@ -9,7 +9,7 @@ import React from "react";
 const sectionTitleStyles = tv({
   slots: {
     base: "flex flex-col font-bold text-black",
-    enTitle: "uppercase",
+    enTitle: "uppercase tracking-wider",
     jpWrapper: "flex items-center gap-x-[calc(8/16*1rem)]",
     jpTitle: "text-[calc(18/16*1rem)]",
     bullet:

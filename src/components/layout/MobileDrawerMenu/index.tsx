@@ -44,7 +44,7 @@ export const MobileDrawerMenu = ({
         }`}
       >
         {/* 1. 上部：ボタンエリア */}
-        <div className="flex items-center justify-end min-h-header-mini small:min-h-header-small mb-5">
+        <div className="flex items-center justify-end min-h-header-mini small:min-h-header-small mb-[calc(11/16*1rem)]">
           <button onClick={onClose} aria-label="メニューを閉じる">
             <MobileMenuClose />
           </button>
@@ -61,7 +61,7 @@ export const MobileDrawerMenu = ({
               return (
                 <li
                   key={item.href}
-                  className={`group flex items-center justify-between py-4 pl-4 border-b first:border-t border-medium-gray ${
+                  className={`group flex items-center justify-between first:pt-[calc(17/16*1rem)] -mb-px py-4 pl-4 border-b first:border-t border-medium-gray ${
                     !item.isPublished ? "cursor-not-allowed" : "cursor-pointer"
                   }`}
                   onClick={() => {

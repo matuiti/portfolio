@@ -13,7 +13,7 @@ export const mainButtonStyles = tv({
   slots: {
     base: "group inline-flex items-center justify-center font-bold transition-all active:scale-95 disabled:opacity-50 cursor-pointer",
     /** 縦線：border-current で文字色と同期 */
-    separator: "h-4 border-l border-current",
+    separator: "h-5.5 border-l border-current",
     icon: "transition-transform duration-300 group-hover:translate-x-1 shrink-0",
   },
   variants: {
@@ -21,11 +21,11 @@ export const mainButtonStyles = tv({
       /** ロング：背景薄灰、文字黒。テキストとアイコンを両端に配置 */
       long: {
         base: "justify-end bg-black text-white px-2 py-3.25 w-full rounded-lg",
-        separator: "ml-2.5 mr-1.75",
+        separator: "ml-6 mr-1.75",
       },
       /** ショート：背景黒、文字白。標準的なパディング */
       short: {
-        base: "bg-black text-white py-3.25 px-4 rounded-lg",
+        base: "bg-black text-white py-3.25 pr-4 pl-7.5 rounded-lg",
         separator: "ml-3 mr-1.75",
       },
       /** 下線：背景なし。縦線は表示されません */

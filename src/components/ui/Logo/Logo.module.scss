@@ -1,0 +1,24 @@
+@use "../../../styles" as *;
+
+// .logo {
+//   // 1. 基本レイアウトとアニメーションは Tailwind 側と分担可能ですが、
+//   // 複雑な計算が必要な余白（ml）をここで管理します。
+
+//   // Base (Mini: 350px未満〜) [5, 6]
+//   margin-left: calc(-5 / 16 * 1rem);
+
+//   // Small (1140px〜) [5, 6]
+//   @include mq("small") {
+//     margin-left: calc(3 / 16 * 1rem);
+//   }
+
+//   // Default (1280px〜) [5, 6]
+//   @include mq("default") {
+//     margin-left: calc(-2 / 16 * 1rem);
+//   }
+
+//   // Large (1920px〜) [5, 6]
+//   @include mq("large") {
+//     margin-left: calc(-2 / 16 * 1rem);
+//   }
+// }

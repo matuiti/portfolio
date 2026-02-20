@@ -98,8 +98,8 @@
 // 入力項目のグリッドレイアウト
 .formGrid {
   display: grid;
-  grid-template-columns: 1fr; // grid-cols-1
-  gap: calc(32 / 16 * 1rem); // gap-icon-24相当
+  grid-template-columns: 1fr;
+  gap: calc(36 / 16 * 1rem);
 }
 
 // ボタンの個別調整（SubButtonに渡す用）

@@ -2,13 +2,17 @@
 import { tv, type VariantProps } from "tailwind-variants";
 import React from "react";
 import { siteConfig } from "@/data/site-config";
+import styles from "./Logo.module.scss";
 
 /**
  * ロゴのスタイル定義
- * 設置場所に応じたレスポンシブサイズを定義
+ * 複雑なレスポンシブ余白は SCSS へ移行し、tv は状態管理に専念させる [1]
  */
 const logoStyles = tv({
-  base: "inline-block h-auto transition-all duration-300 ease-in-out overflow-visible hover:opacity-hover",
+  base: [
+    "inline-block h-auto overflow-visible",
+    "transition-all duration-300 ease-in-out hover:opacity-hover",
+  ],
   variants: {
     color: {
       black: "text-black",
@@ -39,7 +43,11 @@ export const Logo = ({ color, type, className, ...props }: LogoProps) => {
       width={160}
       height={45}
       xmlns="http://www.w3.org/2000/svg"
-      className={logoStyles({ color, type, className })}
+      className={logoStyles({
+        color,
+        type,
+        className: [styles.logo, className],
+      })}
       aria-label={siteConfig.name}
       role="img"
       {...props}

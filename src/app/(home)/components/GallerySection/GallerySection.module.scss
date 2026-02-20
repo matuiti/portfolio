@@ -6,7 +6,7 @@
   gap: calc(40 / 16 * 1rem);
   margin-bottom: calc(40 / 16 * 1rem);
 
-  @include mq("small") {
+  @include mq("default") {
     margin-bottom: calc(60 / 16 * 1rem);
   }
 }

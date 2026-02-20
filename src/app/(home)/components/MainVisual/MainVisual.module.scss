@@ -2,63 +2,68 @@
 @use "../../../../styles" as *;
 
 .mvSectionContainer {
+  $header-mini: 65;
+  $header-small: 90;
   // 1. 基本サイズ (Mini: 350px〜)
-  min-height: calc(570 / 16 * 1rem);
-  padding-top: calc(65 / 16 * 1rem); // pt-header-mini (ヘッダー高: 65px)
+  $min-height: 570 + $header-mini;
+  min-height: calc($min-height / 16 * 1rem);
+  padding-top: calc(
+    $header-mini / 16 * 1rem
+  ); // pt-header-mini (ヘッダー高: 65px)
 
   // 2. Mobile (540px〜) [3]
   @include mq(mobile) {
-    min-height: calc(650 / 16 * 1rem);
+    $min-height: 650 + $header-mini;
+    min-height: calc($min-height / 16 * 1rem);
   }
 
   // 3. Tablet (840px〜) [3]
   @include mq(tablet) {
-    min-height: calc(600 / 16 * 1rem);
+    $min-height: 600 + $header-mini;
+    min-height: calc($min-height / 16 * 1rem);
   }
 
   // 4. Small (1140px〜) [3]
   @include mq(small) {
-    min-height: calc(640 / 16 * 1rem);
-    padding-top: calc(90 / 16 * 1rem); // pt-header-small (ヘッダー高: 90px)
+    $min-height: 640 + $header-small;
+    min-height: calc($min-height / 16 * 1rem);
+    padding-top: calc(
+      $header-small / 16 * 1rem
+    ); // pt-header-small (ヘッダー高: 90px)
     // padding-top: calc(170 / 16 * 1rem);
   }
 }
 
 .mvContainer {
   width: 100%;
-  max-width: 90%;
-  margin-top: calc(60 / 16 * 1rem);
+  margin-top: calc(63 / 16 * 1rem);
   margin-left: auto;
   margin-right: auto;
-  padding-left: calc(20 / 16 * 1rem);
-  padding-right: calc(20 / 16 * 1rem);
+  padding-inline: 10%;
+  // padding-left: calc(43 / 16 * 1rem);
+  // padding-right: calc(43 / 16 * 1rem);
 
   @include mq(mobile) {
-    padding-left: calc(32 / 16 * 1rem);
-    padding-right: calc(32 / 16 * 1rem);
-    max-width: 82%;
+    padding-left: calc(48 / 16 * 1rem);
+    padding-right: calc(48 / 16 * 1rem);
   }
 
   @include mq(tablet) {
-    // margin-top: calc(174 / 16 * 1rem);
-    margin-top: calc(158 / 16 * 1rem);
+    margin-top: calc(178 / 16 * 1rem);
     max-width: calc(800 / 16 * 1rem);
   }
 
   @include mq(small) {
     align-self: center;
-    margin-top: 0;
-    // margin-top: calc(170 / 16 * 1rem);
+    margin-top: calc(1 / 16 * 1rem);
     max-width: calc(1000 / 16 * 1rem);
+    padding-left: 0;
+    padding-right: 0;
   }
 
   @include mq(default) {
+    margin-top: calc(4 / 16 * 1rem);
     max-width: calc(1200 / 16 * 1rem);
-  }
-
-  @include mq(large) {
-    padding-left: 0;
-    padding-right: 0;
   }
 }
 
@@ -78,6 +83,7 @@
 
   // Tablet (840px〜)
   @include mq(tablet) {
+    gap: calc(20 / 16 * 1rem);
     flex-direction: row;
     margin-bottom: 0;
   }
@@ -85,6 +91,7 @@
   // Small (1140px〜)
   @include mq(small) {
     gap: calc(40 / 16 * 1rem);
+    // margin-top: calc(96 / 16 * 1rem);
   }
 }
 
@@ -94,6 +101,7 @@
   font-weight: 900;
   line-height: normal;
   font-size: calc(28 / 16 * 1rem);
+  letter-spacing: 0.05em;
 
   // Mobile (540px〜)
   @include mq(mobile) {
@@ -150,32 +158,32 @@
   position: absolute;
   bottom: 0;
   /* Mini / Base */
-  right: 1.5%;
+  right: 7%;
 
   /* Mobile */
   @include mq(mobile) {
-    right: -2%;
+    right: 5%;
   }
 
   /* Tablet */
   @include mq(tablet) {
-    right: 1%;
+    right: 4.5%;
   }
 
   /* Small */
   @include mq(small) {
-    right: -1%;
+    right: -1.3%;
     transform: translateX(calc(16 / 16 * 1rem));
   }
 
   /* Default */
   @include mq(default) {
-    right: 3%;
+    right: 1.5%;
   }
 
   /* Large */
   @include mq(large) {
-    right: 0;
+    right: 1.3%;
   }
 }
 

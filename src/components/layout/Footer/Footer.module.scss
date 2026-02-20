@@ -1,0 +1,27 @@
+// src/components/layout/Footer/Footer.module.scss
+@use "../../../styles" as *; // 規約：相対パスでの読み込み [3]
+
+.root {
+  background-color: var(--color-black); // Tailwindの black と同期
+
+  /* ベース（mini〜） */
+  padding: calc(20 / 16 * 1rem);
+
+  /* Tablet (840px以上) */
+  @include mq("tablet") {
+    padding-top: calc(20.62 / 16 * 1rem);
+    padding-bottom: calc(20.62 / 16 * 1rem);
+  }
+
+  /* Small (1140px以上) */
+  @include mq("small") {
+    padding-top: calc(40.5 / 16 * 1rem);
+    padding-bottom: calc(20.5 / 16 * 1rem);
+  }
+
+  /* Default (1280px以上) */
+  @include mq("default") {
+    padding-top: calc(40.5 / 16 * 1rem);
+    padding-inline: calc(40 / 16 * 1rem);
+  }
+}
