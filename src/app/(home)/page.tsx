@@ -6,8 +6,10 @@ import { WorksSection } from "./components/WorksSection";
 import { AboutSection } from "./components/AboutSection";
 import { BlogSection } from "./components/BlogSection";
 import { ContactSection } from "./components/ContactSection";
+import { ScrollRevealManager } from "./components/ScrollRevealManager";
 
 export default function Home() {
+  <ScrollRevealManager />;
   return (
     <div className="w-full overflow-hidden">
       {/* 1. メインビジュアル：初期演出を含む */}

@@ -152,6 +152,12 @@
     @apply w-full max-w-container-max mx-auto;
   }
 
+ .js-fuwa-fade {
+  opacity: 0;
+  visibility: hidden; /* より確実に隠す場合（クリック等も無効化） */
+  pointer-events: none; /* アニメーション完了までクリックさせない場合 */
+}
+
   /* スクロールバー制御 (Firefox) */
   @supports (scrollbar-width: thin) {
     * {

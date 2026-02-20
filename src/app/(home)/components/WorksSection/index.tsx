@@ -9,6 +9,7 @@ import { Work, WorkCategory, WorkFilterCategory } from "@/types/work";
 import { CategoryTabs } from "./CategoryTabs";
 import styles from "./WorksSection.module.scss";
 import { MainButton } from "@/components/ui/Buttons/MainButton";
+import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
 
 export const WorksSection = () => {
   // 1. 状態管理：選択中のカテゴリと、モーダル表示用の実績
@@ -28,6 +29,13 @@ export const WorksSection = () => {
     return filtered.slice(0, 3);
   }, [activeCategory]);
 
+  /**
+   * 3. スクロール演出の適用
+   * 依存配列に displayWorks を含めることで、カテゴリ切り替えにより
+   * DOMが書き換わった際も、新しいカードを検知して演出を再実行します。
+   */
+  useScrollReveal([displayWorks]);
+
   return (
     <section id="works" className="scroll-mt-20">
       <div className="section-padding-y section-padding-x bg-white">
@@ -38,12 +46,15 @@ export const WorksSection = () => {
               enTitle="works"
               jpTitle="制作実績"
               variant="default"
+              className="js-fuwa-fade"
             />
             {/* 3. カテゴリスイッチ */}
-            <CategoryTabs
-              activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
-            />
+            <div className="js-fuwa-fade">
+              <CategoryTabs
+                activeCategory={activeCategory}
+                onCategoryChange={setActiveCategory}
+              />
+            </div>
           </div>
 
           {/* 4. 実績グリッド表示 */}
@@ -54,11 +65,12 @@ export const WorksSection = () => {
                 work={work}
                 onClick={() => setSelectedWork(work)}
                 onCategoryClick={(cat) => setActiveCategory(cat)}
+                className="js-fuwa-fade"
               />
             ))}
 
             {/* ボタンをグリッドの最後の子要素として配置 */}
-            <div className={styles.moreButtonWrapper}>
+            <div className={`${styles.moreButtonWrapper} js-fuwa-fade`}>
               <MainButton variant="long" href="/works">
                 一覧を見る
               </MainButton>
@@ -79,4 +91,4 @@ export const WorksSection = () => {
       </div>
     </section>
   );
-};
+};;
