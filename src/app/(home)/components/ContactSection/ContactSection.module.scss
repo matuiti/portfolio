@@ -52,8 +52,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-block: calc(60 / 16 * 1rem);
-  gap: calc(32 / 16 * 1rem);
+  padding-top: calc(20 / 16 * 1rem);
+  gap: calc(40 / 16 * 1rem);
   animation: fade-in 0.5s ease-out;
 
   @keyframes fade-in {

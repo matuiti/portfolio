@@ -152,28 +152,6 @@
     @apply w-full max-w-container-max mx-auto;
   }
 
-  .footer-container {
-    /* ベース（mini〜） */
-    padding-left: calc(20 / 16 * 1rem);
-    padding-right: calc(20 / 16 * 1rem);
-    padding-top: calc(20 / 16 * 1rem);
-    padding-bottom: calc(20 / 16 * 1rem);
-
-    /* Tablet (840px以上) */
-    @media (min-width: 52.5em) {
-      padding-top: calc(20.62 / 16 * 1rem);
-      padding-bottom: calc(20.62 / 16 * 1rem);
-    }
-
-    /* Small (1140px以上) */
-    @media (min-width: 71.25em) {
-      padding-top: calc(40.5 / 16 * 1rem);
-      padding-bottom: calc(20.5 / 16 * 1rem);
-      padding-left: calc(40 / 16 * 1rem);
-      padding-right: calc(40 / 16 * 1rem);
-    }
-  }
-
   /* スクロールバー制御 (Firefox) */
   @supports (scrollbar-width: thin) {
     * {
