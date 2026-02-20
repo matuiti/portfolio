@@ -8,7 +8,7 @@ const formInput = tv({
     label: "text-black leading-normal flex items-center",
     input:
       "w-full px-5 py-2.5 bg-light-gray rounded-sm focus:ring-2 focus:ring-dark-gray focus:border-dark-gray outline-none transition-all placeholder:text-dark-gray placeholder:leading-normal",
-    errorText: "text-[calc(14/16*1rem)] text-red mt-2",
+    errorText: "text-[calc(14/16*1rem)] text-red",
   },
   variants: {
     // エラーがある時のスタイル変更を一括指定
