@@ -6,7 +6,7 @@
   align-items: start;
   // mini~tablet: 1カラム配置
   grid-template-areas:
-    "title-sp"
+    "title"
     "head"
     "image-sp"
     "desc"
@@ -17,7 +17,7 @@
     grid-template-columns: calc(350 / 16 * 1rem) 1fr;
     grid-template-rows: repeat(4, auto);
     grid-template-areas:
-      "image-pc title-pc"
+      "image-pc title"
       "image-pc head"
       "image-pc desc"
       "image-pc btns"
@@ -55,17 +55,16 @@
 
 .titleArea {
   margin-bottom: calc(40 / 16 * 1rem);
-  grid-area: title-sp;
-
-  @include mq("tablet") {
-    grid-area: title-pc;
-  }
+  grid-area: title;
 }
 
 .profileHead {
   grid-area: head;
   font-size: calc(24 / 16 * 1rem);
   font-weight: 700;
+  // margin-top: 4px;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
   margin-bottom: calc(20 / 16 * 1rem);
 }
 

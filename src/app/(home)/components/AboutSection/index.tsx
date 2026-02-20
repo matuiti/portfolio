@@ -28,23 +28,14 @@ export const AboutSection = () => {
       >
         <div className="container-center">
           <div className={styles.inner}>
-            {/* 1. タイトルエリア（SP用：small未満） */}
-            <div className={`${styles.titleArea} ${styles.isSP}`}>
+            {/* 2. セクションタイトル */}
+            <div className={`${styles.titleArea}`}>
               <SectionTitle
                 enTitle="about"
                 jpTitle="私について"
                 variant="underlined"
-                size="small"
               />
             </div>
-
-            {/* 1. タイトルエリア */}
-            <SectionTitle
-              enTitle="about"
-              jpTitle="私について"
-              variant="underlined"
-              className={styles.titleArea}
-            />
 
             {/* 2. プロフィール見出し */}
             <h3 className={styles.profileHead}>

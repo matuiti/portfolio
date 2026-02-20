@@ -24,7 +24,9 @@
 .cardGrid {
   display: grid; // grid
   grid-template-columns: repeat(1, minmax(0, 1fr)); // grid-cols-1
-  gap: calc(20 / 16 * 1rem); // gap-[calc(20/16*1rem)]：規約に従ったサイズ指定 [3, 4]
+  gap: calc(
+    20 / 16 * 1rem
+  ); // gap-[calc(20/16*1rem)]：規約に従ったサイズ指定 [3, 4]
 
   // smallブレイクポイント（1140px相当）での制御 [5-7]
   @include mq("small") {
@@ -62,9 +64,16 @@
 .textContent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-start;
   gap: calc(10 / 16 * 1rem);
+
+  @include mq("mobile") {
+    justify-content: center;
+  }
+  @include mq("small") {
+    justify-content: start;
+  }
 }
 
 .titleWrapper {

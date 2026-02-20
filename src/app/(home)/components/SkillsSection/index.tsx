@@ -53,14 +53,14 @@ export const SkillsSection = () => {
             {SKILLS_HIGHLIGHT.map((group) => (
               <SkillCard key={group.title} group={group} />
             ))}
-          </div>
-
           {/* 右寄せの下線ボタン */}
           <div className={styles.buttonWrapper}>
             <MainButton variant="underline" href="/skills">
               一覧を見る
             </MainButton>
           </div>
+          </div>
+
         </div>
       </div>
     </section>

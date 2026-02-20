@@ -32,8 +32,9 @@ export const ServiceSection = () => {
             ))}
           </div>
           <div className={styles.sectionFoot}>
-            <p className="leading-normal">
-              その他、ご要望に応じて柔軟に対応いたします。
+            <p className="leading-normal text-center">
+              <span className="inline-block">その他、ご要望に応じて</span>
+              <span className="inline-block">柔軟に対応いたします。</span>
             </p>
             <MainButton href="/#contact">お問い合わせはこちら</MainButton>
           </div>
