@@ -9,6 +9,7 @@ import styles from "./MainVisual.module.scss";
 
 export const MainVisual = () => {
   const rootRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const setPhase = useUIStore((state) => state.setPhase);
   const phase = useUIStore((state) => state.phase);
 
@@ -17,12 +18,15 @@ export const MainVisual = () => {
 
   useEffect(() => {
     // 既に演出が完了している場合は実行しない [1]
-    if (isAllFinished) return;
+    // if (isAllFinished) return;
+    if (phase === "ready") return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => setPhase("ready"),
       });
+
+      timelineRef.current = tl;
 
       setPhase("playing");
 
@@ -59,7 +63,30 @@ export const MainVisual = () => {
     }, rootRef);
 
     return () => ctx.revert();
-  }, [setPhase, isAllFinished]);
+    timelineRef.current = null; // クリーンアップ
+  }, [setPhase, phase]);
+
+  useEffect(() => {
+    // 演出中(playing)の時だけスクロールを監視する
+    if (phase !== "playing") return;
+
+    const handleScrollSkip = () => {
+      if (window.scrollY > 10) {
+        // 10px以上スクロールしたら実行
+        if (timelineRef.current) {
+          // 1. アニメーションを最後まで一瞬で進める
+          timelineRef.current.progress(1);
+          // 2. フェーズを準備完了にする（これに連動してWorksSectionが動き出す）
+          setPhase("ready");
+        }
+        // イベントを解除（一度スキップすれば十分なため）
+        window.removeEventListener("scroll", handleScrollSkip);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollSkip, { passive: true });
+    return () => window.removeEventListener("scroll", handleScrollSkip);
+  }, [phase, setPhase]);
 
   const mvItemClass = `js-mv-item ${isMvItemVisible ? "opacity-100" : "opacity-0"}`;
   const scrollClass = `js-scroll-indicator ${isAllFinished ? "opacity-100" : "opacity-0"} ${styles.scrollIndicator}`;
