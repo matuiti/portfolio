@@ -154,7 +154,6 @@
 
  .js-fuwa-fade {
   opacity: 0;
-  visibility: hidden; /* より確実に隠す場合（クリック等も無効化） */
   pointer-events: none; /* アニメーション完了までクリックさせない場合 */
 }
 
