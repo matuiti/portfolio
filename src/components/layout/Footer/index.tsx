@@ -24,6 +24,7 @@ const footerStyles = tv({
     menuList:
       "flex flex-col justify-start items-start gap-y-3.25 gap-x-4 flex-wrap mobile:flex-row mobile:justify-center mobile:items-center mt-2.5",
     bottomArea: "mt-5 pt-5 border-t border-dark-gray",
+    privacyPolicy: "text-white text-[calc(14/16*1rem)] tracking-wider text-center mb-5",
     copyright:
       "text-xs leading-none font-normal text-dark-gray text-center tracking-normal",
   },
@@ -32,7 +33,7 @@ const footerStyles = tv({
 export function Footer() {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
-  const { root, container, topArea, menuList, bottomArea, copyright } =
+  const { root, container, topArea, menuList, bottomArea, privacyPolicy, copyright } =
     footerStyles();
 
   return (
@@ -41,7 +42,11 @@ export function Footer() {
         {/* 上部エリア：ロゴとメニュー */}
         <div className={topArea()}>
           {/* ロゴ */}
-          <Link href="/" aria-label="Go to top">
+          <Link
+            href="/"
+            aria-label="Go to top"
+            className="hover:opacity-hover transition-opacity"
+          >
             <Logo type="footer" color="white" />
           </Link>
 
@@ -70,8 +75,19 @@ export function Footer() {
           </nav>
         </div>
 
-        {/* 下部エリア：コピーライト */}
+        {/* 下部エリア：プライバシーポリシー・コピーライト */}
         <div className={bottomArea()}>
+          <div className={privacyPolicy()}>
+            {/* プライバシーポリシー */}
+            <Link
+              href="/privacy-policy"
+              aria-label="プライバシーポリシーページへ移動する"
+              className="hover:opacity-hover transition-opacity"
+            >
+              プライバシーポリシー
+            </Link>
+          </div>
+          {/* コピーライト */}
           <p className={copyright()}>
             &copy; {currentYear} {siteConfig.author || siteConfig.name}
           </p>

@@ -14,7 +14,11 @@
   align-items: center;
   justify-content: flex-start;
   gap: calc(20 / 16 * 1rem);
-  margin-top: calc(80 / 16 * 1rem);
+  margin-top: calc(40 / 16 * 1rem);
+
+  @include mq("mobile") {
+    margin-top: calc(80 / 16 * 1rem);
+  }
 
   @include mq("small") {
     margin-top: calc(60 / 16 * 1rem);

@@ -77,7 +77,7 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
   return (
     <header className={base()}>
       <div className={inner()}>
-        <Link href="/" className="hover:opacity-70 transition-opacity">
+        <Link href="/" className="hover:opacity-hover transition-opacity">
           <Logo color="black" type="header" />
         </Link>
 

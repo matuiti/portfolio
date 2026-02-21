@@ -1,117 +1,113 @@
-"use client"; // クライアント側（ブラウザ）だけで動かしてね
+"use client";
 
 import { useEffect, useCallback, useRef } from "react";
 import gsap from "gsap";
 import { useUIStore } from "@/store/useUIStore";
 
 export const useScrollReveal = () => {
-  // 1. サイト全体の「今どのフェーズか（MV中か、準備完了か）」を取得
   const phase = useUIStore((state) => state.phase);
-
-  // 2. 監視カメラ（IntersectionObserver）の「本体」をしまっておく箱
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   /**
-   * 🎬 【演出関数】要素をじわっと出現させる
+   * 【実装：内容】
+   * アニメーションを実行し、完了後に制御を CSS へバトンタッチする
    */
   const revealElement = useCallback((el: Element) => {
-    // もしすでに「表示済み」というシール（dataset）が貼ってあったら、二度手間なので何もしない
-    if ((el as HTMLElement).dataset.revealed === "true") return;
+    const target = el as HTMLElement;
 
-    // GSAPでアニメーション開始
-    gsap.to(el, {
-      autoAlpha: 1, // 透明度1にして、かつ見える状態にする
-      y: 0, // 3rem 下がっていたのを元の位置に戻す
-      duration: 1.2, // 1.2秒かけてじわっと
-      ease: "power3.out", // 終わりにかけて滑らかに減速
-      overwrite: true, // 他のアニメーションが割り込んできたら、こっちを優先して上書き
+    // すでに表示済み、またはアニメーション中の場合は絶対に何もしない（制御のガード）
+    if (
+      target.dataset.revealed === "true" ||
+      target.dataset.revealing === "true"
+    )
+      return;
 
-      // アニメーションが終わった後の処理
+    // 進行中フラグを立てる
+    target.dataset.revealing = "true";
+
+    gsap.to(target, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 1.2,
+      ease: "power3.out",
+      overwrite: "auto",
       onComplete: () => {
-        // 【重要】GSAPが勝手に付けた「インラインスタイル（直接書き込まれた数値）」を消去
-        // これをしないと、CSSの :hover アクションが効かなくなる
-        gsap.set(el, { clearProps: "opacity,visibility,transform" });
+        // 1. GSAPのインラインスタイルを全削除（ホバーの解放）
+        gsap.set(target, { clearProps: "all" });
 
-        // スタイルを消したままだと消えてしまうので、最低限の「見える状態」をセット
-        (el as HTMLElement).style.opacity = "1";
-        (el as HTMLElement).style.visibility = "visible";
+        // 2. CSSの初期スタイル（opacity:0等）に負けないよう、表示状態を固定
+        target.style.opacity = "1";
+        target.style.visibility = "visible";
+        target.style.pointerEvents = "auto";
 
-        // 「この要素はもう演出済みだよ」というシールを貼る
-        (el as HTMLElement).dataset.revealed = "true";
+        // 3. 完了フラグを立て、進行中フラグを下ろす
+        target.dataset.revealed = "true";
+        target.removeAttribute("data-revealing");
       },
     });
   }, []);
 
   /**
-   * 🔍 【スキャン関数】新しく現れた要素を見つけて、監視対象に入れる
+   * 【制御：選択】
+   * まだ表示されていない要素（シールがない要素）だけを狙ってスキャンする
    */
   const observeNewElements = useCallback(() => {
-    // 画面内の「ふわっとさせたい要素」を全部探す
-    const targets = document.querySelectorAll(".js-fuwa-fade");
+    // すでに完了した要素（.is-revealed や data-revealed）を検索対象から完全に除外
+    const targets = document.querySelectorAll(
+      ".js-fuwa-fade:not([data-revealed='true'])",
+    );
 
     targets.forEach((target) => {
-      // すでに表示済みのシールがあるなら無視
-      if ((target as HTMLElement).dataset.revealed === "true") return;
-
-      // その要素が今、画面に対してどの位置にいるか計算
       const rect = target.getBoundingClientRect();
-
-      // 【リロード対策】すでに画面内（上端が画面の下端より上）にいるなら即座に表示
+      // すでに画面内なら即実行、外なら監視カメラに登録
       if (rect.top < window.innerHeight) {
         revealElement(target);
-      }
-      // まだ画面の外（下）にいるなら、監視カメラ（Observer）に登録して待つ
-      else if (observerRef.current) {
+      } else if (observerRef.current) {
         observerRef.current.observe(target);
       }
     });
   }, [revealElement]);
 
   /**
-   * 🚀 【メイン実行部】サイトの状態が変わるたびに監視の網を張る
+   * 【制御：タイミング】
+   * ライフサイクルやDOMの変化に合わせて、スキャンを指示する
    */
   useEffect(() => {
-    // 最初からスクロールされているかチェック（リロード時など）
+    // 準備が整うまで（MV完了またはスクロール済み）待機
     const isScrolled = window.scrollY > 100;
-
-    // 「すでに下にいる」または「MVが終わった（ready）」とき以外は、何もしない
     if (!isScrolled && phase !== "ready") return;
 
-    // 1. 監視カメラの「ルール」を決める
+    // 1. スクロール監視（Intersection Observer）の初期化
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // 要素が画面にひょこっと入ってきたら（交差したら）
           if (entry.isIntersecting) {
-            revealElement(entry.target); // 演出開始！
-            observerRef.current?.unobserve(entry.target); // 一度見たら監視を外す（エコ）
+            revealElement(entry.target);
+            observerRef.current?.unobserve(entry.target);
           }
         });
       },
-      // rootMargin: 下端から「-50px」の位置に来たら発火（少し早めに準備）
       { rootMargin: "0px 0px -50px 0px" },
     );
 
-    // 2. 最初に見えている範囲をスキャン
+    // 2. 初回実行（ロード時に見えている要素用）
     observeNewElements();
 
-    // 3. ページの中身が変わる（タブ切り替え等）のを監視する「番犬（MutationObserver）」
+    // 3. DOM変化監視（Mutation Observer）：タブ切り替え対策
     let timer: NodeJS.Timeout;
     const mutationObserver = new MutationObserver(() => {
-      // DOMが変わった直後に何度もスキャンすると重いので、100ms待ってから1回だけ実行（デバウンス）
       clearTimeout(timer);
+      // 連続発火を抑えるデバウンス処理
       timer = setTimeout(() => {
         observeNewElements();
       }, 100);
     });
 
-    // ページ全体の変化を監視開始
     mutationObserver.observe(document.body, {
-      childList: true, // 子要素が増えたり減ったりしたか
-      subtree: true, // 深い階層まで見るか
+      childList: true,
+      subtree: true,
     });
 
-    // クリーンアップ：このフックが不要になったら、全部の監視を止めてメモリを解放する
     return () => {
       observerRef.current?.disconnect();
       mutationObserver.disconnect();
