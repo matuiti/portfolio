@@ -54,7 +54,7 @@ export function WorksDrawerMenu({ isOpen, onClose }: Props) {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* ヘッダーセクション */}
+        {/* メニューヘッダエリア */}
         <div className="p-6 flex items-center justify-between border-b border-slate-100">
           <div>
             <h2 className="font-bold text-slate-900">検索パネル</h2>
@@ -71,7 +71,7 @@ export function WorksDrawerMenu({ isOpen, onClose }: Props) {
           </button>
         </div>
 
-        {/* コンテンツセクション（スクロール可能） */}
+        {/* コンテンツエリア（スクロール可） */}
         <div className="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
           {/* キーワード */}
           <section className="space-y-3">

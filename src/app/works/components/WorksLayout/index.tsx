@@ -16,9 +16,7 @@ export function WorksLayout({ children }: WorksLayoutProps) {
 
   return (
     <div className="relative flex flex-col lg:flex-row gap-8">
-      <aside className="hidden lg:block w-80 shrink-0">
         <WorksSidebar />
-      </aside>
       <main className="flex-1 min-w-0">{children}</main>
       <WorksDrawerMenu
         isOpen={isSearchDrawerOpen}
