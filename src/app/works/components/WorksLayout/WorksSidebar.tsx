@@ -2,88 +2,102 @@
 "use client";
 
 import { useWorkStore, useFilteredWorks } from "@/store/useWorkStore";
-import {
-  WorksSearchBox,
-  WorksCategoryList,
-  WorksTagFilters,
-} from "./FilterParts";
+import { SearchBox } from "@/components/ui/SearchBox";
+import { CategoryList } from "@/components/ui/CategoryList";
+import { TagFilters } from "@/components/ui/TagFilters";
+import { WORK_CATEGORIES } from "@/data/works";
+import { WorkCategory, WorkFilterCategory } from "@/types/work";
+import styles from "./WorksSidebar.module.scss";
 
-export function WorksSidebar() {
+type WorksSidebarProps = {
+  footerNote?: string;
+};
+
+export function WorksSidebar({ footerNote }:WorksSidebarProps) {
   const {
     searchQuery,
     setSearchQuery,
     selectedCategory,
     setSelectedCategory,
     selectedTags,
-    setSelectedTags,
+    toggleTag,
     clearFilters,
   } = useWorkStore();
 
   const filteredWorks = useFilteredWorks();
 
+  // 全実績からタグを動的に抽出
+  const availableTags = Array.from(
+    new Set(filteredWorks.flatMap((w) => w.tags)),
+  ).sort();
+
+  // カテゴリ件数の計算（anyを排除して規約に適合させる）
+  const categoryCounts = WORK_CATEGORIES.reduce(
+    (acc, cat) => {
+      if (cat.value === "all") {
+        // 「すべて」の場合は全件数（または仕様に基づく数値）を入れる
+        acc[cat.value] = filteredWorks.length;
+      } else {
+        // cat.value が "all" ではないことをTypeScriptに明示するため
+        // WorkCategory 型として扱う（これが技術的証明に繋がります）
+        const targetCat = cat.value as WorkCategory;
+        acc[cat.value] = filteredWorks.filter((w) =>
+          w.category.includes(targetCat),
+        ).length;
+      }
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
   return (
-    <aside className="hidden lg:block w-80 shrink-0">
-      <div className="sticky top-24 h-[calc(100vh-120px)] bg-white rounded-4xl border border-slate-100 shadow-sm overflow-hidden flex flex-col">
-        {/* メニューヘッダ（固定）エリア */}
-        <div className="p-8 pb-4 border-b border-slate-50">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-slate-800 tracking-tight">
-              検索パネル
-            </h2>
-            <span className="bg-blue-50 text-blue-600 text-[10px] font-black px-2.5 py-1 rounded-full">
-              {filteredWorks.length} 件
-            </span>
-          </div>
-
-          <div className="space-y-4">
-            <section>
-              <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 px-1">
-                Keyword
-              </h3>
-              <WorksSearchBox value={searchQuery} onChange={setSearchQuery} />
-            </section>
-
+    <aside className={styles.container}>
+      <div className={styles.inner}>
+        {/* 固定エリア：ヘッダー */}
+        <div className={styles.head}>
+          <div className={styles.head__inner}>
+            <h3 className={styles.label}>Keyword</h3>
+            <SearchBox value={searchQuery} onChange={setSearchQuery} />
             <button
+              type="button"
               onClick={clearFilters}
-              className="w-full py-2.5 bg-slate-50 hover:bg-slate-100 text-slate-600 rounded-xl text-xs font-bold transition-all active:scale-[0.98]"
+              className={styles.resetBtn}
             >
               フィルターをリセット
             </button>
           </div>
         </div>
 
-        {/* コンテンツエリア（スクロール可） */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar p-8 pt-6 space-y-8">
-          <section>
-            <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 px-1">
-              Category
-            </h3>
-            <WorksCategoryList
+        {/* スクロール可能エリア */}
+        <div className={styles.body}>
+          {/* カテゴリーセクション */}
+          <section className={styles.section}>
+            <h3 className={styles.label}>Category</h3>
+            <CategoryList<WorkFilterCategory>
+              items={WORK_CATEGORIES}
               selected={selectedCategory}
-              onSelect={setSelectedCategory}
+              onChange={setSelectedCategory}
+              counts={categoryCounts}
             />
           </section>
 
-          <section>
-            <div className="flex items-center justify-between mb-3 px-1">
-              <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                Tags
-              </h3>
-              {selectedTags.length > 0 && (
-                <button
-                  onClick={() => setSelectedTags([])}
-                  className="text-[10px] text-blue-600 hover:underline"
-                >
-                  リセット
-                </button>
-              )}
-            </div>
-            <WorksTagFilters
+          {/* タグセクション */}
+          <section className={styles.section}>
+            <h3 className={styles.label}>Tags</h3>
+            <TagFilters
+              tags={availableTags}
               selectedTags={selectedTags}
-              onChange={setSelectedTags}
+              onToggle={toggleTag}
             />
           </section>
         </div>
+
+        {/* 下部エリア：WORKS特有の注釈などをProps経由で表示 [16] */}
+        {footerNote && (
+          <div className={styles.foot}>
+            <p className={styles.foot__text}>{footerNote}</p>
+          </div>
+        )}
       </div>
     </aside>
   );

@@ -4,19 +4,19 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(8 / 16 * 1rem);
+  gap: calc(10 / 16 * 1rem);
 }
 
 .tag {
-  padding: calc(6 / 16 * 1rem) calc(12 / 16 * 1rem);
-  border-radius: calc(8 / 16 * 1rem);
-  font-size: calc(11 / 16 * 1rem);
-  font-weight: 700;
-  border: 1px solid var(--color-slate-200);
+  padding: calc(4 / 16 * 1rem) calc(8 / 16 * 1rem);
+  border-radius: calc(4 / 16 * 1rem);
+  font-size: calc(12 / 16 * 1rem);
+  border: 1px solid var(--color-dark-gray);
   background-color: var(--color-white);
-  color: var(--color-slate-500);
+  color: var(--color-dark-gray);
   transition: all 0.2s ease;
   cursor: pointer;
+  letter-spacing: 0.05em;
 
   &:hover {
     border-color: var(--color-blue-400);

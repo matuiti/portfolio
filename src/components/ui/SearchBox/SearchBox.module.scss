@@ -6,25 +6,35 @@
   width: 100%;
 }
 
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: calc(8 / 16 * 1rem);
+  border: 1px solid var(--color-dark-gray);
+  background: var(--color-white);
+  overflow: hidden;
+}
+
 .iconWrapper {
   position: absolute;
-  left: calc(12 / 16 * 1rem);
-  top: 50%;
-  transform: translateY(-50%);
+  width: calc(44 / 16 * 1rem);
+  height: 100%;
+  left: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   pointer-events: none;
   z-index: 1;
+  background-color: var(--color-light-gray)
 }
 
 .input {
   width: 100%;
   // 左はアイコン分、右はクリアボタン分の余白を確保
-  padding: calc(10 / 16 * 1rem) calc(40 / 16 * 1rem) calc(10 / 16 * 1rem) calc(40 / 16 * 1rem);
-  background-color: var(--color-slate-50);
-  border: 1px solid var(--color-slate-100);
-  border-radius: calc(12 / 16 * 1rem);
-  font-size: calc(14 / 16 * 1rem);
+  padding: calc(10 / 16 * 1rem) calc(40 / 16 * 1rem) calc(10 / 16 * 1rem) calc(60 / 16 * 1rem);
+  font-size: calc(16 / 16 * 1rem);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
   transition: all 0.3s;
 
   @include mq("small") {

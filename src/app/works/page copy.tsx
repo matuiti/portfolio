@@ -3,12 +3,12 @@
 
 import React, { useState, Suspense } from "react";
 import { useWorkStore, useFilteredWorks } from "@/store/useWorkStore";
+import { useWorkURLSync } from "./lib/hooks/useWorkURLSync";
 import { WorkCard } from "./components/WorkCard";
 import { WorkDetailModal } from "./components/WorkDetailModal";
 import { Pagination } from "./components/Pagination";
 import { WorksLayout } from "./components/WorksLayout";
-import { Work, WorkFilterCategory } from "@/types/work";
-import { useCommonURLSync } from "@/lib/hooks/useCommonURLSync";
+import { Work } from "@/types/work";
 
 /**
  * WORKS ページのメインコンテンツ部分
@@ -16,25 +16,12 @@ import { useCommonURLSync } from "@/lib/hooks/useCommonURLSync";
  * Suspense 境界の内部で呼び出す必要があります。 [cite: 131]
  */
 function WorksContent() {
-  const store = useWorkStore();
-  const filteredWorks = useFilteredWorks();
+  // 1. URL同期の有効化 (category, tags, q パラメータをストアと同期)
+  // 内部で useSearchParams を使用しているため、Suspense が必要 [cite: 144, 145]
+  useWorkURLSync();
 
-  // 共通URL同期フックの適用
-  // category, tags, q, page の双方向同期を一本化
-  useCommonURLSync<WorkFilterCategory>(
-    {
-      category: store.selectedCategory,
-      tags: store.selectedTags,
-      searchQuery: store.searchQuery,
-      currentPage: store.currentPage,
-    },
-    {
-      setSelectedCategory: store.setSelectedCategory,
-      setSelectedTags: store.setSelectedTags,
-      setSearchQuery: store.setSearchQuery,
-      setCurrentPage: store.setCurrentPage,
-    },
-  );
+  // 2. フィルタリング済みデータの取得 (Zustandストアの状態に連動) [cite: 228, 265]
+  const filteredWorks = useFilteredWorks();
 
   // 3. ページネーション用状態の取得 [cite: 224, 265]
   const { currentPage, itemsPerPage, setCurrentPage } = useWorkStore();

@@ -9,8 +9,6 @@
   /* プロジェクト規約に基づき、定義済みの色変数を使用 */
   --color-bg-gradation: linear-gradient(
     180deg,
-    var(--color-white) 0%,
-    var(--color-neutral-200) 100%
   );
 }
 

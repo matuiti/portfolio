@@ -44,7 +44,7 @@ export const MobileDrawerMenu = ({
         }`}
       >
         {/* 1. 上部：ボタンエリア */}
-        <div className="flex items-center justify-end min-h-header-mini small:min-h-header-small mb-[calc(11/16*1rem)]">
+        <div className="flex items-center justify-end min-h-header-mini mb-[calc(20/16*1rem)]">
           <button onClick={onClose} aria-label="メニューを閉じる">
             <MobileMenuClose />
           </button>
