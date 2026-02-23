@@ -1,0 +1,67 @@
+// src/components/ui/SearchBox/SearchBox.module.scss
+@use "../../../styles" as *;
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.iconWrapper {
+  position: absolute;
+  left: calc(12 / 16 * 1rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input {
+  width: 100%;
+  // 左はアイコン分、右はクリアボタン分の余白を確保
+  padding: calc(10 / 16 * 1rem) calc(40 / 16 * 1rem) calc(10 / 16 * 1rem) calc(40 / 16 * 1rem);
+  background-color: var(--color-slate-50);
+  border: 1px solid var(--color-slate-100);
+  border-radius: calc(12 / 16 * 1rem);
+  font-size: calc(14 / 16 * 1rem);
+  transition: all 0.3s;
+
+  @include mq("small") {
+    padding-top: calc(12 / 16 * 1rem);
+    padding-bottom: calc(12 / 16 * 1rem);
+  }
+
+  &::placeholder {
+    color: var(--color-neutral-400);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-blue-500);
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.05); // focus:ring-blue-500/5 相当
+  }
+}
+
+.clearButton {
+  position: absolute;
+  right: calc(8 / 16 * 1rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(28 / 16 * 1rem);
+  height: calc(28 / 16 * 1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-slate-400);
+  font-size: calc(18 / 16 * 1rem);
+  border-radius: 50%;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-slate-600);
+    background-color: var(--color-slate-100);
+  }
+}
