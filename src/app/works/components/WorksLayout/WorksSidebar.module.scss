@@ -1,0 +1,116 @@
+// src/app/works/components/WorksLayout/WorksSidebar.module.scss
+@use "../../../../styles" as *;
+
+.container {
+  display: none;
+  width: calc(300 / 16 * 1rem);
+  flex-shrink: 0;
+  @include mq("small") {
+    display: block;
+  }
+}
+
+.inner {
+  // ビューポートに対する固定設定
+  $header-height: 90;
+  position: sticky;
+  top: calc($header-height / 16 * 1rem);
+  // サイドバー自体の最大高さを設定し、ヘッダー固定スクロールを可能にする
+  max-height: calc(100vh - ($header-height / 16 * 1rem));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border-right: 1px solid var(--color-dark-gray);
+  padding: calc(40 / 16 * 1rem) calc(20 / 16 * 1rem);
+}
+
+// 固定上部エリア
+.head {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-white);
+  z-index: 10;
+  padding-bottom: calc(40 / 16 * 1rem);
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+  }
+
+  .resetBtn {
+    width: 100%;
+    padding: calc(10 / 16 * 1rem);
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+    font-size: calc(16 / 16 * 1rem);
+    border-radius: calc(8 / 16 * 1rem);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: calc(20 / 16 * 1rem);
+
+    &:hover {
+      background-color: var(--color-slate-100);
+      color: var(--color-slate-900);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// 内部スクロールエリア
+.body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: calc(40 / 16 * 1rem);
+  padding-right: calc(8 / 16 * 1rem); //スクロールバー分の幅を考慮
+
+}
+
+// 下部エリア
+.foot {
+  margin-top: calc(40 / 16 * 1rem);
+  padding-top: calc(40 / 16 * 1rem);
+  border-top: 1px solid var(--color-medium-gray);
+  &__text {
+    color: var(--color-black);
+    font-size: calc(16 / 16 * 1rem);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: calc(16 / 16 * 1rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  margin-bottom: calc(10 / 16 * 1rem);
+}
+
+// 共通コンポーネントの特定コンテキスト上での上書き（以前の挙動を再現）
+.section {
+  :global(.isActive) {
+    background-color: var(--color-slate-900) !important;
+    transform: translateX(calc(4 / 16 * 1rem)) !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  }
+
+  :global(.tag:hover) {
+    border-color: var(--color-blue-400) !important;
+    color: var(--color-blue-600) !important;
+  }
+}

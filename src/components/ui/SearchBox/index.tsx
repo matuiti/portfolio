@@ -19,23 +19,24 @@ type SearchBoxProps = {
 export function SearchBox({
   value,
   onChange,
-  placeholder = "キーワードで検索...",
+  placeholder = "例：コーポレート",
   className = "",
 }: SearchBoxProps) {
   return (
     <div className={`${styles.container} ${className}`}>
-      {/* 検索アイコン：プロジェクト共通の SearchSmall を使用 */}
-      <div className={styles.iconWrapper}>
-        <SearchSmall color="gray" size="sm" />
-      </div>
+      <div className={styles.inputWrapper}>
+        <div className={styles.iconWrapper}>
+          <SearchSmall color="gray" size="sm" />
+        </div>
 
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={styles.input}
-      />
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className={styles.input}
+        />
+      </div>
 
       {/* クリアボタン：入力がある時のみ表示 */}
       {value && (

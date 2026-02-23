@@ -1,0 +1,190 @@
+// src/components/ui/SearchDrawer/SearchDrawer.module.scss
+@use "../../../styles" as *;
+
+/* ==========================================================================
+   ドロワー特有の構造（レイアウト・開閉制御）
+   ========================================================================== */
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-drawer);
+  pointer-events: none;
+  visibility: hidden;
+
+  &.is-open {
+    visibility: visible;
+    pointer-events: all;
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-menu-backdrop);
+  // backdrop-filter: blur(var(--backdrop-blur-default));
+  opacity: 0;
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+
+  &.is-open {
+    opacity: 1;
+  }
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-height: 100svh;
+  height: 100%;
+  width: 100%;
+  max-width: var(--spacing-mobile-drawer-max-w);
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-default);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  // 開閉アニメーションの設定 [3]
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.7s ease;
+
+  &.is-open {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  min-height: var(--spacing-header-mini);
+  margin-bottom: calc(20 / 16 * 1rem);
+}
+
+.closeBtn {
+  width: calc(40 / 16 * 1rem); // w-10 相当 [3]
+  height: calc(40 / 16 * 1rem); // h-10 相当 [3]
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px; // rounded-full [3]
+  background-color: var(--color-slate-50); // bg-slate-50 [3]
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-slate-100);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* ==========================================================================
+   内部要素
+   ========================================================================== */
+
+.inner {
+  position: sticky;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+}
+
+// 固定上部エリア
+.head {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--color-white);
+  z-index: 10;
+  padding-bottom: calc(40 / 16 * 1rem);
+  &__inner {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+  }
+
+  .resetBtn {
+    width: 100%;
+    padding: calc(10 / 16 * 1rem);
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+    font-size: calc(16 / 16 * 1rem);
+    border-radius: calc(8 / 16 * 1rem);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: calc(20 / 16 * 1rem);
+
+    &:hover {
+      background-color: var(--color-slate-100);
+      color: var(--color-slate-900);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// 内部スクロールエリア
+.body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: calc(40 / 16 * 1rem);
+  padding-right: calc(8 / 16 * 1rem); //スクロールバー分の幅を考慮
+}
+
+// 下部エリア
+.foot {
+  margin-top: calc(40 / 16 * 1rem);
+  padding-top: calc(40 / 16 * 1rem);
+  border-top: 1px solid var(--color-medium-gray);
+  &__text {
+    color: var(--color-black);
+    font-size: calc(16 / 16 * 1rem);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: calc(16 / 16 * 1rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  margin-bottom: calc(10 / 16 * 1rem);
+}
+
+// 共通コンポーネントの特定コンテキスト上での上書き（以前の挙動を再現）
+.section {
+  :global(.isActive) {
+    background-color: var(--color-slate-900) !important;
+    transform: translateX(calc(4 / 16 * 1rem)) !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  }
+
+  :global(.tag:hover) {
+    border-color: var(--color-blue-400) !important;
+    color: var(--color-blue-600) !important;
+  }
+}

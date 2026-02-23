@@ -33,7 +33,7 @@ export function TagFilters({
             className={`${styles.tag} ${isActive ? styles.isActive : ""}`}
             aria-pressed={isActive}
           >
-            #{tag}
+            # {tag}
           </button>
         );
       })}
