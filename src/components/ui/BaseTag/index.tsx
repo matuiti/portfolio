@@ -6,17 +6,17 @@ import Link from "next/link";
 import { tv, type VariantProps } from "tailwind-variants";
 
 /**
- * 1 & 2. バリアント設計 (tailwind-variants)
- * 形状、色、状態に応じたスタイルを一元管理します。
+ * プロジェクト全体の「タグ・タブ」の見た目を一元管理する共通UIパーツ
  */
 const tagStyles = tv({
   slots: {
     base: "inline-flex items-center justify-center transition-all duration-300 font-bold leading-none cursor-pointer active:scale-95",
+    // カウントバッジのスタイル定義（Source [1-3] の意匠を統合）
     countBadge:
       "ml-[calc(6/16*1rem)] px-[calc(4/16*1rem)] py-[calc(1/16*1rem)] rounded-full text-[calc(10/16*1rem)] font-black transition-colors",
   },
   variants: {
-    // 形状：tab(塗りつぶし・大) / tag(チップ型・小)
+    // 形状：タブ型(塗りつぶし) / チップ型(枠線)
     shape: {
       tab: {
         base: "px-[calc(24/16*1rem)] py-[calc(12/16*1rem)] rounded-full text-[calc(12/16*1rem)] tracking-widest uppercase",
@@ -25,7 +25,7 @@ const tagStyles = tv({
         base: "px-[calc(12/16*1rem)] py-[calc(6/16*1rem)] rounded-sm text-[calc(11/16*1rem)]",
       },
     },
-    // 配色：塗りつぶし(Category向け) / 枠線(Skill向け)
+    // 配色：カテゴリー向け(primary) / スキル・タグ向け(outline)
     color: {
       primary: {
         base: "bg-white text-slate-500 border border-slate-200 hover:border-slate-900 hover:text-slate-900",
@@ -36,20 +36,15 @@ const tagStyles = tv({
         countBadge: "bg-slate-100 text-slate-400",
       },
     },
-    // アクティブ状態
+    // アクティブ状態 (Source [4, 5] の挙動を反映)
     isActive: {
-      true: {
-        base: "shadow-md translate-x-[calc(1/16*1rem)]",
-      },
+      true: { base: "shadow-md translate-x-[calc(1/16*1rem)]" },
     },
-    // 表示専用モード（ホバー効果やクリックを無効化）
+    // 表示専用（カード内の表示など、クリック不可の状態）
     isStatic: {
-      true: {
-        base: "cursor-default pointer-events-none active:scale-100",
-      },
+      true: { base: "cursor-default pointer-events-none active:scale-100" },
     },
   },
-  // 複合バリアント：配色 × アクティブ時のスタイル
   compoundVariants: [
     {
       color: "primary",
@@ -68,69 +63,62 @@ const tagStyles = tv({
       },
     },
   ],
-  defaultVariants: {
-    shape: "tag",
-    color: "primary",
-    isActive: false,
-  },
+  defaultVariants: { shape: "tag", color: "primary", isActive: false },
 });
 
-/**
- * 型定義
- * interfaceを禁止し、typeに統一する規約を遵守。
- */
 type TagVariants = VariantProps<typeof tagStyles>;
 
+/**
+ * 型定義（規約に従い interface ではなく type を使用 [6-8]）
+ */
 type BaseTagProps = {
   children: React.ReactNode;
-  mode?: "static" | "toggle" | "link";
   href?: string;
   isActive?: boolean;
   count?: number;
-  onClick?: () => void;
+  showCount?: boolean;
+  isStatic?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   className?: string;
 } & TagVariants;
 
-/**
- * 3. レンダリングロジックの実装
- */
 export function BaseTag({
   children,
-  mode = "toggle",
   shape,
   color,
-  isActive = false,
+  isActive,
+  isStatic,
   count,
+  showCount = true, // デフォルトでカウント表記を有効化
   href,
   onClick,
   className,
 }: BaseTagProps) {
-  // スタイル適用
-  const isStaticMode = mode === "static";
   const { base, countBadge } = tagStyles({
     shape,
     color,
     isActive,
-    isStatic: isStaticMode,
+    isStatic,
     className,
   });
 
-  // 内部コンテンツ（テキスト + 件数バッジ）
+  /**
+   * カウント表記の出し分けロジック
+   * 1. count プロパティが数値である
+   * 2. showCount プロパティが true である
+   * 両方を満たす場合のみバッジをレンダリングします。
+   */
   const content = (
     <>
       {children}
-      {typeof count === "number" && (
+      {showCount && typeof count === "number" && (
         <span className={countBadge()}>{count}</span>
       )}
     </>
   );
 
-  /**
-   * モード別の分岐出力
-   */
-
-  // A. Linkモード：詳細モーダル内やカード内から検索ページへ遷移
-  if (mode === "link" && href) {
+  // Link（遷移）モード：hrefが存在する場合
+  if (href && !isStatic) {
     return (
       <Link href={href} className={base()} onClick={onClick}>
         {content}
@@ -138,18 +126,14 @@ export function BaseTag({
     );
   }
 
-  // B. Staticモード：SkillCard内などの表示専用
-  if (mode === "static") {
-    return <span className={base()}>{content}</span>;
-  }
-
-  // C. Toggleモード：検索サイドバーなどの選択・解除
+  // Button（トグル・フィルタリング）モード
   return (
     <button
       type="button"
       className={base()}
       onClick={onClick}
       aria-pressed={isActive}
+      disabled={isStatic}
     >
       {content}
     </button>
