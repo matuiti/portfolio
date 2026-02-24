@@ -2,8 +2,8 @@
 "use client";
 
 import React from "react";
-import { tv } from "tailwind-variants";
 import styles from "./CategoryList.module.scss";
+import { BaseTag } from "../BaseTag";
 
 // 規約：interfaceを禁止し、typeで定義 [cite: 425]
 type CategoryItem<T> = {
@@ -18,17 +18,6 @@ type CategoryListProps<T> = {
   counts?: Record<string, number>;
   className?: string;
 };
-
-// スタイリングのバリアント管理 [cite: 166, 167]
-const categoryItemStyles = tv({
-  base: styles.button,
-  variants: {
-    isActive: {
-      true: styles.isActive,
-      false: "",
-    },
-  },
-});
 
 export function CategoryList<T extends string>({
   items,
@@ -49,15 +38,16 @@ export function CategoryList<T extends string>({
 
           return (
             <li key={item.value}>
-              <button
-                type="button"
+              <BaseTag
+                shape="tab"
+                size="long"
+                isActive={isActive}
+                count={count}
+                showCount={count > 0}
                 onClick={() => onChange(item.value)}
-                className={categoryItemStyles({ isActive })}
-                aria-current={isActive ? "page" : undefined}
               >
-                <span className={styles.label}>{item.label}</span>
-                {count > 0 && <span className={styles.count}>{count}</span>}
-              </button>
+                {item.label}
+              </BaseTag>
             </li>
           );
         })}

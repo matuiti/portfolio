@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Work } from "@/types/work";
 import styles from "./WorkDetailModal.module.scss";
+import { BaseTag } from "@/components/ui/BaseTag";
 
 // 規約：interface を禁止し、すべて type で定義 [cite: 7, 402, 425]
 type WorkDetailModalProps = {
@@ -89,14 +90,13 @@ export const WorkDetailModal = ({
             {/* カテゴリー：親から注入された関数を実行 */}
             <div className={styles.categories}>
               {work.category.map((cat) => (
-                <button
+                <BaseTag
                   key={cat}
-                  type="button"
+                  shape="tag"
                   onClick={() => onCategoryClick(cat)}
-                  className={styles.categoryBtn}
                 >
                   {cat}
-                </button>
+                </BaseTag>
               ))}
             </div>
 
@@ -118,14 +118,14 @@ export const WorkDetailModal = ({
             {/* スキルタグ：親から注入された関数を実行 */}
             <div className={styles.tags}>
               {work.tags.map((tag) => (
-                <button
+                <BaseTag
                   key={tag}
-                  type="button"
+                  shape="tag"
+                  hasHash
                   onClick={() => onTagClick(tag)}
-                  className={styles.tagBtn}
                 >
-                  #{tag}
-                </button>
+                  # {tag}
+                </BaseTag>
               ))}
             </div>
 

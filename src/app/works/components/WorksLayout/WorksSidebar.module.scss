@@ -53,14 +53,10 @@
     transition: all 0.2s ease;
     margin-top: calc(20 / 16 * 1rem);
 
-    &:hover {
-      background-color: var(--color-slate-100);
-      color: var(--color-slate-900);
-    }
-
-    &:active {
-      transform: scale(0.98);
-    }
+    // &:hover {
+    //   background-color: var(--color-slate-100);
+    //   color: var(--color-slate-900);
+    // }
   }
 }
 

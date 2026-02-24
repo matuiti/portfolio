@@ -12,8 +12,7 @@ export const menuItemStyles = tv({
     base: "group relative flex items-center transition-all duration-300",
     indicator: [
       "w-2 h-2 transition-all duration-300 flex items-center justify-center",
-      // labelのpb(3px)による視覚的な重心のズレを解消 [cite: 442]
-      "-translate-y-[calc(1.5/16*1rem)]",
+      "pb-[calc(6/16*1rem)]", // labelに揃える
     ],
     label: [
       "font-bold transition-all duration-300",

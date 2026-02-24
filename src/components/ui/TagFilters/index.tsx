@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { tv } from "tailwind-variants";
+import { BaseTag } from "../BaseTag";
 import styles from "./TagFilters.module.scss";
 
 type TagFiltersProps = {
@@ -11,16 +11,6 @@ type TagFiltersProps = {
   onToggle: (tag: string) => void;
   className?: string;
 };
-
-const tagStyles = tv({
-  base: styles.tag,
-  variants: {
-    isActive: {
-      true: styles.isActive,
-      false: "",
-    },
-  },
-});
 
 export function TagFilters({
   tags,
@@ -32,16 +22,17 @@ export function TagFilters({
     <div className={`${styles.container} ${className}`}>
       {tags.map((tag) => {
         const isActive = selectedTags.includes(tag);
+
         return (
-          <button
+          <BaseTag
             key={tag}
-            type="button"
+            shape="tag" // タグ形状（四角）を指定
+            hasHash={true} // ハッシュ有りの余白設定を適用
+            isActive={isActive}
             onClick={() => onToggle(tag)}
-            className={tagStyles({ isActive })}
-            aria-pressed={isActive}
           >
             # {tag}
-          </button>
+          </BaseTag>
         );
       })}
     </div>
