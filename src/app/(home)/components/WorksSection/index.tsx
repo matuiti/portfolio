@@ -10,12 +10,23 @@ import { CategoryTabs } from "./CategoryTabs";
 import styles from "./WorksSection.module.scss";
 import { MainButton } from "@/components/ui/Buttons/MainButton";
 import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
+import { useRouter } from "next/navigation";
 
 export const WorksSection = () => {
+  const router = useRouter();
   // 1. 状態管理：選択中のカテゴリと、モーダル表示用の実績
   const [activeCategory, setActiveCategory] =
     useState<WorkFilterCategory>("web");
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
+
+  // 追加：モーダル内のボタンから呼び出される遷移ロジック [cite: 138, 141]
+  const handleModalCategoryClick = (cat: string) => {
+    router.push(`/works?category=${encodeURIComponent(cat)}`);
+  };
+
+  const handleModalTagClick = (tag: string) => {
+    router.push(`/works?tags=${encodeURIComponent(tag)}`);
+  };
 
   // 2. フィルタリングロジック：カテゴリに基づいてデータを抽出
   // パフォーマンス最適化のため useMemo を使用
@@ -34,7 +45,7 @@ export const WorksSection = () => {
    * 依存配列に displayWorks を含めることで、カテゴリ切り替えにより
    * DOMが書き換わった際も、新しいカードを検知して演出を再実行します。
    */
-  useScrollReveal([displayWorks]);
+  useScrollReveal();
 
   return (
     <section id="works" className="scroll-mt-20">
@@ -85,10 +96,13 @@ export const WorksSection = () => {
               work={selectedWork}
               allFilteredWorks={displayWorks}
               onNavigate={setSelectedWork}
+              // 以下の2行を追加することでエラーを解消し、遷移機能を持たせる
+              onCategoryClick={handleModalCategoryClick}
+              onTagClick={handleModalTagClick}
             />
           )}
         </div>
       </div>
     </section>
   );
-};;
+};
