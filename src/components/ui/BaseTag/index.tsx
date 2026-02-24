@@ -6,75 +6,93 @@ import Link from "next/link";
 import { tv, type VariantProps } from "tailwind-variants";
 
 /**
- * プロジェクト全体の「タグ・タブ」の見た目を一元管理する共通UIパーツ
+ * 構成要素：タブ(ショート・ロング) / タグ(ハッシュ有・無)
+ * スタイルの競合を避けるため、具体的なデザインはcompoundVariantsで定義しています。
  */
 const tagStyles = tv({
   slots: {
-    base: "inline-flex items-center justify-center transition-all duration-300 font-bold leading-none cursor-pointer active:scale-95",
-    // カウントバッジのスタイル定義（Source [1-3] の意匠を統合）
+    base: "inline-flex items-center justify-center transition-all duration-300 leading-none tracking-wider cursor-pointer",
     countBadge:
-      "ml-[calc(6/16*1rem)] px-[calc(4/16*1rem)] py-[calc(1/16*1rem)] rounded-full text-[calc(10/16*1rem)] font-black transition-colors",
+      "ml-[calc(6/16*1rem)] text-[calc(14/16*1rem)] transition-colors tracking-widest leading-none",
   },
   variants: {
-    // 形状：タブ型(塗りつぶし) / チップ型(枠線)
+    // 1. 大きな形状の分岐
     shape: {
-      tab: {
-        base: "px-[calc(24/16*1rem)] py-[calc(12/16*1rem)] rounded-full text-[calc(12/16*1rem)] tracking-widest uppercase",
-      },
+      tab: { base: "" },
       tag: {
-        base: "px-[calc(12/16*1rem)] py-[calc(6/16*1rem)] rounded-sm text-[calc(11/16*1rem)]",
+        base: "rounded-sm text-[calc(12/16*1rem)] py-[calc(4/16*1rem)] bg-white text-dark-gray border border-dark-gray hover:bg-dark-gray hover:text-white leading-none tracking-wider",
       },
     },
-    // 配色：カテゴリー向け(primary) / スキル・タグ向け(outline)
-    color: {
-      primary: {
-        base: "bg-white text-slate-500 border border-slate-200 hover:border-slate-900 hover:text-slate-900",
-        countBadge: "bg-neutral-200 text-neutral-500",
-      },
-      outline: {
-        base: "bg-white text-slate-400 border border-slate-200 hover:border-blue-400 hover:text-blue-600",
-        countBadge: "bg-slate-100 text-slate-400",
-      },
+    // 2. タブ専用：ショート・ロング（名前の定義のみ）
+    size: {
+      short: { base: "" },
+      long: { base: "w-full" },
     },
-    // アクティブ状態 (Source [4, 5] の挙動を反映)
+    // 3. タグ専用：ハッシュの有無による余白調整
+    hasHash: {
+      true: { base: "px-[calc(8/16*1rem)]" },
+      false: { base: "px-[calc(12/16*1rem)]" },
+    },
+    // 4. 共通：状態管理
     isActive: {
-      true: { base: "shadow-md translate-x-[calc(1/16*1rem)]" },
+      true: { base: "" },
+      false: { base: "" },
     },
-    // 表示専用（カード内の表示など、クリック不可の状態）
     isStatic: {
       true: { base: "cursor-default pointer-events-none active:scale-100" },
     },
   },
+  // 5. 形状・サイズ・状態の組み合わせによるスタイル確定
   compoundVariants: [
+    // --- タブ：ショート (デフォルト) ---
     {
-      color: "primary",
-      isActive: true,
+      shape: "tab",
+      size: "short",
       class: {
-        base: "bg-slate-900 text-white border-slate-900",
-        countBadge: "bg-white/20 text-white",
+        base: "rounded-[calc(20/16*1rem)] text-[calc(14/16*1rem)] py-[calc(8/16*1rem)] px-[calc(16/16*1rem)] bg-white text-black border border-dark-gray hover:bg-dark-gray hover:text-white hover:border-dark-gray",
       },
     },
+    // --- タブ：ロング ---
     {
-      color: "outline",
+      shape: "tab",
+      size: "long",
+      class: {
+        base: "flex justify-between rounded-lg text-[calc(16/16*1rem)] leading-normal py-[calc(10/16*1rem)] px-[calc(16/16*1rem)] bg-light-gray text-black",
+      },
+    },
+    // --- タブ：アクティブ状態 ---
+    {
+      shape: "tab",
       isActive: true,
       class: {
-        base: "bg-blue-600 text-white border-blue-600 shadow-blue-100",
-        countBadge: "bg-white/20 text-white",
+        base: "bg-black text-white border-black",
+        countBadge: "text-white",
+      },
+    },
+    // --- タグ：アクティブ状態 ---
+    {
+      shape: "tag",
+      isActive: true,
+      class: {
+        base: "bg-dark-gray text-white",
+        countBadge: "text-white",
       },
     },
   ],
-  defaultVariants: { shape: "tag", color: "primary", isActive: false },
+  // デフォルトの組み合わせ
+  defaultVariants: {
+    shape: "tag",
+    size: "short",
+    hasHash: false,
+    isActive: false,
+  },
 });
 
 type TagVariants = VariantProps<typeof tagStyles>;
 
-/**
- * 型定義（規約に従い interface ではなく type を使用 [6-8]）
- */
 type BaseTagProps = {
   children: React.ReactNode;
   href?: string;
-  isActive?: boolean;
   count?: number;
   showCount?: boolean;
   isStatic?: boolean;
@@ -85,29 +103,26 @@ type BaseTagProps = {
 export function BaseTag({
   children,
   shape,
-  color,
+  size,
+  hasHash,
   isActive,
   isStatic,
   count,
-  showCount = true, // デフォルトでカウント表記を有効化
+  showCount = true,
   href,
   onClick,
   className,
 }: BaseTagProps) {
+  // スタイルを生成（定義されたプロパティをすべて渡す）
   const { base, countBadge } = tagStyles({
     shape,
-    color,
+    size,
+    hasHash,
     isActive,
     isStatic,
     className,
   });
 
-  /**
-   * カウント表記の出し分けロジック
-   * 1. count プロパティが数値である
-   * 2. showCount プロパティが true である
-   * 両方を満たす場合のみバッジをレンダリングします。
-   */
   const content = (
     <>
       {children}
@@ -117,7 +132,7 @@ export function BaseTag({
     </>
   );
 
-  // Link（遷移）モード：hrefが存在する場合
+  // Linkとしてレンダリングする場合
   if (href && !isStatic) {
     return (
       <Link href={href} className={base()} onClick={onClick}>
@@ -126,7 +141,7 @@ export function BaseTag({
     );
   }
 
-  // Button（トグル・フィルタリング）モード
+  // Buttonとしてレンダリングする場合
   return (
     <button
       type="button"

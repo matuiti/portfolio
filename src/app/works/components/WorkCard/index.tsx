@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { Work, WorkFilterCategory } from "@/types/work";
 import { useWorkStore } from "@/store/useWorkStore";
+import { BaseTag } from "@/components/ui/BaseTag";
 
 type Props = {
   work: Work;
@@ -107,13 +108,13 @@ export const WorkCard = memo(
             onMouseLeave={() => setIsTagHovered(false)}
           >
             {work.category.map((cat) => (
-              <span
+              <BaseTag
                 key={cat}
+                shape="tag"
                 onClick={(e) => handleCategoryClick(e, cat)}
-                className="text-[calc(12/16*1rem)] bg-white hover:bg-dark-gray hover:text-white border border-dark-gray transition cursor-pointer py-1 px-3 rounded-sm"
               >
                 {cat}
-              </span>
+              </BaseTag>
             ))}
           </div>
 

@@ -1,30 +1,16 @@
 "use client";
 
-import { tv } from "tailwind-variants";
+import { BaseTag } from "@/components/ui/BaseTag"; // パスは適宜調整してください
 import { WORK_CATEGORIES } from "@/data/works";
 import { WorkFilterCategory } from "@/types/work";
+import { tv } from "tailwind-variants";
 
 /**
- * カテゴリタブのスタイル定義
+ * レイアウトのみを定義するスタイル（個別のボタンスタイルはBaseTagに委譲）
  */
-const tabStyles = tv({
+const tabLayoutStyles = tv({
   slots: {
     container: "flex flex-wrap items-center gap-[calc(10/16*1rem)]",
-    button: [
-      "px-[calc(14/16*1rem)] py-[calc(8/16*1rem)]",
-      "rounded-[calc(20/16*1rem)] text-black text-[calc(14/16*1rem)] transition-all duration-300",
-      "cursor-pointer",
-    ],
-  },
-  variants: {
-    isActive: {
-      true: {
-        button: "bg-black text-white border border-black",
-      },
-      false: {
-        button: "bg-white text-black border border-dark-gray hover:bg-dark-gray hover:text-white",
-      },
-    },
   },
 });
 
@@ -37,20 +23,20 @@ export const CategoryTabs = ({
   activeCategory,
   onCategoryChange,
 }: CategoryTabsProps) => {
-  const { container, button } = tabStyles();
+  const { container } = tabLayoutStyles();
 
   return (
     <div className={container()}>
       {WORK_CATEGORIES.map((cat) => (
-        <button
+        <BaseTag
           key={cat.value}
-          type="button"
+          shape="tab"
+          size="short"
+          isActive={activeCategory === cat.value}
           onClick={() => onCategoryChange(cat.value)}
-          className={button({ isActive: activeCategory === cat.value })}
-          aria-current={activeCategory === cat.value ? "true" : undefined}
         >
           {cat.label}
-        </button>
+        </BaseTag>
       ))}
     </div>
   );
