@@ -2,6 +2,7 @@
 "use client";
 
 import React from "react";
+import { tv } from "tailwind-variants";
 import styles from "./TagFilters.module.scss";
 
 type TagFiltersProps = {
@@ -11,10 +12,16 @@ type TagFiltersProps = {
   className?: string;
 };
 
-/**
- * 共通タグ選択フィルター
- * WORKS / GALLERY のタグ一覧を表示。
- */
+const tagStyles = tv({
+  base: styles.tag,
+  variants: {
+    isActive: {
+      true: styles.isActive,
+      false: "",
+    },
+  },
+});
+
 export function TagFilters({
   tags,
   selectedTags,
@@ -30,7 +37,7 @@ export function TagFilters({
             key={tag}
             type="button"
             onClick={() => onToggle(tag)}
-            className={`${styles.tag} ${isActive ? styles.isActive : ""}`}
+            className={tagStyles({ isActive })}
             aria-pressed={isActive}
           >
             # {tag}

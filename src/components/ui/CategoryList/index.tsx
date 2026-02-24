@@ -2,26 +2,34 @@
 "use client";
 
 import React from "react";
+import { tv } from "tailwind-variants";
 import styles from "./CategoryList.module.scss";
 
-// アイテムの型もジェネリックに変更
-type CategoryItem<T extends string> = {
+// 規約：interfaceを禁止し、typeで定義 [cite: 425]
+type CategoryItem<T> = {
   label: string;
   value: T;
 };
 
-type CategoryListProps<T extends string> = {
+type CategoryListProps<T> = {
   items: CategoryItem<T>[];
   selected: T;
-  onChange: (value: T) => void; // any を排除し、T 型を保証
+  onChange: (value: T) => void;
   counts?: Record<string, number>;
   className?: string;
 };
 
-/**
- * 共通カテゴリー選択リスト
- * ジェネリクスにより、WORKS / GALLERY それぞれの固有の型を安全に受け入れます。
- */
+// スタイリングのバリアント管理 [cite: 166, 167]
+const categoryItemStyles = tv({
+  base: styles.button,
+  variants: {
+    isActive: {
+      true: styles.isActive,
+      false: "",
+    },
+  },
+});
+
 export function CategoryList<T extends string>({
   items,
   selected,
@@ -30,21 +38,21 @@ export function CategoryList<T extends string>({
   className = "",
 }: CategoryListProps<T>) {
   return (
-    <nav className={`${styles.nav} ${className}`}>
+    <nav className={`${styles.nav} ${className}`} aria-label="カテゴリー選択">
       <ul className={styles.list}>
         {items.map((item) => {
           const count = counts[item.value] ?? 0;
           const isActive = selected === item.value;
 
-          // 「すべて」以外で件数が0の場合は表示しない（共通仕様書準拠）
+          // 見た目の制御ロジック：件数0のカテゴリーは非表示（共通仕様準拠） [cite: 220]
           if (item.value !== ("all" as T) && count === 0) return null;
 
           return (
-            <li key={item.value} className={styles.item}>
+            <li key={item.value}>
               <button
                 type="button"
                 onClick={() => onChange(item.value)}
-                className={`${styles.button} ${isActive ? styles.isActive : ""}`}
+                className={categoryItemStyles({ isActive })}
                 aria-current={isActive ? "page" : undefined}
               >
                 <span className={styles.label}>{item.label}</span>

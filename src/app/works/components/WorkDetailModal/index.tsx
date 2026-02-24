@@ -1,9 +1,8 @@
+// src / app / works / components / WorkDetailModal / index.tsx;
 "use client";
 
 import React from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { Work, WorkFilterCategory } from "@/types/work";
-import { useWorkStore } from "@/store/useWorkStore";
+import Image from "next/image";
 import {
   X,
   ChevronLeft,
@@ -11,167 +10,179 @@ import {
   ExternalLink,
   Github,
 } from "lucide-react";
-import Image from "next/image";
+import { Work } from "@/types/work";
+import styles from "./WorkDetailModal.module.scss";
 
-type Props = {
+// 規約：interface を禁止し、すべて type で定義 [cite: 7, 402, 425]
+type WorkDetailModalProps = {
   isOpen: boolean;
   onClose: () => void;
   work: Work;
-  allFilteredWorks: Work[]; // エラー解消：Propsの型定義に追加
+  allFilteredWorks: Work[];
   onNavigate: (work: Work) => void;
+  // コンテキスト（トップ or WORKS）に応じた振る舞いを外部から注入する
+  onCategoryClick: (category: string) => void;
+  onTagClick: (tag: string) => void;
 };
 
+/**
+ * 実績詳細モーダルコンポーネント
+ * 自身の振る舞い（遷移か、状態更新か）を知らず、Props を描画・実行することに特化します。
+ */
 export const WorkDetailModal = ({
   isOpen,
   onClose,
   work,
   allFilteredWorks,
   onNavigate,
-}: Props) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const selectOnlyTag = useWorkStore((state) => state.selectOnlyTag);
-  const selectOnlyCategory = useWorkStore((state) => state.selectOnlyCategory);
-
+  onCategoryClick,
+  onTagClick,
+}: WorkDetailModalProps) => {
+  // モーダルが閉じている場合は何もレンダリングしない
   if (!isOpen) return null;
 
-  const isWorksPage = pathname.startsWith("/works");
-
-  // ナビゲーション用ロジック
+  // 前後の実績へのナビゲーションロジック [cite: 3, 381]
   const currentIndex = allFilteredWorks.findIndex((w) => w.id === work.id);
   const prevWork = allFilteredWorks[currentIndex - 1];
   const nextWork = allFilteredWorks[currentIndex + 1];
 
-  // カテゴリクリック時の挙動（WorkCardと同じロジック）
-  const handleCategoryClick = (cat: string) => {
-    onClose(); // モーダルを閉じる
-    if (isWorksPage) {
-      selectOnlyCategory(cat as WorkFilterCategory);
-    } else {
-      router.push(`/works?category=${encodeURIComponent(cat)}`);
-    }
-  };
-
-  // タグクリック時の挙動
-  const handleTagClick = (tag: string) => {
-    onClose(); // モーダルを閉じる
-    if (isWorksPage) {
-      selectOnlyTag(tag);
-    } else {
-      router.push(`/works?tags=${encodeURIComponent(tag)}`);
-    }
-  };
+  // NDA案件のサムネイル判定ロジック [cite: 11, 150, 427]
+  const displayThumbnail =
+    work.disclosureLevel === "NDA"
+      ? "/assets/images/common/noimage.jpg"
+      : work.thumbnail;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6">
-      {/* 背景オーバーレイ */}
-      <div
-        className="absolute inset-0 bg-slate-900/90 backdrop-blur-sm"
-        onClick={onClose}
-      />
+    <div className={styles.root} role="dialog" aria-modal="true">
+      {/* 背景オーバーレイ：クリックで閉じる [cite: 138] */}
+      <div className={styles.overlay} onClick={onClose} aria-hidden="true" />
 
-      {/* モーダル本体 */}
-      <div className="relative w-full max-w-5xl max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col animate-in zoom-in-95 duration-300">
-        {/* ヘッダー/閉じるボタン */}
-        <div className="absolute top-6 right-6 z-10">
-          <button
-            onClick={onClose}
-            className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
+      {/* モーダルコンテンツ本体 */}
+      <div className={styles.content}>
+        {/* 閉じるボタン */}
+        <button
+          type="button"
+          onClick={onClose}
+          className={styles.closeBtn}
+          aria-label="モーダルを閉じる"
+        >
+          <X size={24} />
+        </button>
 
-        <div className="flex-1 overflow-y-auto custom-scrollbar">
-          <div className="flex flex-col lg:flex-row">
-            {/* 左側：ビジュアルエリア */}
-            <div className="lg:w-3/5 bg-slate-100 aspect-video relative">
+        <div className={styles.inner}>
+          {/* 左側：ビジュアルエリア */}
+          <div className={styles.visualArea}>
+            <div className={styles.imageWrapper}>
               <Image
-                src={work.thumbnail}
+                src={displayThumbnail}
                 alt={work.title}
                 fill
-                className="object-cover"
+                sizes="(max-width: 840px) 100vw, 600px"
+                className={styles.image}
+                priority
               />
             </div>
+          </div>
 
-            {/* 右側：詳細情報エリア */}
-            <div className="lg:w-2/5 p-8 md:p-12 flex flex-col">
-              <div className="mb-6">
-                {work.category.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => handleCategoryClick(cat)}
-                    className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-4 hover:underline cursor-pointer"
-                  >
-                    {cat}
-                  </button>
-                ))}
-                <h2 className="text-3xl font-bold text-slate-900 leading-tight">
-                  {work.title}
-                </h2>
+          {/* 右側：テキスト情報エリア */}
+          <div className={styles.infoArea}>
+            {/* カテゴリー：親から注入された関数を実行 */}
+            <div className={styles.categories}>
+              {work.category.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => onCategoryClick(cat)}
+                  className={styles.categoryBtn}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            <h2 className={styles.title}>{work.title}</h2>
+            <p className={styles.description}>{work.description}</p>
+
+            {/* 基本情報（ role / duration ） [cite: 427] */}
+            <dl className={styles.specList}>
+              <div className={styles.specItem}>
+                <dt className={styles.specLabel}>担当範囲</dt>
+                <dd className={styles.specValue}>{work.role}</dd>
               </div>
-
-              <div className="space-y-6 flex-1 text-slate-600 text-sm leading-relaxed">
-                <p>{work.description}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {work.tags.map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => handleTagClick(tag)}
-                      className="px-3 py-1.5 bg-slate-100 rounded-lg font-bold text-slate-500 hover:bg-slate-900 hover:text-white transition-all cursor-pointer"
-                    >
-                      #{tag}
-                    </button>
-                  ))}
-                </div>
+              <div className={styles.specItem}>
+                <dt className={styles.specLabel}>制作期間</dt>
+                <dd className={styles.specValue}>{work.duration}</dd>
               </div>
+            </dl>
 
-              {/* 外部リンク */}
-              <div className="pt-8 mt-8 border-t border-slate-100 flex gap-4">
-                {work.url && (
-                  <a
-                    href={work.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-bold text-blue-600 hover:opacity-70"
-                  >
-                    <ExternalLink className="w-4 h-4" /> Visit Site
-                  </a>
-                )}
-                {work.github && (
-                  <a
-                    href={work.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 text-sm font-bold text-slate-900 hover:opacity-70"
-                  >
-                    <Github className="w-4 h-4" /> GitHub
-                  </a>
-                )}
-              </div>
+            {/* スキルタグ：親から注入された関数を実行 */}
+            <div className={styles.tags}>
+              {work.tags.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => onTagClick(tag)}
+                  className={styles.tagBtn}
+                >
+                  #{tag}
+                </button>
+              ))}
+            </div>
+
+            {/* 外部リンクエリア */}
+            <div className={styles.links}>
+              {work.url && (
+                <a
+                  href={work.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  <ExternalLink size={18} />
+                  <span>Visit Site</span>
+                </a>
+              )}
+              {work.github && (
+                <a
+                  href={work.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  <Github size={18} />
+                  <span>View Code</span>
+                </a>
+              )}
             </div>
           </div>
         </div>
 
-        {/* ナビゲーションフッター */}
-        <div className="bg-slate-50 px-8 py-4 flex items-center justify-between border-t border-slate-100">
+        {/* ナビゲーションフッター：前後の実績への移動 [cite: 3, 140, 383] */}
+        <div className={styles.footerNav}>
           <button
+            type="button"
             onClick={() => prevWork && onNavigate(prevWork)}
             disabled={!prevWork}
-            className="flex items-center gap-2 text-sm font-bold text-slate-400 disabled:opacity-20 hover:text-slate-900 transition-colors"
+            className={styles.navBtn}
           >
-            <ChevronLeft className="w-5 h-5" /> PREV
+            <ChevronLeft size={20} />
+            <span>PREV</span>
           </button>
-          <span className="text-[10px] font-black text-slate-300 tracking-widest uppercase">
-            {currentIndex + 1} / {allFilteredWorks.length}
-          </span>
+
+          <div className={styles.counter}>
+            <span className={styles.current}>{currentIndex + 1}</span>
+            <span className={styles.separator}>/</span>
+            <span className={styles.total}>{allFilteredWorks.length}</span>
+          </div>
+
           <button
+            type="button"
             onClick={() => nextWork && onNavigate(nextWork)}
             disabled={!nextWork}
-            className="flex items-center gap-2 text-sm font-bold text-slate-400 disabled:opacity-20 hover:text-slate-900 transition-colors"
+            className={styles.navBtn}
           >
-            NEXT <ChevronRight className="w-5 h-5" />
+            <span>NEXT</span>
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>

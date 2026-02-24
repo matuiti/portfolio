@@ -15,6 +15,7 @@
   $header-height: 90;
   position: sticky;
   top: calc($header-height / 16 * 1rem);
+  margin-top: calc($header-height / 16 * 1rem);
   // サイドバー自体の最大高さを設定し、ヘッダー固定スクロールを可能にする
   max-height: calc(100vh - ($header-height / 16 * 1rem));
   overflow: hidden;
