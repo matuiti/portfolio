@@ -11,6 +11,9 @@ import { NoResults } from "./components/list/NoResults";
 import { LoadingGallery } from "./components/ui/LoadingGallery";
 import { useFiltering } from "./lib/hooks/useFiltering";
 import { useURLSync } from "./lib/hooks/useURLSync";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { CATEGORIES } from "./data/categories";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 // 1. ロジックを「GalleryContent」として切り出す
 function GalleryContent() {
@@ -30,10 +33,44 @@ function GalleryContent() {
     clearFilters,
     setSelectedItem,
     setCurrentPage,
+    selectedCategory,
+    searchQuery,
   } = filtering;
+
+  const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
+  const PAGE_HEADER_DATA = {
+    jpTitle: "UIギャラリー",
+    enTitle: "GALLERY",
+    images: PAGE_HEADER_IMAGE_PATH,
+    bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
+  } as const;
+
+  const activeCategoryLabel = CATEGORIES.find(
+    (cat) => cat.id === selectedCategory,
+  )?.label;
+
+  const breadcrumbItems = [
+    { label: "トップ", href: "/" },
+    { label: "UIギャラリー", href: "/gallery" },
+    // カテゴリが選択されている（"all"以外）なら追加
+    ...(selectedCategory !== "all" && activeCategoryLabel
+      ? [{ label: activeCategoryLabel }]
+      : []),
+    // 検索ワードがある場合はさらに追加
+    ...(searchQuery ? [{ label: `「${searchQuery}」の検索結果` }] : []),
+  ];
 
   return (
     <GalleryLayout filtering={filtering}>
+      {/* ページヘッダー */}
+      <PageHeader
+        enTitle={PAGE_HEADER_DATA.enTitle}
+        jpTitle={PAGE_HEADER_DATA.jpTitle}
+        bgImage={PAGE_HEADER_DATA.images}
+      />
+      {/* パンくずリスト */}
+
+      <Breadcrumbs items={breadcrumbItems} />
       <div className="space-y-8">
         <TitleAndCount title={displayTitle} count={totalHitCount} />
 

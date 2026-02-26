@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { SkillGroup, SkillLink, SkillLevelValue } from "@/types/skill";
 import { ALL_SKILLS } from "@/data/skills";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 // --- ヘルパー: カテゴリー/タグの自動判別リンク生成 ---
 const getProjectLink = (itemName: string) => {
@@ -65,24 +67,27 @@ export default function SkillsPage() {
     Object.fromEntries(ALL_SKILLS.map((g) => [g.id, true])),
   );
 
+  const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
+  const PAGE_HEADER_DATA = {
+    jpTitle: "スキル",
+    enTitle: "SKILLS",
+    images: PAGE_HEADER_IMAGE_PATH,
+    bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
+  } as const;
+
+  const breadcrumbItems = [{ label: "トップ", href: "/" }, { label: "スキル" }];
+
   return (
     <div className="min-h-screen bg-white pt-24 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-16 border-l-8 border-slate-900 pl-6">
-          <div className="text-[10px] font-black tracking-[0.3em] text-slate-400 mb-2 uppercase">
-            Tech_Stack_Verified_2025
-          </div>
-          <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-4 tracking-tighter">
-            Proof of <br />
-            Capability.
-          </h1>
-          <p className="text-slate-600 max-w-2xl text-sm md:text-base leading-relaxed font-medium">
-            実務における技術的習熟度と、それを証明するエビデンスのカタログ。
-            <br />
-            エンジニアリング品質を「透明化」するための仕様書です。
-          </p>
-        </div>
+        {/* ページヘッダー */}
+        <PageHeader
+          enTitle={PAGE_HEADER_DATA.enTitle}
+          jpTitle={PAGE_HEADER_DATA.jpTitle}
+          bgImage={PAGE_HEADER_DATA.images}
+        />
+        {/* パンくずリスト */}
+        <Breadcrumbs items={breadcrumbItems} />
 
         {/* Skill Groups */}
         {ALL_SKILLS.map((group: SkillGroup) => (
