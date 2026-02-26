@@ -5,13 +5,15 @@ import React, { useState, Suspense, useMemo } from "react";
 import { useWorkStore, useFilteredWorks } from "@/store/useWorkStore";
 import { WorkCard } from "./components/WorkCard";
 import { WorkDetailModal } from "./components/WorkDetailModal";
-import { Pagination } from "./components/Pagination";
+import { Pagination } from "@/components/ui/Pagination";
 import { WorksLayout } from "./components/WorksLayout";
 import { Work, WorkFilterCategory } from "@/types/work";
 import { useCommonURLSync } from "@/lib/hooks/useCommonURLSync";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { WORK_CATEGORIES } from "@/data/works";
+import { TitleAndCount } from "@/components/ui/TitleAndCount";
+import styles from "./Works.module.scss";
 
 /**
  * WORKS ページのメインコンテンツコンポーネント
@@ -90,6 +92,25 @@ function WorksContent() {
       : []),
   ];
 
+  // 1. カテゴリのラベルを取得（例: "Web制作"） [5]
+  const activeCategoryLabel = WORK_CATEGORIES.find(
+    (cat) => cat.value === store.selectedCategory,
+  )?.label;
+
+  // 2. 表記を変化させるタイトルのロジック
+  let displayTitle = "制作実績"; // デフォルト
+
+  if (store.searchQuery) {
+    // 検索ワードがある場合を最優先
+    displayTitle = `「${store.searchQuery}」の検索結果`;
+  } else if (store.selectedCategory !== "all") {
+    // カテゴリが選択されている場合
+    displayTitle = activeCategoryLabel || "制作実績";
+  }
+
+  // 3. 件数の取得
+  const totalHitCount = filteredWorks.length;
+
   return (
     <WorksLayout>
       {/* ページヘッダー */}
@@ -99,44 +120,49 @@ function WorksContent() {
         bgImage={PAGE_HEADER_DATA.images}
       />
       {/* パンくずリスト */}
-      <Breadcrumbs items={breadcrumbItems} />
-
-      {/* カテゴリタイトル */}
-      {/* サーチカウント */}
-
-      {/* 実績グリッド一覧 [cite: 3, 40] */}
-      {displayWorks.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[calc(32/16*1rem)]">
-          {displayWorks.map((work) => (
-            <WorkCard
-              key={work.id}
-              work={work}
-              onClick={() => setSelectedWork(work)}
-              // カード内のカテゴリクリック時もストアを更新 [cite: 92]
-              onCategoryClick={(cat) => store.selectOnlyCategory(cat)}
+      <div className="section-padding-x">
+        <Breadcrumbs items={breadcrumbItems} />
+      </div>
+      {/* コンテンツ */}
+      <div className="section-padding-x py-15 bg-light-gray">
+        {/* タイトル、検索ヒット件数 */}
+        <TitleAndCount title={displayTitle} count={totalHitCount} />
+        {/* 実績グリッド一覧 */}
+        {displayWorks.length > 0 ? (
+          <div className={styles.cards}>
+            {displayWorks.map((work) => (
+              <WorkCard
+                key={work.id}
+                work={work}
+                onClick={() => setSelectedWork(work)}
+                // カード内のカテゴリクリック時もストアを更新 [cite: 92]
+                onCategoryClick={(cat) => store.selectOnlyCategory(cat)}
+                className={styles.card}
+              />
+            ))}
+          </div>
+        ) : (
+          /* 検索結果ゼロ時の表示 [cite: 40] */
+          <div className="py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)]">
+            <p className="text-dark-gray font-bold">
+              該当する実績は見つかりませんでした。
+            </p>
+            <p className="text-[calc(14/16*1rem)] text-medium-gray mt-[calc(8/16*1rem)]">
+              条件を変えて再度お試しください。
+            </p>
+          </div>
+        )}
+        {/* ページネーション */}
+        {totalPages > 1 && (
+          <div className={styles.paginationWrapper}>
+            <Pagination
+              current={store.currentPage}
+              total={totalPages}
+              onPageChange={store.setCurrentPage}
             />
-          ))}
-        </div>
-      ) : (
-        /* 検索結果ゼロ時の表示 [cite: 40] */
-        <div className="py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)]">
-          <p className="text-dark-gray font-bold">
-            該当する実績は見つかりませんでした。
-          </p>
-          <p className="text-[calc(14/16*1rem)] text-medium-gray mt-[calc(8/16*1rem)]">
-            条件を変えて再度お試しください。
-          </p>
-        </div>
-      )}
-
-      {/* ページネーション */}
-      {totalPages > 1 && (
-        <Pagination
-          current={store.currentPage}
-          total={totalPages}
-          onPageChange={store.setCurrentPage}
-        />
-      )}
+          </div>
+        )}
+      </div>
 
       {/* 詳細モーダル */}
       {selectedWork && (
@@ -146,8 +172,8 @@ function WorksContent() {
           work={selectedWork}
           allFilteredWorks={filteredWorks}
           onNavigate={setSelectedWork}
-          onCategoryClick={handleCategoryAction} // ここでロジックを注入
-          onTagClick={handleTagAction} // ここでロジックを注入
+          onCategoryClick={handleCategoryAction}
+          onTagClick={handleTagAction}
         />
       )}
     </WorksLayout>

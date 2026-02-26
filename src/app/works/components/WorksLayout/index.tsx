@@ -47,9 +47,11 @@ export function WorksLayout({ children }: WorksLayoutProps) {
   );
 
   return (
-    <div className="relative flex flex-col lg:flex-row gap-8">
-      <WorksSidebar footerNote={footerNote} />
-      <main className="flex-1 min-w-0">{children}</main>
+    <div className="relative">
+      <div className="flex flex-row max-w-[calc(1280/16*1rem)] m-auto">
+        <WorksSidebar footerNote={footerNote} />
+        <main className="flex-1 min-w-0">{children}</main>
+      </div>
       <SearchDrawer<WorkFilterCategory>
         isOpen={isSearchDrawerOpen}
         onClose={() => setSearchDrawerOpen(false)}

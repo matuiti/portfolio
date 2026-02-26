@@ -259,4 +259,84 @@ export const ALL_WORKS: Work[] = [
     isSpeedyWork: true,
     isLongTerm: false,
   },
+  {
+    id: "w-16",
+    title: "物流倉庫 在庫スキャナーWebアプリ",
+    category: ["app"],
+    tags: ["React", "Zxing", "Service Worker", "PWA", "Material UI"],
+    thumbnail: "/assets/images/works/warehouse-scan.jpg",
+    summary:
+      "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
+    description:
+      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
+    duration: "2ヶ月",
+    role: "フロントエンド開発",
+    disclosureLevel: "NDA",
+    isSpeedyWork: true,
+    isLongTerm: false,
+  },
+  {
+    id: "w-17",
+    title: "物流倉庫 在庫スキャナーWebアプリ",
+    category: ["app"],
+    tags: ["React", "Zxing", "Service Worker", "PWA", "Material UI"],
+    thumbnail: "/assets/images/works/warehouse-scan.jpg",
+    summary:
+      "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
+    description:
+      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
+    duration: "2ヶ月",
+    role: "フロントエンド開発",
+    disclosureLevel: "NDA",
+    isSpeedyWork: true,
+    isLongTerm: false,
+  },
+  {
+    id: "w-18",
+    title: "物流倉庫 在庫スキャナーWebアプリ",
+    category: ["app"],
+    tags: ["React", "Zxing", "Service Worker", "PWA", "Material UI"],
+    thumbnail: "/assets/images/works/warehouse-scan.jpg",
+    summary:
+      "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
+    description:
+      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
+    duration: "2ヶ月",
+    role: "フロントエンド開発",
+    disclosureLevel: "NDA",
+    isSpeedyWork: true,
+    isLongTerm: false,
+  },
+  {
+    id: "w-19",
+    title: "物流倉庫 在庫スキャナーWebアプリ",
+    category: ["app"],
+    tags: ["React", "Zxing", "Service Worker", "PWA", "Material UI"],
+    thumbnail: "/assets/images/works/warehouse-scan.jpg",
+    summary:
+      "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
+    description:
+      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
+    duration: "2ヶ月",
+    role: "フロントエンド開発",
+    disclosureLevel: "NDA",
+    isSpeedyWork: true,
+    isLongTerm: false,
+  },
+  {
+    id: "w-20",
+    title: "物流倉庫 在庫スキャナーWebアプリ",
+    category: ["app"],
+    tags: ["React", "Zxing", "Service Worker", "PWA", "Material UI"],
+    thumbnail: "/assets/images/works/warehouse-scan.jpg",
+    summary:
+      "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
+    description:
+      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
+    duration: "2ヶ月",
+    role: "フロントエンド開発",
+    disclosureLevel: "NDA",
+    isSpeedyWork: true,
+    isLongTerm: false,
+  },
 ];
