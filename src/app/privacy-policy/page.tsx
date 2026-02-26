@@ -1,8 +1,9 @@
 // src/app/privacy-policy/page.tsx
 import React from "react";
-import { SectionTitle } from "@/components/ui/SectionTitle";
 import styles from "./PrivacyPolicy.module.scss";
 import { MainButton } from "@/components/ui/Buttons/MainButton";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 /**
  * プライバシーポリシーページ
@@ -11,16 +12,32 @@ import { MainButton } from "@/components/ui/Buttons/MainButton";
  * 基づいた透明性の高い安全管理措置を明文化しています。
  */
 export default function PrivacyPolicyPage() {
+  const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
+  const PAGE_HEADER_DATA = {
+    jpTitle: "プライバシーポリシー",
+    enTitle: "PRIVACY POLICY",
+    images: PAGE_HEADER_IMAGE_PATH,
+    bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
+  } as const;
+
+  const breadcrumbItems = [
+    { label: "トップ", href: "/" },
+    { label: "プライバシーポリシー" },
+  ];
+
   return (
     <article className="section-padding-x section-padding-y">
       <div className="container-center">
         <div className={styles.inner}>
-          <SectionTitle
-            enTitle="Privacy Policy"
-            jpTitle="プライバシーポリシー"
-            variant="underlined"
-            className={styles.title}
+
+          {/* ページヘッダー */}
+          <PageHeader
+            enTitle={PAGE_HEADER_DATA.enTitle}
+            jpTitle={PAGE_HEADER_DATA.jpTitle}
+            bgImage={PAGE_HEADER_DATA.images}
           />
+          {/* パンくずリスト */}
+          <Breadcrumbs items={breadcrumbItems} />
 
           <div className={styles.content}>
             <section className={styles.section}>

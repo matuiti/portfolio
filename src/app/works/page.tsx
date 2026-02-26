@@ -9,6 +9,9 @@ import { Pagination } from "./components/Pagination";
 import { WorksLayout } from "./components/WorksLayout";
 import { Work, WorkFilterCategory } from "@/types/work";
 import { useCommonURLSync } from "@/lib/hooks/useCommonURLSync";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { WORK_CATEGORIES } from "@/data/works";
 
 /**
  * WORKS ページのメインコンテンツコンポーネント
@@ -61,18 +64,45 @@ function WorksContent() {
     setSelectedWork(null); // アクション実行後にモーダルを閉じる
   };
 
+  const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
+  const PAGE_HEADER_DATA = {
+    jpTitle: "制作実績",
+    enTitle: "WORKS",
+    images: PAGE_HEADER_IMAGE_PATH,
+    bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
+  } as const;
+
+  // カテゴリーIDからラベルを取得するロジック [9]
+  const selectedCategoryLabel = WORK_CATEGORIES.find(
+    (cat) => cat.value === store.selectedCategory,
+  )?.label;
+
+  const breadcrumbItems = [
+    { label: "トップ", href: "/" },
+    { label: "制作実績", href: "/works" },
+    // カテゴリーが「すべて」以外なら追加
+    ...(store.selectedCategory !== "all"
+      ? [{ label: selectedCategoryLabel || "" }]
+      : []),
+    // 検索クエリがあれば追加
+    ...(store.searchQuery
+      ? [{ label: `「${store.searchQuery}」の検索結果` }]
+      : []),
+  ];
+
   return (
     <WorksLayout>
-      {/* 実績一覧のヘッダー [cite: 40] */}
-      <div className="mb-[calc(48/16*1rem)]">
-        <h1 className="text-[calc(36/16*1rem)] font-black mb-[calc(16/16*1rem)]">
-          WORKS
-        </h1>
-        <p className="text-dark-gray leading-relaxed max-w-mv-height-tablet">
-          プロジェクト実績のアーカイブ。
-          サイドバーのフィルターを使用することで、特定の技術スタックやカテゴリで瞬時に絞り込むことが可能です。
-        </p>
-      </div>
+      {/* ページヘッダー */}
+      <PageHeader
+        enTitle={PAGE_HEADER_DATA.enTitle}
+        jpTitle={PAGE_HEADER_DATA.jpTitle}
+        bgImage={PAGE_HEADER_DATA.images}
+      />
+      {/* パンくずリスト */}
+      <Breadcrumbs items={breadcrumbItems} />
+
+      {/* カテゴリタイトル */}
+      {/* サーチカウント */}
 
       {/* 実績グリッド一覧 [cite: 3, 40] */}
       {displayWorks.length > 0 ? (
@@ -99,7 +129,7 @@ function WorksContent() {
         </div>
       )}
 
-      {/* ページネーション [cite: 2, 40] */}
+      {/* ページネーション */}
       {totalPages > 1 && (
         <Pagination
           current={store.currentPage}
@@ -108,7 +138,7 @@ function WorksContent() {
         />
       )}
 
-      {/* 詳細モーダル：Pure UI コンポーネントに WORKS 用のロジックを注入 [cite: 3, 41] */}
+      {/* 詳細モーダル */}
       {selectedWork && (
         <WorkDetailModal
           isOpen={!!selectedWork}
@@ -126,7 +156,7 @@ function WorksContent() {
 
 /**
  * ページのルートコンポーネント
- * useSearchParams 等のクライアントサイド・フックを使用するため、Suspense でラップします [cite: 38, 41]。
+ * useSearchParams 等のクライアントサイド・フックを使用するため、Suspense でラップします。
  */
 export default function WorksPage() {
   return (

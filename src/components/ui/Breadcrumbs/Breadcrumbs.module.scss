@@ -1,0 +1,43 @@
+// src/components/ui/Breadcrumbs/Breadcrumbs.module.scss
+@use "../../../styles" as *;
+
+.container {
+  padding-block: calc(16 / 16 * 1rem);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  font-size: calc(16 / 16 * 1rem);
+  color: var(--color-dark-gray);
+  line-height: 1.5;
+  font-weight:500;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--default-transition-duration);
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.current {
+  // font-weight: 700;
+  color: var(--color-black);
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
