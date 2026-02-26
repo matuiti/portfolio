@@ -21,10 +21,7 @@ type BreadcrumbsProps = {
  */
 export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   return (
-    <nav
-      aria-label="Breadcrumb"
-      className={`${styles.container} section-padding-x`}
-    >
+    <nav aria-label="Breadcrumb" className={styles.container}>
       <ol className={styles.list}>
         {items.map((item, index) => {
           const isLast = index === items.length - 1;

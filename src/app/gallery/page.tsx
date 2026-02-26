@@ -4,8 +4,7 @@ import { Suspense } from "react";
 import { UI_PARTS } from "@/gallery/data/ui-parts";
 import { GalleryLayout } from "./components/layout/GalleryLayout";
 import { ItemList } from "./components/list/ItemList";
-import { TitleAndCount } from "./components/ui/TitleAndCount";
-import { Pagination } from "./components/list/Pagination";
+import { Pagination } from "@/components/ui/Pagination";
 import { PreviewModal } from "./components/modal/PreviewModal";
 import { NoResults } from "./components/list/NoResults";
 import { LoadingGallery } from "./components/ui/LoadingGallery";
@@ -14,6 +13,7 @@ import { useURLSync } from "./lib/hooks/useURLSync";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { CATEGORIES } from "./data/categories";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { TitleAndCount } from "@/components/ui/TitleAndCount";
 
 // 1. ロジックを「GalleryContent」として切り出す
 function GalleryContent() {
@@ -69,7 +69,6 @@ function GalleryContent() {
         bgImage={PAGE_HEADER_DATA.images}
       />
       {/* パンくずリスト */}
-
       <Breadcrumbs items={breadcrumbItems} />
       <div className="space-y-8">
         <TitleAndCount title={displayTitle} count={totalHitCount} />
@@ -80,13 +79,11 @@ function GalleryContent() {
           <div className="space-y-12">
             <ItemList items={paginatedItems} onItemClick={setSelectedItem} />
             {totalPages > 1 && (
-              <div className="pt-12 border-t border-neutral-100">
-                <Pagination
-                  current={currentPage}
-                  total={totalPages}
-                  onPageChange={setCurrentPage}
-                />
-              </div>
+              <Pagination
+                current={currentPage}
+                total={totalPages}
+                onPageChange={setCurrentPage}
+              />
             )}
           </div>
         )}
