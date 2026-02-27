@@ -14,10 +14,15 @@ const iconStyles = tv({
       lg: "w-icon-30 h-icon-30",
       xl: "w-icon-50 h-icon-50",
     },
+    left: {
+      true: "-scale-x-100",
+      false: "",
+    },
   },
   defaultVariants: {
     color: "gray",
     size: "sm",
+    left: false,
   },
 });
 
@@ -27,6 +32,7 @@ export type KeyboardArrowRightProps = React.SVGProps<SVGSVGElement> &
 export const KeyboardArrowRight = ({
   color,
   size,
+  left,
   className,
   ...props
 }: KeyboardArrowRightProps) => {
@@ -35,7 +41,7 @@ export const KeyboardArrowRight = ({
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={iconStyles({ color, size, className })}
+      className={iconStyles({ color, size, left, className })}
       {...props}
     >
       <path

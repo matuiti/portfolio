@@ -15,6 +15,7 @@ export type Work = {
   category: WorkCategory[];
   tags: string[];
   thumbnail: string;
+  images?: string[];
   summary: string; // カード用の短い説明 [cite: 7, 16]
   duration: string; // 制作期間 [cite: 7, 16]
   role: string; // 担当役割 [cite: 7, 16]

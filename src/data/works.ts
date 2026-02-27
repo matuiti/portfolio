@@ -21,13 +21,18 @@ export const ALL_WORKS: Work[] = [
     category: ["app"],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "App Router", "Zustand"],
     thumbnail: "/assets/images/works/ec-next.jpg",
+    images: [
+      "/assets/images/common/noimage.jpg",
+      "/assets/images/common/bg-page-header.jpg",
+      "/assets/images/common/comingsoon.png",
+    ],
     summary:
       "Next.js App Routerを採用した、大規模ECサイトのフロントエンドリニューアル。",
     description:
       "パフォーマンスとSEOを最優先に設計. Server Componentsを活用し、従来のReact構成よりLCPを40%改善しました。",
     duration: "4ヶ月",
     role: "リードエンジニア",
-    disclosureLevel: "NDA",
+    disclosureLevel: "Full",
     isSpeedyWork: false,
     isLongTerm: true,
     github: "https://github.com/your-id/next-ec-project",

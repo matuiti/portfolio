@@ -2,10 +2,12 @@ import { tv, type VariantProps } from "tailwind-variants";
 import React from "react";
 
 const iconStyles = tv({
-  base: "inline-block shrink-0 transition-all duration-300 cursor-pointer",
+  base: "inline-block shrink-0cursor-pointer",
   variants: {
     color: {
       black: "text-black",
+      white: "text-white",
+      gray: "text-dark-gray",
     },
     size: {
       sm: "w-icon-20 h-icon-20",
@@ -23,7 +25,7 @@ const iconStyles = tv({
 export type MobileMenuCloseProps = React.SVGProps<SVGSVGElement> &
   VariantProps<typeof iconStyles>;
 
-export const MobileMenuClose = ({
+export const Close = ({
   color,
   size,
   className,
