@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { MobileMenuClose } from "@/components/ui/Icons";
+import { Close } from "@/components/ui/Icons";
 import { SearchBox } from "@/components/ui/SearchBox";
 import { CategoryList } from "@/components/ui/CategoryList";
 import { TagFilters } from "@/components/ui/TagFilters";
@@ -74,7 +74,7 @@ export function SearchDrawer<T extends string>({
               className={styles.closeBtn}
               aria-label="メニューを閉じる"
             >
-              <MobileMenuClose />
+              <Close />
             </button>
           </div>
 

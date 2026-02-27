@@ -1,306 +1,447 @@
 @use "../../../../styles" as *;
 
 .overlay {
+  overflow: auto;
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.8);
+  // backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(20 / 16 * 1rem);
+  padding-inline: calc(20 / 16 * 1rem);
+  padding-block: calc(50 / 16 * 1rem);
 
-  @include mq(lg) {
-    padding: calc(40 / 16 * 1rem);
+  @include mq("tablet") {
+    padding-inline: calc(30 / 16 * 1rem);
   }
 }
 
 .modalContent {
-  position: relative;
-  background-color: #fff;
+  // position: relative;
   width: 100%;
-  max-width: calc(1400 / 16 * 1rem); // 最大幅を制限
-  height: 90vh;
-  max-height: calc(900 / 16 * 1rem);
+  max-width: calc(900 / 16 * 1rem);
+  height: 100%;
+  // max-height: calc(900 / 16 * 1rem);
   display: flex;
   flex-direction: column;
-  overflow: hidden; // フッターとヘッダーを固定するため
   animation: modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  @keyframes modalIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-// ヘッダー（閉じるボタン）
 .header {
-  display: flex;
-  justify-content: space-between; // 両端に配置
-  align-items: center;
-  padding: calc(16 / 16 * 1rem);
-}
-
-.navGroup {
-  display: flex;
-  align-items: center;
-  gap: 1rem; // 要素間の隙間
-
-  /* SP時の並び順設定 */
-  .navButton:first-of-type {
-    order: 1; // 左アロー
-  }
-  .pageCounter {
-    order: 2; // 1/10
-  }
-  .navButton:last-of-type {
-    order: 3; // 右アロー
+  @include mq("tablet") {
+    background: var(--color-white);
+    border-radius: calc(20 / 16 * 1rem) calc(20 / 16 * 1rem) 0 0;
+    padding-inline: calc(30 / 16 * 1rem);
   }
 
-  /* PC時 (例: 768px以上) の並び順変更 */
-  @media (min-width: 768px) {
-    .pageCounter {
-      order: 1; // 1/10 を最初に
-      margin-right: 1rem; // アローとの間に少し距離を置く
+  @include mq("small") {
+    padding-inline: calc(40 / 16 * 1rem);
+  }
+
+  .inner {
+    display: grid;
+    align-items: center;
+
+    // --- mini~ (スマホ): [<][ 1/10 ][>] のカプセルスタイル ---
+    // vLineをテンプレートに含めず、display: none で消去します
+    grid-template-areas: "prev counter next . close";
+    grid-template-columns: auto auto auto 1fr auto;
+
+    .projectLabel,
+    .vLine {
+      display: none;
     }
-    .navButton:first-of-type {
-      order: 2; // 左アロー
+
+    // 統合UIの背景と高さ
+    .prevBtn,
+    .nextBtn,
+    .counter {
+      background: var(--color-white);
+      min-height: calc(28 / 16 * 1rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .navButton:last-of-type {
-      order: 3; // 右アロー
+
+    .prevBtn,
+    .nextBtn {
+      cursor: pointer;
+
+      // 通常時のアイコンの色
+      svg {
+        color: var(--color-black);
+        transition:
+          color 0.3s,
+          background 0.3s;
+        border-radius: calc(4 / 16 * 1rem);
+      }
+
+      // ボタンが非活性（disabled）のとき
+      &:disabled {
+        cursor: not-allowed;
+        svg {
+          color: var(--color-medium-gray);
+        }
+      }
+
+      &:not(:disabled) {
+        svg {
+          &:hover {
+            background-color: var(--color-white);
+            box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+
+    .prevBtn {
+      grid-area: prev;
+      border-radius: calc(28 / 16 * 1rem) 0 0 calc(28 / 16 * 1rem);
+      padding-left: calc(4 / 16 * 1rem);
+    }
+
+    .counter {
+      grid-area: counter;
+      padding-inline: calc(10 / 16 * 1rem);
+      font-size: calc(14 / 16 * 1rem);
+      letter-spacing: 0.1em;
+      color: var(--color-dark-gray);
+      display: flex;
+      gap: calc(2 / 16 * 1rem);
+    }
+
+    .nextBtn {
+      grid-area: next;
+      border-radius: 0 calc(28 / 16 * 1rem) calc(28 / 16 * 1rem) 0;
+      padding-right: calc(4 / 16 * 1rem);
+    }
+
+    .closeBtn {
+      grid-area: close;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    // [該当PJ 1/10] ... [< | >] [X]
+    @include mq("tablet") {
+      // 縦線(vLine)をアローの間に挿入し、背景色付きの操作パネルを構成
+      grid-template-areas: "label counter . prev vLine next close";
+      grid-template-columns: auto auto 1fr auto auto auto auto;
+      border-bottom: 1px solid var(--color-medium-gray);
+      padding-block: calc(20 / 16 * 1rem) calc(12 / 16 * 1rem);
+
+      // 統合UIの背景と高さ
+      .projectLabel,
+      .counter {
+        background: var(--color-light-gray);
+        min-height: calc(28 / 16 * 1rem);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: calc(7 / 16 * 1rem);
+        padding-bottom: calc(5 / 16 * 1rem);
+      }
+
+      .projectLabel {
+        grid-area: label;
+        font-size: calc(12 / 16 * 1rem);
+        letter-spacing: 0.05em;
+        color: var(--color-black);
+        padding-inline: calc(12 / 16 * 1rem);
+        border-radius: calc(50 / 16 * 1rem) 0 0 calc(50 / 16 * 1rem);
+      }
+
+      .counter {
+        grid-area: counter;
+        padding-right: calc(12 / 16 * 1rem);
+        padding-left: 0;
+        border-radius: 0 calc(50 / 16 * 1rem) calc(50 / 16 * 1rem) 0;
+        color: var(--color-black);
+      }
+
+      // 操作パネル（アロー＋縦線）のスタイル
+      .prevBtn,
+      .vLine,
+      .nextBtn {
+        background: var(--color-light-gray); // 操作系をグレーの塊に
+      }
+
+      .prevBtn {
+        grid-area: prev;
+        border-radius: calc(22 / 16 * 1rem) 0 0 calc(22 / 16 * 1rem);
+        padding: calc(4 / 16 * 1rem) calc(11 / 16 * 1rem) calc(4 / 16 * 1rem)
+          calc(8 / 16 * 1rem);
+        margin-right: calc(-1 / 16 * 1rem);
+      }
+
+      .vLine {
+        grid-area: vLine;
+        position: relative;
+        display: block;
+        width: 1px;
+        height: calc(16 / 16 * 1rem);
+        background: var(--color-medium-gray);
+        align-self: center;
+      }
+
+      .nextBtn {
+        grid-area: next;
+        border-radius: 0 calc(22 / 16 * 1rem) calc(22 / 16 * 1rem) 0;
+        padding: calc(4 / 16 * 1rem) calc(8 / 16 * 1rem) calc(4 / 16 * 1rem)
+          calc(10 / 16 * 1rem);
+      }
+
+      .closeBtn {
+        grid-area: close;
+        margin-left: calc(10 / 16 * 1rem);
+      }
     }
   }
-}
-
-.pageCounter {
-  font-family: serif; // 数値を見やすく
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.closeButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #000;
-  font-family: var(--font-en);
-  font-weight: 700;
-  transition: opacity 0.3s;
-
-  &:hover {
-    opacity: 0.6;
-  }
-}
-
-.closeText {
-  font-size: calc(12 / 16 * 1rem);
-  letter-spacing: 0.1em;
 }
 
 // メインコンテンツエリア
 .article {
-  flex: 1;
-  overflow-y: auto; // 全体が長い場合はスクロール
-}
+  // flex: 1;
+  // overflow: hidden;
+  background: var(--color-white);
+  border-radius: calc(20 / 16 * 1rem);
 
-.layoutBody {
-  display: flex;
-  flex-direction: column;
-
-  @include mq(lg) {
-    height: 100%;
+  @include mq("tablet") {
+    border-radius: 0 0 calc(20 / 16 * 1rem) calc(20 / 16 * 1rem);
   }
-}
-
-// 画像セクション
-.imageSection {
-  background-color: #f5f5f5;
-
-  @include mq(lg) {
-    flex: 1.2; // 画像を少し広めに
+  .inner {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #eee;
-    overflow: hidden;
-  }
-}
-
-.imageWrapper {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  position: relative;
-
-  .mainImage {
-    object-fit: cover;
-    width: 100%;
+    flex-direction: column;
     height: 100%;
   }
-}
 
-// 右側：情報セクション
-.infoSection {
-  padding: calc(32 / 16 * 1rem);
+  .articleHead {
+    margin-bottom: calc(20 / 16 * 1rem);
 
-  @include mq(lg) {
-    flex: 0.8;
-    overflow-y: auto; // 右側だけスクロールさせる
-    padding: calc(60 / 16 * 1rem) calc(40 / 16 * 1rem);
+    .categoryList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(8 / 16 * 1rem);
+      margin-bottom: calc(12 / 16 * 1rem);
+    }
+
+    .title {
+      font-size: calc(18 / 16 * 1rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.05em;
+      margin-bottom: calc(12 / 16 * 1rem);
+      color: var(--color-black);
+
+      @include mq("tablet") {
+        font-size: calc(24 / 16 * 1rem);
+        margin-bottom: calc(20 / 16 * 1rem);
+      }
+      
+      @include mq("small") {
+        font-size: calc(30 / 16 * 1rem);
+        margin-bottom: calc(20 / 16 * 1rem);
+      }
+    }
   }
-}
 
-.categoryList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: calc(16 / 16 * 1rem);
-}
+  // 画像セクション
+  .imageSection {
+    background-color: var(--color-white);
+    overflow: hidden; // スライダーのはみ出しを防ぐ
+    position: relative;
 
-.categoryTag {
-  font-size: calc(10 / 16 * 1rem);
-  font-weight: 700;
-  padding: 4px 12px;
-  border: 1px solid #000;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s;
+    .imageWrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
 
-  &:hover {
+    .imageSlider {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); // 滑らかな移動
+    }
+
+    .slide {
+      flex-shrink: 0;
+      width: 100%;
+      height: 100%;
+
+      .mainImage {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    // 操作ボタン
+    .slidePrev,
+    .slideNext {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .slidePrev {
+      left: calc(14 / 16 * 1rem);
+    }
+    .slideNext {
+      right: calc(14 / 16 * 1rem);
+    }
+
+    // インジケーター
+    // インジケーター用のコンテナ（ここが「スペース」になります）
+    .indicatorContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: calc(42 / 16 * 1rem);
+
+      @include mq("tablet") {
+        padding-top: calc(68 / 16 * 1rem);
+      }
+    }
+    .dotIndicator {
+      position: absolute;
+      bottom: calc(20 / 16 * 1rem);
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: calc(8 / 16 * 1rem);
+      z-index: 10;
+      @include mq("tablet") {
+        bottom: calc(40 / 16 * 1rem);
+      }
+
+      .dot {
+        width: calc(8 / 16 * 1rem);
+        height: calc(8 / 16 * 1rem);
+        background: var(--color-dark-gray);
+        border-radius: 50%;
+        transition: all 0.3s;
+
+        &.isActive {
+          // 状態を示す命名則 [4]
+          background: var(--color-black);
+          width: calc(12 / 16 * 1rem); // アクティブ時に横長にする等の演出
+          border-radius: calc(4 / 16 * 1rem);
+        }
+      }
+    }
+  }
+
+  // 情報セクション
+  .infoSection {
+    @include mq("tablet") {
+      flex: 0.8;
+      overflow-y: auto;
+    }
+  }
+
+  // データテーブル形式のメタ情報
+  .metaTable {
+    border-top: 1px solid #eee;
+    margin-bottom: calc(40 / 16 * 1rem);
+  }
+
+  .metaRow {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+    font-size: calc(14 / 16 * 1rem);
+  }
+
+  .metaLabel {
+    width: calc(100 / 16 * 1rem);
+    color: #666;
+    font-weight: 500;
+  }
+
+  .metaValue {
+    flex: 1;
+    color: #000;
+    font-weight: 600;
+  }
+
+  // 各セクション
+  .section {
+    margin-bottom: calc(40 / 16 * 1rem);
+  }
+
+  .sectionTitle {
+    font-family: var(--font-en);
+    font-size: calc(12 / 16 * 1rem);
+    color: #999;
+    letter-spacing: 0.1em;
+    margin-bottom: calc(16 / 16 * 1rem);
+  }
+
+  .description {
+    font-size: calc(15 / 16 * 1rem);
+    line-height: 1.8;
+    color: #333;
+    white-space: pre-wrap;
+  }
+
+  .linkWrapper {
+    margin-top: calc(24 / 16 * 1rem);
+  }
+
+  .siteLink {
+    display: inline-block;
+    padding: 12px 32px;
     background: #000;
     color: #fff;
-  }
-}
+    text-decoration: none;
+    font-family: var(--font-en);
+    font-size: calc(12 / 16 * 1rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    transition: transform 0.3s;
 
-.title {
-  font-size: calc(24 / 16 * 1rem);
-  font-weight: 800;
-  line-height: 1.4;
-  margin-bottom: calc(32 / 16 * 1rem);
-
-  @include mq(lg) {
-    font-size: calc(32 / 16 * 1rem);
-  }
-}
-
-// データテーブル形式のメタ情報
-.metaTable {
-  border-top: 1px solid #eee;
-  margin-bottom: calc(40 / 16 * 1rem);
-}
-
-.metaRow {
-  display: flex;
-  border-bottom: 1px solid #eee;
-  padding: 12px 0;
-  font-size: calc(14 / 16 * 1rem);
-}
-
-.metaLabel {
-  width: calc(100 / 16 * 1rem);
-  color: #666;
-  font-weight: 500;
-}
-
-.metaValue {
-  flex: 1;
-  color: #000;
-  font-weight: 600;
-}
-
-// 各セクション
-.section {
-  margin-bottom: calc(40 / 16 * 1rem);
-}
-
-.sectionTitle {
-  font-family: var(--font-en);
-  font-size: calc(12 / 16 * 1rem);
-  color: #999;
-  letter-spacing: 0.1em;
-  margin-bottom: calc(16 / 16 * 1rem);
-}
-
-.description {
-  font-size: calc(15 / 16 * 1rem);
-  line-height: 1.8;
-  color: #333;
-  white-space: pre-wrap;
-}
-
-.linkWrapper {
-  margin-top: calc(24 / 16 * 1rem);
-}
-
-.siteLink {
-  display: inline-block;
-  padding: 12px 32px;
-  background: #000;
-  color: #fff;
-  text-decoration: none;
-  font-family: var(--font-en);
-  font-size: calc(12 / 16 * 1rem);
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  transition: transform 0.3s;
-
-  &:hover {
-    transform: translateY(-2px);
-  }
-}
-
-.tagGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.techTag {
-  font-size: calc(13 / 16 * 1rem);
-  color: #666;
-  background: #f0f0f0;
-  border: none;
-  padding: 4px 10px;
-  cursor: pointer;
-
-  &:hover {
-    background: #e0e0e0;
-    color: #000;
-  }
-}
-
-// フッターナビゲーション
-.arrowButtons {
-  display: flex;
-}
-
-.navButton {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 20px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  transition: background 0.3s;
-
-  &:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
-  &:not(:disabled):hover {
-    background: #fafafa;
+  .tagGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  &:first-child {
-    border-right: 1px solid #eee;
+  .techTag {
+    font-size: calc(13 / 16 * 1rem);
+    color: #666;
+    background: #f0f0f0;
+    border: none;
+    padding: 4px 10px;
+    cursor: pointer;
+
+    &:hover {
+      background: #e0e0e0;
+      color: #000;
+    }
   }
 }

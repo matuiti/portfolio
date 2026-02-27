@@ -1,6 +1,6 @@
 export * from "./Hamburger";
 export * from "./SearchLarge";
-export * from "./MobileMenuClose";
+export * from "./Close";
 export * from "./ArrowRight";
 export * from "./Launch";
 export * from "./GitHub";
@@ -13,3 +13,4 @@ export * from "./ServiceWeb";
 export * from "./ServiceResponsive";
 export * from "./ServiceCMS";
 export * from "./ServicePerformance";
+export * from "./CarouselArrowRight";

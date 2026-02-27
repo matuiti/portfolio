@@ -4,12 +4,7 @@
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/data/navigation";
 import { MenuItem } from "@/components/ui/MenuItem";
-import {
-  ArrowRight,
-  GitHub,
-  Mail,
-  MobileMenuClose,
-} from "@/components/ui/Icons";
+import { ArrowRight, GitHub, Mail, Close } from "@/components/ui/Icons";
 import { SubButton } from "@/components/ui/Buttons/SubButton";
 
 type MobileDrawerMenuProps = {
@@ -46,7 +41,7 @@ export const MobileDrawerMenu = ({
         {/* 1. 上部：ボタンエリア */}
         <div className="flex items-center justify-end min-h-header-mini mb-[calc(20/16*1rem)]">
           <button onClick={onClose} aria-label="メニューを閉じる">
-            <MobileMenuClose />
+            <Close />
           </button>
         </div>
 

@@ -1,12 +1,25 @@
 // src/app/works/components/WorkDetailModal/index.tsx
-// src/app/works/components/WorkDetailModal/index.tsx
 "use client";
 
-import React, { useEffect, useRef, Dispatch, SetStateAction } from "react";
+import {
+  useEffect,
+  useRef,
+  Dispatch,
+  SetStateAction,
+  useState,
+  useMemo,
+} from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Work } from "@/types/work";
 import styles from "./WorkDetailModal.module.scss";
+import { CloseModal } from "@/components/ui/Icons/CloseModal";
+import {
+  CarouselArrowRight,
+  KeyboardArrowRight,
+  Launch,
+} from "@/components/ui/Icons";
+import { BaseTag } from "@/components/ui/BaseTag";
+import { SubButton } from "@/components/ui/Buttons/SubButton";
 
 type WorkDetailModalProps = {
   work: Work;
@@ -28,6 +41,28 @@ export const WorkDetailModal = ({
   onTagClick,
 }: WorkDetailModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // 1. スライド用のインデックス管理
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
+
+  // 2. 表示する画像リストの作成（NDA案件の場合はサムネイルのみに制限 [1, 2]）
+  const imageList = useMemo(() => {
+    if (work.disclosureLevel === "NDA") return [work.thumbnail];
+    // images 配列があればそれを使い、なければ thumbnail を使う
+    return work.images && work.images.length > 0
+      ? work.images
+      : [work.thumbnail];
+  }, [work]);
+
+  const hasMultipleImages = imageList.length > 1;
+
+  // 3. スライド操作関数
+  const handlePrev = () => {
+    setCurrentImgIndex((prev) => (prev > 0 ? prev - 1 : imageList.length - 1));
+  };
+  const handleNext = () => {
+    setCurrentImgIndex((prev) => (prev < imageList.length - 1 ? prev + 1 : 0));
+  };
 
   // --- ページネーション・ナビゲーションロジック ---
   const currentIndex = allFilteredWorks.findIndex((w) => w.id === work.id);
@@ -64,82 +99,140 @@ export const WorkDetailModal = ({
         className={styles.modalContent}
         onClick={(e) => e.stopPropagation()}
         ref={modalRef}
+        key={work.id}
       >
-        {/* ヘッダーセクション */}
         <header className={styles.header}>
-          {/* 左側：ページナビゲーションエリア */}
-          <div className={styles.navGroup}>
-            {/* ページ番号（SP/PCで順番が変わる対象1） */}
-            <div className={styles.pageCounter}>
+          <div className={styles.inner}>
+            {/* 1. ラベル（タブレット以上で表示） */}
+            <span className={styles.projectLabel}>該当プロジェクト</span>
+
+            {/* 2. カウンター（SPではアローに挟まれ、PCでは左側へ） */}
+            <div className={styles.counter}>
               <span className={styles.current}>{displayIndex}</span>
               <span className={styles.separator}>/</span>
               <span className={styles.total}>{totalCount}</span>
             </div>
 
-            {/* 前へボタン（SP/PCで順番が変わる対象2） */}
+            {/* 3. ナビゲーション（前へ） */}
             <button
-              className={styles.navButton}
+              className={styles.prevBtn}
               onClick={() => prevWork && onNavigate(prevWork)}
               disabled={!prevWork}
-              aria-label="前へ"
             >
-              <ChevronLeft size={24} />
+              <KeyboardArrowRight left />
             </button>
 
-            {/* 次へボタン（SP/PCで順番が変わる対象3） */}
+            {/* 縦の仕切り線（tablet以上で表示） */}
+            <div className={styles.vLine} />
+
+            {/* 4. ナビゲーション（次へ） */}
             <button
-              className={styles.navButton}
+              className={styles.nextBtn}
               onClick={() => nextWork && onNavigate(nextWork)}
               disabled={!nextWork}
-              aria-label="次へ"
             >
-              <ChevronRight size={24} />
+              <KeyboardArrowRight />
+            </button>
+
+            {/* 5. 閉じるボタン */}
+            <button className={styles.closeBtn} onClick={onClose}>
+              <CloseModal color="white" size="xl" />
             </button>
           </div>
-
-          {/* 右側：閉じるボタン */}
-          <button
-            className={styles.closeButton}
-            onClick={onClose}
-            aria-label="閉じる"
-          >
-            <span className={styles.closeText}>CLOSE</span>
-            <X size={20} strokeWidth={1.5} />
-          </button>
         </header>
 
-        <article className={styles.article}>
-          <div className={styles.layoutBody}>
-            {/* ビジュアルエリア */}
+        <article className={`${styles.article} section-padding-x pt-5 pb-10`}>
+          <div className={styles.inner}>
+            {/* 記事ヘッダーエリア */}
+            <div className={styles.articleHead}>
+              <div className={styles.categoryList}>
+                {work.category.map((cat) => (
+                  <BaseTag key={cat} onClick={() => onCategoryClick(cat)}>
+                    {cat}
+                  </BaseTag>
+                ))}
+              </div>
+              <h2 className={styles.title}>{work.title}</h2>
+              {work.url && work.disclosureLevel !== "NDA" && (
+                <div className={styles.linkWrapper}>
+                  <SubButton
+                    href={work.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    leftIcon={Launch}
+                  >
+                    サイトを見る
+                  </SubButton>
+                </div>
+              )}
+            </div>
+
+            {/* 画像エリア（複数枚ある時はスライダー） */}
             <div className={styles.imageSection}>
               <div className={styles.imageWrapper}>
-                <Image
-                  src={work.thumbnail}
-                  alt={work.title}
-                  width={1200}
-                  height={675}
-                  className={styles.mainImage}
-                  priority
-                />
+                {/* スライダー本体 */}
+                <div
+                  className={styles.imageSlider}
+                  style={{
+                    transform: `translateX(-${currentImgIndex * 100}%)`,
+                  }}
+                >
+                  {imageList.map((src, index) => (
+                    <div
+                      key={`${work.id}-img-${index}`}
+                      className={styles.slide}
+                    >
+                      <Image
+                        src={src}
+                        alt={`${work.title} - ${index + 1}`}
+                        width={1200}
+                        height={675}
+                        className={styles.mainImage}
+                        priority={index === 0}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* 複数枚ある場合のみ操作UIを表示 */}
+                {hasMultipleImages && (
+                  <>
+                    <button
+                      className={styles.slidePrev}
+                      onClick={handlePrev}
+                      aria-label="前の画像へ"
+                    >
+                      <CarouselArrowRight left />
+                    </button>
+                    <button
+                      className={styles.slideNext}
+                      onClick={handleNext}
+                      aria-label="次の画像へ"
+                    >
+                      <CarouselArrowRight />
+                    </button>
+                  </>
+                )}
               </div>
+
+              {/* 画像の下に配置するインジケーターエリア */}
+              {hasMultipleImages && (
+                <div className={styles.indicatorContainer}>
+                  <div className={styles.dotIndicator}>
+                    {imageList.map((_, i) => (
+                      <span
+                        key={i}
+                        className={`${styles.dot} ${i === currentImgIndex ? styles.isActive : ""}`}
+                        onClick={() => setCurrentImgIndex(i)} // ドットクリックで移動可能に
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* テキスト詳細エリア */}
             <div className={styles.infoSection}>
-              <div className={styles.categoryList}>
-                {work.category.map((cat) => (
-                  <button
-                    key={cat}
-                    className={styles.categoryTag}
-                    onClick={() => onCategoryClick(cat)}
-                  >
-                    {cat.toUpperCase()}
-                  </button>
-                ))}
-              </div>
-
-              <h2 className={styles.title}>{work.title}</h2>
-
               <dl className={styles.metaTable}>
                 <div className={styles.metaRow}>
                   <dt className={styles.metaLabel}>担当範囲</dt>
@@ -162,18 +255,6 @@ export const WorkDetailModal = ({
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}>PROJECT DESCRIPTION</h3>
                 <p className={styles.description}>{work.description}</p>
-                {work.url && work.disclosureLevel !== "NDA" && (
-                  <div className={styles.linkWrapper}>
-                    <a
-                      href={work.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.siteLink}
-                    >
-                      VISIT SITE
-                    </a>
-                  </div>
-                )}
               </section>
 
               <section className={styles.section}>

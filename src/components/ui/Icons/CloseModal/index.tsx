@@ -2,11 +2,10 @@ import { tv, type VariantProps } from "tailwind-variants";
 import React from "react";
 
 const iconStyles = tv({
-  base: "inline-block shrink-0",
+  base: "inline-block shrink-0 cursor-pointer transition-colors duration-300",
   variants: {
     color: {
-      black: "text-black",
-      gray: "text-dark-gray",
+      white: "text-white tablet:text-dark-gray hover:text-red hover:bg-light-gray",
     },
     size: {
       sm: "w-icon-20 h-icon-20",
@@ -14,38 +13,32 @@ const iconStyles = tv({
       lg: "w-icon-30 h-icon-30",
       xl: "w-icon-50 h-icon-50",
     },
-    left: {
-      true: "-scale-x-100",
-      false: "",
-    },
   },
   defaultVariants: {
-    color: "gray",
-    size: "sm",
-    left: false,
+    color: "white",
+    size: "xl",
   },
 });
 
-export type KeyboardArrowRightProps = React.SVGProps<SVGSVGElement> &
+export type MobileMenuCloseModalProps = React.SVGProps<SVGSVGElement> &
   VariantProps<typeof iconStyles>;
 
-export const KeyboardArrowRight = ({
+export const CloseModal = ({
   color,
   size,
-  left,
   className,
   ...props
-}: KeyboardArrowRightProps) => {
+}: MobileMenuCloseModalProps) => {
   return (
     <svg
-      viewBox="0 0 20 20"
+      viewBox="0 0 50 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={iconStyles({ color, size, left, className })}
+      className={iconStyles({ color, size, className })}
       {...props}
     >
       <path
-        d="M7 13.825L10.7085 10L7 6.175L8.1417 5L13 10L8.1417 15L7 13.825Z"
+        d="M33 18.6114L31.3886 17L25 23.3886L18.6114 17L17 18.6114L23.3886 25L17 31.3886L18.6114 33L25 26.6114L31.3886 33L33 31.3886L26.6114 25L33 18.6114Z"
         fill="currentColor"
       />
     </svg>
