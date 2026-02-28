@@ -18,7 +18,7 @@ export const ALL_WORKS: Work[] = [
   {
     id: "w-01",
     title: "モダンECフロントエンド基盤",
-    category: ["app"],
+    category: ["web"],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "App Router", "Zustand"],
     thumbnail: "/assets/images/works/ec-next.jpg",
     images: [
@@ -30,13 +30,21 @@ export const ALL_WORKS: Work[] = [
       "Next.js App Routerを採用した、大規模ECサイトのフロントエンドリニューアル。",
     description:
       "パフォーマンスとSEOを最優先に設計. Server Componentsを活用し、従来のReact構成よりLCPを40%改善しました。",
-    duration: "4ヶ月",
-    role: "リードエンジニア",
-    disclosureLevel: "Full",
     isSpeedyWork: false,
     isLongTerm: true,
-    github: "https://github.com/your-id/next-ec-project",
     url: "https://example-ec.com",
+    github: "https://github.com/your-id/next-ec-project",
+    siteId: "id",
+    sitePassword: "pass",
+    background:
+      "既存システムの老朽化に伴い、表示速度の改善と運用コストの削減が急務となっていました。特にモバイル環境でのレイテンシが課題でした。",
+    features:
+      "・Next.js App Routerによる高速なページ遷移\n・Zustandを用いたカート状態の管理\n・ISRによる商品情報のリアルタイム更新",
+    points:
+      "パフォーマンスを最優先し、LCPを40%改善。また、コンポーネントの共通化により、開発効率を大幅に向上させました。",
+    role: "リードエンジニア、リードエンジニア、リードエンジニア、リードエンジニア",
+    duration: "4ヶ月",
+    disclosureLevel: "Full",
   },
   {
     id: "w-02",
@@ -55,8 +63,8 @@ export const ALL_WORKS: Work[] = [
     isLongTerm: false,
     url: "https://example-ryokan.jp",
     github: "https://example-ryokan.jp",
-    siteId:"id",
-    sitePassword:"pass",
+    siteId: "id",
+    sitePassword: "pass",
   },
   {
     id: "w-03",

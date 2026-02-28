@@ -143,7 +143,7 @@ export const WorkDetailModal = ({
           </div>
         </header>
 
-        <article className={`${styles.article} section-padding-x pt-5 pb-10`}>
+        <article className={`${styles.article} section-padding-x py-5`}>
           <div className={styles.inner}>
             {/* 記事ヘッダーエリア */}
             <div className={styles.articleHead}>
@@ -154,23 +154,9 @@ export const WorkDetailModal = ({
                   </BaseTag>
                 ))}
               </div>
+              {/* --- タイトル --- */}
               <h2 className={styles.title}>{work.title}</h2>
-
-              {/* {work.url && work.disclosureLevel !== "NDA" && (
-                <div className={styles.linkWrapper}>
-                  <SubButton
-                    href={work.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    leftIcon={Launch}
-                  >
-                    サイトを見る
-                  </SubButton>
-                </div>
-              )}
-            </div> */}
-
-              {/* --- 外部リンクエリア --- */}
+              {/* --- 外部リンク --- */}
               <div className={styles.linkWrapper}>
                 <div className={styles.buttonGroup}>
                   {/* サイトリンク */}
@@ -234,14 +220,6 @@ export const WorkDetailModal = ({
                       key={`${work.id}-img-${index}`}
                       className={styles.slide}
                     >
-                      {/* <Image
-                        src={src}
-                        alt={`${work.title} - ${index + 1}`}
-                        width={1200}
-                        height={675}
-                        className={styles.mainImage}
-                        priority={index === 0}
-                      /> */}
                       <SafeImage
                         src={src}
                         alt={`${work.title} - ${index + 1}`}
@@ -293,17 +271,55 @@ export const WorkDetailModal = ({
 
             {/* テキスト詳細エリア */}
             <div className={styles.infoSection}>
+              {/* 1. ご依頼の背景・課題 */}
+              {work.background && (
+                <section className={styles.section}>
+                  <h3 className={styles.sectionTitle}>ご依頼の背景・課題</h3>
+                  <p className={styles.description}>{work.background}</p>
+                </section>
+              )}
+              {/* 2. 実装機能 */}
+              {work.features && (
+                <section className={styles.section}>
+                  <h3 className={styles.sectionTitle}>実装機能</h3>
+                  <p className={styles.description}>{work.features}</p>
+                </section>
+              )}
+              {/* 3. 制作のポイント */}
+              {work.points && (
+                <section className={styles.section}>
+                  <h3 className={styles.sectionTitle}>制作のポイント</h3>
+                  <p className={styles.description}>{work.points}</p>
+                </section>
+              )}
+              {/* 4. 使用スキル */}
+              <section className={styles.section}>
+                <h3 className={styles.sectionTitle}>使用スキル</h3>
+                <div className={styles.tagGrid}>
+                  {work.tags.map((tag) => (
+                    <BaseTag
+                      key={tag}
+                      className={styles.techTag}
+                      onClick={() => onTagClick(tag)}
+                      hasHash
+                    >
+                      # {tag}
+                    </BaseTag>
+                  ))}
+                </div>
+              </section>
+              {/* 5. メタ情報 */}
               <dl className={styles.metaTable}>
                 <div className={styles.metaRow}>
-                  <dt className={styles.metaLabel}>担当範囲</dt>
+                  <dt className={styles.metaLabel}>担当範囲：</dt>
                   <dd className={styles.metaValue}>{work.role}</dd>
                 </div>
                 <div className={styles.metaRow}>
-                  <dt className={styles.metaLabel}>制作期間</dt>
+                  <dt className={styles.metaLabel}>制作期間：</dt>
                   <dd className={styles.metaValue}>{work.duration}</dd>
                 </div>
                 <div className={styles.metaRow}>
-                  <dt className={styles.metaLabel}>公開範囲</dt>
+                  <dt className={styles.metaLabel}>公開範囲：</dt>
                   <dd className={styles.metaValue}>
                     {work.disclosureLevel === "NDA"
                       ? "非公開（守秘義務）"
@@ -311,26 +327,6 @@ export const WorkDetailModal = ({
                   </dd>
                 </div>
               </dl>
-
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>PROJECT DESCRIPTION</h3>
-                <p className={styles.description}>{work.description}</p>
-              </section>
-
-              <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>TECH STACK</h3>
-                <div className={styles.tagGrid}>
-                  {work.tags.map((tag) => (
-                    <button
-                      key={tag}
-                      className={styles.techTag}
-                      onClick={() => onTagClick(tag)}
-                    >
-                      #{tag}
-                    </button>
-                  ))}
-                </div>
-              </section>
             </div>
           </div>
         </article>

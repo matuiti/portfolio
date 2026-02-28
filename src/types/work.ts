@@ -16,11 +16,12 @@ export type Work = {
   tags: string[];
   thumbnail: string;
   images?: string[];
-  summary: string; // カード用の短い説明 [cite: 7, 16]
-  duration: string; // 制作期間 [cite: 7, 16]
-  role: string; // 担当役割 [cite: 7, 16]
+  summary: string; // カード用の短い説明
 
-  disclosureLevel: DisclosureLevel;
+  role: string; // 担当役割
+  duration: string; // 制作期間
+  disclosureLevel: DisclosureLevel; // 公開範囲
+
   isSpeedyWork: boolean;
   isLongTerm: boolean; // 中長期プロジェクト（Accomplished）用フラグ
 
@@ -28,5 +29,10 @@ export type Work = {
   github?: string;
   siteId?: string; // サイト閲覧用ID
   sitePassword?: string; // サイト閲覧用パスワード
-  description?: string; // 詳細ページ・モーダル用 [cite: 131]
+
+  background?: string; // ご依頼の背景・課題
+  features?: string; // 実装機能
+  points?: string; // 制作のポイント
+
+  description?: string; // 以前の汎用説明文（必要に応じて残すか移行）
 };

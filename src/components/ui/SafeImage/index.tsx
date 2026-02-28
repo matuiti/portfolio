@@ -7,6 +7,7 @@ import Image, { ImageProps } from "next/image";
 // 規約に従い type で定義 [2]
 type SafeImageProps = ImageProps & {
   fallbackSrc?: string;
+  priority?: boolean;
 };
 
 const DEFAULT_FALLBACK = "/assets/images/common/noimage.jpg"; // [3]
