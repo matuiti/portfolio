@@ -9,8 +9,8 @@ export function TitleAndCount({ title, count }: TitleAndCountProps) {
       <h2 className="text-black text-[calc(24/16*1rem)] font-bold tracking-wider leading-none">
         {title}
       </h2>
-      <div className="text-dark-gray text-[calc(16/16*1rem)] tracking-wider leading-none">
-        <span className="text-sm text-neutral-500">検索結果：{count}件</span>
+      <div className="text-dark-gray text-[calc(16/16*1rem)] tracking-wider leading-normal">
+        <span>検索結果：{count}件</span>
       </div>
     </div>
   );

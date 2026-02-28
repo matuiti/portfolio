@@ -38,8 +38,8 @@
   transition: all 0.3s;
 
   @include mq("small") {
-    padding-top: calc(12 / 16 * 1rem);
-    padding-bottom: calc(12 / 16 * 1rem);
+    padding-top: calc(9 / 16 * 1rem);
+    padding-bottom: calc(9 / 16 * 1rem);
   }
 
   &::placeholder {

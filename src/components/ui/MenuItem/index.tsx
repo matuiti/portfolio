@@ -93,6 +93,14 @@ export const menuItemStyles = tv({
         indicator: "mobile:w-2 mobile:h-2 mobile:shrink-0",
       },
     },
+    {
+      indicatorLayout: "responsive",
+      isActive: false,
+      class: {
+        base: "mobile:gap-1",
+        indicator: "mobile:w-0 mobile:h-0 mobile:shrink",
+      },
+    },
   ],
   defaultVariants: {
     color: "black",
