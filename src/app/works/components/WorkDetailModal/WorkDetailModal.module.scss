@@ -242,18 +242,55 @@
       font-weight: 700;
       line-height: 1;
       letter-spacing: 0.05em;
-      margin-bottom: calc(12 / 16 * 1rem);
       color: var(--color-black);
+      padding-bottom: calc(12 / 16 * 1rem);
+      border-bottom: 1px solid var(--color-medium-gray);
 
       @include mq("tablet") {
         font-size: calc(24 / 16 * 1rem);
-        margin-bottom: calc(20 / 16 * 1rem);
+        padding-bottom: 0;
+        border-bottom: none;
       }
-      
+
       @include mq("small") {
         font-size: calc(30 / 16 * 1rem);
-        margin-bottom: calc(20 / 16 * 1rem);
       }
+    }
+
+    .linkWrapper {
+      margin-top: calc(12 / 16 * 1rem);
+      @include mq("tablet") {
+        margin-top: calc(20 / 16 * 1rem);
+      }
+    }
+
+    .buttonGroup {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(10 / 16 * 1rem);
+    }
+
+    .authBox {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(8 / 16 * 1rem) calc(20 / 16 * 1rem);
+      color: var(--color-black);
+      font-size: calc(14 / 16 * 1rem);
+      line-height: 1;
+      margin-top: calc(12 / 16 * 1rem);
+
+      @include mq("tablet") {
+        margin-top: calc(20 / 16 * 1rem);
+      }
+    }
+
+    .authLabel {
+      letter-spacing: 0.05em;
+    }
+
+    .authValue {
+      letter-spacing: 0.1em;
+      user-select: all; // ワンクリックで選択可能
     }
   }
 

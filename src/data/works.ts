@@ -54,6 +54,9 @@ export const ALL_WORKS: Work[] = [
     isSpeedyWork: true,
     isLongTerm: false,
     url: "https://example-ryokan.jp",
+    github: "https://example-ryokan.jp",
+    siteId:"id",
+    sitePassword:"pass",
   },
   {
     id: "w-03",

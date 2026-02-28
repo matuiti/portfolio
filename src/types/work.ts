@@ -26,5 +26,7 @@ export type Work = {
 
   url?: string;
   github?: string;
+  siteId?: string; // サイト閲覧用ID
+  sitePassword?: string; // サイト閲覧用パスワード
   description?: string; // 詳細ページ・モーダル用 [cite: 131]
 };
