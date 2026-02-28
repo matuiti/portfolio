@@ -7,9 +7,7 @@
 
 :root {
   /* プロジェクト規約に基づき、定義済みの色変数を使用 */
-  --color-bg-gradation: linear-gradient(
-    180deg,
-  );
+  --color-bg-gradation: linear-gradient(180deg);
 }
 
 /* 2. プロジェクト専用テーマ設定 */
@@ -57,10 +55,10 @@
   --spacing-mv-height-small: calc(640 / 16 * 1rem);
 
   /* セクション余白 [18, 19] */
-  --spacing-section-padding-x-mini: calc(15 / 16 * 1rem);
+  /* --spacing-section-padding-x-mini: calc(15 / 16 * 1rem);
   --spacing-section-padding-x-mobile: calc(20 / 16 * 1rem);
   --spacing-section-padding-x-tablet: calc(30 / 16 * 1rem);
-  --spacing-section-padding-x-small: calc(40 / 16 * 1rem);
+  --spacing-section-padding-x-small: calc(40 / 16 * 1rem); */
   --spacing-section-padding-y-mini: calc(100 / 16 * 1rem);
   --spacing-section-padding-y-small: calc(120 / 16 * 1rem);
 
@@ -135,11 +133,32 @@
 /* 4. カスタムユーティリティ */
 @layer utilities {
   /* 共通セクション余白 [6, 18, 19] */
+  /* 共通セクション余白：カスケード順序を保証する実装 [3-5] */
   .section-padding-x {
-    @apply px-section-padding-x-mini
-           mobile:px-section-padding-x-mobile
-           tablet:px-section-padding-x-tablet
-           small:px-section-padding-x-small;
+    /* 1. px根拠を明示しつつ rem 換算を行う (プロジェクト規約) [3, 5] */
+    /* デフォルト (mini: 350px〜) [4] */
+    --section-px: 15; /* Source [1] の定義に準拠 */
+    padding-inline: calc(var(--section-px) / 16 * 1rem);
+
+    /* 2. メディアクエリを順序通りに記述し、詳細度を固定する [4] */
+
+    /* mobile (540px〜) */
+    @media (min-width: 33.75em) {
+      /* 540px / 16 */
+      --section-px: 20;
+    }
+
+    /* tablet (840px〜) */
+    @media (min-width: 52.5em) {
+      /* 840px / 16 */
+      --section-px: 30;
+    }
+
+    /* small (1140px〜) */
+    @media (min-width: 71.25em) {
+      /* 1140px / 16 */
+      --section-px: 40;
+    }
   }
 
   .section-padding-y {
@@ -151,10 +170,10 @@
     @apply w-full max-w-container-max mx-auto;
   }
 
- .js-fuwa-fade {
-  opacity: 0;
-  pointer-events: none; /* アニメーション完了までクリックさせない場合 */
-}
+  .js-fuwa-fade {
+    opacity: 0;
+    pointer-events: none; /* アニメーション完了までクリックさせない場合 */
+  }
 
   /* スクロールバー制御 (Firefox) */
   @supports (scrollbar-width: thin) {

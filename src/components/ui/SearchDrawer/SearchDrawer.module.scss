@@ -39,17 +39,20 @@
   min-height: 100svh;
   height: 100%;
   width: 100%;
-  max-width: var(--spacing-mobile-drawer-max-w);
   background-color: var(--color-white);
   box-shadow: var(--shadow-default);
   display: flex;
   flex-direction: column;
   justify-content: start;
-
+  
   // 開閉アニメーションの設定 [3]
   transform: translateX(100%);
   opacity: 0;
   transition: all 0.7s ease;
+  
+  @include mq("tablet") {
+    max-width: var(--spacing-mobile-drawer-max-w);
+  }
 
   &.is-open {
     transform: translateX(0);
@@ -71,15 +74,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 9999px; // rounded-full [3]
-  background-color: var(--color-slate-50); // bg-slate-50 [3]
   border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: var(--color-slate-100);
-  }
+  transition: all 0.3s ease;
 
   &:active {
     transform: scale(0.95);

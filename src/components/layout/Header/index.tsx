@@ -108,7 +108,6 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
             <button
               type="button"
               onClick={() => setSearchDrawerOpen(true)}
-              className="p-2"
             >
               <SearchLarge />
             </button>

@@ -63,11 +63,10 @@ export function WorksSidebar({ footerNote }: WorksSidebarProps) {
         {/* 固定ヘッダーエリア：検索ボックスとリセット */}
         <div className={styles.head}>
           <div className={styles.head__inner}>
-            <span className={styles.label}>Keyword</span>
+            <span className={styles.label}>キーワード</span>
             <SearchBox
               value={searchQuery}
               onChange={setSearchQuery}
-              placeholder="キーワードで検索..."
             />
             <button
               type="button"
@@ -82,7 +81,7 @@ export function WorksSidebar({ footerNote }: WorksSidebarProps) {
         {/* スクロール可能エリア：カテゴリとタグ */}
         <div className={styles.body}>
           <section className={styles.section}>
-            <h3 className={styles.label}>Category</h3>
+            <h3 className={styles.label}>カテゴリー</h3>
             <CategoryList
               items={WORK_CATEGORIES}
               selected={selectedCategory}
@@ -92,7 +91,7 @@ export function WorksSidebar({ footerNote }: WorksSidebarProps) {
           </section>
 
           <section className={styles.section}>
-            <h3 className={styles.label}>Tags</h3>
+            <h3 className={styles.label}>使用スキル</h3>
             <TagFilters
               tags={availableTags}
               selectedTags={selectedTags}

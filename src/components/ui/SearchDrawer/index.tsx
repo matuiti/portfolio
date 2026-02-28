@@ -17,7 +17,6 @@ type CategoryItem<T extends string> = {
 type SearchDrawerProps<T extends string> = {
   isOpen: boolean;
   onClose: () => void;
-  // 検索・フィルタ用ステートとアクション
   totalCount: number;
   searchQuery: string;
   setSearchQuery: (val: string) => void;
@@ -81,7 +80,7 @@ export function SearchDrawer<T extends string>({
           {/* 固定エリア：ヘッダー */}
           <div className={styles.head}>
             <div className={styles.head__inner}>
-              <h3 className={styles.label}>Keyword</h3>
+              <h3 className={styles.label}>キーワード</h3>
               <SearchBox value={searchQuery} onChange={setSearchQuery} />
               <button
                 type="button"
@@ -97,7 +96,7 @@ export function SearchDrawer<T extends string>({
           <div className={styles.body}>
             {/* カテゴリーセクション */}
             <section className={styles.section}>
-              <h3 className={styles.label}>Category</h3>
+              <h3 className={styles.label}>カテゴリー</h3>
               <CategoryList<T>
                 items={categories}
                 selected={selectedCategory}
@@ -108,7 +107,7 @@ export function SearchDrawer<T extends string>({
 
             {/* タグセクション */}
             <section className={styles.section}>
-              <h3 className={styles.label}>Tags</h3>
+              <h3 className={styles.label}>使用スキル</h3>
               <TagFilters
                 tags={availableTags}
                 selectedTags={selectedTags}

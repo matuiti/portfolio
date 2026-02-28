@@ -2,7 +2,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 import React from "react";
 
 const iconStyles = tv({
-  base: "inline-block shrink-0cursor-pointer",
+  base: "inline-block shrink-0 cursor-pointer",
   variants: {
     color: {
       black: "text-black",
