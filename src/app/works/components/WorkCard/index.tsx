@@ -109,7 +109,7 @@ export const WorkCard = memo(
             ))}
           </div>
 
-          <h3 className="text-[calc(18/16*1rem)] leading-tight">
+          <h3 className="text-[calc(18/16*1rem)] leading-tight  line-clamp-2">
             {work.title}
           </h3>
 
@@ -120,7 +120,7 @@ export const WorkCard = memo(
           <div className="mt-auto  border-t border-medium-gray pt-4 flex flex-col gap-y-2.5 text-[calc(12/16*1rem)] text-dark-gray">
             <div className="flex">
               <span className="shrink-0">担当範囲：</span>
-              <span>{work.role}</span>
+              <span className="line-clamp-1">{work.role}</span>
             </div>
             <div className="flex">
               <span className="shrink-0">制作期間：</span>

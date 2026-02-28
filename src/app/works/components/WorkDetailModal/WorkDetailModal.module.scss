@@ -224,7 +224,7 @@
   .inner {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    // height: 100%;
   }
 
   .articleHead {
@@ -381,8 +381,8 @@
         &.isActive {
           // 状態を示す命名則 [4]
           background: var(--color-black);
-          width: calc(12 / 16 * 1rem); // アクティブ時に横長にする等の演出
-          border-radius: calc(4 / 16 * 1rem);
+          // width: calc(12 / 16 * 1rem); // アクティブ時に横長にする等の演出
+          // border-radius: calc(4 / 16 * 1rem);
         }
       }
     }
@@ -390,95 +390,75 @@
 
   // 情報セクション
   .infoSection {
-    @include mq("tablet") {
-      flex: 0.8;
-      overflow-y: auto;
+    // @include mq("tablet") {
+    //   overflow-y: auto;
+    // }
+
+    // 各セクション
+    .section {
+      & + .section {
+        margin-top: calc(30 / 16 * 1rem);
+      }
     }
-  }
 
-  // データテーブル形式のメタ情報
-  .metaTable {
-    border-top: 1px solid #eee;
-    margin-bottom: calc(40 / 16 * 1rem);
-  }
-
-  .metaRow {
-    display: flex;
-    border-bottom: 1px solid #eee;
-    padding: 12px 0;
-    font-size: calc(14 / 16 * 1rem);
-  }
-
-  .metaLabel {
-    width: calc(100 / 16 * 1rem);
-    color: #666;
-    font-weight: 500;
-  }
-
-  .metaValue {
-    flex: 1;
-    color: #000;
-    font-weight: 600;
-  }
-
-  // 各セクション
-  .section {
-    margin-bottom: calc(40 / 16 * 1rem);
-  }
-
-  .sectionTitle {
-    font-family: var(--font-en);
-    font-size: calc(12 / 16 * 1rem);
-    color: #999;
-    letter-spacing: 0.1em;
-    margin-bottom: calc(16 / 16 * 1rem);
-  }
-
-  .description {
-    font-size: calc(15 / 16 * 1rem);
-    line-height: 1.8;
-    color: #333;
-    white-space: pre-wrap;
-  }
-
-  .linkWrapper {
-    margin-top: calc(24 / 16 * 1rem);
-  }
-
-  .siteLink {
-    display: inline-block;
-    padding: 12px 32px;
-    background: #000;
-    color: #fff;
-    text-decoration: none;
-    font-family: var(--font-en);
-    font-size: calc(12 / 16 * 1rem);
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    transition: transform 0.3s;
-
-    &:hover {
-      transform: translateY(-2px);
+    .sectionTitle {
+      font-size: calc(16 / 16 * 1rem);
+      font-weight: 700;
+      color: var(--color-black);
+      background-color: var(--color-light-gray);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      padding: calc(4 / 16 * 1rem) calc(8 / 16 * 1rem);
+      margin-bottom: calc(10 / 16 * 1rem);
     }
-  }
 
-  .tagGrid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
+    .description {
+      font-size: calc(16 / 16 * 1rem);
+      color: var(--color-black);
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+      white-space: pre-wrap;
+      padding-inline: calc(10 / 16 * 1rem);
+    }
 
-  .techTag {
-    font-size: calc(13 / 16 * 1rem);
-    color: #666;
-    background: #f0f0f0;
-    border: none;
-    padding: 4px 10px;
-    cursor: pointer;
+    .tagGrid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(10 / 16 * 1rem);
+      padding-inline: calc(10 / 16 * 1rem);
+    }
 
-    &:hover {
-      background: #e0e0e0;
-      color: #000;
+    // .techTag {
+    // }
+
+    // データテーブル形式のメタ情報
+    .metaTable {
+      display: flex;
+      flex-wrap: wrap;
+      gap: calc(8 / 16 * 1rem) calc(20 / 16 * 1rem);
+      border-top: 1px solid var(--color-medium-gray);
+      margin-top: calc(20 / 16 * 1rem);
+      padding-top: calc(10 / 16 * 1rem);
+      padding-bottom: calc(20 / 16 * 1rem);
+    }
+
+    .metaRow {
+      display: flex;
+      font-size: calc(12 / 16 * 1rem);
+      color: var(--color-dark-gray);
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      padding-inline: calc(10 / 16 * 1rem);
+      // &:first-of-type {
+      //   width: 100%;
+      // }
+    }
+
+    // .metaLabel {
+    // }
+
+    .metaValue {
+      flex: 1;
     }
   }
 }
