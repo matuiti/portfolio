@@ -1,13 +1,12 @@
 // src/app/works/components/WorkCard/index.tsx
-
 "use client";
 
-import React, { memo, useState, useEffect } from "react";
-import Image from "next/image";
+import React, { memo, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Work, WorkFilterCategory } from "@/types/work";
 import { useWorkStore } from "@/store/useWorkStore";
 import { BaseTag } from "@/components/ui/BaseTag";
+import { SafeImage } from "@/components/ui/SafeImage";
 
 type Props = {
   work: Work;
@@ -43,13 +42,6 @@ export const WorkCard = memo(
         ? NDA_THUMBNAIL_PATH
         : work.thumbnail || PLACEHOLDER_THUMBNAIL_PATH;
 
-    const [imgSrc, setImgSrc] = useState(initialSrc);
-
-    // フィルタリング等で work が切り替わった際に画像をリセット
-    useEffect(() => {
-      setImgSrc(initialSrc);
-    }, [initialSrc]);
-
     const handleCategoryClick = (e: React.MouseEvent, cat: string) => {
       e.stopPropagation();
       if (onCategoryClick) {
@@ -73,15 +65,14 @@ export const WorkCard = memo(
       >
         {/* 上部：サムネイルエリア */}
         <div className="relative aspect-video overflow-hidden bg-white">
-          <Image
-            src={imgSrc}
+          <SafeImage
+            src={initialSrc}
             alt={work.title}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={`object-cover transition-transform duration-700 ${
               !isTagHovered ? "group-hover:scale-110" : ""
             }`}
-            // パスの間違いなどで読み込みエラーが発生した際にプレースホルダーに差し替える
-            onError={() => setImgSrc(PLACEHOLDER_THUMBNAIL_PATH)}
           />
 
           {/* 「詳しく見る」オーバーレイ */}

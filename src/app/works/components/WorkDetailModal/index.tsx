@@ -9,17 +9,19 @@ import {
   useState,
   useMemo,
 } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { Work } from "@/types/work";
 import styles from "./WorkDetailModal.module.scss";
 import { CloseModal } from "@/components/ui/Icons/CloseModal";
 import {
   CarouselArrowRight,
+  GitHub,
   KeyboardArrowRight,
   Launch,
 } from "@/components/ui/Icons";
 import { BaseTag } from "@/components/ui/BaseTag";
 import { SubButton } from "@/components/ui/Buttons/SubButton";
+import { SafeImage } from "@/components/ui/SafeImage";
 
 type WorkDetailModalProps = {
   work: Work;
@@ -153,7 +155,8 @@ export const WorkDetailModal = ({
                 ))}
               </div>
               <h2 className={styles.title}>{work.title}</h2>
-              {work.url && work.disclosureLevel !== "NDA" && (
+
+              {/* {work.url && work.disclosureLevel !== "NDA" && (
                 <div className={styles.linkWrapper}>
                   <SubButton
                     href={work.url}
@@ -165,6 +168,55 @@ export const WorkDetailModal = ({
                   </SubButton>
                 </div>
               )}
+            </div> */}
+
+              {/* --- 外部リンクエリア --- */}
+              <div className={styles.linkWrapper}>
+                <div className={styles.buttonGroup}>
+                  {/* サイトリンク */}
+                  {work.url && (
+                    <SubButton
+                      href={work.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      leftIcon={Launch}
+                    >
+                      サイトを見る
+                    </SubButton>
+                  )}
+
+                  {/* GitHubリンク */}
+                  {work.github && (
+                    <SubButton
+                      href={work.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      leftIcon={GitHub}
+                    >
+                      GitHub
+                    </SubButton>
+                  )}
+                </div>
+
+                {/* 閲覧用認証情報 */}
+                {work.url && work.siteId && work.sitePassword && (
+                  <div className={styles.authBox}>
+                    <p>
+                      <span className={styles.authLabel}>サイト閲覧ID：</span>
+                      <span className={styles.authValue}>{work.siteId}</span>
+                    </p>
+                    <p>
+                      <span className={styles.authLabel}>
+                        サイト閲覧パスワード：
+                      </span>
+                      <span className={styles.authValue}>
+                        {work.sitePassword}
+                      </span>
+                    </p>
+                  </div>
+                )}
+              </div>
+              {/* --- 外部リンクエリア〆 --- */}
             </div>
 
             {/* 画像エリア（複数枚ある時はスライダー） */}
@@ -182,7 +234,15 @@ export const WorkDetailModal = ({
                       key={`${work.id}-img-${index}`}
                       className={styles.slide}
                     >
-                      <Image
+                      {/* <Image
+                        src={src}
+                        alt={`${work.title} - ${index + 1}`}
+                        width={1200}
+                        height={675}
+                        className={styles.mainImage}
+                        priority={index === 0}
+                      /> */}
+                      <SafeImage
                         src={src}
                         alt={`${work.title} - ${index + 1}`}
                         width={1200}
