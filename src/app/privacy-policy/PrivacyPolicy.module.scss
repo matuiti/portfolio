@@ -1,63 +1,116 @@
 // src/app/privacy-policy/PrivacyPolicy.module.scss
 @use "../../styles" as *;
 
-.container {
-  // ヘッダー高を考慮した余白（例：Small以上で90px）
-  padding-top: calc(65 / 16 * 1rem);
-  background-color: var(--color-white);
-
+.pageBody {
+  width: 100%;
+  background: var(--color-light-gray);
+  padding-bottom: calc(150 / 16 * 1rem);
+  padding-inline: calc(15 / 16 * 1rem);
+  @include mq("mobile") {
+    padding-inline: calc(20 / 16 * 1rem);
+  }
+  @include mq("tablet") {
+    padding-inline: calc(30 / 16 * 1rem);
+  }
   @include mq("small") {
-    padding-top: calc(90 / 16 * 1rem);
+    padding-inline: calc(40 / 16 * 1rem);
   }
 }
 
-.inner {
-  max-width: calc(1000 / 16 * 1rem);
-  margin-inline: auto;
-}
-
-.title {
-  margin-bottom: calc(40 / 16 * 1rem);
-}
-
-.content {
+.sectionGroups {
   display: flex;
   flex-direction: column;
-  gap: calc(40 / 16 * 1rem);
+  padding-top: calc(40 / 16 * 1rem);
+  padding-inline: calc(15 / 16 * 1rem);
+  padding-bottom: calc(40 / 16 * 1rem);
+  border-radius: calc(20 / 16 * 1rem);
+  background: var(--color-white);
+
+  @include mq("mobile") {
+    padding-inline: calc(20 / 16 * 1rem);
+  }
+
+  @include mq("small") {
+    padding-inline: calc(40 / 16 * 1rem);
+    padding-block: calc(60 / 16 * 1rem);
+  }
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: calc(16 / 16 * 1rem);
+  gap: calc(20 / 16 * 1rem);
+  & + .section {
+    margin-top: calc(40 / 16 * 1rem);
+  }
 }
 
-.heading {
-  font-size: calc(18 / 16 * 1rem);
-  font-weight: 700;
-  color: var(--color-black);
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: calc(16 / 16 * 1rem);
+
+  .num {
+    font-size: calc(20 / 16 * 1rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    color: var(--color-black);
+  }
+  .heading {
+    font-size: calc(16 / 16 * 1rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    color: var(--color-black);
+  }
 }
 
 .text {
-  font-size: calc(15 / 16 * 1rem);
+  font-size: calc(16 / 16 * 1rem);
   line-height: 1.8;
-  color: var(--color-dark-gray);
+  letter-spacing: 0.05em;
+  color: var(--color-black);
 }
 
 .list {
-  padding-left: 1.2em;
-  list-style: disc;
-  font-size: calc(15 / 16 * 1rem);
-  line-height: 1.8;
-  color: var(--color-dark-gray);
+  list-style: none; // デフォルトの黒丸（マーカー）を非表示にする
+  padding: calc(20 / 16 * 1rem);
+  padding-left: calc(17 / 16 * 1rem);
+  background-color: var(--color-light-gray);
+
+  li {
+    position: relative;
+    // ★文章とマーカーの距離：padding-left の数値で調整します
+    padding-left: calc(13 / 16 * 1rem);
+    font-size: calc(16 / 16 * 1rem);
+    line-height: 1.8;
+    color: var(--color-black);
+
+    // 独自のマーカー（疑似要素）
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      // ★マーカーの垂直位置：1行目の文頭中央に来るよう調整
+      top: 0.65em;
+
+      // ★マーカーのサイズ
+      width: calc(6 / 16 * 1rem);
+      height: calc(6 / 16 * 1rem);
+
+      background-color: var(--color-dark-gray);
+      border-radius: 50%;
+    }
+  }
+
+  li + li {
+    margin-top: calc(12 / 16 * 1rem);
+  }
 }
 
 .buttonWrapper {
   display: flex;
   justify-content: start;
-  margin-top: calc(60 / 16 * 1rem);
-
-  @include mq("small") {
-    margin-top: calc(80 / 16 * 1rem);
-  }
+  margin-top: calc(80 / 16 * 1rem);
 }
