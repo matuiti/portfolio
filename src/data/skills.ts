@@ -3,89 +3,96 @@ import { SkillGroup } from "@/types/skill";
 
 export const ALL_SKILLS: SkillGroup[] = [
   {
-    id: "frontend",
     title: "Front-end Engineering",
-    icon: "Code2",
-    categories: [
+    items: [
       {
-        label: "Core Libraries",
-        items: [
+        name: "Next.js",
+        label: "実務レベル",
+        description:
+          "Server Componentsを用いた高度な最適化と、ISR/SSGを活用した設計が可能。Server Componentsを用いた高度な最適化と、ISR/SSGを活用した設計が可能。",
+        links: [
           {
-            name: "Next.js",
-            level: 4,
-            label: "実務レベル",
-            experience: "App Router / Page Router",
-            description:
-              "Server Componentsを用いた高度な最適化と、ISR/SSGを活用した設計が可能。",
-            links: [
-              {
-                label: "Related Works",
-                url: "/works?category=all&q=Next.js",
-                type: "project",
-              },
-              {
-                label: "Internal Repo",
-                url: "https://github.com/your-id/next-boilerplate",
-                type: "github",
-              },
-            ],
+            url: "/works?category=all&q=Next.js",
+            type: "project",
           },
           {
-            name: "React",
-            level: 5,
-            label: "精通",
-            experience: "実務 4年",
-            description:
-              "カスタムフックによるロジックの分離、パフォーマンスを意識したコンポーネント設計。",
-            links: [
-              {
-                label: "Related Works",
-                url: "/works?category=all&q=React",
-                type: "project",
-              },
-            ],
+            url: "https://github.com/your-id/next-boilerplate",
+            type: "github",
           },
+        ],
+      },
+      {
+        name: "React",
+        label: "精通",
+        description:
+          "カスタムフックによるロジックの分離、パフォーマンスを意識したコンポーネント設計。",
+        links: [
           {
-            name: "TypeScript",
-            level: 4,
-            label: "実務レベル",
-            experience: "全案件採用",
-            description:
-              "Genericsを用いた型安全なユーティリティ開発や、スキーマ駆動開発の経験。",
-            links: [
-              {
-                label: "Type Logic Sample",
-                url: "https://github.com/your-id/ts-logic",
-                type: "github",
-              },
-            ],
+            url: "/works?category=all&q=React",
+            type: "project",
+          },
+        ],
+      },
+      {
+        name: "TypeScript",
+        label: "基礎",
+        description:
+          "Genericsを用いた型安全なユーティリティ開発や、スキーマ駆動開発の経験。",
+        links: [
+          {
+            url: "https://github.com/your-id/ts-logic",
+            type: "github",
           },
         ],
       },
     ],
   },
   {
-    id: "cms",
     title: "CMS & Backend",
-    icon: "Server",
-    categories: [
+    items: [
       {
-        label: "Platform",
-        items: [
+        name: "WordPress",
+        label: "精通",
+        description:
+          "REST API連携、カスタムフィールドによる高度な管理画面カスタマイズに対応。",
+        links: [
           {
-            name: "WordPress",
-            level: 5,
-            label: "精通",
-            experience: "独自テーマ開発多数",
-            description:
-              "REST API連携、カスタムフィールドによる高度な管理画面カスタマイズに対応。",
-            links: [
-              {
-                label: "WP Portfolio",
-                url: "/works?category=WordPress",
-                type: "project",
-              },
-            ],
+            url: "/works?category=WordPress",
+            type: "project",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "AAA",
+    items: [
+      {
+        name: "WordPress",
+        label: "精通",
+        description:
+          "REST API連携、カスタムフィールドによる高度な管理画面カスタマイズに対応。",
+        links: [
+          {
+            url: "/works?category=WordPress",
+            type: "project",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "BBB",
+    items: [
+      {
+        name: "WordPress",
+        label: "精通",
+        description:
+          "REST API連携、カスタムフィールドによる高度な管理画面カスタマイズに対応。",
+        links: [
+          {
+            url: "/works?category=WordPress",
+            type: "project",
           },
         ],
       },

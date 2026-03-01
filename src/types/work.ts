@@ -6,7 +6,7 @@ export type WorkCategory = "web" | "wordpress" | "app" | "game" | "client" | "nd
 /** フィルタ用 (カテゴリ + all) */
 export type WorkFilterCategory = WorkCategory | "all";
 
-/** 公開レベルの定義 [cite: 7] */
+/** 公開レベルの定義 */
 export type DisclosureLevel = "Full" | "NDA";
 
 export type Work = {
@@ -22,9 +22,6 @@ export type Work = {
   duration: string; // 制作期間
   disclosureLevel: DisclosureLevel; // 公開範囲
 
-  isSpeedyWork: boolean;
-  isLongTerm: boolean; // 中長期プロジェクト（Accomplished）用フラグ
-
   url?: string;
   github?: string;
   siteId?: string; // サイト閲覧用ID
@@ -33,6 +30,4 @@ export type Work = {
   background?: string; // ご依頼の背景・課題
   features?: string; // 実装機能
   points?: string; // 制作のポイント
-
-  description?: string; // 以前の汎用説明文（必要に応じて残すか移行）
 };

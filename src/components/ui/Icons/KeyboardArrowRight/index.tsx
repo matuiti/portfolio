@@ -6,6 +6,7 @@ const iconStyles = tv({
   variants: {
     color: {
       black: "text-black",
+      white: "text-white",
       gray: "text-dark-gray",
     },
     size: {
@@ -14,25 +15,29 @@ const iconStyles = tv({
       lg: "w-icon-30 h-icon-30",
       xl: "w-icon-50 h-icon-50",
     },
-    left: {
-      true: "-scale-x-100",
-      false: "",
+    direction: {
+      right: "rotate-0",
+      left: "rotate-180",
+      top: "-rotate-90",
+      bottom: "rotate-90",
     },
   },
   defaultVariants: {
     color: "gray",
     size: "sm",
-    left: false,
+    direction: "right",
   },
 });
 
-export type KeyboardArrowRightProps = React.SVGProps<SVGSVGElement> &
+export type KeyboardArrowRightProps = {
+  direction?: "right" | "left" | "top" | "bottom";
+} & React.SVGProps<SVGSVGElement> &
   VariantProps<typeof iconStyles>;
 
 export const KeyboardArrowRight = ({
   color,
   size,
-  left,
+  direction,
   className,
   ...props
 }: KeyboardArrowRightProps) => {
@@ -41,7 +46,7 @@ export const KeyboardArrowRight = ({
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={iconStyles({ color, size, left, className })}
+      className={iconStyles({ color, size, direction, className })}
       {...props}
     >
       <path

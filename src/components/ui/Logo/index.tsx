@@ -20,7 +20,7 @@ const logoStyles = tv({
     },
     type: {
       header: "w-logo-small small:w-logo-large", // 120px相当 / 160px相当
-      footer: "w-logo-small mobile:w-logo-large", // 120px相当 / 160px相当
+      footer: "w-logo-small tablet:w-logo-large", // 120px相当 / 160px相当
     },
   },
   defaultVariants: {

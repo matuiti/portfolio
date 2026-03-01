@@ -121,7 +121,7 @@ export const WorkDetailModal = ({
               onClick={() => prevWork && onNavigate(prevWork)}
               disabled={!prevWork}
             >
-              <KeyboardArrowRight left />
+              <KeyboardArrowRight direction="left" />
             </button>
 
             {/* 縦の仕切り線（tablet以上で表示） */}

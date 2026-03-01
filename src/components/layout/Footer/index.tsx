@@ -20,9 +20,9 @@ const footerStyles = tv({
     root: styles.root,
     container: "container-center",
     topArea:
-      "flex flex-col items-start mobile:items-center small:items-start p-5 -mb-1.5 small:-mb-px gap-y-8 small:gap-y-0 small:gap-x-5 tablet:items-center small:flex-row small:justify-between",
+      "flex flex-col items-start small:items-start p-5 -mb-1.5 small:-mb-px gap-y-8 small:gap-y-0 small:gap-x-5 tablet:items-center small:flex-row small:justify-between",
     menuList:
-      "flex flex-col justify-start items-start gap-y-3.25 gap-x-4 flex-wrap mobile:flex-row mobile:justify-center mobile:items-center mt-2.5",
+      "flex flex-col justify-start items-start gap-y-2.5 gap-x-4 flex-wrap tablet:flex-row tablet:justify-center tablet:items-center mt-2.5",
     bottomArea: "mt-5 pt-5 border-t border-dark-gray",
     privacyPolicy: "text-white text-[calc(14/16*1rem)] tracking-wider text-center mb-5",
     copyright:

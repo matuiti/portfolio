@@ -61,6 +61,8 @@ export const SubButton = (props: SubButtonProps) => {
     ...rest
   } = props;
 
+  const iconColor = "white";
+
   // 型ガードを用いて type="submit" またはプロップスによる判定を行う
   const isSubmit =
     isSubmitProp ||
@@ -72,9 +74,7 @@ export const SubButton = (props: SubButtonProps) => {
 
   const content = (
     <>
-      {Icon && (
-        <Icon size={iconSize} color={variant === "white" ? "white" : "black"} />
-      )}
+      {Icon && <Icon size={iconSize} color={iconColor} className="shrink-0" />}
       {children}
     </>
   );
