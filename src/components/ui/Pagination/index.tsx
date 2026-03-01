@@ -72,7 +72,7 @@ export function Pagination({ current, total, onPageChange }: PaginationProps) {
           className={styles.arrowButton}
           aria-label="前のページへ"
         >
-          <KeyboardArrowRight className={styles.iconLeft} />
+          <KeyboardArrowRight direction="left" />
         </button>
       )}
 

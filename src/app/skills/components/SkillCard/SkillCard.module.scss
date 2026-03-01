@@ -1,0 +1,96 @@
+// src/app/skills/components/SkillCard/SkillCard.module.scss
+
+@use "../../../../styles" as *;
+
+.card {
+  background-color: var(--color-white);
+  padding: calc(20 / 16 * 1rem);
+  border-radius: calc(8 / 16 * 1rem);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: calc(12 / 16 * 1rem);
+  padding-block: calc(8 / 16 * 1rem);
+  border-bottom: 1px solid var(--color-medium-gray);
+}
+
+.name {
+  font-size: calc(24 / 16 * 1rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: var(--color-black);
+}
+
+.tag {
+  font-size: calc(14 / 16 * 1rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  padding: calc(4 / 16 * 1rem) calc(8 / 16 * 1rem);
+  background-color: var(--color-white);
+  color: var(--color-dark-gray);
+  border-radius: calc(4 / 16 * 1rem);
+  border: 1px solid var(--color-dark-gray);
+}
+
+.content {
+  padding-top: calc(14 / 16 * 1rem);
+}
+
+.description {
+  font-size: calc(16 / 16 * 1rem);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+  margin-bottom: calc(14 / 16 * 1rem);
+  
+  &.isExpanded {
+    line-clamp: unset;
+    -webkit-line-clamp: unset;
+    display: block; // 展開時は通常のブロック表示に戻す
+    overflow: visible;
+  }
+}
+
+.toggleBtn {
+  display: block;
+  margin-left: auto;
+  font-size: calc(14 / 16 * 1rem);
+  color: var(--color-black);
+  padding-bottom: calc(2 / 16 * 1rem);
+  margin-bottom: calc(14 / 16 * 1rem);
+  border-bottom: 1px solid var(--color-black);
+  cursor: pointer;
+
+  &:hover {
+    opacity: var(--opacity-hover);
+  }
+}
+
+.footer {
+  margin-top: auto;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(10 / 16 * 1rem);
+}

@@ -1,0 +1,75 @@
+// src/app/skills/Skills.module.scss
+
+@use "../../styles" as *;
+
+.pageBody {
+  width: 100%;
+  background: var(--color-light-gray);
+  padding-bottom: calc(126 / 16 * 1rem);
+
+  @include mq("mobile") {
+    padding-bottom: calc(150 / 16 * 1rem);
+  }
+}
+
+.description {
+  font-size: calc(16 / 16 * 1rem);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  white-space: pre-wrap;
+  padding-top: calc(60 / 16 * 1rem);
+}
+
+.skillGroups {
+  padding-top: calc(60 / 16 * 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 / 16 * 1rem);
+}
+
+.groupHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: calc(15 / 16 * 1rem) calc(16 / 16 * 1rem) calc(15 / 16 * 1rem)
+    calc(30 / 16 * 1rem);
+  border-radius: calc(8 / 16 * 1rem);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.005);
+  }
+}
+
+.groupTitle {
+  font-size: calc(16 / 16 * 1rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: calc(16 / 16 * 1rem);
+}
+
+.groupContent {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.skillGrid {
+  display: grid;
+  gap: calc(20 / 16 * 1rem);
+  padding-top: calc(20 / 16 * 1rem);
+  padding-bottom: calc(20 / 16 * 1rem);
+  grid-template-columns: 1fr;
+
+  @include mq("default") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
