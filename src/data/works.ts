@@ -28,10 +28,6 @@ export const ALL_WORKS: Work[] = [
     ],
     summary:
       "Next.js App Routerを採用した、大規模ECサイトのフロントエンドリニューアル。",
-    description:
-      "パフォーマンスとSEOを最優先に設計. Server Componentsを活用し、従来のReact構成よりLCPを40%改善しました。",
-    isSpeedyWork: false,
-    isLongTerm: true,
     url: "https://example-ec.com",
     github: "https://github.com/your-id/next-ec-project",
     siteId: "id",
@@ -54,13 +50,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/ryokan-wp.jpg",
     summary:
       "カスタムブロックを多用し、運用性を極めたフルカスタムWordPressテーマ制作。",
-    description:
-      "クライアント側での更新性を高めるため、独自のGutenbergカスタムブロックを20種類以上実装。和の質感を出すためのGSAPアニメーションを多用しています。",
     duration: "1.5ヶ月",
     role: "デザイン・コーディング",
     disclosureLevel: "Full",
-    isSpeedyWork: true,
-    isLongTerm: false,
     url: "https://example-ryokan.jp",
     github: "https://example-ryokan.jp",
     siteId: "id",
@@ -74,13 +66,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/internal-system.jpg",
     summary:
       "膨大なデータグリッドと複雑な入力を伴う、社内基幹システムのフロントエンド刷新。",
-    description:
-      "機密性の高い大規模プロジェクトのため、コード設計とテストカバレッジを重視。レガシーなシステムからReactへの段階的な移行をサポートしました。",
     duration: "10ヶ月",
     role: "UI開発リーダー",
     disclosureLevel: "NDA",
-    isSpeedyWork: false,
-    isLongTerm: true,
   },
   {
     id: "w-04",
@@ -90,13 +78,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/game-lp.jpg",
     summary:
       "WebGLを活用した動的な演出により、世界観を表現した没入型特設サイト。",
-    description:
-      "3Dモデルのレンダリングとシェーダーによる特殊効果を組み合わせ、スマートフォンのブラウザでも60FPSを維持する最適化を行いました。",
     duration: "3週間",
     role: "メインコーディング",
     disclosureLevel: "Full",
-    isSpeedyWork: true,
-    isLongTerm: false,
     url: "https://example-lp.com/recruit",
   },
   {
@@ -107,13 +91,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/task-saas.jpg",
     summary:
       "リアルタイム更新機能を備えた、スタートアップ向けSaaSプロダクトの開発。",
-    description:
-      "Next.jsとSupabaseを組み合わせ、DB設計から認証、リアルタイム通信までを一気通貫で実装。高速なMVP開発を実現しました。",
     duration: "2ヶ月",
     role: "フルスタック開発",
     disclosureLevel: "Full",
-    isSpeedyWork: false,
-    isLongTerm: false,
     github: "https://github.com/your-id/saas-proto",
   },
   {
@@ -124,13 +104,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/ai-dashboard.jpg",
     summary:
       "社内ドキュメントを学習させたナレッジ検索型AIチャットボットツール。",
-    description:
-      "RAG(Retrieval-Augmented Generation)を採用。LangChainを用いた回答精度の調整から、ReactでのチャットUI実装までを担当。業務効率を30%向上させました。",
     duration: "3ヶ月",
     role: "フロントエンド・プロンプトエンジニアリング",
     disclosureLevel: "NDA",
-    isSpeedyWork: false,
-    isLongTerm: false,
   },
   {
     id: "w-07",
@@ -140,13 +116,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/health-app.jpg",
     summary:
       "歩数や睡眠時間を自動記録し、ユーザーに健康アドバイスを行うアプリ。",
-    description:
-      "HealthKit連携によりバックグラウンドでのデータ同期を実現。Firebase Cloud Messagingを用いたプッシュ通知で、ユーザーの継続率を高める工夫を行いました。",
     duration: "5ヶ月",
     role: "アプリ開発エンジニア",
     disclosureLevel: "Full",
-    isSpeedyWork: false,
-    isLongTerm: true,
     github: "https://github.com/your-id/healthcare-app",
   },
   {
@@ -157,13 +129,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/design-system.jpg",
     summary:
       "複数プロダクトで共通利用するためのUIコンポーネントライブラリ構築。",
-    description:
-      "デザイントークンの定義から、アクセシビリティに配慮したStorybookのドキュメント化まで。開発効率の向上とUIの不整合解消に大きく貢献しました。",
     duration: "6ヶ月",
     role: "UI/UXエンジニア",
     disclosureLevel: "Full",
-    isSpeedyWork: false,
-    isLongTerm: true,
   },
   {
     id: "w-09",
@@ -173,13 +141,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/fashion-2024.jpg",
     summary:
       "静的サイトジェネレーターAstroを使用した、超軽量なブランドサイト。",
-    description:
-      "画像アセットが非常に多いため、Astroの画像最適化機能をフル活用。Framer Motionによるスクロールアニメーションで、高級感のある演出を行いました。",
     duration: "2週間",
     role: "コーディング",
     disclosureLevel: "Full",
-    isSpeedyWork: true,
-    isLongTerm: false,
     url: "https://collection.example-fashion.com",
   },
   {
@@ -189,13 +153,9 @@ export const ALL_WORKS: Work[] = [
     tags: ["Vue.js", "Electron", "WebSocket", "Node.js"],
     thumbnail: "/assets/images/works/smart-mirror.jpg",
     summary: "洗面台の鏡に情報を表示するスマートデバイス用UIの開発。",
-    description:
-      "Electronを用いたデスクトップアプリとして構築。WebSocketでスマホアプリと同期し、朝のニュースや天気をリアルタイムに表示する制御システムを実装しました。",
     duration: "4ヶ月",
     role: "フロントエンド開発",
     disclosureLevel: "NDA",
-    isSpeedyWork: false,
-    isLongTerm: false,
   },
   {
     id: "w-11",
@@ -204,13 +164,9 @@ export const ALL_WORKS: Work[] = [
     tags: ["Next.js", "Hono", "Cloudflare Workers", "D1", "Tailwind CSS"],
     thumbnail: "/assets/images/works/crypto-tracker.jpg",
     summary: "API経由で複数取引所の資産状況を統合管理するWebアプリ。",
-    description:
-      "Cloudflare WorkersとD1データベースを活用し、エッジ側で高速なデータ処理を実現。軽量かつサーバーレスな構成を徹底しました。",
     duration: "1ヶ月",
     role: "個人開発",
     disclosureLevel: "Full",
-    isSpeedyWork: true,
-    isLongTerm: false,
     github: "https://github.com/your-id/crypto-app",
   },
   {
@@ -220,13 +176,9 @@ export const ALL_WORKS: Work[] = [
     tags: ["React", "Go", "PostgreSQL", "AWS", "WebRTC"],
     thumbnail: "/assets/images/works/learning-system.jpg",
     summary: "リアルタイム講義と動画学習を組み合わせた学習管理システム。",
-    description:
-      "WebRTCを用いたビデオ通話機能のフロントエンド実装を担当。数千人が同時接続する環境での状態管理と負荷軽減を考慮した設計を行いました。",
     duration: "12ヶ月",
     role: "フロントエンドテックリード",
     disclosureLevel: "NDA",
-    isSpeedyWork: false,
-    isLongTerm: true,
   },
   {
     id: "w-13",
@@ -235,13 +187,9 @@ export const ALL_WORKS: Work[] = [
     tags: ["Vanilla JS", "PWA", "Google Maps API", "MicroCMS"],
     thumbnail: "/assets/images/works/stamp-rally.jpg",
     summary: "観光地での回遊を促す、ブラウザベースのスタンプラリーアプリ。",
-    description:
-      "アプリインストール不要で動作するPWAとして開発。GPS座標を取得し、指定のスポットに近づくとスタンプが付与される機能を実装しました。",
     duration: "1ヶ月",
     role: "設計・コーディング",
     disclosureLevel: "Full",
-    isSpeedyWork: true,
-    isLongTerm: false,
     url: "https://stamp.city-kanko.example.jp",
   },
   {
@@ -251,13 +199,9 @@ export const ALL_WORKS: Work[] = [
     tags: ["Nuxt.js", "Three.js", "GSAP", "Contentful"],
     thumbnail: "/assets/images/works/agency-site.jpg",
     summary: "独創的な画面遷移が特徴の、エージェンシー公式サイト。",
-    description:
-      "Canvasを用いたページトランジションや、マウスカーソルの追従エフェクトなどを実装。ヘッドレスCMSを採用し、実績更新の柔軟性も確保しています。",
     duration: "2ヶ月",
     role: "テクニカルディレクター",
     disclosureLevel: "Full",
-    isSpeedyWork: false,
-    isLongTerm: false,
   },
   {
     id: "w-15",
@@ -267,13 +211,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/warehouse-scan.jpg",
     summary:
       "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
-    description:
-      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
     duration: "2ヶ月",
     role: "フロントエンド開発",
     disclosureLevel: "NDA",
-    isSpeedyWork: true,
-    isLongTerm: false,
   },
   {
     id: "w-16",
@@ -283,13 +223,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/warehouse-scan.jpg",
     summary:
       "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
-    description:
-      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
     duration: "2ヶ月",
     role: "フロントエンド開発",
     disclosureLevel: "NDA",
-    isSpeedyWork: true,
-    isLongTerm: false,
   },
   {
     id: "w-17",
@@ -299,13 +235,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/warehouse-scan.jpg",
     summary:
       "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
-    description:
-      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
     duration: "2ヶ月",
     role: "フロントエンド開発",
     disclosureLevel: "NDA",
-    isSpeedyWork: true,
-    isLongTerm: false,
   },
   {
     id: "w-18",
@@ -315,13 +247,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/warehouse-scan.jpg",
     summary:
       "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
-    description:
-      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
     duration: "2ヶ月",
     role: "フロントエンド開発",
     disclosureLevel: "NDA",
-    isSpeedyWork: true,
-    isLongTerm: false,
   },
   {
     id: "w-19",
@@ -331,13 +259,9 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/warehouse-scan.jpg",
     summary:
       "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
-    description:
-      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
     duration: "2ヶ月",
     role: "フロントエンド開発",
     disclosureLevel: "NDA",
-    isSpeedyWork: true,
-    isLongTerm: false,
   },
   {
     id: "w-20",
@@ -347,12 +271,8 @@ export const ALL_WORKS: Work[] = [
     thumbnail: "/assets/images/works/warehouse-scan.jpg",
     summary:
       "ハンディターミナルの代わりにスマホブラウザでバーコードを読み取る業務ツール。",
-    description:
-      "低スペックなAndroid端末でも動作するよう軽量化。オフライン環境でもデータを一時保存し、オンライン時に同期する仕組みをService Workerで構築しました。",
     duration: "2ヶ月",
     role: "フロントエンド開発",
     disclosureLevel: "NDA",
-    isSpeedyWork: true,
-    isLongTerm: false,
   },
 ];
