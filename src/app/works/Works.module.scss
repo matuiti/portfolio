@@ -2,7 +2,7 @@
 @use "../../styles/" as *;
 
 .cards {
-  margin-top: calc(60 / 16 * 1rem);
+  margin-top: calc(40 / 16 * 1rem);
   display: grid;
   justify-content: center;
   gap: calc(40 / 16 * 1rem) calc(20 / 16 * 1rem);
@@ -12,6 +12,7 @@
   }
   @include mq(default) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: calc(50 / 16 * 1rem);
   }
 }
 

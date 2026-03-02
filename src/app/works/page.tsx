@@ -124,7 +124,7 @@ function WorksContent() {
         <Breadcrumbs items={breadcrumbItems} />
       </div>
       {/* コンテンツ */}
-      <div className="section-padding-x py-15 bg-light-gray">
+      <div className="section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray">
         {/* タイトル、検索ヒット件数 */}
         <TitleAndCount title={displayTitle} count={totalHitCount} />
         {/* 実績グリッド一覧 */}
