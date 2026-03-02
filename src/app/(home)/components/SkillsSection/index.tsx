@@ -7,31 +7,30 @@ import styles from "./SkillsSection.module.scss";
 // トップページ固有のハイライトデータ
 const SKILLS_HIGHLIGHT: HighlightSkillGroup[] = [
   {
-    title: "Coding",
+    title: "WEBサイト",
     items: [
-      { name: "HTML/CSS (Sass)", percentage: 95 },
+      { name: "HTML", percentage: 95 },
+      { name: "CSS / SASS", percentage: 95 },
       { name: "JavaScript", percentage: 90 },
-      { name: "TypeScript", percentage: 80 },
-      { name: "a", percentage: 80 },
-      { name: "b", percentage: 80 },
-      { name: "c", percentage: 80 },
+      { name: "WordPress / PHP", percentage: 85 },
     ],
   },
   {
-    title: "Frameworks",
+    title: "ライブラリ、フレームワーク",
     items: [
+      { name: "TypeScript", percentage: 85 },
       { name: "Next.js / React", percentage: 85 },
-      { name: "WordPress", percentage: 90 },
-      { name: "LongName LongName", percentage: 70 },
-      { name: "Astro", percentage: 70 },
+      { name: "TailwindCSS", percentage: 85 },
+      { name: "jQuery", percentage: 80 },
     ],
   },
   {
-    title: "Design & Tools",
+    title: "ツール",
     items: [
-      { name: "Figma", percentage: 80 },
+      { name: "Figma", percentage: 85 },
       { name: "Git / GitHub", percentage: 85 },
-      { name: "Adobe Creative Cloud", percentage: 60 },
+      { name: "生成AI", percentage: 85 },
+      { name: "Slack / Chatwork", percentage: 80 },
     ],
   },
 ];
@@ -49,7 +48,7 @@ export const SkillsSection = () => {
               className="js-fuwa-fade"
             />
             <p className={`${styles.description} js-fuwa-fade`}>
-              常に新しい技術の習得に取り組み、スキルアップを続けています。
+              常に新しい技術の習得に取り組み、専門性を磨いて参ります。
             </p>
           </div>
 

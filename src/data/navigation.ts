@@ -8,7 +8,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "サービス内容", href: "/#service", isPublished: true },
   { label: "スキル", href: "/skills", isPublished: true },
   { label: "私について", href: "/#about", isPublished: true },
-  { label: "ブログ", href: "/#blog", isPublished: false },
+  // { label: "ブログ", href: "/#blog", isPublished: false },
   { label: "お問い合わせ", href: "/#contact", isPublished: true },
   // { label: "Workbench", href: "/workbench", isPublished: true }, // 開発用
 ];

@@ -4,7 +4,7 @@ import { ServiceSection } from "./components/ServiceSection";
 import { SkillsSection } from "./components/SkillsSection";
 import { WorksSection } from "./components/WorksSection";
 import { AboutSection } from "./components/AboutSection";
-import { BlogSection } from "./components/BlogSection";
+// import { BlogSection } from "./components/BlogSection";
 import { ContactSection } from "./components/ContactSection";
 import { ScrollRevealManager } from "./components/ScrollRevealManager";
 
@@ -26,7 +26,7 @@ export default function Home() {
         {/* 6. ABOUT：2カラム・プロフィール */}
         <AboutSection />
         {/* 7. BLOG：準備中コンポーネントを配置予定 */}
-        <BlogSection />
+        {/* <BlogSection /> */}
         {/* 8. CONTACT：フォームセクション */}
         <ContactSection />
       </div>
