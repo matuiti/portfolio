@@ -31,7 +31,7 @@ export const ComingSoon = ({ hasOverlay = true }: ComingSoonProps) => {
       {hasOverlay && <div className={styles.overlay} />}
 
       {/* テキスト */}
-      <p className={styles.text}>コンテンツは近日公開予定です</p>
+      <p className={styles.text}>近日公開予定</p>
     </section>
   );
 };

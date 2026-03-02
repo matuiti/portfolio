@@ -16,7 +16,7 @@ export const GallerySection = () => {
               className="js-fuwa-fade"
             />
             <p className={`${styles.description} js-fuwa-fade`}>
-              UIパーツやアニメーションなどのギャラリーは準備中です
+              UIパーツギャラリーは準備中です。
             </p>
           </div>
           <div className="flex items-center justify-center js-fuwa-fade">
