@@ -7,7 +7,7 @@
 
 :root {
   /* プロジェクト規約に基づき、定義済みの色変数を使用 */
-  --color-bg-gradation: linear-gradient(180deg);
+  --color-bg-gradation: linear-gradient(180deg, #ffffff 0%, #F4F4F4 100%);
 }
 
 /* 2. プロジェクト専用テーマ設定 */

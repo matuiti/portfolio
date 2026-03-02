@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className={`${inter.variable} ${notoSansJp.variable}`}>
-      <body className="antialiased font-sans bg-bg-gradation min-h-svh">
+      <body className="antialiased font-sans bg-bg-gradation min-h-svh h-full">
         <PageLayout>{children}</PageLayout>
       </body>
     </html>

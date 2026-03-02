@@ -1,0 +1,24 @@
+@use "../styles" as *;
+.container {
+  width: 100%;
+  background-color: var(--color-white)
+}
+
+.contentContainer {
+  width: 100%;
+  padding-bottom: calc(100 / 16 * 1rem);
+  padding-top: calc(100 / 16 * 1rem);
+
+}
+
+.text {
+  font-size: calc(16 / 16 * 1rem);
+  line-height: 1.8;
+  color: var(--color-black);
+  margin-bottom: calc(40 / 16 * 1rem);
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+}
