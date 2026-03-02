@@ -2,6 +2,7 @@
 @use "../../../styles" as *; // 規約：相対パスでの読み込み [3]
 
 .root {
+  margin-top: auto;
   background-color: var(--color-black); // Tailwindの black と同期
 
   /* ベース（mini〜） */
