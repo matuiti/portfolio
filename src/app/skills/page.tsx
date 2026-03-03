@@ -23,9 +23,14 @@ export default function SkillsPage() {
   } as const;
 
   const breadcrumbItems = [{ label: "トップ", href: "/" }, { label: "スキル" }];
-  const description = `実務で使用したものや、個人開発用に独学で学んだものもあります。
-業務では主に〇〇を行ってきたので、〇〇が比較的強いです。
-GitHubやUIギャラリーとして作成したサンプルをご覧いただけますので、参考にしてもらえれば幸いです。`;
+  // src/app/skills/page.tsx 内の description 変数を以下に差し替えます
+
+  const description = `
+0→1のテンプレート設計から大規模改修まで、既存コードを壊さず迅速に適応する自走力が強みです。
+
+直近では企業独自CMSの構築にて、デザイナー・エンジニアと密に連携し4テーマを同時完遂しました。
+リモート環境でも仕様の行間を読み解き、保守性の高いコードで貴社の制作ラインを支える即戦力として貢献します。
+`.trim();
 
   return (
     <>

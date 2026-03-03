@@ -6,6 +6,7 @@ export type labeType = "基礎" | "実務レベル" | "精通";
 export type SkillLink = {
   url: string;
   type: SkillLinkType;
+  name?: string;
 };
 
 export type SkillItem = {

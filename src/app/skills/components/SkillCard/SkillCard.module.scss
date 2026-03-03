@@ -19,7 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: calc(12 / 16 * 1rem);
+  gap: calc(16 / 16 * 1rem);
   padding-block: calc(8 / 16 * 1rem);
   border-bottom: 1px solid var(--color-medium-gray);
 }
@@ -41,6 +41,7 @@
   color: var(--color-dark-gray);
   border-radius: calc(4 / 16 * 1rem);
   border: 1px solid var(--color-dark-gray);
+  min-width: max-content;
 }
 
 .content {

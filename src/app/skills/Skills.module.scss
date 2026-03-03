@@ -19,6 +19,9 @@
   color: var(--color-black);
   white-space: pre-wrap;
   padding-top: calc(60 / 16 * 1rem);
+  @include mq("small") {
+    text-align: center;
+  }
 }
 
 .skillGroups {

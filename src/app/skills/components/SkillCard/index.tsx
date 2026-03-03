@@ -85,12 +85,12 @@ export const SkillCard = ({ item }: SkillCardProps) => {
         <div className={styles.buttonGroup}>
           {projectLink && (
             <SubButton
-              href={`/works?tags=${encodeURIComponent(item.name)}`}
+              href={projectLink.url}
               leftIcon={Launch}
               variant="gray"
               className={styles.subBtn}
             >
-              事例を見る
+              {`「${projectLink.name || item.name}」の事例を見る`}
             </SubButton>
           )}
           {githubLink && (
