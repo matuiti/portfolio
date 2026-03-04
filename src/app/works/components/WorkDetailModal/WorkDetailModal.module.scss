@@ -353,23 +353,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding-top: calc(42 / 16 * 1rem);
+      padding-top: calc(22 / 16 * 1rem);
 
       @include mq("tablet") {
-        padding-top: calc(68 / 16 * 1rem);
+        padding-top: calc(28 / 16 * 1rem);
       }
     }
     .dotIndicator {
       position: absolute;
-      bottom: calc(20 / 16 * 1rem);
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       gap: calc(8 / 16 * 1rem);
       z-index: 10;
-      @include mq("tablet") {
-        bottom: calc(40 / 16 * 1rem);
-      }
 
       .dot {
         width: calc(6 / 16 * 1rem);
@@ -395,6 +392,11 @@
 
   // 情報セクション
   .infoSection {
+    margin-top: calc(20 / 16 * 1rem);
+    @include mq("tablet") {
+      margin-top: calc(40 / 16 * 1rem);
+    }
+
     // @include mq("tablet") {
     //   overflow-y: auto;
     // }
@@ -424,6 +426,40 @@
       letter-spacing: 0.05em;
       white-space: pre-wrap;
       padding-inline: calc(10 / 16 * 1rem);
+    }
+
+    .detailList {
+      list-style: none; // デフォルトのマーカーを非表示
+      padding: 0;
+      margin-top: calc(10 / 16 * 1rem);
+      padding-inline: calc(10 / 16 * 1rem); // 他の要素と揃えるための余白
+
+      li {
+        position: relative;
+        // ★文章とマーカーの距離：padding-left の数値で調整
+        padding-left: calc(13 / 16 * 1rem);
+        font-size: calc(16 / 16 * 1rem);
+        line-height: 1.5;
+        color: var(--color-black);
+        letter-spacing: 0.05em;
+
+        // 独自のマーカー（文頭が揃うように絶対配置）
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          // ★1行目の文頭中央に来るよう垂直位置を調整
+          width: calc(4 / 16 * 1rem);
+          height: calc(4 / 16 * 1rem);
+          top: 0.58em;
+          background-color: var(--color-black);
+          border-radius: 50%;
+        }
+      }
+
+      li + li {
+        margin-top: calc(10 / 16 * 1rem);
+      }
     }
 
     .tagGrid {
