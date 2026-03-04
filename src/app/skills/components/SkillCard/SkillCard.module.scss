@@ -19,17 +19,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: calc(16 / 16 * 1rem);
-  padding-block: calc(8 / 16 * 1rem);
+  gap: calc(10 / 16 * 1rem);
+  padding-bottom: calc(8 / 16 * 1rem);
   border-bottom: 1px solid var(--color-medium-gray);
 }
 
 .name {
-  font-size: calc(18 / 16 * 1rem);
+  font-size: calc(15 / 16 * 1rem);
   font-weight: 700;
   letter-spacing: 0.05em;
   line-height: 1;
   color: var(--color-black);
+  @include mq("tablet") {
+    font-size: calc(18 / 16 * 1rem);
+  }
 }
 
 .tag {
@@ -62,7 +65,7 @@
   overflow: hidden;
   word-break: break-all;
   margin-bottom: calc(14 / 16 * 1rem);
-  
+
   &.isExpanded {
     line-clamp: unset;
     -webkit-line-clamp: unset;
