@@ -28,6 +28,6 @@ export type Work = {
   sitePassword?: string; // サイト閲覧用パスワード
 
   background?: string; // ご依頼の背景・課題
-  features?: string; // 実装機能
-  points?: string; // 制作のポイント
+  features?: string[]; // 実装機能
+  points?: string[]; // 制作のポイント
 };

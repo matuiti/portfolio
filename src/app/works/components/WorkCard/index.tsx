@@ -89,12 +89,12 @@ export const WorkCard = memo(
 
         {/* 下部：情報エリア (既存のスタイルを維持) */}
         <div
-          className={`bg-white flex flex-col flex-1 pt-[calc(28/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] gap-4 ${
+          className={`bg-white flex flex-col flex-1 pt-[calc(20/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] ${
             !isTagHovered ? "group-hover:bg-light-gray" : ""
           }`}
         >
           <div
-            className="flex flex-wrap gap-2 relative"
+            className="mb-4 flex flex-wrap gap-2 relative"
             onMouseEnter={() => setIsTagHovered(true)}
             onMouseLeave={() => setIsTagHovered(false)}
           >
@@ -109,7 +109,7 @@ export const WorkCard = memo(
             ))}
           </div>
 
-          <h3 className="text-[calc(18/16*1rem)] leading-tight  line-clamp-2">
+          <h3 className="mb-4 text-[calc(18/16*1rem)] leading-tight  line-clamp-2">
             {work.title}
           </h3>
 
@@ -117,14 +117,16 @@ export const WorkCard = memo(
             {work.summary}
           </p>
 
-          <div className="mt-auto  border-t border-medium-gray pt-4 flex flex-col gap-y-2.5 text-[calc(12/16*1rem)] text-dark-gray">
-            <div className="flex">
-              <span className="shrink-0">担当範囲：</span>
-              <span className="line-clamp-1">{work.role}</span>
-            </div>
-            <div className="flex">
-              <span className="shrink-0">制作期間：</span>
-              <span>{work.duration}</span>
+          <div className="mt-auto">
+            <div className="mt-4  border-t border-medium-gray pt-4 flex flex-col gap-y-2.5 text-[calc(12/16*1rem)] text-dark-gray">
+              <div className="flex">
+                <span className="shrink-0">担当範囲：</span>
+                <span className="line-clamp-1">{work.role}</span>
+              </div>
+              <div className="flex">
+                <span className="shrink-0">制作期間：</span>
+                <span>{work.duration}</span>
+              </div>
             </div>
           </div>
         </div>

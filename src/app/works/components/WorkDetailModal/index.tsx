@@ -49,7 +49,7 @@ export const WorkDetailModal = ({
 
   // 2. 表示する画像リストの作成（NDA案件の場合はサムネイルのみに制限 [1, 2]）
   const imageList = useMemo(() => {
-    if (work.disclosureLevel === "NDA") return [work.thumbnail];
+    // if (work.disclosureLevel === "NDA") return [work.thumbnail];
     // images 配列があればそれを使い、なければ thumbnail を使う
     return work.images && work.images.length > 0
       ? work.images
@@ -279,18 +279,27 @@ export const WorkDetailModal = ({
                 </section>
               )}
               {/* 2. 実装機能 */}
-              {work.features && (
-                <section className={styles.section}>
+              {work.features && work.features.length > 0 && (
+                <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>実装機能</h3>
-                  <p className={styles.description}>{work.features}</p>
-                </section>
+                  <ul className={styles.detailList}>
+                    {work.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
+
               {/* 3. 制作のポイント */}
-              {work.points && (
-                <section className={styles.section}>
+              {work.points && work.points.length > 0 && (
+                <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>制作のポイント</h3>
-                  <p className={styles.description}>{work.points}</p>
-                </section>
+                  <ul className={styles.detailList}>
+                    {work.points.map((point, index) => (
+                      <li key={index}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
               {/* 4. 使用スキル */}
               <section className={styles.section}>
