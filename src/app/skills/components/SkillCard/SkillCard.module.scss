@@ -4,11 +4,15 @@
 
 .card {
   background-color: var(--color-white);
-  padding: calc(20 / 16 * 1rem);
+  padding: calc(10 / 16 * 1rem) calc(20 / 16 * 1rem) calc(20 / 16 * 1rem);
   border-radius: calc(8 / 16 * 1rem);
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
+
+  @include mq("tablet") {
+    padding: calc(20 / 16 * 1rem) calc(20 / 16 * 1rem) calc(24 / 16 * 1rem);
+  }
 
   &:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
