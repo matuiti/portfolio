@@ -90,15 +90,18 @@
       content: "";
       position: absolute;
       left: 0;
-      // ★マーカーの垂直位置：1行目の文頭中央に来るよう調整
-      top: 0.65em;
+      // マーカーの垂直位置：1行目の文頭中央に来るよう調整
+      top: 0.54em;
 
-      // ★マーカーのサイズ
+      // マーカーのサイズ
       width: calc(6 / 16 * 1rem);
       height: calc(6 / 16 * 1rem);
 
       background-color: var(--color-dark-gray);
       border-radius: 50%;
+      @include mq("tablet") {
+        top: 0.65em;
+      }
     }
   }
 

@@ -8,6 +8,9 @@
 :root {
   /* プロジェクト規約に基づき、定義済みの色変数を使用 */
   --color-bg-gradation: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
+    /* --- シャドー --- */
+  --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
 }
 
 /* 2. プロジェクト専用テーマ設定 */
@@ -86,9 +89,7 @@
   --z-index-modal: 200;
   --z-index-popover: 300;
 
-  /* --- シャドー --- */
-  --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
-  --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+
 
   /* --- ブラー --- */
   --backdrop-blur-default: 10px;

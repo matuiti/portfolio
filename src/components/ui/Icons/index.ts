@@ -14,3 +14,4 @@ export * from "./ServiceResponsive";
 export * from "./ServiceCMS";
 export * from "./ServicePerformance";
 export * from "./CarouselArrowRight";
+export * from "./LibraryBooks";
