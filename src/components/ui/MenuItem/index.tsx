@@ -38,8 +38,8 @@ export const menuItemStyles = tv({
           "bg-bottom-right",
           "bg-size-[0_1px]",
           "transition-[background-size] duration-500 ease-out",
-          "group-hover:bg-bottom-left",
-          "group-hover:bg-size-[100%_1px]",
+          "small:group-hover:bg-bottom-left",
+          "small:group-hover:bg-size-[100%_1px]",
         ],
       },
       false: {
@@ -69,12 +69,12 @@ export const menuItemStyles = tv({
     {
       isPublished: true,
       color: "black",
-      class: { base: "hover:black" },
+      class: { base: "small:hover:black" },
     },
     {
       isPublished: true,
       color: "white",
-      class: { base: "hover:text-white" },
+      class: { base: "small:hover:text-white" },
     },
     // 既存の isActive 時のレイアウト制御を維持 [cite: 146]
     {
@@ -117,6 +117,7 @@ type MenuItemProps = {
   href: string;
   renderIndicator?: React.ReactNode;
   indicatorOffsetClass?: string;
+  onClick?: () => void;
 } & MenuItemVariants;
 
 const DefaultIndicator = () => (
@@ -132,6 +133,7 @@ export const MenuItem = ({
   indicatorLayout,
   renderIndicator = <DefaultIndicator />,
   indicatorOffsetClass = "-left-3",
+  onClick,
 }: MenuItemProps) => {
   const {
     base,
@@ -164,7 +166,7 @@ export const MenuItem = ({
   }
 
   return (
-    <Link href={href} className={base()}>
+    <Link href={href} className={base()} onClick={onClick}>
       {content}
     </Link>
   );

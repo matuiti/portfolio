@@ -67,7 +67,6 @@
 }
 
 .text {
-  font-size: calc(16 / 16 * 1rem);
   line-height: 1.5;
   letter-spacing: 0.05em;
   color: var(--color-black);
@@ -83,7 +82,6 @@
     position: relative;
     // ★文章とマーカーの距離：padding-left の数値で調整します
     padding-left: calc(13 / 16 * 1rem);
-    font-size: calc(16 / 16 * 1rem);
     line-height: 1.5;
     color: var(--color-black);
 
