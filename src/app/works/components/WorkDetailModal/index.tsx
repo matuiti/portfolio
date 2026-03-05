@@ -18,6 +18,7 @@ import {
   GitHub,
   KeyboardArrowRight,
   Launch,
+  LibraryBooks,
 } from "@/components/ui/Icons";
 import { BaseTag } from "@/components/ui/BaseTag";
 import { SubButton } from "@/components/ui/Buttons/SubButton";
@@ -170,6 +171,17 @@ export const WorkDetailModal = ({
                       サイトを見る
                     </SubButton>
                   )}
+                  {/* サイトリンク */}
+                  {work.url && (
+                    <SubButton
+                      href={work.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      leftIcon={LibraryBooks}
+                    >
+                      記事を読む
+                    </SubButton>
+                  )}
 
                   {/* GitHubリンク */}
                   {work.github && (
@@ -183,26 +195,33 @@ export const WorkDetailModal = ({
                     </SubButton>
                   )}
                 </div>
-
-                {/* 閲覧用認証情報 */}
-                {work.url && work.siteId && work.sitePassword && (
-                  <div className={styles.authBox}>
-                    <p>
-                      <span className={styles.authLabel}>サイト閲覧ID：</span>
-                      <span className={styles.authValue}>{work.siteId}</span>
-                    </p>
-                    <p>
-                      <span className={styles.authLabel}>
-                        サイト閲覧パスワード：
-                      </span>
-                      <span className={styles.authValue}>
-                        {work.sitePassword}
-                      </span>
-                    </p>
-                  </div>
-                )}
               </div>
-              {/* --- 外部リンクエリア〆 --- */}
+
+              {/* 閲覧用認証情報 */}
+              {work.url && work.siteId && work.sitePassword && (
+                <div className={styles.authBox}>
+                  <p>
+                    <span className={styles.authLabel}>サイト閲覧ID：</span>
+                    <span className={styles.authValue}>{work.siteId}</span>
+                  </p>
+                  <p>
+                    <span className={styles.authLabel}>
+                      サイト閲覧パスワード：
+                    </span>
+                    <span className={styles.authValue}>
+                      {work.sitePassword}
+                    </span>
+                  </p>
+                </div>
+              )}
+
+              {work.disclosureLevel === "NDA" ? (
+                <p className={styles.message}>
+                  ※非公開の実績です。可能な範囲で概要をご紹介します。
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             {/* 画像エリア（複数枚ある時はスライダー） */}

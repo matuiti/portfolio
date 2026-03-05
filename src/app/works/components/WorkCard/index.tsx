@@ -42,6 +42,11 @@ export const WorkCard = memo(
         ? NDA_THUMBNAIL_PATH
         : work.thumbnail || PLACEHOLDER_THUMBNAIL_PATH;
 
+    const hoveredText =
+      work.disclosureLevel === "NDA"
+        ? "非公開実績"
+        : "詳しく見る";
+
     const handleCategoryClick = (e: React.MouseEvent, cat: string) => {
       e.stopPropagation();
       if (onCategoryClick) {
@@ -82,7 +87,7 @@ export const WorkCard = memo(
             }`}
           >
             <span className="text-white text-[calc(18/16*1rem)]">
-              詳しく見る
+              {hoveredText}
             </span>
           </div>
         </div>

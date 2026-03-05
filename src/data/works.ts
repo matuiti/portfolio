@@ -45,6 +45,8 @@ export const ALL_WORKS: Work[] = [
       "独自CMS向けの4テーマテンプレート開発。プロフェッショナルチームと連携し、高度なUI実装と保守性の高い設計を追求しました。",
     url: "https://multi-theme-template-set-for-review.vercel.app/",
     github: "https://github.com/matuiti/MultiThemeTemplateSet-forReview",
+    siteId:"id",
+    sitePassword:"pass",
     background:
       "クライアント企業の独自CMS向けに、トップ・一覧・詳細の3ページ構成×4種類のデザインテーマを開発。GitHubの公開コードを評価いただき、概算見積から本見積、採用という流れで参画しました。企画・デザイン、フロントエンドエンジニア兼PMなど5名のプロフェッショナルチーム体制での開発です。",
     features: [

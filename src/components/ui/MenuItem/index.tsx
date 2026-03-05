@@ -12,11 +12,11 @@ export const menuItemStyles = tv({
     base: "group relative flex items-center transition-all duration-300",
     indicator: [
       "w-2 h-2 transition-all duration-300 flex items-center justify-center",
-      "pb-[calc(6/16*1rem)]", // labelに揃える
+      "pb-[calc(6/16*1rem)]",
     ],
     label: [
       "font-bold transition-all duration-300",
-      "pb-[calc(6/16*1rem)]", // レイアウト維持のためパディングは固定
+      "pb-[calc(6/16*1rem)]",
     ],
   },
   variants: {
@@ -38,8 +38,8 @@ export const menuItemStyles = tv({
           "bg-bottom-right",
           "bg-size-[0_1px]",
           "transition-[background-size] duration-500 ease-out",
-          "small:group-hover:bg-bottom-left",
-          "small:group-hover:bg-size-[100%_1px]",
+          "group-hover:bg-bottom-left",
+          "group-hover:bg-size-[100%_1px]",
         ],
       },
       false: {
@@ -69,12 +69,12 @@ export const menuItemStyles = tv({
     {
       isPublished: true,
       color: "black",
-      class: { base: "small:hover:black" },
+      class: { base: "hover:black" },
     },
     {
       isPublished: true,
       color: "white",
-      class: { base: "small:hover:text-white" },
+      class: { base: "hover:text-white" },
     },
     // 既存の isActive 時のレイアウト制御を維持 [cite: 146]
     {

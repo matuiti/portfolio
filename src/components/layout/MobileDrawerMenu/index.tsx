@@ -63,7 +63,7 @@ export const MobileDrawerMenu = ({
                 <li
                   key={item.href}
                   className={`group flex items-center justify-between first:pt-[calc(17/16*1rem)] -mb-px py-4 pl-4 border-b first:border-t border-medium-gray ${
-                    !item.isPublished ? "cursor-not-allowed" : "cursor-pointer"
+                    !item.isPublished ? "cursor-not-allowed" : ""
                   }`}
                 >
                   <MenuItem

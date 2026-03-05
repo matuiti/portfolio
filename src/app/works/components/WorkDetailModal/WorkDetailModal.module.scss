@@ -228,7 +228,7 @@
   }
 
   .articleHead {
-    margin-bottom: calc(20 / 16 * 1rem);
+    margin-bottom: calc(10 / 16 * 1rem);
 
     .categoryList {
       display: flex;
@@ -262,35 +262,46 @@
       @include mq("tablet") {
         margin-top: calc(20 / 16 * 1rem);
       }
-    }
-
-    .buttonGroup {
-      display: flex;
-      flex-wrap: wrap;
-      gap: calc(10 / 16 * 1rem);
+      .buttonGroup {
+        display: flex;
+        flex-wrap: wrap;
+        gap: calc(8 / 16 * 1rem) calc(10 / 16 * 1rem);
+      }
     }
 
     .authBox {
-      display: flex;
+      display: inline-flex;
       flex-wrap: wrap;
       gap: calc(8 / 16 * 1rem) calc(20 / 16 * 1rem);
       color: var(--color-black);
+      background-color: var(--color-light-gray);
+      padding: calc(14 / 16 * 1rem) calc(14 / 16 * 1rem);
+      border-radius: calc(8 / 16 * 1rem);
       font-size: calc(14 / 16 * 1rem);
       line-height: 1;
       margin-top: calc(12 / 16 * 1rem);
+      @include mq("tablet") {
+        margin-top: calc(14 / 16 * 1rem);
+      }
+      .authLabel {
+        letter-spacing: 0.05em;
+      }
+
+      .authValue {
+        letter-spacing: 0.1em;
+        user-select: all; // ワンクリックで選択可能
+      }
+    }
+
+    .message {
+      color: var(--color-black);
+      font-size: calc(14 / 16 * 1rem);
+      line-height: 1.5;
+      margin-top: calc(10 / 16 * 1rem);
 
       @include mq("tablet") {
         margin-top: calc(20 / 16 * 1rem);
       }
-    }
-
-    .authLabel {
-      letter-spacing: 0.05em;
-    }
-
-    .authValue {
-      letter-spacing: 0.1em;
-      user-select: all; // ワンクリックで選択可能
     }
   }
 
