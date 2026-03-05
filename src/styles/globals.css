@@ -7,7 +7,7 @@
 
 :root {
   /* プロジェクト規約に基づき、定義済みの色変数を使用 */
-  --color-bg-gradation: linear-gradient(180deg, #ffffff 0%, #F4F4F4 100%);
+  --color-bg-gradation: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
 }
 
 /* 2. プロジェクト専用テーマ設定 */
@@ -116,7 +116,7 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply font-sans bg-white text-black text-base leading-none tracking-wider font-medium;
+    @apply font-sans bg-white text-black text-[calc(14/16*1rem)] tablet:text-[calc(16/16*1rem)] leading-none tracking-wider font-medium;
   }
 
   /* 見出しの共通設定 [21] */

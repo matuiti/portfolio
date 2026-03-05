@@ -24,7 +24,7 @@ export const MobileDrawerMenu = ({
         isOpen ? "visible" : "invisible pointer-events-none"
       }`}
     >
-      {/* 背景オーバーレイ：独自にopacityとtransitionを管理 */}
+      {/* 背景オーバーレイ */}
       <div
         className={`absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-all duration-500 ease-in ${
           isOpen ? "opacity-100" : "opacity-0"
@@ -32,15 +32,21 @@ export const MobileDrawerMenu = ({
         onClick={onClose}
       />
 
-      {/* メニュー本体：opacityも加えることで、より「ふわっと」した登場に */}
+      {/* メニュー本体 */}
       <div
+        // メニュー内での操作を背後のオーバーレイに伝わらないようにする
+        onClick={(e) => e.stopPropagation()}
         className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default flex flex-col justify-start transition-all duration-700 ease ${
           isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         }`}
       >
         {/* 1. 上部：ボタンエリア */}
         <div className="flex items-center justify-end min-h-header-mini mb-[calc(20/16*1rem)]">
-          <button onClick={onClose} aria-label="メニューを閉じる">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="メニューを閉じる"
+          >
             <Close />
           </button>
         </div>
@@ -59,11 +65,6 @@ export const MobileDrawerMenu = ({
                   className={`group flex items-center justify-between first:pt-[calc(17/16*1rem)] -mb-px py-4 pl-4 border-b first:border-t border-medium-gray ${
                     !item.isPublished ? "cursor-not-allowed" : "cursor-pointer"
                   }`}
-                  onClick={() => {
-                    if (item.isPublished) {
-                      onClose();
-                    }
-                  }}
                 >
                   <MenuItem
                     label={item.label}
@@ -72,8 +73,10 @@ export const MobileDrawerMenu = ({
                     isActive={isActive}
                     color="black"
                     indicatorLayout="floating"
+                    onClick={() => {
+                      if (item.isPublished) onClose();
+                    }}
                   />
-
                   <ArrowRight isPublished={item.isPublished} />
                 </li>
               );
@@ -81,7 +84,7 @@ export const MobileDrawerMenu = ({
           </ul>
         </nav>
 
-        {/* 1. 下部：ボタンエリア */}
+        {/* 3. 下部：ボタンエリア */}
         <div className="mt-5">
           <div className="flex gap-x-2.5 justify-end">
             <SubButton leftIcon={GitHub}>GitHub</SubButton>
