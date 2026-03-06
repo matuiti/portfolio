@@ -147,11 +147,11 @@ function WorksContent() {
           </div>
         ) : (
           /* 検索結果ゼロ時の表示 */
-          <div className="py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)]">
+          <div className="py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]">
             <p className="text-dark-gray font-bold">
               該当する実績は見つかりませんでした。
             </p>
-            <p className="text-[calc(14/16*1rem)] text-medium-gray mt-[calc(8/16*1rem)]">
+            <p className="text-[calc(14/16*1rem)] text-dark-gray mt-[calc(8/16*1rem)]">
               条件を変えて再度お試しください。
             </p>
           </div>
