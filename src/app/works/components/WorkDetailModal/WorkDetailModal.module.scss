@@ -19,11 +19,9 @@
 }
 
 .modalContent {
-  // position: relative;
   width: 100%;
   max-width: calc(900 / 16 * 1rem);
   height: 100%;
-  // max-height: calc(900 / 16 * 1rem);
   display: flex;
   flex-direction: column;
   animation: modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -157,8 +155,6 @@
       .projectLabel {
         grid-area: label;
         font-size: calc(12 / 16 * 1rem);
-        letter-spacing: 0.05em;
-        color: var(--color-black);
         padding-inline: calc(12 / 16 * 1rem);
         border-radius: calc(50 / 16 * 1rem) 0 0 calc(50 / 16 * 1rem);
       }
@@ -168,7 +164,6 @@
         padding-right: calc(12 / 16 * 1rem);
         padding-left: 0;
         border-radius: 0 calc(50 / 16 * 1rem) calc(50 / 16 * 1rem) 0;
-        color: var(--color-black);
       }
 
       // 操作パネル（アロー＋縦線）のスタイル
@@ -241,8 +236,6 @@
       font-size: calc(18 / 16 * 1rem);
       font-weight: 700;
       line-height: 1;
-      letter-spacing: 0.05em;
-      color: var(--color-black);
       padding-bottom: calc(12 / 16 * 1rem);
       border-bottom: 1px solid var(--color-medium-gray);
 
@@ -272,19 +265,16 @@
     .authBox {
       display: inline-flex;
       flex-wrap: wrap;
-      gap: calc(8 / 16 * 1rem) calc(20 / 16 * 1rem);
+      gap: calc(10 / 16 * 1rem) calc(20 / 16 * 1rem);
       color: var(--color-black);
       background-color: var(--color-light-gray);
-      padding: calc(14 / 16 * 1rem) calc(14 / 16 * 1rem);
-      border-radius: calc(8 / 16 * 1rem);
+      padding: calc(10 / 16 * 1rem);
+      border-radius: calc(4 / 16 * 1rem);
       font-size: calc(14 / 16 * 1rem);
       line-height: 1;
       margin-top: calc(12 / 16 * 1rem);
       @include mq("tablet") {
-        margin-top: calc(14 / 16 * 1rem);
-      }
-      .authLabel {
-        letter-spacing: 0.05em;
+        margin-top: calc(20 / 16 * 1rem);
       }
 
       .authValue {
@@ -294,10 +284,7 @@
     }
 
     .message {
-      color: var(--color-black);
-      font-size: calc(14 / 16 * 1rem);
-      line-height: 1.5;
-      margin-top: calc(10 / 16 * 1rem);
+      margin-top: calc(12 / 16 * 1rem);
 
       @include mq("tablet") {
         margin-top: calc(20 / 16 * 1rem);
@@ -425,15 +412,11 @@
       color: var(--color-black);
       background-color: var(--color-light-gray);
       line-height: 1;
-      letter-spacing: 0.05em;
       padding: calc(8 / 16 * 1rem);
       margin-bottom: calc(10 / 16 * 1rem);
     }
 
     .description {
-      color: var(--color-black);
-      line-height: 1.5;
-      letter-spacing: 0.05em;
       white-space: pre-wrap;
       padding-inline: calc(10 / 16 * 1rem);
     }
@@ -446,11 +429,8 @@
 
       li {
         position: relative;
-        // ★文章とマーカーの距離：padding-left の数値で調整
+        // 文章とマーカーの距離：padding-left の数値で調整
         padding-left: calc(13 / 16 * 1rem);
-        line-height: 1.5;
-        color: var(--color-black);
-        letter-spacing: 0.05em;
 
         // 独自のマーカー（文頭が揃うように絶対配置）
         &::before {
@@ -497,7 +477,6 @@
       display: flex;
       font-size: calc(12 / 16 * 1rem);
       color: var(--color-dark-gray);
-      letter-spacing: 0.05em;
       line-height: 1.2;
       // &:first-of-type {
       //   width: 100%;

@@ -1,6 +1,10 @@
 // src/app/works/Works.module.scss
 @use "../../styles/" as *;
 
+.pageDescription {
+  margin-top: calc(10 / 16 * 1rem);
+}
+
 .cards {
   margin-top: calc(40 / 16 * 1rem);
   display: grid;

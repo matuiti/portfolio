@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className={`${inter.variable} ${notoSansJp.variable}`}>
-      <body className="antialiased font-sans bg-bg-gradation min-h-svh h-full">
+      <body className="text-black antialiased font-sans bg-bg-gradation min-h-svh h-full leading-normal tracking-wider text-[calc(14 / 16 * 1rem)] tablet:text-[calc(14 / 16 * 1rem)]">
         <PageLayout>{children}</PageLayout>
       </body>
     </html>
