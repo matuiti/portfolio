@@ -30,18 +30,27 @@ export const WorkCard = memo(
 
     const [isTagHovered, setIsTagHovered] = useState(false);
 
-    /**
-     * 画像のソースを管理するステート
-     * 初期値の決定ロジック：
-     * 1. NDA案件なら専用画像
-     * 2. サムネイルが未設定（空文字など）ならプレースホルダー
-     * 3. それ以外は設定されたサムネイル
-     */
-    const initialSrc =
-      work.disclosureLevel === "NDA"
-        ? NDA_THUMBNAIL_PATH
-        : work.thumbnail || PLACEHOLDER_THUMBNAIL_PATH;
+    // 画像決定ロジック
+    const initialSrc = (() => {
+      const hasThumbnail = !!work.thumbnail;
+      const hasImages = !!(work.images && work.images.length > 0);
 
+      // 1. まず「具体的な画像」が登録されているかをチェック（thumbnail > images[0]）
+      // NDA案件であっても、見せられる画像（抽象化済み等）が登録されていればそれを優先します
+      if (hasThumbnail) return work.thumbnail!;
+      if (hasImages) return work.images![0];
+
+      // 2. 画像が一切登録されていない場合のフォールバック
+      // 画像がない場合に初めて、NDAかどうかの判定を行います
+      if (work.disclosureLevel === "NDA") {
+        return NDA_THUMBNAIL_PATH;
+      }
+
+      // 3. NDAでもなく、画像もない場合はプレースホルダー
+      return PLACEHOLDER_THUMBNAIL_PATH;
+    })();
+
+    // ホバー時のテキストもこれに連動させるのが自然です
     const hoveredText =
       work.disclosureLevel === "NDA"
         ? "非公開実績"
@@ -137,7 +146,7 @@ export const WorkCard = memo(
         </div>
       </article>
     );
-  },
+  }
 );
 
 WorkCard.displayName = "WorkCard";
