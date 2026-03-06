@@ -127,6 +127,10 @@ function WorksContent() {
       <div className="section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray">
         {/* タイトル、検索ヒット件数 */}
         <TitleAndCount title={displayTitle} count={totalHitCount} />
+        {/* 補足文 */}
+        <p className={styles.pageDescription}>
+          機密保持契約を遵守するため、実案件の一部については名称や画像を伏せ、内容を抽象化して掲載しております。
+        </p>
         {/* 実績グリッド一覧 */}
         {displayWorks.length > 0 ? (
           <div className={styles.cards}>
@@ -135,14 +139,14 @@ function WorksContent() {
                 key={work.id}
                 work={work}
                 onClick={() => setSelectedWork(work)}
-                // カード内のカテゴリクリック時もストアを更新 [cite: 92]
+                // カード内のカテゴリクリック時もストアを更新
                 onCategoryClick={(cat) => store.selectOnlyCategory(cat)}
                 className={styles.card}
               />
             ))}
           </div>
         ) : (
-          /* 検索結果ゼロ時の表示 [cite: 40] */
+          /* 検索結果ゼロ時の表示 */
           <div className="py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)]">
             <p className="text-dark-gray font-bold">
               該当する実績は見つかりませんでした。
