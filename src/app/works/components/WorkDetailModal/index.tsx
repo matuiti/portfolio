@@ -172,9 +172,9 @@ export const WorkDetailModal = ({
                     </SubButton>
                   )}
                   {/* サイトリンク */}
-                  {work.url && (
+                  {work.articleUrl && (
                     <SubButton
-                      href={work.url}
+                      href={work.articleUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       leftIcon={LibraryBooks}
