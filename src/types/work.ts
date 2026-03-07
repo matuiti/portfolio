@@ -14,7 +14,7 @@ export type Work = {
   title: string;
   category: WorkCategory[];
   tags: string[];
-  thumbnail: string;
+  thumbnail?: string;
   images?: string[];
   summary: string; // カード用の短い説明
 
@@ -23,6 +23,7 @@ export type Work = {
   disclosureLevel: DisclosureLevel; // 公開範囲
 
   url?: string;
+  articleUrl?: string;
   github?: string;
   siteId?: string; // サイト閲覧用ID
   sitePassword?: string; // サイト閲覧用パスワード
