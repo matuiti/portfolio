@@ -67,6 +67,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-break: break-all;
+  white-space: pre-wrap;
   margin-bottom: calc(14 / 16 * 1rem);
 
   &.isExpanded {
