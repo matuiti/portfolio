@@ -92,7 +92,11 @@ export const MobileDrawerMenu = ({
             >
               GitHub
             </SubButton>
-            <SubButton href={siteConfig.links.contact} leftIcon={Mail}>
+            <SubButton
+              href={siteConfig.links.contact}
+              leftIcon={Mail}
+              onClick={onClose}
+            >
               Contact
             </SubButton>
           </div>
