@@ -4,7 +4,7 @@ import { NavItem } from "@/types/navigation";
 export const NAV_ITEMS: NavItem[] = [
   { label: "トップ", href: "/", isPublished: true },
   { label: "制作実績", href: "/works", isPublished: true },
-  { label: "UIギャラリー", href: "/gallery", isPublished: true },
+  { label: "UIギャラリー", href: "/gallery", isPublished: false },// 未公開状態
   { label: "サービス内容", href: "/#service", isPublished: true },
   { label: "スキル", href: "/skills", isPublished: true },
   { label: "私について", href: "/#about", isPublished: true },
