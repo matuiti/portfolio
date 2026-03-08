@@ -1,6 +1,7 @@
 // src/types/site.ts
 export type SiteConfig = {
   name: string;
+  title: string;
   url: string;
   description: string;
   author: string;
