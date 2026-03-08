@@ -91,6 +91,7 @@ export const WorksSection = () => {
           {/* 詳細モーダル */}
           {selectedWork && (
             <WorkDetailModal
+              key={selectedWork.id}
               isOpen={!!selectedWork}
               onClose={() => setSelectedWork(null)}
               work={selectedWork}
