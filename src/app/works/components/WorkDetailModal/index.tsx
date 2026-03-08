@@ -45,13 +45,11 @@ export const WorkDetailModal = ({
 }: WorkDetailModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 1. スライド用のインデックス管理
+// 1. スライド用のインデックス管理
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
-  // 2. 表示する画像リストの作成（NDA案件の場合はサムネイルのみに制限 [1, 2]）
+  // 2. 表示する画像リストの作成
   const imageList = useMemo(() => {
-    // if (work.disclosureLevel === "NDA") return [work.thumbnail];
-    // images 配列があればそれを使い、なければ thumbnail を使う
     return work.images && work.images.length > 0
       ? work.images
       : [work.thumbnail];
@@ -59,7 +57,7 @@ export const WorkDetailModal = ({
 
   const hasMultipleImages = imageList.length > 1;
 
-  // 3. スライド操作関数
+  // 3. スライド操作関数 (同じ実績内での画像切り替え)
   const handlePrev = () => {
     setCurrentImgIndex((prev) => (prev > 0 ? prev - 1 : imageList.length - 1));
   };
