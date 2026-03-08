@@ -2,9 +2,11 @@
 import { SiteConfig } from "@/types/site";
 
 export const siteConfig: SiteConfig = {
-  name: "My Portfolio",
+  name: "松葉一八",
+  title: "松葉一八 ポートフォリオ | 技術的証明と品質の高いコーディング",
+  description:
+    "Webコーダー 松葉一八のポートフォリオサイトです。React 19 / Next.jsを用いた「技術的証明」をテーマに、保守性と再現性の高いコーディングスキルを体現しています。",
   url: "https://matuba-code.com",
-  description: "Next.jsとTypeScriptで構築されたポートフォリオサイト",
   author: "Kazuya Matuba",
   links: {
     github: "https://github.com/matuiti",

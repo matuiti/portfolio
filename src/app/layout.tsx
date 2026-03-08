@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import "@/styles/globals.css";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { siteConfig } from "@/data/site-config";
 
 // 英数字用: Inter
 const inter = Inter({
@@ -19,8 +20,17 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Showcasing my works and skills",
+  title: siteConfig.title,
+  description: siteConfig.description,
+  openGraph: {
+    title: siteConfig.name + " ポートフォリオ",
+    description:
+      "実務における習熟度とエビデンスを可視化したポートフォリオです。",
+    url: siteConfig.url,
+    siteName: siteConfig.name + " ポートフォリオ",
+    locale: "ja_JP",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
