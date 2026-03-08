@@ -3,16 +3,18 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 import { SubButton } from "@/components/ui/Buttons/SubButton";
 import { Mail, GitHub } from "@/components/ui/Icons";
 import styles from "./AboutSection.module.scss";
+import { siteConfig } from "@/data/site-config";
 
 const PROFILE_DATA = {
   jobTitle: "Webコーダー",
   name: "松葉一八",
-  description: `Web制作コーダーとしての「実装力」と、フロントエンドエンジニアとしての「設計力」を武器に、アイデアを確かな形にします。
-  セマンティックなマークアップ、保守性の高いCSS設計、そしてユーザー体験を向上させる細やかなアニメーション実装を得意としています。`,
-  links: {
-    contact: "/#contact",
-    github: "https://github.com/your-id",
-  },
+  description: `コーディング歴は5年、Web制作のコーダーとして実務を積んで3年以上になります。
+
+観光・宿泊施設サイト30サイト超の長期保守、企業サイトのリニューアルへのチーム参画、ECサイトの継続的な改修サポートなど、単発の制作だけでなく「継続してお付き合いできるコーダー」としての経験が土台にあります。
+
+大切にしているのは、再現精度の高さはもちろん、「触ってはいけない部分を見極める」「手戻りが起きないよう事前に確認する」「納品後も困らないようにする」といった、地味だけれど信頼につながる部分です。
+
+デザインカンプがある案件もない案件も、状況に合わせて柔軟に対応しますので、まずはお気軽にご相談ください。`,
   images: {
     sp: "/assets/images/home/about-profile-sp.jpg",
     pc: "/assets/images/home/about-profile-pc.jpg",
@@ -68,10 +70,15 @@ export const AboutSection = () => {
 
           {/* 5. ボタンエリア */}
           <div className={styles.buttonArea}>
-            <SubButton href={PROFILE_DATA.links.github} leftIcon={GitHub}>
+            <SubButton
+              href={siteConfig.links.github}
+              leftIcon={GitHub}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               GitHub
             </SubButton>
-            <SubButton href={PROFILE_DATA.links.contact} leftIcon={Mail}>
+            <SubButton href={siteConfig.links.contact} leftIcon={Mail}>
               Contact
             </SubButton>
           </div>

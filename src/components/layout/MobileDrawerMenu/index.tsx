@@ -6,6 +6,7 @@ import { NAV_ITEMS } from "@/data/navigation";
 import { MenuItem } from "@/components/ui/MenuItem";
 import { ArrowRight, GitHub, Mail, Close } from "@/components/ui/Icons";
 import { SubButton } from "@/components/ui/Buttons/SubButton";
+import { siteConfig } from "@/data/site-config";
 
 type MobileDrawerMenuProps = {
   isOpen: boolean;
@@ -42,11 +43,7 @@ export const MobileDrawerMenu = ({
       >
         {/* 1. 上部：ボタンエリア */}
         <div className="flex items-center justify-end min-h-header-mini mb-[calc(20/16*1rem)]">
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="メニューを閉じる"
-          >
+          <button type="button" onClick={onClose} aria-label="メニューを閉じる">
             <Close />
           </button>
         </div>
@@ -87,8 +84,17 @@ export const MobileDrawerMenu = ({
         {/* 3. 下部：ボタンエリア */}
         <div className="mt-5">
           <div className="flex gap-x-2.5 justify-end">
-            <SubButton leftIcon={GitHub}>GitHub</SubButton>
-            <SubButton leftIcon={Mail}>お問い合わせ</SubButton>
+            <SubButton
+              href={siteConfig.links.github}
+              leftIcon={GitHub}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </SubButton>
+            <SubButton href={siteConfig.links.contact} leftIcon={Mail}>
+              Contact
+            </SubButton>
           </div>
         </div>
       </div>

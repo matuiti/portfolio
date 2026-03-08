@@ -7,7 +7,8 @@ export const siteConfig: SiteConfig = {
   description: "Next.jsとTypeScriptで構築されたポートフォリオサイト",
   author: "Kazuya Matuba",
   links: {
-    github: "https://github.com/your-id",
+    github: "https://github.com/matuiti",
+    contact: "/#contact",
   },
   email: {
     from: "Contact Form <contact@matuba-code.com>", // 認証済み独自ドメイン
