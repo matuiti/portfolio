@@ -1,7 +1,13 @@
 // src/types/work.ts
 
 /** 内部管理用のカテゴリID */
-export type WorkCategory = "web" | "wordpress" | "app" | "game" | "client" | "nda";
+export type WorkCategory =
+  | "web"
+  | "wordpress"
+  | "app"
+  | "game"
+  | "client"
+  | "nda";
 
 /** フィルタ用 (カテゴリ + all) */
 export type WorkFilterCategory = WorkCategory | "all";
@@ -28,7 +34,7 @@ export type Work = {
   siteId?: string; // サイト閲覧用ID
   sitePassword?: string; // サイト閲覧用パスワード
 
-  background?: string; // ご依頼の背景・課題
+  background?: string; // 制作概要
   features?: string[]; // 実装機能
   points?: string[]; // 制作のポイント
 };

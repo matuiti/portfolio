@@ -290,10 +290,10 @@ export const WorkDetailModal = ({
 
             {/* テキスト詳細エリア */}
             <div className={styles.infoSection}>
-              {/* 1. ご依頼の背景・課題 */}
+              {/* 1. 制作概要 */}
               {work.background && (
                 <section className={styles.section}>
-                  <h3 className={styles.sectionTitle}>ご依頼の背景・課題</h3>
+                  <h3 className={styles.sectionTitle}>制作概要</h3>
                   <p className={styles.description}>{work.background}</p>
                 </section>
               )}
