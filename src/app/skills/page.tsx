@@ -1,7 +1,7 @@
 // src/app/skills/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { ALL_SKILLS } from "@/data/skills";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -9,11 +9,6 @@ import styles from "./Skills.module.scss";
 import { SkillGroupSection } from "./components/SkillGroupSection";
 
 export default function SkillsPage() {
-  // 初期表示は index === 0（最初の要素）のみアコーディオンを展開
-  const [openGroups, setOpenGroups] = useState<{ [key: string]: boolean }>(
-    Object.fromEntries(ALL_SKILLS.map((g, index) => [g.title, index === 0])),
-  );
-
   const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
   const PAGE_HEADER_DATA = {
     jpTitle: "スキル",
@@ -23,7 +18,6 @@ export default function SkillsPage() {
   } as const;
 
   const breadcrumbItems = [{ label: "トップ", href: "/" }, { label: "スキル" }];
-  // src/app/skills/page.tsx 内の description 変数を以下に差し替えます
 
   const description = `
 0→1のテンプレート設計から大規模改修まで、既存コードを壊さず迅速に適応する自走力が強みです。
@@ -31,6 +25,16 @@ export default function SkillsPage() {
 直近では企業独自CMSの構築にて、デザイナー・エンジニアと密に連携し4テーマを同時完遂しました。
 リモート環境でも仕様の行間を読み解き、保守性の高いコードで貴社の制作ラインを支える即戦力として貢献します。
 `.trim();
+
+  /**
+   * 1. ページ遷移時のスクロール位置補正
+   * コンポーネントがブラウザに読み込まれた瞬間、
+   * 前のページのスクロール位置が残っている場合を考慮し、
+   * 強制的に最上部 (y=0) へスクロールさせます。
+   */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -51,17 +55,14 @@ export default function SkillsPage() {
         <div className="container-center">
           <p className={styles.description}>{description}</p>
           <div className={styles.skillGroups}>
-            {ALL_SKILLS.map((group) => (
+            {/* index を渡すことで、子コンポーネント側が
+                「初回訪問時に自分（一番上）を開くべきか」を判断できるようにします
+            */}
+            {ALL_SKILLS.map((group, index) => (
               <SkillGroupSection
                 key={group.title}
                 group={group}
-                isOpen={openGroups[group.title]}
-                onToggle={() =>
-                  setOpenGroups((p) => ({
-                    ...p,
-                    [group.title]: !p[group.title],
-                  }))
-                }
+                index={index}
               />
             ))}
           </div>

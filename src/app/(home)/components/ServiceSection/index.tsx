@@ -9,7 +9,7 @@ import { MainButton } from "@/components/ui/Buttons/MainButton";
 
 export const ServiceSection = () => {
   return (
-    <section id="service" className="scroll-mt-20">
+    <section id="service" className="-scroll-mt-2">
       <div className="section-padding-y section-padding-x bg-white">
         <div className="container-center">
           <div className={styles.sectionHead}>

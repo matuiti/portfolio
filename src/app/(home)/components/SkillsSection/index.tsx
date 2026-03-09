@@ -37,7 +37,7 @@ const SKILLS_HIGHLIGHT: HighlightSkillGroup[] = [
 
 export const SkillsSection = () => {
   return (
-    <section id="skills" className="scroll-mt-20">
+    <section id="skills" className="-scroll-mt-2">
       <div className="section-padding-y section-padding-x bg-light-gray">
         <div className="container-center">
           <div className={styles.sectionHead}>
