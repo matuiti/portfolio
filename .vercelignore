@@ -1,0 +1,23 @@
+# --- AIパッキングツール (Repomix) 関連 ---
+# 大容量のソースコード要約ファイルや設定ファイルを除外します
+.repomix/
+repomix.config.json
+repomix.home.config.json
+
+# --- ローカル開発・運用スクリプト ---
+# 新規パーツ生成などのスクリプトはサーバー上では不要です
+scripts/
+
+# --- 実験用・作業用ページ (ソースごと除外する場合)  ---
+# (lab)ディレクトリ内のページをビルド対象から物理的に除外します
+# ※これにより本番URL (example.com/workbench等) も生成されなくなります
+src/app/(lab)/
+
+# --- エディタ・ツール設定 ---
+.vscode/
+.prettierrc
+.eslintrc.json
+
+# --- ローカル環境変数 ---
+# .env.local はVercelの管理画面から登録するため、ファイル自体は転送不要です
+.env.local

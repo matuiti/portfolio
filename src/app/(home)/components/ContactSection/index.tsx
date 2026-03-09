@@ -6,7 +6,7 @@ import { siteConfig } from "@/data/site-config";
 
 export const ContactSection = () => {
   return (
-    <section id="contact" className="scroll-mt-20">
+    <section id="contact" className="-scroll-mt-4">
       <div className="section-padding-y section-padding-x bg-light-gray">
         <div className="container-center">
           <div className={styles.sectionHead}>

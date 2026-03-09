@@ -25,7 +25,7 @@ export const AboutSection = () => {
   return (
     <section
       id="about"
-      className="scroll-mt-20 section-padding-y section-padding-x bg-white js-fuwa-fade"
+      className="section-padding-y section-padding-x bg-white js-fuwa-fade"
     >
       <div className="container-center">
         <div className={styles.inner}>

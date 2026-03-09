@@ -4,7 +4,7 @@ import styles from "./GallerySection.module.scss";
 
 export const GallerySection = () => {
   return (
-    <section id="gallery" className="scroll-mt-20">
+    <section id="gallery" className="-scroll-mt-2">
       <div className="section-padding-y section-padding-x bg-light-gray">
         <div className="container-center">
           <div className={styles.sectionHead}>

@@ -48,7 +48,7 @@ export const WorksSection = () => {
   useScrollReveal();
 
   return (
-    <section id="works" className="scroll-mt-20">
+    <section id="works" className="-scroll-mt-2">
       <div className="section-padding-y section-padding-x bg-white">
         <div className="container-center">
           <div className={styles.sectionHead}>
