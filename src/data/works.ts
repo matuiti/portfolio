@@ -79,7 +79,7 @@ export const ALL_WORKS: Work[] = [
       "キーボードだけで操作できるナビゲーションと、スクリーンリーダーで正しく読み上げられるHTML構造を意識して実装しています。",
     ],
     role: "企画 / 設計 / コーディング",
-    duration: "3ヶ月",
+    duration: "2ヶ月",
     disclosureLevel: "Full",
   },
   {
