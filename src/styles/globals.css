@@ -28,7 +28,8 @@
   --color-white: #ffffff;
   --color-dark-gray: #757575;
   --color-medium-gray: #d1d5db;
-  --color-light-gray: #f3f4f6;
+  /* --color-light-gray: #f3f4f6; */
+  --color-light-gray: #f2f2f0;
   --color-red: #ff6262; /* エラー・必須項目用 */
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);
 
