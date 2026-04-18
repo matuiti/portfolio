@@ -145,7 +145,7 @@ export const ALL_WORKS: Work[] = [
     ],
     role: "フロントエンド設計・実装 / 見積もり / 技術提案 / リファクタリング",
     duration:
-      "3ヶ月（+ プロジェクト完了後にリファクタリング・ドキュメント整備を自発的に実施）",
+      "ご相談から納品までに4ヶ月（プロジェクト完了後にリファクタリング・ドキュメント整備を自発的に実施）",
     disclosureLevel: "NDA",
   },
   {
@@ -189,7 +189,7 @@ export const ALL_WORKS: Work[] = [
       "既存のSass/CSS設計を読み解き、他のエンジニアのスタイルに影響を与えないようスコープを慎重に管理しながら実装しました。",
     ],
     role: "フロントエンド実装 / 保守・運用",
-    duration: "11ヶ月以上（継続）",
+    duration: "1年7ヶ月",
     disclosureLevel: "NDA",
   },
   {
@@ -235,7 +235,7 @@ export const ALL_WORKS: Work[] = [
       "納品後にクライアント自身でコンテンツの追加・更新ができるよう、HTML/CSSの操作手順を解説したドキュメントを作成してお渡ししました。",
     ],
     role: "フロントエンド実装 / ヒアリング / 見積もり / 提案・サポート",
-    duration: "１年９ヶ月（期間中複数ご依頼）",
+    duration: "1年8ヵ月（期間中に複数ご依頼）",
     disclosureLevel: "Full",
   },
   {
@@ -279,7 +279,7 @@ export const ALL_WORKS: Work[] = [
       "デザイン担当：みさ（https://lit.link/misa123illustdesign）",
     ],
     role: "設計 / フロントエンド実装 / サーバー設定 / WordPress導入 / 継続的な保守・運用",
-    duration: "長期（継続運用中）",
+    duration: "長期（運用5年目）",
     disclosureLevel: "Full",
   },
   {
@@ -318,7 +318,7 @@ export const ALL_WORKS: Work[] = [
       "妹にもメモアプリを使ってもらっており、実ユーザーのフィードバックも機能改善に反映しています。",
     ],
     role: "企画 / 設計 / UIデザイン / フロントエンド実装",
-    duration: "継続開発中（2プロダクト）",
+    duration: "3ヶ月~（運用・エンハンス開発）",
     disclosureLevel: "Full",
   },
   {
@@ -357,7 +357,7 @@ export const ALL_WORKS: Work[] = [
     url: "https://sample-site-02.vercel.app/",
     github: "https://github.com/matuiti/sample-site-02",
     background:
-      "デザイン〜実装のフルサイクルを体験するため、Figmaでのビジュアルデザインから始め、HTML/CSS/JS/GSAPで実装。技術の幅を広げることを目的に取り組みました。\n\n" +
+      "デザイナー視点を体験するため、Figmaでのビジュアルデザインから始め、HTML/CSS/JS/GSAPで実装。技術の幅を広げることを目的に取り組みました。\n\n" +
       "この制作に並行して、プロのフロントエンドエンジニアの設計思想を体系的に学ぶため、Udemy教材（元ソフトバンクエンジニア監修）を徹底的に学習・反復制作も行い、「なぜその実装を選ぶか」という意図の理解に集中しました。",
     features: [
       "CSSアニメーションのみで実現したリッチなメインビジュアル演出。",
@@ -373,7 +373,7 @@ export const ALL_WORKS: Work[] = [
       "すべての画像素材提供：みさ（https://lit.link/misa123illustdesign）",
     ],
     role: "企画 / 設計 / デザイン / フロントエンド実装",
-    duration: "約1〜2ヶ月",
+    duration: "2ヶ月~",
     disclosureLevel: "Full",
   },
   {
@@ -387,6 +387,7 @@ export const ALL_WORKS: Work[] = [
       "vercel",
       "Git/GitHub",
       "デザイン",
+      "UI/UX",
       "ゲーム",
     ],
     thumbnail: "/assets/images/works/saru-game/1.png",
@@ -419,7 +420,7 @@ export const ALL_WORKS: Work[] = [
       "すべての画像素材提供：みさ（https://lit.link/misa123illustdesign）",
     ],
     role: "企画 / 設計 / UIデザイン / フロントエンド実装 / 作曲",
-    duration: "初回リリース後も継続的に機能追加中",
+    duration: "2ヶ月~（初回リリース後も断続的にエンハンス開発）",
     disclosureLevel: "Full",
   },
 ];
