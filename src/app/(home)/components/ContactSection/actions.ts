@@ -5,6 +5,7 @@ import { Resend } from "resend";
 import { siteConfig } from "@/data/site-config";
 import { contactSchema } from "./schema";
 import { ContactEmail } from "./ContactEmail";
+import { z } from 'zod';
 
 export type ActionState = {
   status: "idle" | "loading" | "success" | "error" | "validation-error";
@@ -29,9 +30,9 @@ export async function sendContactAction(
 
   if (!validatedFields.success) {
     return {
-      status: "validation-error",
-      message: "入力内容に不備があります。",
-      errors: validatedFields.error.flatten().fieldErrors,
+      status: 'validation-error',
+      message: '入力内容に不備があります。',
+      errors: z.flattenError(validatedFields.error).fieldErrors,
     };
   }
 
