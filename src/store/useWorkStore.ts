@@ -3,20 +3,17 @@ import { WorkFilterCategory } from "@/types/work";
 import { ALL_WORKS } from "@/data/works";
 
 type WorkState = {
-  // 状態
   searchQuery: string;
   selectedCategory: WorkFilterCategory;
   selectedTags: string[];
   currentPage: number;
   itemsPerPage: number;
 
-  // アクション
   setSearchQuery: (q: string) => void;
   setSelectedCategory: (cat: WorkFilterCategory) => void;
   setSelectedTags: (tags: string[]) => void;
   setCurrentPage: (page: number) => void;
 
-  // 便利アクション（特定の操作時に他をリセットする）
   toggleTag: (tag: string) => void;
   selectOnlyTag: (tag: string) => void;
   selectOnlyCategory: (cat: WorkFilterCategory) => void;

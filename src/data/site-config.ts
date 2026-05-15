@@ -3,9 +3,10 @@ import { SiteConfig } from "@/types/site";
 
 export const siteConfig: SiteConfig = {
   name: '松葉一八',
-  title: '松葉一八 ポートフォリオ | 技術的証明と品質の高いコーディング',
+  title:
+    '松葉一八のポートフォリオサイト | フロントエンドエンジニアの技術的証明',
   description:
-    'Webコーダー 松葉一八のポートフォリオサイトです。React 19 / Next.jsを用いた「技術的証明」をテーマに、保守性と再現性の高いコーディングスキルを体現しています。',
+    'フロントエンドエンジニア 松葉一八のポートフォリオサイトです。React 19 / Next.jsを用いた「技術的証明」をテーマに、保守性と再現性の高いコーディングスキルを体現しています。',
   url: 'https://matuba-code.com',
   author: 'Kazuya Matuba',
   links: {
