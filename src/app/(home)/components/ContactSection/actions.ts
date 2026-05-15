@@ -1,14 +1,14 @@
 // src / app / home / components / ContactSection / actions.ts;
-"use server";
+'use server';
 
-import { Resend } from "resend";
-import { siteConfig } from "@/data/site-config";
-import { contactSchema } from "./schema";
-import { ContactEmail } from "./ContactEmail";
+import { Resend } from 'resend';
+import { siteConfig } from '@/data/site-config';
+import { contactSchema } from './schema';
+import { ContactEmail } from './ContactEmail';
 import { z } from 'zod';
 
 export type ActionState = {
-  status: "idle" | "loading" | "success" | "error" | "validation-error";
+  status: 'idle' | 'loading' | 'success' | 'error' | 'validation-error';
   message: string;
   errors?: Record<string, string[]>;
 };
@@ -39,14 +39,14 @@ export async function sendContactAction(
   const data = validatedFields.data;
 
   // 2. Cloudflare Turnstile トークンの検証
-  const turnstileToken = data["cf-turnstile-response"];
+  const turnstileToken = data['cf-turnstile-response'];
 
   try {
     const verifyResponse = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
       {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `secret=${encodeURIComponent(TURNSTILE_SECRET_KEY!)}&response=${encodeURIComponent(
           turnstileToken,
         )}`,
@@ -57,12 +57,12 @@ export async function sendContactAction(
 
     if (!verifyData.success) {
       return {
-        status: "error",
-        message: "スパムの疑いがあるため送信を中断しました。",
+        status: 'error',
+        message: 'スパムの疑いがあるため送信を中断しました。',
       };
     }
   } catch {
-    return { status: "error", message: "検証サーバーとの通信に失敗しました。" };
+    return { status: 'error', message: '検証サーバーとの通信に失敗しました。' };
   }
 
   // 3. レート制限ロジック (将来的な拡張用)
@@ -74,26 +74,24 @@ export async function sendContactAction(
       to: [process.env.CONTACT_EMAIL_FROM || siteConfig.email.admin],
       subject: `【お問い合わせ】${data.subject}`,
       replyTo: data.email,
-      // 修正箇所：ContactEmailのPropsに合致するようにスプレッド演算子で展開
       react: ContactEmail({ ...data }),
     });
 
     if (resendError) {
-      // ★ここを追加：Resendが返してきた「生の理由」を表示する
-      console.log("Resend APIからのエラー詳細:", resendError);
       return {
-        status: "error",
-        message: "メール送信中にエラーが発生しました。",
+        status: 'error',
+        message: 'メール送信中にエラーが発生しました。',
       };
     }
 
     return {
-      status: "success",
-      message: "お問い合わせを受け付けました。ありがとうございます。",
+      status: 'success',
+      message: 'お問い合わせを受け付けました。ありがとうございます。',
     };
-  } catch(error) {
-    // ★ここを追加：エラーの正体をコンソールに出力する
-    console.error("Resend送信エラーの詳細:", error);
-    return { status: "error", message: "システムエラーが発生しました。" };
+  } catch (error) {
+    return {
+      status: 'error',
+      message: `システムエラーが発生しました。 error: ${error}`,
+    };
   }
 }

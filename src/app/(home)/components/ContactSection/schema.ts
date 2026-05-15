@@ -7,30 +7,32 @@ import { z } from "zod";
 export const contactSchema = z.object({
   name: z
     .string()
-    .min(1, "お名前を入力してください")
-    .max(50, "お名前は50文字以内で入力してください"),
+    .trim()
+    .min(1, 'お名前を入力してください')
+    .max(50, 'お名前は50文字以内で入力してください'),
   email: z
     .string()
-    .min(1, "メールアドレスを入力してください")
-    .email("正しいメールアドレスの形式で入力してください"),
-  subject: z.string().min(1, "件名を選択してください"),
+    .trim()
+    .min(1, { error: 'メールアドレスを入力してください' })
+    .pipe(z.email({ error: '正しいメールアドレスの形式で入力してください' })),
+  subject: z.string().min(1, '件名を選択してください'),
   message: z
     .string()
-    .min(1, "メッセージを入力してください")
-    .max(2000, "メッセージは2000文字以内で入力してください"),
+    .min(1, 'メッセージを入力してください')
+    .max(2000, 'メッセージは2000文字以内で入力してください'),
 
   // 入力時は string | boolean を許容し、検証後は true であることを保証
   privacyPolicy: z
     .union([z.boolean(), z.string()])
-    .transform((val) => val === true || val === "true" || val === "on")
+    .transform((val) => val === true || val === 'true' || val === 'on')
     .refine((val) => val === true, {
-      message: "プライバシーポリシーへの同意が必要です",
+      message: 'プライバシーポリシーへの同意が必要です',
     }),
 
   // Cloudflare Turnstile トークン
-  "cf-turnstile-response": z
+  'cf-turnstile-response': z
     .string()
-    .min(1, "セキュリティ検証を完了させてください"),
+    .min(1, 'セキュリティ検証を完了させてください'),
 });
 
 /**
