@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useUIStore } from "@/store/useUIStore";
 import styles from "./ContactSection.module.scss";
 
 /**
  * 送信完了時の「雫と波紋」演出コンポーネント
- * ステップ10: GSAPによる情緒的アニメーションの実装
  */
 export const ContactRipple = () => {
   const rippleRef = useRef<HTMLDivElement>(null);
