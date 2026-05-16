@@ -3,7 +3,7 @@
 export type FilterableItem = {
   title: string;
   description?: string;
-  category: string | string[]; // WORKS(配列)とGALLERY(単一)の両方を許容
+  category: string | string[];
   tags: string[];
 };
 
@@ -13,7 +13,7 @@ export type FilterState = {
   searchQuery: string;
 };
 
-// URL同期用ステートの型定義（ジェネリクスを導入）
+// URL同期用ステートの型定義
 export type URLSyncState<T extends string> = {
   category: T;
   tags: string[];
@@ -21,7 +21,7 @@ export type URLSyncState<T extends string> = {
   currentPage: number;
 };
 
-// アクションの型定義（any を排除し、T型で制限）
+// アクションの型定義
 export type URLSyncActions<T extends string> = {
   setSelectedCategory: (val: T) => void;
   setSelectedTags: (tags: string[]) => void;

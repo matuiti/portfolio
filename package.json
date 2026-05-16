@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "repomix": "repomix",
     "repomix:home": "repomix --config repomix.home.config.json",
     "// --- Development Environment ---": "",
