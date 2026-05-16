@@ -1,23 +1,23 @@
 // src/components/ui/features/ContactForm.tsx
-"use client";
+'use client';
 
-import React, { useTransition, useCallback } from "react";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Turnstile from "react-turnstile";
+import { useTransition, useCallback } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Turnstile from 'react-turnstile';
 
-import { FormInput } from "@/components/ui/FormInput";
-import { SubButton } from "@/components/ui/Buttons/SubButton";
-import { Send, ArrowRight } from "@/components/ui/Icons";
+import { FormInput } from '@/components/ui/FormInput';
+import { SubButton } from '@/components/ui/Buttons/SubButton';
+import { Send, ArrowRight } from '@/components/ui/Icons';
 import {
   contactSchema,
   type ContactFormValues,
   type ContactFormData,
-} from "./schema";
-import { sendContactAction } from "./actions";
-import { useUIStore } from "@/store/useUIStore";
-import { ContactRipple } from "./ContactRipple";
-import styles from "./ContactSection.module.scss";
+} from './schema';
+import { sendContactAction } from './actions';
+import { useUIStore } from '@/store/useUIStore';
+import { ContactRipple } from './ContactRipple';
+import styles from './ContactSection.module.scss';
 
 export const ContactForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -34,12 +34,12 @@ export const ContactForm = () => {
   } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
       privacyPolicy: false,
-      "cf-turnstile-response": "",
+      'cf-turnstile-response': '',
     },
   });
 
@@ -48,7 +48,7 @@ export const ContactForm = () => {
   const onSubmit: SubmitHandler<ContactFormValues> = useCallback(
     async (data) => {
       const validatedData = data as ContactFormData;
-      setContactStatus("submitting");
+      setContactStatus('submitting');
 
       startTransition(async () => {
         const formData = new FormData();
@@ -59,15 +59,15 @@ export const ContactForm = () => {
         );
 
         const result = await sendContactAction(
-          { status: "idle", message: "" },
+          { status: 'idle', message: '' },
           formData,
         );
 
-        if (result.status === "success") {
-          setContactStatus("success");
+        if (result.status === 'success') {
+          setContactStatus('success');
           reset();
         } else {
-          setContactStatus("error");
+          setContactStatus('error');
           alert(result.message);
         }
       });
@@ -75,26 +75,26 @@ export const ContactForm = () => {
     [reset, setContactStatus],
   );
 
-  const handleBackToForm = () => setContactStatus("idle");
-  const isSubmitting = isPending || contactStatus === "submitting";
+  const handleBackToForm = () => setContactStatus('idle');
+  const isSubmitting = isPending || contactStatus === 'submitting';
 
   return (
     <div className={styles.formWrapper}>
       <ContactRipple />
 
-      {contactStatus === "success" ? (
+      {contactStatus === 'success' ? (
         /* 送信成功UI */
         <div className={styles.successContainer}>
           <div className={styles.successMessage}>
             <h3 className={styles.successTitle}>送信が完了しました</h3>
             <p className={styles.successText}>
               お問い合わせありがとうございます。内容を確認の上、
-              <br className="hidden tablet:block" />
+              <br className='hidden tablet:block' />
               順次メールにてご連絡差し上げます。
             </p>
           </div>
           <SubButton
-            variant="white"
+            variant='white'
             onClick={handleBackToForm}
             leftIcon={ArrowRight}
           >
@@ -110,39 +110,39 @@ export const ContactForm = () => {
         >
           <div className={styles.formGrid}>
             <FormInput
-              label="お名前"
-              placeholder="山田 太郎"
+              label='お名前'
+              placeholder='山田 太郎'
               required
-              {...register("name")}
+              {...register('name')}
               error={errors.name?.message}
               isInvalid={!!errors.name}
               disabled={isSubmitting}
             />
             <FormInput
-              label="メールアドレス"
-              type="email"
-              placeholder="yamada@gmail.com"
+              label='メールアドレス'
+              type='email'
+              placeholder='yamada@gmail.com'
               required
-              {...register("email")}
+              {...register('email')}
               error={errors.email?.message}
               isInvalid={!!errors.email}
               disabled={isSubmitting}
             />
             <FormInput
-              label="件名"
-              placeholder="〇〇について相談したい"
+              label='件名'
+              placeholder='〇〇について相談したい'
               required
-              {...register("subject")}
+              {...register('subject')}
               error={errors.subject?.message}
               isInvalid={!!errors.subject}
               disabled={isSubmitting}
             />
             <FormInput
-              label="メッセージ"
+              label='メッセージ'
               isTextArea
-              placeholder="ご要件をお書きください。"
+              placeholder='ご要件をお書きください。'
               required
-              {...register("message")}
+              {...register('message')}
               error={errors.message?.message}
               isInvalid={!!errors.message}
               disabled={isSubmitting}
@@ -154,13 +154,13 @@ export const ContactForm = () => {
             <div className={styles.privacyArea}>
               <label className={styles.checkboxLabel}>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   className={styles.checkbox}
-                  {...register("privacyPolicy")}
+                  {...register('privacyPolicy')}
                   disabled={isSubmitting}
                 />
                 <span className={styles.agreementText}>
-                  <a href="/privacy-policy" className={styles.policyLink}>
+                  <a href='/privacy-policy' className={styles.policyLink}>
                     プライバシーポリシー
                   </a>
                   に同意する
@@ -176,16 +176,16 @@ export const ContactForm = () => {
             {/* セキュリティ検証（Turnstile） */}
             <div className={styles.securityArea}>
               <Turnstile
-                sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ''}
                 onVerify={(token) =>
-                  setValue("cf-turnstile-response", token, {
+                  setValue('cf-turnstile-response', token, {
                     shouldValidate: true,
                   })
                 }
               />
-              {errors["cf-turnstile-response"]?.message && (
+              {errors['cf-turnstile-response']?.message && (
                 <p className={styles.errorText}>
-                  {String(errors["cf-turnstile-response"].message)}
+                  {String(errors['cf-turnstile-response'].message)}
                 </p>
               )}
             </div>
@@ -193,14 +193,14 @@ export const ContactForm = () => {
             {/* 送信ボタン */}
             <div className={styles.submitArea}>
               <SubButton
-                type="submit"
-                variant="white"
+                type='submit'
+                variant='white'
                 isSubmit
                 disabled={isSubmitting}
                 leftIcon={Send}
                 className={styles.submitButton}
               >
-                {isSubmitting ? "送信中..." : "送信する"}
+                {isSubmitting ? '送信中...' : '送信する'}
               </SubButton>
             </div>
           </div>
