@@ -1,16 +1,16 @@
-"use client";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { HighlightSkillGroup } from "./types";
-import styles from "./SkillsSection.module.scss";
+'use client';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { SkillCardData } from './types';
+import styles from './SkillsSection.module.scss';
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 type SkillCardProps = {
-  group: HighlightSkillGroup;
+  group: SkillCardData;
 };
 
 export const SkillCard = ({ group }: SkillCardProps) => {
@@ -28,7 +28,7 @@ export const SkillCard = ({ group }: SkillCardProps) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: cardRef.current,
-          start: "top 85%",
+          start: 'top 85%',
           once: true,
         },
       });
@@ -37,7 +37,7 @@ export const SkillCard = ({ group }: SkillCardProps) => {
         const bar = item.querySelector(`.${styles.gaugeBar}`);
         const numberSpan = item.querySelector(`.${styles.skillLevel}`);
         const targetValue = parseInt(
-          bar?.getAttribute("data-percent") || "0",
+          bar?.getAttribute('data-percent') || '0',
           10,
         );
 
@@ -51,7 +51,7 @@ export const SkillCard = ({ group }: SkillCardProps) => {
           {
             width: `${targetValue}%`,
             duration: TOTAL_DURATION,
-            ease: "power4.out",
+            ease: 'power4.out',
           },
           startTime,
         );
@@ -62,7 +62,7 @@ export const SkillCard = ({ group }: SkillCardProps) => {
           {
             value: targetValue,
             duration: TOTAL_DURATION,
-            ease: "power4.out",
+            ease: 'power4.out',
             onUpdate: () => {
               if (numberSpan) {
                 numberSpan.textContent = `${Math.ceil(counter.value)}%`;

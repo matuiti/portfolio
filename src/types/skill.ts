@@ -1,6 +1,6 @@
 // src/types/skill.ts
 
-export type SkillLinkType = "project" | "github" | "cert";
+export type SkillLinkType = "project" | "github";
 export type labeType = "基礎" | "実務レベル" | "精通";
 
 export type SkillLink = {

@@ -15,7 +15,7 @@ import { Hamburger, SearchLarge } from "@/components/ui/Icons";
 
 /**
  * ヘッダースタイル定義
- * slotsを使用して、各パーツのスタイルを分離管理する [cite: 19, 677]
+ * slotsを使用して、各パーツのスタイルを分離管理する
  */
 export const headerStyles = tv({
   slots: {
@@ -25,8 +25,8 @@ export const headerStyles = tv({
     navList: [
       "hidden small:flex items-center leading-normal",
       "gap-[calc(15.6/16*1rem)]",
-      "mt-[calc(6/16*1rem)]", // margin-top: 6px を追加 [cite: 677]
-      "mr-[calc(3/16*1rem)]", // margin-right: 3px を追加 [cite: 677]
+      "mt-[calc(6/16*1rem)]", // margin-top: 6px を追加
+      "mr-[calc(3/16*1rem)]", // margin-right: 3px を追加
     ],
     mobileActions: "flex items-center gap-2.5 small:hidden",
   },
@@ -56,6 +56,7 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
   }, [isHomePage, setPhase]);
 
   const [dynamicThreshold, setDynamicThreshold] = useState(0);
+
   useEffect(() => {
     if (!isHomePage) return;
     const updateHeight = () => setDynamicThreshold(window.innerHeight);
