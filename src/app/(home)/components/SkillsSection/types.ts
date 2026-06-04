@@ -1,10 +1,10 @@
 // src/app/(home)/components/SkillsSection/types.ts
-export type HighlightSkillItem = {
+export type SkillCardGaugeData = {
   name: string;
   percentage: number;
 };
 
-export type HighlightSkillGroup = {
+export type SkillCardData = {
   title: string;
-  items: HighlightSkillItem[];
+  items: SkillCardGaugeData[];
 };

@@ -6,10 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "repomix": "repomix",
-    "repomix:home": "repomix --config repomix.home.config.json",
     "// --- Development Environment ---": "",
-    "dev:work": "npm-run-all --parallel watch:scss dev",
+    "dev:work": "run-p watch:scss dev",
     "new": "node scripts/generate-ui-part.mjs",
     "new:icon": "node scripts/generate-svg-icon.mjs",
     "// --- Sass & Watchers ---": "",
@@ -17,7 +15,10 @@
     "compile:scss": "sass public/gallery-parts:public/gallery-parts --no-source-map --style=compressed --load-path=public/gallery-parts/common/css",
     "// --- Lifecycle Hooks ---": "",
     "prebuild": "npm run compile:scss",
-    "postinstall": "npm run compile:scss"
+    "postinstall": "npm run compile:scss",
+    "// --- Repomix ---": "",
+    "repomix": "repomix",
+    "repomix:home": "repomix --config repomix.home.config.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

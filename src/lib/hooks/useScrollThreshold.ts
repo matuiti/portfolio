@@ -11,7 +11,7 @@ export function useScrollThreshold(threshold: number) {
 
   useEffect(() => {
     // サーバーサイド実行時は何もしない
-    if (typeof window === "undefined") return;
+    // if (typeof window === "undefined") return;
 
     const handleScroll = () => {
       setIsExceeded(window.scrollY > threshold);
