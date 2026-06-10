@@ -57,7 +57,7 @@ export const SubButton = (props: SubButtonProps) => {
     leftIcon: Icon,
     children,
     href,
-    isSubmit: isSubmitProp, // ★ここに追加：propsから抽出して、DOMへ流れるのを防ぐ
+    isSubmit: isSubmitProp, // propsから抽出して、DOMへ流れるのを防ぐ
     ...rest
   } = props;
 

@@ -15,7 +15,6 @@ const formInput = tv({
     isInvalid: {
       true: {
         input: "border-red border-2 focus:border-none",
-        false:"",
       },
     },
   },

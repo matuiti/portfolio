@@ -6,14 +6,13 @@ import { useUIStore } from "@/store/useUIStore";
 import styles from "./ContactSection.module.scss";
 
 /**
- * 送信完了時の「雫と波紋」演出コンポーネント
+ * 送信完了時のアニメーションコンポーネント
  */
 export const ContactRipple = () => {
   const rippleRef = useRef<HTMLDivElement>(null);
   const { contactStatus } = useUIStore();
 
   useEffect(() => {
-    // 送信成功時のみアニメーションを実行
     if (contactStatus === "success" && rippleRef.current) {
       const tl = gsap.timeline();
 
