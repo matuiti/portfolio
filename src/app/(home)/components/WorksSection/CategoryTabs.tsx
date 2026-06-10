@@ -1,6 +1,6 @@
 "use client";
 
-import { BaseTag } from "@/components/ui/BaseTag"; // パスは適宜調整してください
+import { BaseTag } from "@/components/ui/BaseTag";
 import { WORK_CATEGORIES } from "@/data/works";
 import { WorkFilterCategory } from "@/types/work";
 import { tv } from "tailwind-variants";

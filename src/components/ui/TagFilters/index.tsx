@@ -1,7 +1,6 @@
 // src/components/ui/TagFilters/index.tsx
 "use client";
 
-import React from "react";
 import { BaseTag } from "../BaseTag";
 import styles from "./TagFilters.module.scss";
 

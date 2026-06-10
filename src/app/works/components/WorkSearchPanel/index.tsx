@@ -1,7 +1,6 @@
 // src / app / works / components / WorkSearchPanel.tsx;
 "use client";
 
-import React from "react";
 import { Search, RotateCcw } from "lucide-react";
 import { WorkFilterCategory } from "@/types/work";
 import { useWorkStore } from "@/store/useWorkStore";

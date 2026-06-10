@@ -9,7 +9,6 @@ export const useScrollReveal = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   /**
-   * 【実装：内容】
    * アニメーションを実行し、完了後に制御を CSS へバトンタッチする
    */
   const revealElement = useCallback((el: Element) => {
@@ -73,7 +72,7 @@ export const useScrollReveal = () => {
    * ライフサイクルやDOMの変化に合わせて、スキャンを指示する
    */
   useEffect(() => {
-    // 準備が整うまで（MV完了またはスクロール済み）待機
+    // 準備が整うまで（MV演出完了またはスクロール済み）待機
     const isScrolled = window.scrollY > 100;
     if (!isScrolled && phase !== "ready") return;
 

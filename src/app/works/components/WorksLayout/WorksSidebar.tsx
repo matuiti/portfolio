@@ -1,7 +1,7 @@
 // src/app/works/components/WorksLayout/WorksSidebar.tsx
 "use client";
 
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useWorkStore} from "@/store/useWorkStore";
 import { SearchBox } from "@/components/ui/SearchBox";
 import { CategoryList } from "@/components/ui/CategoryList";
