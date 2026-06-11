@@ -63,7 +63,6 @@ export const FormInput = ({
 
       {isTextArea ? (
         <textarea
-          // 必要な属性だけを明示的に渡すか、適切にキャストして渡します
           className={input({ className: "min-h-30 resize-y" })}
           {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />

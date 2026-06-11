@@ -1,6 +1,7 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { SkillCardData } from './types';
 import styles from './SkillsSection.module.scss';
@@ -16,12 +17,11 @@ type SkillCardProps = {
 export const SkillCard = ({ group }: SkillCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       const items = cardRef.current?.querySelectorAll(`.${styles.skillItem}`);
       if (!items) return;
 
-      // 全アイテム共通の完了時間と、開始をずらす間隔
       const TOTAL_DURATION = 2;
       const STAGGER_DELAY = 0.2;
 
@@ -41,11 +41,10 @@ export const SkillCard = ({ group }: SkillCardProps) => {
           10,
         );
 
-        // 数値更新用のプロキシ
         const counter = { value: 0 };
         const startTime = i * STAGGER_DELAY;
 
-        // ゲージの伸び（溜めてから加速）
+        // ゲージの伸び
         tl.to(
           bar,
           {
@@ -56,7 +55,7 @@ export const SkillCard = ({ group }: SkillCardProps) => {
           startTime,
         );
 
-        // 数値のカウントアップ（ゲージと同期）
+        // 数値のカウントアップ
         tl.to(
           counter,
           {
@@ -72,10 +71,12 @@ export const SkillCard = ({ group }: SkillCardProps) => {
           startTime,
         );
       });
-    }, cardRef);
-
-    return () => ctx.revert();
-  }, [group]);
+    },
+    {
+      dependencies: [group],
+      scope: cardRef,
+    },
+  );
 
   return (
     <div className={styles.card} ref={cardRef}>

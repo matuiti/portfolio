@@ -6,21 +6,21 @@ import styles from "./AboutSection.module.scss";
 import { siteConfig } from "@/data/site-config";
 
 const PROFILE_DATA = {
-  jobTitle: "Webフロントエンドエンジニア / コーダー",
-  name: "松葉一八",
-  description: `独学スタートからフルリモート案件のみで4年半の実績です。
+  jobTitle: 'WEBフロントエンドエンジニア',
+  name: '松葉一八',
+  description: `フルリモート環境で案件を獲得・達成して5年です。
 
-観光・宿泊施設サイト30サイト超の長期保守、企業サイトのリニューアルへのチーム参画、ECサイトの継続的な改修サポート経験など、年単位での継続プロジェクト経験が複数ございます。
+受注歴は、観光・宿泊施設サイト30サイト超の長期保守、企業サイトのリニューアルへのチーム参画、ECサイトの継続的な改修サポート経験など、4サイト同時納品プロジェクトなどです。年単位での継続プロジェクト経験が複数ございます。
 
-大切にしているのは、ご要件の達成はもちろん、
-ユーザーが「戸惑わない実装」、
-クライアントが「快適に運用できる実装」、
-未来の同業者が「扱いやすい実装」です。
+コミュニケーション経験は、チャットベースの連携やWebカメラを通じたミーティングなど様々です。
 
-オンラインだからこそ、その先の「人」を意識した実装を心がけております。`,
+納める成果物の基本方針は、要求・要件の達成に加えて、ユーザーにとって不満のない、クライアントが管理・運用をスムーズにできる、のちにコードを編集する同業者にとって扱いやすい、そのような実装です。
+
+クライアントの課題にいかに貢献できるかを最重要視しております。
+`,
   images: {
-    sp: "/assets/images/home/about-profile-sp.jpg",
-    pc: "/assets/images/home/about-profile-pc.jpg",
+    sp: '/assets/images/home/about-profile-sp.jpg',
+    pc: '/assets/images/home/about-profile-pc.jpg',
   },
 } as const;
 
