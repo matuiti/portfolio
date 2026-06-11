@@ -3,6 +3,7 @@
 
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import Image from 'next/image';
 import { useUIStore } from '@/store/useUIStore';
 import styles from './MainVisual.module.scss';
@@ -16,12 +17,10 @@ export const MainVisual = () => {
   const isAllFinished = phase === 'ready';
   const isMvItemVisible = phase === 'ready';
 
-  useEffect(() => {
-    // 既に演出が完了している場合は実行しない
-    // if (isAllFinished) return;
-    if (phase === 'ready') return;
+  useGSAP(
+    () => {
+      if (phase === 'ready') return;
 
-    const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         onComplete: () => setPhase('ready'),
       });
@@ -34,7 +33,6 @@ export const MainVisual = () => {
         filter: 'blur(8px)',
         opacity: 0,
       });
-
       tl.set('.js-scroll-indicator', {
         opacity: 0,
       });
@@ -44,8 +42,8 @@ export const MainVisual = () => {
         opacity: 1,
         filter: 'blur(0px)',
         y: 0,
-        duration: 2.0, // じわっとさせる演出を維持
-        stagger: 0, // 同時に開始
+        duration: 2.0,
+        stagger: 0,
         ease: 'power2.out',
       })
         // --- 3. スクロールインジケーターのアニメーション ---
@@ -59,13 +57,13 @@ export const MainVisual = () => {
           },
           '-=1.4',
         );
-    }, rootRef);
 
-    return () => {
-      ctx.revert();
-      timelineRef.current = null; // クリーンアップ
-    };
-  }, [setPhase, phase]);
+    },
+    {
+      dependencies: [phase],
+      scope: rootRef,
+    },
+  );
 
   useEffect(() => {
     // 演出中(playing)はスクロールを監視
