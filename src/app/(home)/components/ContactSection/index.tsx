@@ -14,7 +14,6 @@ export const ContactSection = () => {
               enTitle="contact"
               jpTitle="お問い合わせ"
               variant="center"
-              size="large"
               className="js-fuwa-fade"
             />
             <p className={`${styles.description} js-fuwa-fade`}>

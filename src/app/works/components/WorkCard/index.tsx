@@ -1,7 +1,7 @@
 // src/app/works/components/WorkCard/index.tsx
 "use client";
 
-import React, { memo, useState } from "react";
+import { memo, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Work, WorkFilterCategory } from "@/types/work";
 import { useWorkStore } from "@/store/useWorkStore";
@@ -103,7 +103,7 @@ export const WorkCard = memo(
 
         {/* 下部：情報エリア (既存のスタイルを維持) */}
         <div
-          className={`bg-white flex flex-col flex-1 pt-[calc(20/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] ${
+          className={`bg-white flex flex-col flex-1 pt-[calc(28/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] ${
             !isTagHovered ? "group-hover:bg-light-gray" : ""
           }`}
         >
