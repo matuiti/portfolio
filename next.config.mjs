@@ -6,16 +6,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/home2',
-  //       permanent: false,
-  //     },
-  //   ];
-  // },
 };
 
 export default nextConfig;

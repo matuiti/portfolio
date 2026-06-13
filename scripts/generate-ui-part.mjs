@@ -23,35 +23,38 @@ const CONFIG = {
 const args = process.argv.slice(2);
 const category = args.find(arg => arg.startsWith('--category='))?.split('=')[1];
 const name = args.find(arg => arg.startsWith('--name='))?.split('=')[1];
+const difficultyInput = args.find(arg => arg.startsWith('--difficulty='))?.split('=')[1] || 'basic';
 
+// --- エラー処理 ---
 if (!category || !name) {
-  console.error('❌ Usage: npm run new -- --category=button --name=button03');
+  console.error('Usage: npm run new -- --category=button --name=button03 --difficulty=advanced');
   process.exit(1);
 }
-
-// バリデーション
+const VALID_DIFFICULTIES = ['basic', 'advanced', 'expert'];
+if (!VALID_DIFFICULTIES.includes(difficultyInput)) {
+  console.error(`Error: Difficulty must be one of: ${VALID_DIFFICULTIES.join(', ')}`);
+  process.exit(1);
+}
 if (!CONFIG.REGEXP.SAFE_PATTERN.test(category) || !CONFIG.REGEXP.SAFE_PATTERN.test(name)) {
-  console.error('❌ Error: Category and Name must be alphanumeric, hyphen, or underscore.');
+  console.error('Error: Category and Name must be alphanumeric, hyphen, or underscore.');
   process.exit(1);
 }
-
 const targetDir = path.join(CONFIG.PATHS.PUBLIC_BASE, category, name);
-// 作品用プレフィックスを付与したクラス名
-const prefixClassName = `p-${name}`;
-
-// --- 重複チェック (ディレクトリ) ---
-if (fs.existsSync(targetDir)) {
-  console.error(`❌ Error: Directory already exists at ${targetDir}`);
+if (fs.existsSync(targetDir)) {// 重複チェック (ディレクトリ)
+  console.error(`Error: Directory already exists at ${targetDir}`);
   process.exit(1);
 }
 
+// --- 正常系 ---
+
+const prefixClassName = `p-${name}`;// 作品用プレフィックスを付与したクラス名
 // --- メタデータ生成 ---
 const newItem = `  {
     id: "${name}",
     category: "${category}",
     title: "${name}",
     description: "",
-    difficulty: "basic",
+    difficulty: "${difficultyInput}",
     tags: ["Vanilla JS", "SCSS"],
     features: ["特徴１", "特徴２"],
     techStack: ["HTML", "SCSS", "JavaScript"],
@@ -64,26 +67,26 @@ const newItem = `  {
   },`;
 
 try {
-  // 1. ui-parts.ts の更新と重複チェック
+  // ui-parts.ts の更新と重複チェック
   const currentMetadata = fs.readFileSync(CONFIG.PATHS.METADATA, 'utf8');
-
   // IDが既に登録されていないかチェック
   if (currentMetadata.includes(`id: "${name}"`)) {
-    console.error(`❌ Error: ID "${name}" is already registered in ui-parts.ts`);
+    console.error(`Error: ID "${name}" is already registered in ui-parts.ts`);
     process.exit(1);
   }
-
+  // 指定位置にデータを挿入
   const updatedMetadata = currentMetadata.replace(
     CONFIG.REGEXP.INSERT_POINT,
     `$1\n${newItem}`
   );
+  // 書き込み
   fs.writeFileSync(CONFIG.PATHS.METADATA, updatedMetadata);
-  console.log(`✅ Updated: ui-parts.ts`);
+  console.log(`Updated: ui-parts.ts`);
 
-  // 2. ディレクトリ作成
+  // ディレクトリ作成
   fs.mkdirSync(targetDir, { recursive: true });
 
-  // 3. テンプレートファイル生成
+  // テンプレートファイル生成
   const templates = {
     'index.html': `<!DOCTYPE html>
 <html lang="ja">
@@ -115,28 +118,28 @@ try {
   });
 })();`
   };
-
+  // 書き込み
   Object.entries(templates).forEach(([file, content]) => {
     fs.writeFileSync(path.join(targetDir, file), content);
-    console.log(`✅ Created: ${file}`);
+    console.log(`Created: ${file}`);
   });
 
-  console.log(`\n✨ Successfully generated "${name}"!`);
-  console.log(`📂 Path: ${targetDir}`);
-  console.log(`🏷️  Class name: .${prefixClassName}`);
+  console.log(`\nSuccessfully generated "${name}"!`);
+  console.log(`Path: ${targetDir}`);
+  console.log(`Class name: .${prefixClassName}`);
 
-  // --- 4. ブラウザを自動で開く ---
+  // --- ブラウザを自動で開く ---
+  // OSを判定し最適なコマンドを定義
   const startCommand = process.platform === 'darwin' ? 'open' :
     process.platform === 'win32' ? 'start' : 'xdg-open';
-
   exec(`${startCommand} ${CONFIG.URL.WORKBENCH}`, (err) => {
     if (err) {
-      console.warn(`⚠️ Could not open browser automatically: ${err.message}`);
+      console.warn(`Could not open browser automatically: ${err.message}`);
     } else {
-      console.log(`🚀 Opening Workbench: ${CONFIG.URL.WORKBENCH}`);
+      console.log(`Opening Workbench: ${CONFIG.URL.WORKBENCH}`);
     }
   });
 
 } catch (err) {
-  console.error(`❌ Error: ${err.message}`);
+  console.error(`Error: ${err.message}`);
 }

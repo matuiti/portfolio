@@ -80,27 +80,28 @@ export const ContactForm = () => {
 
   return (
     <div className={styles.formWrapper}>
-      <ContactRipple />
-
       {contactStatus === 'success' ? (
         /* 送信成功UI */
-        <div className={styles.successContainer}>
-          <div className={styles.successMessage}>
-            <h3 className={styles.successTitle}>送信が完了しました</h3>
-            <p className={styles.successText}>
-              お問い合わせありがとうございます。内容を確認の上、
-              <br className='hidden tablet:block' />
-              順次メールにてご連絡差し上げます。
-            </p>
+        <>
+          <ContactRipple />
+          <div className={styles.successContainer}>
+            <div className={styles.successMessage}>
+              <h3 className={styles.successTitle}>送信が完了しました</h3>
+              <p className={styles.successText}>
+                お問い合わせありがとうございます。内容を確認の上、
+                <br className='hidden tablet:block' />
+                順次メールにてご連絡いたします。
+              </p>
+            </div>
+            <SubButton
+              variant='white'
+              onClick={handleBackToForm}
+              leftIcon={ArrowRight}
+            >
+              フォームに戻る
+            </SubButton>
           </div>
-          <SubButton
-            variant='white'
-            onClick={handleBackToForm}
-            leftIcon={ArrowRight}
-          >
-            フォームに戻る
-          </SubButton>
-        </div>
+        </>
       ) : (
         /* 入力フォームUI */
         <form
@@ -150,6 +151,7 @@ export const ContactForm = () => {
           </div>
 
           <div className={styles.formFoot}>
+            
             {/* プライバシーポリシー */}
             <div className={styles.privacyArea}>
               <label className={styles.checkboxLabel}>
@@ -185,7 +187,7 @@ export const ContactForm = () => {
               />
               {errors['cf-turnstile-response']?.message && (
                 <p className={styles.errorText}>
-                  {String(errors['cf-turnstile-response'].message)}
+                  {errors['cf-turnstile-response'].message}
                 </p>
               )}
             </div>
