@@ -16,7 +16,7 @@ export const ContactRipple = () => {
 
   useGSAP(
     () => {
-      if (contactStatus === 'success' && rippleRef.current) {
+      if (rippleRef.current) {
         const tl = gsap.timeline();
 
         tl.to(rippleRef.current, {
@@ -37,8 +37,6 @@ export const ContactRipple = () => {
       scope: containerRef,
     },
   );
-
-  if (contactStatus !== 'success') return null;
 
   return (
     <div ref={containerRef} className={styles.rippleContainer}>

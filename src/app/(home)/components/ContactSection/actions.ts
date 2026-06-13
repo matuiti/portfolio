@@ -18,7 +18,7 @@ const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 
 /**
  * お問い合わせフォーム Server Action
- * 多層防御と型安全を徹底した実装。
+ * 多層防御と型安全の徹底。
  */
 export async function sendContactAction(
   _prevState: ActionState,
@@ -86,7 +86,7 @@ export async function sendContactAction(
 
     return {
       status: 'success',
-      message: 'お問い合わせを受け付けました。ありがとうございます。',
+      message: 'お問い合わせ頂き、ありがとうございます。',
     };
   } catch (error) {
     return {

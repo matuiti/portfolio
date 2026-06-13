@@ -30,7 +30,7 @@ export const DirectMailTextLink = ({
   color,
   className,
 }: DirectMailTextLinkProps) => {
-  // クリック時に動的にmailtoを生成（クローラー対策）
+  // スパムボット（クローラー）によるメールアドレスの自動収集を対策
   const handleMailClick = (e: React.MouseEvent) => {
     e.preventDefault();
     window.location.href = `mailto:${user}@${domain}`;
