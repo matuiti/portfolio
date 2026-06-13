@@ -1,9 +1,8 @@
 // src/components/ui/CategoryList/index.tsx
-"use client";
+'use client';
 
-import React from "react";
-import styles from "./CategoryList.module.scss";
-import { BaseTag } from "../BaseTag";
+import styles from './CategoryList.module.scss';
+import { BaseTag } from '../BaseTag';
 
 // 規約：interfaceを禁止し、typeで定義 [cite: 425]
 type CategoryItem<T> = {
@@ -24,23 +23,23 @@ export function CategoryList<T extends string>({
   selected,
   onChange,
   counts = {},
-  className = "",
+  className = '',
 }: CategoryListProps<T>) {
   return (
-    <nav className={`${styles.nav} ${className}`} aria-label="カテゴリー選択">
+    <nav className={`${styles.nav} ${className}`} aria-label='カテゴリー選択'>
       <ul className={styles.list}>
         {items.map((item) => {
           const count = counts[item.value] ?? 0;
           const isActive = selected === item.value;
 
           // 見た目の制御ロジック：件数0のカテゴリーは非表示（共通仕様準拠） [cite: 220]
-          if (item.value !== ("all" as T) && count === 0) return null;
+          if (item.value !== ('all' as T) && count === 0) return null;
 
           return (
             <li key={item.value}>
               <BaseTag
-                shape="tab"
-                size="long"
+                shape='tab'
+                size='long'
                 isActive={isActive}
                 count={count}
                 showCount={count > 0}

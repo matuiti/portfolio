@@ -1,20 +1,20 @@
 // src/components/ui/FormInput.tsx
-import React from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+
+import { tv, type VariantProps } from 'tailwind-variants';
 
 const formInput = tv({
   slots: {
-    container: "flex flex-col gap-2 w-full",
-    label: "text-black leading-normal flex items-center",
+    container: 'flex flex-col gap-2 w-full',
+    label: 'text-black leading-normal flex items-center',
     input:
-      "w-full px-5 py-2.5 bg-light-gray rounded-sm focus:ring-2 focus:ring-dark-gray focus:border-dark-gray outline-none transition-all placeholder:text-dark-gray placeholder:leading-normal",
-    errorText: "text-[calc(14/16*1rem)] text-red",
+      'w-full px-5 py-2.5 bg-light-gray rounded-sm focus:ring-2 focus:ring-dark-gray focus:border-dark-gray outline-none transition-all placeholder:text-dark-gray placeholder:leading-normal',
+    errorText: 'text-[calc(14/16*1rem)] text-red',
   },
   variants: {
     // エラーがある時のスタイル変更を一括指定
     isInvalid: {
       true: {
-        input: "border-red border-2 focus:border-none",
+        input: 'border-red border-2 focus:border-none',
       },
     },
   },
@@ -54,7 +54,7 @@ export const FormInput = ({
         {/* {label} */}
         {/* 必須タグの表示ロジック */}
         {required && (
-          <span className="bg-red mr-1.5 text-white text-[calc(12/16*1rem)] px-1 py-0.5 rounded-sm">
+          <span className='bg-red mr-1.5 text-white text-[calc(12/16*1rem)] px-1 py-0.5 rounded-sm'>
             必須
           </span>
         )}
@@ -63,7 +63,7 @@ export const FormInput = ({
 
       {isTextArea ? (
         <textarea
-          className={input({ className: "min-h-30 resize-y" })}
+          className={input({ className: 'min-h-30 resize-y' })}
           {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
       ) : (

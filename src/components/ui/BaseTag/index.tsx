@@ -1,9 +1,8 @@
 // src / components / ui / BaseTag / index.tsx;
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { tv, type VariantProps } from "tailwind-variants";
+import Link from 'next/link';
+import { tv, type VariantProps } from 'tailwind-variants';
 
 /**
  * 構成要素：タブ(ショート・ロング) / タグ(ハッシュ有・無)
@@ -11,78 +10,78 @@ import { tv, type VariantProps } from "tailwind-variants";
  */
 const tagStyles = tv({
   slots: {
-    base: "inline-flex items-center justify-center transition-all duration-300 leading-none tracking-wider cursor-pointer",
+    base: 'inline-flex items-center justify-center transition-all duration-300 leading-none tracking-wider cursor-pointer',
     countBadge:
-      "ml-[calc(6/16*1rem)] text-[calc(14/16*1rem)] transition-colors tracking-widest leading-none",
+      'ml-[calc(6/16*1rem)] text-[calc(14/16*1rem)] transition-colors tracking-widest leading-none',
   },
   variants: {
     // 1. 大きな形状の分岐
     shape: {
-      tab: { base: "" },
+      tab: { base: '' },
       tag: {
-        base: "rounded-sm text-[calc(12/16*1rem)] py-[calc(4/16*1rem)] bg-white text-dark-gray border border-dark-gray hover:bg-dark-gray hover:text-white leading-none tracking-wider",
+        base: 'rounded-sm text-[calc(12/16*1rem)] py-[calc(4/16*1rem)] bg-white text-dark-gray border border-dark-gray hover:bg-dark-gray hover:text-white leading-none tracking-wider',
       },
     },
     // 2. タブ専用：ショート・ロング（名前の定義のみ）
     size: {
-      short: { base: "" },
-      long: { base: "w-full" },
+      short: { base: '' },
+      long: { base: 'w-full' },
     },
     // 3. タグ専用：ハッシュの有無による余白調整
     hasHash: {
-      true: { base: "px-[calc(8/16*1rem)]" },
-      false: { base: "px-[calc(12/16*1rem)]" },
+      true: { base: 'px-[calc(8/16*1rem)]' },
+      false: { base: 'px-[calc(12/16*1rem)]' },
     },
     // 4. 共通：状態管理
     isActive: {
-      true: { base: "" },
-      false: { base: "" },
+      true: { base: '' },
+      false: { base: '' },
     },
     isStatic: {
-      true: { base: "cursor-default pointer-events-none active:scale-100" },
+      true: { base: 'cursor-default pointer-events-none active:scale-100' },
     },
   },
   // 5. 形状・サイズ・状態の組み合わせによるスタイル確定
   compoundVariants: [
     // --- タブ：ショート (デフォルト) ---
     {
-      shape: "tab",
-      size: "short",
+      shape: 'tab',
+      size: 'short',
       class: {
-        base: "rounded-[calc(20/16*1rem)] text-[calc(14/16*1rem)] py-[calc(8/16*1rem)] px-[calc(16/16*1rem)] bg-white text-black border border-dark-gray hover:bg-dark-gray hover:text-white hover:border-dark-gray",
+        base: 'rounded-[calc(20/16*1rem)] text-[calc(14/16*1rem)] py-[calc(8/16*1rem)] px-[calc(16/16*1rem)] bg-white text-black border border-dark-gray hover:bg-dark-gray hover:text-white hover:border-dark-gray',
       },
     },
     // --- タブ：ロング ---
     {
-      shape: "tab",
-      size: "long",
+      shape: 'tab',
+      size: 'long',
       class: {
-        base: "flex justify-between rounded-lg text-[calc(16/16*1rem)] leading-normal py-[calc(10/16*1rem)] px-[calc(16/16*1rem)] bg-light-gray text-black",
+        base: 'flex justify-between rounded-lg text-[calc(16/16*1rem)] leading-normal py-[calc(10/16*1rem)] px-[calc(16/16*1rem)] bg-light-gray text-black',
       },
     },
     // --- タブ：アクティブ状態 ---
     {
-      shape: "tab",
+      shape: 'tab',
       isActive: true,
       class: {
-        base: "bg-black text-white border-black",
-        countBadge: "text-white",
+        base: 'bg-black text-white border-black',
+        countBadge: 'text-white',
       },
     },
     // --- タグ：アクティブ状態 ---
     {
-      shape: "tag",
+      shape: 'tag',
       isActive: true,
       class: {
-        base: "bg-dark-gray text-white",
-        countBadge: "text-white",
+        base: 'bg-dark-gray text-white',
+        countBadge: 'text-white',
       },
     },
   ],
   // デフォルトの組み合わせ
   defaultVariants: {
-    shape: "tag",
-    size: "short",
+    shape: 'tag',
+    size: 'short',
     hasHash: false,
     isActive: false,
   },
@@ -126,7 +125,7 @@ export function BaseTag({
   const content = (
     <>
       {children}
-      {showCount && typeof count === "number" && (
+      {showCount && typeof count === 'number' && (
         <span className={countBadge()}>{count}</span>
       )}
     </>
@@ -144,7 +143,7 @@ export function BaseTag({
   // Buttonとしてレンダリングする場合
   return (
     <button
-      type="button"
+      type='button'
       className={base()}
       onClick={onClick}
       aria-pressed={isActive}

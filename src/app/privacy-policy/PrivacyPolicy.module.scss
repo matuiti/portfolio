@@ -6,6 +6,7 @@
   background: var(--color-light-gray);
   padding-bottom: calc(150 / 16 * 1rem);
   padding-inline: calc(15 / 16 * 1rem);
+  
   @include mq("mobile") {
     padding-inline: calc(20 / 16 * 1rem);
   }

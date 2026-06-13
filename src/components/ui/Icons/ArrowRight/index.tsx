@@ -1,31 +1,30 @@
-import { tv, type VariantProps } from "tailwind-variants";
-import React from "react";
+import { tv, type VariantProps } from 'tailwind-variants';
 
 const iconStyles = tv({
-  base: "inline-block shrink-0 transition-all duration-300",
+  base: 'inline-block shrink-0 transition-all duration-300',
   variants: {
     color: {
-      black: "text-black",
-      white: "text-white",
+      black: 'text-black',
+      white: 'text-white',
     },
     size: {
-      sm: "w-icon-20 h-icon-20",
-      md: "w-icon-24 h-icon-24",
-      lg: "w-icon-30 h-icon-30",
-      xl: "w-icon-50 h-icon-50",
+      sm: 'w-icon-20 h-icon-20',
+      md: 'w-icon-24 h-icon-24',
+      lg: 'w-icon-30 h-icon-30',
+      xl: 'w-icon-50 h-icon-50',
     },
     isPublished: {
       true: {
-        base: "text-black",
+        base: 'text-black',
       },
       false: {
-        base: "text-dark-gray",
+        base: 'text-dark-gray',
       },
     },
   },
   defaultVariants: {
-    color: "black",
-    size: "md",
+    color: 'black',
+    size: 'md',
   },
 });
 
@@ -41,15 +40,15 @@ export const ArrowRight = ({
 }: ArrowRightProps) => {
   return (
     <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      viewBox='0 0 24 24'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
       className={iconStyles({ color, size, isPublished, className })}
       {...props}
     >
       <path
-        d="M13.3 17.275C13.1 17.075 13.004 16.8333 13.012 16.55C13.0207 16.2667 13.125 16.025 13.325 15.825L16.15 13H5C4.71667 13 4.479 12.904 4.287 12.712C4.09567 12.5207 4 12.2833 4 12C4 11.7167 4.09567 11.479 4.287 11.287C4.479 11.0957 4.71667 11 5 11H16.15L13.3 8.14999C13.1 7.94999 13 7.71232 13 7.43699C13 7.16232 13.1 6.92499 13.3 6.72499C13.5 6.52499 13.7377 6.42499 14.013 6.42499C14.2877 6.42499 14.525 6.52499 14.725 6.72499L19.3 11.3C19.4 11.4 19.471 11.5083 19.513 11.625C19.5543 11.7417 19.575 11.8667 19.575 12C19.575 12.1333 19.5543 12.2583 19.513 12.375C19.471 12.4917 19.4 12.6 19.3 12.7L14.7 17.3C14.5167 17.4833 14.2877 17.575 14.013 17.575C13.7377 17.575 13.5 17.475 13.3 17.275Z"
-        fill="currentColor"
+        d='M13.3 17.275C13.1 17.075 13.004 16.8333 13.012 16.55C13.0207 16.2667 13.125 16.025 13.325 15.825L16.15 13H5C4.71667 13 4.479 12.904 4.287 12.712C4.09567 12.5207 4 12.2833 4 12C4 11.7167 4.09567 11.479 4.287 11.287C4.479 11.0957 4.71667 11 5 11H16.15L13.3 8.14999C13.1 7.94999 13 7.71232 13 7.43699C13 7.16232 13.1 6.92499 13.3 6.72499C13.5 6.52499 13.7377 6.42499 14.013 6.42499C14.2877 6.42499 14.525 6.52499 14.725 6.72499L19.3 11.3C19.4 11.4 19.471 11.5083 19.513 11.625C19.5543 11.7417 19.575 11.8667 19.575 12C19.575 12.1333 19.5543 12.2583 19.513 12.375C19.471 12.4917 19.4 12.6 19.3 12.7L14.7 17.3C14.5167 17.4833 14.2877 17.575 14.013 17.575C13.7377 17.575 13.5 17.475 13.3 17.275Z'
+        fill='currentColor'
       />
     </svg>
   );

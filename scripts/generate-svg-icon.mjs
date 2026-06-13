@@ -4,11 +4,11 @@ import path from 'path';
 // --- 設定 ---
 const CONFIG = {
   PATHS: {
-    ICONS_BASE: path.join(process.cwd(), 'src', 'components', 'ui', 'Icons'),
     HUB_INDEX: path.join(process.cwd(), 'src', 'components', 'ui', 'Icons', 'index.ts'),
+    ICONS_BASE: path.join(process.cwd(), 'src', 'components', 'ui', 'Icons'),
   },
   REGEXP: {
-    SAFE_PATTERN: /^[A-Z][a-zA-Z0-9]+$/, // 大文字開始のパスカルケースを強制
+    SAFE_PATTERN: /^[A-Z][a-zA-Z0-9]+$/, // パスカルケースを強制
   }
 };
 
@@ -16,8 +16,8 @@ const args = process.argv.slice(2);
 const name = args.find(arg => arg.startsWith('--name='))?.split('=')[1];
 
 if (!name || !CONFIG.REGEXP.SAFE_PATTERN.test(name)) {
-  console.error('❌ Usage: node scripts/generate-svg-icon.mjs --name=IconArrowRight');
-  console.error('⚠️ Name must be PascalCase (e.g., IconArrow).');
+  console.error('Usage: node scripts/generate-svg-icon.mjs --name=IconArrowRight');
+  console.error('Name must be PascalCase.');
   process.exit(1);
 }
 
@@ -26,14 +26,14 @@ const indexPath = path.join(targetDir, 'index.tsx');
 
 // --- 1. ディレクトリ作成 ---
 if (fs.existsSync(targetDir)) {
-  console.error(`❌ Error: Icon "${name}" already exists.`);
+  console.error(`Error: Icon "${name}" already exists.`);
   process.exit(1);
 }
 fs.mkdirSync(targetDir, { recursive: true });
 
-// --- 2. テンプレート作成 (規約準拠) ---
+// --- 2. テンプレート作成 ---
 const template = `import { tv, type VariantProps } from "tailwind-variants";
-import React from "react";
+
 
 const iconStyles = tv({
   base: "inline-block shrink-0 transition-all duration-300",
@@ -73,11 +73,11 @@ export const ${name} = ({ color, size, className, ...props }: ${name}Props) => {
 `;
 
 fs.writeFileSync(indexPath, template);
-console.log(`✅ Created: ${name}/index.tsx`);
+console.log(`Created: ${name}/index.tsx`);
 
 // --- 3. ハブファイル (index.ts) への自動登録 ---
 const exportLine = `export * from "./${name}";\n`;
 fs.appendFileSync(CONFIG.PATHS.HUB_INDEX, exportLine);
-console.log(`✅ Registered: Export added to Icons/index.ts`);
+console.log(`Registered: Export added to Icons/index.ts`);
 
-console.log(`\n✨ Successfully generated "${name}"!`);
+console.log(`\nSuccessfully generated "${name}"!`);

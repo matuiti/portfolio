@@ -1,26 +1,26 @@
 // src/components/ui/Buttons/SubButton/index.tsx
 
-import { tv, type VariantProps } from "tailwind-variants";
-import React from "react";
-import Link from "next/link";
+import { tv, type VariantProps } from 'tailwind-variants';
+
+import Link from 'next/link';
 
 /**
  * サブボタンのスタイル定義
  */
 export const subButtonStyles = tv({
-  base: "inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 cursor-pointer hover:opacity-hover",
+  base: 'inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 cursor-pointer hover:opacity-hover',
   variants: {
     variant: {
-      white: "bg-black text-white",
-      gray: "bg-dark-gray text-white",
+      white: 'bg-black text-white',
+      gray: 'bg-dark-gray text-white',
     },
     isSubmit: {
-      true: "py-2.25 px-4 text-base gap-2.5 rounded-lg",
-      false: "py-1 px-2 text-sm gap-1 rounded-sm",
+      true: 'py-2.25 px-4 text-base gap-2.5 rounded-lg',
+      false: 'py-1 px-2 text-sm gap-1 rounded-sm',
     },
   },
   defaultVariants: {
-    variant: "white",
+    variant: 'white',
     isSubmit: false,
   },
 });
@@ -31,7 +31,7 @@ export const subButtonStyles = tv({
 type SubButtonBaseProps = {
   children: React.ReactNode;
   leftIcon?: React.ElementType;
-  iconSize?: "sm" | "md" | "lg" | "xl";
+  iconSize?: 'sm' | 'md' | 'lg' | 'xl';
 } & VariantProps<typeof subButtonStyles>;
 
 /**
@@ -52,8 +52,8 @@ type SubButtonProps =
 export const SubButton = (props: SubButtonProps) => {
   const {
     className,
-    variant = "white",
-    iconSize = "sm",
+    variant = 'white',
+    iconSize = 'sm',
     leftIcon: Icon,
     children,
     href,
@@ -61,20 +61,20 @@ export const SubButton = (props: SubButtonProps) => {
     ...rest
   } = props;
 
-  const iconColor = "white";
+  const iconColor = 'white';
 
   // 型ガードを用いて type="submit" またはプロップスによる判定を行う
   const isSubmit =
     isSubmitProp ||
     (!href &&
       (rest as React.ButtonHTMLAttributes<HTMLButtonElement>).type ===
-        "submit");
+        'submit');
 
   const styles = subButtonStyles({ variant, isSubmit, className });
 
   const content = (
     <>
-      {Icon && <Icon size={iconSize} color={iconColor} className="shrink-0" />}
+      {Icon && <Icon size={iconSize} color={iconColor} className='shrink-0' />}
       {children}
     </>
   );

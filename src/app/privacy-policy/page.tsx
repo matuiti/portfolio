@@ -1,11 +1,11 @@
 // src/app/privacy-policy/page.tsx
 
-import React from "react";
-import styles from "./PrivacyPolicy.module.scss";
-import { MainButton } from "@/components/ui/Buttons/MainButton";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { PRIVACY_POLICY_DATA } from "@/data/privacy-policy";
+import styles from './PrivacyPolicy.module.scss';
+import { MainButton } from '@/components/ui/Buttons/MainButton';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { PRIVACY_POLICY_DATA } from '@/data/privacy-policy';
+import { ScrollToTop } from '@/lib/utility/ScrollToTop';
 
 /**
  * プライバシーポリシーページ
@@ -14,36 +14,37 @@ import { PRIVACY_POLICY_DATA } from "@/data/privacy-policy";
  * 各セクションのタイトル、本文、箇条書きリストを網羅的に出力します。
  */
 export default function PrivacyPolicyPage() {
-  const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
+  const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';
 
   const PAGE_HEADER_DATA = {
-    jpTitle: "プライバシーポリシー",
-    enTitle: "PRIVACY POLICY",
+    jpTitle: 'プライバシーポリシー',
+    enTitle: 'PRIVACY POLICY',
     images: PAGE_HEADER_IMAGE_PATH,
     bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
   } as const;
 
   const breadcrumbItems = [
-    { label: "トップ", href: "/" },
-    { label: "プライバシーポリシー" },
+    { label: 'トップ', href: '/' },
+    { label: 'プライバシーポリシー' },
   ];
 
   return (
     <>
+      <ScrollToTop />
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
         bgImage={PAGE_HEADER_DATA.images}
       />
 
-      <div className="section-padding-x w-full bg-white">
-        <div className="container-center">
+      <div className='section-padding-x w-full bg-white'>
+        <div className='container-center'>
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
 
       <div className={`${styles.pageBody} pt-10 pb-37.5`}>
-        <div className="container-center">
+        <div className='container-center'>
           <div className={styles.sectionGroups}>
             {PRIVACY_POLICY_DATA.sections.map((section) => (
               <section key={section.id} className={styles.section}>
@@ -64,7 +65,7 @@ export default function PrivacyPolicyPage() {
               </section>
             ))}
             <div className={styles.buttonWrapper}>
-              <MainButton variant="underline" href="/#contact">
+              <MainButton variant='underline' href='/#contact'>
                 トップページに戻る
               </MainButton>
             </div>

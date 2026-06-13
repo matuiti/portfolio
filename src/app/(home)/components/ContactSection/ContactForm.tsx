@@ -18,6 +18,7 @@ import { sendContactAction } from './actions';
 import { useUIStore } from '@/store/useUIStore';
 import { ContactRipple } from './ContactRipple';
 import styles from './ContactSection.module.scss';
+import Link from 'next/link';
 
 export const ContactForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -162,9 +163,9 @@ export const ContactForm = () => {
                   disabled={isSubmitting}
                 />
                 <span className={styles.agreementText}>
-                  <a href='/privacy-policy' className={styles.policyLink}>
+                  <Link href='/privacy-policy' className={styles.policyLink}>
                     プライバシーポリシー
-                  </a>
+                  </Link>
                   に同意する
                 </span>
               </label>
