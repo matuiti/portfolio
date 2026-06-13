@@ -50,7 +50,6 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
   const isHomePage = pathname === "/";
   const { setPhase, setSearchDrawerOpen } = useUIStore();
 
-  // フェーズ同期・スクロール判定ロジックは現状を維持
   useEffect(() => {
     if (!isHomePage) setPhase("ready");
   }, [isHomePage, setPhase]);
@@ -69,7 +68,6 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
   const isSearchablePage =
     pathname.startsWith("/works") || pathname.startsWith("/gallery");
 
-  // スロットの取得
   const { base, inner, navList, mobileActions } = headerStyles({
     isScrolled,
     isSearchablePage,

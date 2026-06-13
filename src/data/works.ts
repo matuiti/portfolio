@@ -38,6 +38,7 @@ export const ALL_WORKS: Work[] = [
       'Cloudflare Turnstile',
       'Resend',
       'アクセシビリティ',
+      'スクラッチ',
     ],
     thumbnail: '/assets/images/works/portfolio-site/1.png',
     images: [
@@ -104,6 +105,7 @@ export const ALL_WORKS: Work[] = [
       '直請け',
       'フルリモート',
       '秘密保持契約',
+      'スクラッチ',
     ],
     thumbnail: '/assets/images/works/w-cms-multi-theme/1.png',
     images: [
@@ -167,6 +169,7 @@ export const ALL_WORKS: Work[] = [
       '下請け',
       'フルリモート',
       '秘密保持契約',
+      '修正',
     ],
     thumbnail: '/assets/images/works/w-wp-maintenance-hotels/1.png',
     summary:
@@ -251,6 +254,7 @@ export const ALL_WORKS: Work[] = [
       'レスポンシブデザイン',
       'XD',
       'チーム連携',
+      'スクラッチ',
     ],
     thumbnail: '/assets/images/works/animo-site/1.png',
     images: [
@@ -295,6 +299,7 @@ export const ALL_WORKS: Work[] = [
       'Git/GitHub',
       'デザイン',
       'アプリケーション',
+      'スクラッチ',
     ],
     summary:
       '自身の実務課題を解決するReact + TypeScriptプロダクトを2本開発。継続的に機能追加中。',
@@ -342,6 +347,7 @@ export const ALL_WORKS: Work[] = [
       'アクセシビリティ',
       '自主制作',
       'サンプルサイト',
+      'スクラッチ',
     ],
     thumbnail: '/assets/images/works/sample-site2/1.png',
     images: [
@@ -389,6 +395,7 @@ export const ALL_WORKS: Work[] = [
       'デザイン',
       'UI/UX',
       'ゲーム',
+      'スクラッチ',
     ],
     thumbnail: '/assets/images/works/saru-game/1.png',
     images: [

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteConfig.name + " ポートフォリオ",
     description:
-      "実務における習熟度とエビデンスを可視化したポートフォリオです。",
+      "実績と実装力の可視化を目指したポートフォリオサイトです。",
     url: siteConfig.url,
     siteName: siteConfig.name + " ポートフォリオ",
     locale: "ja_JP",

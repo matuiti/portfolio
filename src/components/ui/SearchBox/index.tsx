@@ -1,9 +1,8 @@
 // src/components/ui/SearchBox/index.tsx
-"use client";
+'use client';
 
-import React from "react";
-import { SearchSmall } from "@/components/ui/Icons";
-import styles from "./SearchBox.module.scss";
+import { SearchSmall } from '@/components/ui/Icons';
+import styles from './SearchBox.module.scss';
 
 type SearchBoxProps = {
   value: string;
@@ -19,18 +18,18 @@ type SearchBoxProps = {
 export function SearchBox({
   value,
   onChange,
-  placeholder = "例：コーポレート",
-  className = "",
+  placeholder = '例：コーポレート',
+  className = '',
 }: SearchBoxProps) {
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={styles.inputWrapper}>
         <div className={styles.iconWrapper}>
-          <SearchSmall color="gray" size="sm" />
+          <SearchSmall color='gray' size='sm' />
         </div>
 
         <input
-          type="text"
+          type='text'
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
@@ -41,12 +40,12 @@ export function SearchBox({
       {/* クリアボタン：入力がある時のみ表示 */}
       {value && (
         <button
-          type="button"
-          onClick={() => onChange("")}
+          type='button'
+          onClick={() => onChange('')}
           className={styles.clearButton}
-          aria-label="検索ワードをクリア"
+          aria-label='検索ワードをクリア'
         >
-          <span aria-hidden="true">×</span>
+          <span aria-hidden='true'>×</span>
         </button>
       )}
     </div>

@@ -1,112 +1,106 @@
 // src/components/ui/MenuItem/index.tsx
 
-import { tv, type VariantProps } from "tailwind-variants";
-import Link from "next/link";
-import React from "react";
+import { tv, type VariantProps } from 'tailwind-variants';
+import Link from 'next/link';
 
 /**
  * メニューアイテムのスタイル定義
  */
 export const menuItemStyles = tv({
   slots: {
-    base: "group relative flex items-center transition-all duration-300",
+    base: 'group relative flex items-center transition-all duration-300',
     indicator: [
-      "w-2 h-2 transition-all duration-300 flex items-center justify-center",
-      "pb-[calc(6/16*1rem)]",
+      'w-2 h-2 transition-all duration-300 flex items-center justify-center',
+      'pb-[calc(6/16*1rem)]',
     ],
-    label: [
-      "font-bold transition-all duration-300",
-      "pb-[calc(6/16*1rem)]",
-    ],
+    label: ['font-bold transition-all duration-300', 'pb-[calc(6/16*1rem)]'],
   },
   variants: {
     color: {
       black: {
-        base: "text-black",
+        base: 'text-black',
       },
       white: {
-        base: "text-white",
+        base: 'text-white',
       },
     },
     isPublished: {
       true: {
-        base: "cursor-pointer",
-        // 公開時のみホバーアニメーションを有効化 [cite: 144, 442]
+        base: 'cursor-pointer',
         label: [
-          "bg-[linear-gradient(currentColor,currentColor)]",
-          "bg-no-repeat",
-          "bg-bottom-right",
-          "bg-size-[0_1px]",
-          "transition-[background-size] duration-500 ease-out",
-          "group-hover:bg-bottom-left",
-          "group-hover:bg-size-[100%_1px]",
+          'bg-[linear-gradient(currentColor,currentColor)]',
+          'bg-no-repeat',
+          'bg-bottom-right',
+          'bg-size-[0_1px]',
+          'transition-[background-size] duration-500 ease-out',
+          'group-hover:bg-bottom-left',
+          'group-hover:bg-size-[100%_1px]',
         ],
       },
       false: {
-        base: "text-dark-gray cursor-not-allowed",
-        // 未公開時はアニメーション関連のクラスを付与しない
+        base: 'text-dark-gray cursor-not-allowed',
       },
     },
     isActive: {
-      true: { indicator: "opacity-100" },
-      false: { indicator: "opacity-0" },
+      true: { indicator: 'opacity-100' },
+      false: { indicator: 'opacity-0' },
     },
     indicatorLayout: {
       fixed: {
-        base: "gap-0",
-        indicator: "w-0 h-0",
+        base: 'gap-0',
+        indicator: 'w-0 h-0',
       },
       floating: {
-        indicator: "absolute",
+        indicator: 'absolute',
       },
       responsive: {
-        base: "gap-y-1 tablet:gap-1",
-        indicator: "absolute tablet:static",
+        base: 'gap-y-1 tablet:gap-1',
+        indicator: 'absolute tablet:static',
       },
     },
   },
   compoundVariants: [
     {
       isPublished: true,
-      color: "black",
-      class: { base: "hover:black" },
+      color: 'black',
+      class: { base: 'hover:black' },
     },
     {
       isPublished: true,
-      color: "white",
-      class: { base: "hover:text-white" },
+      color: 'white',
+      class: { base: 'hover:text-white' },
     },
     // 既存の isActive 時のレイアウト制御を維持 [cite: 146]
     {
-      indicatorLayout: "fixed",
+      indicatorLayout: 'fixed',
       isActive: true,
       class: {
-        base: "gap-1",
-        indicator: "w-2 h-2 shrink-0",
+        base: 'gap-1',
+        indicator: 'w-2 h-2 shrink-0',
       },
     },
     {
-      indicatorLayout: "responsive",
+      indicatorLayout: 'responsive',
       isActive: true,
       class: {
-        base: "tablet:gap-1",
-        indicator: "tablet:w-2 tablet:h-2 tablet:shrink-0",
+        base: 'tablet:gap-1',
+        indicator: 'tablet:w-2 tablet:h-2 tablet:shrink-0',
       },
     },
     {
-      indicatorLayout: "responsive",
+      indicatorLayout: 'responsive',
       isActive: false,
       class: {
-        base: "tablet:gap-1",
-        indicator: "tablet:w-0 tablet:h-0 tablet:shrink",
+        base: 'tablet:gap-1',
+        indicator: 'tablet:w-0 tablet:h-0 tablet:shrink',
       },
     },
   ],
   defaultVariants: {
-    color: "black",
+    color: 'black',
     isPublished: true,
     isActive: false,
-    indicatorLayout: "fixed",
+    indicatorLayout: 'fixed',
   },
 });
 
@@ -121,7 +115,7 @@ type MenuItemProps = {
 } & MenuItemVariants;
 
 const DefaultIndicator = () => (
-  <span className="w-2 h-2 rounded-full bg-current" />
+  <span className='w-2 h-2 rounded-full bg-current' />
 );
 
 export const MenuItem = ({
@@ -132,7 +126,7 @@ export const MenuItem = ({
   isActive,
   indicatorLayout,
   renderIndicator = <DefaultIndicator />,
-  indicatorOffsetClass = "-left-3",
+  indicatorOffsetClass = '-left-3',
   onClick,
 }: MenuItemProps) => {
   const {
@@ -150,9 +144,9 @@ export const MenuItem = ({
     <>
       <span
         className={indicator({
-          class: indicatorLayout !== "fixed" ? indicatorOffsetClass : "",
+          class: indicatorLayout !== 'fixed' ? indicatorOffsetClass : '',
         })}
-        aria-hidden="true"
+        aria-hidden='true'
       >
         {renderIndicator}
       </span>

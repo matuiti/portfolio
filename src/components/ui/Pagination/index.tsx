@@ -1,8 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { KeyboardArrowRight, MoreHoriz } from "@/components/ui/Icons";
-import styles from "./Pagination.module.scss";
+import { KeyboardArrowRight, MoreHoriz } from '@/components/ui/Icons';
+import styles from './Pagination.module.scss';
 
 /**
  * Pagination コンポーネントの型定義
@@ -53,26 +52,26 @@ export function Pagination({ current, total, onPageChange }: PaginationProps) {
     // ページ遷移時に最上部へスムーズスクロール [3, 10]
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   /**
    * ページ番号を "01" 形式にフォーマットする
    */
-  const formatPageNumber = (num: number) => String(num).padStart(2, "0");
+  const formatPageNumber = (num: number) => String(num).padStart(2, '0');
 
   return (
-    <nav className={styles.container} aria-label="ページネーション">
+    <nav className={styles.container} aria-label='ページネーション'>
       {/* 左アロー：1ページ目以外で表示 */}
       {current > 1 && (
         <button
-          type="button"
+          type='button'
           onClick={() => handlePageClick(current - 1)}
           className={styles.arrowButton}
-          aria-label="前のページへ"
+          aria-label='前のページへ'
         >
-          <KeyboardArrowRight direction="left" />
+          <KeyboardArrowRight direction='left' />
         </button>
       )}
 
@@ -83,11 +82,11 @@ export function Pagination({ current, total, onPageChange }: PaginationProps) {
           return (
             <button
               key={page}
-              type="button"
+              type='button'
               onClick={() => handlePageClick(page)}
-              aria-current={isCurrent ? "page" : undefined}
+              aria-current={isCurrent ? 'page' : undefined}
               aria-label={`${page}ページ目へ移動`}
-              className={`${styles.pageButton} ${isCurrent ? styles.isCurrent : ""}`}
+              className={`${styles.pageButton} ${isCurrent ? styles.isCurrent : ''}`}
             >
               {formatPageNumber(page)}
             </button>
@@ -96,7 +95,7 @@ export function Pagination({ current, total, onPageChange }: PaginationProps) {
 
         {/* 三点ドットのモアボタン：範囲外のページがある場合に表示 */}
         {showMore && (
-          <div className={styles.more} aria-hidden="true">
+          <div className={styles.more} aria-hidden='true'>
             <MoreHoriz />
           </div>
         )}
@@ -105,10 +104,10 @@ export function Pagination({ current, total, onPageChange }: PaginationProps) {
       {/* 右アロー：最終ページ以外で表示 */}
       {current < total && (
         <button
-          type="button"
+          type='button'
           onClick={() => handlePageClick(current + 1)}
           className={styles.arrowButton}
-          aria-label="次のページへ"
+          aria-label='次のページへ'
         >
           <KeyboardArrowRight />
         </button>

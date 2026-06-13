@@ -1,75 +1,73 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { SkillGroup } from "@/types/skill";
-import { SkillCard } from "../SkillCard";
-import { KeyboardArrowRight } from "@/components/ui/Icons";
-import styles from "../../Skills.module.scss";
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import gsap from 'gsap';
+import { SkillGroup } from '@/types/skill';
+import { SkillCard } from '../SkillCard';
+import { KeyboardArrowRight } from '@/components/ui/Icons';
+import styles from '../../Skills.module.scss';
 
 type Props = {
   group: SkillGroup;
-  index: number; // 何番目のセクションか判定するために追加
+  index: number;
 };
+
+// 空のサブスクライブ関数（history.state はイベントをリスンできないため空で定義）
+const subscribeEmpty = () => () => {};
 
 export const SkillGroupSection = ({ group, index }: Props) => {
   const contentRef = useRef<HTMLDivElement>(null);
-
-  // 識別子として title を使用（型エラー回避のため group.id ではなく title を使用）
   const groupId = group.title;
 
-  // --- 1. 状態管理（初期化ロジック） ---
-  const [isOpen, setIsOpen] = useState<boolean>(() => {
-    // サーバーサイドレンダリング時は実行しない
-    if (typeof window === "undefined") return false;
+  // useSyncExternalStore を使い、サーバー側とクライアント側の値を安全に分離する
+  const isOpen = useSyncExternalStore(
+    subscribeEmpty,
+    // クライアント（ブラウザ）側で評価する値
+    () => {
+      const savedGroups = window.history.state?.openGroups;
+      if (savedGroups !== undefined && Array.isArray(savedGroups)) {
+        return savedGroups.includes(groupId);
+      }
+      return index === 0;
+    },
+    // サーバー（SSR）側で評価する初期値（一律で閉じている状態にする）
+    () => false,
+  );
 
-    const savedGroups = window.history.state?.openGroups;
+  // 状態を変更・再レンダリングさせるためのトリガー用ダミーステイト
+  const [, setTick] = useState(0);
 
-    // A. 履歴データが存在する場合（「戻る」や「実績から帰還」した時）
-    if (savedGroups !== undefined && Array.isArray(savedGroups)) {
-      return savedGroups.includes(groupId);
-    }
-
-    // B. 新規訪問時（履歴データがまだ作られていない時）
-    // index が 0（一番上）のグループだけ true を返す
-    return index === 0;
-  });
-
-  // 初回訪問時、一番上の状態を履歴に保存するための副作用
+  // 初回訪問時、一番上の状態を履歴に保存（これはReact外部への書き込みなので useEffect として正しい用途）
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const currentState = window.history.state || {};
-    // まだ一度も履歴が保存されていない場合のみ、初期状態を書き込む
     if (currentState.openGroups === undefined && index === 0) {
       window.history.replaceState(
         { ...currentState, openGroups: [groupId] },
-        "",
+        '',
       );
     }
   }, [groupId, index]);
 
   // クリック時の処理（履歴の同期）
   const handleToggle = () => {
-    setIsOpen((prev) => {
-      const nextStatus = !prev;
-      const currentState = window.history.state || {};
-      const currentOpenGroups: string[] = currentState.openGroups || [];
+    const currentState = window.history.state || {};
+    const currentOpenGroups: string[] = currentState.openGroups || [];
 
-      let nextOpenGroups: string[];
-      if (nextStatus) {
-        nextOpenGroups = Array.from(new Set([...currentOpenGroups, groupId]));
-      } else {
-        nextOpenGroups = currentOpenGroups.filter((id) => id !== groupId);
-      }
+    let nextOpenGroups: string[];
+    // 現在の状態の反対にする
+    if (!isOpen) {
+      nextOpenGroups = Array.from(new Set([...currentOpenGroups, groupId]));
+    } else {
+      nextOpenGroups = currentOpenGroups.filter((id) => id !== groupId);
+    }
 
-      window.history.replaceState(
-        { ...currentState, openGroups: nextOpenGroups },
-        "",
-      );
+    window.history.replaceState(
+      { ...currentState, openGroups: nextOpenGroups },
+      '',
+    );
 
-      return nextStatus;
-    });
+    // useSyncExternalStore に再評価を促すためにステイトを更新
+    setTick((t) => t + 1);
   };
 
   // --- 2. アニメーション制御 (GSAP) ---
@@ -78,10 +76,10 @@ export const SkillGroupSection = ({ group, index }: Props) => {
 
     if (isOpen) {
       gsap.to(contentRef.current, {
-        height: "auto",
+        height: 'auto',
         opacity: 1,
         duration: 0.5,
-        ease: "power3.out",
+        ease: 'power3.out',
         overwrite: true,
       });
     } else {
@@ -89,7 +87,7 @@ export const SkillGroupSection = ({ group, index }: Props) => {
         height: 0,
         opacity: 0,
         duration: 0.4,
-        ease: "power3.inOut",
+        ease: 'power3.inOut',
         overwrite: true,
       });
     }
@@ -98,7 +96,7 @@ export const SkillGroupSection = ({ group, index }: Props) => {
   return (
     <section className={styles.groupSection}>
       <button
-        type="button"
+        type='button'
         onClick={handleToggle}
         className={styles.groupHeader}
         aria-expanded={isOpen}
@@ -107,22 +105,14 @@ export const SkillGroupSection = ({ group, index }: Props) => {
         <div
           style={{
             transform: `rotate(${isOpen ? -180 : 0}deg)`,
-            transition: "transform 0.5s ease",
+            transition: 'transform 0.5s ease',
           }}
         >
-          <KeyboardArrowRight direction="bottom" color="white" />
+          <KeyboardArrowRight direction='bottom' color='white' />
         </div>
       </button>
 
-      <div
-        ref={contentRef}
-        className={styles.groupContent}
-        style={{
-          height: isOpen ? "auto" : 0,
-          opacity: isOpen ? 1 : 0,
-          overflow: "hidden",
-        }}
-      >
+      <div ref={contentRef} className={styles.groupContent}>
         <div className={styles.skillGrid}>
           {group.items.map((item) => (
             <SkillCard key={item.name} item={item} />
