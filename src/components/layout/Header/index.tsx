@@ -1,17 +1,16 @@
 // src/components/layout/Header/index.tsx
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { tv } from "tailwind-variants";
-
-import { NAV_ITEMS } from "@/data/navigation";
-import { useUIStore } from "@/store/useUIStore";
-import { useScrollThreshold } from "@/lib/hooks/useScrollThreshold";
-import { Logo } from "@/components/ui/Logo";
-import { MenuItem } from "@/components/ui/MenuItem";
-import { Hamburger, SearchLarge } from "@/components/ui/Icons";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { tv } from 'tailwind-variants';
+import { NAV_ITEMS, SEARCHABLE_PATHS } from '@/data/navigation';
+import { useUIStore } from '@/store/useUIStore';
+import { useScrollThreshold } from '@/lib/hooks/useScrollThreshold';
+import { Logo } from '@/components/ui/Logo';
+import { MenuItem } from '@/components/ui/MenuItem';
+import { Hamburger, SearchLarge } from '@/components/ui/Icons';
 
 /**
  * ヘッダースタイル定義
@@ -19,24 +18,24 @@ import { Hamburger, SearchLarge } from "@/components/ui/Icons";
  */
 export const headerStyles = tv({
   slots: {
-    base: "section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-1000 ease-in",
-    inner: "container-center flex items-center justify-between",
+    base: 'section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-1000 ease-in',
+    inner: 'container-center flex items-center justify-between',
     // 複雑なcalcを含むリスト部分を配列で切り出し
     navList: [
-      "hidden small:flex items-center leading-normal",
-      "gap-[calc(15.6/16*1rem)]",
-      "mt-[calc(6/16*1rem)]", // margin-top: 6px を追加
-      "mr-[calc(3/16*1rem)]", // margin-right: 3px を追加
+      'hidden small:flex items-center leading-normal',
+      'gap-[calc(15.6/16*1rem)]',
+      'mt-[calc(6/16*1rem)]', // margin-top: 6px を追加
+      'mr-[calc(3/16*1rem)]', // margin-right: 3px を追加
     ],
-    mobileActions: "flex items-center gap-2.5 small:hidden",
+    mobileActions: 'flex items-center gap-2.5 small:hidden',
   },
   variants: {
     isScrolled: {
-      true: { base: "backdrop-blur-default shadow-default" },
-      false: { base: "bg-white" },
+      true: { base: 'backdrop-blur-default shadow-default' },
+      false: { base: 'bg-white' },
     },
     isSearchablePage: {
-      true: { base: "shadow-default" },
+      true: { base: 'shadow-default' },
     },
   },
   defaultVariants: {
@@ -45,28 +44,34 @@ export const headerStyles = tv({
   },
 });
 
-export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
+type HeaderProps = {
+  onMenuOpen: () => void;
+};
+
+export const Header = ({ onMenuOpen }: HeaderProps) => {
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
+  const isHomePage = pathname === '/';
   const { setPhase, setSearchDrawerOpen } = useUIStore();
 
   useEffect(() => {
-    if (!isHomePage) setPhase("ready");
+    if (!isHomePage) setPhase('ready');
   }, [isHomePage, setPhase]);
 
-  const [dynamicThreshold, setDynamicThreshold] = useState(0);
+  const [dynamicThreshold, setDynamicThreshold] = useState<number | null>(null);
 
   useEffect(() => {
     if (!isHomePage) return;
     const updateHeight = () => setDynamicThreshold(window.innerHeight);
     updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
   }, [isHomePage]);
 
-  const isScrolled = useScrollThreshold(isHomePage ? dynamicThreshold : 20);
-  const isSearchablePage =
-    pathname.startsWith("/works") || pathname.startsWith("/gallery");
+  const isScrolled = useScrollThreshold(
+    isHomePage ? (dynamicThreshold ?? Infinity) : 20,
+  );
+
+  const isSearchablePage = SEARCHABLE_PATHS.some((p) => pathname.startsWith(p));
 
   const { base, inner, navList, mobileActions } = headerStyles({
     isScrolled,
@@ -76,8 +81,8 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
   return (
     <header className={base()}>
       <div className={inner()}>
-        <Link href="/" className="hover:opacity-hover transition-opacity">
-          <Logo color="black" type="header" />
+        <Link href='/' className='hover:opacity-hover transition-opacity'>
+          <Logo color='black' type='header' />
         </Link>
 
         <nav>
@@ -85,7 +90,7 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
             {NAV_ITEMS.map((item) => {
               const isActive =
                 pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href));
+                (item.href !== '/' && pathname.startsWith(item.href));
               return (
                 <li key={item.href}>
                   <MenuItem
@@ -93,8 +98,8 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
                     href={item.href}
                     isPublished={item.isPublished}
                     isActive={isActive}
-                    color="black"
-                    indicatorLayout="fixed"
+                    color='black'
+                    indicatorLayout='fixed'
                   />
                 </li>
               );
@@ -104,14 +109,11 @@ export const Header = ({ onMenuOpen }: { onMenuOpen: () => void }) => {
 
         <div className={mobileActions()}>
           {isSearchablePage && (
-            <button
-              type="button"
-              onClick={() => setSearchDrawerOpen(true)}
-            >
+            <button type='button' onClick={() => setSearchDrawerOpen(true)}>
               <SearchLarge />
             </button>
           )}
-          <button type="button" onClick={onMenuOpen}>
+          <button type='button' onClick={onMenuOpen}>
             <Hamburger />
           </button>
         </div>

@@ -66,19 +66,16 @@ export const MainVisual = () => {
   );
 
   useEffect(() => {
-    // 演出中(playing)はスクロールを監視
+    // 演出中(playing)ならスクロールを監視
     if (phase !== 'playing') return;
 
     const handleScrollSkip = () => {
       if (window.scrollY >= 10) {
-        // 10px以上スクロールしたら実行
         if (timelineRef.current) {
-          // 1. アニメーションを最後まで一瞬で進める
+          // アニメーションを強制的に最後まで進める
           timelineRef.current.progress(1);
-          // 2. フェーズを準備完了にする（これに連動してWorksSectionが動き出す）
           setPhase('ready');
         }
-        // イベントを解除（一度スキップすれば十分なため）
         window.removeEventListener('scroll', handleScrollSkip);
       }
     };

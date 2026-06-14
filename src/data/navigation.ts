@@ -21,3 +21,8 @@ export const UTILITY_ITEMS: NavItem[] = [
   { label: "プライバシーポリシー", href: "/privacy-policy", isPublished: true },
   // 今後、特定商取引法に基づく表記等が必要になった場合もここに追加
 ];
+
+/**
+ * 検索機能を持つページのパスヒント
+ */
+export const SEARCHABLE_PATHS = ["/works", "/gallery"];
