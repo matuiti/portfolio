@@ -4,7 +4,10 @@ import { useEffect, useCallback, useRef } from 'react';
 import gsap from 'gsap';
 import { useUIStore } from '@/store/useUIStore';
 
-export const useScrollReveal = () => {
+/**
+ * TOPページ専用（現在）
+ */
+export const ScrollReveal = () => {
   const phase = useUIStore((state) => state.phase);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const revealedSet = useRef(new WeakSet<Element>());
@@ -110,4 +113,6 @@ export const useScrollReveal = () => {
       clearTimeout(timer);
     };
   }, [phase, observeNewElements]);
+
+  return null;
 };

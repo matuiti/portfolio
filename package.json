@@ -25,6 +25,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@react-email/components": "1.0.7",
     "@react-email/render": "^2.0.4",
+    "clsx": "^2.1.1",
     "gsap": "^3.14.2",
     "lucide-react": "^0.563.0",
     "next": "16.1.1",
