@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import React, { useState, useMemo } from "react";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { WorkCard } from "@/app/works/components/WorkCard";
-import { WorkDetailModal } from "@/app/works/components/WorkDetailModal";
-import { ALL_WORKS } from "@/data/works";
-import { Work, WorkCategory, WorkFilterCategory } from "@/types/work";
-import { CategoryTabs } from "./CategoryTabs";
-import styles from "./WorksSection.module.scss";
-import { MainButton } from "@/components/ui/Buttons/MainButton";
-import { useScrollReveal } from "@/lib/hooks/useScrollReveal";
-import { useRouter } from "next/navigation";
+import React, { useState, useMemo } from 'react';
+import { SectionTitle } from '@/components/ui/SectionTitle';
+import { WorkCard } from '@/app/works/components/WorkCard';
+import { WorkDetailModal } from '@/app/works/components/WorkDetailModal';
+import { ALL_WORKS } from '@/data/works';
+import { Work, WorkCategory, WorkFilterCategory } from '@/types/work';
+import { CategoryTabs } from './CategoryTabs';
+import styles from './WorksSection.module.scss';
+import { MainButton } from '@/components/ui/Buttons/MainButton';
+import { ScrollReveal } from '@/home/ScrollReveal';
+import { useRouter } from 'next/navigation';
 
 export const WorksSection = () => {
   const router = useRouter();
   // 1. 状態管理：選択中のカテゴリと、モーダル表示用の実績
   const [activeCategory, setActiveCategory] =
-    useState<WorkFilterCategory>("web");
+    useState<WorkFilterCategory>('web');
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
   // 追加：モーダル内のボタンから呼び出される遷移ロジック [cite: 138, 141]
@@ -33,7 +33,7 @@ export const WorksSection = () => {
   const displayWorks = useMemo(() => {
     const filtered = ALL_WORKS.filter((work) => {
       // "all" の場合は全てのデータを通す
-      if (activeCategory === "all") return true;
+      if (activeCategory === 'all') return true;
       return work.category.includes(activeCategory as WorkCategory);
     });
 
@@ -45,22 +45,22 @@ export const WorksSection = () => {
    * 依存配列に displayWorks を含めることで、カテゴリ切り替えにより
    * DOMが書き換わった際も、新しいカードを検知して演出を再実行します。
    */
-  useScrollReveal();
+  ScrollReveal();
 
   return (
-    <section id="works" className="-scroll-mt-2">
-      <div className="section-padding-y section-padding-x bg-white">
-        <div className="container-center">
+    <section id='works' className='-scroll-mt-2'>
+      <div className='section-padding-y section-padding-x bg-white'>
+        <div className='container-center'>
           <div className={styles.sectionHead}>
             {/* セクション見出し */}
             <SectionTitle
-              enTitle="works"
-              jpTitle="制作実績"
-              variant="default"
-              className="js-fuwa-fade"
+              enTitle='works'
+              jpTitle='制作実績'
+              variant='default'
+              className='js-fuwa-fade'
             />
             {/* 3. カテゴリスイッチ */}
-            <div className="js-fuwa-fade">
+            <div className='js-fuwa-fade'>
               <CategoryTabs
                 activeCategory={activeCategory}
                 onCategoryChange={setActiveCategory}
@@ -76,13 +76,13 @@ export const WorksSection = () => {
                 work={work}
                 onClick={() => setSelectedWork(work)}
                 onCategoryClick={(cat) => setActiveCategory(cat)}
-                className="js-fuwa-fade"
+                className='js-fuwa-fade'
               />
             ))}
 
             {/* ボタンをグリッドの最後の子要素として配置 */}
             <div className={`${styles.moreButtonWrapper} js-fuwa-fade`}>
-              <MainButton variant="long" href="/works">
+              <MainButton variant='long' href='/works'>
                 一覧を見る
               </MainButton>
             </div>

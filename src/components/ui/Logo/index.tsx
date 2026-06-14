@@ -6,7 +6,7 @@ import styles from './Logo.module.scss';
 
 /**
  * ロゴのスタイル定義
- * 複雑なレスポンシブ余白は SCSS へ移行し、tv は状態管理に専念させる [1]
+ * 複雑なレスポンシブ余白は SCSS へ移行し、tv は状態管理に専念させる
  */
 const logoStyles = tv({
   base: [

@@ -1,6 +1,7 @@
 // src/app/(home)/components/MainVisual/index.tsx
 'use client';
 
+import { clsx } from 'clsx';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -13,9 +14,7 @@ export const MainVisual = () => {
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const setPhase = useUIStore((state) => state.setPhase);
   const phase = useUIStore((state) => state.phase);
-
-  const isAllFinished = phase === 'ready';
-  const isMvItemVisible = phase === 'ready';
+  const isReady = phase === 'ready';
 
   useGSAP(
     () => {
@@ -57,10 +56,9 @@ export const MainVisual = () => {
           },
           '-=1.4',
         );
-
     },
     {
-      dependencies: [phase],
+      dependencies: [phase, setPhase],
       scope: rootRef,
     },
   );
@@ -74,7 +72,7 @@ export const MainVisual = () => {
         if (timelineRef.current) {
           // アニメーションを強制的に最後まで進める
           timelineRef.current.progress(1);
-          setPhase('ready');
+          // setPhase('ready');
         }
         window.removeEventListener('scroll', handleScrollSkip);
       }
@@ -84,8 +82,15 @@ export const MainVisual = () => {
     return () => window.removeEventListener('scroll', handleScrollSkip);
   }, [phase, setPhase]);
 
-  const mvItemClass = `js-mv-item ${isMvItemVisible ? 'opacity-100' : 'opacity-0'}`;
-  const scrollClass = `js-scroll-indicator ${isAllFinished ? 'opacity-100' : 'opacity-0'} ${styles.scrollIndicator}`;
+  const mvItemClass = clsx(
+    'js-mv-item',
+    isReady ? 'opacity-100' : 'opacity-0',
+  );
+  const scrollClass = clsx(
+    'js-scroll-indicator',
+    styles.scrollIndicator,
+    isReady ? 'opacity-100' : 'opacity-0',
+  );
 
   return (
     <section
