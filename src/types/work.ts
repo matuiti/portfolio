@@ -2,19 +2,20 @@
 
 /** 内部管理用のカテゴリID */
 export type WorkCategory =
-  | "web"
-  | "wordpress"
-  | "app"
-  | "game"
-  | "client"
-  | "nda";
+  | 'web'
+  | 'wordpress'
+  | 'app'
+  | 'game'
+  | 'client'
+  | 'nda';
 
 /** フィルタ用 (カテゴリ + all) */
-export type WorkFilterCategory = WorkCategory | "all";
+export type WorkFilterCategory = WorkCategory | 'all';
 
-/** 公開レベルの定義 */
-export type DisclosureLevel = "Full" | "NDA";
+/** 公開レベル */
+export type DisclosureLevel = 'Full' | 'NDA';
 
+/** 実績データ */
 export type Work = {
   id: string;
   title: string;
@@ -26,7 +27,7 @@ export type Work = {
 
   role: string; // 担当役割
   duration: string; // 制作期間
-  disclosureLevel: DisclosureLevel; // 公開範囲
+  disclosureLevel: DisclosureLevel; // 公開レベル
 
   url?: string;
   articleUrl?: string;

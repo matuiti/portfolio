@@ -4,7 +4,7 @@ import { SkillCard } from './SkillCard';
 import { SkillCardData } from './types';
 import styles from './SkillsSection.module.scss';
 
-// トップページ固有のハイライトデータ
+// スキルデータ（トップページ固有）
 const SKILL_CARDS_DATA: SkillCardData[] = [
   {
     title: 'WEBサイト',

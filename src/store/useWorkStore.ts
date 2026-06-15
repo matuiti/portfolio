@@ -21,7 +21,7 @@ type WorkState = {
 };
 
 export const useWorkStore = create<WorkState>((set) => ({
-  // --- 初期状態 ---
+  // --- 状態の初期値 ---
   searchQuery: "",
   selectedCategory: "all",
   selectedTags: [],

@@ -1,25 +1,25 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { WorkCard } from '@/app/works/components/WorkCard';
 import { WorkDetailModal } from '@/app/works/components/WorkDetailModal';
 import { ALL_WORKS } from '@/data/works';
 import { Work, WorkCategory, WorkFilterCategory } from '@/types/work';
 import { CategoryTabs } from './CategoryTabs';
-import styles from './WorksSection.module.scss';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { ScrollReveal } from '@/home/ScrollReveal';
 import { useRouter } from 'next/navigation';
+import styles from './WorksSection.module.scss';
 
 export const WorksSection = () => {
   const router = useRouter();
-  // 1. 状態管理：選択中のカテゴリと、モーダル表示用の実績
+  // 状態管理：選択中のカテゴリと、モーダル表示用の実績
   const [activeCategory, setActiveCategory] =
     useState<WorkFilterCategory>('web');
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  // 追加：モーダル内のボタンから呼び出される遷移ロジック [cite: 138, 141]
+  // モーダル内のボタンから呼び出される遷移ロジック 
   const handleModalCategoryClick = (cat: string) => {
     router.push(`/works?category=${encodeURIComponent(cat)}`);
   };
@@ -28,7 +28,7 @@ export const WorksSection = () => {
     router.push(`/works?tags=${encodeURIComponent(tag)}`);
   };
 
-  // 2. フィルタリングロジック：カテゴリに基づいてデータを抽出
+  // フィルタリングロジック：カテゴリに基づいてデータを抽出
   // パフォーマンス最適化のため useMemo を使用
   const displayWorks = useMemo(() => {
     const filtered = ALL_WORKS.filter((work) => {
@@ -41,7 +41,7 @@ export const WorksSection = () => {
   }, [activeCategory]);
 
   /**
-   * 3. スクロール演出の適用
+   * スクロール演出の適用
    * 依存配列に displayWorks を含めることで、カテゴリ切り替えにより
    * DOMが書き換わった際も、新しいカードを検知して演出を再実行します。
    */
@@ -59,7 +59,7 @@ export const WorksSection = () => {
               variant='default'
               className='js-fuwa-fade'
             />
-            {/* 3. カテゴリスイッチ */}
+            {/* カテゴリスイッチ */}
             <div className='js-fuwa-fade'>
               <CategoryTabs
                 activeCategory={activeCategory}
@@ -68,7 +68,7 @@ export const WorksSection = () => {
             </div>
           </div>
 
-          {/* 4. 実績グリッド表示 */}
+          {/* 実績グリッド表示 */}
           <div className={styles.cards}>
             {displayWorks.map((work) => (
               <WorkCard
