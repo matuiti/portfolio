@@ -1,7 +1,7 @@
 // src/app/works/page.tsx
 "use client";
 
-import React, { useState, Suspense, useMemo } from "react";
+import { useState, Suspense, useMemo } from "react";
 import { useWorkStore, useFilteredWorks } from "@/store/useWorkStore";
 import { WorkCard } from "./components/WorkCard";
 import { WorkDetailModal } from "./components/WorkDetailModal";
@@ -20,11 +20,11 @@ import styles from "./Works.module.scss";
  * ストアの状態管理と、各 UI パーツへのロジック注入を統括します。
  */
 function WorksContent() {
-  // 1. ストアから状態とアクションを取得 [cite: 38, 198]
+  // 1. ストアから状態とアクションを取得
   const store = useWorkStore();
-  const filteredWorks = useFilteredWorks(); // フィルタリング済みデータ [cite: 200]
+  const filteredWorks = useFilteredWorks(); // フィルタリング済みデータ
 
-  // 2. 共通 URL 同期システム（URL パラメータとストアの双方向同期） [cite: 1, 38, 185]
+  // 2. 共通 URL 同期システム（URLパラメータとストアの双方向同期）
   useCommonURLSync(
     {
       category: store.selectedCategory,
@@ -40,10 +40,10 @@ function WorksContent() {
     },
   );
 
-  // 3. ローカル状態：現在詳細を表示している実績 [cite: 39]
+  // 3. ローカル状態：現在詳細を表示している実績
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  // 4. 表示データの計算（ページネーション適用） [cite: 39]
+  // 4. 表示データの計算（ページネーション適用）
   const totalPages = Math.ceil(filteredWorks.length / store.itemsPerPage);
   const displayWorks = useMemo(() => {
     const start = (store.currentPage - 1) * store.itemsPerPage;
@@ -55,13 +55,13 @@ function WorksContent() {
    * WORKS ページでは遷移せず、その場でストアを更新（再フィルタリング）します。
    */
   const handleCategoryAction = (cat: string) => {
-    // 他のフィルタをリセットし、該当カテゴリのみで絞り込む [cite: 30, 368]
+    // 他のフィルタをリセットし、該当カテゴリのみで絞り込む
     store.selectOnlyCategory(cat as WorkFilterCategory);
     setSelectedWork(null); // アクション実行後にモーダルを閉じる
   };
 
   const handleTagAction = (tag: string) => {
-    // カテゴリを「すべて」にし、該当タグ 1 つだけで絞り込む [cite: 29, 367]
+    // カテゴリを「すべて」にし、該当タグ 1 つだけで絞り込む
     store.selectOnlyTag(tag);
     setSelectedWork(null); // アクション実行後にモーダルを閉じる
   };

@@ -1,5 +1,5 @@
 // src/app/works/components/WorkDetailModal/index.tsx
-"use client";
+'use client';
 
 import {
   useEffect,
@@ -8,21 +8,21 @@ import {
   SetStateAction,
   useState,
   useMemo,
-} from "react";
+} from 'react';
 // import Image from "next/image";
-import { Work } from "@/types/work";
-import styles from "./WorkDetailModal.module.scss";
-import { CloseModal } from "@/components/ui/Icons/CloseModal";
+import { Work } from '@/types/work';
+import styles from './WorkDetailModal.module.scss';
+import { CloseModal } from '@/components/ui/Icons/CloseModal';
 import {
   CarouselArrowRight,
   GitHub,
   KeyboardArrowRight,
   Launch,
   LibraryBooks,
-} from "@/components/ui/Icons";
-import { BaseTag } from "@/components/ui/BaseTag";
-import { SubButton } from "@/components/ui/Buttons/SubButton";
-import { SafeImage } from "@/components/ui/SafeImage";
+} from '@/components/ui/Icons';
+import { BaseTag } from '@/components/ui/BaseTag';
+import { SubButton } from '@/components/ui/Buttons/SubButton';
+import { SafeImage } from '@/components/ui/SafeImage';
 
 type WorkDetailModalProps = {
   work: Work;
@@ -45,7 +45,7 @@ export const WorkDetailModal = ({
 }: WorkDetailModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-// 1. スライド用のインデックス管理
+  // 1. スライド用のインデックス管理
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   // 2. 表示する画像リストの作成
@@ -78,12 +78,12 @@ export const WorkDetailModal = ({
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
@@ -93,8 +93,8 @@ export const WorkDetailModal = ({
     <div
       className={styles.overlay}
       onClick={onClose}
-      role="dialog"
-      aria-modal="true"
+      role='dialog'
+      aria-modal='true'
     >
       <div
         className={styles.modalContent}
@@ -120,7 +120,7 @@ export const WorkDetailModal = ({
               onClick={() => prevWork && onNavigate(prevWork)}
               disabled={!prevWork}
             >
-              <KeyboardArrowRight direction="left" />
+              <KeyboardArrowRight direction='left' />
             </button>
 
             {/* 縦の仕切り線（tablet以上で表示） */}
@@ -137,7 +137,7 @@ export const WorkDetailModal = ({
 
             {/* 5. 閉じるボタン */}
             <button className={styles.closeBtn} onClick={onClose}>
-              <CloseModal color="white" size="xl" />
+              <CloseModal color='white' size='xl' />
             </button>
           </div>
         </header>
@@ -162,8 +162,8 @@ export const WorkDetailModal = ({
                   {work.url && (
                     <SubButton
                       href={work.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                       leftIcon={Launch}
                     >
                       サイトを見る
@@ -173,8 +173,8 @@ export const WorkDetailModal = ({
                   {work.articleUrl && (
                     <SubButton
                       href={work.articleUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                       leftIcon={LibraryBooks}
                     >
                       記事を読む
@@ -185,8 +185,8 @@ export const WorkDetailModal = ({
                   {work.github && (
                     <SubButton
                       href={work.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target='_blank'
+                      rel='noopener noreferrer'
                       leftIcon={GitHub}
                     >
                       GitHub
@@ -213,12 +213,12 @@ export const WorkDetailModal = ({
                 </div>
               )}
 
-              {work.disclosureLevel === "NDA" ? (
+              {work.disclosureLevel === 'NDA' ? (
                 <p className={styles.message}>
                   ※非公開の実績です。可能な範囲で概要をご紹介します。
                 </p>
               ) : (
-                ""
+                ''
               )}
             </div>
 
@@ -255,14 +255,14 @@ export const WorkDetailModal = ({
                     <button
                       className={styles.slidePrev}
                       onClick={handlePrev}
-                      aria-label="前の画像へ"
+                      aria-label='前の画像へ'
                     >
                       <CarouselArrowRight left />
                     </button>
                     <button
                       className={styles.slideNext}
                       onClick={handleNext}
-                      aria-label="次の画像へ"
+                      aria-label='次の画像へ'
                     >
                       <CarouselArrowRight />
                     </button>
@@ -277,7 +277,7 @@ export const WorkDetailModal = ({
                     {imageList.map((_, i) => (
                       <span
                         key={i}
-                        className={`${styles.dot} ${i === currentImgIndex ? styles.isActive : ""}`}
+                        className={`${styles.dot} ${i === currentImgIndex ? styles.isActive : ''}`}
                         onClick={() => setCurrentImgIndex(i)} // ドットクリックで移動可能に
                       />
                     ))}
@@ -347,9 +347,9 @@ export const WorkDetailModal = ({
                 <div className={styles.metaRow}>
                   <dt className={styles.metaLabel}>公開範囲：</dt>
                   <dd className={styles.metaValue}>
-                    {work.disclosureLevel === "NDA"
-                      ? "非公開（守秘義務）"
-                      : "一般公開"}
+                    {work.disclosureLevel === 'NDA'
+                      ? '非公開（守秘義務）'
+                      : '一般公開'}
                   </dd>
                 </div>
               </dl>
