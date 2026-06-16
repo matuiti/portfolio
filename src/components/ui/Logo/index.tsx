@@ -1,7 +1,7 @@
 // src/components/ui/Logo/index.tsx
 import { tv, type VariantProps } from 'tailwind-variants';
 
-import { siteConfig } from '@/data/site-config';
+import { SITE_CONFIG } from '@/data/site';
 import styles from './Logo.module.scss';
 
 /**
@@ -48,7 +48,7 @@ export const Logo = ({ color, type, className, ...props }: LogoProps) => {
         type,
         className: [styles.logo, className],
       })}
-      aria-label={siteConfig.name}
+      aria-label={SITE_CONFIG.name}
       role='img'
       {...props}
     >

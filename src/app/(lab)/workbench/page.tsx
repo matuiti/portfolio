@@ -79,7 +79,7 @@ export default function WorkbenchPage() {
         </div>
       </header>
 
-      <main className='flex-1 flex gap-8 p-10 overflow-x-auto items-start bg-[radial-gradient(#222_1px,transparent_1px)] [background-size:20px_20px]'>
+      <main className='flex-1 flex gap-8 p-10 overflow-x-auto items-start bg-[radial-gradient(#222_1px,transparent_1px)] bz-size-[20px_20px]'>
         {(['Mobile', 'Tablet', 'Desktop'] as const).map((name) => {
           const widths = { Mobile: 375, Tablet: 768, Desktop: 1200 };
           return (

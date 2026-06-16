@@ -2,7 +2,7 @@
 'use server';
 
 import { Resend } from 'resend';
-import { siteConfig } from '@/data/site-config';
+import { SITE_CONFIG } from '@/data/site';
 import { contactSchema } from './schema';
 import { ContactEmail } from './ContactEmail';
 import { z } from 'zod';
@@ -70,8 +70,8 @@ export async function sendContactAction(
   // 4. Resendによるメール送信
   try {
     const { error: resendError } = await resend.emails.send({
-      from: siteConfig.email.from,
-      to: [process.env.CONTACT_EMAIL_FROM || siteConfig.email.admin],
+      from: SITE_CONFIG.email.from,
+      to: [process.env.CONTACT_EMAIL_FROM || SITE_CONFIG.email.admin],
       subject: `【お問い合わせ】${data.subject}`,
       replyTo: data.email,
       react: ContactEmail({ ...data }),

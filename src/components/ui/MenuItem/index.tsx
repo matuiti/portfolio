@@ -92,7 +92,7 @@ export const menuItemStyles = tv({
       isActive: false,
       class: {
         base: 'tablet:gap-1',
-        indicator: 'tablet:w-0 tablet:h-0 tablet:shrink',
+        indicator: 'tablet:w-0 tablet:h-0 tablet:flex-shrink',
       },
     },
   ],

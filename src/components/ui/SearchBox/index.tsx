@@ -13,7 +13,7 @@ type SearchBoxProps = {
 
 /**
  * 共通検索ボックスコンポーネント
- * WORKS / GALLERY の両アーカイブページで使用。
+ * WORKS / GALLERY の両アーカイブページで使用
  */
 export function SearchBox({
   value,

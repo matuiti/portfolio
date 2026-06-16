@@ -1,12 +1,12 @@
 // src/components/layout/MobileDrawerMenu/index.tsx
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import { NAV_ITEMS } from "@/data/navigation";
-import { MenuItem } from "@/components/ui/MenuItem";
-import { ArrowRight, GitHub, Mail, Close } from "@/components/ui/Icons";
-import { SubButton } from "@/components/ui/Buttons/SubButton";
-import { siteConfig } from "@/data/site-config";
+import { usePathname } from 'next/navigation';
+import { NAV_ITEMS } from '@/data/navigation';
+import { MenuItem } from '@/components/ui/MenuItem';
+import { ArrowRight, GitHub, Mail, Close } from '@/components/ui/Icons';
+import { SubButton } from '@/components/ui/Buttons/SubButton';
+import { SITE_CONFIG } from '@/data/site';
 
 type MobileDrawerMenuProps = {
   isOpen: boolean;
@@ -22,13 +22,13 @@ export const MobileDrawerMenu = ({
   return (
     <div
       className={`fixed inset-0 z-drawer ${
-        isOpen ? "visible" : "invisible pointer-events-none"
+        isOpen ? 'visible' : 'invisible pointer-events-none'
       }`}
     >
       {/* 背景オーバーレイ */}
       <div
         className={`absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-all duration-500 ease-in ${
-          isOpen ? "opacity-100" : "opacity-0"
+          isOpen ? 'opacity-100' : 'opacity-0'
         }`}
         onClick={onClose}
       />
@@ -38,29 +38,29 @@ export const MobileDrawerMenu = ({
         // メニュー内での操作を背後のオーバーレイに伝わらないようにする
         onClick={(e) => e.stopPropagation()}
         className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default flex flex-col justify-start transition-all duration-700 ease ${
-          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
       >
         {/* 1. 上部：ボタンエリア */}
-        <div className="flex items-center justify-end min-h-header-mini mb-[calc(20/16*1rem)]">
-          <button type="button" onClick={onClose} aria-label="メニューを閉じる">
+        <div className='flex items-center justify-end min-h-header-mini mb-[calc(20/16*1rem)]'>
+          <button type='button' onClick={onClose} aria-label='メニューを閉じる'>
             <Close />
           </button>
         </div>
 
         {/* 2. 中央：リストアイテム */}
-        <nav className="overflow-y-auto">
-          <ul className="flex flex-col overflow-hidden">
+        <nav className='overflow-y-auto'>
+          <ul className='flex flex-col overflow-hidden'>
             {NAV_ITEMS.map((item) => {
               const isActive =
                 pathname === item.href ||
-                (item.href !== "/" && pathname.startsWith(item.href));
+                (item.href !== '/' && pathname.startsWith(item.href));
 
               return (
                 <li
                   key={item.href}
                   className={`group flex items-center justify-between first:pt-[calc(17/16*1rem)] -mb-px py-4 pl-4 border-b first:border-t border-medium-gray ${
-                    !item.isPublished ? "cursor-not-allowed" : ""
+                    !item.isPublished ? 'cursor-not-allowed' : ''
                   }`}
                 >
                   <MenuItem
@@ -68,8 +68,8 @@ export const MobileDrawerMenu = ({
                     href={item.href}
                     isPublished={item.isPublished}
                     isActive={isActive}
-                    color="black"
-                    indicatorLayout="floating"
+                    color='black'
+                    indicatorLayout='floating'
                     onClick={() => {
                       if (item.isPublished) onClose();
                     }}
@@ -82,18 +82,18 @@ export const MobileDrawerMenu = ({
         </nav>
 
         {/* 3. 下部：ボタンエリア */}
-        <div className="mt-5">
-          <div className="flex gap-x-2.5 justify-end">
+        <div className='mt-5'>
+          <div className='flex gap-x-2.5 justify-end'>
             <SubButton
-              href={siteConfig.links.github}
+              href={SITE_CONFIG.links.github}
               leftIcon={GitHub}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
             >
               GitHub
             </SubButton>
             <SubButton
-              href={siteConfig.links.contact}
+              href={SITE_CONFIG.links.contact}
               leftIcon={Mail}
               onClick={onClose}
             >

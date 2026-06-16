@@ -23,6 +23,6 @@ export const UTILITY_ITEMS: NavItem[] = [
 ];
 
 /**
- * 検索機能を持つページのパスヒント
+ * 検索機能を持つページのパス
  */
 export const SEARCHABLE_PATHS = ["/works", "/gallery"];

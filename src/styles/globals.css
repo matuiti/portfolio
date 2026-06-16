@@ -1,22 +1,20 @@
-/* 全てのTailwind設定（@theme）とベーススタイルをここに集約。 */
-
+/* 全てのTailwind設定（@theme）とベーススタイルをここに集約 */
 @import "tailwindcss";
 
-/* 1. スキャン対象(Tailwind)の指定：srcディレクトリ内の全コンポーネントを対象に設定 */
+/* 1. スキャン対象(Tailwind)の指定：src内の全コンポーネントを対象 */
 @source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 
 :root {
   /* プロジェクト規約に基づき、定義済みの色変数を使用 */
   --color-bg-gradation: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
-  /* --- シャドー --- */
   --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
   --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
 }
 
 /* 2. プロジェクト専用テーマ設定 */
 @theme {
-  /* --- ブレイクポイント (emを使用: ユーザーのフォントサイズ設定に追従) [5, 6] --- */
+  /* --- ブレイクポイント (emを使用: ユーザーのフォントサイズ設定に追従) --- */
   --breakpoint-mini: calc(350 / 16 * 1em);
   --breakpoint-mobile: calc(540 / 16 * 1em);
   --breakpoint-tablet: calc(840 / 16 * 1em);
@@ -24,7 +22,7 @@
   --breakpoint-default: calc(1280 / 16 * 1em);
   --breakpoint-large: calc(1920 / 16 * 1em);
 
-  /* --- ブランドカラー：実装コード内で頻出する色を定義 [7-9] --- */
+  /* --- ブランドカラー：実装コード内で頻出する色を定義 --- */
   --color-black: #0a0a0a;
   --color-white: #ffffff;
   --color-dark-gray: #757575;
@@ -34,32 +32,32 @@
   --color-red: #ff6262; /* エラー・必須項目用 */
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);
 
-  /* ニュートラル系（スクロールインジケーター等で使用） [10, 11] */
+  /* ニュートラル系（スクロールインジケーター等で使用） */
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
   --color-neutral-500: #737373;
   --color-neutral-900: #171717;
 
-  /* --- タイポグラフィ：Next.js Fontと連動 [12, 13] --- */
+  /* --- タイポグラフィ：Next.js Fontと連動 --- */
   --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 
-  /* --- カスタムスペーシング (remを使用: デザイン上のpx根拠を明示) [1, 5] --- */
+  /* --- カスタムスペーシング (remを使用: デザイン上のpx根拠を明示) --- */
 
   /* ロゴ幅 */
   --spacing-logo-small: calc(120 / 16 * 1rem);
   --spacing-logo-large: calc(163.54 / 16 * 1rem);
 
-  /* ヘッダー高 [14, 15] */
+  /* ヘッダー高 */
   --spacing-header-mini: calc(65 / 16 * 1rem);
   --spacing-header-small: calc(90 / 16 * 1rem);
 
-  /* メインビジュアル(MV)高：各デバイスの最小高さ [16, 17] */
+  /* メインビジュアル(MV)高：各デバイスの最小高さ */
   --spacing-mv-height-mini: calc(570 / 16 * 1rem);
   --spacing-mv-height-mobile: calc(650 / 16 * 1rem);
   --spacing-mv-height-tablet: calc(600 / 16 * 1rem);
   --spacing-mv-height-small: calc(640 / 16 * 1rem);
 
-  /* セクション余白 [18, 19] */
+  /* セクション余白 */
   /* --spacing-section-padding-x-mini: calc(15 / 16 * 1rem);
   --spacing-section-padding-x-mobile: calc(20 / 16 * 1rem);
   --spacing-section-padding-x-tablet: calc(30 / 16 * 1rem);
@@ -67,7 +65,7 @@
   --spacing-section-padding-y-mini: calc(100 / 16 * 1rem);
   --spacing-section-padding-y-small: calc(120 / 16 * 1rem);
 
-  /* アイコン・パーツ用数値 [14] */
+  /* アイコン・パーツ用数値 */
   --spacing-icon-20: calc(20 / 16 * 1rem);
   --spacing-icon-24: calc(24 / 16 * 1rem);
   --spacing-icon-30: calc(30 / 16 * 1rem);
@@ -79,7 +77,7 @@
   --spacing-container-max: calc(1200 / 16 * 1rem);
   --spacing-mobile-drawer-max-w: calc(500 / 16 * 1rem);
 
-  /* --- z-index の階層管理 [15, 20] --- */
+  /* --- z-index の階層管理 --- */
   --z-index-base: 1;
   --z-index-dropdown: 10;
   --z-index-image-overlay: 10;
@@ -124,7 +122,7 @@
     @apply font-sans bg-white text-black text-[calc(14/16*1rem)] tablet:text-[calc(16/16*1rem)] leading-none tracking-wider font-medium;
   }
 
-  /* 見出しの共通設定 [21] */
+  /* 見出しの共通設定 */
   h1,
   h2,
   h3,
@@ -137,15 +135,14 @@
 
 /* 4. カスタムユーティリティ */
 @layer utilities {
-  /* 共通セクション余白 [6, 18, 19] */
-  /* 共通セクション余白：カスケード順序を保証する実装 [3-5] */
+  /* 共通セクション余白：カスケード順序を保証する実装 */
   .section-padding-x {
-    /* 1. px根拠を明示しつつ rem 換算を行う (プロジェクト規約) [3, 5] */
-    /* デフォルト (mini: 350px〜) [4] */
-    --section-px: 15; /* Source [1] の定義に準拠 */
+    /* 1. px根拠を明示しつつ rem 換算を行う (プロジェクト規約) */
+    /* デフォルト (mini: 350px〜) */
+    --section-px: 15;
     padding-inline: calc(var(--section-px) / 16 * 1rem);
 
-    /* 2. メディアクエリを順序通りに記述し、詳細度を固定する [4] */
+    /* 2. メディアクエリを順序通りに記述し、詳細度を固定する */
 
     /* mobile (540px〜) */
     @media (min-width: 33.75em) {
@@ -188,7 +185,7 @@
     }
   }
 
-  /* Webkit系スクロールバー設定 [5, 19, 24] */
+  /* Webkit系スクロールバー設定 */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -207,7 +204,7 @@
     background-color: var(--scrollbar-thumb-hover);
   }
 
-  /* ホバー時のみ表示するカスタムスクロールバー [5, 24] */
+  /* ホバー時のみ表示するカスタムスクロールバー */
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: transparent;
   }

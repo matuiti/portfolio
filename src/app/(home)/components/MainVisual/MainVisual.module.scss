@@ -1,5 +1,5 @@
 // src/app/(home)/components/MainVisual/MainVisual.module.scss
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .mvSectionContainer {
   $header-mini: 65;
@@ -7,23 +7,21 @@
   // 1. 基本サイズ (Mini: 350px〜)
   $min-height: 570 + $header-mini;
   min-height: calc($min-height / 16 * 1rem);
-  padding-top: calc(
-    $header-mini / 16 * 1rem
-  ); // pt-header-mini (ヘッダー高: 65px)
+  padding-top: calc($header-mini / 16 * 1rem);
 
-  // 2. Mobile (540px〜) [3]
+  // 2. Mobile (540px〜)
   @include mq(mobile) {
     $min-height: 650 + $header-mini;
     min-height: calc($min-height / 16 * 1rem);
   }
 
-  // 3. Tablet (840px〜) [3]
+  // 3. Tablet (840px〜)
   @include mq(tablet) {
     $min-height: 600 + $header-mini;
     min-height: calc($min-height / 16 * 1rem);
   }
 
-  // 4. Small (1140px〜) [3]
+  // 4. Small (1140px〜)
   @include mq(small) {
     $min-height: 640 + $header-small;
     min-height: calc($min-height / 16 * 1rem);
@@ -217,7 +215,7 @@
 
   // 線のアニメーション部分
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;

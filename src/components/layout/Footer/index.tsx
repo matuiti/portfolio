@@ -7,7 +7,7 @@ import { tv } from 'tailwind-variants';
 import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { NAV_ITEMS } from '@/data/navigation';
-import { siteConfig } from '@/data/site-config';
+import { SITE_CONFIG } from '@/data/site';
 import styles from './Footer.module.scss';
 
 /**
@@ -96,7 +96,7 @@ export function Footer() {
           </div>
           {/* コピーライト */}
           <p className={copyright()}>
-            &copy; {currentYear} {siteConfig.author || siteConfig.name}
+            &copy; {currentYear} {SITE_CONFIG.author || SITE_CONFIG.name}
           </p>
         </div>
       </div>

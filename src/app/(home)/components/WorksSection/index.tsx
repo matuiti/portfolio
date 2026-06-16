@@ -8,18 +8,16 @@ import { ALL_WORKS } from '@/data/works';
 import { Work, WorkCategory, WorkFilterCategory } from '@/types/work';
 import { CategoryTabs } from './CategoryTabs';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
-import { ScrollReveal } from '@/home/ScrollReveal';
 import { useRouter } from 'next/navigation';
 import styles from './WorksSection.module.scss';
 
 export const WorksSection = () => {
   const router = useRouter();
-  // 状態管理：選択中のカテゴリと、モーダル表示用の実績
   const [activeCategory, setActiveCategory] =
     useState<WorkFilterCategory>('web');
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  // モーダル内のボタンから呼び出される遷移ロジック 
+  // モーダル内のボタンから呼び出される遷移ロジック
   const handleModalCategoryClick = (cat: string) => {
     router.push(`/works?category=${encodeURIComponent(cat)}`);
   };
@@ -29,7 +27,6 @@ export const WorksSection = () => {
   };
 
   // フィルタリングロジック：カテゴリに基づいてデータを抽出
-  // パフォーマンス最適化のため useMemo を使用
   const displayWorks = useMemo(() => {
     const filtered = ALL_WORKS.filter((work) => {
       // "all" の場合は全てのデータを通す
@@ -39,13 +36,6 @@ export const WorksSection = () => {
 
     return filtered.slice(0, 3);
   }, [activeCategory]);
-
-  /**
-   * スクロール演出の適用
-   * 依存配列に displayWorks を含めることで、カテゴリ切り替えにより
-   * DOMが書き換わった際も、新しいカードを検知して演出を再実行します。
-   */
-  ScrollReveal();
 
   return (
     <section id='works' className='-scroll-mt-2'>

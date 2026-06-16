@@ -4,7 +4,7 @@ import styles from './PrivacyPolicy.module.scss';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { PRIVACY_POLICY_DATA } from '@/data/privacy-policy';
+import { PRIVACY_POLICY_DATA } from '@/data/privacyPolicy';
 import { ScrollToTop } from '@/lib/utility/ScrollToTop';
 
 /**
