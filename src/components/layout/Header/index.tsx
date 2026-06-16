@@ -24,8 +24,8 @@ export const headerStyles = tv({
     navList: [
       'hidden small:flex items-center leading-normal',
       'gap-[calc(15.6/16*1rem)]',
-      'mt-[calc(6/16*1rem)]', // margin-top: 6px を追加
-      'mr-[calc(3/16*1rem)]', // margin-right: 3px を追加
+      'mt-[calc(6/16*1rem)]',
+      'mr-[calc(3/16*1rem)]',
     ],
     mobileActions: 'flex items-center gap-2.5 small:hidden',
   },

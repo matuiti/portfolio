@@ -3,11 +3,11 @@
 
 import { clsx } from 'clsx';
 import { useEffect, useRef } from 'react';
+import { useUIStore } from '@/store/useUIStore';
+import Image from 'next/image';
+import styles from './MainVisual.module.scss';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import Image from 'next/image';
-import { useUIStore } from '@/store/useUIStore';
-import styles from './MainVisual.module.scss';
 
 export const MainVisual = () => {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -18,7 +18,7 @@ export const MainVisual = () => {
 
   useGSAP(
     () => {
-      if (phase === 'ready') return;
+      if (isReady) return;
 
       const tl = gsap.timeline({
         onComplete: () => setPhase('ready'),
@@ -50,7 +50,6 @@ export const MainVisual = () => {
           '.js-scroll-indicator',
           {
             opacity: 1,
-            filter: 'blur(0px)',
             duration: 1.2,
             ease: 'slow',
           },
@@ -58,34 +57,33 @@ export const MainVisual = () => {
         );
     },
     {
-      dependencies: [phase, setPhase],
       scope: rootRef,
     },
   );
 
   useEffect(() => {
-    // 演出中(playing)ならスクロールを監視
-    if (phase !== 'playing') return;
+    // 演出中でない、またはタイムラインが存在しない場合は何もしない
+    if (phase !== 'playing' || !timelineRef.current) return;
 
     const handleScrollSkip = () => {
       if (window.scrollY >= 10) {
         if (timelineRef.current) {
           // アニメーションを強制的に最後まで進める
           timelineRef.current.progress(1);
-          // setPhase('ready');
         }
+        // スキップが発火したら、その場でイベントリスナーを解除
         window.removeEventListener('scroll', handleScrollSkip);
       }
     };
 
     window.addEventListener('scroll', handleScrollSkip, { passive: true });
-    return () => window.removeEventListener('scroll', handleScrollSkip);
-  }, [phase, setPhase]);
 
-  const mvItemClass = clsx(
-    'js-mv-item',
-    isReady ? 'opacity-100' : 'opacity-0',
-  );
+    return () => {
+      window.removeEventListener('scroll', handleScrollSkip);
+    };
+  }, [phase]);
+
+  const mvItemClass = clsx('js-mv-item', isReady ? 'opacity-100' : 'opacity-0');
   const scrollClass = clsx(
     'js-scroll-indicator',
     styles.scrollIndicator,
@@ -115,7 +113,7 @@ export const MainVisual = () => {
             <div className='block tablet:hidden w-full h-auto aspect-video relative'>
               <Image
                 src='/assets/images/home/mv-sp.jpg'
-                alt='メインビジュアル'
+                alt='パソコン作業中の手元の写真'
                 fill
                 priority
                 className='object-cover'
@@ -125,7 +123,7 @@ export const MainVisual = () => {
             <div className='hidden tablet:block w-50 h-50 small:w-75 small:h-75 relative overflow-hidden'>
               <Image
                 src='/assets/images/home/mv-pc.jpg'
-                alt='メインビジュアル'
+                alt='パソコン作業中の手元の写真'
                 fill
                 priority
                 className='object-cover'

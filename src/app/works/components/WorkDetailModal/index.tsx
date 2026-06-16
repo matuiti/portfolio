@@ -243,7 +243,7 @@ export const WorkDetailModal = ({
                         width={1200}
                         height={675}
                         className={styles.mainImage}
-                        priority={index === 0}
+                        preload={index === 0}
                       />
                     </div>
                   ))}

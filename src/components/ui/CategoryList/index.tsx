@@ -4,7 +4,6 @@
 import styles from './CategoryList.module.scss';
 import { BaseTag } from '../BaseTag';
 
-// 規約：interfaceを禁止し、typeで定義 [cite: 425]
 type CategoryItem<T> = {
   label: string;
   value: T;
@@ -32,8 +31,8 @@ export function CategoryList<T extends string>({
           const count = counts[item.value] ?? 0;
           const isActive = selected === item.value;
 
-          // 見た目の制御ロジック：件数0のカテゴリーは非表示（共通仕様準拠） [cite: 220]
-          if (item.value !== ('all' as T) && count === 0) return null;
+          // 件数0のカテゴリーは非表示
+          if (item.value !== ('all') && count === 0) return null;
 
           return (
             <li key={item.value}>

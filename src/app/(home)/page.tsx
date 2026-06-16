@@ -8,15 +8,17 @@ import { ContactSection } from './components/ContactSection';
 import { ScrollReveal } from './ScrollReveal';
 
 export default function Home() {
-  <ScrollReveal />;
   return (
     <div className='w-full overflow-hidden'>
+      {/* スクロール位置検知アニメーション制御 */}
+      <ScrollReveal />;
+
       {/* 1. MV：初期演出を含む */}
       <MainVisual />
       <div className='space-y-0'>
         {/* 2. WORKS：データ共有・カテゴリスイッチング機能付き */}
         <WorksSection />
-        {/* 3. GALLERY：準備中コンポーネントを配置予定 */}
+        {/* 3. GALLERY：（準備中コンポーネントを配置） */}
         <GallerySection />
         {/* 4. SERVICE：メディアカードレイアウト */}
         <ServiceSection />

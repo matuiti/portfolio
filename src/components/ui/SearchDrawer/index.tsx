@@ -7,7 +7,6 @@ import { CategoryList } from '@/components/ui/CategoryList';
 import { TagFilters } from '@/components/ui/TagFilters';
 import styles from './SearchDrawer.module.scss';
 
-// カテゴリ用アイテムの型定義（Tは各ページのリテラル型を継承） [2]
 type CategoryItem<T extends string> = {
   label: string;
   value: T;
@@ -19,7 +18,7 @@ type SearchDrawerProps<T extends string> = {
   totalCount: number;
   searchQuery: string;
   setSearchQuery: (val: string) => void;
-  categories: CategoryItem<T>[]; // 外部から注入 [4]
+  categories: CategoryItem<T>[];
   selectedCategory: T;
   setSelectedCategory: (val: T) => void;
   categoryCounts: Record<string, number>;
@@ -27,13 +26,13 @@ type SearchDrawerProps<T extends string> = {
   selectedTags: string[];
   toggleTag: (tag: string) => void;
   clearFilters: () => void;
-  footerNote?: string; // ページ固有の注釈用 [5]
+  footerNote?: string;
 };
 
 /**
  * 共通検索ドロワーコンポーネント
  * ジェネリクス T により、WORKS(WorkFilterCategory) と
- * GALLERY(Category) の両方に対応します。 [6, 7]
+ * GALLERY(Category) に両対応
  */
 export function SearchDrawer<T extends string>({
   isOpen,
@@ -48,24 +47,23 @@ export function SearchDrawer<T extends string>({
   selectedTags,
   toggleTag,
   clearFilters,
-  footerNote, // 引数に追加
+  footerNote,
 }: SearchDrawerProps<T>) {
   return (
     <div className={`${styles.root} ${isOpen ? styles['is-open'] : ''}`}>
-      {/* 1. オーバーレイ */}
+      {/* オーバーレイ */}
       <div
         className={`${styles.overlay} ${isOpen ? styles['is-open'] : ''}`}
         onClick={onClose}
         aria-hidden='true'
       />
 
-      {/* 2. ドロワー本体：開閉アニメーションを適用するコンテナ */}
+      {/* ドロワー：本体 */}
       <aside
         className={`section-padding-x pb-10 ${styles.drawer} ${isOpen ? styles['is-open'] : ''}`}
         aria-labelledby='search-drawer-title'
       >
         <div className={styles.inner}>
-          {/* 閉じるボタンエリア */}
           <div className={styles.btnWrapper}>
             <button
               onClick={onClose}
@@ -76,7 +74,7 @@ export function SearchDrawer<T extends string>({
             </button>
           </div>
 
-          {/* 固定エリア：ヘッダー */}
+          {/* ドロワー：上部固定エリア */}
           <div className={styles.head}>
             <div className={styles.head__inner}>
               <h3 className={styles.label}>キーワード</h3>
@@ -91,9 +89,8 @@ export function SearchDrawer<T extends string>({
             </div>
           </div>
 
-          {/* スクロール可能エリア */}
+          {/* ドロワー：中部スクロール可能エリア */}
           <div className={styles.body}>
-            {/* カテゴリーセクション */}
             <section className={styles.section}>
               <h3 className={styles.label}>カテゴリー</h3>
               <CategoryList<T>
@@ -103,8 +100,6 @@ export function SearchDrawer<T extends string>({
                 counts={categoryCounts}
               />
             </section>
-
-            {/* タグセクション */}
             <section className={styles.section}>
               <h3 className={styles.label}>使用スキル</h3>
               <TagFilters
@@ -115,7 +110,7 @@ export function SearchDrawer<T extends string>({
             </section>
           </div>
 
-          {/* 下部エリア：WORKS特有の注釈などをProps経由で表示 [16] */}
+          {/* ドロワー：下部エリア、WORKS特有の注釈などをProps経由で表示 */}
           {footerNote && (
             <div className={styles.foot}>
               <p className={styles.foot__text}>{footerNote}</p>

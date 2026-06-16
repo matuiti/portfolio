@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { SubButton } from "@/components/ui/Buttons/SubButton";
-import { Mail, GitHub } from "@/components/ui/Icons";
-import styles from "./AboutSection.module.scss";
-import { siteConfig } from "@/data/site-config";
+import Image from 'next/image';
+import { SectionTitle } from '@/components/ui/SectionTitle';
+import { SubButton } from '@/components/ui/Buttons/SubButton';
+import { Mail, GitHub } from '@/components/ui/Icons';
+import styles from './AboutSection.module.scss';
+import { SITE_CONFIG } from '@/data/site';
 
 const PROFILE_DATA = {
   jobTitle: 'WEBフロントエンドエンジニア',
@@ -27,17 +27,17 @@ const PROFILE_DATA = {
 export const AboutSection = () => {
   return (
     <section
-      id="about"
-      className="section-padding-y section-padding-x bg-white js-fuwa-fade"
+      id='about'
+      className='section-padding-y section-padding-x bg-white js-fuwa-fade'
     >
-      <div className="container-center">
+      <div className='container-center'>
         <div className={styles.inner}>
           {/* 2. セクションタイトル */}
           <div className={`${styles.titleArea}`}>
             <SectionTitle
-              enTitle="about"
-              jpTitle="私について"
-              variant="underlined"
+              enTitle='about'
+              jpTitle='私について'
+              variant='underlined'
             />
           </div>
 
@@ -53,7 +53,7 @@ export const AboutSection = () => {
               alt={PROFILE_DATA.name}
               fill
               className={styles.image}
-              sizes="(max-width: 839px) 100vw, 1px"
+              sizes='(max-width: 839px) 100vw, 1px'
             />
           </div>
 
@@ -64,7 +64,7 @@ export const AboutSection = () => {
               alt={PROFILE_DATA.name}
               fill
               className={styles.image}
-              sizes="(min-width: 840px) 570px, 1px"
+              sizes='(min-width: 840px) 570px, 1px'
             />
           </div>
 
@@ -74,14 +74,14 @@ export const AboutSection = () => {
           {/* 5. ボタンエリア */}
           <div className={styles.buttonArea}>
             <SubButton
-              href={siteConfig.links.github}
+              href={SITE_CONFIG.links.github}
               leftIcon={GitHub}
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
             >
               GitHub
             </SubButton>
-            <SubButton href={siteConfig.links.contact} leftIcon={Mail}>
+            <SubButton href={SITE_CONFIG.links.contact} leftIcon={Mail}>
               Contact
             </SubButton>
           </div>

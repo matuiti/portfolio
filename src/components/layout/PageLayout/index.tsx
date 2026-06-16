@@ -1,21 +1,21 @@
 // src/components/layout/PageLayout/index.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Header } from "../Header";
-import { Footer } from "../Footer";
-import { MobileDrawerMenu } from "../MobileDrawerMenu";
-import { PageTopButton } from "@/components/ui/Buttons/PageTopButton";
+import { useState } from 'react';
+import { Header } from '../Header';
+import { Footer } from '../Footer';
+import { MobileDrawerMenu } from '../MobileDrawerMenu';
+import { PageTopButton } from '@/components/ui/Buttons/PageTopButton';
 
 export function PageLayout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex flex-col h-full min-h-dvh">
-      <Header onMenuOpen={() => setIsMenuOpen(true)} />
+    <div className='flex flex-col h-full min-h-dvh'>
+      <Header onMenuOpen={() => setIsMenuOpen(!isMenuOpen)} />
       <MobileDrawerMenu
         isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
+        onClose={() => setIsMenuOpen(!isMenuOpen)}
       />
       <main>{children}</main>
       <Footer />
