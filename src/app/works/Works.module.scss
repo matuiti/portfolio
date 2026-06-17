@@ -1,5 +1,5 @@
 // src/app/works/Works.module.scss
-@use "../../styles/" as *;
+@use '../../styles/' as *;
 
 .pageDescription {
   margin-top: calc(10 / 16 * 1rem);
@@ -14,7 +14,7 @@
   @include mq(tablet) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @include mq(default) {
+  @include mq(base) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-top: calc(50 / 16 * 1rem);
   }
@@ -22,7 +22,7 @@
 
 .card {
   max-width: 100%;
-  @include mq("default") {
+  @include mq('default') {
     max-width: calc(280 / 16 * 1rem);
   }
 }

@@ -1,8 +1,8 @@
 $breakpoints: (
-  "mini": "calc(350 / 16 * 1em)",    // 350px
-  "mobile": "calc(540 / 16 * 1em)",  // 540px
-  "tablet": "calc(840 / 16 * 1em)",  // 840px
-  "small": "calc(1140 / 16 * 1em)",  // 1140px
-  "default": "calc(1280 / 16 * 1em)",// 1280px
-  "large": "calc(1920 / 16 * 1em)"   // 1920px
-)  !default;
+  'mini': 'calc(350 / 16 * 1em)',
+  'mobile': 'calc(540 / 16 * 1em)',
+  'tablet': 'calc(840 / 16 * 1em)',
+  'small': 'calc(1140 / 16 * 1em)',
+  'base': 'calc(1280 / 16 * 1em)',
+  'large': 'calc(1920 / 16 * 1em)',
+) !default;

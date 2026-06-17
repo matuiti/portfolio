@@ -6,21 +6,16 @@
 @source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 
-:root {
-  --color-bg-gradation: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
-  --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
-  --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
-}
-
 /* 2. プロジェクト専用テーマ設定 */
 @theme {
   /* --- ブレイクポイント (ユーザーのフォントサイズ設定に追従) --- */
-  --breakpoint-mini: calc(350 / 16 * 1em);
-  --breakpoint-mobile: calc(540 / 16 * 1em);
-  --breakpoint-tablet: calc(840 / 16 * 1em);
-  --breakpoint-small: calc(1140 / 16 * 1em);
-  --breakpoint-default: calc(1280 / 16 * 1em);
-  --breakpoint-large: calc(1920 / 16 * 1em);
+  --breakpoint-*: initial; /* 本家（Tailwind）のブレークポイントを一括削除 */
+  --breakpoint-mini: 21.875em; /* 350 / 16 */
+  --breakpoint-mobile: 33.75em; /* 540 / 16 */
+  --breakpoint-tablet: 52.5em; /* 840 / 16 */
+  --breakpoint-small: 71.25em; /* 1140 / 16 */
+  --breakpoint-base: 80em; /* 1280 / 16 (defaultを回避) */
+  --breakpoint-large: 120em; /* 1920 / 16 */
 
   /* --- ブランドカラー --- */
   --color-black: #0a0a0a;
@@ -31,16 +26,8 @@
   --color-red: #ff6262; /* エラー・必須項目 用 */
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);
 
-  /* ニュートラル系（スクロールインジケーター等で使用） */
-  --color-neutral-100: #f5f5f5;
-  --color-neutral-200: #e5e5e5;
-  --color-neutral-500: #737373;
-  --color-neutral-900: #171717;
-
   /* --- タイポグラフィ：Next.js Fontと連動 --- */
   --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
-
-  /* --- カスタムスペーシング (remを使用: デザイン上のpx根拠を明示) --- */
 
   /* ロゴ幅 */
   --spacing-logo-small: calc(120 / 16 * 1rem);
@@ -49,12 +36,6 @@
   /* ヘッダー高 */
   --spacing-header-mini: calc(65 / 16 * 1rem);
   --spacing-header-small: calc(90 / 16 * 1rem);
-
-  /* メインビジュアル(MV)高：各デバイスの最小高さ */
-  /* --spacing-mv-height-mini: calc(570 / 16 * 1rem);
-  --spacing-mv-height-mobile: calc(650 / 16 * 1rem);
-  --spacing-mv-height-tablet: calc(600 / 16 * 1rem);
-  --spacing-mv-height-small: calc(640 / 16 * 1rem); */
 
   /* セクション余白 */
   --spacing-section-padding-y-mini: calc(100 / 16 * 1rem);
@@ -83,8 +64,8 @@
   --z-index-modal: 120;
 
   /* --- シャドー --- */
-  --shadow-default: var(--shadow-default);
-  --shadow-card: var(--shadow-card);
+  --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
 
   /* --- ブラー --- */
   --backdrop-blur-default: 10px;
@@ -97,7 +78,7 @@
   --opacity-hover: 0.8;
 
   /* --- グラデーション --- */
-  --background-image-bg-gradation: var(--color-bg-gradation);
+  --color-gradation: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
 }
 
 /* 3. ベーススタイルの定義 */
@@ -124,36 +105,46 @@
   h6 {
     @apply font-bold;
   }
+
+  /* スクロールバー制御 (Firefox) */
+  @supports (scrollbar-width: thin) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb) transparent;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 100vmax;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 }
 
 /* 4. カスタムユーティリティ */
 @layer utilities {
   /* 共通セクション余白：カスケード順序を保証する実装 */
   .section-padding-x {
-    /* 1. px根拠を明示しつつ rem 換算を行う (プロジェクト規約) */
-    /* デフォルト (mini: 350px〜) */
-    --section-px: 15;
-    padding-inline: calc(var(--section-px) / 16 * 1rem);
-
-    /* 2. メディアクエリを順序通りに記述し、詳細度を固定する */
-
-    /* mobile (540px〜) */
-    @media (min-width: 33.75em) {
-      /* 540px / 16 */
-      --section-px: 20;
-    }
-
-    /* tablet (840px〜) */
-    @media (min-width: 52.5em) {
-      /* 840px / 16 */
-      --section-px: 30;
-    }
-
-    /* small (1140px〜) */
-    @media (min-width: 71.25em) {
-      /* 1140px / 16 */
-      --section-px: 40;
-    }
+    @apply px-[calc(15/16*1rem)]
+           mobile:px-[calc(20/16*1rem)]
+           tablet:px-[calc(30/16*1rem)]
+           small:px-[calc(40/16*1rem)];
   }
 
   .section-padding-y {
@@ -170,38 +161,10 @@
     pointer-events: none; /* アニメーション完了までクリックさせない場合 */
   }
 
-  /* スクロールバー制御 (Firefox) */
-  @supports (scrollbar-width: thin) {
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: var(--scrollbar-thumb) transparent;
-    }
-  }
-
-  /* Webkit系スクロールバー設定 */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
-    border-radius: 100vmax;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar-thumb-hover);
-  }
-
   /* ホバー時のみ表示するカスタムスクロールバー */
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
-
   .custom-scrollbar:hover::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
   }

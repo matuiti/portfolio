@@ -49,7 +49,7 @@
     padding-right: 0;
   }
 
-  @include mq(default) {
+  @include mq(base) {
     margin-top: calc(4 / 16 * 1rem);
     max-width: calc(1200 / 16 * 1rem);
   }
@@ -108,7 +108,7 @@
   }
 
   // Default (1280px〜)
-  @include mq(default) {
+  @include mq(base) {
     font-size: calc(70 / 16 * 1rem);
   }
 }
@@ -126,7 +126,7 @@
   }
 
   // Default (1280px〜)
-  @include mq(default) {
+  @include mq(base) {
     font-size: calc(20 / 16 * 1rem);
   }
 }
@@ -165,7 +165,7 @@
   }
 
   /* Default */
-  @include mq(default) {
+  @include mq(base) {
     right: 1.5%;
   }
 
