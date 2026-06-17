@@ -60,15 +60,26 @@ export const WorksSection = () => {
 
           {/* 実績グリッド表示 */}
           <div className={styles.cards}>
-            {displayWorks.map((work) => (
-              <WorkCard
-                key={work.id}
-                work={work}
-                onClick={() => setSelectedWork(work)}
-                onCategoryClick={(cat) => setActiveCategory(cat)}
-                className='js-fuwa-fade'
-              />
-            ))}
+            {displayWorks.length ? (
+              displayWorks.map((work) => (
+                <WorkCard
+                  key={work.id}
+                  work={work}
+                  onClick={() => setSelectedWork(work)}
+                  onCategoryClick={(cat) => setActiveCategory(cat)}
+                  className='js-fuwa-fade'
+                />
+              ))
+            ) : (
+              <div className='py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]'>
+                <p className='text-dark-gray font-bold'>
+                  該当する実績は見つかりませんでした。
+                </p>
+                <p className='text-[calc(14/16*1rem)] text-dark-gray mt-[calc(8/16*1rem)]'>
+                  条件を変えて再度お試しください。
+                </p>
+              </div>
+            )}
 
             {/* ボタンをグリッドの最後の子要素として配置 */}
             <div className={`${styles.moreButtonWrapper} js-fuwa-fade`}>
@@ -87,7 +98,6 @@ export const WorksSection = () => {
               work={selectedWork}
               allFilteredWorks={displayWorks}
               onNavigate={setSelectedWork}
-              // 以下の2行を追加することでエラーを解消し、遷移機能を持たせる
               onCategoryClick={handleModalCategoryClick}
               onTagClick={handleModalTagClick}
             />

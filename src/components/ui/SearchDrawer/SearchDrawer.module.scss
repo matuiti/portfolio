@@ -8,7 +8,7 @@
 .root {
   position: fixed;
   inset: 0;
-  z-index: var(--z-index-drawer);
+  z-index: 110;
   pointer-events: none;
   visibility: hidden;
 
@@ -22,7 +22,6 @@
   position: absolute;
   inset: 0;
   background-color: var(--color-menu-backdrop);
-  // backdrop-filter: blur(var(--backdrop-blur-default));
   opacity: 0;
   transition: all 0.5s ease-in;
   cursor: pointer;
@@ -45,7 +44,7 @@
   flex-direction: column;
   justify-content: start;
   
-  // 開閉アニメーションの設定 [3]
+  // 開閉アニメーションの設定
   transform: translateX(100%);
   opacity: 0;
   transition: all 0.7s ease;
@@ -69,8 +68,8 @@
 }
 
 .closeBtn {
-  width: calc(40 / 16 * 1rem); // w-10 相当 [3]
-  height: calc(40 / 16 * 1rem); // h-10 相当 [3]
+  width: calc(40 / 16 * 1rem);
+  height: calc(40 / 16 * 1rem);
   display: flex;
   align-items: center;
   justify-content: center;

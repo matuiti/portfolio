@@ -2,33 +2,23 @@
 @use '../../../../styles' as *;
 
 .mvSectionContainer {
-  $header-mini: 65;
-  $header-small: 90;
+  $min-height-mini: 570;
+  $min-height-mobile: 650;
+  $min-height-tablet: 600;
+  $min-height-small: 640;
   // 1. 基本サイズ (Mini: 350px〜)
-  $min-height: 570 + $header-mini;
-  min-height: calc($min-height / 16 * 1rem);
-  padding-top: calc($header-mini / 16 * 1rem);
-
+  min-height: calc($min-height-mini / 16 * 1rem);
   // 2. Mobile (540px〜)
   @include mq(mobile) {
-    $min-height: 650 + $header-mini;
-    min-height: calc($min-height / 16 * 1rem);
+    min-height: calc($min-height-mobile / 16 * 1rem);
   }
-
   // 3. Tablet (840px〜)
   @include mq(tablet) {
-    $min-height: 600 + $header-mini;
-    min-height: calc($min-height / 16 * 1rem);
+    min-height: calc($min-height-tablet / 16 * 1rem);
   }
-
   // 4. Small (1140px〜)
   @include mq(small) {
-    $min-height: 640 + $header-small;
-    min-height: calc($min-height / 16 * 1rem);
-    padding-top: calc(
-      $header-small / 16 * 1rem
-    ); // pt-header-small (ヘッダー高: 90px)
-    // padding-top: calc(170 / 16 * 1rem);
+    min-height: calc($min-height-small / 16 * 1rem);
   }
 }
 

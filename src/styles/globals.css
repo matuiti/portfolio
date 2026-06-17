@@ -1,12 +1,12 @@
-/* 全てのTailwind設定（@theme）とベーススタイルをここに集約 */
-@import "tailwindcss";
+/* Tailwind（@theme）とスタイルのベースを集約 */
+
+@import 'tailwindcss';
 
 /* 1. スキャン対象(Tailwind)の指定：src内の全コンポーネントを対象 */
 @source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 
 :root {
-  /* プロジェクト規約に基づき、定義済みの色変数を使用 */
   --color-bg-gradation: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
   --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
   --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
@@ -14,7 +14,7 @@
 
 /* 2. プロジェクト専用テーマ設定 */
 @theme {
-  /* --- ブレイクポイント (emを使用: ユーザーのフォントサイズ設定に追従) --- */
+  /* --- ブレイクポイント (ユーザーのフォントサイズ設定に追従) --- */
   --breakpoint-mini: calc(350 / 16 * 1em);
   --breakpoint-mobile: calc(540 / 16 * 1em);
   --breakpoint-tablet: calc(840 / 16 * 1em);
@@ -22,14 +22,13 @@
   --breakpoint-default: calc(1280 / 16 * 1em);
   --breakpoint-large: calc(1920 / 16 * 1em);
 
-  /* --- ブランドカラー：実装コード内で頻出する色を定義 --- */
+  /* --- ブランドカラー --- */
   --color-black: #0a0a0a;
   --color-white: #ffffff;
   --color-dark-gray: #757575;
   --color-medium-gray: #d1d5db;
-  /* --color-light-gray: #f3f4f6; */
   --color-light-gray: #f2f2f0;
-  --color-red: #ff6262; /* エラー・必須項目用 */
+  --color-red: #ff6262; /* エラー・必須項目 用 */
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);
 
   /* ニュートラル系（スクロールインジケーター等で使用） */
@@ -52,16 +51,12 @@
   --spacing-header-small: calc(90 / 16 * 1rem);
 
   /* メインビジュアル(MV)高：各デバイスの最小高さ */
-  --spacing-mv-height-mini: calc(570 / 16 * 1rem);
+  /* --spacing-mv-height-mini: calc(570 / 16 * 1rem);
   --spacing-mv-height-mobile: calc(650 / 16 * 1rem);
   --spacing-mv-height-tablet: calc(600 / 16 * 1rem);
-  --spacing-mv-height-small: calc(640 / 16 * 1rem);
+  --spacing-mv-height-small: calc(640 / 16 * 1rem); */
 
   /* セクション余白 */
-  /* --spacing-section-padding-x-mini: calc(15 / 16 * 1rem);
-  --spacing-section-padding-x-mobile: calc(20 / 16 * 1rem);
-  --spacing-section-padding-x-tablet: calc(30 / 16 * 1rem);
-  --spacing-section-padding-x-small: calc(40 / 16 * 1rem); */
   --spacing-section-padding-y-mini: calc(100 / 16 * 1rem);
   --spacing-section-padding-y-small: calc(120 / 16 * 1rem);
 
@@ -77,17 +72,15 @@
   --spacing-container-max: calc(1200 / 16 * 1rem);
   --spacing-mobile-drawer-max-w: calc(500 / 16 * 1rem);
 
-  /* --- z-index の階層管理 --- */
+  /* --- z-index --- */
   --z-index-base: 1;
   --z-index-dropdown: 10;
   --z-index-image-overlay: 10;
   --z-index-sticky: 20;
   --z-index-pagetop: 30;
   --z-index-header: 50;
-  --z-index-overlay: 100;
   --z-index-drawer: 110;
-  --z-index-modal: 200;
-  --z-index-popover: 300;
+  --z-index-modal: 120;
 
   /* --- シャドー --- */
   --shadow-default: var(--shadow-default);

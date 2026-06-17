@@ -18,7 +18,7 @@ export const WORK_CATEGORIES: { label: string; value: WorkFilterCategory }[] = [
  * 全制作実績データ
  * role, duration, disclosureLevel は必須入力。
  */
-export const ALL_WORKS: Work[] = [
+export const ALL_WORKS: Work[] | [] = [
   {
     id: 'portfolio-site',
     title: 'ポートフォリオサイト',

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className='w-full overflow-hidden'>
       {/* スクロール位置検知アニメーション制御 */}
-      <ScrollReveal />;
+      <ScrollReveal />
 
       {/* 1. MV：初期演出を含む */}
       <MainVisual />

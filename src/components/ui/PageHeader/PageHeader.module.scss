@@ -2,9 +2,6 @@
 @use "../../../styles" as *;
 
 .container {
-  $headerHeightMini: 65;
-  $headerHeightSmall: 90;
-  margin-top: $headerHeightMini;
   position: relative;
   display: flex;
   align-items: center;
@@ -13,9 +10,6 @@
   background-size: cover;
   background-position: center;
   min-height: calc(200 / 16 * 1rem);
-  @include mq("small") {
-    margin-top: $headerHeightSmall;
-  }
 }
 
 .overlay {
