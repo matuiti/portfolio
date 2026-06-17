@@ -20,11 +20,9 @@ import styles from "./Works.module.scss";
  * ストアの状態管理と、各 UI パーツへのロジック注入を統括します。
  */
 function WorksContent() {
-  // 1. ストアから状態とアクションを取得
   const store = useWorkStore();
-  const filteredWorks = useFilteredWorks(); // フィルタリング済みデータ
+  const filteredWorks = useFilteredWorks();
 
-  // 2. 共通 URL 同期システム（URLパラメータとストアの双方向同期）
   useCommonURLSync(
     {
       category: store.selectedCategory,
@@ -40,7 +38,6 @@ function WorksContent() {
     },
   );
 
-  // 3. ローカル状態：現在詳細を表示している実績
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
   // 4. 表示データの計算（ページネーション適用）
@@ -113,40 +110,34 @@ function WorksContent() {
 
   return (
     <WorksLayout>
-      {/* ページヘッダー */}
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
         bgImage={PAGE_HEADER_DATA.images}
       />
-      {/* パンくずリスト */}
       <div className="section-padding-x">
         <Breadcrumbs items={breadcrumbItems} />
       </div>
       {/* コンテンツ */}
       <div className="section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray">
-        {/* タイトル、検索ヒット件数 */}
         <TitleAndCount title={displayTitle} count={totalHitCount} />
-        {/* 補足文 */}
         <p className={styles.pageDescription}>
-          機密保持契約を遵守するため、実案件の一部については名称や画像を伏せ、内容を抽象化して掲載しております。
+          機密保持契約を遵守するため、実案件の一部については内容を抽象化して掲載しております。
         </p>
-        {/* 実績グリッド一覧 */}
-        {displayWorks.length > 0 ? (
+        {/* 実績カードグリッド */}
+        {displayWorks.length ? (
           <div className={styles.cards}>
             {displayWorks.map((work) => (
               <WorkCard
                 key={work.id}
                 work={work}
                 onClick={() => setSelectedWork(work)}
-                // カード内のカテゴリクリック時もストアを更新
                 onCategoryClick={(cat) => store.selectOnlyCategory(cat)}
                 className={styles.card}
               />
             ))}
           </div>
         ) : (
-          /* 検索結果ゼロ時の表示 */
           <div className="py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]">
             <p className="text-dark-gray font-bold">
               該当する実績は見つかりませんでした。
