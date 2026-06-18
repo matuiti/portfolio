@@ -11,20 +11,19 @@ if (typeof window !== 'undefined') {
 }
 
 type SkillCardProps = {
-  group: SkillCardData;
+  card: SkillCardData;
 };
 
-export const SkillCard = ({ group }: SkillCardProps) => {
+export const SkillCard = ({ card }: SkillCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const items = cardRef.current?.querySelectorAll(`.${styles.skillItem}`);
-      if (!items) return;
+      const infoItems = cardRef.current?.querySelectorAll(`.${styles.skillItem}`);
+      if (!infoItems) return;
 
       const TOTAL_DURATION = 2;
       const STAGGER_DELAY = 0.2;
-
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: cardRef.current,
@@ -33,18 +32,19 @@ export const SkillCard = ({ group }: SkillCardProps) => {
         },
       });
 
-      items.forEach((item, i) => {
-        const bar = item.querySelector(`.${styles.gaugeBar}`);
-        const numberSpan = item.querySelector(`.${styles.skillLevel}`);
+      infoItems.forEach((infoItem, i) => {
+        const bar = infoItem.querySelector(`.${styles.gaugeBar}`);
+        const numberSpan = infoItem.querySelector(`.${styles.skillLevel}`);
+        if (!bar) return;
+
         const targetValue = parseInt(
-          bar?.getAttribute('data-percent') || '0',
+          bar.getAttribute('data-percent') || '0',
           10,
         );
-
-        const counter = { value: 0 };
         const startTime = i * STAGGER_DELAY;
+        const counter = { value: 0 };
 
-        // ゲージの伸び
+        // 1. ゲージの伸び
         tl.to(
           bar,
           {
@@ -55,7 +55,7 @@ export const SkillCard = ({ group }: SkillCardProps) => {
           startTime,
         );
 
-        // 数値のカウントアップ
+        // 2. 数値のカウントアップ ＋ ARIA属性更新
         tl.to(
           counter,
           {
@@ -63,9 +63,14 @@ export const SkillCard = ({ group }: SkillCardProps) => {
             duration: TOTAL_DURATION,
             ease: 'power4.out',
             onUpdate: () => {
+              const currentPercent = Math.ceil(counter.value);
+
+              // 視覚的な数字を更新
               if (numberSpan) {
-                numberSpan.textContent = `${Math.ceil(counter.value)}%`;
+                numberSpan.textContent = `${currentPercent}%`;
               }
+              // スクリーンリーダー用のリアルタイムな現在値も一緒に更新
+              bar.setAttribute('aria-valuenow', String(currentPercent));
             },
           },
           startTime,
@@ -73,27 +78,45 @@ export const SkillCard = ({ group }: SkillCardProps) => {
       });
     },
     {
-      dependencies: [group],
+      dependencies: [card],
       scope: cardRef,
     },
   );
 
-  return (
-    <div className={styles.card} ref={cardRef}>
-      <h3 className={styles.cardTitle}>{group.title}</h3>
-      <ul className={styles.skillList}>
-        {group.items.map((item) => (
-          <li key={item.name} className={styles.skillItem}>
-            <div className={styles.skillInfo}>
-              <span className={styles.skillName}>{item.name}</span>
-              <span className={styles.skillLevel}>0%</span>
-            </div>
-            <div className={styles.gaugeTrack}>
-              <div className={styles.gaugeBar} data-percent={item.percentage} />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+ return (
+   <div className={styles.card} ref={cardRef}>
+     <h3 className={styles.cardTitle}>{card.title}</h3>
+     <ul className={styles.skillList}>
+       {card.infoItems.map((infoItem) => {
+         const labelId = `skill-${card.title}-${infoItem.name}`.replace(
+           /\s+/g,
+           '-',
+         );
+
+         return (
+           <li key={infoItem.name} className={styles.skillItem}>
+             <div className={styles.skillInfo}>
+               <span id={labelId} className={styles.skillName}>
+                 {infoItem.name}
+               </span>
+               <span className={styles.skillLevel}>0%</span>
+             </div>
+             <div className={styles.gaugeTrack}>
+               <div
+                 className={styles.gaugeBar}
+                 data-percent={infoItem.percentage}
+                 role='progressbar'
+                 aria-labelledby={labelId}
+                 aria-valuenow={infoItem.percentage}
+                 aria-valuemin={0}
+                 aria-valuemax={100}
+               />
+             </div>
+           </li>
+         );
+       })}
+     </ul>
+   </div>
+ );
+
 };

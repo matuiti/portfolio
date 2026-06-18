@@ -33,17 +33,12 @@ const sectionTitleStyles = tv({
       },
     },
   },
-  defaultVariants: {
-    variant: 'default',
-  },
 });
-
-type SectionTitleStylesProps = VariantProps<typeof sectionTitleStyles>;
 
 type SectionTitleProps = {
   enTitle: string;
   jpTitle: string;
-  variant?: SectionTitleStylesProps['variant'];
+  variant?: VariantProps<typeof sectionTitleStyles>['variant'];
   className?: string;
   enClassName?: string;
   jpClassName?: string;
@@ -52,7 +47,7 @@ type SectionTitleProps = {
 export const SectionTitle = ({
   enTitle,
   jpTitle,
-  variant,
+  variant = 'default',
   className,
   enClassName,
   jpClassName,
@@ -69,14 +64,9 @@ export const SectionTitle = ({
 
   return (
     <div className={base({ className })}>
-      {/* 英語タイトル */}
       <span className={enStyle({ className: enClassName })}>{enTitle}</span>
-
-      {/* 日本語タイトルエリア */}
       <div className={jpWrapper()}>
-        {/* 丸ポチ：centerタイプでは自動的に hidden になります */}
         <span className={bullet()} aria-hidden='true' />
-        {/* 日本語タイトル */}
         <h2 className={jpStyle({ className: jpClassName })}>{jpTitle}</h2>
       </div>
     </div>

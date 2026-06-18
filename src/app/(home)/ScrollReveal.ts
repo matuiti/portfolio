@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useCallback, useRef } from 'react';
 import gsap from 'gsap';
 import { useUIStore } from '@/store/useUIStore';

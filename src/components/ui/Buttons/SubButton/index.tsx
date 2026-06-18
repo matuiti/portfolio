@@ -1,12 +1,6 @@
-// src/components/ui/Buttons/SubButton/index.tsx
-
+'use client';
 import { tv, type VariantProps } from 'tailwind-variants';
-
 import Link from 'next/link';
-
-/**
- * サブボタンのスタイル定義
- */
 export const subButtonStyles = tv({
   base: 'inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 cursor-pointer hover:opacity-hover',
   variants: {
@@ -46,9 +40,6 @@ type SubButtonProps =
       href?: never;
     } & React.ButtonHTMLAttributes<HTMLButtonElement>);
 
-/**
- * SubButtonコンポーネント
- */
 export const SubButton = (props: SubButtonProps) => {
   const {
     className,
@@ -57,13 +48,11 @@ export const SubButton = (props: SubButtonProps) => {
     leftIcon: Icon,
     children,
     href,
-    isSubmit: isSubmitProp, // propsから抽出して、DOMへ流れるのを防ぐ
+    isSubmit: isSubmitProp,
     ...rest
   } = props;
 
   const iconColor = 'white';
-
-  // 型ガードを用いて type="submit" またはプロップスによる判定を行う
   const isSubmit =
     isSubmitProp ||
     (!href &&
@@ -71,7 +60,7 @@ export const SubButton = (props: SubButtonProps) => {
         'submit');
 
   const styles = subButtonStyles({ variant, isSubmit, className });
-
+  
   const content = (
     <>
       {Icon && <Icon size={iconSize} color={iconColor} className='shrink-0' />}

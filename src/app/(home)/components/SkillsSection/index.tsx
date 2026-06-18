@@ -1,39 +1,8 @@
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
+import { SKILL_CARDS_DATA } from './data';
 import { SkillCard } from './SkillCard';
-import { SkillCardData } from './types';
 import styles from './SkillsSection.module.scss';
-
-// スキルデータ（トップページ固有）
-const SKILL_CARDS_DATA: SkillCardData[] = [
-  {
-    title: 'WEBサイト',
-    items: [
-      { name: 'HTML', percentage: 95 },
-      { name: 'CSS / SASS', percentage: 95 },
-      { name: 'JavaScript', percentage: 90 },
-      { name: 'WordPress / PHP', percentage: 85 },
-    ],
-  },
-  {
-    title: 'ライブラリ、フレームワーク',
-    items: [
-      { name: 'TypeScript', percentage: 85 },
-      { name: 'Next.js / React', percentage: 85 },
-      { name: 'TailwindCSS', percentage: 85 },
-      { name: 'jQuery', percentage: 80 },
-    ],
-  },
-  {
-    title: 'ツール',
-    items: [
-      { name: 'Figma', percentage: 85 },
-      { name: 'Git / GitHub', percentage: 85 },
-      { name: '生成AI', percentage: 85 },
-      { name: 'Slack / Chatwork', percentage: 80 },
-    ],
-  },
-];
 
 export const SkillsSection = () => {
   return (
@@ -48,16 +17,15 @@ export const SkillsSection = () => {
               className='js-fuwa-fade'
             />
             <p className={`${styles.description} js-fuwa-fade`}>
-              常に新しい技術の習得に取り組み、専門性を磨いて参ります。
+              専門技術を縦に深めつつ、周辺の知見を獲得する横への拡充も楽しみます。
             </p>
           </div>
-
           <div className={`${styles.cardGrid} js-fuwa-fade`}>
-            {SKILL_CARDS_DATA.map((group) => (
-              <SkillCard key={group.title} group={group} />
+            {SKILL_CARDS_DATA.map((card) => (
+              <SkillCard key={card.title} card={card} />
             ))}
             <div className={`${styles.buttonWrapper} js-fuwa-fade`}>
-              <MainButton variant='underline' href='/skills'>
+              <MainButton variant='underline' href='/skills' aria-label='スキル一覧を見る'>
                 一覧を見る
               </MainButton>
             </div>

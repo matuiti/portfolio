@@ -28,7 +28,7 @@ export const SkillCard = ({ item }: SkillCardProps) => {
       const isOverflowing = el.scrollHeight > tripleLineHeight - 1;
 
       setHasOverflow(isOverflowing);
-      
+
       if (!isOverflowing) {
         setIsExpanded((prev) => {
           if (prev) return false;

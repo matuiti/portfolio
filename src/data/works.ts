@@ -2,7 +2,7 @@
 import { Work, WorkFilterCategory } from '@/types/work';
 
 /**
- * WORKSセクション全体で使用する共通カテゴリ定義 (SSoT)
+ * WORKSセクションの共通カテゴリ定義 (SSoT)
  */
 export const WORK_CATEGORIES: { label: string; value: WorkFilterCategory }[] = [
   { label: 'すべて', value: 'all' },
@@ -15,7 +15,7 @@ export const WORK_CATEGORIES: { label: string; value: WorkFilterCategory }[] = [
 ];
 
 /**
- * 全制作実績データ
+ * 実績データ
  * role, duration, disclosureLevel は必須入力。
  */
 export const ALL_WORKS: Work[] | [] = [

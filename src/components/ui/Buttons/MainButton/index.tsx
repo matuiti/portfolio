@@ -1,84 +1,53 @@
-// src/components/ui/Buttons/MainButton/index.tsx
-
 import { tv, type VariantProps } from 'tailwind-variants';
-
-import Link from 'next/link'; // Linkをインポート
+import Link from 'next/link';
 import { ArrowRight } from '@/components/ui/Icons';
 
-/**
- * ボタンのスタイル定義
- * 既存のスタイル設定を一切変更せずに維持します [1, 2]。
- */
 export const mainButtonStyles = tv({
   slots: {
     base: 'group inline-flex items-center justify-center font-bold transition-all active:scale-95 disabled:opacity-50 cursor-pointer',
-    /** 縦線：border-current で文字色と同期 */
     separator: 'h-5.5 border-l border-current',
     icon: 'transition-transform duration-300 group-hover:translate-x-1 shrink-0',
   },
   variants: {
     variant: {
-      /** ロング：背景薄灰、文字黒。テキストとアイコンを両端に配置 */
       long: {
         base: 'justify-end bg-black text-white px-2 py-3.25 w-full rounded-lg',
         separator: 'ml-6 mr-1.75',
       },
-      /** ショート：背景黒、文字白。標準的なパディング */
       short: {
         base: 'bg-black text-white py-3.25 pr-4 pl-7.5 rounded-lg',
         separator: 'ml-3 mr-1.75',
       },
-      /** 下線：背景なし。縦線は表示されません */
       underline: {
         base: 'text-black border-b border-black px-0 pb-1',
         icon: 'ml-6',
       },
     },
   },
-  defaultVariants: {
-    variant: 'short',
-  },
 });
 
-/**
- * プロップスの定義
- * button属性からアンカー（Link）属性ベースへ変更し、hrefを追加します [3]。
- */
-type MainButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+type MainButtonProps = React.ComponentPropsWithoutRef<typeof Link> &
   VariantProps<typeof mainButtonStyles> & {
-    children: React.ReactNode;
-    href?: string; // hrefを必須に近い形で扱えるよう定義
+    href: string;
   };
 
-/**
- * MainButtonコンポーネント
- * 要素を button から Link に変更しました。
- */
 export const MainButton = ({
   variant = 'short',
-  href = '/', // デフォルト値を設定
+  href = '/',
   className,
   children,
   ...props
 }: MainButtonProps) => {
   const { base, separator, icon } = mainButtonStyles({ variant, className });
-
-  /**
-   * ArrowRight の色同期解決
-   * 既存のロジックを維持します [4]。
-   */
   const iconColor =
     variant === 'short' || variant === 'long' ? 'white' : 'black';
 
   return (
     <Link href={href} className={base()} {...props}>
       {children}
-
-      {/* ロングとショートの時のみ、テキストとアイコンの間に縦線を表示（既存ロジック） */}
       {(variant === 'long' || variant === 'short') && (
         <span className={separator()} aria-hidden='true' />
       )}
-
       <ArrowRight className={icon()} color={iconColor} />
     </Link>
   );

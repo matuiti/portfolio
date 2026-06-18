@@ -6,17 +6,16 @@
   $min-height-mobile: 650;
   $min-height-tablet: 600;
   $min-height-small: 640;
-  // 1. 基本サイズ (Mini: 350px〜)
   min-height: calc($min-height-mini / 16 * 1rem);
-  // 2. Mobile (540px〜)
+  // Mobile (540px〜)
   @include mq(mobile) {
     min-height: calc($min-height-mobile / 16 * 1rem);
   }
-  // 3. Tablet (840px〜)
+  // Tablet (840px〜)
   @include mq(tablet) {
     min-height: calc($min-height-tablet / 16 * 1rem);
   }
-  // 4. Small (1140px〜)
+  // Small (1140px〜)
   @include mq(small) {
     min-height: calc($min-height-small / 16 * 1rem);
   }
@@ -28,8 +27,6 @@
   margin-left: auto;
   margin-right: auto;
   padding-inline: 10%;
-  // padding-left: calc(43 / 16 * 1rem);
-  // padding-right: calc(43 / 16 * 1rem);
 
   @include mq(mobile) {
     padding-left: calc(48 / 16 * 1rem);
@@ -56,7 +53,6 @@
 }
 
 .mvContentWrapper {
-  // 基本スタイル (Base / Mini〜)
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,12 +75,10 @@
   // Small (1140px〜)
   @include mq(small) {
     gap: calc(40 / 16 * 1rem);
-    // margin-top: calc(96 / 16 * 1rem);
   }
 }
 
 .mainCopyText {
-  // 基本スタイル (Mobile未満 / Mini)
   color: var(--color-white);
   font-weight: 900;
   line-height: normal;
@@ -107,14 +101,13 @@
     font-size: calc(60 / 16 * 1rem);
   }
 
-  // Default (1280px〜)
+  // Base (1280px〜)
   @include mq(base) {
     font-size: calc(70 / 16 * 1rem);
   }
 }
 
 .subCopyText {
-  // 基本スタイル (Base / Mini〜Tablet)
   color: var(--color-white);
   letter-spacing: 0.1em;
   font-size: calc(14 / 16 * 1rem);
@@ -125,7 +118,7 @@
     font-size: calc(17 / 16 * 1rem);
   }
 
-  // Default (1280px〜)
+  // Base (1280px〜)
   @include mq(base) {
     font-size: calc(20 / 16 * 1rem);
   }
@@ -145,31 +138,25 @@
 
   position: absolute;
   bottom: 0;
-  /* Mini / Base */
   right: 7%;
 
-  /* Mobile */
   @include mq(mobile) {
     right: 5%;
   }
 
-  /* Tablet */
   @include mq(tablet) {
     right: 4.5%;
   }
 
-  /* Small */
   @include mq(small) {
     right: -1.3%;
     transform: translateX(calc(16 / 16 * 1rem));
   }
 
-  /* Default */
   @include mq(base) {
     right: 1.5%;
   }
 
-  /* Large */
   @include mq(large) {
     right: 1.3%;
   }
@@ -182,7 +169,6 @@
   text-transform: uppercase;
   writing-mode: vertical-rl;
   color: var(--color-white);
-  /* Small */
   @include mq(small) {
     font-size: calc(16 / 16 * 1rem);
   }
