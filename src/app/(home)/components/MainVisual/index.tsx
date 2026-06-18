@@ -1,6 +1,4 @@
-// src/app/(home)/components/MainVisual/index.tsx
 'use client';
-
 import { clsx } from 'clsx';
 import { useEffect, useRef } from 'react';
 import { useUIStore } from '@/store/useUIStore';

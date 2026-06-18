@@ -22,7 +22,7 @@
 
 .card {
   max-width: 100%;
-  @include mq('default') {
+  @include mq('base') {
     max-width: calc(280 / 16 * 1rem);
   }
 }

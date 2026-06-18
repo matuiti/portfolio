@@ -1,37 +1,36 @@
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .inner {
   display: grid;
   align-content: start;
   align-items: start;
-  // mini~tablet: 1カラム配置
   grid-template-areas:
-    "title"
-    "head"
-    "image-sp"
-    "desc"
-    "btns";
+    'title'
+    'head'
+    'image-sp'
+    'desc'
+    'btns';
   gap: 0;
 
-  @include mq("tablet") {
+  @include mq('tablet') {
     grid-template-columns: calc(350 / 16 * 1rem) 1fr;
     grid-template-rows: repeat(4, auto);
     grid-template-areas:
-      "image-pc title"
-      "image-pc head"
-      "image-pc desc"
-      "image-pc btns"
-      "image-pc ."; // 5行目（余白吸収用）
+      'image-pc title'
+      'image-pc head'
+      'image-pc desc'
+      'image-pc btns'
+      'image-pc .'; // 5行目（余白吸収用）
     column-gap: calc(40 / 16 * 1rem);
     align-content: start;
   }
 
-  @include mq("small") {
+  @include mq('small') {
     grid-template-columns: calc(400 / 16 * 1rem) 1fr;
     column-gap: calc(50 / 16 * 1rem);
   }
 
-  @include mq("default") {
+  @include mq('base') {
     grid-template-columns: calc(500 / 16 * 1rem) 1fr;
   }
 }
@@ -39,14 +38,14 @@
 // --- 表示制御 ---
 .isSP {
   display: block;
-  @include mq("tablet") {
+  @include mq('tablet') {
     display: none !important;
   }
 }
 
 .isPC {
   display: none !important;
-  @include mq("tablet") {
+  @include mq('tablet') {
     display: block !important;
   }
 }
@@ -62,7 +61,6 @@
   grid-area: head;
   font-size: calc(24 / 16 * 1rem);
   font-weight: 700;
-  // margin-top: 4px;
   line-height: 1.3;
   letter-spacing: 0.05em;
   margin-bottom: calc(20 / 16 * 1rem);
@@ -81,7 +79,7 @@
 
   &.isPC {
     grid-area: image-pc;
-    @include mq("tablet") {
+    @include mq('tablet') {
       width: 100%;
       aspect-ratio: 1 / 1;
       align-self: start;

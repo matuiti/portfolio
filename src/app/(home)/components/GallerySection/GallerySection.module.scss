@@ -1,4 +1,4 @@
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .sectionHead {
   display: flex;
@@ -6,7 +6,7 @@
   gap: calc(40 / 16 * 1rem);
   margin-bottom: calc(40 / 16 * 1rem);
 
-  @include mq("default") {
+  @include mq('base') {
     margin-bottom: calc(60 / 16 * 1rem);
   }
 }
