@@ -1,11 +1,9 @@
-// src/components/ui/SearchDrawer/index.tsx
 'use client';
-
 import { Close } from '@/components/ui/Icons';
 import { SearchBox } from '@/components/ui/SearchBox';
 import { CategoryList } from '@/components/ui/CategoryList';
 import { TagFilters } from '@/components/ui/TagFilters';
-import styles from './SearchDrawer.module.scss';
+import styles from './SearchDrawer.module.css';
 
 type CategoryItem<T extends string> = {
   label: string;

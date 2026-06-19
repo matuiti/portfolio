@@ -1,8 +1,6 @@
-// src/components/ui/TagFilters/index.tsx
-"use client";
-
-import { BaseTag } from "../BaseTag";
-import styles from "./TagFilters.module.scss";
+'use client';
+import { BaseTag } from '../BaseTag';
+import styles from './TagFilters.module.css';
 
 type TagFiltersProps = {
   tags: string[];
@@ -15,7 +13,7 @@ export function TagFilters({
   tags,
   selectedTags,
   onToggle,
-  className = "",
+  className = '',
 }: TagFiltersProps) {
   return (
     <div className={`${styles.container} ${className}`}>
@@ -25,8 +23,8 @@ export function TagFilters({
         return (
           <BaseTag
             key={tag}
-            shape="tag" // タグ形状（四角）を指定
-            hasHash={true} // ハッシュ有りの余白設定を適用
+            shape='tag'
+            hasHash={true}
             isActive={isActive}
             onClick={() => onToggle(tag)}
           >

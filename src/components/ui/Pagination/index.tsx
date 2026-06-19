@@ -1,12 +1,7 @@
 'use client';
-
 import { KeyboardArrowRight, MoreHoriz } from '@/components/ui/Icons';
-import styles from './Pagination.module.scss';
+import styles from './Pagination.module.css';
 
-/**
- * Pagination コンポーネントの型定義
- * プロジェクト規約に基づき interface ではなく type で定義 [1, 2]
- */
 type PaginationProps = {
   current: number;
   total: number;
@@ -14,13 +9,12 @@ type PaginationProps = {
 };
 
 export function Pagination({ current, total, onPageChange }: PaginationProps) {
-  // 1ページしかない場合は表示しない [3, 4]
   if (total <= 1) return null;
 
   /**
    * 表示するページ番号の範囲を計算するロジック
    * 要件：現在の番号を中心に最大3つまで。
-   * 例：現在が1なら [5-7]、現在が5なら [3, 8, 9]
+   * 例：現在が1なら [5-7]、現在が5なら
    */
   const getPageNumbers = () => {
     const half = 1; // 中心から左右1つずつ
@@ -49,7 +43,7 @@ export function Pagination({ current, total, onPageChange }: PaginationProps) {
   const handlePageClick = (page: number) => {
     if (page === current) return;
     onPageChange(page);
-    // ページ遷移時に最上部へスムーズスクロール [3, 10]
+    // ページ遷移時に最上部へスムーズスクロール
     window.scrollTo({
       top: 0,
       behavior: 'smooth',

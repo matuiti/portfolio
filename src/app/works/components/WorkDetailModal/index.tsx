@@ -1,6 +1,4 @@
-// src/app/works/components/WorkDetailModal/index.tsx
 'use client';
-
 import {
   useEffect,
   useRef,
@@ -9,10 +7,6 @@ import {
   useState,
   useMemo,
 } from 'react';
-// import Image from "next/image";
-import { Work } from '@/types/work';
-import styles from './WorkDetailModal.module.scss';
-import { CloseModal } from '@/components/ui/Icons/CloseModal';
 import {
   CarouselArrowRight,
   GitHub,
@@ -20,9 +14,12 @@ import {
   Launch,
   LibraryBooks,
 } from '@/components/ui/Icons';
+import { Work } from '@/types/work';
+import { CloseModal } from '@/components/ui/Icons/CloseModal';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { SafeImage } from '@/components/ui/SafeImage';
+import styles from './WorkDetailModal.module.css';
 
 type WorkDetailModalProps = {
   work: Work;
@@ -104,17 +101,16 @@ export const WorkDetailModal = ({
       >
         <header className={styles.header}>
           <div className={styles.inner}>
-            {/* 1. ラベル（タブレット以上で表示） */}
             <span className={styles.projectLabel}>該当プロジェクト</span>
 
-            {/* 2. カウンター（SPではアローに挟まれ、PCでは左側へ） */}
+            {/* カウンター（SPではアローに挟まれ、PCでは左側へ） */}
             <div className={styles.counter}>
               <span className={styles.current}>{displayIndex}</span>
               <span className={styles.separator}>/</span>
               <span className={styles.total}>{totalCount}</span>
             </div>
 
-            {/* 3. ナビゲーション（前へ） */}
+            {/* ナビゲーション（前へ） */}
             <button
               className={styles.prevBtn}
               onClick={() => prevWork && onNavigate(prevWork)}
@@ -123,10 +119,10 @@ export const WorkDetailModal = ({
               <KeyboardArrowRight direction='left' />
             </button>
 
-            {/* 縦の仕切り線（tablet以上で表示） */}
+            {/* 縦の仕切り線 */}
             <div className={styles.vLine} />
 
-            {/* 4. ナビゲーション（次へ） */}
+            {/* ナビゲーション（次へ） */}
             <button
               className={styles.nextBtn}
               onClick={() => nextWork && onNavigate(nextWork)}
@@ -135,7 +131,7 @@ export const WorkDetailModal = ({
               <KeyboardArrowRight />
             </button>
 
-            {/* 5. 閉じるボタン */}
+            {/* 閉じるボタン */}
             <button className={styles.closeBtn} onClick={onClose}>
               <CloseModal color='white' size='xl' />
             </button>
@@ -144,7 +140,6 @@ export const WorkDetailModal = ({
 
         <article className={`${styles.article} section-padding-x py-5`}>
           <div className={styles.inner}>
-            {/* 記事ヘッダーエリア */}
             <div className={styles.articleHead}>
               <div className={styles.categoryList}>
                 {work.category.map((cat) => (
@@ -153,7 +148,6 @@ export const WorkDetailModal = ({
                   </BaseTag>
                 ))}
               </div>
-              {/* --- タイトル --- */}
               <h2 className={styles.title}>{work.title}</h2>
               {/* --- 外部リンク --- */}
               <div className={styles.linkWrapper}>

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import styles from './ComingSoon.module.scss';
+import styles from './ComingSoon.module.css';
 
 const BG_IMAGE_PATH = '/assets/images/common/comingsoon.png';
 

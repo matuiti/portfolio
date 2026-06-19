@@ -11,7 +11,7 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { WORK_CATEGORIES } from '@/data/works';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
-import styles from './Works.module.scss';
+import styles from './Works.module.css';
 
 /**
  * WORKS ページのメインコンテンツコンポーネント
@@ -38,7 +38,7 @@ function WorksContent() {
 
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  // 4. 表示データの計算（ページネーション適用）
+  // 表示データの計算（ページネーション適用）
   const totalPages = Math.ceil(filteredWorks.length / store.itemsPerPage);
   const displayWorks = useMemo(() => {
     const start = (store.currentPage - 1) * store.itemsPerPage;

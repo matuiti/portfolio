@@ -1,6 +1,3 @@
-// src/app/privacy-policy/PrivacyPolicy.module.scss
-@use '../../styles' as *;
-
 .pageBody {
   width: 100%;
   background: var(--color-light-gray);
@@ -74,27 +71,23 @@
 }
 
 .list {
-  list-style: none; // デフォルトの黒丸（マーカー）を非表示にする
+  list-style: none;
   padding: calc(20 / 16 * 1rem);
   padding-left: calc(17 / 16 * 1rem);
   background-color: var(--color-light-gray);
 
   li {
     position: relative;
-    // ★文章とマーカーの距離：padding-left の数値で調整します
     padding-left: calc(13 / 16 * 1rem);
     line-height: 1.5;
     color: var(--color-black);
 
-    // 独自のマーカー（疑似要素）
     &::before {
       content: '';
       position: absolute;
       left: 0;
-      // マーカーの垂直位置：1行目の文頭中央に来るよう調整
       top: 0.54em;
 
-      // マーカーのサイズ
       width: calc(6 / 16 * 1rem);
       height: calc(6 / 16 * 1rem);
 

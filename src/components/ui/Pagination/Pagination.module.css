@@ -1,5 +1,3 @@
-@use "../../../styles/" as *;
-
 .container {
   display: flex;
   justify-content: center;
@@ -40,10 +38,8 @@
     background-color: var(--color-dark-gray);
     color: var(--color-white);
 
-    // アイコン（SVG）に対して、親のホバー時の文字色を強制的に適用させる
-    // アイコンコンポーネントが持つ Tailwind クラスよりも高い詳細度で上書きします
     svg {
-      color: inherit; // または直接 var(--color-white)
+      color: inherit;
     }
   }
 

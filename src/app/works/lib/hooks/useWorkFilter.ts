@@ -1,7 +1,6 @@
-"use client";
-
-import { useState, useMemo, useCallback } from "react";
-import { Work, WorkFilterCategory } from "@/types/work";
+'use client';
+import { useState, useMemo, useCallback } from 'react';
+import { Work, WorkFilterCategory } from '@/types/work';
 
 /**
  * 作品一覧のフィルタリングを管理するカスタムフック
@@ -9,9 +8,9 @@ import { Work, WorkFilterCategory } from "@/types/work";
  */
 export function useWorkFilter(allWorks: Work[] = []) {
   const [selectedCategory, setSelectedCategory] =
-    useState<WorkFilterCategory>("all");
+    useState<WorkFilterCategory>('all');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   // サイドバーなどで使用する既存の「追加・削除」トグル
@@ -24,24 +23,24 @@ export function useWorkFilter(allWorks: Work[] = []) {
 
   // 【新規】他のフィルターをすべてリセットして、そのタグのみで検索する
   const selectOnlyTag = useCallback((tag: string) => {
-    setSearchQuery(""); // キーワードをクリア
-    setSelectedCategory("all"); // カテゴリーを「すべて」にリセット
+    setSearchQuery(''); // キーワードをクリア
+    setSelectedCategory('all'); // カテゴリーを「すべて」にリセット
     setSelectedTags([tag]); // 指定されたタグのみを選択
     setCurrentPage(1); // 1ページ目に戻す
   }, []);
 
   // 【新規】他のフィルターをすべてリセットして、そのカテゴリーのみで検索する
   const selectOnlyCategory = useCallback((cat: WorkFilterCategory) => {
-    setSearchQuery(""); // キーワードをクリア
+    setSearchQuery(''); // キーワードをクリア
     setSelectedTags([]); // すべてのタグをクリア
     setSelectedCategory(cat); // 指定されたカテゴリーのみを選択
     setCurrentPage(1); // 1ページ目に戻す
   }, []);
 
   const clearFilters = useCallback(() => {
-    setSelectedCategory("all");
+    setSelectedCategory('all');
     setSelectedTags([]);
-    setSearchQuery("");
+    setSearchQuery('');
     setCurrentPage(1);
   }, []);
 
@@ -52,12 +51,12 @@ export function useWorkFilter(allWorks: Work[] = []) {
 
     return allWorks.filter((work) => {
       const matchCategory =
-        selectedCategory === "all" || work.category.includes(selectedCategory);
+        selectedCategory === 'all' || work.category.includes(selectedCategory);
       const matchTags =
         selectedTags.length === 0 ||
         selectedTags.every((tag) => work.tags.includes(tag));
       const matchQuery =
-        searchQuery === "" ||
+        searchQuery === '' ||
         work.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         work.tags.some((t) =>
           t.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -86,8 +85,8 @@ export function useWorkFilter(allWorks: Work[] = []) {
     setSearchQuery,
     setCurrentPage,
     toggleTag,
-    selectOnlyTag, // 追加
-    selectOnlyCategory, // 追加
+    selectOnlyTag,
+    selectOnlyCategory,
     clearFilters,
   };
 }

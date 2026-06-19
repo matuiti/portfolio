@@ -6,7 +6,7 @@ import { CategoryList } from '@/components/ui/CategoryList';
 import { TagFilters } from '@/components/ui/TagFilters';
 import { WORK_CATEGORIES, ALL_WORKS } from '@/data/works';
 import { WorkCategory } from '@/types/work';
-import styles from './WorksSidebar.module.scss';
+import styles from './WorksSidebar.module.css';
 
 type WorksSidebarProps = {
   footerNote?: string;

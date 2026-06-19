@@ -1,8 +1,6 @@
-// src/components/ui/CategoryList/index.tsx
 'use client';
-
-import styles from './CategoryList.module.scss';
 import { BaseTag } from '../BaseTag';
+import styles from './CategoryList.module.css';
 
 type CategoryItem<T> = {
   label: string;

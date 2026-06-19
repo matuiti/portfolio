@@ -1,6 +1,4 @@
-// src/components/ui/PageHeader/index.tsx
-
-import styles from './PageHeader.module.scss';
+import styles from './PageHeader.module.css';
 
 type PageHeaderProps = {
   enTitle: string;

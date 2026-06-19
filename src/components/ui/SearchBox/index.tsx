@@ -1,8 +1,6 @@
-// src/components/ui/SearchBox/index.tsx
 'use client';
-
 import { SearchSmall } from '@/components/ui/Icons';
-import styles from './SearchBox.module.scss';
+import styles from './SearchBox.module.css';
 
 type SearchBoxProps = {
   value: string;

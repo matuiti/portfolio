@@ -1,7 +1,7 @@
 // src/components/ui/Breadcrumbs/index.tsx
 import Link from "next/link";
 import { KeyboardArrowRight } from "@/components/ui/Icons";
-import styles from "./Breadcrumbs.module.scss";
+import styles from "./Breadcrumbs.module.css";
 
 type BreadcrumbItem = {
   label: string;

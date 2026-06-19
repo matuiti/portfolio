@@ -1,10 +1,3 @@
-// src/components/ui/SearchDrawer/SearchDrawer.module.scss
-@use '../../../styles' as *;
-
-/* ==========================================================================
-   ドロワー特有の構造（レイアウト・開閉制御）
-   ========================================================================== */
-
 .root {
   position: fixed;
   inset: 0;
@@ -43,8 +36,6 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-
-  // 開閉アニメーションの設定
   transform: translateX(100%);
   opacity: 0;
   transition: all 0.7s ease;
@@ -52,7 +43,6 @@
   @media (width >= 52.5em /* tablet */) {
     max-width: var(--spacing-mobile-drawer-max-w);
   }
-
   &.is-open {
     transform: translateX(0);
     opacity: 1;
@@ -81,10 +71,6 @@
   }
 }
 
-/* ==========================================================================
-   内部要素
-   ========================================================================== */
-
 .inner {
   position: sticky;
   overflow: hidden;
@@ -94,7 +80,6 @@
   height: 100%;
 }
 
-// 固定上部エリア
 .head {
   display: flex;
   width: 100%;
@@ -134,7 +119,6 @@
   }
 }
 
-// 内部スクロールエリア
 .body {
   flex: 1;
   overflow-y: auto;
@@ -142,10 +126,9 @@
   display: flex;
   flex-direction: column;
   gap: calc(40 / 16 * 1rem);
-  padding-right: calc(8 / 16 * 1rem); //スクロールバー分の幅を考慮
+  padding-right: calc(8 / 16 * 1rem);
 }
 
-// 下部エリア
 .foot {
   align-self: flex-end;
   margin-top: calc(40 / 16 * 1rem);
@@ -171,7 +154,6 @@
   margin-bottom: calc(10 / 16 * 1rem);
 }
 
-// 共通コンポーネントの特定コンテキスト上での上書き（以前の挙動を再現）
 .section {
   :global(.isActive) {
     background-color: var(--color-slate-900) !important;
