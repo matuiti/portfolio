@@ -1,11 +1,11 @@
-'use client'
+'use client';
 import Image from 'next/image';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { Mail, GitHub } from '@/components/ui/Icons';
 import { SITE_CONFIG } from '@/data/site';
 import { PROFILE_DATA } from './data';
-import styles from './AboutSection.module.scss';
+import styles from './AboutSection.module.css';
 
 export const AboutSection = () => {
   return (

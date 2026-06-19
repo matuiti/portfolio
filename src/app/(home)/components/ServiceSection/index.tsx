@@ -3,7 +3,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { ServiceCard } from './ServiceCard';
 import { SERVICES } from '@/data/services';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
-import styles from './ServiceSection.module.scss';
+import styles from './ServiceSection.module.css';
 
 export const ServiceSection = () => {
   return (

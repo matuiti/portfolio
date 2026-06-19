@@ -1,11 +1,8 @@
-// src/components/ui/features/ContactForm.tsx
 'use client';
-
 import { useTransition, useCallback } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Turnstile from 'react-turnstile';
-
 import { FormInput } from '@/components/ui/FormInput';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { Send, ArrowRight } from '@/components/ui/Icons';
@@ -17,8 +14,8 @@ import {
 import { sendContactAction } from './actions';
 import { useUIStore } from '@/store/useUIStore';
 import { ContactRipple } from './ContactRipple';
-import styles from './ContactSection.module.scss';
 import Link from 'next/link';
+import styles from './ContactSection.module.css';
 
 export const ContactForm = () => {
   const [isPending, startTransition] = useTransition();

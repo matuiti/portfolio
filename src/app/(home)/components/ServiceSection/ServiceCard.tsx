@@ -1,6 +1,5 @@
-// src / app / home / components / ServiceSection / ServiceCard.tsx;
-import { ElementType } from "react";
-import styles from "./ServiceSection.module.scss";
+import { ElementType } from 'react';
+import styles from './ServiceSection.module.css';
 
 type ServiceCardProps = {
   index: number;
@@ -15,19 +14,17 @@ export const ServiceCard = ({
   title,
   description,
   Icon,
-  className
+  className,
 }: ServiceCardProps) => {
   // 01, 02... 形式の連番生成
-  const formattedNumber = (index + 1).toString().padStart(2, "0");
+  const formattedNumber = (index + 1).toString().padStart(2, '0');
 
   return (
     <div className={`${styles.cardContainer} ${className}`}>
       {/* 左：画像(SVG) */}
       <div className={styles.iconWrapper}>
-        {/* アイコンサイズはプロップス、またはSCSS側で制御 */}
-        <Icon color="black" />
+        <Icon color='black' />
       </div>
-
       {/* 右：テキスト内容 */}
       <div className={styles.textContent}>
         <div className={styles.titleWrapper}>

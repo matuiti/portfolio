@@ -1,5 +1,3 @@
-@use '../../../../styles' as *;
-
 .sectionHead {
   display: flex;
   flex-direction: column;
@@ -16,13 +14,9 @@
   gap: calc(20 / 16 * 1rem);
   justify-content: center;
   align-items: stretch;
-
-  // 1カラム時の定義
   grid-template-columns: 1fr;
 
   @media (width >= 52.5em /* tablet */) {
-    // 3カラム時の定義
-    // 各列を最大350pxで固定し、3つ並べる
     grid-template-columns: repeat(3, minmax(0, calc(350 / 16 * 1rem)));
   }
 }
@@ -71,7 +65,7 @@
 .skillLevel {
   font-size: calc(14 / 16 * 1rem);
   letter-spacing: 0.1em;
-  font-variant-numeric: tabular-nums; // 数値の幅を固定してガタつきを防止
+  font-variant-numeric: tabular-nums;
 }
 
 .gaugeTrack {
@@ -88,7 +82,7 @@
   left: 0;
   height: 100%;
   background-color: var(--color-black);
-  width: 0%; // 初期状態
+  width: 0%;
 }
 
 .buttonWrapper {
