@@ -1,13 +1,7 @@
 // src/components/ui/Logo/index.tsx
 import { tv, type VariantProps } from 'tailwind-variants';
-
 import { SITE_CONFIG } from '@/data/site';
-import styles from './Logo.module.scss';
 
-/**
- * ロゴのスタイル定義
- * 複雑なレスポンシブ余白は SCSS へ移行し、tv は状態管理に専念させる
- */
 const logoStyles = tv({
   base: [
     'inline-block h-auto overflow-visible',
@@ -19,8 +13,8 @@ const logoStyles = tv({
       white: 'text-white',
     },
     type: {
-      header: 'w-logo-small small:w-logo-large', // 120px相当 / 160px相当
-      footer: 'w-logo-small tablet:w-logo-large', // 120px相当 / 160px相当
+      header: 'w-logo-small small:w-logo-large',
+      footer: 'w-logo-small tablet:w-logo-large',
     },
   },
   defaultVariants: {
@@ -46,7 +40,7 @@ export const Logo = ({ color, type, className, ...props }: LogoProps) => {
       className={logoStyles({
         color,
         type,
-        className: [styles.logo, className],
+        className,
       })}
       aria-label={SITE_CONFIG.name}
       role='img'

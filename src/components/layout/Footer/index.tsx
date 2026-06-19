@@ -1,6 +1,4 @@
-// src/components/layout/Footer/index.tsx
 'use client';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { tv } from 'tailwind-variants';
@@ -8,15 +6,10 @@ import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { NAV_ITEMS } from '@/data/navigation';
 import { SITE_CONFIG } from '@/data/site';
-import styles from './Footer.module.scss';
 
-/**
- * フッターのスタイル定義
- * 各エリアのクラスをスロットとして切り出し、JSXの見通しを改善します [1, 2]。
- */
 const footerStyles = tv({
   slots: {
-    root: styles.root,
+    root: 'mt-auto bg-[var(--color-black)] p-[calc(20/16*1rem)] tablet:pt-[calc(20.62/16*1rem)] tablet:pb-[calc(20.62/16*1rem)] small:pt-[calc(40.5/16*1rem)] small:pb-[calc(20.5/16*1rem)] base:pb-[calc(40/16*1rem)]',
     container: 'container-center',
     topArea:
       'flex flex-col items-start small:items-start p-5 -mb-1.5 small:-mb-px gap-y-8 small:gap-y-0 small:gap-x-5 tablet:items-center small:flex-row small:justify-between',
@@ -46,9 +39,7 @@ export function Footer() {
   return (
     <footer className={root()}>
       <div className={container()}>
-        {/* 上部エリア：ロゴとメニュー */}
         <div className={topArea()}>
-          {/* ロゴ */}
           <Link
             href='/'
             aria-label='トップページに移動する'
@@ -56,8 +47,6 @@ export function Footer() {
           >
             <Logo type='footer' color='white' />
           </Link>
-
-          {/* メニュー */}
           <nav>
             <ul className={menuList()}>
               {NAV_ITEMS.map((item) => {
@@ -81,11 +70,8 @@ export function Footer() {
             </ul>
           </nav>
         </div>
-
-        {/* 下部エリア：プライバシーポリシー・コピーライト */}
         <div className={bottomArea()}>
           <div className={privacyPolicy()}>
-            {/* プライバシーポリシー */}
             <Link
               href='/privacy-policy'
               aria-label='プライバシーポリシーページへ移動する'
@@ -94,7 +80,6 @@ export function Footer() {
               プライバシーポリシー
             </Link>
           </div>
-          {/* コピーライト */}
           <p className={copyright()}>
             &copy; {currentYear} {SITE_CONFIG.author || SITE_CONFIG.name}
           </p>

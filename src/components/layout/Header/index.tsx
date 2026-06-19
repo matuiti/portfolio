@@ -1,6 +1,4 @@
-// src/components/layout/Header/index.tsx
 'use client';
-
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -12,22 +10,9 @@ import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { Hamburger, SearchLarge } from '@/components/ui/Icons';
 
-/**
- * ヘッダースタイル定義
- * slotsを使用して、各パーツのスタイルを分離管理する
- */
 export const headerStyles = tv({
   slots: {
     base: 'section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-1000 ease-in',
-    inner: 'container-center flex items-center justify-between',
-    // 複雑なcalcを含むリスト部分を配列で切り出し
-    navList: [
-      'hidden small:flex items-center leading-normal',
-      'gap-[calc(15.6/16*1rem)]',
-      'mt-[calc(6/16*1rem)]',
-      'mr-[calc(3/16*1rem)]',
-    ],
-    mobileActions: 'flex items-center gap-2.5 small:hidden',
   },
   variants: {
     isScrolled: {
@@ -73,20 +58,19 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
 
   const isSearchablePage = SEARCHABLE_PATHS.some((p) => pathname.startsWith(p));
 
-  const { base, inner, navList, mobileActions } = headerStyles({
+  const { base } = headerStyles({
     isScrolled,
     isSearchablePage,
   });
 
   return (
     <header className={base()}>
-      <div className={inner()}>
+      <div className='container-center flex items-center justify-between'>
         <Link href='/' className='hover:opacity-hover transition-opacity'>
           <Logo color='black' type='header' />
         </Link>
-
         <nav>
-          <ul className={navList()}>
+          <ul className='hidden small:flex items-center leading-normal gap-[calc(15.6/16*1rem)] mt-[calc(6/16*1rem)] mr-[calc(3/16*1rem)]'>
             {NAV_ITEMS.map((item) => {
               const isActive =
                 pathname === item.href ||
@@ -107,7 +91,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
           </ul>
         </nav>
 
-        <div className={mobileActions()}>
+        <div className='flex items-center gap-2.5 small:hidden'>
           {isSearchablePage && (
             <button type='button' onClick={() => setSearchDrawerOpen(true)}>
               <SearchLarge />

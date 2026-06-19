@@ -1,6 +1,4 @@
-// src/data/skills.ts
 import { SkillGroup } from "@/types/skill";
-
 /**
  * SKILLSページ用データ定義 (Single Source of Truth)
  *
