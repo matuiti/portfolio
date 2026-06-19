@@ -1,6 +1,6 @@
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { ComingSoon } from '@/components/ui/ComingSoon';
-import styles from './GallerySection.module.scss';
+import styles from './GallerySection.module.css';
 
 export const GallerySection = () => {
   return (

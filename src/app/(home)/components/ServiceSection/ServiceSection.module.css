@@ -1,5 +1,3 @@
-@use '../../../../styles' as *;
-
 .sectionHead {
   margin-bottom: calc(40 / 16 * 1rem);
 
@@ -26,15 +24,12 @@
 }
 
 .cardGrid {
-  display: grid; // grid
-  grid-template-columns: repeat(1, minmax(0, 1fr)); // grid-cols-1
-  gap: calc(
-    20 / 16 * 1rem
-  ); // gap-[calc(20/16*1rem)]：規約に従ったサイズ指定 [3, 4]
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: calc(20 / 16 * 1rem);
 
-  // smallブレイクポイント（1140px相当）での制御 [5-7]
   @media (width >= 71.25em /* small */) {
-    grid-template-columns: repeat(2, minmax(0, 1fr)); // small:grid-cols-2
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -43,9 +38,7 @@
   flex-direction: column;
   gap: calc(30 / 16 * 1rem);
   padding: calc(20 / 16 * 1rem);
-  background-color: var(
-    --color-light-gray
-  ); // Tailwindのlight-grayに対応する変数
+  background-color: var(--color-light-gray);
   transition: all 0.3s;
 
   @media (width >= 33.75em /* mobile */) {
@@ -55,7 +48,6 @@
 }
 
 .iconWrapper {
-  // Tailwindの w-icon-100 (100px相当) を想定
   width: calc(100 / 16 * 1rem);
   height: calc(100 / 16 * 1rem);
   flex-shrink: 0;
@@ -97,5 +89,5 @@
 }
 
 .description {
-  line-height: 1.5; // leading-normal相当
+  line-height: 1.5;
 }

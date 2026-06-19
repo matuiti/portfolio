@@ -1,5 +1,3 @@
-@use '../../../../styles' as *;
-
 .inner {
   display: grid;
   align-content: start;
@@ -20,7 +18,7 @@
       'image-pc head'
       'image-pc desc'
       'image-pc btns'
-      'image-pc .'; // 5行目（余白吸収用）
+      'image-pc .';
     column-gap: calc(40 / 16 * 1rem);
     align-content: start;
   }
@@ -35,7 +33,6 @@
   }
 }
 
-// --- 表示制御 ---
 .isSP {
   display: block;
   @media (width >= 52.5em /* tablet */) {
@@ -49,8 +46,6 @@
     display: block !important;
   }
 }
-
-// --- エリア割り当て ---
 
 .titleArea {
   margin-bottom: calc(40 / 16 * 1rem);

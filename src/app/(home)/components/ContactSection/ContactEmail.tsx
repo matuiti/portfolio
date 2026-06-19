@@ -14,7 +14,7 @@ import { type ContactFormData } from "./schema";
 
 /**
  * お問い合わせ通知メールのテンプレート
- * React EmailとTailwind CSSを使用して構築。
+ * React EmailとTailwind CSSを使用して構築
  */
 export const ContactEmail = ({
   name,

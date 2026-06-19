@@ -2,7 +2,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { SKILL_CARDS_DATA } from './data';
 import { SkillCard } from './SkillCard';
-import styles from './SkillsSection.module.scss';
+import styles from './SkillsSection.module.css';
 
 export const SkillsSection = () => {
   return (

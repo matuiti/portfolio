@@ -1,8 +1,8 @@
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { ContactForm } from '@/home/components/ContactSection/ContactForm';
-import styles from './ContactSection.module.scss';
 import { DirectMailTextLink } from '@/components/ui/DirectMailTextLink';
 import { SITE_CONFIG } from '@/data/site';
+import styles from './ContactSection.module.css';
 
 export const ContactSection = () => {
   return (
@@ -29,7 +29,6 @@ export const ContactSection = () => {
               user={SITE_CONFIG.email.directUser}
               domain={SITE_CONFIG.email.directDomain}
             />
-
             <p className={styles.description}>
               <span>※お急ぎの方や、ファイルを添付したい場合は</span>
               <span>こちらをご利用ください</span>

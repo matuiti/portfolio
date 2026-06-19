@@ -1,10 +1,9 @@
 'use client';
-
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useUIStore } from '@/store/useUIStore';
-import styles from './ContactSection.module.scss';
+import styles from './ContactSection.module.css';
 
 /**
  * 送信完了アニメーション

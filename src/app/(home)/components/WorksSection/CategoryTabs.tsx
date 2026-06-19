@@ -1,18 +1,7 @@
 'use client';
-
 import { BaseTag } from '@/components/ui/BaseTag';
 import { WORK_CATEGORIES } from '@/data/works';
 import { WorkFilterCategory } from '@/types/work';
-import { tv } from 'tailwind-variants';
-
-/**
- * レイアウトのみを定義するスタイル（個別のボタンスタイルはBaseTagに委譲）
- */
-const tabLayoutStyles = tv({
-  slots: {
-    container: 'flex flex-wrap items-center gap-[calc(10/16*1rem)]',
-  },
-});
 
 type CategoryTabsProps = {
   activeCategory: WorkFilterCategory;
@@ -23,10 +12,9 @@ export const CategoryTabs = ({
   activeCategory,
   onCategoryChange,
 }: CategoryTabsProps) => {
-  const { container } = tabLayoutStyles();
 
   return (
-    <div className={container()}>
+    <div className='flex flex-wrap items-center gap-[calc(10/16*1rem)]'>
       {WORK_CATEGORIES.map((cat) => (
         <BaseTag
           key={cat.value}
