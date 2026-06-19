@@ -1,12 +1,9 @@
-// src/app/skills/components/SkillCard/index.tsx
-
 'use client';
-
 import { useState, useRef, useEffect } from 'react';
 import { SkillItem } from '@/types/skill';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { Launch, GitHub } from '@/components/ui/Icons';
-import styles from './SkillCard.module.scss';
+import styles from './SkillCard.module.css';
 
 type SkillCardProps = {
   item: SkillItem;

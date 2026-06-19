@@ -1,7 +1,7 @@
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
-import styles from './NotFound.module.scss';
+import styles from './NotFound.module.css';
 
 export default function NotFound() {
   const PAGE_HEADER_DATA = {

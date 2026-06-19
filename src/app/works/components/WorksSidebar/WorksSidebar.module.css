@@ -1,6 +1,3 @@
-// src/app/works/components/WorksLayout/WorksSidebar.module.scss
-@use '../../../../styles' as *;
-
 .container {
   display: none;
   width: calc(300 / 16 * 1rem);
@@ -11,13 +8,10 @@
 }
 
 .inner {
-  // ビューポートに対する固定設定
-  $header-height: 90;
   position: sticky;
-  top: calc($header-height / 16 * 1rem);
-  margin-top: calc($header-height / 16 * 1rem);
-  // サイドバー自体の最大高さを設定し、ヘッダー固定スクロールを可能にする
-  max-height: calc(100vh - ($header-height / 16 * 1rem));
+  top: var(--spacing-header-small);
+  margin-top: var(--spacing-header-small);
+  max-height: calc(100vh - var(--spacing-header-small));
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -26,7 +20,6 @@
   padding: calc(40 / 16 * 1rem) calc(20 / 16 * 1rem);
 }
 
-// 固定上部エリア
 .head {
   display: flex;
   justify-content: space-between;
@@ -52,15 +45,9 @@
     cursor: pointer;
     transition: all 0.2s ease;
     margin-top: calc(20 / 16 * 1rem);
-
-    // &:hover {
-    //   background-color: var(--color-slate-100);
-    //   color: var(--color-slate-900);
-    // }
   }
 }
 
-// 内部スクロールエリア
 .body {
   flex: 1;
   overflow-y: auto;
@@ -68,10 +55,9 @@
   display: flex;
   flex-direction: column;
   gap: calc(40 / 16 * 1rem);
-  padding-right: calc(8 / 16 * 1rem); //スクロールバー分の幅を考慮
+  padding-right: calc(8 / 16 * 1rem);
 }
 
-// 下部エリア
 .foot {
   margin-top: calc(40 / 16 * 1rem);
   padding-top: calc(40 / 16 * 1rem);
@@ -96,7 +82,6 @@
   margin-bottom: calc(10 / 16 * 1rem);
 }
 
-// 共通コンポーネントの特定コンテキスト上での上書き（以前の挙動を再現）
 .section {
   :global(.isActive) {
     background-color: var(--color-slate-900) !important;

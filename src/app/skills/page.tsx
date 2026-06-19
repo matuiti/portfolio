@@ -4,7 +4,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { SkillGroupSection } from './components/SkillGroupSection';
 import { ScrollToTop } from '@/lib/utility/ScrollToTop';
-import styles from './Skills.module.scss';
+import styles from './Skills.module.css';
 
 export default function SkillsPage() {
   return (

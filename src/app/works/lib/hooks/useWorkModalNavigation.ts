@@ -1,7 +1,6 @@
-"use client";
-
-import { useCallback, useEffect } from "react";
-import { Work } from "@/types/work";
+'use client';
+import { useCallback, useEffect } from 'react';
+import { Work } from '@/types/work';
 
 type UseWorkModalNavigationProps = {
   currentWork: Work;
@@ -32,18 +31,18 @@ export function useWorkModalNavigation({
     if (hasNext) onNavigate(allWorks[currentIndex + 1]);
   }, [hasNext, onNavigate, allWorks, currentIndex]);
 
-  // キーボード操作設定 [cite: 139]
+  // キーボード操作設定
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") goToPrev();
-      if (e.key === "ArrowRight") goToNext();
-      if (e.key === "Escape") onClose(); // Escキーで閉じる機能を追加
+      if (e.key === 'ArrowLeft') goToPrev();
+      if (e.key === 'ArrowRight') goToNext();
+      if (e.key === 'Escape') onClose(); // Escキーで閉じる機能を追加
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, goToPrev, goToNext, onClose]);
 
   return { currentIndex, totalCount, hasPrev, hasNext, goToPrev, goToNext };

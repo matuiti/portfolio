@@ -1,6 +1,3 @@
-// src/components/ui/PageHeader/PageHeader.module.scss
-@use '../../../styles' as *;
-
 .container {
   position: relative;
   display: flex;

@@ -1,9 +1,8 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useWorkStore } from "@/store/useWorkStore";
-import { WorkFilterCategory } from "@/types/work";
+'use client';
+import { useEffect, useRef } from 'react';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useWorkStore } from '@/store/useWorkStore';
+import { WorkFilterCategory } from '@/types/work';
 
 /**
  * URLパラメータとZustandストアを同期させるフック
@@ -26,9 +25,9 @@ export function useWorkURLSync() {
 
   // 1. 初回マウント時：URLパラメータをストアに反映
   useEffect(() => {
-    const categoryParam = searchParams.get("category");
-    const tagsParam = searchParams.get("tags");
-    const qParam = searchParams.get("q");
+    const categoryParam = searchParams.get('category');
+    const tagsParam = searchParams.get('tags');
+    const qParam = searchParams.get('q');
 
     // 複数のパラメータが同時に存在する場合を考慮し、独立して判定を行う
     // （旧ロジック：if-else if による排他処理を解消）
@@ -40,7 +39,7 @@ export function useWorkURLSync() {
 
     // タグの同期
     if (tagsParam) {
-      const tagsArray = tagsParam.split(",").filter(Boolean);
+      const tagsArray = tagsParam.split(',').filter(Boolean);
       if (tagsArray.length > 0) {
         setSelectedTags(tagsArray);
       }
@@ -63,18 +62,18 @@ export function useWorkURLSync() {
     const params = new URLSearchParams();
 
     // カテゴリが "all" 以外ならパラメータに追加
-    if (selectedCategory !== "all") {
-      params.set("category", selectedCategory);
+    if (selectedCategory !== 'all') {
+      params.set('category', selectedCategory);
     }
 
     // タグがあればカンマ区切りで追加
     if (selectedTags.length > 0) {
-      params.set("tags", selectedTags.join(","));
+      params.set('tags', selectedTags.join(','));
     }
 
     // 検索語句があれば追加
     if (searchQuery) {
-      params.set("q", searchQuery);
+      params.set('q', searchQuery);
     }
 
     const query = params.toString();

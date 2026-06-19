@@ -1,12 +1,9 @@
-@use '../../../../styles' as *;
-
 .overlay {
   overflow: auto;
   position: fixed;
   inset: 0;
   z-index: 120;
   background-color: rgba(0, 0, 0, 0.8);
-  // backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,9 +37,6 @@
   .inner {
     display: grid;
     align-items: center;
-
-    // --- mini~ (スマホ): [<][ 1/10 ][>] のカプセルスタイル ---
-    // vLineをテンプレートに含めず、display: none で消去します
     grid-template-areas: 'prev counter next . close';
     grid-template-columns: auto auto auto 1fr auto;
 
@@ -51,7 +45,6 @@
       display: none;
     }
 
-    // 統合UIの背景と高さ
     .prevBtn,
     .nextBtn,
     .counter {
@@ -66,7 +59,6 @@
     .nextBtn {
       cursor: pointer;
 
-      // 通常時のアイコンの色
       svg {
         color: var(--color-black);
         transition:
@@ -75,7 +67,6 @@
         border-radius: calc(4 / 16 * 1rem);
       }
 
-      // ボタンが非活性（disabled）のとき
       &:disabled {
         cursor: not-allowed;
         svg {
@@ -121,15 +112,12 @@
       overflow: hidden;
     }
 
-    // [該当PJ 1/10] ... [< | >] [X]
     @media (width >= 52.5em /* tablet */) {
-      // 縦線(vLine)をアローの間に挿入し、背景色付きの操作パネルを構成
       grid-template-areas: 'label counter . prev vLine next close';
       grid-template-columns: auto auto 1fr auto auto auto auto;
       border-bottom: 1px solid var(--color-medium-gray);
       padding-block: calc(20 / 16 * 1rem) calc(12 / 16 * 1rem);
 
-      // 統合UIの背景と高さ
       .projectLabel,
       .counter {
         background: var(--color-light-gray);
@@ -155,11 +143,10 @@
         border-radius: 0 calc(50 / 16 * 1rem) calc(50 / 16 * 1rem) 0;
       }
 
-      // 操作パネル（アロー＋縦線）のスタイル
       .prevBtn,
       .vLine,
       .nextBtn {
-        background: var(--color-light-gray); // 操作系をグレーの塊に
+        background: var(--color-light-gray);
       }
 
       .prevBtn {
@@ -195,10 +182,7 @@
   }
 }
 
-// メインコンテンツエリア
 .article {
-  // flex: 1;
-  // overflow: hidden;
   background: var(--color-white);
   border-radius: calc(20 / 16 * 1rem);
 
@@ -208,7 +192,6 @@
   .inner {
     display: flex;
     flex-direction: column;
-    // height: 100%;
   }
 
   .articleHead {
@@ -268,7 +251,7 @@
 
       .authValue {
         letter-spacing: 0.1em;
-        user-select: all; // ワンクリックで選択可能
+        user-select: all;
       }
     }
 
@@ -281,10 +264,9 @@
     }
   }
 
-  // 画像セクション
   .imageSection {
     background-color: var(--color-white);
-    overflow: hidden; // スライダーのはみ出しを防ぐ
+    overflow: hidden;
     position: relative;
 
     .imageWrapper {
@@ -297,7 +279,7 @@
       display: flex;
       width: 100%;
       height: 100%;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); // 滑らかな移動
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .slide {
@@ -312,7 +294,6 @@
       }
     }
 
-    // 操作ボタン
     .slidePrev,
     .slideNext {
       position: absolute;
@@ -334,8 +315,6 @@
       right: calc(14 / 16 * 1rem);
     }
 
-    // インジケーター
-    // インジケーター用のコンテナ（ここが「スペース」になります）
     .indicatorContainer {
       display: flex;
       justify-content: center;
@@ -368,27 +347,19 @@
         }
 
         &.isActive {
-          // 状態を示す命名則 [4]
           background: var(--color-black);
-          // width: calc(12 / 16 * 1rem); // アクティブ時に横長にする等の演出
-          // border-radius: calc(4 / 16 * 1rem);
         }
       }
     }
   }
 
-  // 情報セクション
   .infoSection {
     margin-top: calc(20 / 16 * 1rem);
     @media (width >= 52.5em /* tablet */) {
       margin-top: calc(40 / 16 * 1rem);
     }
 
-    // @media (width >= 52.5em /* tablet */) {
-    //   overflow-y: auto;
-    // }
 
-    // 各セクション
     .section {
       & + .section {
         margin-top: calc(30 / 16 * 1rem);
@@ -411,22 +382,19 @@
     }
 
     .detailList {
-      list-style: none; // デフォルトのマーカーを非表示
+      list-style: none;
       padding: 0;
       margin-top: calc(10 / 16 * 1rem);
-      padding-inline: calc(10 / 16 * 1rem); // 他の要素と揃えるための余白
+      padding-inline: calc(10 / 16 * 1rem);
 
       li {
         position: relative;
-        // 文章とマーカーの距離：padding-left の数値で調整
         padding-left: calc(13 / 16 * 1rem);
 
-        // 独自のマーカー（文頭が揃うように絶対配置）
         &::before {
           content: '';
           position: absolute;
           left: 0;
-          // ★1行目の文頭中央に来るよう垂直位置を調整
           width: calc(4 / 16 * 1rem);
           height: calc(4 / 16 * 1rem);
           top: 0.58em;
@@ -447,10 +415,7 @@
       padding-inline: calc(10 / 16 * 1rem);
     }
 
-    // .techTag {
-    // }
 
-    // データテーブル形式のメタ情報
     .metaTable {
       display: flex;
       flex-wrap: wrap;
@@ -467,13 +432,8 @@
       font-size: calc(12 / 16 * 1rem);
       color: var(--color-dark-gray);
       line-height: 1.2;
-      // &:first-of-type {
-      //   width: 100%;
-      // }
     }
 
-    // .metaLabel {
-    // }
 
     .metaValue {
       flex: 1;
