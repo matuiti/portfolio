@@ -1,11 +1,11 @@
-import { GallerySection } from './components/GallerySection';
+import { ScrollReveal } from './ScrollReveal';
 import { MainVisual } from './components/MainVisual';
+import { WorksSection } from './components/WorksSection';
+import { GallerySection } from './components/GallerySection';
 import { ServiceSection } from './components/ServiceSection';
 import { SkillsSection } from './components/SkillsSection';
-import { WorksSection } from './components/WorksSection';
 import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
-import { ScrollReveal } from './ScrollReveal';
 
 export default function Home() {
   return (

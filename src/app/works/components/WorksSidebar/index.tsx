@@ -1,26 +1,18 @@
-// src/app/works/components/WorksLayout/WorksSidebar.tsx
-"use client";
+'use client';
+import { useMemo } from 'react';
+import { useWorkStore } from '@/store/useWorkStore';
+import { SearchBox } from '@/components/ui/SearchBox';
+import { CategoryList } from '@/components/ui/CategoryList';
+import { TagFilters } from '@/components/ui/TagFilters';
+import { WORK_CATEGORIES, ALL_WORKS } from '@/data/works';
+import { WorkCategory } from '@/types/work';
+import styles from './WorksSidebar.module.scss';
 
-import { useMemo } from "react";
-import { useWorkStore} from "@/store/useWorkStore";
-import { SearchBox } from "@/components/ui/SearchBox";
-import { CategoryList } from "@/components/ui/CategoryList";
-import { TagFilters } from "@/components/ui/TagFilters";
-import { WORK_CATEGORIES, ALL_WORKS } from "@/data/works";
-import { WorkCategory } from "@/types/work";
-import styles from "./WorksSidebar.module.scss";
-
-// 規約：interface を禁止し、type で定義 [cite: 7, 425]
 type WorksSidebarProps = {
   footerNote?: string;
 };
 
-/**
- * WORKS ページ専用サイドバー
- * ストアの状態を Pure UI コンポーネントへ橋渡しする役割を担います。
- */
 export function WorksSidebar({ footerNote }: WorksSidebarProps) {
-  // 1. ストアから状態とアクションを取得 [cite: 8, 345]
   const {
     searchQuery,
     setSearchQuery,
@@ -31,19 +23,16 @@ export function WorksSidebar({ footerNote }: WorksSidebarProps) {
     clearFilters,
   } = useWorkStore();
 
-  // 2. 利用可能な全タグを動的に抽出 [cite: 314]
   const availableTags = useMemo(() => {
     const tags = new Set<string>();
-    // 全実績データからタグを収集（フィルタリング結果ではなく全データから抽出が一般的）
     ALL_WORKS.forEach((work) => work.tags.forEach((tag) => tags.add(tag)));
     return Array.from(tags).sort();
   }, []);
 
-  // 3. カテゴリごとの件数計算（型安全な reduce 実装） [cite: 63, 64]
   const categoryCounts = useMemo(() => {
     return WORK_CATEGORIES.reduce(
       (acc, cat) => {
-        if (cat.value === "all") {
+        if (cat.value === 'all') {
           acc[cat.value] = ALL_WORKS.length;
         } else {
           const targetCat = cat.value as WorkCategory;
@@ -64,12 +53,9 @@ export function WorksSidebar({ footerNote }: WorksSidebarProps) {
         <div className={styles.head}>
           <div className={styles.head__inner}>
             <span className={styles.label}>キーワード</span>
-            <SearchBox
-              value={searchQuery}
-              onChange={setSearchQuery}
-            />
+            <SearchBox value={searchQuery} onChange={setSearchQuery} />
             <button
-              type="button"
+              type='button'
               onClick={clearFilters}
               className={styles.resetBtn}
             >
@@ -100,7 +86,7 @@ export function WorksSidebar({ footerNote }: WorksSidebarProps) {
           </section>
         </div>
 
-        {/* 下部エリア：注釈 [cite: 65, 427] */}
+        {/* 下部エリア：注釈 */}
         {footerNote && (
           <div className={styles.foot}>
             <p className={styles.foot__text}>{footerNote}</p>
