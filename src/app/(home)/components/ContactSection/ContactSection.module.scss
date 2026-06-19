@@ -1,4 +1,4 @@
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .sectionHead {
   display: flex;
@@ -6,7 +6,7 @@
   gap: calc(40 / 16 * 1rem);
   margin-bottom: calc(40 / 16 * 1rem);
 
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     margin-bottom: calc(60 / 16 * 1rem);
   }
 }
@@ -36,11 +36,11 @@
   padding-block: calc(20 / 16 * 1rem);
   padding-inline: calc(15 / 16 * 1rem);
 
-  @include mq("mobile") {
+  @media (width >= 33.75em /* mobile */) {
     padding-block: calc(40 / 16 * 1rem);
     padding-inline: calc(25 / 16 * 1rem);
   }
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     padding-block: calc(60 / 16 * 1rem);
     padding-inline: calc(40 / 16 * 1rem);
   }
@@ -122,7 +122,7 @@
   justify-content: center;
   align-items: center;
 
-  @include mq("mobile") {
+  @media (width >= 33.75em /* mobile */) {
     margin-top: calc(40 / 16 * 1rem);
   }
 
@@ -184,7 +184,7 @@
   display: flex;
   justify-content: center;
 
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     margin-top: calc(60 / 16 * 1rem);
   }
 }
@@ -192,7 +192,7 @@
 // .submitButton {
 //   min-width: calc(240 / 16 * 1rem);
 
-//   @include mq("tablet") {
+//   @media (width >= 52.5em /* tablet */) {
 //     width: auto;
 //   }
 // }

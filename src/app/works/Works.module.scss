@@ -11,10 +11,10 @@
   justify-content: center;
   gap: calc(40 / 16 * 1rem) calc(20 / 16 * 1rem);
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  @include mq(tablet) {
+  @media (width >= 52.5em /* tablet */) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @include mq(base) {
+  @media (width >= 80em /* base */) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-top: calc(50 / 16 * 1rem);
   }
@@ -22,7 +22,7 @@
 
 .card {
   max-width: 100%;
-  @include mq(base) {
+  @media (width >= 80em /* base */) {
     max-width: calc(280 / 16 * 1rem);
   }
 }

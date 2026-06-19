@@ -1,6 +1,6 @@
 // src/app/skills/components/SkillCard/SkillCard.module.scss
 
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .card {
   background-color: var(--color-white);
@@ -10,7 +10,7 @@
   flex-direction: column;
   transition: all 0.3s ease;
 
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     padding: calc(24 / 16 * 1rem) calc(20 / 16 * 1rem);
   }
 
@@ -34,7 +34,7 @@
   letter-spacing: 0.05em;
   line-height: 1;
   color: var(--color-black);
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     font-size: calc(18 / 16 * 1rem);
   }
 }

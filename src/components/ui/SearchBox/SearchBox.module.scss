@@ -1,5 +1,5 @@
 // src/components/ui/SearchBox/SearchBox.module.scss
-@use "../../../styles" as *;
+@use '../../../styles' as *;
 
 .container {
   position: relative;
@@ -25,19 +25,20 @@
   justify-content: center;
   pointer-events: none;
   z-index: 1;
-  background-color: var(--color-light-gray)
+  background-color: var(--color-light-gray);
 }
 
 .input {
   width: 100%;
   // 左はアイコン分、右はクリアボタン分の余白を確保
-  padding: calc(10 / 16 * 1rem) calc(40 / 16 * 1rem) calc(10 / 16 * 1rem) calc(60 / 16 * 1rem);
+  padding: calc(10 / 16 * 1rem) calc(40 / 16 * 1rem) calc(10 / 16 * 1rem)
+    calc(60 / 16 * 1rem);
   font-size: calc(16 / 16 * 1rem);
   line-height: 1.5;
   letter-spacing: 0.05em;
   transition: all 0.3s;
 
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     padding-top: calc(9 / 16 * 1rem);
     padding-bottom: calc(9 / 16 * 1rem);
   }
