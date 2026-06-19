@@ -79,6 +79,12 @@
 
   /* --- グラデーション --- */
   --color-gradation: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
+  
+  /* --- MVの高さ --- */
+  --min-height-mini: calc(570/16*1rem);
+  --min-height-mobile: calc(650/16*1rem);
+  --min-height-tablet: calc(600/16*1rem);
+  --min-height-small: calc(640/16*1rem);
 }
 
 /* 3. ベーススタイルの定義 */

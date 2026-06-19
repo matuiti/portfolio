@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import styles from './MainVisual.module.scss';
+import styles from './MainVisual.module.css';
 
 export const MainVisual = () => {
   const rootRef = useRef<HTMLDivElement>(null);

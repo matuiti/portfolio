@@ -1,23 +1,13 @@
-// src/app/(home)/components/MainVisual/MainVisual.module.scss
-@use '../../../../styles' as *;
-
 .mvSectionContainer {
-  $min-height-mini: 570;
-  $min-height-mobile: 650;
-  $min-height-tablet: 600;
-  $min-height-small: 640;
-  min-height: calc($min-height-mini / 16 * 1rem);
-  // Mobile (540px〜)
+  min-height: var(--min-height-mini);
   @media (width >= 33.75em /* mobile */) {
-    min-height: calc($min-height-mobile / 16 * 1rem);
+    min-height: var(--min-height-mobile);
   }
-  // Tablet (840px〜)
   @media (width >= 52.5em /* tablet */) {
-    min-height: calc($min-height-tablet / 16 * 1rem);
+    min-height: var(--min-height-tablet);
   }
-  // Small (1140px〜)
   @media (width >= 71.25em /* small */) {
-    min-height: calc($min-height-small / 16 * 1rem);
+    min-height: var(--min-height-small);
   }
 }
 
@@ -59,20 +49,17 @@
   align-items: flex-start;
   gap: calc(20 / 16 * 1rem);
 
-  // Mobile (540px〜)
   @media (width >= 33.75em /* mobile */) {
     gap: calc(26 / 16 * 1rem);
     margin-bottom: 9%;
   }
 
-  // Tablet (840px〜)
   @media (width >= 52.5em /* tablet */) {
     gap: calc(20 / 16 * 1rem);
     flex-direction: row;
     margin-bottom: 0;
   }
 
-  // Small (1140px〜)
   @media (width >= 71.25em /* small */) {
     gap: calc(40 / 16 * 1rem);
   }
@@ -85,23 +72,19 @@
   font-size: calc(28 / 16 * 1rem);
   letter-spacing: 0.05em;
 
-  // Mobile (540px〜)
   @media (width >= 33.75em /* mobile */) {
     font-size: calc(32 / 16 * 1rem);
     line-height: 1.7;
   }
 
-  // Tablet (840px〜)
   @media (width >= 52.5em /* tablet */) {
     font-size: calc(45 / 16 * 1rem);
   }
 
-  // Small (1140px〜)
   @media (width >= 71.25em /* small */) {
     font-size: calc(60 / 16 * 1rem);
   }
 
-  // Base (1280px〜)
   @media (width >= 80em /* base */) {
     font-size: calc(70 / 16 * 1rem);
   }
@@ -113,12 +96,10 @@
   font-size: calc(14 / 16 * 1rem);
   line-height: 1.5;
 
-  // Small (1140px〜)
   @media (width >= 71.25em /* small */) {
     font-size: calc(17 / 16 * 1rem);
   }
 
-  // Base (1280px〜)
   @media (width >= 80em /* base */) {
     font-size: calc(20 / 16 * 1rem);
   }
@@ -176,7 +157,7 @@
 
 .dropLineTrack {
   width: calc(1 / 16 * 1rem);
-  background-color: var(--color-dark-gray); // 線の背景色
+  background-color: var(--color-dark-gray);
   position: relative;
   overflow: hidden;
   height: calc(60 / 16 * 1rem);
@@ -189,7 +170,6 @@
     height: calc(100 / 16 * 1rem);
   }
 
-  // 線のアニメーション部分
   &::after {
     content: '';
     position: absolute;
@@ -206,18 +186,18 @@
 @keyframes scroll {
   0% {
     transform: scale(1, 0);
-    transform-origin: 0 0;
+    transform-origin: left top;
   }
   69% {
     transform: scale(1, 1);
-    transform-origin: 0 0;
+    transform-origin: left top;
   }
   70% {
     transform: scale(1, 1);
-    transform-origin: 0 100%;
+    transform-origin: left bottom;
   }
   100% {
     transform: scale(1, 0);
-    transform-origin: 0 100%;
+    transform-origin: left bottom;
   }
 }
