@@ -1,6 +1,4 @@
-// src/components/layout/MobileDrawerMenu/index.tsx
 'use client';
-
 import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '@/data/navigation';
 import { MenuItem } from '@/components/ui/MenuItem';
@@ -35,7 +33,7 @@ export const MobileDrawerMenu = ({
 
       {/* メニュー本体 */}
       <div
-        // メニュー内での操作を背後のオーバーレイに伝わらないようにする
+        // メニュー内の操作がオーバーレイに伝わらないようにする
         onClick={(e) => e.stopPropagation()}
         className={`min-h-svh section-padding-x pb-10 absolute top-0 right-0 w-full max-w-mobile-drawer-max-w bg-white shadow-default flex flex-col justify-start transition-all duration-700 ease ${
           isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'

@@ -13,6 +13,15 @@ import { Hamburger, SearchLarge } from '@/components/ui/Icons';
 export const headerStyles = tv({
   slots: {
     base: 'section-padding-x fixed top-0 left-0 flex items-center justify-center w-full min-h-header-mini small:min-h-header-small z-header transition-all duration-1000 ease-in',
+    inner: 'container-center flex items-center justify-between',
+    // 複雑なcalcを含むリスト部分を配列で切り出し
+    navList: [
+      'hidden small:flex items-center leading-normal',
+      'gap-[calc(15.6/16*1rem)]',
+      'mt-[calc(6/16*1rem)]',
+      'mr-[calc(3/16*1rem)]',
+    ],
+    mobileActions: 'flex items-center gap-2.5 small:hidden',
   },
   variants: {
     isScrolled: {
@@ -58,19 +67,20 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
 
   const isSearchablePage = SEARCHABLE_PATHS.some((p) => pathname.startsWith(p));
 
-  const { base } = headerStyles({
+  const { base, inner, navList, mobileActions } = headerStyles({
     isScrolled,
     isSearchablePage,
   });
 
   return (
     <header className={base()}>
-      <div className='container-center flex items-center justify-between'>
+      <div className={inner()}>
         <Link href='/' className='hover:opacity-hover transition-opacity'>
           <Logo color='black' type='header' />
         </Link>
+
         <nav>
-          <ul className='hidden small:flex items-center leading-normal gap-[calc(15.6/16*1rem)] mt-[calc(6/16*1rem)] mr-[calc(3/16*1rem)]'>
+          <ul className={navList()}>
             {NAV_ITEMS.map((item) => {
               const isActive =
                 pathname === item.href ||
@@ -91,7 +101,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
           </ul>
         </nav>
 
-        <div className='flex items-center gap-2.5 small:hidden'>
+        <div className={mobileActions()}>
           {isSearchablePage && (
             <button type='button' onClick={() => setSearchDrawerOpen(true)}>
               <SearchLarge />

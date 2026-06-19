@@ -1,22 +1,22 @@
-// src/components/layout/PageLayout/index.tsx
 'use client';
-
-import { useState } from 'react';
-import { Header } from '../Header';
-import { Footer } from '../Footer';
-import { MobileDrawerMenu } from '../MobileDrawerMenu';
+import { useCallback, useState } from 'react';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout//Footer';
+import { MobileDrawerMenu } from '@/components/layout//MobileDrawerMenu';
 import { PageTopButton } from '@/components/ui/Buttons/PageTopButton';
 
 export function PageLayout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleMenuToggle = useCallback(
+    () => setIsMenuOpen((prev) => !prev),
+    [],
+  );
+  const handleMenuClose = useCallback(() => setIsMenuOpen(false), []);
 
   return (
-    <div className='flex flex-col h-full min-h-dvh mt-[var(--spacing-header-mini)] small:mt-[var(--spacing-header-small)]'>
-      <Header onMenuOpen={() => setIsMenuOpen(!isMenuOpen)} />
-      <MobileDrawerMenu
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(!isMenuOpen)}
-      />
+    <div className='flex min-h-dvh flex-col mt-[var(--spacing-header-mini)] small:mt-[var(--spacing-header-small)]'>
+      <Header onMenuOpen={handleMenuToggle} />
+      <MobileDrawerMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
       <main>{children}</main>
       <Footer />
       <PageTopButton />

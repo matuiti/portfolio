@@ -1,14 +1,9 @@
-// src/components/ui/MenuItem/index.tsx
-
 import { tv, type VariantProps } from 'tailwind-variants';
 import Link from 'next/link';
 
-/**
- * メニューアイテムのスタイル定義
- */
 export const menuItemStyles = tv({
   slots: {
-    base: 'group relative flex items-center transition-all duration-300',
+    base: 'group relative flex items-center transition-all duration-300 w-full',
     indicator: [
       'w-2 h-2 transition-all duration-300 flex items-center justify-center',
       'pb-[calc(6/16*1rem)]',
@@ -70,7 +65,7 @@ export const menuItemStyles = tv({
       color: 'white',
       class: { base: 'hover:text-white' },
     },
-    // 既存の isActive 時のレイアウト制御を維持 [cite: 146]
+    // 既存の isActive 時のレイアウト制御を維持
     {
       indicatorLayout: 'fixed',
       isActive: true,
@@ -154,7 +149,7 @@ export const MenuItem = ({
     </>
   );
 
-  // 非公開時は span としてレンダリング（アニメーションなし） [cite: 148]
+  // 非公開時は span としてレンダリング（アニメーションなし）
   if (!isPublished) {
     return <span className={base()}>{content}</span>;
   }
