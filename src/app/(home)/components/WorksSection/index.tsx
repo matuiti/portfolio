@@ -8,7 +8,7 @@ import { Work, WorkCategory, WorkFilterCategory } from '@/types/work';
 import { CategoryTabs } from './CategoryTabs';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { useRouter } from 'next/navigation';
-import styles from './WorksSection.module.scss';
+import styles from './WorksSection.module.css';
 
 export const WorksSection = () => {
   const router = useRouter();

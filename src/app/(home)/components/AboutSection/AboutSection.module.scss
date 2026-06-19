@@ -12,7 +12,7 @@
     'btns';
   gap: 0;
 
-  @include mq('tablet') {
+  @include mq(tablet) {
     grid-template-columns: calc(350 / 16 * 1rem) 1fr;
     grid-template-rows: repeat(4, auto);
     grid-template-areas:
@@ -25,12 +25,12 @@
     align-content: start;
   }
 
-  @include mq('small') {
+  @include mq(mobile) {
     grid-template-columns: calc(400 / 16 * 1rem) 1fr;
     column-gap: calc(50 / 16 * 1rem);
   }
 
-  @include mq('base') {
+  @include mq(base) {
     grid-template-columns: calc(500 / 16 * 1rem) 1fr;
   }
 }
@@ -38,14 +38,14 @@
 // --- 表示制御 ---
 .isSP {
   display: block;
-  @include mq('tablet') {
+  @include mq(tablet) {
     display: none !important;
   }
 }
 
 .isPC {
   display: none !important;
-  @include mq('tablet') {
+  @include mq(tablet) {
     display: block !important;
   }
 }
@@ -79,7 +79,7 @@
 
   &.isPC {
     grid-area: image-pc;
-    @include mq('tablet') {
+    @include mq(tablet) {
       width: 100%;
       aspect-ratio: 1 / 1;
       align-self: start;
