@@ -3,7 +3,7 @@
 'use client';
 
 import { useUIStore } from '@/store/useUIStore';
-import { WorksSidebar } from './WorksSidebar';
+import { WorksSidebar } from '../WorksSidebar';
 import { SearchDrawer } from '@/components/ui/SearchDrawer';
 import { useFilteredWorks, useWorkStore } from '@/store/useWorkStore';
 import { WORK_CATEGORIES } from '@/data/works';

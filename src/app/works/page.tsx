@@ -1,19 +1,17 @@
-// src/app/works/page.tsx
-"use client";
-
-import { useState, Suspense, useMemo } from "react";
-import { useWorkStore, useFilteredWorks } from "@/store/useWorkStore";
-import { WorkCard } from "./components/WorkCard";
-import { WorkDetailModal } from "./components/WorkDetailModal";
-import { Pagination } from "@/components/ui/Pagination";
-import { WorksLayout } from "./components/WorksLayout";
-import { Work, WorkFilterCategory } from "@/types/work";
-import { useCommonURLSync } from "@/lib/hooks/useCommonURLSync";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { WORK_CATEGORIES } from "@/data/works";
-import { TitleAndCount } from "@/components/ui/TitleAndCount";
-import styles from "./Works.module.scss";
+'use client';
+import { useState, Suspense, useMemo } from 'react';
+import { useWorkStore, useFilteredWorks } from '@/store/useWorkStore';
+import { WorkCard } from './components/WorkCard';
+import { WorkDetailModal } from './components/WorkDetailModal';
+import { Pagination } from '@/components/ui/Pagination';
+import { WorksLayout } from './components/WorksLayout';
+import { Work, WorkFilterCategory } from '@/types/work';
+import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { WORK_CATEGORIES } from '@/data/works';
+import { TitleAndCount } from '@/components/ui/TitleAndCount';
+import styles from './Works.module.scss';
 
 /**
  * WORKS ページのメインコンテンツコンポーネント
@@ -63,10 +61,10 @@ function WorksContent() {
     setSelectedWork(null); // アクション実行後にモーダルを閉じる
   };
 
-  const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
+  const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';
   const PAGE_HEADER_DATA = {
-    jpTitle: "制作実績",
-    enTitle: "WORKS",
+    jpTitle: '制作実績',
+    enTitle: 'WORKS',
     images: PAGE_HEADER_IMAGE_PATH,
     bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
   } as const;
@@ -77,11 +75,11 @@ function WorksContent() {
   )?.label;
 
   const breadcrumbItems = [
-    { label: "トップ", href: "/" },
-    { label: "制作実績", href: "/works" },
+    { label: 'トップ', href: '/' },
+    { label: '制作実績', href: '/works' },
     // カテゴリーが「すべて」以外なら追加
-    ...(store.selectedCategory !== "all"
-      ? [{ label: selectedCategoryLabel || "" }]
+    ...(store.selectedCategory !== 'all'
+      ? [{ label: selectedCategoryLabel || '' }]
       : []),
     // 検索クエリがあれば追加
     ...(store.searchQuery
@@ -95,14 +93,14 @@ function WorksContent() {
   )?.label;
 
   // 2. 表記を変化させるタイトルのロジック
-  let displayTitle = "制作実績"; // デフォルト
+  let displayTitle = '制作実績'; // デフォルト
 
   if (store.searchQuery) {
     // 検索ワードがある場合を最優先
     displayTitle = `「${store.searchQuery}」の検索結果`;
-  } else if (store.selectedCategory !== "all") {
+  } else if (store.selectedCategory !== 'all') {
     // カテゴリが選択されている場合
-    displayTitle = activeCategoryLabel || "制作実績";
+    displayTitle = activeCategoryLabel || '制作実績';
   }
 
   // 3. 件数の取得
@@ -115,11 +113,11 @@ function WorksContent() {
         jpTitle={PAGE_HEADER_DATA.jpTitle}
         bgImage={PAGE_HEADER_DATA.images}
       />
-      <div className="section-padding-x">
+      <div className='section-padding-x'>
         <Breadcrumbs items={breadcrumbItems} />
       </div>
       {/* コンテンツ */}
-      <div className="section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray">
+      <div className='section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray'>
         <TitleAndCount title={displayTitle} count={totalHitCount} />
         <p className={styles.pageDescription}>
           機密保持契約を遵守するため、実案件の一部については内容を抽象化して掲載しております。
@@ -138,11 +136,11 @@ function WorksContent() {
             ))}
           </div>
         ) : (
-          <div className="py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]">
-            <p className="text-dark-gray font-bold">
+          <div className='py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]'>
+            <p className='text-dark-gray font-bold'>
               該当する実績は見つかりませんでした。
             </p>
-            <p className="text-[calc(14/16*1rem)] text-dark-gray mt-[calc(8/16*1rem)]">
+            <p className='text-[calc(14/16*1rem)] text-dark-gray mt-[calc(8/16*1rem)]'>
               条件を変えて再度お試しください。
             </p>
           </div>
@@ -184,7 +182,7 @@ export default function WorksPage() {
   return (
     <Suspense
       fallback={
-        <div className="p-[calc(80/16*1rem)] text-center font-bold">
+        <div className='p-[calc(80/16*1rem)] text-center font-bold'>
           Loading Works...
         </div>
       }
