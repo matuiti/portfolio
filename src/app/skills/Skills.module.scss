@@ -7,7 +7,7 @@
   background: var(--color-light-gray);
   padding-bottom: calc(126 / 16 * 1rem);
 
-  @include mq('mobile') {
+  @include mq(mobile) {
     padding-bottom: calc(150 / 16 * 1rem);
   }
 }
@@ -18,7 +18,7 @@
   color: var(--color-black);
   white-space: pre-wrap;
   padding-top: calc(60 / 16 * 1rem);
-  @include mq('small') {
+  @include mq(mobile) {
     text-align: center;
   }
 }
@@ -71,7 +71,7 @@
   padding-bottom: calc(20 / 16 * 1rem);
   grid-template-columns: 1fr;
 
-  @include mq('base') {
+  @include mq(base) {
     grid-template-columns: repeat(2, 1fr);
   }
 }

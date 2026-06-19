@@ -1,14 +1,15 @@
-@use '../../../../styles' as *;
+/* @use '../../../../styles' as *; */
 
 .sectionHead {
   display: flex;
   flex-direction: column;
   gap: calc(40 / 16 * 1rem);
   margin-bottom: calc(20 / 16 * 1rem);
-  @include mq('tablet') {
+
+  @media (width >= 52.5em /* tablet */) {
     margin-bottom: calc(40 / 16 * 1rem);
   }
-  @include mq('small') {
+  @media (width >= 33.75em /* mobile */) {
     flex-direction: row;
     justify-content: space-between;
     align-items: end;
@@ -22,22 +23,23 @@
   gap: calc(var(--gap-px) / 16 * 1rem);
   grid-template-columns: 1fr;
   justify-content: center;
-  @include mq('tablet') {
+  @media (width >= 52.5em /* tablet */) {
     grid-template-columns: repeat(3, 1fr);
   }
-  @include mq('small') {
+  @media (width >= 33.75em /* mobile */) {
     grid-template-columns: repeat(3, minmax(0, calc(300 / 16 * 1rem)));
   }
-  @include mq('base') {
+  @media (width >= 80em /* base */) {
     grid-template-columns: repeat(3, minmax(0, calc(346.67 / 16 * 1rem)));
   }
 
   .moreButtonWrapper {
     grid-column: 1 / -1;
     width: 100%;
-    // 目標余白(40px) - グリッドの溝(20px) = 実質の追加マージン
+    /* 目標余白(40px) - グリッドの溝(20px) = 実質の追加マージン */
     margin-top: calc((40 - var(--gap-px)) / 16 * 1rem);
-    @include mq('small') {
+    
+    @media (width >= 33.75em /* mobile */) {
       margin-top: calc((60 - var(--gap-px)) / 16 * 1rem);
     }
     & > button,
