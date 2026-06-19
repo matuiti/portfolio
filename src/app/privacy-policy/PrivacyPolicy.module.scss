@@ -1,19 +1,19 @@
 // src/app/privacy-policy/PrivacyPolicy.module.scss
-@use "../../styles" as *;
+@use '../../styles' as *;
 
 .pageBody {
   width: 100%;
   background: var(--color-light-gray);
   padding-bottom: calc(150 / 16 * 1rem);
   padding-inline: calc(15 / 16 * 1rem);
-  
-  @include mq("mobile") {
+
+  @media (width >= 33.75em /* mobile */) {
     padding-inline: calc(20 / 16 * 1rem);
   }
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     padding-inline: calc(30 / 16 * 1rem);
   }
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     padding-inline: calc(40 / 16 * 1rem);
   }
 }
@@ -27,11 +27,11 @@
   border-radius: calc(20 / 16 * 1rem);
   background: var(--color-white);
 
-  @include mq("mobile") {
+  @media (width >= 33.75em /* mobile */) {
     padding-inline: calc(20 / 16 * 1rem);
   }
 
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     padding-inline: calc(40 / 16 * 1rem);
     padding-block: calc(60 / 16 * 1rem);
   }
@@ -88,7 +88,7 @@
 
     // 独自のマーカー（疑似要素）
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       // マーカーの垂直位置：1行目の文頭中央に来るよう調整
@@ -100,7 +100,7 @@
 
       background-color: var(--color-dark-gray);
       border-radius: 50%;
-      @include mq("tablet") {
+      @media (width >= 52.5em /* tablet */) {
         top: 0.65em;
       }
     }

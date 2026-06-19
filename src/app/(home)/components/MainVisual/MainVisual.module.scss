@@ -8,15 +8,15 @@
   $min-height-small: 640;
   min-height: calc($min-height-mini / 16 * 1rem);
   // Mobile (540px〜)
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     min-height: calc($min-height-mobile / 16 * 1rem);
   }
   // Tablet (840px〜)
-  @include mq(tablet) {
+  @media (width >= 52.5em /* tablet */) {
     min-height: calc($min-height-tablet / 16 * 1rem);
   }
   // Small (1140px〜)
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     min-height: calc($min-height-small / 16 * 1rem);
   }
 }
@@ -28,17 +28,17 @@
   margin-right: auto;
   padding-inline: 10%;
 
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     padding-left: calc(48 / 16 * 1rem);
     padding-right: calc(48 / 16 * 1rem);
   }
 
-  @include mq(tablet) {
+  @media (width >= 52.5em /* tablet */) {
     margin-top: calc(178 / 16 * 1rem);
     max-width: calc(800 / 16 * 1rem);
   }
 
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     align-self: center;
     margin-top: calc(1 / 16 * 1rem);
     max-width: calc(1000 / 16 * 1rem);
@@ -46,7 +46,7 @@
     padding-right: 0;
   }
 
-  @include mq(base) {
+  @media (width >= 80em /* base */) {
     margin-top: calc(4 / 16 * 1rem);
     max-width: calc(1200 / 16 * 1rem);
   }
@@ -60,20 +60,20 @@
   gap: calc(20 / 16 * 1rem);
 
   // Mobile (540px〜)
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     gap: calc(26 / 16 * 1rem);
     margin-bottom: 9%;
   }
 
   // Tablet (840px〜)
-  @include mq(tablet) {
+  @media (width >= 52.5em /* tablet */) {
     gap: calc(20 / 16 * 1rem);
     flex-direction: row;
     margin-bottom: 0;
   }
 
   // Small (1140px〜)
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     gap: calc(40 / 16 * 1rem);
   }
 }
@@ -86,23 +86,23 @@
   letter-spacing: 0.05em;
 
   // Mobile (540px〜)
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     font-size: calc(32 / 16 * 1rem);
     line-height: 1.7;
   }
 
   // Tablet (840px〜)
-  @include mq(tablet) {
+  @media (width >= 52.5em /* tablet */) {
     font-size: calc(45 / 16 * 1rem);
   }
 
   // Small (1140px〜)
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     font-size: calc(60 / 16 * 1rem);
   }
 
   // Base (1280px〜)
-  @include mq(base) {
+  @media (width >= 80em /* base */) {
     font-size: calc(70 / 16 * 1rem);
   }
 }
@@ -114,12 +114,12 @@
   line-height: 1.5;
 
   // Small (1140px〜)
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     font-size: calc(17 / 16 * 1rem);
   }
 
   // Base (1280px〜)
-  @include mq(base) {
+  @media (width >= 80em /* base */) {
     font-size: calc(20 / 16 * 1rem);
   }
 }
@@ -140,24 +140,24 @@
   bottom: 0;
   right: 7%;
 
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     right: 5%;
   }
 
-  @include mq(tablet) {
+  @media (width >= 52.5em /* tablet */) {
     right: 4.5%;
   }
 
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     right: -1.3%;
     transform: translateX(calc(16 / 16 * 1rem));
   }
 
-  @include mq(base) {
+  @media (width >= 80em /* base */) {
     right: 1.5%;
   }
 
-  @include mq(large) {
+  @media (width >= 120em /* large */) {
     right: 1.3%;
   }
 }
@@ -169,7 +169,7 @@
   text-transform: uppercase;
   writing-mode: vertical-rl;
   color: var(--color-white);
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     font-size: calc(16 / 16 * 1rem);
   }
 }
@@ -181,11 +181,11 @@
   overflow: hidden;
   height: calc(60 / 16 * 1rem);
 
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     height: calc(80 / 16 * 1rem);
   }
 
-  @include mq(small) {
+  @media (width >= 71.25em /* small */) {
     height: calc(100 / 16 * 1rem);
   }
 

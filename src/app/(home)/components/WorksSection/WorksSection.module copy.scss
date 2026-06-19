@@ -8,7 +8,7 @@
   @include mq(tablet) {
     margin-bottom: calc(40 / 16 * 1rem);
   }
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     flex-direction: row;
     justify-content: space-between;
     align-items: end;
@@ -25,10 +25,10 @@
   @include mq(tablet) {
     grid-template-columns: repeat(3, 1fr);
   }
-  @include mq(mobile) {
+  @media (width >= 33.75em /* mobile */) {
     grid-template-columns: repeat(3, minmax(0, calc(300 / 16 * 1rem)));
   }
-  @include mq(base) {
+  @media (width >= 80em /* base */) {
     grid-template-columns: repeat(3, minmax(0, calc(346.67 / 16 * 1rem)));
   }
 
@@ -37,7 +37,7 @@
     width: 100%;
     // 目標余白(40px) - グリッドの溝(20px) = 実質の追加マージン
     margin-top: calc((40 - var(--gap-px)) / 16 * 1rem);
-    @include mq(mobile) {
+    @media (width >= 33.75em /* mobile */) {
       margin-top: calc((60 - var(--gap-px)) / 16 * 1rem);
     }
     & > button,

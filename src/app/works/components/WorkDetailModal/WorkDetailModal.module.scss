@@ -1,4 +1,4 @@
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .overlay {
   overflow: auto;
@@ -13,7 +13,7 @@
   padding-inline: calc(20 / 16 * 1rem);
   padding-block: calc(50 / 16 * 1rem);
 
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     padding-inline: calc(30 / 16 * 1rem);
   }
 }
@@ -27,13 +27,13 @@
 }
 
 .header {
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     background: var(--color-white);
     border-radius: calc(20 / 16 * 1rem) calc(20 / 16 * 1rem) 0 0;
     padding-inline: calc(30 / 16 * 1rem);
   }
 
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     padding-inline: calc(40 / 16 * 1rem);
   }
 
@@ -43,7 +43,7 @@
 
     // --- mini~ (スマホ): [<][ 1/10 ][>] のカプセルスタイル ---
     // vLineをテンプレートに含めず、display: none で消去します
-    grid-template-areas: "prev counter next . close";
+    grid-template-areas: 'prev counter next . close';
     grid-template-columns: auto auto auto 1fr auto;
 
     .projectLabel,
@@ -122,9 +122,9 @@
     }
 
     // [該当PJ 1/10] ... [< | >] [X]
-    @include mq("tablet") {
+    @media (width >= 52.5em /* tablet */) {
       // 縦線(vLine)をアローの間に挿入し、背景色付きの操作パネルを構成
-      grid-template-areas: "label counter . prev vLine next close";
+      grid-template-areas: 'label counter . prev vLine next close';
       grid-template-columns: auto auto 1fr auto auto auto auto;
       border-bottom: 1px solid var(--color-medium-gray);
       padding-block: calc(20 / 16 * 1rem) calc(12 / 16 * 1rem);
@@ -202,7 +202,7 @@
   background: var(--color-white);
   border-radius: calc(20 / 16 * 1rem);
 
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     border-radius: 0 0 calc(20 / 16 * 1rem) calc(20 / 16 * 1rem);
   }
   .inner {
@@ -228,20 +228,20 @@
       padding-bottom: calc(12 / 16 * 1rem);
       border-bottom: 1px solid var(--color-medium-gray);
 
-      @include mq("tablet") {
+      @media (width >= 52.5em /* tablet */) {
         font-size: calc(24 / 16 * 1rem);
         padding-bottom: 0;
         border-bottom: none;
       }
 
-      @include mq("small") {
+      @media (width >= 71.25em /* small */) {
         font-size: calc(30 / 16 * 1rem);
       }
     }
 
     .linkWrapper {
       margin-top: calc(12 / 16 * 1rem);
-      @include mq("tablet") {
+      @media (width >= 52.5em /* tablet */) {
         margin-top: calc(20 / 16 * 1rem);
       }
       .buttonGroup {
@@ -262,7 +262,7 @@
       font-size: calc(14 / 16 * 1rem);
       line-height: 1;
       margin-top: calc(12 / 16 * 1rem);
-      @include mq("tablet") {
+      @media (width >= 52.5em /* tablet */) {
         margin-top: calc(20 / 16 * 1rem);
       }
 
@@ -275,7 +275,7 @@
     .message {
       margin-top: calc(12 / 16 * 1rem);
 
-      @include mq("tablet") {
+      @media (width >= 52.5em /* tablet */) {
         margin-top: calc(20 / 16 * 1rem);
       }
     }
@@ -342,7 +342,7 @@
       align-items: center;
       padding-top: calc(22 / 16 * 1rem);
 
-      @include mq("tablet") {
+      @media (width >= 52.5em /* tablet */) {
         padding-top: calc(28 / 16 * 1rem);
       }
     }
@@ -362,7 +362,7 @@
         border-radius: 50%;
         transition: all 0.3s;
 
-        @include mq("mobile") {
+        @media (width >= 33.75em /* mobile */) {
           width: calc(8 / 16 * 1rem);
           height: calc(8 / 16 * 1rem);
         }
@@ -380,11 +380,11 @@
   // 情報セクション
   .infoSection {
     margin-top: calc(20 / 16 * 1rem);
-    @include mq("tablet") {
+    @media (width >= 52.5em /* tablet */) {
       margin-top: calc(40 / 16 * 1rem);
     }
 
-    // @include mq("tablet") {
+    // @media (width >= 52.5em /* tablet */) {
     //   overflow-y: auto;
     // }
 
@@ -423,7 +423,7 @@
 
         // 独自のマーカー（文頭が揃うように絶対配置）
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           left: 0;
           // ★1行目の文頭中央に来るよう垂直位置を調整

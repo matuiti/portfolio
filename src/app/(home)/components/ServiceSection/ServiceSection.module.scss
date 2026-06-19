@@ -1,9 +1,9 @@
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .sectionHead {
   margin-bottom: calc(40 / 16 * 1rem);
 
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     margin-bottom: calc(60 / 16 * 1rem);
   }
 }
@@ -16,11 +16,11 @@
   gap: calc(20 / 16 * 1rem);
   margin-top: calc(40 / 16 * 1rem);
 
-  @include mq("mobile") {
+  @media (width >= 33.75em /* mobile */) {
     margin-top: calc(80 / 16 * 1rem);
   }
 
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     margin-top: calc(60 / 16 * 1rem);
   }
 }
@@ -33,7 +33,7 @@
   ); // gap-[calc(20/16*1rem)]：規約に従ったサイズ指定 [3, 4]
 
   // smallブレイクポイント（1140px相当）での制御 [5-7]
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     grid-template-columns: repeat(2, minmax(0, 1fr)); // small:grid-cols-2
   }
 }
@@ -48,7 +48,7 @@
   ); // Tailwindのlight-grayに対応する変数
   transition: all 0.3s;
 
-  @include mq("mobile") {
+  @media (width >= 33.75em /* mobile */) {
     flex-direction: row;
     padding: calc(30 / 16 * 1rem);
   }
@@ -72,10 +72,10 @@
   align-items: flex-start;
   gap: calc(10 / 16 * 1rem);
 
-  @include mq("mobile") {
+  @media (width >= 33.75em /* mobile */) {
     justify-content: center;
   }
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     justify-content: start;
   }
 }

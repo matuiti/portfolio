@@ -1,4 +1,4 @@
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .sectionHead {
   display: flex;
@@ -20,7 +20,7 @@
   // 1カラム時の定義
   grid-template-columns: 1fr;
 
-  @include mq("tablet") {
+  @media (width >= 52.5em /* tablet */) {
     // 3カラム時の定義
     // 各列を最大350pxで固定し、3つ並べる
     grid-template-columns: repeat(3, minmax(0, calc(350 / 16 * 1rem)));

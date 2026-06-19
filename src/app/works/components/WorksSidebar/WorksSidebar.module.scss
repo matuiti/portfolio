@@ -1,11 +1,11 @@
 // src/app/works/components/WorksLayout/WorksSidebar.module.scss
-@use "../../../../styles" as *;
+@use '../../../../styles' as *;
 
 .container {
   display: none;
   width: calc(300 / 16 * 1rem);
   flex-shrink: 0;
-  @include mq("small") {
+  @media (width >= 71.25em /* small */) {
     display: block;
   }
 }
@@ -69,7 +69,6 @@
   flex-direction: column;
   gap: calc(40 / 16 * 1rem);
   padding-right: calc(8 / 16 * 1rem); //スクロールバー分の幅を考慮
-
 }
 
 // 下部エリア
