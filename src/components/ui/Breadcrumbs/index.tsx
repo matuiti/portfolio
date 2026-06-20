@@ -1,6 +1,5 @@
-// src/components/ui/Breadcrumbs/index.tsx
-import Link from "next/link";
 import { KeyboardArrowRight } from "@/components/ui/Icons";
+import Link from "next/link";
 import styles from "./Breadcrumbs.module.css";
 
 type BreadcrumbItem = {
@@ -12,12 +11,9 @@ type BreadcrumbsProps = {
   items: BreadcrumbItem[];
 };
 
-/**
- * 下層ページ共通パンくずリストコンポーネント
- * 階層に応じて動的にアイテムを表示し、セパレーターを挿入
- */
 export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   const lastIndex = items.length ? items.length - 1 : 0;
+  
   return (
     <nav aria-label="Breadcrumb" className={styles.container}>
       <ol className={styles.list}>
