@@ -13,10 +13,6 @@ import { WORK_CATEGORIES } from '@/data/works';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import styles from './Works.module.css';
 
-/**
- * WORKS ページのメインコンテンツコンポーネント
- * ストアの状態管理と、各 UI パーツへのロジック注入を統括します。
- */
 function WorksContent() {
   const store = useWorkStore();
   const filteredWorks = useFilteredWorks();
@@ -68,7 +64,7 @@ function WorksContent() {
     bgiPath: PAGE_HEADER_IMAGE_PATH,
   } as const;
 
-  // カテゴリーIDからラベルを取得するロジック [9]
+  // カテゴリーIDからラベルを取得するロジック
   const selectedCategoryLabel = WORK_CATEGORIES.find(
     (cat) => cat.value === store.selectedCategory,
   )?.label;
@@ -86,7 +82,7 @@ function WorksContent() {
       : []),
   ];
 
-  // 1. カテゴリのラベルを取得（例: "Web制作"） [5]
+  // 1. カテゴリのラベルを取得（例: "Web制作"）
   const activeCategoryLabel = WORK_CATEGORIES.find(
     (cat) => cat.value === store.selectedCategory,
   )?.label;
