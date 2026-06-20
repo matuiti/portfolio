@@ -21,7 +21,7 @@ type WorkState = {
 };
 
 export const useWorkStore = create<WorkState>((set) => ({
-  // --- 状態の初期値 ---
+  // --- 初期値 ---
   searchQuery: "",
   selectedCategory: "all",
   selectedTags: [],
@@ -72,7 +72,7 @@ export const useWorkStore = create<WorkState>((set) => ({
 
 /**
  * フィルタリング済みのデータを取得するセレクター
- * （コンポーネント側で useFilteredWorks() として使用）
+ * 使用例： const filteredWorks = useFilteredWorks();
  */
 export const useFilteredWorks = () => {
   const { searchQuery, selectedCategory, selectedTags } = useWorkStore();

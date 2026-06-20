@@ -1,7 +1,4 @@
-// src/app/works/components/WorksLayout/index.tsx
-
 'use client';
-
 import { useUIStore } from '@/store/useUIStore';
 import { WorksSidebar } from '../WorksSidebar';
 import { SearchDrawer } from '@/components/ui/SearchDrawer';

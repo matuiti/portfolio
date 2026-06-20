@@ -1,7 +1,4 @@
-// src/lib/hooks/useCommonURLSync.ts
-
 'use client';
-
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { URLSyncState, URLSyncActions } from '@/types/filtering';
@@ -49,7 +46,7 @@ export function useCommonURLSync<T extends string>(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // ページマウント時の初期化として1回だけ実行
 
-  // 2. デバウンス処理：入力停止から300ms後にURL反映用Stateを更新 
+  // 2. デバウンス処理：入力停止から300ms後にURL反映用Stateを更新
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedQuery(state.searchQuery);
