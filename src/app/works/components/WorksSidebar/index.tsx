@@ -1,6 +1,6 @@
 'use client';
 import { useMemo } from 'react';
-import { useWorkStore } from '@/store/useWorkStore';
+import { useWorkStore } from '@/lib/hooks/useWorkStore';
 import { SearchBox } from '@/components/ui/SearchBox';
 import { CategoryList } from '@/components/ui/CategoryList';
 import { TagFilters } from '@/components/ui/TagFilters';

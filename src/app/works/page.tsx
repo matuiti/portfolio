@@ -1,6 +1,6 @@
 'use client';
 import { useState, Suspense, useMemo } from 'react';
-import { useWorkStore, useFilteredWorks } from '@/store/useWorkStore';
+import { useWorkStore, useFilteredWorks } from '@/lib/hooks/useWorkStore';
 import { WorkCard } from './components/WorkCard';
 import { WorkDetailModal } from './components/WorkDetailModal';
 import { Pagination } from '@/components/ui/Pagination';

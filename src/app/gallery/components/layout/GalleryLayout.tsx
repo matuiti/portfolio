@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useUIStore } from '@/store/useUIStore';
+import { useUIStore } from '@/lib/hooks/useUIStore';
 import { GallerySidebar } from './GallerySidebar';
 import { GalleryDrawerMenu } from './GalleryDrawerMenu';
 import { Filtering } from '@/gallery/types/filtering';
