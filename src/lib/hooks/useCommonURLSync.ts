@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { URLSyncState, URLSyncActions } from '@/types/filtering';
+import { URLSyncActions, URLSyncState } from '@/types/urlSync';
 
 /**
  * 共通：URLステート同期システム

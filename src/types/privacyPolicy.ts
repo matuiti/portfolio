@@ -1,5 +1,3 @@
-// src/types/privacy-policy.ts
-
 export type PrivacyPolicySection = {
   id: string;
   num: string;

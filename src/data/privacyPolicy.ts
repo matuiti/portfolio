@@ -1,5 +1,5 @@
 // src/data/privacy-policy.ts
-import { PrivacyPolicyData } from "@/types/privacy-policy";
+import { PrivacyPolicyData } from "@/types/privacyPolicy";
 
 export const PRIVACY_POLICY_DATA: PrivacyPolicyData = {
   lastUpdated: "2024.03.01", // 必要に応じて管理
