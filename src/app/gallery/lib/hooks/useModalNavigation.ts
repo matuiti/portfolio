@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { UIPart } from "@/gallery/types/ui-part";
-import { useEffect, useCallback } from "react";
+import { UIPart } from '@/gallery/types/ui-part';
+import { useEffect, useCallback } from 'react';
 
 type UseModalNavigationProps = {
   currentItem: UIPart;
@@ -39,12 +39,12 @@ export function useModalNavigation({
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") goToPrev();
-      if (e.key === "ArrowRight") goToNext();
+      if (e.key === 'ArrowLeft') goToPrev();
+      if (e.key === 'ArrowRight') goToNext();
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, goToPrev, goToNext]); // 必要最小限かつ正確な依存配列
 
   return {

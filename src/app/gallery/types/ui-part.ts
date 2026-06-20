@@ -1,6 +1,6 @@
 // src/types/gallery/ui-part.ts
 
-import { Category } from "./category";
+import { Category } from './category';
 
 /**
  * UIパーツの型定義
@@ -11,7 +11,7 @@ export type UIPart = {
   category: Category;
   title: string;
   description: string;
-  difficulty: "basic" | "advanced" | "expert";
+  difficulty: 'basic' | 'advanced' | 'expert';
   tags: string[];
   features: string[];
   techStack: string[];

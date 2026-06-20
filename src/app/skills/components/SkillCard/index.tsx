@@ -8,12 +8,12 @@ import {
   shift,
   autoUpdate,
 } from '@floating-ui/react';
-import { labelType, SkillItem } from '@/types/skill';
+import { LabelType, SkillItem } from '@/types/skill';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { Launch, GitHub } from '@/components/ui/Icons';
 import { LABEL_DESCRIPTION } from '@/data/skills';
-import styles from './SkillCard.module.css';
 import { useIsMounted } from '@/lib/hooks/useIsMounted';
+import styles from './SkillCard.module.css';
 
 type SkillCardProps = {
   item: SkillItem;
@@ -27,13 +27,13 @@ export const SkillCard = ({ item }: SkillCardProps) => {
   const [isActive, setIsActive] = useState(false);
   const isMounted = useIsMounted();
 
-const { refs, floatingStyles } = useFloating({
-  open: isActive,
-  onOpenChange: setIsActive,
-  placement: 'top',
-  whileElementsMounted: autoUpdate,
-  middleware: [offset(8), flip(), shift({ padding: 8 })],
-});
+  const { refs, floatingStyles } = useFloating({
+    open: isActive,
+    onOpenChange: setIsActive,
+    placement: 'top',
+    whileElementsMounted: autoUpdate,
+    middleware: [offset(8), flip(), shift({ padding: 8 })],
+  });
 
   useEffect(() => {
     const checkOverflow = () => {
@@ -51,7 +51,6 @@ const { refs, floatingStyles } = useFloating({
         });
       }
     };
-
     checkOverflow();
     window.addEventListener('resize', checkOverflow);
     return () => window.removeEventListener('resize', checkOverflow);
@@ -60,7 +59,7 @@ const { refs, floatingStyles } = useFloating({
   const projectLink = item.links?.find((l) => l.type === 'project');
   const githubLink = item.links?.find((l) => l.type === 'github');
 
-  const getTooltipText = (label: labelType): string | null => {
+  const getTooltipText = (label: LabelType): string | null => {
     switch (label) {
       case '基礎レベル':
         return `${LABEL_DESCRIPTION.基礎レベル}`;
