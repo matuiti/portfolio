@@ -1,13 +1,13 @@
 'use client';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import gsap from 'gsap';
-import { SkillGroup } from '@/types/skill';
+import { AllSkills } from '@/types/skill';
 import { SkillCard } from '../SkillCard';
 import { KeyboardArrowRight } from '@/components/ui/Icons';
 import styles from '../../Skills.module.css';
 
 type Props = {
-  group: SkillGroup;
+  group: AllSkills;
   index: number;
 };
 
