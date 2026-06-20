@@ -77,7 +77,7 @@ export const ALL_WORKS: Work[] | [] = [
       'トップページのアニメーションは、重要なメッセージを伝えながらもユーザーを長く引き止めすぎないよう、秒数・イージング・モーションの粒度を細かく調整しています。',
     ],
     role: '企画 / アーキテクチャ設計 / フロントエンド実装 / 継続的改善',
-    duration: '設計・初回リリースまで2ヶ月 / 継続的に改善・運用中',
+    duration: '2ヶ月（継続改善・強化中）',
     disclosureLevel: 'Full',
   },
   {
@@ -146,8 +146,7 @@ export const ALL_WORKS: Work[] | [] = [
       'プロジェクト途中での新ブレイクポイント追加という仕様変更にも、影響範囲を最小化しながら柔軟に対応しました。',
     ],
     role: 'フロントエンド設計・実装 / 見積もり / 技術提案 / リファクタリング',
-    duration:
-      'ご相談から納品までに4ヶ月（プロジェクト完了後にリファクタリング・ドキュメント整備を自発的に実施）',
+    duration: '4ヶ月',
     disclosureLevel: 'NDA',
   },
   {
@@ -283,7 +282,7 @@ export const ALL_WORKS: Work[] | [] = [
       'デザイン担当：みさ（https://lit.link/misa123illustdesign）',
     ],
     role: '設計 / フロントエンド実装 / サーバー設定 / WordPress導入 / 継続的な保守・運用',
-    duration: '長期（運用5年目）',
+    duration: '半年~（保守・運用5年目）',
     disclosureLevel: 'Full',
   },
   {
@@ -323,7 +322,7 @@ export const ALL_WORKS: Work[] | [] = [
       '妹にもメモアプリを使ってもらっており、実ユーザーのフィードバックも機能改善に反映しています。',
     ],
     role: '企画 / 設計 / UIデザイン / フロントエンド実装',
-    duration: '3ヶ月~（運用・エンハンス開発）',
+    duration: '3ヶ月（改善に+1ヶ月）',
     disclosureLevel: 'Full',
   },
   {
@@ -379,7 +378,7 @@ export const ALL_WORKS: Work[] | [] = [
       '画像素材提供：みさ（https://lit.link/misa123illustdesign）',
     ],
     role: '企画 / 設計 / デザイン / フロントエンド実装',
-    duration: '2ヶ月~',
+    duration: '2ヶ月',
     disclosureLevel: 'Full',
   },
   {
@@ -427,7 +426,7 @@ export const ALL_WORKS: Work[] | [] = [
       '画像素材提供：みさ（https://lit.link/misa123illustdesign）',
     ],
     role: '企画 / 設計 / UIデザイン / フロントエンド実装 / 作曲',
-    duration: '2ヶ月~（初回リリース後も断続的にエンハンス開発）',
+    duration: '2ヶ月~（断続的に強化）',
     disclosureLevel: 'Full',
   },
 ];

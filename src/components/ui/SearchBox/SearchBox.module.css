@@ -7,9 +7,10 @@
   position: relative;
   width: 100%;
   border-radius: calc(8 / 16 * 1rem);
-  border: 1px solid var(--color-dark-gray);
+  border: 3px solid var(--color-medium-gray);
+  /* border: 1px solid var(--color-dark-gray); */
   background: var(--color-white);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .iconWrapper {
@@ -33,21 +34,18 @@
   line-height: 1.5;
   letter-spacing: 0.05em;
   transition: all 0.3s;
-
-  @media (width >= 71.25em /* small */) {
-    padding-top: calc(9 / 16 * 1rem);
-    padding-bottom: calc(9 / 16 * 1rem);
-  }
-
   &::placeholder {
     color: var(--color-neutral-400);
   }
 
-  &:focus {
-    outline: none;
-    border-color: var(--color-blue-500);
-    background-color: var(--color-white);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.05);
+  &:focus,&:hover {
+    outline: 3px solid var(--color-blue-500);
+    outline-offset: 1px;
+  }
+
+  @media (width >= 71.25em /* small */) {
+    padding-top: calc(9 / 16 * 1rem);
+    padding-bottom: calc(9 / 16 * 1rem);
   }
 }
 
