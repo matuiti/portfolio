@@ -12,7 +12,7 @@ import {
   type ContactFormData,
 } from './schema';
 import { sendContactAction } from './actions';
-import { useUIStore } from '@/store/useUIStore';
+import { useUIStore } from '@/lib/hooks/useUIStore';
 import { ContactRipple } from './ContactRipple';
 import Link from 'next/link';
 import styles from './ContactSection.module.css';
@@ -149,7 +149,6 @@ export const ContactForm = () => {
           </div>
 
           <div className={styles.formFoot}>
-            
             {/* プライバシーポリシー */}
             <div className={styles.privacyArea}>
               <label className={styles.checkboxLabel}>
