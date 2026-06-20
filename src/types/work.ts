@@ -1,6 +1,4 @@
-// src/types/work.ts
-
-/** 内部管理用のカテゴリID */
+/** 内部管理用のカテゴリ */
 export type WorkCategory =
   | 'web'
   | 'wordpress'
