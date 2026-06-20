@@ -1,7 +1,6 @@
-// src/types/skill.ts
-
 export type SkillLinkType = "project" | "github";
-export type labeType = "基礎" | "実務レベル" | "精通";
+export type labelType = "基礎レベル" | "実務レベル" | "精通レベル";
+export type labelDescription = Record<labelType, string>;
 
 export type SkillLink = {
   url: string;
@@ -11,7 +10,7 @@ export type SkillLink = {
 
 export type SkillItem = {
   name: string;
-  label: labeType;
+  label: labelType;
   description: string;
   links?: SkillLink[];
 };
