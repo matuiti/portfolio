@@ -112,6 +112,10 @@
     @apply font-bold;
   }
 
+  *:focus-visible {
+  @apply outline-3 outline-blue-500 outline-offset-1;
+}
+
   /* スクロールバー制御 (Firefox) */
   @supports (scrollbar-width: thin) {
     * {

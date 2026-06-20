@@ -12,6 +12,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { WORK_CATEGORIES } from '@/data/works';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import styles from './Works.module.css';
+import { ScrollToTop } from '@/lib/utility/ScrollToTop';
 
 function WorksContent() {
   const store = useWorkStore();
@@ -175,14 +176,17 @@ function WorksContent() {
  */
 export default function WorksPage() {
   return (
-    <Suspense
-      fallback={
-        <div className='p-[calc(80/16*1rem)] text-center font-bold'>
-          Loading Works...
-        </div>
-      }
-    >
-      <WorksContent />
-    </Suspense>
+    <>
+      <ScrollToTop />
+      <Suspense
+        fallback={
+          <div className='p-[calc(80/16*1rem)] text-center font-bold'>
+            Loading Works...
+          </div>
+        }
+      >
+        <WorksContent />
+      </Suspense>
+    </>
   );
 }

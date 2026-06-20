@@ -84,7 +84,7 @@ export const SkillCard = ({ item }: SkillCardProps) => {
           onMouseEnter={() => setIsActive(true)}
           onMouseLeave={() => setIsActive(false)}
           onClick={() => setIsActive(!isActive)}
-          className={`${styles.tag} cursor-pointer select-none`}
+          className={`${styles.tag} select-none`}
         >
           {item.label}
         </span>

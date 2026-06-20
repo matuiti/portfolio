@@ -36,8 +36,6 @@
   .resetBtn {
     width: 100%;
     padding: calc(10 / 16 * 1rem);
-    background-color: var(--color-light-gray);
-    color: var(--color-dark-gray);
     font-size: calc(16 / 16 * 1rem);
     border-radius: calc(8 / 16 * 1rem);
     letter-spacing: 0.05em;
@@ -45,6 +43,12 @@
     cursor: pointer;
     transition: all 0.2s ease;
     margin-top: calc(20 / 16 * 1rem);
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+    &:hover {
+      background-color: var(--color-dark-gray);
+      color: var(--color-white);
+    }
   }
 }
 
