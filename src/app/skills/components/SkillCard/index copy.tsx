@@ -1,19 +1,9 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import {
-  useFloating,
-  offset,
-  flip,
-  shift,
-  autoUpdate,
-} from '@floating-ui/react';
-import { labelType, SkillItem } from '@/types/skill';
+import { SkillItem } from '@/types/skill';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { Launch, GitHub } from '@/components/ui/Icons';
-import { LABEL_DESCRIPTION } from '@/data/skills';
 import styles from './SkillCard.module.css';
-import { useIsMounted } from '@/lib/hooks/useIsMounted';
 
 type SkillCardProps = {
   item: SkillItem;
@@ -23,17 +13,6 @@ export const SkillCard = ({ item }: SkillCardProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasOverflow, setHasOverflow] = useState(false);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
-
-  const [isActive, setIsActive] = useState(false);
-  const isMounted = useIsMounted();
-
-const { refs, floatingStyles } = useFloating({
-  open: isActive,
-  onOpenChange: setIsActive,
-  placement: 'top',
-  whileElementsMounted: autoUpdate,
-  middleware: [offset(8), flip(), shift({ padding: 8 })],
-});
 
   useEffect(() => {
     const checkOverflow = () => {
@@ -60,50 +39,11 @@ const { refs, floatingStyles } = useFloating({
   const projectLink = item.links?.find((l) => l.type === 'project');
   const githubLink = item.links?.find((l) => l.type === 'github');
 
-  const getTooltipText = (label: labelType): string | null => {
-    switch (label) {
-      case '基礎レベル':
-        return `${LABEL_DESCRIPTION.基礎レベル}`;
-      case '実務レベル':
-        return `${LABEL_DESCRIPTION.実務レベル}`;
-      case '精通レベル':
-        return `${LABEL_DESCRIPTION.精通レベル}`;
-      default:
-        return null;
-    }
-  };
-
-  const tooltipText = getTooltipText(item.label);
-
   return (
     <article className={styles.card}>
       <div className={styles.header}>
         <h3 className={styles.name}>{item.name}</h3>
-
-        <span
-          ref={(node) => refs.setReference(node)}
-          onMouseEnter={() => setIsActive(true)}
-          onMouseLeave={() => setIsActive(false)}
-          onClick={() => setIsActive(!isActive)}
-          className={`${styles.tag} cursor-pointer select-none`}
-        >
-          {item.label}
-        </span>
-
-        {isActive &&
-          tooltipText &&
-          isMounted &&
-          createPortal(
-            <span
-              ref={(node) => refs.setFloating(node)}
-              style={floatingStyles}
-              className='fixed px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-md whitespace-nowrap z-50 font-normal normal-case tracking-normal pointer-events-none'
-            >
-              {tooltipText}
-              <span className='absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-800' />
-            </span>,
-            document.body,
-          )}
+        <span className={styles.tag}>{item.label}</span>
       </div>
 
       <div className={styles.content}>

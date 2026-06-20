@@ -1,5 +1,3 @@
-// src/app/gallery/components/ui/DifficultyBadge.tsx
-
 import { UIPart } from "@/gallery/types/ui-part";
 
 type DifficultyConfig = {
