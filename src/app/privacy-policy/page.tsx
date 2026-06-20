@@ -17,8 +17,7 @@ export default function PrivacyPolicyPage() {
   const PAGE_HEADER_DATA = {
     jpTitle: 'プライバシーポリシー',
     enTitle: 'PRIVACY POLICY',
-    images: PAGE_HEADER_IMAGE_PATH,
-    bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
+    bgiPath: PAGE_HEADER_IMAGE_PATH,
   } as const;
 
   const breadcrumbItems = [
@@ -32,7 +31,7 @@ export default function PrivacyPolicyPage() {
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
-        bgImage={PAGE_HEADER_DATA.images}
+        bgiPath={PAGE_HEADER_DATA.bgiPath}
       />
 
       <div className='section-padding-x w-full bg-white'>

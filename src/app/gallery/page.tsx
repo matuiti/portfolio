@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { Suspense } from "react";
-import { UI_PARTS } from "@/gallery/data/ui-parts";
-import { GalleryLayout } from "./components/layout/GalleryLayout";
-import { ItemList } from "./components/list/ItemList";
-import { Pagination } from "@/components/ui/Pagination";
-import { PreviewModal } from "./components/modal/PreviewModal";
-import { NoResults } from "./components/list/NoResults";
-import { LoadingGallery } from "./components/ui/LoadingGallery";
-import { useFiltering } from "./lib/hooks/useFiltering";
-import { useURLSync } from "./lib/hooks/useURLSync";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { CATEGORIES } from "./data/categories";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { TitleAndCount } from "@/components/ui/TitleAndCount";
+import { Suspense } from 'react';
+import { UI_PARTS } from '@/gallery/data/ui-parts';
+import { GalleryLayout } from './components/layout/GalleryLayout';
+import { ItemList } from './components/list/ItemList';
+import { Pagination } from '@/components/ui/Pagination';
+import { PreviewModal } from './components/modal/PreviewModal';
+import { NoResults } from './components/list/NoResults';
+import { LoadingGallery } from './components/ui/LoadingGallery';
+import { useFiltering } from './lib/hooks/useFiltering';
+import { useURLSync } from './lib/hooks/useURLSync';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { CATEGORIES } from './data/categories';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { TitleAndCount } from '@/components/ui/TitleAndCount';
 
 // 1. ロジックを「GalleryContent」として切り出す
 function GalleryContent() {
@@ -37,12 +37,11 @@ function GalleryContent() {
     searchQuery,
   } = filtering;
 
-  const PAGE_HEADER_IMAGE_PATH = "/assets/images/common/bg-page-header.jpg";
+  const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';
   const PAGE_HEADER_DATA = {
-    jpTitle: "UIギャラリー",
-    enTitle: "GALLERY",
-    images: PAGE_HEADER_IMAGE_PATH,
-    bgPath: `url(${PAGE_HEADER_IMAGE_PATH})`,
+    jpTitle: 'UIギャラリー',
+    enTitle: 'GALLERY',
+    bgiPath: PAGE_HEADER_IMAGE_PATH,
   } as const;
 
   const activeCategoryLabel = CATEGORIES.find(
@@ -50,10 +49,10 @@ function GalleryContent() {
   )?.label;
 
   const breadcrumbItems = [
-    { label: "トップ", href: "/" },
-    { label: "UIギャラリー", href: "/gallery" },
+    { label: 'トップ', href: '/' },
+    { label: 'UIギャラリー', href: '/gallery' },
     // カテゴリが選択されている（"all"以外）なら追加
-    ...(selectedCategory !== "all" && activeCategoryLabel
+    ...(selectedCategory !== 'all' && activeCategoryLabel
       ? [{ label: activeCategoryLabel }]
       : []),
     // 検索ワードがある場合はさらに追加
@@ -66,17 +65,17 @@ function GalleryContent() {
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
-        bgImage={PAGE_HEADER_DATA.images}
+        bgiPath={PAGE_HEADER_DATA.bgiPath}
       />
       {/* パンくずリスト */}
       <Breadcrumbs items={breadcrumbItems} />
-      <div className="space-y-8">
+      <div className='space-y-8'>
         <TitleAndCount title={displayTitle} count={totalHitCount} />
 
         {isEmpty ? (
           <NoResults message={noResultsMessage} onReset={clearFilters} />
         ) : (
-          <div className="space-y-12">
+          <div className='space-y-12'>
             <ItemList items={paginatedItems} onItemClick={setSelectedItem} />
             {totalPages > 1 && (
               <Pagination

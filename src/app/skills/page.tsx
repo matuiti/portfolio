@@ -1,8 +1,8 @@
-import { ALL_SKILLS } from '@/data/skills';
-import { breadcrumbItems, description, PAGE_HEADER_DATA } from './data';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { SkillGroupSection } from './components/SkillGroupSection';
+import { breadcrumbItems, description, PAGE_HEADER_DATA } from './data';
+import { ALL_SKILLS } from '@/data/skills';
 import { ScrollToTop } from '@/lib/utility/ScrollToTop';
 import styles from './Skills.module.css';
 
@@ -13,7 +13,7 @@ export default function SkillsPage() {
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
-        bgImage={PAGE_HEADER_DATA.images}
+        bgiPath={PAGE_HEADER_DATA.bgiPath}
       />
       <div className='section-padding-x w-full bg-white'>
         <div className='container-center'>

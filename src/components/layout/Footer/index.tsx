@@ -9,7 +9,7 @@ import { SITE_CONFIG } from '@/data/site';
 
 const footerStyles = tv({
   slots: {
-    root: 'mt-auto bg-[var(--color-black)] p-[calc(20/16*1rem)] tablet:pt-[calc(20.62/16*1rem)] tablet:pb-[calc(20.62/16*1rem)] small:pt-[calc(40.5/16*1rem)] small:pb-[calc(20.5/16*1rem)] base:pb-[calc(40/16*1rem)]',
+    root: 'bg-[var(--color-black)] p-[calc(20/16*1rem)] tablet:pt-[calc(20.62/16*1rem)] tablet:pb-[calc(20.62/16*1rem)] small:pt-[calc(40.5/16*1rem)] small:pb-[calc(20.5/16*1rem)] base:pb-[calc(40/16*1rem)]',
     container: 'container-center',
     topArea:
       'flex flex-col items-start small:items-start p-5 -mb-1.5 small:-mb-px gap-y-8 small:gap-y-0 small:gap-x-5 tablet:items-center small:flex-row small:justify-between',
