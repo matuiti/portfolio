@@ -20,6 +20,7 @@ import { BaseTag } from '@/components/ui/BaseTag';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { SafeImage } from '@/components/ui/SafeImage';
 import styles from './WorkDetailModal.module.css';
+import { scrollToTop } from '@/lib/utility/scrollToTop';
 
 type WorkDetailModalProps = {
   work: Work;
@@ -85,6 +86,11 @@ export const WorkDetailModal = ({
   }, [isOpen]);
 
   if (!isOpen) return null;
+
+  const handleTagClick = (tag: string):void => {
+    onTagClick(tag);
+    scrollToTop();
+  }
 
   return (
     <div
@@ -320,7 +326,7 @@ export const WorkDetailModal = ({
                     <BaseTag
                       key={tag}
                       className={styles.techTag}
-                      onClick={() => onTagClick(tag)}
+                      onClick={() => handleTagClick(tag)}
                       hasHash
                     >
                       # {tag}
