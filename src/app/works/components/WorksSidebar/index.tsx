@@ -8,11 +8,10 @@ import { WORK_CATEGORIES, ALL_WORKS } from '@/data/works';
 import { WorkCategory } from '@/types/work';
 import styles from './WorksSidebar.module.css';
 
-type WorksSidebarProps = {
-  footerNote?: string;
-};
+const footerNote =
+  '※「非公開」タグの実績は、契約上の理由により最適化されたデータを掲載しています。';
 
-export function WorksSidebar({ footerNote }: WorksSidebarProps) {
+export function WorksSidebar() {
   const {
     searchQuery,
     setSearchQuery,

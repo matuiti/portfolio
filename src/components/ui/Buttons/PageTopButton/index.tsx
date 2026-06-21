@@ -2,6 +2,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 import React, { useEffect, useState } from 'react';
 import { useScrollThreshold } from '@/lib/hooks/useScrollThreshold';
+import { scrollToTop } from '@/lib/utility/scrollToTop';
 
 const pageTopButtonStyles = tv({
   base: [
@@ -101,10 +102,6 @@ export const PageTopButton = ({
     bottom: footerIntersecting
       ? `calc((${footerHeight} + 20)/16*1rem)`
       : '1.25rem',
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

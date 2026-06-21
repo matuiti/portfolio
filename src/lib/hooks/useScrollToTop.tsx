@@ -1,9 +1,6 @@
-// src/lib/utility/ScrollToTop.tsx
 'use client';
-
 import { useEffect } from 'react';
-
-export function ScrollToTop() {
+export function useScrollToTop() {
   /**
    * ページ遷移時のスクロール位置補正
    * コンポーネントがブラウザに読み込まれた瞬間、

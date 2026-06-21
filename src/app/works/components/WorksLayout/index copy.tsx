@@ -1,7 +1,7 @@
 'use client';
 import { useUIStore } from '@/lib/hooks/useUIStore';
 import { WorksSidebar } from '../WorksSidebar';
-import { SearchDrawer } from '@/components/ui/SearchDrawer';
+import { SearchDrawer } from '@/works/components/SearchWorksDrawer';
 import { useFilteredWorks, useWorkStore } from '@/lib/hooks/useWorkStore';
 import { WORK_CATEGORIES } from '@/data/works';
 import { WorkCategory, WorkFilterCategory } from '@/types/work';

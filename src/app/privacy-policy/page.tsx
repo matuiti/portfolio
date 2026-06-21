@@ -2,7 +2,7 @@ import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PRIVACY_POLICY_DATA } from '@/data/privacyPolicy';
-import { ScrollToTop } from '@/lib/utility/ScrollToTop';
+import { useScrollToTop } from '@/lib/hooks/useScrollToTop';
 import styles from './PrivacyPolicy.module.css';
 
 /**
@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
 
   return (
     <>
-      <ScrollToTop />
+      <useScrollToTop />
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
