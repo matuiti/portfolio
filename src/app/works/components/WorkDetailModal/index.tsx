@@ -312,9 +312,9 @@ export const WorkDetailModal = ({
                   </ul>
                 </div>
               )}
-              {/* 4. 使用スキル */}
+              {/* 4. キーワードタグ */}
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>使用スキル</h3>
+                <h3 className={styles.sectionTitle}>キーワードタグ</h3>
                 <div className={styles.tagGrid}>
                   {work.tags.map((tag) => (
                     <BaseTag

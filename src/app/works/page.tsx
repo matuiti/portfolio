@@ -11,10 +11,11 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { WORK_CATEGORIES } from '@/data/works';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
-import styles from './Works.module.css';
 import { ScrollToTop } from '@/lib/utility/ScrollToTop';
+import { PAGE_HEADER_DATA } from './data';
+import styles from './Works.module.css';
 
-function WorksContent() {
+function WorksPageContent() {
   const store = useWorkStore();
   const filteredWorks = useFilteredWorks();
 
@@ -42,28 +43,15 @@ function WorksContent() {
     return filteredWorks.slice(start, start + store.itemsPerPage);
   }, [filteredWorks, store.currentPage, store.itemsPerPage]);
 
-  /**
-   * ロジックの注入：実績詳細モーダル内でのアクション定義
-   * WORKS ページでは遷移せず、その場でストアを更新（再フィルタリング）します。
-   */
+  // 詳細モーダル用のアクション定義
   const handleCategoryAction = (cat: string) => {
-    // 他のフィルタをリセットし、該当カテゴリのみで絞り込む
     store.selectOnlyCategory(cat as WorkFilterCategory);
-    setSelectedWork(null); // アクション実行後にモーダルを閉じる
+    setSelectedWork(null); // モーダルを閉じる
   };
-
   const handleTagAction = (tag: string) => {
-    // カテゴリを「すべて」にし、該当タグ 1 つだけで絞り込む
     store.selectOnlyTag(tag);
-    setSelectedWork(null); // アクション実行後にモーダルを閉じる
+    setSelectedWork(null); // モーダルを閉じる
   };
-
-  const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';
-  const PAGE_HEADER_DATA = {
-    jpTitle: '制作実績',
-    enTitle: 'WORKS',
-    bgiPath: PAGE_HEADER_IMAGE_PATH,
-  } as const;
 
   // カテゴリーIDからラベルを取得するロジック
   const selectedCategoryLabel = WORK_CATEGORIES.find(
@@ -73,33 +61,37 @@ function WorksContent() {
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
     { label: '制作実績', href: '/works' },
-    // カテゴリーが「すべて」以外なら追加
     ...(store.selectedCategory !== 'all'
       ? [{ label: selectedCategoryLabel || '' }]
       : []),
-    // 検索クエリがあれば追加
-    ...(store.searchQuery
-      ? [{ label: `「${store.searchQuery}」の検索結果` }]
-      : []),
   ];
 
-  // 1. カテゴリのラベルを取得（例: "Web制作"）
-  const activeCategoryLabel = WORK_CATEGORIES.find(
-    (cat) => cat.value === store.selectedCategory,
-  )?.label;
+  const renderedTitle = useMemo(() => {
+    if (store.searchQuery) {
+      return `「${store.searchQuery}」の検索結果`;
+    }
+    const baseTitle =
+      store.selectedCategory === 'all'
+        ? '制作実績'
+        : selectedCategoryLabel || '制作実績';
+    const hasTags = store.selectedTags && store.selectedTags.length > 0;
+    return (
+      <>
+        <span>{baseTitle}</span>
+        {hasTags && (
+          <span className='text-[calc(12/16*1rem)] font-normal ml-2'>
+            {store.selectedTags.map((tag) => `#${tag}`).join(' ')}
+          </span>
+        )}
+      </>
+    );
+  }, [
+    store.searchQuery,
+    store.selectedCategory,
+    store.selectedTags,
+    selectedCategoryLabel,
+  ]);
 
-  // 2. 表記を変化させるタイトルのロジック
-  let displayTitle = '制作実績'; // デフォルト
-
-  if (store.searchQuery) {
-    // 検索ワードがある場合を最優先
-    displayTitle = `「${store.searchQuery}」の検索結果`;
-  } else if (store.selectedCategory !== 'all') {
-    // カテゴリが選択されている場合
-    displayTitle = activeCategoryLabel || '制作実績';
-  }
-
-  // 3. 件数の取得
   const totalHitCount = filteredWorks.length;
 
   return (
@@ -114,7 +106,7 @@ function WorksContent() {
       </div>
       {/* コンテンツ */}
       <div className='section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray'>
-        <TitleAndCount title={displayTitle} count={totalHitCount} />
+        <TitleAndCount title={renderedTitle} count={totalHitCount} />
         <p className={styles.pageDescription}>
           機密保持契約を遵守するため、実案件の一部については内容を抽象化して掲載しております。
         </p>
@@ -126,7 +118,7 @@ function WorksContent() {
                 key={work.id}
                 work={work}
                 onClick={() => setSelectedWork(work)}
-                onCategoryClick={(cat) => store.selectOnlyCategory(cat)}
+                onCategoryClick={store.selectOnlyCategory}
                 className={styles.card}
               />
             ))}
@@ -170,10 +162,7 @@ function WorksContent() {
   );
 }
 
-/**
- * ページのルートコンポーネント
- * useSearchParams 等のクライアントサイド・フックを使用するため、Suspense でラップします。
- */
+/* ページルート */
 export default function WorksPage() {
   return (
     <>
@@ -185,7 +174,7 @@ export default function WorksPage() {
           </div>
         }
       >
-        <WorksContent />
+        <WorksPageContent />
       </Suspense>
     </>
   );

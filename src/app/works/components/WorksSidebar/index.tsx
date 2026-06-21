@@ -77,7 +77,7 @@ export function WorksSidebar({ footerNote }: WorksSidebarProps) {
           </section>
 
           <section className={styles.section}>
-            <h3 className={styles.label}>使用スキル</h3>
+            <h3 className={styles.label}>キーワードタグ</h3>
             <TagFilters
               tags={availableTags}
               selectedTags={selectedTags}

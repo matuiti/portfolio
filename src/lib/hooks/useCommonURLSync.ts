@@ -42,15 +42,14 @@ export function useCommonURLSync<T extends string>(
     // ページ番号の同期：なければ 1 に強制リセット
     actions.setCurrentPage(page ? Number(page) : 1);
 
-    isInitialMount.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // ページマウント時の初期化として1回だけ実行
 
-  // 2. デバウンス処理：入力停止から300ms後にURL反映用Stateを更新
+  // 2. デバウンス処理：入力停止から400ms後にURL反映用Stateを更新
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedQuery(state.searchQuery);
-    }, 300);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [state.searchQuery]);
@@ -95,4 +94,11 @@ export function useCommonURLSync<T extends string>(
     pathname,
     router,
   ]);
+
+  // 4. 初期化(effect 1〜3)が同一コミットで走り終えたあとにフラグを下ろす。
+  //    宣言順で最後に実行されるため、effect 3 は初回マウント時には
+  //    isInitialMount.current === true を見て確実にスキップできる。
+  useEffect(() => {
+    isInitialMount.current = false;
+  }, []);
 }

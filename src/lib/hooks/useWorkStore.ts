@@ -1,6 +1,8 @@
-import { create } from "zustand";
-import { WorkFilterCategory } from "@/types/work";
-import { ALL_WORKS } from "@/data/works";
+import { create } from 'zustand';
+import { Work, WorkFilterCategory } from '@/types/work';
+import { ALL_WORKS } from '@/data/works';
+import { useShallow } from 'zustand/shallow';
+import { useMemo } from 'react';
 
 type WorkState = {
   searchQuery: string;
@@ -20,23 +22,29 @@ type WorkState = {
   clearFilters: () => void;
 };
 
+// 「フィルタ条件」をリセットする際の共通の土台。
+// selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使う。
+const RESET_FILTERS = {
+  searchQuery: '',
+  selectedCategory: 'all' as WorkFilterCategory,
+  selectedTags: [] as string[],
+  currentPage: 1,
+};
+
 export const useWorkStore = create<WorkState>((set) => ({
   // --- 初期値 ---
-  searchQuery: "",
-  selectedCategory: "all",
+  searchQuery: '',
+  selectedCategory: 'all',
   selectedTags: [],
   currentPage: 1,
   itemsPerPage: 6,
 
-  // --- 基本アクション（独立して状態を更新） ---
-  // URL同期や個別のフィルタ操作で使用
+  // --- 単一条件の更新アクション ---
+  // 自分の対象フィールドだけを更新し、他のフィルタ条件には影響しない。
   setSearchQuery: (q) => set({ searchQuery: q, currentPage: 1 }),
   setSelectedCategory: (cat) => set({ selectedCategory: cat, currentPage: 1 }),
   setSelectedTags: (tags) => set({ selectedTags: tags, currentPage: 1 }),
   setCurrentPage: (page) => set({ currentPage: page }),
-
-  // --- 複合アクション（内部で他をリセットする） ---
-  // UI上の特定の導線（カテゴリラベルクリックなど）で使用
   toggleTag: (tag) =>
     set((state) => ({
       selectedTags: state.selectedTags.includes(tag)
@@ -45,55 +53,61 @@ export const useWorkStore = create<WorkState>((set) => ({
       currentPage: 1,
     })),
 
-  selectOnlyTag: (tag) =>
-    set({
-      searchQuery: "",
-      selectedCategory: "all",
-      selectedTags: [tag],
-      currentPage: 1,
-    }),
-
-  selectOnlyCategory: (cat) =>
-    set({
-      searchQuery: "",
-      selectedTags: [],
-      selectedCategory: cat,
-      currentPage: 1,
-    }),
-
-  clearFilters: () =>
-    set({
-      searchQuery: "",
-      selectedCategory: "all",
-      selectedTags: [],
-      currentPage: 1,
-    }),
+  // --- 排他的フィルタ選択アクション ---
+  // 他のフィルタ条件をすべてリセットしてから、指定した条件のみを設定する。
+  selectOnlyTag: (tag) => set({ ...RESET_FILTERS, selectedTags: [tag] }),
+  selectOnlyCategory: (cat) => set({ ...RESET_FILTERS, selectedCategory: cat }),
+  clearFilters: () => set({ ...RESET_FILTERS }),
 }));
 
 /**
  * フィルタリング済みのデータを取得するセレクター
  * 使用例： const filteredWorks = useFilteredWorks();
  */
+
 export const useFilteredWorks = () => {
-  const { searchQuery, selectedCategory, selectedTags } = useWorkStore();
+  const filters = useWorkStore(
+    useShallow((state) => ({
+      searchQuery: state.searchQuery,
+      selectedCategory: state.selectedCategory,
+      selectedTags: state.selectedTags,
+    })),
+  );
 
-  return ALL_WORKS.filter((work) => {
-    // カテゴリ一致判定
+  return useMemo(() => filterWorks(ALL_WORKS, filters), [filters]);
+};
+
+export const filterWorks = (
+  works: Work[],
+  {
+    searchQuery,
+    selectedCategory,
+    selectedTags,
+  }: {
+    searchQuery: string;
+    selectedCategory: WorkFilterCategory;
+    selectedTags: string[];
+  },
+) => {
+  const query = searchQuery.toLowerCase();
+
+  return works.filter((work) => {
     const matchCategory =
-      selectedCategory === "all" || work.category.includes(selectedCategory);
+      selectedCategory === 'all' || work.category.includes(selectedCategory);
 
-    // タグ一致判定（選択されたタグすべてを含んでいるか）
     const matchTags =
       selectedTags.length === 0 ||
-      selectedTags.every((tag) => work.tags.includes(tag));
+      selectedTags.every((tag) => work.tags.includes(tag)); // AND検索
 
-    // 検索クエリ一致判定（タイトルまたはタグにキーワードが含まれるか）
     const matchQuery =
-      searchQuery === "" ||
-      work.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      work.tags.some((t) =>
-        t.toLowerCase().includes(searchQuery.toLowerCase()),
-      );
+      query === '' ||
+      work.title.toLowerCase().includes(query) ||
+      work.role.toLowerCase().includes(query) ||
+      work.tags.some((t) => t.toLowerCase().includes(query)) ||
+      work.summary.toLowerCase().includes(query) ||
+      work.background?.toLowerCase().includes(query) ||
+      work.features?.some((t) => t.toLowerCase().includes(query)) ||
+      work.points?.some((t) => t.toLowerCase().includes(query));
 
     return matchCategory && matchTags && matchQuery;
   });
