@@ -26,10 +26,8 @@ export function WorksLayout({ children }: WorksLayoutProps) {
   const categoryCounts = WORK_CATEGORIES.reduce(
     (acc, cat) => {
       if (cat.value === 'all') {
-        // 「すべて」の場合は全件数を入れる
         acc[cat.value] = filteredWorks.length;
       } else {
-        // cat.valueが"all"ではないことをWorkCategory型として明示する
         const targetCat = cat.value as WorkCategory;
         acc[cat.value] = filteredWorks.filter((w) =>
           w.category.includes(targetCat),
