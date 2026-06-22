@@ -7,6 +7,7 @@ import { TagFilters } from '@/components/ui/TagFilters';
 import { WORK_CATEGORIES, ALL_WORKS } from '@/data/works';
 import { WorkCategory } from '@/types/work';
 import styles from './WorksSidebar.module.css';
+import { scrollToTop } from '@/lib/utility/scrollToTop';
 
 export function WorksSidebar() {
   const {
@@ -42,6 +43,11 @@ export function WorksSidebar() {
     );
   }, []);
 
+  const handleClear = () => {
+    clearFilters();
+    scrollToTop();
+  };
+
   return (
     <aside className={styles.container}>
       <div className={styles.inner}>
@@ -51,7 +57,7 @@ export function WorksSidebar() {
             <SearchBox value={searchQuery} onChange={setSearchQuery} />
             <button
               type='button'
-              onClick={clearFilters}
+              onClick={handleClear}
               className={styles.resetBtn}
             >
               フィルターをリセット

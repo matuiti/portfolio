@@ -1,4 +1,5 @@
 'use client';
+import { scrollToTop } from '@/lib/utility/scrollToTop';
 import { BaseTag } from '../BaseTag';
 import styles from './CategoryList.module.css';
 
@@ -22,6 +23,10 @@ export function CategoryList<T extends string>({
   counts = {},
   className = '',
 }: CategoryListProps<T>) {
+  const handleClick = (value: T) => {
+    onChange(value);
+    scrollToTop();
+  };
   return (
     <nav className={`${styles.nav} ${className}`} aria-label='カテゴリー選択'>
       <ul className={styles.list}>
@@ -30,7 +35,7 @@ export function CategoryList<T extends string>({
           const isActive = selected === item.value;
 
           // 件数0のカテゴリーは非表示
-          if (item.value !== ('all') && count === 0) return null;
+          if (item.value !== 'all' && count === 0) return null;
 
           return (
             <li key={item.value}>
@@ -40,7 +45,7 @@ export function CategoryList<T extends string>({
                 isActive={isActive}
                 count={count}
                 showCount={count > 0}
-                onClick={() => onChange(item.value)}
+                onClick={() => handleClick(item.value)}
               >
                 {item.label}
               </BaseTag>
