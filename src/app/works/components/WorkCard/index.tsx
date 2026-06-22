@@ -3,6 +3,8 @@ import { memo, useState } from 'react';
 import { Work, WorkFilterCategory } from '@/types/work';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SafeImage } from '@/components/ui/SafeImage';
+import { scrollToTop } from '@/lib/utility/scrollToTop';
+import { useGetPageName } from '@/lib/hooks/useGetPageName';
 
 const NDA_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
 const PLACEHOLDER_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
@@ -30,11 +32,13 @@ export const WorkCard = memo(
     const hoveredText =
       work.disclosureLevel === 'NDA' ? '非公開実績' : '詳しく見る';
 
+    const currentPageName = useGetPageName();
     const handleCategoryClick = (e: React.MouseEvent, cat: string) => {
       e.stopPropagation();
-      if (onCategoryClick) {
-        onCategoryClick(cat as WorkFilterCategory);
-        return;
+      if (!onCategoryClick) return;
+      onCategoryClick(cat as WorkFilterCategory);
+      if (currentPageName === 'works') {
+        scrollToTop();
       }
     };
 
