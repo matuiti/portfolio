@@ -1,6 +1,6 @@
 'use client';
 import { useEffect } from 'react';
-export function useScrollToTop() {
+export function ScrollToTopComp() {
   /**
    * ページ遷移時のスクロール位置補正
    * コンポーネントがブラウザに読み込まれた瞬間、
@@ -10,6 +10,5 @@ export function useScrollToTop() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   return null;
 }
