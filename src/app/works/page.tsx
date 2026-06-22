@@ -11,8 +11,8 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { WORK_CATEGORIES } from '@/data/works';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
-import { useScrollToTop } from '@/lib/hooks/useScrollToTop';
 import { PAGE_HEADER_DATA } from './data';
+import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import styles from './Works.module.css';
 
 function WorksPageContent() {
@@ -166,7 +166,7 @@ function WorksPageContent() {
 export default function WorksPage() {
   return (
     <>
-      <useScrollToTop />
+      <ScrollToTopComp />
       <Suspense
         fallback={
           <div className='p-[calc(80/16*1rem)] text-center font-bold'>

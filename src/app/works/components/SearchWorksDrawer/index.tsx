@@ -9,9 +9,6 @@ import { WORK_CATEGORIES } from '@/data/works';
 import { WorkCategory, WorkFilterCategory } from '@/types/work';
 import styles from './SearchWorksDrawer.module.css';
 
-const footerNote =
-  '※「非公開」タグの実績は、契約上の理由により最適化されたデータを掲載しています。';
-
 export function SearchWorksDrawer() {
   const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();
   const store = useWorkStore();
@@ -109,11 +106,11 @@ export function SearchWorksDrawer() {
             </section>
           </div>
 
-          {footerNote && (
-            <div className={styles.foot}>
-              <p className={styles.foot__text}>{footerNote}</p>
-            </div>
-          )}
+          <div className={styles.foot}>
+            <p className={styles.foot__text}>
+              ※「非公開」タグの実績は、契約上の理由により最適化されたデータを掲載しています。
+            </p>
+          </div>
         </div>
       </aside>
     </div>

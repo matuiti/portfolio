@@ -3,13 +3,13 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { SkillGroupSection } from './components/SkillGroupSection';
 import { breadcrumbItems, description, PAGE_HEADER_DATA } from './data';
 import { ALL_SKILLS } from '@/data/skills';
-import { useScrollToTop } from '@/lib/hooks/useScrollToTop';
+import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import styles from './Skills.module.css';
 
 export default function SkillsPage() {
   return (
     <>
-      <useScrollToTop />
+      <ScrollToTopComp />
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
