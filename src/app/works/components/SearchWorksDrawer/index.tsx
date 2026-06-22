@@ -7,9 +7,9 @@ import { useUIStore } from '@/lib/hooks/useUIStore';
 import { useFilteredWorks, useWorkStore } from '@/lib/hooks/useWorkStore';
 import { WORK_CATEGORIES } from '@/data/works';
 import { WorkCategory, WorkFilterCategory } from '@/types/work';
-import styles from './SearchWorksDrawer.module.css';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { useMemo } from 'react';
+import styles from './SearchWorksDrawer.module.css';
 
 export function SearchWorksDrawer() {
   const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();

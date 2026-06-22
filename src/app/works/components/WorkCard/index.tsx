@@ -1,10 +1,11 @@
-// src/app/works/components/WorkCard/index.tsx
 'use client';
-
 import { memo, useState } from 'react';
 import { Work, WorkFilterCategory } from '@/types/work';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SafeImage } from '@/components/ui/SafeImage';
+
+const NDA_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
+const PLACEHOLDER_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
 
 type WorkCardProps = {
   work: Work;
@@ -13,29 +14,16 @@ type WorkCardProps = {
   className?: string;
 };
 
-// パス定義
-const NDA_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
-const PLACEHOLDER_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
-
 export const WorkCard = memo(
   ({ work, onClick, onCategoryClick, className }: WorkCardProps) => {
     const [isTagHovered, setIsTagHovered] = useState(false);
 
-    // 画像決定ロジック
-    const initialSrc = (() => {
+    const getImageSrc = (() => {
       const hasThumbnail = !!work.thumbnail;
       const hasImages = !!(work.images && work.images.length > 0);
-
-      // 1. まず「具体的な画像」が登録されているかをチェック（thumbnail > images[0]）
-      // NDA案件であっても、見せられる画像（抽象化済み等）が登録されていればそれを優先します
-      if (hasThumbnail) return work.thumbnail!;
+      if (hasThumbnail) return work.thumbnail;
       if (hasImages) return work.images![0];
-      // 2. 画像が一切登録されていない場合のフォールバック
-      // 画像がない場合に初めて、NDAかどうかの判定を行います
-      if (work.disclosureLevel === 'NDA') {
-        return NDA_THUMBNAIL_PATH;
-      }
-      // 3. NDAでもなく、画像もない場合はプレースホルダー
+      if (work.disclosureLevel === 'NDA') return NDA_THUMBNAIL_PATH;
       return PLACEHOLDER_THUMBNAIL_PATH;
     })();
 
@@ -62,7 +50,7 @@ export const WorkCard = memo(
         {/* サムネイル */}
         <div className='relative aspect-video overflow-hidden bg-white'>
           <SafeImage
-            src={initialSrc}
+            src={getImageSrc}
             alt={work.title}
             fill
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'

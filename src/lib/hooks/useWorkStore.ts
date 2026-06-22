@@ -22,8 +22,8 @@ type WorkState = {
   clearFilters: () => void;
 };
 
-// 「フィルタ条件」をリセットする際の共通の土台。
-// selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使う。
+// 「フィルタ条件」をリセットする際の共通の土台
+// selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使用する
 const RESET_FILTERS = {
   searchQuery: '',
   selectedCategory: 'all' as WorkFilterCategory,
