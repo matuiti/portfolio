@@ -43,10 +43,7 @@ export const WorkDetailModal = ({
 }: WorkDetailModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 1. スライド用のインデックス管理
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-
-  // 2. 表示する画像リストの作成
   const imageList = useMemo(() => {
     return work.images && work.images.length > 0
       ? work.images
@@ -55,7 +52,7 @@ export const WorkDetailModal = ({
 
   const hasMultipleImages = imageList.length > 1;
 
-  // 3. スライド操作関数 (同じ実績内での画像切り替え)
+  // スライド操作 (同じ実績内での画像切り替え)
   const handlePrev = () => {
     setCurrentImgIndex((prev) => (prev > 0 ? prev - 1 : imageList.length - 1));
   };
@@ -64,10 +61,9 @@ export const WorkDetailModal = ({
   };
 
   // --- ページネーション・ナビゲーションロジック ---
-  const currentIndex = allFilteredWorks.findIndex((w) => w.id === work.id);
   const totalCount = allFilteredWorks.length;
+  const currentIndex = allFilteredWorks.findIndex((w) => w.id === work.id);
   const displayIndex = currentIndex + 1; // 0始まりなので+1する
-
   const prevWork = currentIndex > 0 ? allFilteredWorks[currentIndex - 1] : null;
   const nextWork =
     currentIndex < allFilteredWorks.length - 1
@@ -87,6 +83,10 @@ export const WorkDetailModal = ({
 
   if (!isOpen) return null;
 
+  const handleCategoryClick = (cat: string): void => {
+    onCategoryClick(cat);
+    scrollToTop();
+  };
   const handleTagClick = (tag: string): void => {
     onTagClick(tag);
     scrollToTop();
@@ -149,7 +149,7 @@ export const WorkDetailModal = ({
             <div className={styles.articleHead}>
               <div className={styles.categoryList}>
                 {work.category.map((cat) => (
-                  <BaseTag key={cat} onClick={() => onCategoryClick(cat)}>
+                  <BaseTag key={cat} onClick={() => handleCategoryClick(cat)}>
                     {cat}
                   </BaseTag>
                 ))}
@@ -278,7 +278,7 @@ export const WorkDetailModal = ({
                       <span
                         key={i}
                         className={`${styles.dot} ${i === currentImgIndex ? styles.isActive : ''}`}
-                        onClick={() => setCurrentImgIndex(i)} // ドットクリックで移動可能に
+                        onClick={() => setCurrentImgIndex(i)} // ドットクリックで画像切替
                       />
                     ))}
                   </div>
@@ -288,14 +288,12 @@ export const WorkDetailModal = ({
 
             {/* テキスト詳細エリア */}
             <div className={styles.infoSection}>
-              {/* 1. 制作概要 */}
               {work.background && (
                 <section className={styles.section}>
                   <h3 className={styles.sectionTitle}>制作概要</h3>
                   <p className={styles.description}>{work.background}</p>
                 </section>
               )}
-              {/* 2. 実装機能 */}
               {work.features && work.features.length > 0 && (
                 <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>実装機能</h3>
@@ -306,8 +304,6 @@ export const WorkDetailModal = ({
                   </ul>
                 </div>
               )}
-
-              {/* 3. 制作のポイント */}
               {work.points && work.points.length > 0 && (
                 <div className={styles.section}>
                   <h3 className={styles.sectionTitle}>制作のポイント</h3>
@@ -318,7 +314,6 @@ export const WorkDetailModal = ({
                   </ul>
                 </div>
               )}
-              {/* 4. キーワードタグ */}
               <section className={styles.section}>
                 <h3 className={styles.sectionTitle}>キーワードタグ</h3>
                 <div className={styles.tagGrid}>
@@ -334,7 +329,6 @@ export const WorkDetailModal = ({
                   ))}
                 </div>
               </section>
-              {/* 5. メタ情報 */}
               <dl className={styles.metaTable}>
                 <div className={styles.metaRow}>
                   <dt className={styles.metaLabel}>担当範囲：</dt>
