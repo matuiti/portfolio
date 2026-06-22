@@ -8,6 +8,8 @@ import { useFilteredWorks, useWorkStore } from '@/lib/hooks/useWorkStore';
 import { WORK_CATEGORIES } from '@/data/works';
 import { WorkCategory, WorkFilterCategory } from '@/types/work';
 import styles from './SearchWorksDrawer.module.css';
+import { TitleAndCount } from '@/components/ui/TitleAndCount';
+import { useMemo } from 'react';
 
 export function SearchWorksDrawer() {
   const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();
@@ -27,7 +29,6 @@ export function SearchWorksDrawer() {
     new Set(filteredWorks.flatMap((w) => w.tags)),
   ).sort();
 
-  // カテゴリ名と件数の計算
   const categoryCounts = WORK_CATEGORIES.reduce(
     (acc, cat) => {
       if (cat.value === 'all') {
@@ -42,6 +43,39 @@ export function SearchWorksDrawer() {
     },
     {} as Record<string, number>,
   );
+
+  const totalHitCount = filteredWorks.length;
+
+  // カテゴリーIDからラベルを取得するロジック
+  const selectedCategoryLabel = WORK_CATEGORIES.find(
+    (cat) => cat.value === store.selectedCategory,
+  )?.label;
+
+  const renderedTitle = useMemo(() => {
+    if (store.searchQuery) {
+      return `「${store.searchQuery}」の検索結果`;
+    }
+    const baseTitle =
+      store.selectedCategory === 'all'
+        ? '制作実績'
+        : selectedCategoryLabel || '制作実績';
+    const hasTags = store.selectedTags && store.selectedTags.length > 0;
+    return (
+      <>
+        <span>{baseTitle}</span>
+        {hasTags && (
+          <span className='text-[calc(12/16*1rem)] font-normal ml-2'>
+            {store.selectedTags.map((tag) => `#${tag}`).join(' ')}
+          </span>
+        )}
+      </>
+    );
+  }, [
+    store.searchQuery,
+    store.selectedCategory,
+    store.selectedTags,
+    selectedCategoryLabel,
+  ]);
 
   return (
     <div
@@ -82,6 +116,9 @@ export function SearchWorksDrawer() {
               >
                 フィルターをリセット
               </button>
+              <div className='mt-5'>
+                <TitleAndCount title={renderedTitle} count={totalHitCount} />
+              </div>
             </div>
           </div>
 
