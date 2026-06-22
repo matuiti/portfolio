@@ -20,7 +20,7 @@ import { BaseTag } from '@/components/ui/BaseTag';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { SafeImage } from '@/components/ui/SafeImage';
 import styles from './WorkDetailModal.module.css';
-import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
+import { scrollToTop } from '@/lib/utility/scrollToTop';
 
 type WorkDetailModalProps = {
   work: Work;
