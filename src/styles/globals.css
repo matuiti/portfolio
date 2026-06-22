@@ -89,6 +89,10 @@
 
 /* 3. ベーススタイルの定義 */
 @layer base {
+  :root {
+    interpolate-size: allow-keywords; /* これにより height: auto や max-content がアニメーション可能になります */
+  }
+
   html {
     /* スクロールバーが表示されてもレイアウトがガタつかないように領域を固定する */
     scrollbar-gutter: stable;
@@ -113,8 +117,8 @@
   }
 
   *:focus-visible {
-  @apply outline-3 outline-blue-500 outline-offset-1;
-}
+    @apply outline-3 outline-blue-500 outline-offset-1;
+  }
 
   /* スクロールバー制御 (Firefox) */
   @supports (scrollbar-width: thin) {

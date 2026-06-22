@@ -2,7 +2,7 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { SkillGroupSection } from './components/SkillGroupSection';
 import { breadcrumbItems, description, PAGE_HEADER_DATA } from './data';
-import { ALL_SKILLS } from '@/data/skills';
+import { SKILL_GROUPS } from '@/data/skills';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import styles from './Skills.module.css';
 
@@ -24,7 +24,7 @@ export default function SkillsPage() {
         <div className='container-center'>
           <p className={styles.description}>{description}</p>
           <div className={styles.skillGroups}>
-            {ALL_SKILLS.map((group, index) => (
+            {SKILL_GROUPS.map((group, index) => (
               <SkillGroupSection
                 key={group.title}
                 group={group}

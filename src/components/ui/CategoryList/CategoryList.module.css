@@ -28,12 +28,12 @@
     background-color: var(--color-slate-50);
     color: var(--color-slate-900);
   }
+}
 
-  &.isActive {
-    background-color: var(--color-black);
-    color: var(--color-white);
-    transform: translateX(calc(4 / 16 * 1rem));
-  }
+.button.isActive {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  transform: translateX(calc(4 / 16 * 1rem));
 }
 
 .count {

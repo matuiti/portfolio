@@ -15,7 +15,7 @@ export type SkillItem = {
   links?: SkillLink[];
 };
 
-export type AllSkills = {
+export type SkillGroup = {
   title: string;
   items: SkillItem[];
 };

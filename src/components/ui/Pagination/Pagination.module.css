@@ -53,12 +53,13 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   line-height: 1;
-  &.isCurrent {
-    background-color: var(--color-black);
-    color: var(--color-white);
-    border-color: var(--color-black);
-    cursor: default;
-  }
+}
+
+.pageButton.isCurrent {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+  cursor: default;
 }
 
 .more {

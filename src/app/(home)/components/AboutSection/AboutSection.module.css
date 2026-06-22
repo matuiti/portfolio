@@ -61,25 +61,23 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-
-  &.isSP {
-    grid-area: image-sp;
-    aspect-ratio: 16 / 9;
-    margin-bottom: calc(20 / 16 * 1rem);
-  }
-
-  &.isPC {
-    grid-area: image-pc;
-    @media (width >= 52.5em /* tablet */) {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      align-self: start;
-      margin-bottom: 0;
-    }
-  }
-
   .image {
     object-fit: cover;
+  }
+}
+.imageWrapper.isSP {
+  grid-area: image-sp;
+  aspect-ratio: 16 / 9;
+  margin-bottom: calc(20 / 16 * 1rem);
+}
+
+.imageWrapper.isPC {
+  grid-area: image-pc;
+  @media (width >= 52.5em /* tablet */) {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    align-self: start;
+    margin-bottom: 0;
   }
 }
 

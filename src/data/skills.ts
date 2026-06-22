@@ -1,9 +1,8 @@
-import { LabelDescription, AllSkills } from '@/types/skill';
+import { LabelDescription, SkillGroup } from '@/types/skill';
 
 /**
- * SKILLSページ用データ定義
+ * SKILLS習熟レベルデータ定義
  */
-
 export const LABEL_DESCRIPTION: LabelDescription = {
   基礎レベル: '概念的に理解しており補助があれば実務対応が可能',
   実務レベル: '業務において独力で実装・トラブルシューティングが可能',
@@ -11,7 +10,10 @@ export const LABEL_DESCRIPTION: LabelDescription = {
     '技術を仕組みから理解していて深く慣れ親しんでおり複雑な実装にも対応可能',
 };
 
-export const ALL_SKILLS: AllSkills[] = [
+/**
+ * SKILLSページ用データ定義
+ */
+export const SKILL_GROUPS: SkillGroup[] = [
   {
     title: 'サイト制作・運用',
     items: [
