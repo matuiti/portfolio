@@ -1,14 +1,10 @@
 'use client';
-
 import { useState } from 'react';
 import { UI_PARTS } from '@/gallery/data/ui-parts';
 import { useIsMounted } from '@/lib/hooks/useIsMounted';
 
 export default function WorkbenchPage() {
   const isMounted = useIsMounted();
-
-  // useStateの初期値として関数を渡し、マウントに関わらず値を決める
-  // これにより useEffect + setSelectedId が不要になります
   const [selectedId, setSelectedId] = useState(() =>
     UI_PARTS.length > 0 ? UI_PARTS[0].id : '',
   );

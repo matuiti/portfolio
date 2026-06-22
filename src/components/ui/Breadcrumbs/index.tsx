@@ -13,7 +13,6 @@ type BreadcrumbsProps = {
 
 export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   const lastIndex = items.length ? items.length - 1 : 0;
-  
   return (
     <nav aria-label="Breadcrumb" className={styles.container}>
       <ol className={styles.list}>

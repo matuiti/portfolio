@@ -54,23 +54,24 @@
   line-height: 1.5;
   letter-spacing: 0.05em;
   color: var(--color-black);
-  margin: 0;
+  margin: 0 0 calc(14 / 16 * 1rem) 0;
   padding: 0;
-  display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   word-break: break-all;
   white-space: pre-wrap;
-  margin-bottom: calc(14 / 16 * 1rem);
+  overflow: hidden;
 
-  &.isExpanded {
-    line-clamp: unset;
-    -webkit-line-clamp: unset;
-    display: block;
-    overflow: visible;
-  }
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 3em;
+}
+
+.description.isExpanded {
+  -webkit-line-clamp: 999;
+  line-clamp: 999;
+  max-height: 1000px;
+  transition: max-height 1.8s ease-out;
 }
 
 .toggleBtn {

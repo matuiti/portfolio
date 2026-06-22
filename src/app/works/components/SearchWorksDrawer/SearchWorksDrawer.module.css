@@ -5,10 +5,11 @@
   pointer-events: none;
   visibility: hidden;
 
-  &.is-open {
-    visibility: visible;
-    pointer-events: all;
-  }
+}
+
+.root.is-open {
+  visibility: visible;
+  pointer-events: all;
 }
 
 .overlay {
@@ -18,9 +19,10 @@
   opacity: 0;
   transition: all 0.5s ease-in;
 
-  &.is-open {
-    opacity: 1;
-  }
+}
+
+.overlay.is-open {
+  opacity: 1;
 }
 
 .drawer {
@@ -40,10 +42,11 @@
   transition: all 0.7s ease;
 
   max-width: var(--spacing-mobile-drawer-max-w);
-  &.is-open {
-    transform: translateX(0);
-    opacity: 1;
-  }
+}
+
+.drawer.is-open {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .btnWrapper {

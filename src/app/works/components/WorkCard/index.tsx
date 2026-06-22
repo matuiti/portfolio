@@ -27,7 +27,6 @@ export const WorkCard = memo(
       return PLACEHOLDER_THUMBNAIL_PATH;
     })();
 
-    // ホバー時のテキストも連動
     const hoveredText =
       work.disclosureLevel === 'NDA' ? '非公開実績' : '詳しく見る';
 

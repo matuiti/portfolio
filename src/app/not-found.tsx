@@ -3,10 +3,11 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 
 export default function NotFound() {
+
   const PAGE_HEADER_DATA = {
     jpTitle: 'ページが見つかりません',
     enTitle: '404 NOT FOUND',
-    images: '/assets/images/common/bg-page-header.jpg',
+    bgiPath: '/assets/images/common/bg-page-header.jpg',
   } as const;
 
   const breadcrumbItems = [{ label: 'トップ', href: '/' }, { label: '404' }];

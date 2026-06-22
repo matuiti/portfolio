@@ -45,10 +45,7 @@ export const SkillCard = ({ item }: SkillCardProps) => {
       const isOverflowing = el.scrollHeight > tripleLineHeight - 1;
       setHasOverflow(isOverflowing);
       if (!isOverflowing) {
-        setIsExpanded((prev) => {
-          if (prev) return false;
-          return prev;
-        });
+        setIsExpanded(false);
       }
     };
     checkOverflow();
@@ -106,6 +103,7 @@ export const SkillCard = ({ item }: SkillCardProps) => {
       </div>
 
       <div className={styles.content}>
+        {/* インラインスタイル(style={{}})はすべて削除 */}
         <p
           ref={descriptionRef}
           className={`${styles.description} ${isExpanded ? styles.isExpanded : ''}`}

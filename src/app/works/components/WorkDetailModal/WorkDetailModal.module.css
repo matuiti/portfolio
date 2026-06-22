@@ -345,10 +345,6 @@
           width: calc(8 / 16 * 1rem);
           height: calc(8 / 16 * 1rem);
         }
-
-        &.isActive {
-          background: var(--color-black);
-        }
       }
     }
   }
@@ -358,7 +354,6 @@
     @media (width >= 52.5em /* tablet */) {
       margin-top: calc(40 / 16 * 1rem);
     }
-
 
     .section {
       & + .section {
@@ -415,7 +410,6 @@
       padding-inline: calc(10 / 16 * 1rem);
     }
 
-
     .metaTable {
       display: flex;
       flex-wrap: wrap;
@@ -434,9 +428,12 @@
       line-height: 1.2;
     }
 
-
     .metaValue {
       flex: 1;
     }
   }
+}
+
+.article.isActive {
+  background: var(--color-black);
 }

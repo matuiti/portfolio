@@ -8,9 +8,6 @@ import { WORK_CATEGORIES, ALL_WORKS } from '@/data/works';
 import { WorkCategory } from '@/types/work';
 import styles from './WorksSidebar.module.css';
 
-const footerNote =
-  '※「非公開」タグの実績は、契約上の理由により最適化されたデータを掲載しています。';
-
 export function WorksSidebar() {
   const {
     searchQuery,
@@ -48,7 +45,6 @@ export function WorksSidebar() {
   return (
     <aside className={styles.container}>
       <div className={styles.inner}>
-        {/* 固定ヘッダーエリア：検索ボックスとリセット */}
         <div className={styles.head}>
           <div className={styles.head__inner}>
             <span className={styles.label}>キーワード</span>
@@ -63,7 +59,7 @@ export function WorksSidebar() {
           </div>
         </div>
 
-        {/* スクロール可能エリア：カテゴリとタグ */}
+        {/* スクロール可能エリア */}
         <div className={styles.body}>
           <section className={styles.section}>
             <h3 className={styles.label}>カテゴリー</h3>
@@ -74,7 +70,6 @@ export function WorksSidebar() {
               counts={categoryCounts}
             />
           </section>
-
           <section className={styles.section}>
             <h3 className={styles.label}>キーワードタグ</h3>
             <TagFilters
@@ -85,12 +80,11 @@ export function WorksSidebar() {
           </section>
         </div>
 
-        {/* 下部エリア：注釈 */}
-        {footerNote && (
-          <div className={styles.foot}>
-            <p className={styles.foot__text}>{footerNote}</p>
-          </div>
-        )}
+        <div className={styles.foot}>
+          <p className={styles.foot__text}>
+            ※「非公開」タグの実績は、契約上の理由により最適化されたデータを掲載しています。
+          </p>
+        </div>
       </div>
     </aside>
   );

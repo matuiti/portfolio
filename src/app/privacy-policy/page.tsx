@@ -1,9 +1,10 @@
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { PRIVACY_POLICY_DATA } from '@/data/privacyPolicy';
+import { breadcrumbItems, PRIVACY_POLICY_DATA } from '@/data/privacyPolicy';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import styles from './PrivacyPolicy.module.css';
+import { PAGE_HEADER_DATA } from '@/skills/data';
 
 /**
  * プライバシーポリシーページ
@@ -12,19 +13,6 @@ import styles from './PrivacyPolicy.module.css';
  * 各セクションのタイトル、本文、箇条書きリストを網羅的に出力します。
  */
 export default function PrivacyPolicyPage() {
-  const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';
-
-  const PAGE_HEADER_DATA = {
-    jpTitle: 'プライバシーポリシー',
-    enTitle: 'PRIVACY POLICY',
-    bgiPath: PAGE_HEADER_IMAGE_PATH,
-  } as const;
-
-  const breadcrumbItems = [
-    { label: 'トップ', href: '/' },
-    { label: 'プライバシーポリシー' },
-  ];
-
   return (
     <>
       <ScrollToTopComp />
@@ -33,13 +21,11 @@ export default function PrivacyPolicyPage() {
         jpTitle={PAGE_HEADER_DATA.jpTitle}
         bgiPath={PAGE_HEADER_DATA.bgiPath}
       />
-
       <div className='section-padding-x w-full bg-white'>
         <div className='container-center'>
           <Breadcrumbs items={breadcrumbItems} />
         </div>
       </div>
-
       <div className={`${styles.pageBody} pt-10 pb-37.5`}>
         <div className='container-center'>
           <div className={styles.sectionGroups}>
