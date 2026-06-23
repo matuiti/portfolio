@@ -1,118 +1,152 @@
 'use client';
+import { Close } from '@/components/ui/Icons';
+import { SearchBox } from '@/components/ui/SearchBox';
+import { CategoryList } from '@/components/ui/CategoryList';
+import { TagFilters } from '@/components/ui/TagFilters';
 import { useStore } from '@/lib/store/useStore';
-import { CategoryList } from '../filter/CategoryList';
-import { TagFilters } from '../filter/TagFilters';
-import { SearchBox } from '../filter/SearchBox';
-import { Filtering } from '@/gallery/types';
+import {
+  useFilteredUIParts,
+  useGalleryStore,
+} from '@/lib/store/useGalleryStore';
+import { TitleAndCount } from '@/components/ui/TitleAndCount';
+import { useMemo } from 'react';
+import { GALLERY_CATEGORIES } from '@/gallery/data';
+import { GalleryCategory } from '@/gallery/types';
+import styles from './SearchGalleryDrawer.module.css';
 
-type Props = {
-  filtering: Filtering;
-  isOpen: boolean;
-  onClose: () => void;
-};
+export function SearchGalleryDrawer() {
+  const { isSearchDrawerOpen, setSearchDrawerOpen } = useStore();
+  const store = useGalleryStore();
+  const filteredGallery = useFilteredUIParts();
+  const searchQuery = store.searchQuery;
+  const setSearchQuery = store.setSearchQuery;
+  const selectedCategory = store.selectedCategory;
+  const setSelectedCategory = store.setSelectedCategory;
+  const selectedTags = store.selectedTags;
+  const categories = GALLERY_CATEGORIES;
+  const toggleTag = store.toggleTag;
+  const clearFilters = store.clearFilters;
 
-export function SearchGalleryDrawer({ filtering, isOpen, onClose }: Props) {
-  const { setSearchDrawerOpen } = useStore();
+  // 全実績のタグから重複を排除、五十音順に並び替えて抽出
+  const availableTags = Array.from(
+    new Set(filteredGallery.flatMap((w) => w.tags)),
+  ).sort();
 
-  const {
-    selectedCategory,
-    selectedTags,
-    searchQuery,
-    categoryCounts,
-    filteredItems,
-    setSelectedCategory,
-    setSelectedTags,
-    setSearchQuery,
-    clearFilters,
-  } = filtering;
+  const categoryCounts = GALLERY_CATEGORIES.reduce(
+    (acc, cat) => {
+      if (cat.id === 'all') {
+        acc[cat.id] = filteredGallery.length;
+      } else {
+        const targetCat = cat.id as GalleryCategory;
+        acc[cat.id] = filteredGallery.filter((w) =>
+          w.category.includes(targetCat),
+        ).length;
+      }
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
-  // ドロワーを閉じる際、グローバル状態も更新する
-  const handleClose = () => {
-    setSearchDrawerOpen(false);
-    onClose();
-  };
+  const totalHitCount = filteredGallery.length;
+
+  // カテゴリーIDからラベルを取得するロジック
+  const selectedCategoryLabel = GALLERY_CATEGORIES.find(
+    (cat) => cat.id === store.selectedCategory,
+  )?.label;
+
+  const renderedTitle = useMemo(() => {
+    if (store.searchQuery) {
+      return `「${store.searchQuery}」の検索結果`;
+    }
+    const baseTitle =
+      store.selectedCategory === 'all'
+        ? 'すべてのアイテム'
+        : selectedCategoryLabel || 'すべてのアイテム';
+    const hasTags = store.selectedTags && store.selectedTags.length > 0;
+    return (
+      <>
+        <span>{baseTitle}</span>
+        {hasTags && (
+          <span className='text-[calc(12/16*1rem)] font-normal ml-2'>
+            {store.selectedTags.map((tag) => `#${tag}`).join(' ')}
+          </span>
+        )}
+      </>
+    );
+  }, [
+    store.searchQuery,
+    store.selectedCategory,
+    store.selectedTags,
+    selectedCategoryLabel,
+  ]);
 
   return (
-    <>
-      {/* オーバーレイ: クリックでドロワーを閉じる */}
+    <div
+      className={`${styles.root} ${isSearchDrawerOpen ? styles['is-open'] : ''}`}
+    >
+      {/* オーバーレイ */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
-          isOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={handleClose}
+        className={`${styles.overlay} ${isSearchDrawerOpen ? styles['is-open'] : ''}`}
+        onClick={() => setSearchDrawerOpen(!isSearchDrawerOpen)}
+        aria-hidden='true'
       />
 
-      {/* ドロワー本体 */}
+      {/* ドロワー：本体 */}
       <aside
-        className={`fixed top-0 left-0 h-full w-[85%] max-w-[320px] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-out flex flex-col ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-        aria-labelledby='sp-search-panel-title'
+        className={`section-padding-x pb-10 ${styles.drawer} ${isSearchDrawerOpen ? styles['is-open'] : ''}`}
+        aria-labelledby='search-drawer-title'
       >
-        {/* --- ヘッダーエリア (固定) --- */}
-        <div className='p-6 flex items-center justify-between border-b border-neutral-100'>
-          <div>
-            <h2
-              id='sp-search-panel-title'
-              className='font-bold text-neutral-800'
-            >
-              検索パネル
-            </h2>
-            <p className='text-[10px] text-neutral-400 font-bold uppercase tracking-wider'>
-              ヒット：{filteredItems.length} 件
-            </p>
-          </div>
-          <button
-            onClick={handleClose}
-            className='w-10 h-10 flex items-center justify-center rounded-full bg-neutral-50 text-neutral-400 text-2xl hover:bg-neutral-100 transition-colors'
-            aria-label='閉じる'
-          >
-            ×
-          </button>
-        </div>
-
-        {/* --- コンテンツエリア (スクロール可能) --- */}
-        <div className='flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar'>
-          {/* キーワード検索セクション */}
-          <section className='space-y-3'>
-            <h3 className='text-[10px] font-bold text-neutral-400 uppercase tracking-widest px-1'>
-              Keyword
-            </h3>
-            <SearchBox value={searchQuery} onChange={setSearchQuery} />
+        <div className={styles.inner}>
+          <div className={styles.btnWrapper}>
             <button
-              onClick={clearFilters}
-              className='w-full py-2.5 bg-neutral-100 text-neutral-600 rounded-xl text-xs font-bold active:bg-neutral-200 transition-colors'
+              onClick={() => setSearchDrawerOpen(!isSearchDrawerOpen)}
+              className={styles.closeBtn}
+              aria-label='メニューを閉じる'
             >
-              フィルターをリセット
+              <Close />
             </button>
-          </section>
+          </div>
 
-          {/* カテゴリ選択セクション */}
-          <section className='space-y-3'>
-            <h3 className='text-[10px] font-bold text-neutral-400 uppercase tracking-widest px-1'>
-              Category
-            </h3>
-            <CategoryList
-              selected={selectedCategory}
-              onChange={setSelectedCategory}
-              counts={categoryCounts}
-            />
-          </section>
+          {/* ドロワー：上部固定エリア */}
+          <div className={styles.head}>
+            <div className={styles.head__inner}>
+              <h3 className={styles.label}>キーワード</h3>
+              <SearchBox value={searchQuery} onChange={setSearchQuery} />
+              <button
+                type='button'
+                onClick={clearFilters}
+                className={styles.resetBtn}
+              >
+                フィルターをリセット
+              </button>
+              <div className='mt-5'>
+                <TitleAndCount title={renderedTitle} count={totalHitCount} />
+              </div>
+            </div>
+          </div>
 
-          {/* タグ選択セクション */}
-          <section className='space-y-3'>
-            <h3 className='text-[10px] font-bold text-neutral-400 uppercase tracking-widest px-1'>
-              Tags
-            </h3>
-            <TagFilters
-              selectedTags={selectedTags}
-              onChange={setSelectedTags}
-            />
-          </section>
+          {/* ドロワー：中部スクロール可能エリア */}
+          <div className={styles.body}>
+            <section className={styles.section}>
+              <h3 className={styles.label}>カテゴリー</h3>
+              <CategoryList<GalleryCategory>
+                items={categories}
+                selected={selectedCategory}
+                onChange={setSelectedCategory}
+                counts={categoryCounts}
+              />
+            </section>
+            <section className={styles.section}>
+              <h3 className={styles.label}>キーワードタグ</h3>
+              <TagFilters
+                tags={availableTags}
+                selectedTags={selectedTags}
+                onToggle={toggleTag}
+              />
+            </section>
+          </div>
         </div>
       </aside>
-    </>
+    </div>
   );
 }

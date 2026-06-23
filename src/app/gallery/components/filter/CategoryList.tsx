@@ -1,11 +1,11 @@
 'use client';
 
 import { GALLERY_CATEGORIES } from '@/gallery/data';
-import { GalelryCategory } from '@/gallery/types';
+import { GalleryCategory } from '@/gallery/types';
 
 type Props = {
-  selected: GalelryCategory;
-  onChange: (category: GalelryCategory) => void;
+  selected: GalleryCategory;
+  onChange: (category: GalleryCategory) => void;
   counts?: Record<string, number>;
 };
 

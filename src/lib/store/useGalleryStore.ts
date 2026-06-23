@@ -1,19 +1,19 @@
 import { useMemo } from 'react';
 import { create } from 'zustand';
-import { Work, WorkCategory, WorkState } from '@/types/work';
-import { ALL_WORKS } from '@/data/works';
+import { GalleryCategory, GalleryState, UIPart } from '@/gallery/types';
 import { useShallow } from 'zustand/shallow';
+import { UI_PARTS } from '@/gallery/data/ui-parts';
 
 // 「フィルタ条件」をリセットする際の共通の土台
 // selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使用する
 const RESET_FILTERS = {
   searchQuery: '',
-  selectedCategory: 'all' as WorkCategory,
+  selectedCategory: 'all' as GalleryCategory,
   selectedTags: [] as string[],
   currentPage: 1,
 };
 
-export const useWorkStore = create<WorkState>((set) => ({
+export const useGalleryStore = create<GalleryState>((set) => ({
   // --- 初期値 ---
   searchQuery: '',
   selectedCategory: 'all',
@@ -35,19 +35,15 @@ export const useWorkStore = create<WorkState>((set) => ({
       currentPage: 1,
     })),
 
-  // --- 排他的フィルタ選択アクション ---
-  // 他のフィルタ条件をすべてリセットしてから、指定した条件のみを設定する。
-  selectOnlyTag: (tag) => set({ ...RESET_FILTERS, selectedTags: [tag] }),
-  selectOnlyCategory: (cat) => set({ ...RESET_FILTERS, selectedCategory: cat }),
   clearFilters: () => set({ ...RESET_FILTERS }),
 }));
 
 /**
  * フィルタリング済みのデータを取得するセレクター
- * 使用例： const filteredWorks = useFilteredWorks();
+ * 使用例： const filteredUIParts = useFilteredUIParts();
  */
-export const useFilteredWorks = () => {
-  const filters = useWorkStore(
+export const useFilteredUIParts = () => {
+  const filters = useGalleryStore(
     useShallow((state) => ({
       searchQuery: state.searchQuery,
       selectedCategory: state.selectedCategory,
@@ -55,40 +51,35 @@ export const useFilteredWorks = () => {
     })),
   );
 
-  return useMemo(() => filterWorks(ALL_WORKS, filters), [filters]);
+  return useMemo(() => filterUIParts(UI_PARTS, filters), [filters]);
 };
 
-const filterWorks = (
-  works: Work[],
+const filterUIParts = (
+  UIParts: UIPart[],
   {
     searchQuery,
     selectedCategory,
     selectedTags,
   }: {
     searchQuery: string;
-    selectedCategory: WorkCategory;
+    selectedCategory: GalleryCategory;
     selectedTags: string[];
   },
 ) => {
   const query = searchQuery.toLowerCase();
 
-  return works.filter((work) => {
+  return UIParts.filter((UIPart) => {
     const matchCategory =
-      selectedCategory === 'all' || work.category.includes(selectedCategory);
+      selectedCategory === 'all' || UIPart.category.includes(selectedCategory);
 
     const matchTags =
       selectedTags.length === 0 ||
-      selectedTags.every((tag) => work.tags.includes(tag)); // AND検索
+      selectedTags.every((tag) => UIPart.tags.includes(tag)); // AND検索
 
     const matchQuery =
       query === '' ||
-      work.title.toLowerCase().includes(query) ||
-      work.role.toLowerCase().includes(query) ||
-      work.tags.some((t) => t.toLowerCase().includes(query)) ||
-      work.summary.toLowerCase().includes(query) ||
-      work.background?.toLowerCase().includes(query) ||
-      work.features?.some((t) => t.toLowerCase().includes(query)) ||
-      work.points?.some((t) => t.toLowerCase().includes(query));
+      UIPart.title.toLowerCase().includes(query) ||
+      UIPart.tags.some((t) => t.toLowerCase().includes(query));
 
     return matchCategory && matchTags && matchQuery;
   });

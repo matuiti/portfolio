@@ -27,7 +27,6 @@ export const WorksSection = () => {
   // フィルタリングロジック：カテゴリに基づいてデータを抽出
   const displayWorks = useMemo(() => {
     const filtered = ALL_WORKS.filter((work) => {
-      // "all" の場合は全てのデータを通す
       if (activeCategory === 'all') return true;
       return work.category.includes(activeCategory as WorkCategory);
     });

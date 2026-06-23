@@ -29,11 +29,11 @@ export function WorksSidebar() {
   const categoryCounts = useMemo(() => {
     return WORK_CATEGORIES.reduce(
       (acc, cat) => {
-        if (cat.value === 'all') {
-          acc[cat.value] = ALL_WORKS.length;
+        if (cat.id === 'all') {
+          acc[cat.id] = ALL_WORKS.length;
         } else {
-          const targetCat = cat.value as WorkCategory;
-          acc[cat.value] = ALL_WORKS.filter((w) =>
+          const targetCat = cat.id as WorkCategory;
+          acc[cat.id] = ALL_WORKS.filter((w) =>
             w.category.includes(targetCat),
           ).length;
         }

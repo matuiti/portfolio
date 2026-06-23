@@ -1,4 +1,4 @@
-export type GalelryCategory =
+export type GalleryCategory =
   | 'all'
   | 'button'
   | 'card'
@@ -15,7 +15,7 @@ export type GalelryCategory =
 export type UIPart = {
   id: string;
   title: string;
-  category: GalelryCategory;
+  category: GalleryCategory;
   description: string;
   tags: string[];
   url: string;
@@ -40,30 +40,26 @@ export type TabItem = {
   isMobileOnly?: boolean;
 };
 
-type FilteringState = {
-  selectedItem: UIPart | null;
-  selectedCategory: GalelryCategory;
+export type GalleryState = {
+  // selectedItem: UIPart | null;
+  selectedCategory: GalleryCategory;
   selectedTags: string[];
   searchQuery: string;
   currentPage: number;
   itemsPerPage: number;
-  totalPages: number;
-  filteredItems: UIPart[];
-  paginatedItems: UIPart[];
-  noResultsMessage: string;
-  categoryCounts: Record<string, number>;
-  displayTitle: string;
-  totalHitCount: number;
-  isEmpty: boolean;
-};
-
-type FilteringActions = {
-  setSelectedItem: (item: UIPart | null) => void;
-  setSelectedCategory: (cat: GalelryCategory) => void;
+  // totalPages: number;
+  // filteredItems: UIPart[];
+  // paginatedItems: UIPart[];
+  // noResultsMessage: string;
+  // categoryCounts: Record<string, number>;
+  // displayTitle: string;
+  // totalHitCount: number;
+  // isEmpty: boolean;
+  // setSelectedItem: (item: UIPart | null) => void;
+  toggleTag: (tag: string) => void;
+  setSelectedCategory: (cat: GalleryCategory) => void;
   setSelectedTags: (tags: string[]) => void;
   setSearchQuery: (q: string) => void;
   setCurrentPage: (page: number) => void;
   clearFilters: () => void;
 };
-
-export type Filtering = FilteringState & FilteringActions;

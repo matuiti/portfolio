@@ -16,11 +16,11 @@ export const CategoryTabs = ({
     <div className='flex flex-wrap items-center gap-[calc(10/16*1rem)]'>
       {WORK_CATEGORIES.map((cat) => (
         <BaseTag
-          key={cat.value}
+          key={cat.id}
           shape='tab'
           size='short'
-          isActive={activeCategory === cat.value}
-          onClick={() => onCategoryChange(cat.value)}
+          isActive={activeCategory === cat.id}
+          onClick={() => onCategoryChange(cat.id)}
         >
           {cat.label}
         </BaseTag>

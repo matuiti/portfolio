@@ -1,28 +1,18 @@
-'use client';
-import { useStore } from '@/lib/store/useStore';
 import { GallerySidebar } from '../GallerySidebar';
-import { Filtering } from '@/gallery/types';
 import { SearchGalleryDrawer } from '../SearchGalleryDrawer';
 
 type GalleryLayoutProps = {
   children: React.ReactNode;
-  filtering: Filtering;
 };
 
-export function GalleryLayout({ children, filtering }: GalleryLayoutProps) {
-  const { isSearchDrawerOpen, setSearchDrawerOpen } = useStore();
-
+export function GalleryLayout({ children }: GalleryLayoutProps) {
   return (
-    <div className='flex flex-col small:flex-row gap-8'>
-      <aside className='hidden small:block w-80 shrink-0'>
-        <GallerySidebar filtering={filtering} />
-      </aside>
-      <main className='flex-1 min-w-0'>{children}</main>
-      <SearchGalleryDrawer
-        isOpen={isSearchDrawerOpen}
-        onClose={() => setSearchDrawerOpen(false)}
-        filtering={filtering}
-      />
+    <div className='relative'>
+      <div className='flex flex-row max-w-[calc(1280/16*1rem)] m-auto'>
+        <GallerySidebar />
+        <main className='flex-1 min-w-0'>{children}</main>
+      </div>
+      <SearchGalleryDrawer />
     </div>
   );
 }

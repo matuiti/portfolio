@@ -1,13 +1,13 @@
 import { Work, WorkCategory } from '@/types/work';
 
-export const WORK_CATEGORIES: { label: string; value: WorkCategory }[] = [
-  { label: 'すべて', value: 'all' },
-  { label: 'Web制作', value: 'web' },
-  { label: 'WordPress', value: 'wordpress' },
-  { label: 'アプリケーション', value: 'app' },
-  { label: 'ゲーム', value: 'game' },
-  // { label: "実案件", value: "client" },
-  // { label: "非公開", value: "nda" },
+export const WORK_CATEGORIES: { label: string; id: WorkCategory }[] = [
+  { label: 'すべて', id: 'all' },
+  { label: 'Web制作', id: 'web' },
+  { label: 'WordPress', id: 'wordpress' },
+  { label: 'アプリケーション', id: 'app' },
+  { label: 'ゲーム', id: 'game' },
+  // { label: "実案件", id: "client" },
+  // { label: "非公開", id: "nda" },
 ];
 
 /**

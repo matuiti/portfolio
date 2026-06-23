@@ -1,4 +1,3 @@
-'use client';
 import { WorksSidebar } from '../WorksSidebar';
 import { SearchWorksDrawer } from '@/works/components/SearchWorksDrawer';
 
