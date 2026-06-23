@@ -1,4 +1,3 @@
-/** 内部管理用のカテゴリ */
 export type WorkCategory =
   | 'web'
   | 'wordpress'
@@ -7,7 +6,6 @@ export type WorkCategory =
   | 'client'
   | 'nda';
 
-/** フィルタ用 (カテゴリ + all) */
 export type WorkFilterCategory = WorkCategory | 'all';
 
 /** 公開レベル */
@@ -36,4 +34,22 @@ export type Work = {
   background?: string; // 制作概要
   features?: string[]; // 実装機能
   points?: string[]; // 制作のポイント
+};
+
+export type WorkState = {
+  searchQuery: string;
+  selectedCategory: WorkFilterCategory;
+  selectedTags: string[];
+  currentPage: number;
+  itemsPerPage: number;
+
+  setSearchQuery: (q: string) => void;
+  setSelectedCategory: (cat: WorkFilterCategory) => void;
+  setSelectedTags: (tags: string[]) => void;
+  setCurrentPage: (page: number) => void;
+
+  toggleTag: (tag: string) => void;
+  selectOnlyTag: (tag: string) => void;
+  selectOnlyCategory: (cat: WorkFilterCategory) => void;
+  clearFilters: () => void;
 };

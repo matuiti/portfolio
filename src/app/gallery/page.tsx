@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import { UI_PARTS } from '@/gallery/data/ui-parts';
 import { GalleryLayout } from './components/layout/GalleryLayout';
-import { ItemList } from './components/list/ItemList';
 import { Pagination } from '@/components/ui/Pagination';
 import { PreviewModal } from './components/modal/PreviewModal';
 import { NoResults } from './components/list/NoResults';
@@ -14,8 +13,10 @@ import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { CATEGORIES } from './data/categories';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
+import { Cards } from './components/list/Cards';
+import { PAGE_HEADER_DATA } from './data';
+import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 
-// 1. ロジックを「GalleryContent」として切り出す
 function GalleryContent() {
   const filtering = useFiltering(UI_PARTS || []);
   useURLSync(filtering);
@@ -37,13 +38,6 @@ function GalleryContent() {
     searchQuery,
   } = filtering;
 
-  const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';
-  const PAGE_HEADER_DATA = {
-    jpTitle: 'UIギャラリー',
-    enTitle: 'GALLERY',
-    bgiPath: PAGE_HEADER_IMAGE_PATH,
-  } as const;
-
   const activeCategoryLabel = CATEGORIES.find(
     (cat) => cat.id === selectedCategory,
   )?.label;
@@ -61,22 +55,19 @@ function GalleryContent() {
 
   return (
     <GalleryLayout filtering={filtering}>
-      {/* ページヘッダー */}
       <PageHeader
         enTitle={PAGE_HEADER_DATA.enTitle}
         jpTitle={PAGE_HEADER_DATA.jpTitle}
         bgiPath={PAGE_HEADER_DATA.bgiPath}
       />
-      {/* パンくずリスト */}
       <Breadcrumbs items={breadcrumbItems} />
       <div className='space-y-8'>
         <TitleAndCount title={displayTitle} count={totalHitCount} />
-
         {isEmpty ? (
           <NoResults message={noResultsMessage} onReset={clearFilters} />
         ) : (
           <div className='space-y-12'>
-            <ItemList items={paginatedItems} onItemClick={setSelectedItem} />
+            <Cards items={paginatedItems} onItemClick={setSelectedItem} />
             {totalPages > 1 && (
               <Pagination
                 current={currentPage}
@@ -102,11 +93,14 @@ function GalleryContent() {
   );
 }
 
-// 2. 本体の Export は Suspense でラップするだけにする
+/* ページルート */
 export default function GalleryPage() {
   return (
-    <Suspense fallback={<LoadingGallery />}>
-      <GalleryContent />
-    </Suspense>
+    <>
+      <ScrollToTopComp />
+      <Suspense fallback={<LoadingGallery />}>
+        <GalleryContent />
+      </Suspense>
+    </>
   );
 }

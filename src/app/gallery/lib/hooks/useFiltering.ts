@@ -1,12 +1,8 @@
-// src/hooks/gallery/useFiltering.ts
-"use client";
-
-import { useState, useMemo } from "react";
-import { UIPart } from "@/gallery/types/ui-part";
-import { Filtering } from "@/gallery/types/filtering";
-import { Category } from "@/gallery/types/category";
-import { CATEGORIES } from "@/gallery/data/categories";
-import { GALLERY_SETTINGS } from "../constants/gallery";
+'use client';
+import { useState, useMemo } from 'react';
+import { Category, Filtering, UIPart } from '@/gallery/types/type';
+import { CATEGORIES } from '@/gallery/data/categories';
+import { GALLERY_SETTINGS } from '../constants/gallery';
 
 export function useFiltering(allItems: UIPart[]): Filtering {
   const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
@@ -14,7 +10,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     GALLERY_SETTINGS.DEFAULT_CATEGORY,
   );
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = GALLERY_SETTINGS.ITEMS_PER_PAGE;
 
@@ -38,7 +34,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     let items = [...allItems];
 
     // カテゴリ絞り込み
-    if (selectedCategory !== "all") {
+    if (selectedCategory !== 'all') {
       items = items.filter((item) => item.category === selectedCategory);
     }
 
@@ -50,7 +46,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     }
 
     // 検索ワード絞り込み
-    if (searchQuery.trim() !== "") {
+    if (searchQuery.trim() !== '') {
       const q = searchQuery.toLowerCase();
       items = items.filter(
         (item) =>
@@ -72,7 +68,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
   // 4. 表示用タイトルの確定（検索ワードがある場合は引用符で強調）
   const displayTitle = useMemo(() => {
     const label =
-      CATEGORIES.find((c) => c.id === selectedCategory)?.label || "すべて";
+      CATEGORIES.find((c) => c.id === selectedCategory)?.label || 'すべて';
     return searchQuery.trim() ? `${label} : "${searchQuery}"` : label;
   }, [selectedCategory, searchQuery]);
 
@@ -82,16 +78,16 @@ export function useFiltering(allItems: UIPart[]): Filtering {
 
   // 6. メッセージの動的生成
   const noResultsMessage = isEmpty
-    ? searchQuery.trim() !== ""
+    ? searchQuery.trim() !== ''
       ? `"${searchQuery}" に一致するアイテムが見つかりませんでした。`
-      : "該当するアイテムがありません。"
-    : "";
+      : '該当するアイテムがありません。'
+    : '';
 
   // すべての条件を初期状態に戻す関数
   const clearFilters = () => {
-    setSelectedCategory("all");
+    setSelectedCategory('all');
     setSelectedTags([]);
-    setSearchQuery("");
+    setSearchQuery('');
     setCurrentPage(1);
   };
 

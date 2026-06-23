@@ -45,12 +45,11 @@ export const GALLERY_MESSAGES = {
  * ギャラリー内で使用するタブの基本設定
  */
 export const GALLERY_TABS = [
-  { id: "description", label: "説明", icon: <svg>...</svg> },
-  { id: "code", label: "コード", icon: <svg>...</svg> },
+  { id: "description", label: "説明"},
+  { id: "code", label: "コード"},
   {
     id: "preview",
     label: "プレビュー",
     isMobileOnly: true,
-    icon: <svg>...</svg>,
   },
 ] as const satisfies readonly TabItem[];

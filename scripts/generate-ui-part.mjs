@@ -23,16 +23,10 @@ const CONFIG = {
 const args = process.argv.slice(2);
 const category = args.find(arg => arg.startsWith('--category='))?.split('=')[1];
 const name = args.find(arg => arg.startsWith('--name='))?.split('=')[1];
-const difficultyInput = args.find(arg => arg.startsWith('--difficulty='))?.split('=')[1] || 'basic';
 
 // --- エラー処理 ---
 if (!category || !name) {
   console.error('Usage: npm run new -- --category=button --name=button03 --difficulty=advanced');
-  process.exit(1);
-}
-const VALID_DIFFICULTIES = ['basic', 'advanced', 'expert'];
-if (!VALID_DIFFICULTIES.includes(difficultyInput)) {
-  console.error(`Error: Difficulty must be one of: ${VALID_DIFFICULTIES.join(', ')}`);
   process.exit(1);
 }
 if (!CONFIG.REGEXP.SAFE_PATTERN.test(category) || !CONFIG.REGEXP.SAFE_PATTERN.test(name)) {
@@ -54,11 +48,9 @@ const newItem = `  {
     category: "${category}",
     title: "${name}",
     description: "",
-    difficulty: "${difficultyInput}",
     tags: ["Vanilla JS", "SCSS"],
-    features: ["特徴１", "特徴２"],
     techStack: ["HTML", "SCSS", "JavaScript"],
-    path: "/gallery-parts/ui/${category}/${name}/index.html",
+    url: "/gallery-parts/ui/${category}/${name}/index.html",
     code: {
       html: \`\`,
       css: \`\`,
@@ -108,8 +100,9 @@ try {
 // プレフィックス p- を付与したクラス
 .${prefixClassName} {
   padding: 1rem;
-  // BEM記法例: &____inner { ... }
-}`,
+  }
+  // BEM記法例: .${prefixClassName}__inner { ... }
+`,
     'script.js': `(function() {
   'use strict';
 

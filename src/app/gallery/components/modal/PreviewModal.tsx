@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ViewportSlider } from './ViewportSlider';
 import { PreviewFrame } from '../preview/PreviewFrame';
 import { ModalNavigation } from './ModalNavigation';
-import { UIPart } from '@/gallery/types/ui-part';
+import { UIPart } from '@/gallery/types/type';
 import { PREVIEW_MODAL_SETTINGS } from '@/gallery/lib/constants/gallery';
 import { useModalNavigation } from '@/gallery/lib/hooks/useModalNavigation';
 
@@ -133,7 +133,7 @@ export const PreviewModal = ({
         <main className='flex-1 bg-neutral-200/50 relative overflow-hidden flex flex-col'>
           <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
 
-          <div className='flex-1 relative z-10 p-4 lg:p-10 flex items-center justify-center overflow-hidden'>
+          <div className='flex-1 relative z-10 p-4 small:p-10 flex items-center justify-center overflow-hidden'>
             <div
               style={{ width: `${viewportWidth}px` }}
               className='relative h-full max-w-none transition-[width] duration-300 ease-out shadow-2xl bg-white flex items-center'

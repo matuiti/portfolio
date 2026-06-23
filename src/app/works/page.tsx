@@ -14,6 +14,7 @@ import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import styles from './Works.module.css';
+import { LoadingWorks } from './components/ui/LoadingWorks';
 
 function WorksPageContent() {
   const store = useWorkStore();
@@ -167,13 +168,7 @@ export default function WorksPage() {
   return (
     <>
       <ScrollToTopComp />
-      <Suspense
-        fallback={
-          <div className='p-[calc(80/16*1rem)] text-center font-bold'>
-            Loading Works...
-          </div>
-        }
-      >
+      <Suspense fallback={<LoadingWorks />}>
         <WorksPageContent />
       </Suspense>
     </>
