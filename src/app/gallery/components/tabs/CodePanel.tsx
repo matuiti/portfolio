@@ -9,7 +9,7 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-markup';
-import { UIPart } from '@/gallery/types/ui-part';
+import { UIPart } from '@/gallery/types/type';
 
 type CodePanelProps = {
   item: UIPart;

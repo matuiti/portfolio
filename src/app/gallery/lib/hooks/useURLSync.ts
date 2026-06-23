@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { Filtering } from "@/gallery/types/filtering";
-import { CATEGORIES } from "@/gallery/data/categories";
-import { Category } from "@/gallery/types/category";
+import { useEffect, useState } from 'react';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { CATEGORIES } from '@/gallery/data/categories';
+import { Category, Filtering } from '@/gallery/types/type';
 
 export function useURLSync(filtering: Filtering) {
   const router = useRouter();
@@ -28,10 +27,10 @@ export function useURLSync(filtering: Filtering) {
 
   // 1. URLから初期値を読み込む (初回マウント時)
   useEffect(() => {
-    const category = searchParams.get("category");
-    const tags = searchParams.get("tags");
-    const q = searchParams.get("q");
-    const page = searchParams.get("page");
+    const category = searchParams.get('category');
+    const tags = searchParams.get('tags');
+    const q = searchParams.get('q');
+    const page = searchParams.get('page');
 
     if (category) {
       const isValid = CATEGORIES.some((c) => c.id === category);
@@ -40,7 +39,7 @@ export function useURLSync(filtering: Filtering) {
 
     // 空文字ガード付きのタグ読み込み
     if (tags) {
-      const tagList = tags.split(",").filter((t) => t !== "");
+      const tagList = tags.split(',').filter((t) => t !== '');
       if (tagList.length > 0) setSelectedTags(tagList);
     }
 
@@ -62,18 +61,18 @@ export function useURLSync(filtering: Filtering) {
   useEffect(() => {
     const params = new URLSearchParams();
 
-    if (selectedCategory && selectedCategory !== "all") {
-      params.set("category", selectedCategory);
+    if (selectedCategory && selectedCategory !== 'all') {
+      params.set('category', selectedCategory);
     }
     if (selectedTags.length > 0) {
-      params.set("tags", selectedTags.join(","));
+      params.set('tags', selectedTags.join(','));
     }
     // デバウンスされた値を使用してURLを更新
     if (debouncedSearchQuery) {
-      params.set("q", debouncedSearchQuery);
+      params.set('q', debouncedSearchQuery);
     }
     if (currentPage > 1) {
-      params.set("page", currentPage.toString());
+      params.set('page', currentPage.toString());
     }
 
     const query = params.toString();
@@ -83,7 +82,7 @@ export function useURLSync(filtering: Filtering) {
   }, [
     selectedCategory,
     selectedTags,
-    debouncedSearchQuery, // ここをsearchQueryではなくデバウンス版にする
+    debouncedSearchQuery,
     currentPage,
     pathname,
     router,

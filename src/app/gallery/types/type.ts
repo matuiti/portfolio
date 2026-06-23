@@ -1,8 +1,46 @@
-// src/types/gallery/filtering.ts
-import type { Category } from "./category";
-import type { UIPart } from "./ui-part";
+export type Category =
+  | 'all'
+  | 'button'
+  | 'card'
+  | 'form'
+  | 'modal'
+  | 'navigation'
+  | 'list'
+  | 'loading'
+  | 'transition'
+  | 'scroll'
+  | 'layout'
+  | 'other';
 
-export type FilteringState = {
+export type UIPart = {
+  id: string;
+  title: string;
+  category: Category;
+  description: string;
+  tags: string[];
+  url: string;
+  code: {
+    html: string;
+    css: string;
+    js: string;
+  };
+};
+
+export type TagGroup = {
+  label: string;
+  icon: string;
+  tags: string[];
+};
+
+export type TabType = 'description' | 'code' | 'preview';
+
+export type TabItem = {
+  id: TabType;
+  label: string;
+  isMobileOnly?: boolean;
+};
+
+type FilteringState = {
   selectedItem: UIPart | null;
   selectedCategory: Category;
   selectedTags: string[];
@@ -19,7 +57,7 @@ export type FilteringState = {
   isEmpty: boolean;
 };
 
-export type FilteringActions = {
+type FilteringActions = {
   setSelectedItem: (item: UIPart | null) => void;
   setSelectedCategory: (cat: Category) => void;
   setSelectedTags: (tags: string[]) => void;

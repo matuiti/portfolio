@@ -16,9 +16,9 @@ export function GalleryLayout({ children, filtering }: GalleryLayoutProps) {
   const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();
 
   return (
-    <div className='flex flex-col lg:flex-row gap-8'>
+    <div className='flex flex-col small:flex-row gap-8'>
       {/* デスクトップ用サイドバーは利便性のために残します */}
-      <aside className='hidden lg:block w-80 shrink-0'>
+      <aside className='hidden small:block w-80 shrink-0'>
         <GallerySidebar filtering={filtering} />
       </aside>
 

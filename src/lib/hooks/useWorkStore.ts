@@ -1,26 +1,8 @@
 import { create } from 'zustand';
-import { Work, WorkFilterCategory } from '@/types/work';
+import { Work, WorkFilterCategory, WorkState } from '@/types/work';
 import { ALL_WORKS } from '@/data/works';
 import { useShallow } from 'zustand/shallow';
 import { useMemo } from 'react';
-
-type WorkState = {
-  searchQuery: string;
-  selectedCategory: WorkFilterCategory;
-  selectedTags: string[];
-  currentPage: number;
-  itemsPerPage: number;
-
-  setSearchQuery: (q: string) => void;
-  setSelectedCategory: (cat: WorkFilterCategory) => void;
-  setSelectedTags: (tags: string[]) => void;
-  setCurrentPage: (page: number) => void;
-
-  toggleTag: (tag: string) => void;
-  selectOnlyTag: (tag: string) => void;
-  selectOnlyCategory: (cat: WorkFilterCategory) => void;
-  clearFilters: () => void;
-};
 
 // 「フィルタ条件」をリセットする際の共通の土台
 // selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使用する
@@ -64,7 +46,6 @@ export const useWorkStore = create<WorkState>((set) => ({
  * フィルタリング済みのデータを取得するセレクター
  * 使用例： const filteredWorks = useFilteredWorks();
  */
-
 export const useFilteredWorks = () => {
   const filters = useWorkStore(
     useShallow((state) => ({

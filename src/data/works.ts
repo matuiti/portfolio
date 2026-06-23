@@ -1,9 +1,5 @@
-// src/data/works.ts
 import { Work, WorkFilterCategory } from '@/types/work';
 
-/**
- * WORKSセクションの共通カテゴリ定義 (SSoT)
- */
 export const WORK_CATEGORIES: { label: string; value: WorkFilterCategory }[] = [
   { label: 'すべて', value: 'all' },
   { label: 'Web制作', value: 'web' },

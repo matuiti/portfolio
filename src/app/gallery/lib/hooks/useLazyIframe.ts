@@ -1,8 +1,7 @@
-"use client";
+'use client';
+import { useState, useEffect, useRef } from 'react';
 
-import { useState, useEffect, useRef } from "react";
-
-export const useLazyIframe = (rootMargin = "200px") => {
+export const useLazyIframe = (rootMargin = '200px') => {
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
