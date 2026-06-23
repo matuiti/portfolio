@@ -1,14 +1,14 @@
 // src/app/gallery/components/filter/CategoryNav.tsx
 
-import { GalelryCategory } from '@/gallery/types/category';
+import { GalleryCategory } from '@/gallery/types/category';
 type CategoryNavProps = {
-  selected: GalelryCategory;
-  onSelect: (cat: GalelryCategory) => void;
+  selected: GalleryCategory;
+  onSelect: (cat: GalleryCategory) => void;
   counts: Record<string, number>;
 };
 
 // UIに表示するカテゴリーリスト
-const CATEGORY_ITEMS: { label: string; value: GalelryCategory }[] = [
+const CATEGORY_ITEMS: { label: string; value: GalleryCategory }[] = [
   { label: 'All Items', value: 'all' },
   { label: 'Buttons', value: 'button' },
   { label: 'Cards', value: 'card' },

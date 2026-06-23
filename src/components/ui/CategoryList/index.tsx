@@ -5,13 +5,13 @@ import styles from './CategoryList.module.css';
 
 type CategoryItem<T> = {
   label: string;
-  value: T;
+  id: T;
 };
 
 type CategoryListProps<T> = {
   items: CategoryItem<T>[];
   selected: T;
-  onChange: (value: T) => void;
+  onChange: (id: T) => void;
   counts?: Record<string, number>;
   className?: string;
 };
@@ -23,29 +23,29 @@ export function CategoryList<T extends string>({
   counts = {},
   className = '',
 }: CategoryListProps<T>) {
-  const handleClick = (value: T) => {
-    onChange(value);
+  const handleClick = (id: T) => {
+    onChange(id);
     scrollToTop();
   };
   return (
     <nav className={`${styles.nav} ${className}`} aria-label='カテゴリー選択'>
       <ul className={styles.list}>
         {items.map((item) => {
-          const count = counts[item.value] ?? 0;
-          const isActive = selected === item.value;
+          const count = counts[item.id] ?? 0;
+          const isActive = selected === item.id;
 
           // 件数0のカテゴリーは非表示
-          if (item.value !== 'all' && count === 0) return null;
+          if (item.id !== 'all' && count === 0) return null;
 
           return (
-            <li key={item.value}>
+            <li key={item.id}>
               <BaseTag
                 shape='tab'
                 size='long'
                 isActive={isActive}
                 count={count}
                 showCount={count > 0}
-                onClick={() => handleClick(item.value)}
+                onClick={() => handleClick(item.id)}
               >
                 {item.label}
               </BaseTag>

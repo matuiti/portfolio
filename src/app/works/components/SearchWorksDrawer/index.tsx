@@ -31,11 +31,11 @@ export function SearchWorksDrawer() {
 
   const categoryCounts = WORK_CATEGORIES.reduce(
     (acc, cat) => {
-      if (cat.value === 'all') {
-        acc[cat.value] = filteredWorks.length;
+      if (cat.id === 'all') {
+        acc[cat.id] = filteredWorks.length;
       } else {
-        const targetCat = cat.value as WorkCategory;
-        acc[cat.value] = filteredWorks.filter((w) =>
+        const targetCat = cat.id as WorkCategory;
+        acc[cat.id] = filteredWorks.filter((w) =>
           w.category.includes(targetCat),
         ).length;
       }
@@ -48,7 +48,7 @@ export function SearchWorksDrawer() {
 
   // カテゴリーIDからラベルを取得するロジック
   const selectedCategoryLabel = WORK_CATEGORIES.find(
-    (cat) => cat.value === store.selectedCategory,
+    (cat) => cat.id === store.selectedCategory,
   )?.label;
 
   const renderedTitle = useMemo(() => {

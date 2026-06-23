@@ -14,7 +14,6 @@ import { WORK_CATEGORIES } from '@/data/works';
 import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import { LoadingWorks } from './components/ui/LoadingWorks';
-
 import styles from './Works.module.css';
 
 function WorksPageContent() {
@@ -54,9 +53,8 @@ function WorksPageContent() {
     setSelectedWork(null); // モーダルを閉じる
   };
 
-  // カテゴリーIDからラベルを取得するロジック
   const selectedCategoryLabel = WORK_CATEGORIES.find(
-    (cat) => cat.value === store.selectedCategory,
+    (cat) => cat.id === store.selectedCategory,
   )?.label;
 
   const breadcrumbItems = [
@@ -113,17 +111,29 @@ function WorksPageContent() {
         </p>
         {/* 実績カードグリッド */}
         {displayWorks.length ? (
-          <div className={styles.cards}>
-            {displayWorks.map((work) => (
-              <WorkCard
-                key={work.id}
-                work={work}
-                onClick={() => setSelectedWork(work)}
-                onCategoryClick={store.selectOnlyCategory}
-                className={styles.card}
-              />
-            ))}
-          </div>
+          <>
+            <div className={styles.cards}>
+              {displayWorks.map((work) => (
+                <WorkCard
+                  key={work.id}
+                  work={work}
+                  onClick={() => setSelectedWork(work)}
+                  onCategoryClick={store.selectOnlyCategory}
+                  className={styles.card}
+                />
+              ))}
+            </div>
+            {/* ページネーション */}
+            {totalPages > 1 && (
+              <div className={styles.paginationWrapper}>
+                <Pagination
+                  current={store.currentPage}
+                  total={totalPages}
+                  onPageChange={store.setCurrentPage}
+                />
+              </div>
+            )}
+          </>
         ) : (
           <div className='py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]'>
             <p className='text-dark-gray font-bold'>
@@ -132,16 +142,6 @@ function WorksPageContent() {
             <p className='text-[calc(14/16*1rem)] text-dark-gray mt-[calc(8/16*1rem)]'>
               条件を変えて再度お試しください。
             </p>
-          </div>
-        )}
-        {/* ページネーション */}
-        {totalPages > 1 && (
-          <div className={styles.paginationWrapper}>
-            <Pagination
-              current={store.currentPage}
-              total={totalPages}
-              onPageChange={store.setCurrentPage}
-            />
           </div>
         )}
       </div>
