@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { Category, Filtering } from '@/gallery/types';
+import { GalelryCategory, Filtering } from '@/gallery/types';
 import { GALLERY_CATEGORIES } from '@/gallery/data';
 
 export function useURLSync(filtering: Filtering) {
@@ -34,7 +34,7 @@ export function useURLSync(filtering: Filtering) {
 
     if (category) {
       const isValid = GALLERY_CATEGORIES.some((c) => c.id === category);
-      if (isValid) setSelectedCategory(category as Category);
+      if (isValid) setSelectedCategory(category as GalelryCategory);
     }
 
     // 空文字ガード付きのタグ読み込み

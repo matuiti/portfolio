@@ -1,5 +1,5 @@
 'use client';
-import { useStore } from '@/lib/hooks/useStore';
+import { useStore } from '@/lib/store/useStore';
 import { CategoryList } from '../filter/CategoryList';
 import { TagFilters } from '../filter/TagFilters';
 import { SearchBox } from '../filter/SearchBox';

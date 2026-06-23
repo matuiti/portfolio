@@ -14,7 +14,7 @@ import {
 import { sendContactAction } from './actions';
 import { ContactRipple } from './ContactRipple';
 import Link from 'next/link';
-import { useStore } from '@/lib/hooks/useStore';
+import { useStore } from '@/lib/store/useStore';
 import styles from './ContactSection.module.css';
 
 export const ContactForm = () => {

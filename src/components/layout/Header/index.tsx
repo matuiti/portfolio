@@ -8,7 +8,7 @@ import { useScrollThreshold } from '@/lib/hooks/useScrollThreshold';
 import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { Hamburger, SearchLarge } from '@/components/ui/Icons';
-import { useStore } from '@/lib/hooks/useStore';
+import { useStore } from '@/lib/store/useStore';
 
 export const headerStyles = tv({
   slots: {

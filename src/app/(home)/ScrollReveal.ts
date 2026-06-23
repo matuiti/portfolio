@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useCallback, useRef } from 'react';
 import gsap from 'gsap';
-import { useStore } from '@/lib/hooks/useStore';
+import { useStore } from '@/lib/store/useStore';
 
 /**
  * TOPページ専用（現在）

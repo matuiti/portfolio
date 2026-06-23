@@ -58,7 +58,7 @@ export const useFilteredWorks = () => {
   return useMemo(() => filterWorks(ALL_WORKS, filters), [filters]);
 };
 
-export const filterWorks = (
+const filterWorks = (
   works: Work[],
   {
     searchQuery,
