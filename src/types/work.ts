@@ -1,4 +1,5 @@
 export type WorkCategory =
+  | 'all'
   | 'web'
   | 'wordpress'
   | 'app'
@@ -6,7 +7,7 @@ export type WorkCategory =
   | 'client'
   | 'nda';
 
-export type WorkFilterCategory = WorkCategory | 'all';
+// export type WorkCategory = WorkCategory | 'all';
 
 /** 公開レベル */
 export type DisclosureLevel = 'Full' | 'NDA';
@@ -38,18 +39,18 @@ export type Work = {
 
 export type WorkState = {
   searchQuery: string;
-  selectedCategory: WorkFilterCategory;
+  selectedCategory: WorkCategory;
   selectedTags: string[];
   currentPage: number;
   itemsPerPage: number;
 
   setSearchQuery: (q: string) => void;
-  setSelectedCategory: (cat: WorkFilterCategory) => void;
+  setSelectedCategory: (cat: WorkCategory) => void;
   setSelectedTags: (tags: string[]) => void;
   setCurrentPage: (page: number) => void;
 
   toggleTag: (tag: string) => void;
   selectOnlyTag: (tag: string) => void;
-  selectOnlyCategory: (cat: WorkFilterCategory) => void;
+  selectOnlyCategory: (cat: WorkCategory) => void;
   clearFilters: () => void;
 };

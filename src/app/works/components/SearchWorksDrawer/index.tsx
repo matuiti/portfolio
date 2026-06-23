@@ -6,7 +6,7 @@ import { TagFilters } from '@/components/ui/TagFilters';
 import { useStore } from '@/lib/store/useStore';
 import { useFilteredWorks, useWorkStore } from '@/lib/store/useWorkStore';
 import { WORK_CATEGORIES } from '@/data/works';
-import { WorkCategory, WorkFilterCategory } from '@/types/work';
+import { WorkCategory } from '@/types/work';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { useMemo } from 'react';
 import styles from './SearchWorksDrawer.module.css';
@@ -126,7 +126,7 @@ export function SearchWorksDrawer() {
           <div className={styles.body}>
             <section className={styles.section}>
               <h3 className={styles.label}>カテゴリー</h3>
-              <CategoryList<WorkFilterCategory>
+              <CategoryList<WorkCategory>
                 items={categories}
                 selected={selectedCategory}
                 onChange={setSelectedCategory}

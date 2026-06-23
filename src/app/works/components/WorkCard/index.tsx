@@ -1,6 +1,6 @@
 'use client';
 import { memo, useState } from 'react';
-import { Work, WorkFilterCategory } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SafeImage } from '@/components/ui/SafeImage';
 import { scrollToTop } from '@/lib/utility/scrollToTop';
@@ -12,7 +12,7 @@ const PLACEHOLDER_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
 type WorkCardProps = {
   work: Work;
   onClick: () => void;
-  onCategoryClick?: (cat: WorkFilterCategory) => void;
+  onCategoryClick?: (cat: WorkCategory) => void;
   className?: string;
 };
 
@@ -36,7 +36,7 @@ export const WorkCard = memo(
     const handleCategoryClick = (e: React.MouseEvent, cat: string) => {
       e.stopPropagation();
       if (!onCategoryClick) return;
-      onCategoryClick(cat as WorkFilterCategory);
+      onCategoryClick(cat as WorkCategory);
       if (currentPageName === 'works') {
         scrollToTop();
       }

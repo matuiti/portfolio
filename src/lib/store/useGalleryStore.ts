@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { create } from 'zustand';
-import { Work, WorkFilterCategory, WorkState } from '@/types/work';
+import { Work, WorkCategory, WorkState } from '@/types/work';
 import { ALL_WORKS } from '@/data/works';
 import { useShallow } from 'zustand/shallow';
 
@@ -8,7 +8,7 @@ import { useShallow } from 'zustand/shallow';
 // selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使用する
 const RESET_FILTERS = {
   searchQuery: '',
-  selectedCategory: 'all' as WorkFilterCategory,
+  selectedCategory: 'all' as WorkCategory,
   selectedTags: [] as string[],
   currentPage: 1,
 };
@@ -66,7 +66,7 @@ const filterWorks = (
     selectedTags,
   }: {
     searchQuery: string;
-    selectedCategory: WorkFilterCategory;
+    selectedCategory: WorkCategory;
     selectedTags: string[];
   },
 ) => {

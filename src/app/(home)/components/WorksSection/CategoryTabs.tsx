@@ -1,18 +1,17 @@
 'use client';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { WORK_CATEGORIES } from '@/data/works';
-import { WorkFilterCategory } from '@/types/work';
+import { WorkCategory } from '@/types/work';
 
 type CategoryTabsProps = {
-  activeCategory: WorkFilterCategory;
-  onCategoryChange: (category: WorkFilterCategory) => void;
+  activeCategory: WorkCategory;
+  onCategoryChange: (category: WorkCategory) => void;
 };
 
 export const CategoryTabs = ({
   activeCategory,
   onCategoryChange,
 }: CategoryTabsProps) => {
-
   return (
     <div className='flex flex-wrap items-center gap-[calc(10/16*1rem)]'>
       {WORK_CATEGORIES.map((cat) => (
