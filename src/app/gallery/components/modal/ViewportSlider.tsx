@@ -1,6 +1,6 @@
 'use client';
 
-import { PREVIEW_MODAL_SETTINGS } from '@/gallery/lib/constants/gallery';
+import { PREVIEW_MODAL_SETTINGS } from '@/gallery/data';
 
 type ViewportSliderProps = {
   value: number;

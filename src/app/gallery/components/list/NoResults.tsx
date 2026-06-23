@@ -1,6 +1,6 @@
 'use client';
 
-import { GALLERY_MESSAGES } from '@/gallery/lib/constants/gallery';
+import { GALLERY_MESSAGES } from '@/gallery/data';
 
 type NoResultsProps = {
   message: string;

@@ -57,7 +57,6 @@ export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
       ref={containerRef}
       className='relative w-full h-full bg-white overflow-hidden flex items-center justify-center'
     >
-      {/* プレースホルダー / ローディング */}
       {(!isInView || status === 'loading') && (
         <div className='absolute inset-0 flex flex-col items-center justify-center bg-neutral-50 z-20'>
           <div className='w-8 h-8 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin mb-4' />
@@ -67,7 +66,6 @@ export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
         </div>
       )}
 
-      {/* エラー表示 */}
       {status === 'error' && (
         <div className='absolute inset-0 flex flex-col items-center justify-center bg-neutral-50 z-20 p-4 text-center'>
           <svg
@@ -89,7 +87,6 @@ export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
         </div>
       )}
 
-      {/* iframe本体 */}
       {isInView && (
         <div
           className='relative flex items-center justify-center transition-transform duration-500'
