@@ -9,16 +9,18 @@ import { Work, WorkFilterCategory } from '@/types/work';
 import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { WORK_CATEGORIES } from '@/data/works';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
+import { WORK_CATEGORIES } from '@/data/works';
 import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
-import styles from './Works.module.css';
 import { LoadingWorks } from './components/ui/LoadingWorks';
+
+import styles from './Works.module.css';
 
 function WorksPageContent() {
   const store = useWorkStore();
   const filteredWorks = useFilteredWorks();
+  const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
   useCommonURLSync(
     {
@@ -35,7 +37,6 @@ function WorksPageContent() {
     },
   );
 
-  const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
   // 表示データの計算（ページネーション適用）
   const totalPages = Math.ceil(filteredWorks.length / store.itemsPerPage);

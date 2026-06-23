@@ -1,5 +1,5 @@
 'use client';
-import { useUIStore } from '@/lib/hooks/useUIStore';
+import { useStore } from '@/lib/hooks/useStore';
 import { GallerySidebar } from '../GallerySidebar';
 import { Filtering } from '@/gallery/types';
 import { SearchGalleryDrawer } from '../SearchGalleryDrawer';
@@ -10,7 +10,7 @@ type GalleryLayoutProps = {
 };
 
 export function GalleryLayout({ children, filtering }: GalleryLayoutProps) {
-  const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();
+  const { isSearchDrawerOpen, setSearchDrawerOpen } = useStore();
 
   return (
     <div className='flex flex-col small:flex-row gap-8'>

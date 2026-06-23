@@ -1,5 +1,5 @@
 'use client';
-import { useUIStore } from '@/lib/hooks/useUIStore';
+import { useStore } from '@/lib/hooks/useStore';
 import { CategoryList } from '../filter/CategoryList';
 import { TagFilters } from '../filter/TagFilters';
 import { SearchBox } from '../filter/SearchBox';
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export function SearchGalleryDrawer({ filtering, isOpen, onClose }: Props) {
-  const { setSearchDrawerOpen } = useUIStore();
+  const { setSearchDrawerOpen } = useStore();
 
   const {
     selectedCategory,

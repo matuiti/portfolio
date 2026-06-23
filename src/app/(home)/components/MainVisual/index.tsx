@@ -1,5 +1,5 @@
 'use client';
-import { useUIStore } from '@/lib/hooks/useUIStore';
+import { useStore } from '@/lib/hooks/useStore';
 import { clsx } from 'clsx';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
@@ -10,8 +10,8 @@ import styles from './MainVisual.module.css';
 export const MainVisual = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const setPhase = useUIStore((state) => state.setPhase);
-  const phase = useUIStore((state) => state.phase);
+  const setPhase = useStore((state) => state.setPhase);
+  const phase = useStore((state) => state.phase);
   const isReady = phase === 'ready';
 
   useGSAP(

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { Category, Filtering } from '@/gallery/types';
-import { CATEGORIES } from '@/gallery/data';
+import { GALLERY_CATEGORIES } from '@/gallery/data';
 
 export function useURLSync(filtering: Filtering) {
   const router = useRouter();
@@ -33,7 +33,7 @@ export function useURLSync(filtering: Filtering) {
     const page = searchParams.get('page');
 
     if (category) {
-      const isValid = CATEGORIES.some((c) => c.id === category);
+      const isValid = GALLERY_CATEGORIES.some((c) => c.id === category);
       if (isValid) setSelectedCategory(category as Category);
     }
 
