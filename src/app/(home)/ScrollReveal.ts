@@ -1,13 +1,13 @@
 'use client';
 import { useEffect, useCallback, useRef } from 'react';
 import gsap from 'gsap';
-import { useUIStore } from '@/lib/hooks/useUIStore';
+import { useStore } from '@/lib/hooks/useStore';
 
 /**
  * TOPページ専用（現在）
  */
 export const ScrollReveal = () => {
-  const phase = useUIStore((state) => state.phase);
+  const phase = useStore((state) => state.phase);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const revealedSet = useRef(new WeakSet<Element>());
   const revealingSet = useRef(new WeakSet<Element>());

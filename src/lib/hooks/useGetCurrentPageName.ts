@@ -10,7 +10,7 @@ const REGISTERED_KEYWORDS = [
 
 type PageName = (typeof REGISTERED_KEYWORDS)[number] | '/';
 
-export function useGetPageName(): PageName {
+export function useGetCurrentPageName(): PageName {
   const pathname = usePathname();
   if (!pathname) return '/';
 

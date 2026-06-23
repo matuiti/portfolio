@@ -12,14 +12,14 @@ import {
   type ContactFormData,
 } from './schema';
 import { sendContactAction } from './actions';
-import { useUIStore } from '@/lib/hooks/useUIStore';
 import { ContactRipple } from './ContactRipple';
 import Link from 'next/link';
+import { useStore } from '@/lib/hooks/useStore';
 import styles from './ContactSection.module.css';
 
 export const ContactForm = () => {
   const [isPending, startTransition] = useTransition();
-  const { contactStatus, setContactStatus } = useUIStore();
+  const { contactStatus, setContactStatus } = useStore();
 
   // 1. React Hook Form の初期化
   // useForm の第1引数には「入力型 (Values)」を渡し、resolver との型整合性を確保

@@ -1,6 +1,6 @@
 'use client';
 
-import { CATEGORIES } from '@/gallery/data';
+import { GALLERY_CATEGORIES } from '@/gallery/data';
 import { Category } from '@/gallery/types';
 
 type Props = {
@@ -13,7 +13,7 @@ export function CategoryList({ selected, onChange, counts = {} }: Props) {
   return (
     <div className='space-y-4'>
       <ul className='space-y-1'>
-        {CATEGORIES.map(({ id, label }) => {
+        {GALLERY_CATEGORIES.map(({ id, label }) => {
           const count = counts[id] || 0;
           const isActive = selected === id;
 

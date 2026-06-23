@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { GlobalState } from '@/types/globalState';
 
-export const useUIStore = create<GlobalState>((set) => ({
+export const useStore = create<GlobalState>((set) => ({
   phase: 'initial',
   setPhase: (phase) => set({ phase }),
   isSearchDrawerOpen: false,

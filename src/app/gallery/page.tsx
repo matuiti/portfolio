@@ -1,22 +1,21 @@
 'use client';
-
 import { Suspense } from 'react';
-import { UI_PARTS } from '@/gallery/data/ui-parts';
-import { GalleryLayout } from './components/layout';
-import { Pagination } from '@/components/ui/Pagination';
-import { PreviewModal } from './components/modal';
 import { NoResults } from './components/list/NoResults';
-import { LoadingGallery } from './components/ui/LoadingGallery';
 import { useFiltering } from './lib/hooks/useFiltering';
-import { useURLSync } from './lib/hooks/useURLSync';
-import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { PageHeader } from '@/components/ui/PageHeader';
-import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { Cards } from './components/list/Cards';
+import { PreviewModal } from './components/modal';
+import { Pagination } from '@/components/ui/Pagination';
+import { GalleryLayout } from './components/layout';
+import { useURLSync } from './lib/hooks/useURLSync';
+import { PageHeader } from '@/components/ui/PageHeader';
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { TitleAndCount } from '@/components/ui/TitleAndCount';
+import { UI_PARTS } from '@/gallery/data/ui-parts';
+import { GALLERY_CATEGORIES, PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
-import { CATEGORIES, PAGE_HEADER_DATA } from './data';
+import { LoadingGallery } from './components/ui/LoadingGallery';
 
-function GalleryContent() {
+function GalleryPageContent() {
   const filtering = useFiltering(UI_PARTS || []);
   useURLSync(filtering);
 
@@ -37,7 +36,7 @@ function GalleryContent() {
     searchQuery,
   } = filtering;
 
-  const activeCategoryLabel = CATEGORIES.find(
+  const activeCategoryLabel = GALLERY_CATEGORIES.find(
     (cat) => cat.id === selectedCategory,
   )?.label;
 
@@ -98,7 +97,7 @@ export default function GalleryPage() {
     <>
       <ScrollToTopComp />
       <Suspense fallback={<LoadingGallery />}>
-        <GalleryContent />
+        <GalleryPageContent />
       </Suspense>
     </>
   );

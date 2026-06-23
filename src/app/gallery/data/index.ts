@@ -60,7 +60,7 @@ export const PAGE_HEADER_DATA = {
   bgiPath: PAGE_HEADER_IMAGE_PATH,
 } as const;
 
-export const CATEGORIES: { id: Category; label: string }[] = [
+export const GALLERY_CATEGORIES: { id: Category; label: string }[] = [
   { id: 'all', label: 'すべて' },
   { id: 'button', label: 'ボタン' },
   { id: 'card', label: 'カード' },

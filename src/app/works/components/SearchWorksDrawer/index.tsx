@@ -3,7 +3,7 @@ import { Close } from '@/components/ui/Icons';
 import { SearchBox } from '@/components/ui/SearchBox';
 import { CategoryList } from '@/components/ui/CategoryList';
 import { TagFilters } from '@/components/ui/TagFilters';
-import { useUIStore } from '@/lib/hooks/useUIStore';
+import { useStore } from '@/lib/hooks/useStore';
 import { useFilteredWorks, useWorkStore } from '@/lib/hooks/useWorkStore';
 import { WORK_CATEGORIES } from '@/data/works';
 import { WorkCategory, WorkFilterCategory } from '@/types/work';
@@ -12,7 +12,7 @@ import { useMemo } from 'react';
 import styles from './SearchWorksDrawer.module.css';
 
 export function SearchWorksDrawer() {
-  const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();
+  const { isSearchDrawerOpen, setSearchDrawerOpen } = useStore();
   const store = useWorkStore();
   const filteredWorks = useFilteredWorks();
   const searchQuery = store.searchQuery;

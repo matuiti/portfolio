@@ -1,7 +1,7 @@
-'use client';
+// 'use client';
 import { useState, useMemo } from 'react';
 import { Category, Filtering, UIPart } from '@/gallery/types';
-import { CATEGORIES, GALLERY_SETTINGS } from '../../data';
+import { GALLERY_CATEGORIES, GALLERY_SETTINGS } from '../../data';
 
 export function useFiltering(allItems: UIPart[]): Filtering {
   const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
@@ -13,10 +13,8 @@ export function useFiltering(allItems: UIPart[]): Filtering {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = GALLERY_SETTINGS.ITEMS_PER_PAGE;
 
-  // ヘルパー：状態変更時にページを1に戻す
   const resetPage = () => setCurrentPage(1);
 
-  // 1. 各カテゴリの件数カウント
   const categoryCounts = useMemo(() => {
     const counts = allItems.reduce(
       (acc, item) => {
@@ -28,7 +26,6 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     return { all: allItems.length, ...counts };
   }, [allItems]);
 
-  // 2. フィルタリング処理
   const filteredItems = useMemo(() => {
     let items = [...allItems];
 
@@ -57,32 +54,29 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     return items;
   }, [allItems, selectedCategory, selectedTags, searchQuery]);
 
-  // 3. ページネーション計算
+  // ページネーション計算
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
   const paginatedItems = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
     return filteredItems.slice(start, start + itemsPerPage);
   }, [filteredItems, currentPage, itemsPerPage]);
 
-  // 4. 表示用タイトルの確定（検索ワードがある場合は引用符で強調）
   const displayTitle = useMemo(() => {
     const label =
-      CATEGORIES.find((c) => c.id === selectedCategory)?.label || 'すべて';
+      GALLERY_CATEGORIES.find((c) => c.id === selectedCategory)?.label ||
+      'すべて';
     return searchQuery.trim() ? `${label} : "${searchQuery}"` : label;
   }, [selectedCategory, searchQuery]);
 
-  // 5. 件数と状態フラグ
   const totalHitCount = filteredItems.length;
   const isEmpty = totalHitCount === 0;
 
-  // 6. メッセージの動的生成
   const noResultsMessage = isEmpty
     ? searchQuery.trim() !== ''
       ? `"${searchQuery}" に一致するアイテムが見つかりませんでした。`
       : '該当するアイテムがありません。'
     : '';
 
-  // すべての条件を初期状態に戻す関数
   const clearFilters = () => {
     setSelectedCategory('all');
     setSelectedTags([]);
