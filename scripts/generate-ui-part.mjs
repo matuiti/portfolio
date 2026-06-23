@@ -49,7 +49,6 @@ const newItem = `  {
     title: "${name}",
     description: "",
     tags: ["Vanilla JS", "SCSS"],
-    techStack: ["HTML", "SCSS", "JavaScript"],
     url: "/gallery-parts/ui/${category}/${name}/index.html",
     code: {
       html: \`\`,

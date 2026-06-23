@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { CATEGORIES } from '@/gallery/data/categories';
-import { Category, Filtering } from '@/gallery/types/type';
+import { Category, Filtering } from '@/gallery/types';
+import { CATEGORIES } from '@/gallery/data';
 
 export function useURLSync(filtering: Filtering) {
   const router = useRouter();

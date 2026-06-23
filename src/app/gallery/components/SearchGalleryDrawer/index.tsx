@@ -1,12 +1,9 @@
-// src/app/gallery/components/layout/GalleryDrawerMenu.tsx
-
 'use client';
-
 import { useUIStore } from '@/lib/hooks/useUIStore';
 import { CategoryList } from '../filter/CategoryList';
 import { TagFilters } from '../filter/TagFilters';
 import { SearchBox } from '../filter/SearchBox';
-import { Filtering } from '@/gallery/types/filtering';
+import { Filtering } from '@/gallery/types';
 
 type Props = {
   filtering: Filtering;
@@ -14,8 +11,7 @@ type Props = {
   onClose: () => void;
 };
 
-export function GalleryDrawerMenu({ filtering, isOpen, onClose }: Props) {
-  // Zustandストアから検索ドロワーを閉じるための関数を取得
+export function SearchGalleryDrawer({ filtering, isOpen, onClose }: Props) {
   const { setSearchDrawerOpen } = useUIStore();
 
   const {

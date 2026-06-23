@@ -2,20 +2,19 @@
 
 import { Suspense } from 'react';
 import { UI_PARTS } from '@/gallery/data/ui-parts';
-import { GalleryLayout } from './components/layout/GalleryLayout';
+import { GalleryLayout } from './components/layout';
 import { Pagination } from '@/components/ui/Pagination';
-import { PreviewModal } from './components/modal/PreviewModal';
+import { PreviewModal } from './components/modal';
 import { NoResults } from './components/list/NoResults';
 import { LoadingGallery } from './components/ui/LoadingGallery';
 import { useFiltering } from './lib/hooks/useFiltering';
 import { useURLSync } from './lib/hooks/useURLSync';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { CATEGORIES } from './data/categories';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { Cards } from './components/list/Cards';
-import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
+import { CATEGORIES, PAGE_HEADER_DATA } from './data';
 
 function GalleryContent() {
   const filtering = useFiltering(UI_PARTS || []);

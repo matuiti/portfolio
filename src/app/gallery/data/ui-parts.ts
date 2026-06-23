@@ -1,4 +1,4 @@
-import { UIPart } from '../types/type';
+import { UIPart } from '../types';
 
 export const UI_PARTS: UIPart[] = [
   {
@@ -7,7 +7,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'modal03',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/modal/modal03/index.html',
     code: {
       html: ``,
@@ -21,7 +20,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'modal01',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/modal/modal01/index.html',
     code: {
       html: ``,
@@ -35,7 +33,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'modal02',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/modal/modal02/index.html',
     code: {
       html: ``,
@@ -49,7 +46,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'card-new',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/card/card-new/index.html',
     code: {
       html: ``,
@@ -63,7 +59,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'primary-btn4',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/button/primary-btn4/index.html',
     code: {
       html: ``,
@@ -77,7 +72,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'primary-btn3',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/button/primary-btn3/index.html',
     code: {
       html: ``,
@@ -91,7 +85,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'primary-btn2',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/button/primary-btn2/index.html',
     code: {
       html: ``,
@@ -105,7 +98,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'button04',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/button/button04/index.html',
     code: {
       html: ``,
@@ -119,7 +111,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'button02',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/button/button02/index.html',
     code: {
       html: ``,
@@ -133,7 +124,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'button-primary',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/button/button-primary/index.html',
     code: {
       html: ``,
@@ -147,7 +137,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'card04',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/card/card04/index.html',
     code: {
       html: ``,
@@ -161,7 +150,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'card03',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/card/card03/index.html',
     code: {
       html: ``,
@@ -175,7 +163,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'card02',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/card/card02/index.html',
     code: {
       html: ``,
@@ -189,7 +176,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'card01',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/card/card01/index.html',
     code: {
       html: ``,
@@ -203,7 +189,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'button03',
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
-    techStack: ['HTML', 'SCSS', 'JavaScript'],
     url: '/gallery-parts/ui/button/button03/index.html',
     code: {
       html: ``,
@@ -218,7 +203,6 @@ export const UI_PARTS: UIPart[] = [
     description:
       'マウスホバーに合わせて吸い付くような動き（マグネティック効果）を実装したモダンなボタンです。',
     tags: ['React', 'Framer Motion'],
-    techStack: ['React', 'Framer Motion', 'Tailwind CSS'],
     url: '/previews/buttons/magnetic',
     code: {
       html: `<button class="magnetic">Hover Me</button>`,
@@ -233,7 +217,6 @@ export const UI_PARTS: UIPart[] = [
     description:
       '背景のぼかしを効果的に使用した、透過感のあるデザインコンポーネントです。',
     tags: ['CSS', 'Design'],
-    techStack: ['Tailwind CSS'],
     url: '/previews/cards/glass',
     code: {
       html: `<div class="glass">Content</div>`,
@@ -247,7 +230,6 @@ export const UI_PARTS: UIPart[] = [
     title: 'Simple Sticky Header',
     description: 'スクロール時に上部に固定されるシンプルなヘッダーです。',
     tags: ['Layout'],
-    techStack: ['HTML', 'CSS'],
     url: '/previews/nav/sticky',
     code: {
       html: '<header>Header</header>',
@@ -262,7 +244,6 @@ export const UI_PARTS: UIPart[] = [
     description:
       '入力時にラベルが上部にスライドする、ユーザビリティの高いフォーム部品です。',
     tags: ['Form', 'UX'],
-    techStack: ['CSS', 'HTML'],
     url: '/previews/form/floating',
     code: {
       html: "<div class='field'><input id='n' placeholder=' '><label>Name</label></div>",
@@ -277,7 +258,6 @@ export const UI_PARTS: UIPart[] = [
     description:
       'コンテンツの読み込み中に表示する、滑らかなシマーアニメーション付きのスケルトンです。',
     tags: ['UX', 'Animation'],
-    techStack: ['Tailwind CSS'],
     url: '/previews/loading/skeleton',
     code: {
       html: "<div class='skeleton animate-pulse'></div>",

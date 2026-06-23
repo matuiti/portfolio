@@ -1,6 +1,6 @@
 'use client';
 
-import { UIPart } from '@/gallery/types/type';
+import { UIPart } from '@/gallery/types';
 import { Card } from './Card';
 
 type CardsProps = {

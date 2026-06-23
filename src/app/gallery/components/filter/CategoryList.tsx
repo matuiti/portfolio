@@ -1,8 +1,7 @@
-// src/app/gallery/components/filter/CategoryList.tsx
-"use client";
+'use client';
 
-import { Category } from "@/gallery/types/category";
-import { CATEGORIES } from "@/gallery/data/categories";
+import { CATEGORIES } from '@/gallery/data';
+import { Category } from '@/gallery/types';
 
 type Props = {
   selected: Category;
@@ -12,14 +11,14 @@ type Props = {
 
 export function CategoryList({ selected, onChange, counts = {} }: Props) {
   return (
-    <div className="space-y-4">
-      <ul className="space-y-1">
+    <div className='space-y-4'>
+      <ul className='space-y-1'>
         {CATEGORIES.map(({ id, label }) => {
           const count = counts[id] || 0;
           const isActive = selected === id;
 
           // 「すべて」以外で作品数が 0 のカテゴリは表示しない
-          if (id !== "all" && count === 0) return null;
+          if (id !== 'all' && count === 0) return null;
 
           return (
             <li key={id}>
@@ -29,8 +28,8 @@ export function CategoryList({ selected, onChange, counts = {} }: Props) {
                   w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold transition-all group
                   ${
                     isActive
-                      ? "bg-neutral-900 text-white shadow-md translate-x-1"
-                      : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
+                      ? 'bg-neutral-900 text-white shadow-md translate-x-1'
+                      : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
                   }
                 `}
               >
@@ -39,8 +38,8 @@ export function CategoryList({ selected, onChange, counts = {} }: Props) {
                   className={`text-[10px] px-2 py-0.5 rounded-full font-black
                   ${
                     isActive
-                      ? "bg-white/20"
-                      : "bg-neutral-200 text-neutral-500 group-hover:bg-white"
+                      ? 'bg-white/20'
+                      : 'bg-neutral-200 text-neutral-500 group-hover:bg-white'
                   }`}
                 >
                   {count}

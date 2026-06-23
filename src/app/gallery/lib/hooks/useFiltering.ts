@@ -1,8 +1,7 @@
 'use client';
 import { useState, useMemo } from 'react';
-import { Category, Filtering, UIPart } from '@/gallery/types/type';
-import { CATEGORIES } from '@/gallery/data/categories';
-import { GALLERY_SETTINGS } from '../constants/gallery';
+import { Category, Filtering, UIPart } from '@/gallery/types';
+import { CATEGORIES, GALLERY_SETTINGS } from '../../data';
 
 export function useFiltering(allItems: UIPart[]): Filtering {
   const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
