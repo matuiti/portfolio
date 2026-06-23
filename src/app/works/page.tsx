@@ -5,7 +5,7 @@ import { WorkCard } from './components/WorkCard';
 import { WorkDetailModal } from './components/WorkDetailModal';
 import { Pagination } from '@/components/ui/Pagination';
 import { WorksLayout } from './components/WorksLayout';
-import { Work, WorkFilterCategory } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -45,8 +45,8 @@ function WorksPageContent() {
   }, [filteredWorks, store.currentPage, store.itemsPerPage]);
 
   // 詳細モーダル用のアクション定義
-  const handleCategoryAction = (cat: string) => {
-    store.selectOnlyCategory(cat as WorkFilterCategory);
+  const handleCategoryAction = (cat: WorkCategory) => {
+    store.selectOnlyCategory(cat);
     setSelectedWork(null); // モーダルを閉じる
   };
   const handleTagAction = (tag: string) => {

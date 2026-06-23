@@ -4,7 +4,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { WorkCard } from '@/app/works/components/WorkCard';
 import { WorkDetailModal } from '@/app/works/components/WorkDetailModal';
 import { ALL_WORKS } from '@/data/works';
-import { Work, WorkCategory, WorkFilterCategory } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 import { CategoryTabs } from './CategoryTabs';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { useRouter } from 'next/navigation';
@@ -12,8 +12,7 @@ import styles from './WorksSection.module.css';
 
 export const WorksSection = () => {
   const router = useRouter();
-  const [activeCategory, setActiveCategory] =
-    useState<WorkFilterCategory>('web');
+  const [activeCategory, setActiveCategory] = useState<WorkCategory>('web');
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
   // モーダル内のボタンから呼び出される遷移ロジック

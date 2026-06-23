@@ -14,7 +14,7 @@ import {
   Launch,
   LibraryBooks,
 } from '@/components/ui/Icons';
-import { Work } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 import { CloseModal } from '@/components/ui/Icons/CloseModal';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
@@ -28,7 +28,7 @@ type WorkDetailModalProps = {
   onClose: () => void;
   allFilteredWorks: Work[];
   onNavigate: Dispatch<SetStateAction<Work | null>>;
-  onCategoryClick: (cat: string) => void;
+  onCategoryClick: (cat: WorkCategory) => void;
   onTagClick: (tag: string) => void;
 };
 
@@ -83,7 +83,7 @@ export const WorkDetailModal = ({
 
   if (!isOpen) return null;
 
-  const handleCategoryClick = (cat: string): void => {
+  const handleCategoryClick = (cat: WorkCategory): void => {
     onCategoryClick(cat);
     scrollToTop();
   };
