@@ -1,11 +1,11 @@
 // 'use client';
 import { useState, useMemo } from 'react';
-import { Category, Filtering, UIPart } from '@/gallery/types';
+import { GalelryCategory, Filtering, UIPart } from '@/gallery/types';
 import { GALLERY_CATEGORIES, GALLERY_SETTINGS } from '../../data';
 
 export function useFiltering(allItems: UIPart[]): Filtering {
   const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Category>(
+  const [selectedCategory, setSelectedCategory] = useState<GalelryCategory>(
     GALLERY_SETTINGS.DEFAULT_CATEGORY,
   );
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -104,7 +104,7 @@ export function useFiltering(allItems: UIPart[]): Filtering {
     // Actions
     clearFilters,
     setSelectedItem,
-    setSelectedCategory: (cat: Category) => {
+    setSelectedCategory: (cat: GalelryCategory) => {
       setSelectedCategory(cat);
       resetPage();
     },

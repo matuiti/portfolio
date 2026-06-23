@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useStore } from '@/lib/hooks/useStore';
+import { useStore } from '@/lib/store/useStore';
 import styles from './ContactSection.module.css';
 
 /**

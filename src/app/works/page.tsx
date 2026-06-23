@@ -1,6 +1,6 @@
 'use client';
 import { useState, Suspense, useMemo } from 'react';
-import { useWorkStore, useFilteredWorks } from '@/lib/hooks/useWorkStore';
+import { useWorkStore, useFilteredWorks } from '@/lib/store/useWorkStore';
 import { WorkCard } from './components/WorkCard';
 import { WorkDetailModal } from './components/WorkDetailModal';
 import { Pagination } from '@/components/ui/Pagination';
@@ -36,7 +36,6 @@ function WorksPageContent() {
       setCurrentPage: store.setCurrentPage,
     },
   );
-
 
   // 表示データの計算（ページネーション適用）
   const totalPages = Math.ceil(filteredWorks.length / store.itemsPerPage);

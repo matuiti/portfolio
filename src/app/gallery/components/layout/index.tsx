@@ -1,5 +1,5 @@
 'use client';
-import { useStore } from '@/lib/hooks/useStore';
+import { useStore } from '@/lib/store/useStore';
 import { GallerySidebar } from '../GallerySidebar';
 import { Filtering } from '@/gallery/types';
 import { SearchGalleryDrawer } from '../SearchGalleryDrawer';

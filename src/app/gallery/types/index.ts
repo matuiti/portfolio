@@ -1,4 +1,4 @@
-export type Category =
+export type GalelryCategory =
   | 'all'
   | 'button'
   | 'card'
@@ -15,7 +15,7 @@ export type Category =
 export type UIPart = {
   id: string;
   title: string;
-  category: Category;
+  category: GalelryCategory;
   description: string;
   tags: string[];
   url: string;
@@ -42,7 +42,7 @@ export type TabItem = {
 
 type FilteringState = {
   selectedItem: UIPart | null;
-  selectedCategory: Category;
+  selectedCategory: GalelryCategory;
   selectedTags: string[];
   searchQuery: string;
   currentPage: number;
@@ -59,7 +59,7 @@ type FilteringState = {
 
 type FilteringActions = {
   setSelectedItem: (item: UIPart | null) => void;
-  setSelectedCategory: (cat: Category) => void;
+  setSelectedCategory: (cat: GalelryCategory) => void;
   setSelectedTags: (tags: string[]) => void;
   setSearchQuery: (q: string) => void;
   setCurrentPage: (page: number) => void;

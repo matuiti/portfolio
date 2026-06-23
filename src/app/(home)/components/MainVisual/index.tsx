@@ -1,5 +1,5 @@
 'use client';
-import { useStore } from '@/lib/hooks/useStore';
+import { useStore } from '@/lib/store/useStore';
 import { clsx } from 'clsx';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';

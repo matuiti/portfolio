@@ -1,4 +1,4 @@
-import { Category, TabItem, TagGroup } from '@/gallery/types';
+import { GalelryCategory, TabItem, TagGroup } from '@/gallery/types';
 
 /**
  * ギャラリー全体の基本設定
@@ -60,7 +60,7 @@ export const PAGE_HEADER_DATA = {
   bgiPath: PAGE_HEADER_IMAGE_PATH,
 } as const;
 
-export const GALLERY_CATEGORIES: { id: Category; label: string }[] = [
+export const GALLERY_CATEGORIES: { id: GalelryCategory; label: string }[] = [
   { id: 'all', label: 'すべて' },
   { id: 'button', label: 'ボタン' },
   { id: 'card', label: 'カード' },
