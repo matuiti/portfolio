@@ -1,4 +1,4 @@
-import { SkillCardData } from './types';
+import { SkillCardData } from '../types';
 
 // スキルデータ（トップページ固有）
 export const SKILL_CARDS_DATA: SkillCardData[] = [

@@ -1,38 +1,38 @@
 import { useMemo } from 'react';
 import { create } from 'zustand';
-import { GalleryCategory, GalleryState, UIPart } from '@/gallery/types';
 import { useShallow } from 'zustand/shallow';
 import { UI_PARTS } from '@/gallery/data/ui-parts';
+import { GalleryCategory, GalleryState, ResetFilters, UIPart } from '@/gallery/types';
+import { GALLERY_SETTINGS } from '@/gallery/data';
 
 // 「フィルタ条件」をリセットする際の共通の土台
-// selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使用する
-const RESET_FILTERS = {
+const RESET_FILTERS:ResetFilters = {
   searchQuery: '',
-  selectedCategory: 'all' as GalleryCategory,
-  selectedTags: [] as string[],
-  currentPage: 1,
+  selectedCategory: GALLERY_SETTINGS.DEFAULT_CATEGORY,
+  selectedTags: [],
+  currentPage:GALLERY_SETTINGS.INIT_PAGE_NAM,
 };
 
 export const useGalleryStore = create<GalleryState>((set) => ({
   // --- 初期値 ---
   searchQuery: '',
-  selectedCategory: 'all',
+  selectedCategory: GALLERY_SETTINGS.DEFAULT_CATEGORY,
   selectedTags: [],
-  currentPage: 1,
-  itemsPerPage: 6,
+  currentPage:GALLERY_SETTINGS.INIT_PAGE_NAM,
+  itemsPerPage: GALLERY_SETTINGS.ITEMS_PER_PAGE,
 
   // --- 単一条件の更新アクション ---
   // 自分の対象フィールドだけを更新し、他のフィルタ条件には影響しない。
-  setSearchQuery: (q) => set({ searchQuery: q, currentPage: 1 }),
-  setSelectedCategory: (cat) => set({ selectedCategory: cat, currentPage: 1 }),
-  setSelectedTags: (tags) => set({ selectedTags: tags, currentPage: 1 }),
+  setSearchQuery: (q) => set({ searchQuery: q, currentPage:GALLERY_SETTINGS.INIT_PAGE_NAM }),
+  setSelectedCategory: (cat) => set({ selectedCategory: cat, currentPage:GALLERY_SETTINGS.INIT_PAGE_NAM }),
+  setSelectedTags: (tags) => set({ selectedTags: tags, currentPage:GALLERY_SETTINGS.INIT_PAGE_NAM }),
   setCurrentPage: (page) => set({ currentPage: page }),
   toggleTag: (tag) =>
     set((state) => ({
       selectedTags: state.selectedTags.includes(tag)
         ? state.selectedTags.filter((t) => t !== tag)
         : [...state.selectedTags, tag],
-      currentPage: 1,
+      currentPage:GALLERY_SETTINGS.INIT_PAGE_NAM,
     })),
 
   clearFilters: () => set({ ...RESET_FILTERS }),

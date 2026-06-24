@@ -1,38 +1,42 @@
 import { useMemo } from 'react';
 import { create } from 'zustand';
-import { Work, WorkCategory, WorkState } from '@/types/work';
-import { ALL_WORKS } from '@/data/works';
 import { useShallow } from 'zustand/shallow';
+import { Work, WorkCategory, WorkState } from '@/types/work';
+import { ResetFilters } from '@/works/types';
+import { ALL_WORKS } from '@/data/works';
+import { WORKS_SETTINGS } from '@/works/data';
 
 // 「フィルタ条件」をリセットする際の共通の土台
-// selectOnlyTag / selectOnlyCategory / clearFilters はこれを展開して使用する
-const RESET_FILTERS = {
+const RESET_FILTERS: ResetFilters = {
   searchQuery: '',
-  selectedCategory: 'all' as WorkCategory,
-  selectedTags: [] as string[],
-  currentPage: 1,
+  selectedCategory: WORKS_SETTINGS.DEFAULT_CATEGORY,
+  selectedTags: [],
+  currentPage:WORKS_SETTINGS.INIT_PAGE_NAM,
 };
 
 export const useWorkStore = create<WorkState>((set) => ({
   // --- 初期値 ---
   searchQuery: '',
-  selectedCategory: 'all',
+  selectedCategory: WORKS_SETTINGS.DEFAULT_CATEGORY,
   selectedTags: [],
-  currentPage: 1,
-  itemsPerPage: 6,
+  currentPage: WORKS_SETTINGS.INIT_PAGE_NAM,
+  itemsPerPage: WORKS_SETTINGS.ITEMS_PER_PAGE,
 
   // --- 単一条件の更新アクション ---
   // 自分の対象フィールドだけを更新し、他のフィルタ条件には影響しない。
-  setSearchQuery: (q) => set({ searchQuery: q, currentPage: 1 }),
-  setSelectedCategory: (cat) => set({ selectedCategory: cat, currentPage: 1 }),
-  setSelectedTags: (tags) => set({ selectedTags: tags, currentPage: 1 }),
+  setSearchQuery: (q) =>
+    set({ searchQuery: q, currentPage: WORKS_SETTINGS.INIT_PAGE_NAM }),
+  setSelectedCategory: (cat) =>
+    set({ selectedCategory: cat, currentPage: WORKS_SETTINGS.INIT_PAGE_NAM }),
+  setSelectedTags: (tags) =>
+    set({ selectedTags: tags, currentPage: WORKS_SETTINGS.INIT_PAGE_NAM }),
   setCurrentPage: (page) => set({ currentPage: page }),
   toggleTag: (tag) =>
     set((state) => ({
       selectedTags: state.selectedTags.includes(tag)
         ? state.selectedTags.filter((t) => t !== tag)
         : [...state.selectedTags, tag],
-      currentPage: 1,
+      currentPage: WORKS_SETTINGS.INIT_PAGE_NAM,
     })),
 
   // --- 排他的フィルタ選択アクション ---

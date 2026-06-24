@@ -25,7 +25,11 @@ export const SkillsSection = () => {
               <SkillCard key={card.title} card={card} />
             ))}
             <div className={`${styles.buttonWrapper} js-fuwa-fade`}>
-              <MainButton variant='underline' href='/skills' aria-label='スキル一覧を見る'>
+              <MainButton
+                variant='underline'
+                href='/skills'
+                aria-label='スキル一覧を見る'
+              >
                 一覧を見る
               </MainButton>
             </div>
