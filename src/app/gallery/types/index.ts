@@ -39,7 +39,6 @@ export type TabType = 'description' | 'code' | 'preview';
 export type TabItem = {
   id: TabType;
   label: string;
-  isMobileOnly?: boolean;
 };
 
 export type GalleryState = {

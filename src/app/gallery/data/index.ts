@@ -46,11 +46,7 @@ export const GALLERY_MESSAGES = {
 export const GALLERY_TABS = [
   { id: 'description', label: '説明' },
   { id: 'code', label: 'コード' },
-  {
-    id: 'preview',
-    label: 'プレビュー',
-    isMobileOnly: true,
-  },
+  { id: 'preview', label: 'プレビュー' },
 ] as const satisfies readonly TabItem[];
 
 const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';

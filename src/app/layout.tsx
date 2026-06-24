@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: SITE_CONFIG.description,
   openGraph: {
     title: SITE_CONFIG.name + ' ポートフォリオ',
-    description: '実績と実装力の可視化を目指したポートフォリオサイトです。',
+    description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name + ' ポートフォリオ',
     locale: 'ja_JP',
@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ja' className={`${inter.variable} ${notoSansJp.variable}`}>
-      <body className='text-black antialiased font-sans bg-[image:var(--color-gradation)] min-h-svh h-full leading-normal tracking-wider text-[calc(14/16*1rem)] tablet:text-[calc(14/16*1rem)]'>
+      <body>
         <PageLayout>{children}</PageLayout>
       </body>
     </html>
