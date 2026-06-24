@@ -1,4 +1,3 @@
-// src/data/navigation.ts
 import { NavItem } from "@/types/navigation";
 
 export const NAV_ITEMS: NavItem[] = [
@@ -24,4 +23,4 @@ export const UTILITY_ITEMS: NavItem[] = [
 /**
  * 検索機能を持つページのパス
  */
-export const SEARCHABLE_PATHS = ["/works", "/gallery"];
+export const SEARCHABLE_PATHS = ["/works", "/gallery"] as const;

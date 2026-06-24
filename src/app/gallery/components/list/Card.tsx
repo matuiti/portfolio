@@ -17,13 +17,6 @@ type CardProps = {
   onExpand: (item: UIPart) => void;
 };
 
-const CARD_STYLE = {
-  height: 'small:h-[580px]',
-  previewHeight: 'h-[400px]',
-  radiusOuter: 'rounded-[40px]',
-  radiusInner: 'rounded-[32px]',
-} as const;
-
 export const Card = ({ item, onExpand }: CardProps) => {
   const [activeTab, setActiveTab] = useState<TabType>('description');
 
@@ -31,7 +24,7 @@ export const Card = ({ item, onExpand }: CardProps) => {
 
   return (
     <div
-      className={`group bg-white ${CARD_STYLE.radiusOuter} border border-neutral-200 shadow-sm overflow-hidden flex flex-col small:flex-row w-full h-auto ${CARD_STYLE.height} transition-all duration-500 hover:shadow-2xl hover:border-blue-100`}
+      className={`group bg-white border border-neutral-200 shadow-sm overflow-hidden flex flex-col small:flex-row w-full h-auto transition-all duration-500 hover:shadow-2xl hover:border-blue-100`}
     >
       {/* 左側：テキスト・情報セクション */}
       <div className='small:w-[45%] p-8 small:p-12 flex flex-col border-b small:border-b-0 small:border-r border-neutral-100 bg-white shrink-0 min-w-0'>
@@ -65,7 +58,7 @@ export const Card = ({ item, onExpand }: CardProps) => {
 
               {activeTab === 'preview' && (
                 <div
-                  className={`small:hidden ${CARD_STYLE.previewHeight} rounded-3xl overflow-hidden border border-neutral-100 shadow-inner bg-neutral-50`}
+                  className={`small:hidden rounded-3xl overflow-hidden border border-neutral-100 shadow-inner bg-neutral-50`}
                 >
                   <PreviewPanel item={item} onExpand={() => onExpand(item)} />
                 </div>
@@ -95,7 +88,7 @@ export const Card = ({ item, onExpand }: CardProps) => {
       {/* PC時に独立するプレビューパネル */}
       <div className='hidden small:flex flex-[1.1] min-w-0 bg-neutral-50 p-10 flex-col overflow-hidden'>
         <div
-          className={`relative w-full h-full ${CARD_STYLE.radiusInner} overflow-hidden shadow-2xl border border-white bg-white group-hover:scale-[1.01] transition-all duration-700`}
+          className={`relative w-full h-full overflow-hidden shadow-2xl border border-white bg-white group-hover:scale-[1.01] transition-all duration-700`}
         >
           {<PreviewPanel item={item} onExpand={() => onExpand(item)} />}
         </div>

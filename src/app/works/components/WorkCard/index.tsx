@@ -13,11 +13,10 @@ type WorkCardProps = {
   work: Work;
   onClick: () => void;
   onCategoryClick?: (cat: WorkCategory) => void;
-  className?: string;
 };
 
 export const WorkCard = memo(
-  ({ work, onClick, onCategoryClick, className }: WorkCardProps) => {
+  ({ work, onClick, onCategoryClick }: WorkCardProps) => {
     const [isTagHovered, setIsTagHovered] = useState(false);
 
     const getImageSrc = (() => {
@@ -45,9 +44,9 @@ export const WorkCard = memo(
     return (
       <article
         onClick={onClick}
-        className={`group flex flex-col overflow-hidden cursor-pointer shadow-card rounded-lg ${
+        className={`group flex flex-col overflow-hidden cursor-pointer shadow-card rounded-lg max-w-full base:max-w-[calc(280/16*1rem)] ${
           !isTagHovered ? 'hover:shadow-none' : ''
-        } ${className || ''}
+        }
         }`}
       >
         {/* サムネイル */}

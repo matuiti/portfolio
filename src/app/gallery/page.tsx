@@ -1,6 +1,5 @@
 'use client';
 import { Suspense, useMemo, useState } from 'react';
-import { Cards } from './components/list/Cards';
 import { PreviewModal } from './components/modal';
 import { Pagination } from '@/components/ui/Pagination';
 import { GalleryLayout } from './components/layout';
@@ -16,6 +15,7 @@ import {
   useGalleryStore,
 } from '@/lib/store/useGalleryStore';
 import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
+import { Card } from './components/list/Card';
 
 function GalleryPageContent() {
   const store = useGalleryStore();
@@ -91,20 +91,33 @@ function GalleryPageContent() {
         jpTitle={PAGE_HEADER_DATA.jpTitle}
         bgiPath={PAGE_HEADER_DATA.bgiPath}
       />
-      <Breadcrumbs items={breadcrumbItems} />
-      <div className='space-y-8'>
+      <div className='section-padding-x'>
+        <Breadcrumbs items={breadcrumbItems} />
+      </div>
+      {/* コンテンツ */}
+      <div className='section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray'>
         <TitleAndCount title={renderedTitle} count={totalHitCount} />
         {displayUIParts.length ? (
-          <div className='space-y-12'>
-            <Cards items={displayUIParts} onItemClick={setSelectedUIPart} />
+          <>
+            <div className='mt-[calc(60/16*1rem)] flex flex-col justify-center w-full gap-y-[calc(40/16*1rem)] base:mt-[calc(50/16*1rem)]'>
+              {displayUIParts.map((item) => (
+                <Card
+                  key={item.id}
+                  item={item}
+                  onExpand={() => setSelectedUIPart(item)}
+                />
+              ))}
+            </div>
             {totalPages > 1 && (
-              <Pagination
-                current={store.currentPage}
-                total={totalPages}
-                onPageChange={store.setCurrentPage}
-              />
+              <div className='mt-[calc(60/16*1rem)]'>
+                <Pagination
+                  current={store.currentPage}
+                  total={totalPages}
+                  onPageChange={store.setCurrentPage}
+                />
+              </div>
             )}
-          </div>
+          </>
         ) : (
           <div className='py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]'>
             <p className='text-dark-gray font-bold'>

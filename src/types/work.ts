@@ -54,3 +54,4 @@ export type WorkState = {
   selectOnlyCategory: (cat: WorkCategory) => void;
   clearFilters: () => void;
 };
+

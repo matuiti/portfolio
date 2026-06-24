@@ -19,8 +19,8 @@ import { CloseModal } from '@/components/ui/Icons/CloseModal';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { SafeImage } from '@/components/ui/SafeImage';
-import styles from './WorkDetailModal.module.css';
 import { scrollToTop } from '@/lib/utility/scrollToTop';
+import styles from './WorkDetailModal.module.css';
 
 type WorkDetailModalProps = {
   work: Work;

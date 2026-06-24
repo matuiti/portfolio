@@ -1,10 +1,11 @@
-import { GalleryCategory, TabItem, TagGroup } from '@/gallery/types';
+import { GalleryCategorys, TabItem, TagGroup } from '@/gallery/types';
 
 /**
  * ギャラリー全体の基本設定
  */
 export const GALLERY_SETTINGS = {
-  ITEMS_PER_PAGE: 4,
+  INIT_PAGE_NAM: 1,
+  ITEMS_PER_PAGE: 3,
   DEFAULT_CATEGORY: 'all',
 } as const;
 
@@ -60,7 +61,7 @@ export const PAGE_HEADER_DATA = {
   bgiPath: PAGE_HEADER_IMAGE_PATH,
 } as const;
 
-export const GALLERY_CATEGORIES: { id: GalleryCategory; label: string }[] = [
+export const GALLERY_CATEGORIES: GalleryCategorys = [
   { id: 'all', label: 'すべて' },
   { id: 'button', label: 'ボタン' },
   { id: 'card', label: 'カード' },

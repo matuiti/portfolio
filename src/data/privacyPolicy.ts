@@ -1,20 +1,7 @@
 import { PrivacyPolicyData } from '@/types/privacyPolicy';
 
-const PAGE_HEADER_IMAGE_PATH = '/assets/images/common/bg-page-header.jpg';
-
-export const PAGE_HEADER_DATA = {
-  jpTitle: 'プライバシーポリシー',
-  enTitle: 'PRIVACY POLICY',
-  bgiPath: PAGE_HEADER_IMAGE_PATH,
-} as const;
-
-export const breadcrumbItems = [
-  { label: 'トップ', href: '/' },
-  { label: 'プライバシーポリシー' },
-];
-
 export const PRIVACY_POLICY_DATA: PrivacyPolicyData = {
-  lastUpdated: '2024.03.01', // 必要に応じて管理
+  lastUpdated: '2026.03.09', // 必要に応じて管理
   sections: [
     {
       id: 'purpose',

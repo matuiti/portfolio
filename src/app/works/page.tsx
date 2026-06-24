@@ -14,7 +14,6 @@ import { WORK_CATEGORIES } from '@/data/works';
 import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import { LoadingWorks } from './components/ui/LoadingWorks';
-import styles from './Works.module.css';
 
 function WorksPageContent() {
   const store = useWorkStore();
@@ -106,26 +105,26 @@ function WorksPageContent() {
       {/* コンテンツ */}
       <div className='section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray'>
         <TitleAndCount title={renderedTitle} count={totalHitCount} />
-        <p className={styles.pageDescription}>
+        <p className='mt-[calc(10/16*1rem)]'>
           機密保持契約を遵守するため、実案件の一部については内容を抽象化して掲載しております。
         </p>
         {/* 実績カードグリッド */}
         {displayWorks.length ? (
           <>
-            <div className={styles.cards}>
+            <div
+              className='mt-[calc(40/16*1rem)] grid justify-center gap-y-[calc(40/16*1rem)] gap-x-[calc(20/16*1rem)] grid-cols-1 tablet:grid-cols-2 base:grid-cols-3 base:mt-[calc(50/16*1rem)]'
+            >
               {displayWorks.map((work) => (
                 <WorkCard
                   key={work.id}
                   work={work}
                   onClick={() => setSelectedWork(work)}
                   onCategoryClick={store.selectOnlyCategory}
-                  className={styles.card}
                 />
               ))}
             </div>
-            {/* ページネーション */}
             {totalPages > 1 && (
-              <div className={styles.paginationWrapper}>
+              <div className='mt-[calc(60/16*1rem)]'>
                 <Pagination
                   current={store.currentPage}
                   total={totalPages}
