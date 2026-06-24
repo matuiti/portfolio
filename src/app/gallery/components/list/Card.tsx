@@ -24,30 +24,30 @@ export const Card = ({ item, onExpand }: CardProps) => {
 
   return (
     <div
-      className={`group bg-white border border-neutral-200 shadow-sm overflow-hidden flex flex-col small:flex-row w-full h-auto transition-all duration-500 hover:shadow-2xl hover:border-blue-100`}
+      className={`group shadow-gallery-card bg-white rounded-[calc(20/16*1rem)] flex flex-col tablet:flex-row w-full h-auto transition-all duration-500`}
     >
-      {/* 左側：テキスト・情報セクション */}
-      <div className='small:w-[45%] p-8 small:p-12 flex flex-col border-b small:border-b-0 small:border-r border-neutral-100 bg-white shrink-0 min-w-0'>
-        <header className='mb-8 shrink-0'>
-          <h3 className='text-2xl small:text-3xl font-black text-neutral-900 mb-4 leading-tight group-hover:text-blue-600 transition-colors'>
+      {/* SP 3tab / PC 2tab */}
+      <div className='tablet:w-[50%] py-5 px-2.5 mobile:px-[calc(15/16*1rem)] tablet:px-5  flex flex-col border-b tablet:border-b-0 tablet:border-r border-medium-gray shrink-0 min-w-0'>
+        <div className='mb-4 shrink-0'>
+          <h3 className='text-[calc(18/16*1rem)] tablet:text-3xl text-black leading-none group-hover:opacity-[var(--opacity-hover)] transition-all'>
             {item.title}
           </h3>
-        </header>
+        </div>
 
-        <div className='mb-8 shrink-0'>
+        <div className='mb-2.5 shrink-0'>
           <TabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
         </div>
 
         {/* コンテンツエリア */}
         <div className='flex-1 min-h-0 relative flex flex-col'>
-          <div
-          // className={`flex-1 min-h-0 ${
-          //   activeTab === 'code'
-          //     ? 'overflow-hidden' // CodePanel自体にスクロールを任せる
-          //     : 'overflow-y-auto custom-scrollbar pr-2 small:pr-6'
-          // }`}
-          >
-            <div className='h-full animate-in fade-in slide-in-from-bottom-4 duration-500'>
+          <div className='flex flex-col'>
+            {/* className=
+            {`flex-1 min-h-0 ${
+              activeTab === 'code'
+                ? 'overflow-hidden' // CodePanel自体にスクロールを任せる
+                : 'overflow-y-auto custom-scrollbar pr-2 tablet:pr-6'
+            }`} */}
+            <div className='flex-1 h-full aspect-[300/168.82] tablet:aspect-[350/196.34] min-h-[calc(168.82/16*1rem)] tablet:min-h-[calc(196.34/16*1rem)]'>
               {activeTab === 'description' && <DescriptionPanel item={item} />}
 
               {activeTab === 'code' && (
@@ -58,35 +58,28 @@ export const Card = ({ item, onExpand }: CardProps) => {
 
               {activeTab === 'preview' && (
                 <div
-                  className={`small:hidden rounded-3xl overflow-hidden border border-neutral-100 shadow-inner bg-neutral-50`}
+                  className={`tablet:hidden overflow-hidden`}
                 >
                   <PreviewPanel item={item} onExpand={() => onExpand(item)} />
                 </div>
               )}
             </div>
-            <div className='animate-in fade-in slide-in-from-bottom-4 duration-1000'>
-              <div className='flex flex-wrap gap-2'>
-                {item.tags?.map((tag) => (
-                  <span
-                    key={tag}
-                    className='px-3 py-1.5 bg-white border border-neutral-200 rounded-lg text-[11px] font-mono font-bold text-neutral-500 shadow-sm'
-                  >
-                    # {tag}
-                  </span>
-                ))}
-              </div>
+            <div className='flex flex-wrap gap-2'>
+              {item.tags?.map((tag) => (
+                <span
+                  key={tag}
+                  className='px-3 py-1.5 bg-white border border-neutral-200 rounded-lg text-[11px] font-bold text-neutral-500 shadow-sm'
+                >
+                  # {tag}
+                </span>
+              ))}
             </div>
           </div>
-
-          {/* グラデーションマスク：Descriptionタブの時のみ、スクロールエリアの上に配置 */}
-          {/* {activeTab === 'description' && (
-            <div className='absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10' />
-          )} */}
         </div>
       </div>
 
-      {/* PC時に独立するプレビューパネル */}
-      <div className='hidden small:flex flex-[1.1] min-w-0 bg-neutral-50 p-10 flex-col overflow-hidden'>
+      {/* PC only プレビューパネル */}
+      <div className='hidden tablet:flex flex-[1.1] min-w-0 bg-neutral-50 p-10 flex-col overflow-hidden'>
         <div
           className={`relative w-full h-full overflow-hidden shadow-2xl border border-white bg-white group-hover:scale-[1.01] transition-all duration-700`}
         >

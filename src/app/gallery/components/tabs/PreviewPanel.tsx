@@ -1,6 +1,4 @@
-// src/app/gallery/components/tabs/PreviewPanel.tsx
 'use client';
-
 import { useState, useRef, useEffect } from 'react';
 import { PreviewFrame } from '../preview/PreviewFrame';
 import { UIPart } from '@/gallery/types';

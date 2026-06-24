@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import Prism from 'prismjs';
 
-// Prismのテーマ（お好みのものを選べます。ここではシンプルでモダンな明日系を使用）
+// Prismのテーマ
 import 'prismjs/themes/prism-tomorrow.css';
+
 // 必要な言語のみインポート
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-markup';
+
 import { UIPart } from '@/gallery/types';
 
 type CodePanelProps = {
@@ -35,8 +37,11 @@ export const CodePanel = ({ item }: CodePanelProps) => {
 
   const getCode = (lang: Lang): string => {
     const source = item.code;
-    if (!source) return `// No code content found.`;
-    return source[lang] || `// No ${lang.toUpperCase()} code provided`;
+    if (!source) return `// コードが見つかりませんでした。`;
+    return (
+      source[lang] ||
+      `// "${lang.toUpperCase()}" の記述は見つかりませんでした。`
+    );
   };
 
   const copyToClipboard = async () => {
@@ -58,9 +63,9 @@ export const CodePanel = ({ item }: CodePanelProps) => {
         : 'language-css';
 
   return (
-    <div className='flex flex-col h-full w-full bg-[#2d2d2d] rounded-3xl border border-neutral-800 overflow-hidden shadow-2xl'>
+    <div className='flex flex-col h-full w-full bg-[#2d2d2d] rounded-2xl border border-neutral-800 overflow-hidden shadow-2xl'>
       {/* ヘッダー */}
-      <div className='flex items-center justify-between px-6 py-4 bg-[#1e1e1e] border-b border-neutral-800 shrink-0'>
+      <div className='flex items-center justify-between px-6 py-3 bg-[#1e1e1e] border-b border-neutral-800 shrink-0'>
         <div className='flex gap-2'>
           {(['html', 'css', 'js'] as const).map((lang) => (
             <button
@@ -124,19 +129,19 @@ export const CodePanel = ({ item }: CodePanelProps) => {
       {/* コード表示エリア：ダークテーマに合わせて背景を調整 */}
       <div className='flex-1 flex flex-col min-h-0 bg-[#2d2d2d] overflow-hidden'>
         <pre
-          className={`flex-1 overflow-auto custom-scrollbar-dark p-8 font-mono text-[13px] leading-relaxed ${prismLangClass}`}
+          className={`flex-1 overflow-auto custom-scrollbar-dark p-8 text-[13px] leading-relaxed ${prismLangClass}`}
         >
           <code className={prismLangClass}>{getCode(activeLang)}</code>
         </pre>
       </div>
 
-      <div className='px-6 py-3 bg-[#1e1e1e] border-t border-neutral-800 flex justify-between items-center shrink-0'>
+      <div className='px-6 py-4 bg-[#1e1e1e] border-t border-neutral-800 flex justify-between items-center shrink-0'>
         <div className='flex gap-1'>
           <div className='w-2 h-2 rounded-full bg-red-500/50' />
           <div className='w-2 h-2 rounded-full bg-amber-500/50' />
           <div className='w-2 h-2 rounded-full bg-green-500/50' />
         </div>
-        <span className='text-[9px] text-neutral-500 font-mono tracking-widest uppercase'>
+        <span className='text-[9px] text-neutral-500 tracking-widest uppercase'>
           {activeLang} engine v1.0
         </span>
       </div>
