@@ -13,7 +13,7 @@ import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { WORK_CATEGORIES } from '@/data/works';
 import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
-import { LoadingWorks } from './components/ui/LoadingWorks';
+import { LoadingWorks } from './components/LoadingWorks';
 
 function WorksPageContent() {
   const store = useWorkStore();

@@ -23,7 +23,9 @@ export function GallerySidebar() {
 
   const availableTags = useMemo(() => {
     const tags = new Set<string>();
-    UI_PARTS.forEach((UIPart) => UIPart.tags.forEach((tag) => tags.add(tag)));
+    UI_PARTS.forEach((GalleryUIPart) =>
+      GalleryUIPart.tags.forEach((tag) => tags.add(tag)),
+    );
     return Array.from(tags).sort();
   }, []);
 

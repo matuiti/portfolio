@@ -1,6 +1,6 @@
-import { UIPart } from '../types';
+import { GalleryUIPart } from '../types';
 
-export const UI_PARTS: UIPart[] = [
+export const UI_PARTS: GalleryUIPart[] = [
   {
     id: 'modal03',
     category: 'modal',
@@ -8,32 +8,6 @@ export const UI_PARTS: UIPart[] = [
     description: '',
     tags: ['Vanilla JS', 'SCSS'],
     url: '/gallery-parts/ui/modal/modal03/index.html',
-    code: {
-      html: ``,
-      css: ``,
-      js: ``,
-    },
-  },
-  {
-    id: 'modal01',
-    category: 'modal',
-    title: 'modal01',
-    description: '',
-    tags: ['Vanilla JS', 'SCSS'],
-    url: '/gallery-parts/ui/modal/modal01/index.html',
-    code: {
-      html: ``,
-      css: ``,
-      js: ``,
-    },
-  },
-  {
-    id: 'modal02',
-    category: 'modal',
-    title: 'modal02',
-    description: '',
-    tags: ['Vanilla JS', 'SCSS'],
-    url: '/gallery-parts/ui/modal/modal02/index.html',
     code: {
       html: ``,
       css: ``,

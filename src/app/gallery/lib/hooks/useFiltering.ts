@@ -1,10 +1,10 @@
 // 'use client';
 import { useState, useMemo } from 'react';
-import { GalleryCategory, GalleryState, UIPart } from '@/gallery/types';
+import { GalleryCategory, GalleryState, GalleryUIPart } from '@/gallery/types';
 import { GALLERY_CATEGORIES, GALLERY_SETTINGS } from '../../data';
 
-export function useFiltering(allItems: UIPart[]): GalleryState {
-  const [selectedItem, setSelectedItem] = useState<UIPart | null>(null);
+export function useFiltering(allItems: GalleryUIPart[]): GalleryState {
+  const [selectedItem, setSelectedItem] = useState<GalleryUIPart | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<GalleryCategory>(
     GALLERY_SETTINGS.DEFAULT_CATEGORY,
   );

@@ -13,7 +13,7 @@ const CONFIG = {
   },
   REGEXP: {
     // 挿入位置を特定する正規表現
-    INSERT_POINT: /(export const UI_PARTS: UIPart\[\] = \[)/,
+    INSERT_POINT: /(export const UI_PARTS: GalleryUIPart\[\] = \[)/,
     // 入力バリデーション（英数字、ハイフン、アンダースコア）
     SAFE_PATTERN: /^[a-zA-Z0-9-_]+$/,
   }

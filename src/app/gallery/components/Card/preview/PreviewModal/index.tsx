@@ -3,16 +3,16 @@ import { useEffect, useRef, useState } from 'react';
 import { ViewportSlider } from './ViewportSlider';
 import { PreviewFrame } from '../preview/PreviewFrame';
 import { ModalNavigation } from './ModalNavigation';
-import { UIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/gallery/types';
 import { PREVIEW_MODAL_SETTINGS } from '@/gallery/data';
 import { useModalNavigation } from '@/gallery/lib/hooks/useModalNavigation';
 
 type PreviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  currentItem: UIPart;
-  allFilteredItems: UIPart[];
-  onNavigate: (item: UIPart) => void;
+  currentItem: GalleryUIPart;
+  allFilteredItems: GalleryUIPart[];
+  onNavigate: (item: GalleryUIPart) => void;
 };
 
 export const PreviewModal = ({

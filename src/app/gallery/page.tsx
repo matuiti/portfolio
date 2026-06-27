@@ -1,26 +1,28 @@
 'use client';
 import { Suspense, useMemo, useState } from 'react';
-import { PreviewModal } from './components/modal';
+import { PreviewModal } from './components/PreviewModal';
 import { Pagination } from '@/components/ui/Pagination';
-import { GalleryLayout } from './components/layout';
+import { GalleryLayout } from './components/Layout';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { GALLERY_CATEGORIES, PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
-import { LoadingGallery } from './components/ui/LoadingGallery';
-import { UIPart } from './types';
+import { LoadingGallery } from './components/LoadingGallery';
+import { GalleryUIPart } from './types';
 import {
   useFilteredUIParts,
   useGalleryStore,
 } from '@/lib/store/useGalleryStore';
 import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
-import { Card } from './components/list/Card';
+import { Card } from './components/Card';
 
 function GalleryPageContent() {
   const store = useGalleryStore();
   const filteredUIParts = useFilteredUIParts();
-  const [selectedUIPart, setSelectedUIPart] = useState<UIPart | null>(null);
+  const [selectedUIPart, setSelectedUIPart] = useState<GalleryUIPart | null>(
+    null,
+  );
 
   useCommonURLSync(
     {

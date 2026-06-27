@@ -4,7 +4,6 @@ import { PREVIEW_MODAL_SETTINGS } from '@/gallery/data';
 
 type ViewportSliderProps = {
   value: number;
-  // 親から渡されない場合は定数の値を使用する設計
   min?: number;
   max?: number;
   onChange: (val: number) => void;
@@ -16,21 +15,16 @@ export const ViewportSlider = ({
   max = PREVIEW_MODAL_SETTINGS.MAX_WIDTH,
   onChange,
 }: ViewportSliderProps) => {
-  // 入力値のバリデーション（最小・最大を超えないように制限）
   const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = Number(e.target.value);
     if (val > max) val = max;
-    // 最小値の制限は入力中だと不便な場合があるため、onChangeにはそのまま渡すか、
-    // blurイベント（フォーカスが外れた時）に修正する等の工夫が一般的ですが、
-    // ここではシンプルにスライダーと同期させます。
     onChange(val);
   };
 
   return (
-    <div className='flex items-center gap-4 bg-neutral-100/50 hover:bg-neutral-100 px-4 py-1.5 rounded-full border border-neutral-200 transition-colors group'>
-      {/* アイコン（視覚的補助） */}
+    <div className='flex items-center gap-4 bg-neutral-100/50 tablet:hoverbg-neutral-100 px-4 py-1.5 rounded-full border border-neutral-200 transition-colors group'>
       <svg
-        className='w-4 h-4 text-neutral-400 group-hover:text-blue-500 transition-colors'
+        className='w-4 h-4 text-neutral-400 tablet:group-hover:text-blue-500 transition-colors'
         fill='none'
         stroke='currentColor'
         viewBox='0 0 24 24'
@@ -51,7 +45,7 @@ export const ViewportSlider = ({
           max={max}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className='w-24 small:w-32 accent-blue-600 cursor-pointer'
+          className='w-24 small:w-32 accent-blue-600 tablet:cursor-pointer'
           aria-label='Viewport width slider'
         />
 

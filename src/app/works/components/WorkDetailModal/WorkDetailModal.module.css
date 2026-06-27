@@ -57,7 +57,9 @@
 
     .prevBtn,
     .nextBtn {
-      cursor: pointer;
+      @media (width >= 52.5em /* tablet */) {
+        cursor: pointer;
+      }
 
       svg {
         color: var(--color-black);
@@ -296,6 +298,9 @@
 
     .slidePrev,
     .slideNext {
+      @media (width >= 52.5em /* tablet */) {
+        cursor: pointer;
+      }
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -303,7 +308,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       transition: all 0.3s;
       border: none;
     }

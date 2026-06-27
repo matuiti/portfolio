@@ -1,11 +1,11 @@
 'use client';
-import { UIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/gallery/types';
 import { useEffect, useCallback } from 'react';
 
 type UseModalNavigationProps = {
-  currentItem: UIPart;
-  allItems: UIPart[];
-  onNavigate: (item: UIPart) => void;
+  currentItem: GalleryUIPart;
+  allItems: GalleryUIPart[];
+  onNavigate: (item: GalleryUIPart) => void;
   isOpen: boolean;
 };
 

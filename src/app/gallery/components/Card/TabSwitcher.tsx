@@ -17,7 +17,7 @@ export const TabSwitcher = ({ activeTab, onTabChange }: TabSwitcherProps) => {
           className={`
             relative z-2 flex-1 flex items-center justify-center py-1.5 rounded-lg font-bold transition-all duration-200
             ${tab.id === 'preview' ? 'tablet:hidden' : ''}
-            ${activeTab === tab.id ? 'text-black bg-white rounded-lg shadow-gallery-card-tab' : 'text-dark-gray hover:text-black hover:bg-white hover:var(--opacity-hover) hover:cursor-pointer'}
+            ${activeTab === tab.id ? 'text-black bg-white rounded-lg shadow-gallery-card-tab' : 'text-dark-gray tablet:hover:text-black tablet:hover:bg-white tablet:hover:var(--opacity-hover) tablet:hover:cursor-pointer'}
           `}
         >
           {tab.label}

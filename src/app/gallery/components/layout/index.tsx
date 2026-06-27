@@ -1,5 +1,5 @@
 import { GallerySidebar } from '../GallerySidebar';
-import { SearchGalleryDrawer } from '../SearchGalleryDrawer';
+import { SearchGalleryDrawer } from './SearchGalleryDrawer';
 
 type GalleryLayoutProps = {
   children: React.ReactNode;
