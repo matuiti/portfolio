@@ -21,15 +21,15 @@ export const menuItemStyles = tv({
     },
     isPublished: {
       true: {
-        base: 'cursor-pointer',
+        base: 'tablet:cursor-pointer',
         label: [
           'bg-[linear-gradient(currentColor,currentColor)]',
           'bg-no-repeat',
           'bg-bottom-right',
           'bg-size-[0_1px]',
           'transition-[background-size] duration-500 ease-out',
-          'group-hover:bg-bottom-left',
-          'group-hover:bg-size-[100%_1px]',
+          'tablet:group-hover:bg-bottom-left',
+          'tablet:group-hover:bg-size-[100%_1px]',
         ],
       },
       false: {

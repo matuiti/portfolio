@@ -116,7 +116,9 @@
     display: flex;
     align-items: center;
     gap: calc(8 / 16 * 1rem);
-    cursor: pointer;
+    @media (width >= 52.5em /* tablet */) {
+      cursor: pointer;
+    }
   }
 
   .checkbox {
@@ -125,7 +127,9 @@
     border: 2px solid var(--color-black);
     border-radius: calc(2 / 16 * 1rem);
     transition: all 0.3s;
-    cursor: pointer;
+    @media (width >= 52.5em /* tablet */) {
+      cursor: pointer;
+    }
 
     &:checked {
       background-color: var(--color-black);

@@ -40,14 +40,16 @@
     border-radius: calc(8 / 16 * 1rem);
     letter-spacing: 0.05em;
     line-height: 1.5;
-    cursor: pointer;
     transition: all 0.2s ease;
     margin-top: calc(20 / 16 * 1rem);
     background-color: var(--color-light-gray);
     color: var(--color-dark-gray);
-    &:hover {
-      background-color: var(--color-dark-gray);
-      color: var(--color-white);
+    @media (width >= 52.5em /* tablet */) {
+      cursor: pointer;
+      &:hover {
+        background-color: var(--color-dark-gray);
+        color: var(--color-white);
+      }
     }
   }
 }

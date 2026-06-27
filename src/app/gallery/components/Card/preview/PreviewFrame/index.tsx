@@ -5,9 +5,14 @@ import { useLazyIframe } from '@/gallery/lib/hooks/useLazyIframe';
 type PreviewFrameProps = {
   url: string;
   baseWidth?: number;
+  onLoadSuccess?: () => void;
 };
 
-export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
+export const PreviewFrame = ({
+  url,
+  baseWidth = 1280,
+  onLoadSuccess,
+}: PreviewFrameProps) => {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>(
     'loading',
   );
@@ -17,18 +22,49 @@ export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
   const { containerRef, isInView } = useLazyIframe('100px');
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
+  // 安全に onLoadSuccess を呼ぶためのRef
+  const onLoadSuccessRef = useRef(onLoadSuccess);
+  useEffect(() => {
+    onLoadSuccessRef.current = onLoadSuccess;
+  }, [onLoadSuccess]);
+
   if (url !== prevUrl) {
     setPrevUrl(url);
     setStatus('loading');
   }
 
+  // 事前のファイル存在チェック
+  useEffect(() => {
+    // SP版のタブ切り替えに対応するため、「画面内に入った(isInView)」または「URLが新しく切り替わった直後(status === 'loading')」であれば、
+    // Observerの誤判定を無視して強制的に fetch を開始するマージ（結合）条件にします。
+    if (!isInView && status !== 'loading') return;
+
+    const checkFileExists = async () => {
+      try {
+        const response = await fetch(url, { method: 'HEAD' });
+
+        if (response.ok) {
+          setStatus('success');
+          onLoadSuccessRef.current?.();
+        } else {
+          setStatus('error');
+          onLoadSuccessRef.current?.();
+        }
+      } catch {
+        setStatus('error');
+        onLoadSuccessRef.current?.();
+      }
+    };
+
+    checkFileExists();
+  }, [url, isInView, status]);
+
+  // スケール計算
   useLayoutEffect(() => {
     const currentContainer = containerRef.current;
-
     const updateScale = () => {
       if (!currentContainer) return;
       const containerWidth = currentContainer.offsetWidth;
-
       if (containerWidth < baseWidth) {
         setScale(containerWidth / baseWidth);
       } else {
@@ -37,35 +73,33 @@ export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
     };
 
     updateScale();
-
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
-
   }, [baseWidth, isInView, containerRef]);
 
+  // タイムアウト監視
   useEffect(() => {
-    if (status !== 'loading' || !isInView) return;
+    if (status !== 'loading') return; // ここも isInView 縛りを緩めて安全に
     const timer = setTimeout(() => setStatus('error'), 10000);
     return () => clearTimeout(timer);
-  }, [status, url, isInView]);
-
-  const handleLoad = () => setStatus('success');
-  const handleError = () => setStatus('error');
+  }, [status]);
 
   return (
     <div
       ref={containerRef}
       className='relative w-full h-full bg-white overflow-hidden flex items-center justify-center'
     >
-      {(!isInView || status === 'loading') && (
+      {/* ローディングUI */}
+      {status === 'loading' && (
         <div className='absolute inset-0 flex flex-col items-center justify-center bg-neutral-50 z-20'>
           <div className='w-8 h-8 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin mb-4' />
           <span className='text-[10px] font-black text-neutral-400 uppercase tracking-widest animate-pulse'>
-            {!isInView ? 'Waiting for scroll...' : 'Rendering...'}
+            Rendering...
           </span>
         </div>
       )}
 
+      {/* エラーUI */}
       {status === 'error' && (
         <div className='absolute inset-0 flex flex-col items-center justify-center bg-neutral-50 z-20 p-4 text-center'>
           <svg
@@ -87,7 +121,8 @@ export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
         </div>
       )}
 
-      {isInView && (
+      {/* iframe表示エリア */}
+      {status !== 'error' && (
         <div
           className='relative flex items-center justify-center transition-transform duration-500'
           style={{
@@ -99,13 +134,12 @@ export const PreviewFrame = ({ url, baseWidth = 1280 }: PreviewFrameProps) => {
         >
           <iframe
             key={url}
-            ref={iframeRef}
+            ref={iframeRef} // refを付与することでマイクロタスクになり、Reactの内部処理と同タイミング（一塊）で処理される（外すと一部のアニメーションがもたつきます）
             src={url}
             className={`w-full h-full border-none transition-opacity duration-700 ${
               status === 'success' ? 'opacity-100' : 'opacity-0'
             }`}
-            onLoad={handleLoad}
-            onError={handleError}
+            onLoad={onLoadSuccess}
             sandbox='allow-scripts allow-same-origin'
             title='UI Part Preview'
           />

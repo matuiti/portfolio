@@ -44,8 +44,8 @@ export const WorkCard = memo(
     return (
       <article
         onClick={onClick}
-        className={`group flex flex-col overflow-hidden cursor-pointer shadow-card rounded-lg max-w-full base:max-w-[calc(280/16*1rem)] ${
-          !isTagHovered ? 'hover:shadow-none' : ''
+        className={`group flex flex-col overflow-hidden tablet:cursor-pointer shadow-card rounded-lg max-w-full ${
+          !isTagHovered ? 'tablet:hover:shadow-none' : ''
         }
         }`}
       >
@@ -57,14 +57,14 @@ export const WorkCard = memo(
             fill
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className={`object-cover transition-transform duration-700 ${
-              !isTagHovered ? 'group-hover:scale-110' : ''
+              !isTagHovered ? 'tablet:group-hover:scale-110' : ''
             }`}
           />
 
           {/* 画像オーバーレイ */}
           <div
             className={`absolute inset-0 bg-menu-backdrop flex items-center justify-center transition-opacity duration-500 z-image-overlay ${
-              !isTagHovered ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'
+              !isTagHovered ? 'opacity-0 tablet:group-hover:opacity-100' : 'opacity-0'
             }`}
           >
             <span className='text-white text-[calc(18/16*1rem)]'>
@@ -76,7 +76,7 @@ export const WorkCard = memo(
         {/* 情報 */}
         <div
           className={`bg-white flex flex-col flex-1 pt-[calc(28/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] ${
-            !isTagHovered ? 'group-hover:bg-light-gray' : ''
+            !isTagHovered ? 'tablet:group-hover:bg-light-gray' : ''
           }`}
         >
           <div

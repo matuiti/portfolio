@@ -11,10 +11,10 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-markup';
 
-import { UIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/gallery/types';
 
 type CodePanelProps = {
-  item: UIPart;
+  item: GalleryUIPart;
 };
 
 type Lang = 'html' | 'css' | 'js';

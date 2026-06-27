@@ -12,9 +12,9 @@ export type GalleryCategory =
   | 'layout'
   | 'other';
 
-  export type GalleryCategorys = { id: GalleryCategory; label: string }[];
+export type GalleryCategorys = { id: GalleryCategory; label: string }[];
 
-export type UIPart = {
+export type GalleryUIPart = {
   id: string;
   title: string;
   category: GalleryCategory;

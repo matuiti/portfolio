@@ -1,4 +1,4 @@
-import { ScrollReveal } from './ScrollReveal';
+import { ScrollReveal } from './scrollReveal';
 import { MainVisual } from './components/MainVisual';
 import { WorksSection } from './components/WorksSection';
 import { GallerySection } from './components/GallerySection';
