@@ -39,14 +39,12 @@ export const WorksSection = () => {
       <div className='section-padding-y section-padding-x bg-white'>
         <div className='container-center'>
           <div className={styles.sectionHead}>
-            {/* セクション見出し */}
             <SectionTitle
               enTitle='works'
               jpTitle='制作実績'
               variant='default'
               className='js-fuwa-fade'
             />
-            {/* カテゴリスイッチ */}
             <div className='js-fuwa-fade'>
               <CategoryTabs
                 activeCategory={activeCategory}
@@ -55,7 +53,7 @@ export const WorksSection = () => {
             </div>
           </div>
 
-          {/* 実績グリッド表示 */}
+          {/* 実績グリッド */}
           <div className={styles.cards}>
             {displayWorks.length ? (
               displayWorks.map((work) => (
@@ -86,7 +84,6 @@ export const WorksSection = () => {
             </div>
           </div>
 
-          {/* 詳細モーダル */}
           {selectedWork && (
             <WorkDetailModal
               key={selectedWork.id}

@@ -315,7 +315,7 @@ export const WorkDetailModal = ({
                 </div>
               )}
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>キーワードタグ</h3>
+                <h3 className={styles.sectionTitle}>タグ</h3>
                 <div className={styles.tagGrid}>
                   {work.tags.map((tag) => (
                     <BaseTag

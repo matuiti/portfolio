@@ -1,4 +1,4 @@
-import { GallerySidebar } from '../GallerySidebar';
+import { GallerySidebar } from './GallerySidebar';
 import { SearchGalleryDrawer } from './SearchGalleryDrawer';
 
 type GalleryLayoutProps = {

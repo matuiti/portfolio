@@ -137,7 +137,7 @@ export function SearchGalleryDrawer() {
               />
             </section>
             <section className={styles.section}>
-              <h3 className={styles.label}>キーワードタグ</h3>
+              <h3 className={styles.label}>タグ</h3>
               <TagFilters
                 tags={availableTags}
                 selectedTags={selectedTags}

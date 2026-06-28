@@ -1,9 +1,9 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import { PreviewFrame } from '../../preview/PreviewFrame';
 import { GalleryUIPart } from '@/gallery/types';
 import { PREVIEW_PANEL_SETTINGS } from '@/gallery/data';
 import { ZoomOutMap } from '@/components/ui/Icons';
+import { PreviewFrame } from './preview/PreviewFrame';
 
 type PreviewPanelProps = {
   item: GalleryUIPart;
@@ -79,16 +79,10 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
     return () => window.removeEventListener('resize', handleResize);
   }, [viewportWidth]);
 
-  // スケール縮小後の「実際の見た目の高さ」を計算
-  const scaledHeight =
-    isHeightCalculated && iframeContentHeight > 0
-      ? iframeContentHeight * scale
-      : 0;
-
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col h-full'>
       {/* ビューポートコントローラー */}
-      <div className='flex items-center justify-between bg-white py-2.5'>
+      <div className='flex items-center justify-between bg-white py-2.5 tablet:p-[calc(10/16*1rem)_calc(16.5/16*1rem)_calc(16/16*1rem)_calc(20/16*1rem)]'>
         <div className='flex items-center gap-2'>
           {PREVIEW_PANEL_SETTINGS.VIEWPORTS.map((v) => (
             <button
@@ -117,7 +111,7 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
       {/* key={item.url} をここに付与することでカードが切り替わるたびにローディングから再開されます */}
       <div
         key={item.url}
-        className='relative flex-1 w-full min-h-[calc(300/16*1rem)]'
+        className='relative flex-1 w-full h-full flex items-center justify-center bg-light-gray p-[calc(18.35/16*1rem)_calc(15/16*1rem)] mobile:p-[calc(24.6/16*1rem)_calc(15/16*1rem)] tablet:p-[calc(20/16*1rem)_calc(20/16*1rem)]'
       >
         {/* 計算中のローディングスピナー */}
         {!isHeightCalculated && (
@@ -129,8 +123,7 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
         {/* プレビュー表示エリア */}
         <div
           ref={containerRef}
-          style={{ height: `${scaledHeight}px` }}
-          className={`relative flex items-start justify-center overflow-x-hidden overflow-y-auto max-h-full bg-light-gray ${
+          className={`relative flex items-start justify-center overflow-x-hidden overflow-y-auto w-auto h-full tablet:aspect-[350/196.34] bg-white rounded-lg ${
             isHeightCalculated ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
