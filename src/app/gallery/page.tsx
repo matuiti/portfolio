@@ -1,6 +1,5 @@
 'use client';
 import { Suspense, useMemo, useState } from 'react';
-import { PreviewModal } from './components/PreviewModal';
 import { Pagination } from '@/components/ui/Pagination';
 import { GalleryLayout } from './components/Layout';
 import { PageHeader } from '@/components/ui/PageHeader';
@@ -16,6 +15,7 @@ import {
 } from '@/lib/store/useGalleryStore';
 import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
 import { Card } from './components/Card';
+import { PreviewModal } from './components/Card/preview/PreviewModal';
 
 function GalleryPageContent() {
   const store = useGalleryStore();

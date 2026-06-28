@@ -21,7 +21,7 @@ export const menuItemStyles = tv({
     },
     isPublished: {
       true: {
-        base: 'tablet:cursor-pointer',
+        base: 'cursor-default tablet:cursor-pointer',
         label: [
           'bg-[linear-gradient(currentColor,currentColor)]',
           'bg-no-repeat',

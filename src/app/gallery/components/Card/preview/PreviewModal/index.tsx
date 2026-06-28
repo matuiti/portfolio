@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { ViewportSlider } from './ViewportSlider';
-import { PreviewFrame } from '../preview/PreviewFrame';
 import { ModalNavigation } from './ModalNavigation';
 import { GalleryUIPart } from '@/gallery/types';
 import { PREVIEW_MODAL_SETTINGS } from '@/gallery/data';
 import { useModalNavigation } from '@/gallery/lib/hooks/useModalNavigation';
+import { PreviewFrame } from '../PreviewFrame';
 
 type PreviewModalProps = {
   isOpen: boolean;

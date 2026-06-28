@@ -1,23 +1,17 @@
 'use client';
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLazyIframe } from '@/gallery/lib/hooks/useLazyIframe';
 
 type PreviewFrameProps = {
   url: string;
-  baseWidth?: number;
   onLoadSuccess?: () => void;
 };
 
-export const PreviewFrame = ({
-  url,
-  baseWidth = 1280,
-  onLoadSuccess,
-}: PreviewFrameProps) => {
+export const PreviewFrame = ({ url, onLoadSuccess }: PreviewFrameProps) => {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>(
     'loading',
   );
   const [prevUrl, setPrevUrl] = useState(url);
-  const [scale, setScale] = useState(1);
 
   const { containerRef, isInView } = useLazyIframe('100px');
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -58,24 +52,6 @@ export const PreviewFrame = ({
 
     checkFileExists();
   }, [url, isInView, status]);
-
-  // スケール計算
-  useLayoutEffect(() => {
-    const currentContainer = containerRef.current;
-    const updateScale = () => {
-      if (!currentContainer) return;
-      const containerWidth = currentContainer.offsetWidth;
-      if (containerWidth < baseWidth) {
-        setScale(containerWidth / baseWidth);
-      } else {
-        setScale(1);
-      }
-    };
-
-    updateScale();
-    window.addEventListener('resize', updateScale);
-    return () => window.removeEventListener('resize', updateScale);
-  }, [baseWidth, isInView, containerRef]);
 
   // タイムアウト監視
   useEffect(() => {
@@ -123,15 +99,7 @@ export const PreviewFrame = ({
 
       {/* iframe表示エリア */}
       {status !== 'error' && (
-        <div
-          className='relative flex items-center justify-center transition-transform duration-500'
-          style={{
-            width: baseWidth,
-            height: `${100 / scale}%`,
-            transform: `scale(${scale})`,
-            transformOrigin: 'center center',
-          }}
-        >
+        <div className='relative flex items-center justify-center w-full h-full transition-transform duration-500'>
           <iframe
             key={url}
             ref={iframeRef} // refを付与することでマイクロタスクになり、Reactの内部処理と同タイミング（一塊）で処理される（外すと一部のアニメーションがもたつきます）
@@ -143,12 +111,6 @@ export const PreviewFrame = ({
             sandbox='allow-scripts allow-same-origin'
             title='UI Part Preview'
           />
-        </div>
-      )}
-
-      {status === 'success' && scale < 1 && (
-        <div className='absolute bottom-3 right-3 bg-neutral-900/10 backdrop-blur-md px-2 py-1 rounded text-[9px] font-mono text-neutral-500 pointer-events-none border border-white/20 select-none'>
-          {Math.round(scale * 100)}% View
         </div>
       )}
     </div>

@@ -13,10 +13,11 @@ type WorkCardProps = {
   work: Work;
   onClick: () => void;
   onCategoryClick?: (cat: WorkCategory) => void;
+  className?: string;
 };
 
 export const WorkCard = memo(
-  ({ work, onClick, onCategoryClick }: WorkCardProps) => {
+  ({ work, onClick, onCategoryClick, className }: WorkCardProps) => {
     const [isTagHovered, setIsTagHovered] = useState(false);
 
     const getImageSrc = (() => {
@@ -32,12 +33,20 @@ export const WorkCard = memo(
       work.disclosureLevel === 'NDA' ? '非公開実績' : '詳しく見る';
 
     const currentPageName = useGetCurrentPageName();
+
     const handleCategoryClick = (e: React.MouseEvent, cat: string) => {
-      e.stopPropagation();
       if (!onCategoryClick) return;
+      e.stopPropagation();
       onCategoryClick(cat as WorkCategory);
+
       if (currentPageName === 'works') {
         scrollToTop();
+      }
+      else if (currentPageName === '/') {
+        const worksSection = document.getElementById('works');
+        if (worksSection) {
+          worksSection.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     };
 
@@ -46,7 +55,7 @@ export const WorkCard = memo(
         onClick={onClick}
         className={`group flex flex-col overflow-hidden tablet:cursor-pointer shadow-card rounded-lg max-w-full ${
           !isTagHovered ? 'tablet:hover:shadow-none' : ''
-        }
+        } ${className ? className : ''}
         }`}
       >
         {/* サムネイル */}
@@ -64,7 +73,9 @@ export const WorkCard = memo(
           {/* 画像オーバーレイ */}
           <div
             className={`absolute inset-0 bg-menu-backdrop flex items-center justify-center transition-opacity duration-500 z-image-overlay ${
-              !isTagHovered ? 'opacity-0 tablet:group-hover:opacity-100' : 'opacity-0'
+              !isTagHovered
+                ? 'opacity-0 tablet:group-hover:opacity-100'
+                : 'opacity-0'
             }`}
           >
             <span className='text-white text-[calc(18/16*1rem)]'>
