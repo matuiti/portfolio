@@ -16,7 +16,7 @@ const args = process.argv.slice(2);
 const name = args.find(arg => arg.startsWith('--name='))?.split('=')[1];
 
 if (!name || !CONFIG.REGEXP.SAFE_PATTERN.test(name)) {
-  console.error('Usage: npm new:icon -- --name=IconArrowRight');
+  console.error('Usage: npm run new:icon -- --name=IconArrowRight');
   console.error('Name must be PascalCase.');
   process.exit(1);
 }

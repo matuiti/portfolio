@@ -1,11 +1,12 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { ViewportSlider } from './ViewportSlider';
+import { IndicatorBox } from './IndicatorBox';
 import { ModalNavigation } from './ModalNavigation';
 import { GalleryUIPart } from '@/gallery/types';
 import { PREVIEW_MODAL_SETTINGS } from '@/gallery/data';
 import { useModalNavigation } from '@/gallery/lib/hooks/useModalNavigation';
 import { PreviewFrame } from '../PreviewFrame';
+import { CloseModal } from '@/components/ui/Icons/CloseModal';
 
 type PreviewModalProps = {
   isOpen: boolean;
@@ -24,7 +25,6 @@ export const PreviewModal = ({
 }: PreviewModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  // 1. 状態管理: key属性の恩恵により、マウント時に常にデフォルト幅になります
   const [viewportWidth, setViewportWidth] = useState<number>(
     PREVIEW_MODAL_SETTINGS.DEFAULT_WIDTH,
   );
@@ -37,8 +37,7 @@ export const PreviewModal = ({
       isOpen,
     });
 
-  // 2. モーダル開閉と背面スクロール禁止の制御
-  // ここでの setState (setViewportWidth) は削除し、DOM制御に専念します
+  // モーダル開閉と背面スクロール禁止の制御
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
@@ -88,12 +87,7 @@ export const PreviewModal = ({
               {currentIndex + 1} / {totalCount}
             </span>
 
-            <ViewportSlider
-              value={viewportWidth}
-              onChange={setViewportWidth}
-              min={PREVIEW_MODAL_SETTINGS.MIN_WIDTH}
-              max={PREVIEW_MODAL_SETTINGS.MAX_WIDTH}
-            />
+            <IndicatorBox value={viewportWidth} onChange={setViewportWidth} />
           </div>
 
           <div className='flex items-center gap-4'>
@@ -108,22 +102,10 @@ export const PreviewModal = ({
 
             <button
               onClick={onClose}
-              className='group p-2 hover:bg-red-50 rounded-full transition-all'
+              className='rounded-[50%] overflow-hidden'
               aria-label='Close modal'
             >
-              <svg
-                className='w-6 h-6 text-neutral-400 group-hover:text-red-500'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth={2}
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              </svg>
+              <CloseModal />
             </button>
           </div>
         </header>

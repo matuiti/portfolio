@@ -1,11 +1,11 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const iconStyles = tv({
-  base: 'inline-block shrink-0 cursor-pointer transition-colors duration-300',
+  base: 'inline-block shrink-0 tablet:cursor-pointer tablet:transition-colors tablet:duration-300',
   variants: {
     color: {
-      white:
-        'text-white tablet:text-dark-gray hover:text-red hover:bg-light-gray',
+      gray:
+        'text-dark-gray tablet:hover:text-red tablet:hover:bg-light-gray',
     },
     size: {
       sm: 'w-icon-20 h-icon-20',
@@ -15,7 +15,7 @@ const iconStyles = tv({
     },
   },
   defaultVariants: {
-    color: 'white',
+    color: 'gray',
     size: 'xl',
   },
 });

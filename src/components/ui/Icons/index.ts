@@ -16,3 +16,5 @@ export * from "./ServicePerformance";
 export * from "./CarouselArrowRight";
 export * from "./LibraryBooks";
 export * from "./ZoomOutMap";
+export * from "./Phone";
+export * from "./Laptop";

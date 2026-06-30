@@ -1,5 +1,7 @@
 'use client';
 
+import { KeyboardArrowRight } from '@/components/ui/Icons';
+
 type ModalNavigationProps = {
   onPrev: () => void;
   onNext: () => void;
@@ -14,58 +16,21 @@ export const ModalNavigation = ({
   hasNext,
 }: ModalNavigationProps) => {
   return (
-    <div className='flex items-center gap-1 bg-neutral-100 p-1 rounded-lg'>
-      <button
-        onClick={onPrev}
-        disabled={!hasPrev}
-        className={`p-1.5 rounded-md transition-all ${
-          hasPrev
-            ? 'text-neutral-700 hover:bg-white hover:shadow-sm'
-            : 'text-neutral-300 cursor-not-allowed'
-        }`}
-        aria-label='Previous item'
-      >
-        <svg
-          className='w-5 h-5'
-          fill='none'
-          stroke='currentColor'
-          viewBox='0 0 24 24'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M15 19l-7-7 7-7'
-          />
-        </svg>
+    <div className='flex items-center gap-2.5 bg-light-gray p-[calc(4/16*1rem)_calc(8/16*1rem)] rounded-lg'>
+      <button onClick={onPrev} disabled={!hasPrev} aria-label='Previous item'>
+        <KeyboardArrowRight
+          direction='left'
+          className={`flex items-center justify-center rounded-l-sm ${hasPrev ? 'text-black tablet:hover:bg-white tablet:hover:shadow-gallery-arrow-bg tablet:cursor-pointer' : 'text-dark-gray/30'}`}
+        />
       </button>
 
       {/* セパレーター */}
-      <div className='w-[1px] h-4 bg-neutral-200 mx-0.5' />
+      <div className='w-[calc(1/16*1rem)] h-4 bg-medium-gray' />
 
-      <button
-        onClick={onNext}
-        disabled={!hasNext}
-        className={`p-1.5 rounded-md transition-all ${
-          hasNext
-            ? 'text-neutral-700 hover:bg-white hover:shadow-sm'
-            : 'text-neutral-300 cursor-not-allowed'
-        }`}
-        aria-label='Next item'
-      >
-        <svg
-          className='w-5 h-5'
-          fill='none'
-          stroke='currentColor'
-          viewBox='0 0 24 24'
-        >
-          <path
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth={2}
-            d='M9 5l7 7-7 7'
-          />
-        </svg>
+      <button onClick={onNext} disabled={!hasNext} aria-label='Next item'>
+        <KeyboardArrowRight
+          className={`flex items-center justify-center rounded-l-sm ${hasNext ? 'text-black tablet:hover:bg-white tablet:hover:shadow-gallery-arrow-bg tablet:cursor-pointer' : 'text-dark-gray/30'}`}
+        />
       </button>
     </div>
   );
