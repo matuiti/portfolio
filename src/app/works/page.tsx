@@ -6,7 +6,6 @@ import { WorkDetailModal } from './components/WorkDetailModal';
 import { Pagination } from '@/components/ui/Pagination';
 import { WorksLayout } from './components/WorksLayout';
 import { Work, WorkCategory } from '@/types/work';
-import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
@@ -14,13 +13,14 @@ import { WORK_CATEGORIES } from '@/data/works';
 import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import { LoadingWorks } from './components/LoadingWorks';
+import { useURLSync } from '@/lib/hooks/useURLSync';
 
 function WorksPageContent() {
   const store = useWorkStore();
   const filteredWorks = useFilteredWorks();
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  useCommonURLSync(
+  useURLSync(
     {
       category: store.selectedCategory,
       tags: store.selectedTags,
@@ -111,9 +111,7 @@ function WorksPageContent() {
         {/* 実績カードグリッド */}
         {displayWorks.length ? (
           <>
-            <div
-              className='mt-[calc(40/16*1rem)] grid justify-center gap-y-[calc(40/16*1rem)] gap-x-[calc(20/16*1rem)] grid-cols-1 tablet:grid-cols-2 base:grid-cols-3 base:mt-[calc(50/16*1rem)]'
-            >
+            <div className='mt-[calc(40/16*1rem)] grid justify-center gap-y-[calc(40/16*1rem)] gap-x-[calc(20/16*1rem)] grid-cols-1 tablet:grid-cols-2 base:grid-cols-3 base:mt-[calc(50/16*1rem)]'>
               {displayWorks.map((work) => (
                 <WorkCard
                   key={work.id}

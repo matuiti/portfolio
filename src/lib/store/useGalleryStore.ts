@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { create } from 'zustand';
 import { useShallow } from 'zustand/shallow';
 import { UI_PARTS } from '@/gallery/data/ui-parts';
@@ -51,16 +50,14 @@ export const useGalleryStore = create<GalleryState>((set) => ({
  * 使用例： const filteredUIParts = useFilteredUIParts();
  */
 export const useFilteredUIParts = () => {
-  const filters = useGalleryStore(
-    useShallow((state) => ({
-      searchQuery: state.searchQuery,
-      selectedCategory: state.selectedCategory,
-      selectedTags: state.selectedTags,
-    })),
+  return useGalleryStore(
+    useShallow((state) => {
+      const { searchQuery, selectedCategory, selectedTags } = state;
+      return filterUIParts(UI_PARTS, { searchQuery, selectedCategory, selectedTags });
+    }),
   );
-
-  return useMemo(() => filterUIParts(UI_PARTS, filters), [filters]);
 };
+
 
 const filterUIParts = (
   GalleryUIParts: GalleryUIPart[],

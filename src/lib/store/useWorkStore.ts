@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { create } from 'zustand';
 import { useShallow } from 'zustand/shallow';
 import { Work, WorkCategory, WorkState } from '@/types/work';
@@ -51,15 +50,12 @@ export const useWorkStore = create<WorkState>((set) => ({
  * 使用例： const filteredWorks = useFilteredWorks();
  */
 export const useFilteredWorks = () => {
-  const filters = useWorkStore(
-    useShallow((state) => ({
-      searchQuery: state.searchQuery,
-      selectedCategory: state.selectedCategory,
-      selectedTags: state.selectedTags,
-    })),
+  return useWorkStore(
+    useShallow((state) => {
+      const { searchQuery, selectedCategory, selectedTags } = state;
+      return filterWorks(ALL_WORKS, { searchQuery, selectedCategory, selectedTags });
+    }),
   );
-
-  return useMemo(() => filterWorks(ALL_WORKS, filters), [filters]);
 };
 
 const filterWorks = (

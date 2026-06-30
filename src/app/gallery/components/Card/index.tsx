@@ -6,7 +6,7 @@ import { TabSwitcher } from './TabSwitcher';
 import { TabType, GalleryUIPart } from '@/gallery/types';
 import dynamic from 'next/dynamic';
 
-// PreviewPanelコンポーネントをクライアントサイドのみで読み込む設定
+// 実際に必要になったタイミングでコンポーネントを遅延読み込み。クライアントサイドのみに設定。
 const PreviewPanel = dynamic(
   () => import('./PreviewPanel').then((mod) => mod.PreviewPanel),
   { ssr: false },
@@ -67,7 +67,11 @@ export const Card = ({ item, onExpand }: CardProps) => {
               )}
 
               {activeTab === 'preview' && (
-                <PreviewPanel item={item} onExpand={() => onExpand(item)} />
+                <PreviewPanel
+                  key={item.url}
+                  item={item}
+                  onExpand={() => onExpand(item)}
+                />
               )}
             </div>
           </div>
@@ -86,7 +90,13 @@ export const Card = ({ item, onExpand }: CardProps) => {
 
       {/* PC only プレビューパネル */}
       <div className='hidden tablet:block flex-1 overflow-hidden'>
-        {<PreviewPanel item={item} onExpand={() => onExpand(item)} />}
+        {
+          <PreviewPanel
+            key={item.url}
+            item={item}
+            onExpand={() => onExpand(item)}
+          />
+        }
       </div>
     </div>
   );

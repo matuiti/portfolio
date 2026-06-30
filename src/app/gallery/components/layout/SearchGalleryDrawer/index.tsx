@@ -58,10 +58,12 @@ export function SearchGalleryDrawer() {
     if (store.searchQuery) {
       return `「${store.searchQuery}」の検索結果`;
     }
+
     const baseTitle =
       store.selectedCategory === 'all'
         ? 'すべてのアイテム'
         : selectedCategoryLabel || 'すべてのアイテム';
+
     const hasTags = store.selectedTags && store.selectedTags.length > 0;
     return (
       <>

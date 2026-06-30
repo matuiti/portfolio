@@ -4,58 +4,56 @@ import { useLazyIframe } from '@/gallery/lib/hooks/useLazyIframe';
 
 type PreviewFrameProps = {
   url: string;
-  onLoadSuccess?: () => void;
 };
 
-export const PreviewFrame = ({ url, onLoadSuccess }: PreviewFrameProps) => {
+export const PreviewFrame = ({ url }: PreviewFrameProps) => {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>(
     'loading',
   );
-  const [prevUrl, setPrevUrl] = useState(url);
 
   const { containerRef, isInView } = useLazyIframe('100px');
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // 安全に onLoadSuccess を呼ぶためのRef
-  const onLoadSuccessRef = useRef(onLoadSuccess);
+  // エフェクトのトリガー（url, isInView）と、現在の状態（status）の判定を分離するための最新値保持
+  const stateRef = useRef({ status, isInView });
   useEffect(() => {
-    onLoadSuccessRef.current = onLoadSuccess;
-  }, [onLoadSuccess]);
-
-  if (url !== prevUrl) {
-    setPrevUrl(url);
-    setStatus('loading');
-  }
+    stateRef.current = { status, isInView };
+  }, [status, isInView]);
 
   // 事前のファイル存在チェック
   useEffect(() => {
-    // SP版のタブ切り替えに対応するため、「画面内に入った(isInView)」または「URLが新しく切り替わった直後(status === 'loading')」であれば、
-    // Observerの誤判定を無視して強制的に fetch を開始するマージ（結合）条件にします。
-    if (!isInView && status !== 'loading') return;
+    const { status: currentStatus, isInView: currentInView } = stateRef.current;
 
+    if (!currentInView && currentStatus !== 'loading') return;
+    if (currentStatus !== 'loading') return;
+
+    let isMounted = true;
     const checkFileExists = async () => {
       try {
         const response = await fetch(url, { method: 'HEAD' });
+        if (!isMounted) return;
 
         if (response.ok) {
           setStatus('success');
-          onLoadSuccessRef.current?.();
         } else {
           setStatus('error');
-          onLoadSuccessRef.current?.();
         }
       } catch {
+        if (!isMounted) return;
         setStatus('error');
-        onLoadSuccessRef.current?.();
       }
     };
 
     checkFileExists();
-  }, [url, isInView, status]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [url]);
 
   // タイムアウト監視
   useEffect(() => {
-    if (status !== 'loading') return; // ここも isInView 縛りを緩めて安全に
+    if (status !== 'loading') return;
     const timer = setTimeout(() => setStatus('error'), 10000);
     return () => clearTimeout(timer);
   }, [status]);
@@ -101,13 +99,11 @@ export const PreviewFrame = ({ url, onLoadSuccess }: PreviewFrameProps) => {
       {status !== 'error' && (
         <div className='relative flex items-center justify-center w-full h-full transition-transform duration-500'>
           <iframe
-            key={url}
-            ref={iframeRef} // refを付与することでマイクロタスクになり、Reactの内部処理と同タイミング（一塊）で処理される（外すと一部のアニメーションがもたつきます）
+            ref={iframeRef}
             src={url}
             className={`w-full h-full border-none transition-opacity duration-700 ${
               status === 'success' ? 'opacity-100' : 'opacity-0'
             }`}
-            onLoad={onLoadSuccess}
             sandbox='allow-scripts allow-same-origin'
             title='UI Part Preview'
           />
