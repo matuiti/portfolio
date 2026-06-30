@@ -10,54 +10,57 @@ type PreviewPanelProps = {
   onExpand: () => void;
 };
 
+type SelectableViewportWidth =
+  (typeof PREVIEW_PANEL_SETTINGS)['VIEWPORTS'][number]['width'];
+
 export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
-  // 実際にどのサイズで表示させるか
-  const [viewportWidth, setViewportWidth] = useState<number>(
+  const [viewportWidth, setViewportWidth] = useState<SelectableViewportWidth>(
     PREVIEW_PANEL_SETTINGS.DEFAULT_WIDTH,
   );
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
-  // iframe内のコンテンツの実際の高さ（縮小前）
+  // iframe内のコンテンツの高さ（縮小前）
   const [iframeContentHeight, setIframeContentHeight] = useState<number>(0);
 
-  // 高さの計算が「完全に完了したか」を管理するフラグ
+  // iframeの高さの計算が「完全に完了したか」を管理するフラグ
   const [isHeightCalculated, setIsHeightCalculated] = useState<boolean>(false);
 
   // iframe内のコンテンツの実際の高さ（縮小前）を更新する関数
   useEffect(() => {
     const iframe = containerRef.current?.querySelector('iframe');
     if (!(iframe instanceof HTMLIFrameElement)) return;
-
     let observer: ResizeObserver | null = null;
-    let cancelled = false;
 
     const attach = () => {
       try {
-        const target = iframe.contentWindow?.document.documentElement;
-        if (!target) return;
+        const iframeHtmlElement =
+          iframe.contentWindow?.document.documentElement;
+        if (!iframeHtmlElement) return;
+
         observer = new ResizeObserver((entries) => {
-          const h = entries[0]?.contentRect.height ?? target.scrollHeight;
-          if (!cancelled && h > 0 && h < 3000) {
+          const h =
+            entries[0]?.contentRect.height ?? iframeHtmlElement.scrollHeight;
+
+          if (h > 0 && h < 3000) {
             setIframeContentHeight(h);
             setIsHeightCalculated(true);
           }
         });
-        observer.observe(target);
+        observer.observe(iframeHtmlElement);
       } catch {
-        if (!cancelled) setIsHeightCalculated(true); // クロスオリジン等のフォールバック
+        setIsHeightCalculated(true);
       }
     };
 
     iframe.addEventListener('load', attach);
-    attach(); // 既に読み込み済みのケースにも対応
+    attach(); // 念の為の実行
 
     return () => {
-      cancelled = true;
       iframe.removeEventListener('load', attach);
       observer?.disconnect();
     };
-  }, [item.url]);
+  }, []);
 
   // コンテナの幅に合わせてスケールを計算する
   useEffect(() => {
@@ -108,7 +111,6 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
         </button>
       </div>
 
-      {/* key={item.url} をここに付与することでカードが切り替わるたびにローディングから再開されます */}
       <div
         key={item.url}
         className='relative flex-1 w-full h-full flex items-center justify-center bg-light-gray p-[calc(18.35/16*1rem)_calc(15/16*1rem)] mobile:p-[calc(24.6/16*1rem)_calc(15/16*1rem)] tablet:p-[calc(20/16*1rem)_calc(20/16*1rem)]'

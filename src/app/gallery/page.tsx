@@ -1,5 +1,5 @@
 'use client';
-import { Suspense, useMemo, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Pagination } from '@/components/ui/Pagination';
 import { GalleryLayout } from './components/Layout';
 import { PageHeader } from '@/components/ui/PageHeader';
@@ -13,9 +13,9 @@ import {
   useFilteredUIParts,
   useGalleryStore,
 } from '@/lib/store/useGalleryStore';
-import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
 import { Card } from './components/Card';
 import { PreviewModal } from './components/Card/preview/PreviewModal';
+import { useURLSync } from '@/lib/hooks/useURLSync';
 
 function GalleryPageContent() {
   const store = useGalleryStore();
@@ -24,7 +24,7 @@ function GalleryPageContent() {
     null,
   );
 
-  useCommonURLSync(
+  useURLSync(
     {
       category: store.selectedCategory,
       tags: store.selectedTags,
@@ -39,12 +39,13 @@ function GalleryPageContent() {
     },
   );
 
-  // 表示データの計算（ページネーション適用）
   const totalPages = Math.ceil(filteredUIParts.length / store.itemsPerPage);
-  const displayUIParts = useMemo(() => {
-    const start = (store.currentPage - 1) * store.itemsPerPage;
-    return filteredUIParts.slice(start, start + store.itemsPerPage);
-  }, [filteredUIParts, store.currentPage, store.itemsPerPage]);
+
+  const start = (store.currentPage - 1) * store.itemsPerPage;
+  const displayUIParts = filteredUIParts.slice(
+    start,
+    start + store.itemsPerPage,
+  );
 
   const selectedCategoryLabel = GALLERY_CATEGORIES.find(
     (cat) => cat.id === store.selectedCategory,
@@ -58,31 +59,24 @@ function GalleryPageContent() {
       : []),
   ];
 
-  const renderedTitle = useMemo(() => {
-    if (store.searchQuery) {
-      return `「${store.searchQuery}」の検索結果`;
-    }
-    const baseTitle =
-      store.selectedCategory === 'all'
-        ? 'すべてのアイテム'
-        : selectedCategoryLabel || 'すべてのアイテム';
-    const hasTags = store.selectedTags && store.selectedTags.length > 0;
-    return (
-      <>
-        <span>{baseTitle}</span>
-        {hasTags && (
-          <span className='text-[calc(12/16*1rem)] font-normal ml-2'>
-            {store.selectedTags.map((tag) => `#${tag}`).join(' ')}
-          </span>
-        )}
-      </>
-    );
-  }, [
-    store.searchQuery,
-    store.selectedCategory,
-    store.selectedTags,
-    selectedCategoryLabel,
-  ]);
+  const baseTitle =
+    store.selectedCategory === 'all'
+      ? 'すべてのアイテム'
+      : selectedCategoryLabel || 'すべてのアイテム';
+
+  const hasTags = store.selectedTags && store.selectedTags.length > 0;
+  const renderedTitle = store.searchQuery ? (
+    `「${store.searchQuery}」の検索結果`
+  ) : (
+    <>
+      <span>{baseTitle}</span>
+      {hasTags && (
+        <span className='text-[calc(12/16*1rem)] font-normal ml-2'>
+          {store.selectedTags.map((tag) => `#${tag}`).join(' ')}
+        </span>
+      )}
+    </>
+  );
 
   const totalHitCount = filteredUIParts.length;
 
@@ -101,7 +95,7 @@ function GalleryPageContent() {
         <TitleAndCount title={renderedTitle} count={totalHitCount} />
         {displayUIParts.length ? (
           <>
-            <div className='mt-[calc(60/16*1rem)] flex flex-col justify-center w-full gap-y-[calc(40/16*1rem)] base:mt-[calc(50/16*1rem)]'>
+            <div className='flex flex-col justify-center w-full gap-y-[calc(40/16*1rem)] mt-[calc(60/16*1rem)] base:mt-[calc(50/16*1rem)]'>
               {displayUIParts.map((item) => (
                 <Card
                   key={item.id}

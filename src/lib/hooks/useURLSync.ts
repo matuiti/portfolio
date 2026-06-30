@@ -8,7 +8,7 @@ import { URLSyncActions, URLSyncState } from '@/types/urlSync';
  * 共通仕様書に基づき、category, tags, q, page パラメータを双方向同期します。
  * URLにパラメータがない場合は、ストアの状態をデフォルトにリセットします。
  */
-export function useCommonURLSync<T extends string>(
+export function useURLSync<T extends string>(
   state: URLSyncState<T>,
   actions: URLSyncActions<T>,
 ) {
@@ -18,17 +18,15 @@ export function useCommonURLSync<T extends string>(
   const isInitialMount = useRef(true);
   const [debouncedQuery, setDebouncedQuery] = useState(state.searchQuery);
 
-  // 1. 初期化：アドレスバー（URL）をもとにステートを復元（パラメータがない場合はリセット）
+  // 初期化：アドレスバー（URL）をもとにステートを復元（パラメータがない場合はリセット）
   useEffect(() => {
     const category = searchParams.get('category');
     const tags = searchParams.get('tags');
     const q = searchParams.get('q');
     const page = searchParams.get('page');
 
-    // カテゴリの同期：なければ "all" に強制リセット
     actions.setSelectedCategory((category as T) || ('all' as T));
 
-    // タグの同期：なければ空配列 [] に強制リセット
     if (tags) {
       const tagList = tags.split(',').filter(Boolean);
       actions.setSelectedTags(tagList);
@@ -36,16 +34,14 @@ export function useCommonURLSync<T extends string>(
       actions.setSelectedTags([]);
     }
 
-    // 検索クエリの同期：なければ空文字 "" に強制リセット
     actions.setSearchQuery(q || '');
 
-    // ページ番号の同期：なければ 1 に強制リセット
     actions.setCurrentPage(page ? Number(page) : 1);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // ページマウント時の初期化として1回だけ実行
+  }, []);
 
-  // 2. デバウンス処理：入力停止から400ms後にURL反映用Stateを更新
+  // デバウンス処理：入力停止から指定ms後にURL反映用Stateを更新
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedQuery(state.searchQuery);
@@ -54,29 +50,25 @@ export function useCommonURLSync<T extends string>(
     return () => clearTimeout(timer);
   }, [state.searchQuery]);
 
-  // 3. ステート変化をURLに反映 (router.replace)
+  // ステート変化をURLに反映 (router.replace)
   useEffect(() => {
     // ステートの復元をまだ終えていないなら処理を抜ける
     if (isInitialMount.current) return;
 
     const params = new URLSearchParams();
 
-    // カテゴリが "all" 以外ならパラメータに追加
     if (state.category && state.category !== 'all') {
       params.set('category', state.category);
     }
 
-    // タグがあればカンマ区切りで追加
     if (state.tags.length > 0) {
       params.set('tags', state.tags.join(','));
     }
 
-    // デバウンスされた検索語句があれば追加
     if (debouncedQuery) {
       params.set('q', debouncedQuery);
     }
 
-    // 2ページ目以降ならページ番号を追加
     if (state.currentPage > 1) {
       params.set('page', state.currentPage.toString());
     }
@@ -95,9 +87,9 @@ export function useCommonURLSync<T extends string>(
     router,
   ]);
 
-  // 4. 初期化(effect 1〜3)が同一コミットで走り終えたあとにフラグを下ろす。
-  //    宣言順で最後に実行されるため、effect 3 は初回マウント時には
-  //    isInitialMount.current === true を見て確実にスキップできる。
+  // 初期化(effect 1〜3)が同一コミットで走り終えたあとにフラグを下ろす。
+  // 宣言順で最後に実行されるため、effect 3 は初回マウント時には
+  // isInitialMount.current === true を見て確実にスキップできる。
   useEffect(() => {
     isInitialMount.current = false;
   }, []);

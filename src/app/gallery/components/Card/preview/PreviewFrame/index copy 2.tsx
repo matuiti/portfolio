@@ -10,28 +10,25 @@ export const PreviewFrame = ({ url }: PreviewFrameProps) => {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>(
     'loading',
   );
+  const [prevUrl, setPrevUrl] = useState(url);
 
   const { containerRef, isInView } = useLazyIframe('100px');
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // エフェクトのトリガー（url, isInView）と、現在の状態（status）の判定を分離するための最新値保持
-  const stateRef = useRef({ status, isInView });
-  useEffect(() => {
-    stateRef.current = { status, isInView };
-  }, [status, isInView]);
+  if (url !== prevUrl) {
+    setPrevUrl(url);
+    setStatus('loading');
+  }
 
   // 事前のファイル存在チェック
   useEffect(() => {
-    const { status: currentStatus, isInView: currentInView } = stateRef.current;
+    // SP版のタブ切り替えに対応するため、「画面内に入った(isInView)」または「URLが新しく切り替わった直後(status === 'loading')」であれば、
+    // Observerの誤判定を無視して強制的に fetch を開始するマージ（結合）条件にします。
+    if (!isInView && status !== 'loading') return;
 
-    if (!currentInView && currentStatus !== 'loading') return;
-    if (currentStatus !== 'loading') return;
-
-    let isMounted = true;
     const checkFileExists = async () => {
       try {
         const response = await fetch(url, { method: 'HEAD' });
-        if (!isMounted) return;
 
         if (response.ok) {
           setStatus('success');
@@ -39,17 +36,12 @@ export const PreviewFrame = ({ url }: PreviewFrameProps) => {
           setStatus('error');
         }
       } catch {
-        if (!isMounted) return;
         setStatus('error');
       }
     };
 
     checkFileExists();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [url]);
+  }, [url, isInView, status]);
 
   // タイムアウト監視
   useEffect(() => {
@@ -99,7 +91,8 @@ export const PreviewFrame = ({ url }: PreviewFrameProps) => {
       {status !== 'error' && (
         <div className='relative flex items-center justify-center w-full h-full transition-transform duration-500'>
           <iframe
-            ref={iframeRef}
+            key={url}
+            ref={iframeRef} // refを付与することでマイクロタスクになり、Reactの内部処理と同タイミング（一塊）で処理される（外すと一部のアニメーションがもたつきます）
             src={url}
             className={`w-full h-full border-none transition-opacity duration-700 ${
               status === 'success' ? 'opacity-100' : 'opacity-0'
