@@ -71,6 +71,7 @@
   --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
   --shadow-gallery-card: 1px 1px 15px 0px rgba(0, 0, 0, 0.1);
   --shadow-gallery-card-tab: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-gallery-arrow-bg: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 
   /* --- ブラー --- */
   --backdrop-blur-default: 10px;

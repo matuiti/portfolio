@@ -139,7 +139,7 @@ export const WorkDetailModal = ({
 
             {/* 閉じるボタン */}
             <button className={styles.closeBtn} onClick={onClose}>
-              <CloseModal color='white' size='xl' />
+              <CloseModal />
             </button>
           </div>
         </header>

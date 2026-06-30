@@ -19,27 +19,22 @@ const iconStyles = tv({
   },
 });
 
-export type ZoomOutMapProps = React.SVGProps<SVGSVGElement> &
+export type PhoneProps = React.SVGProps<SVGSVGElement> &
   VariantProps<typeof iconStyles>;
 
-export const ZoomOutMap = ({
-  color,
-  size,
-  className,
-  ...props
-}: ZoomOutMapProps) => {
+export const Phone = ({ color, size, className, ...props }: PhoneProps) => {
   return (
     <svg
       viewBox='0 0 24 24'
-      fill='currentColor'
+      fill='none'
       xmlns='http://www.w3.org/2000/svg'
       className={iconStyles({ color, size, className })}
       {...props}
     >
-        <path
-          d='M15 3L17.3 5.3L14.41 8.17L15.83 9.59L18.7 6.7L21 9V3H15ZM3 9L5.3 6.7L8.17 9.59L9.59 8.17L6.7 5.3L9 3H3V9ZM9 21L6.7 18.7L9.59 15.83L8.17 14.41L5.3 17.3L3 15V21H9ZM21 15L18.7 17.3L15.83 14.41L14.41 15.83L17.3 18.7L15 21H21V15Z'
-          fill='#757575'
-        />
+      <path
+        d='M15.0769 3.5H8.92308C7.86154 3.5 7 4.36545 7 5.43182V18.5682C7 19.6345 7.86154 20.5 8.92308 20.5H15.0769C16.1385 20.5 17 19.6345 17 18.5682V5.43182C17 4.36545 16.1385 3.5 15.0769 3.5ZM12 19.7273C11.3615 19.7273 10.8462 19.2095 10.8462 18.5682C10.8462 17.9268 11.3615 17.4091 12 17.4091C12.6385 17.4091 13.1538 17.9268 13.1538 18.5682C13.1538 19.2095 12.6385 19.7273 12 19.7273ZM15.4615 16.6364H8.53846V5.81818H15.4615V16.6364Z'
+        fill='currentColor'
+      />
     </svg>
   );
 };
