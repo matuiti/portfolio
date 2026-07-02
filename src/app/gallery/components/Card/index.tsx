@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { DescriptionPanel } from './DescriptionPanel';
 import { CodePanel } from './CodePanel';
 import { TabSwitcher } from './TabSwitcher';
-import { TabType, GalleryUIPart } from '@/gallery/types';
+import { TabType, GalleryUIPart, DefaultTab } from '@/gallery/types';
 import dynamic from 'next/dynamic';
 
-// 実際に必要になったタイミングでコンポーネントを遅延読み込み。クライアントサイドのみに設定。
+// 実際に必要になったタイミングでコンポーネントを読み込む。クライアントサイドのみ。
 const PreviewPanel = dynamic(
   () => import('./PreviewPanel').then((mod) => mod.PreviewPanel),
   { ssr: false },
@@ -18,12 +18,13 @@ type CardProps = {
 };
 
 export const Card = ({ item, onExpand }: CardProps) => {
-  const [activeTab, setActiveTab] = useState<TabType>('description');
+  const DEFAULT_TAB: DefaultTab = 'description';
+  const [activeTab, setActiveTab] = useState<TabType>(DEFAULT_TAB);
   const BP_TABLET = 840;
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= BP_TABLET) {
-        setActiveTab('description');
+        setActiveTab(DEFAULT_TAB);
       }
     };
     window.addEventListener('resize', handleResize);
@@ -33,11 +34,9 @@ export const Card = ({ item, onExpand }: CardProps) => {
   if (!item) return null;
 
   return (
-    <div
-      className={`group shadow-gallery-card bg-white rounded-[calc(20/16*1rem)] overflow-hidden tablet:flex tablet:flex-row w-full h-auto transition-all duration-500`}
-    >
-      {/* 3tab↔2tab(tablet~) */}
-      <div className='tablet:w-[50%] py-5 px-2.5 mobile:px-[calc(15/16*1rem)] tablet:px-5  flex flex-col border-b tablet:border-b-0 tablet:border-r border-medium-gray shrink-0 min-w-0'>
+    <div className='group shadow-gallery-card bg-white rounded-[calc(20/16*1rem)] overflow-hidden tablet:grid tablet:grid-cols-2 w-full h-auto transition-all duration-500'>
+      {/* 3tab↔2tab(tablet~) 左側エリア */}
+      <div className='py-5 px-2.5 mobile:px-[calc(15/16*1rem)] tablet:px-5 flex flex-col border-b tablet:border-b-0 tablet:border-r border-medium-gray shrink-0 min-w-0'>
         <div className='mb-4 shrink-0'>
           <h3 className='text-[calc(18/16*1rem)] tablet:text-3xl text-black leading-none tablet:group-hover:opacity-[var(--opacity-hover)] tablet:transition-all'>
             {item.title}
@@ -49,15 +48,9 @@ export const Card = ({ item, onExpand }: CardProps) => {
         </div>
 
         {/* コンテンツエリア */}
-        <div className='relative flex flex-col'>
-          {/* className=
-            {`flex-1 min-h-0 ${
-              activeTab === 'code'
-                ? 'overflow-hidden' // CodePanel自体にスクロールを任せる
-                : 'overflow-y-auto custom-scrollbar pr-2 tablet:pr-6'
-            }`} */}
+        <div className='relative flex flex-col flex-1'>
           <div className='flex-1 h-full min-h-[calc(168.82/16*1rem)] tablet:min-h-[calc(196.34/16*1rem)] overflow-hidden'>
-            <div className='aspect-[300/168.82] tablet:aspect-[350/196.34]'>
+            <div className='aspect-[300/168.82] tablet:aspect-[350/196.34] h-full'>
               {activeTab === 'description' && <DescriptionPanel item={item} />}
 
               {activeTab === 'code' && (
@@ -75,7 +68,7 @@ export const Card = ({ item, onExpand }: CardProps) => {
               )}
             </div>
           </div>
-          <div className='flex flex-wrap gap-2 mt-4'>
+          <div className='flex flex-wrap gap-2 mt-4 shrink-0'>
             {item.tags?.map((tag) => (
               <span
                 key={tag}
@@ -88,15 +81,15 @@ export const Card = ({ item, onExpand }: CardProps) => {
         </div>
       </div>
 
-      {/* PC only プレビューパネル */}
-      <div className='hidden tablet:block flex-1 overflow-hidden'>
-        {
+      {/* PC only プレビューパネル（右側エリア） */}
+      <div className='hidden tablet:block relative h-full overflow-hidden'>
+        <div className='absolute inset-0 w-full h-full'>
           <PreviewPanel
             key={item.url}
             item={item}
             onExpand={() => onExpand(item)}
           />
-        }
+        </div>
       </div>
     </div>
   );

@@ -91,7 +91,7 @@ function GalleryPageContent() {
         <Breadcrumbs items={breadcrumbItems} />
       </div>
       {/* コンテンツ */}
-      <div className='section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray'>
+      <div className='section-padding-x pb-[calc(150/16*1rem)] pt-10 default:pt-12.5 bg-light-gray'>
         <TitleAndCount title={renderedTitle} count={totalHitCount} />
         {displayUIParts.length ? (
           <>

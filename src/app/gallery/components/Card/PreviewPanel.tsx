@@ -4,6 +4,7 @@ import { GalleryUIPart } from '@/gallery/types';
 import { PREVIEW_PANEL_SETTINGS } from '@/gallery/data';
 import { ZoomOutMap } from '@/components/ui/Icons';
 import { PreviewFrame } from './preview/PreviewFrame';
+import { useIframeContentHeight } from '@/gallery/lib/hooks/useIframeContentHeight';
 
 type PreviewPanelProps = {
   item: GalleryUIPart;
@@ -17,74 +18,51 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
   const [viewportWidth, setViewportWidth] = useState<SelectableViewportWidth>(
     PREVIEW_PANEL_SETTINGS.DEFAULT_WIDTH,
   );
+
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
 
-  // iframe内のコンテンツの高さ（縮小前）
-  const [iframeContentHeight, setIframeContentHeight] = useState<number>(0);
+  // iframeの中身の高さを監視
+  const { height: iframeContentHeight, isCalculated: isHeightCalculated } =
+    useIframeContentHeight(containerRef);
 
-  // iframeの高さの計算が「完全に完了したか」を管理するフラグ
-  const [isHeightCalculated, setIsHeightCalculated] = useState<boolean>(false);
+  // 表示用パネル全体の実際のサイズを管理
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
 
-  // iframe内のコンテンツの実際の高さ（縮小前）を更新する関数
+  // 表示用パネル全体のサイズ変更をリアルタイムに監視
   useEffect(() => {
-    const iframe = containerRef.current?.querySelector('iframe');
-    if (!(iframe instanceof HTMLIFrameElement)) return;
-    let observer: ResizeObserver | null = null;
+    if (!containerRef.current) return;
 
-    const attach = () => {
-      try {
-        const iframeHtmlElement =
-          iframe.contentWindow?.document.documentElement;
-        if (!iframeHtmlElement) return;
-
-        observer = new ResizeObserver((entries) => {
-          const h =
-            entries[0]?.contentRect.height ?? iframeHtmlElement.scrollHeight;
-
-          if (h > 0 && h < 3000) {
-            setIframeContentHeight(h);
-            setIsHeightCalculated(true);
-          }
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) {
+        setContainerSize({
+          width: entry.contentRect.width,
+          height: entry.contentRect.height,
         });
-        observer.observe(iframeHtmlElement);
-      } catch {
-        setIsHeightCalculated(true);
       }
-    };
+    });
 
-    iframe.addEventListener('load', attach);
-    attach(); // 念の為の実行
-
-    return () => {
-      iframe.removeEventListener('load', attach);
-      observer?.disconnect();
-    };
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, []);
 
-  // コンテナの幅に合わせてスケールを計算する
-  useEffect(() => {
-    const updateScale = () => {
-      if (containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth;
-        const newScale = containerWidth / viewportWidth; // 実際の幅 ÷ 表示したい仮想ビューポート幅
-        const finalScale = Math.min(newScale, 1); // 拡大はしない（最大100%）
-        setScale(finalScale);
-      }
-    };
+  // レンダリング中に安全にスケールを計算する
+  let scale = 1;
+  if (
+    containerSize.width > 0 &&
+    containerSize.height > 0 &&
+    iframeContentHeight > 0
+  ) {
+    const widthScale = containerSize.width / viewportWidth;
+    const heightScale = containerSize.height / iframeContentHeight;
 
-    updateScale();
-    const handleResize = () => {
-      updateScale();
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [viewportWidth]);
+    // 縦も横も同時にはみ出さない、最も小さいスケール（最大100%）を採用
+    scale = Math.min(widthScale, heightScale, 1);
+  }
 
   return (
     <div className='flex flex-col h-full'>
-      {/* ビューポートコントローラー */}
+      {/* プレビューサイズ切り替えボタン */}
       <div className='flex items-center justify-between bg-white py-2.5 tablet:p-[calc(10/16*1rem)_calc(16.5/16*1rem)_calc(16/16*1rem)_calc(20/16*1rem)]'>
         <div className='flex items-center gap-2'>
           {PREVIEW_PANEL_SETTINGS.VIEWPORTS.map((v) => (
@@ -111,31 +89,42 @@ export const PreviewPanel = ({ item, onExpand }: PreviewPanelProps) => {
         </button>
       </div>
 
+      {/* 表示パネルのルート（背景領域） */}
       <div
         key={item.url}
-        className='relative flex-1 w-full h-full flex items-center justify-center bg-light-gray p-[calc(18.35/16*1rem)_calc(15/16*1rem)] mobile:p-[calc(24.6/16*1rem)_calc(15/16*1rem)] tablet:p-[calc(20/16*1rem)_calc(20/16*1rem)]'
+        ref={containerRef}
+        className='relative flex-1 w-full h-full flex items-center justify-center bg-light-gray p-[calc(18.35/16*1rem)_calc(15/16*1rem)] mobile:p-[calc(24.6/16*1rem)_calc(15/16*1rem)] tablet:p-[calc(20/16*1rem)_calc(20/16*1rem)] overflow-hidden'
       >
-        {/* 計算中のローディングスピナー */}
+        {/* ローディングスピナー */}
         {!isHeightCalculated && (
           <div className='absolute inset-0 flex items-center justify-center bg-light-gray rounded-lg animate-pulse'>
             <div className='w-6 h-6 border-2 border-black/10 border-t-black rounded-full animate-spin' />
           </div>
         )}
 
-        {/* プレビュー表示エリア */}
+        {/* 物理的に縮小させる */}
         <div
-          ref={containerRef}
-          className={`relative flex items-start justify-center overflow-x-hidden overflow-y-auto w-auto h-full tablet:aspect-[350/196.34] bg-white rounded-lg ${
+          className={`relative bg-white rounded-lg transition-opacity duration-200 ${
             isHeightCalculated ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
+          style={{
+            // スクロールバーを出さずに、外枠の中にぴったり収まるように計算
+            width: `${viewportWidth * scale}px`,
+            height:
+              iframeContentHeight > 0
+                ? `${iframeContentHeight * scale}px`
+                : '100%',
+          }}
         >
+          {/* 見た目上のみ縮小させる */}
           <div
             style={{
+              // パーツの実寸を指定する
               width: `${viewportWidth}px`,
               height:
                 iframeContentHeight > 0 ? `${iframeContentHeight}px` : '100%',
               transform: `scale(${scale})`,
-              transformOrigin: 'top center',
+              transformOrigin: 'top left',
             }}
           >
             <PreviewFrame url={item.url} />

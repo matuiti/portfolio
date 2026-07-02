@@ -34,6 +34,7 @@ export type TagGroup = {
   tags: string[];
 };
 
+export type DefaultTab = 'description' | 'code';
 export type TabType = 'description' | 'code' | 'preview';
 
 export type TabItem = {
