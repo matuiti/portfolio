@@ -88,7 +88,7 @@ export const ContactForm = () => {
               <p className={styles.successText}>
                 お問い合わせありがとうございます。内容を確認の上、
                 <br className='hidden tablet:block' />
-                順次メールにてご連絡いたします。
+                順次メールにてご連絡致します。
               </p>
             </div>
             <SubButton

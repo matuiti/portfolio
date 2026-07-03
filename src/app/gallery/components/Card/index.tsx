@@ -34,11 +34,11 @@ export const Card = ({ item, onExpand }: CardProps) => {
   if (!item) return null;
 
   return (
-    <div className='group shadow-gallery-card bg-white rounded-[calc(20/16*1rem)] overflow-hidden tablet:grid tablet:grid-cols-2 w-full h-auto transition-all duration-500'>
+    <div className={`group shadow-gallery-card bg-white rounded-[calc(20/16*1rem)] overflow-hidden tablet:grid tablet:grid-cols-2 w-full h-auto transition-all duration-500`}>
       {/* 3tab↔2tab(tablet~) 左側エリア */}
       <div className='py-5 px-2.5 mobile:px-[calc(15/16*1rem)] tablet:px-5 flex flex-col border-b tablet:border-b-0 tablet:border-r border-medium-gray shrink-0 min-w-0'>
         <div className='mb-4 shrink-0'>
-          <h3 className='text-[calc(18/16*1rem)] tablet:text-3xl text-black leading-none tablet:group-hover:opacity-[var(--opacity-hover)] tablet:transition-all'>
+          <h3 className='text-[calc(18/16*1rem)] text-black leading-none tablet:group-hover:opacity-[var(--opacity-hover)] tablet:transition-all'>
             {item.title}
           </h3>
         </div>
