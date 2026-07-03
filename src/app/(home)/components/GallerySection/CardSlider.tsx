@@ -1,6 +1,6 @@
 import { CarouselArrowRight } from '@/components/ui/Icons';
 import { Card } from '@/gallery/components/Card';
-import { GalleryUIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/types/gallery';
 import { useState, useRef, useEffect, useCallback, TouchEvent } from 'react';
 import styles from './CardSlider.module.css';
 

@@ -1,5 +1,5 @@
 import { GALLERY_TABS } from '@/gallery/data';
-import { TabItem, TabType } from '@/gallery/types';
+import { TabItem, TabType } from '@/types/gallery';
 
 type TabSwitcherProps = {
   activeTab: TabType;

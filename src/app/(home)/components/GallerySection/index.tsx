@@ -1,14 +1,14 @@
 'use client';
+import { useState } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
-import { useState } from 'react';
-import { GalleryUIPart } from '@/gallery/types';
-import { UI_PARTS } from '@/gallery/data/ui-parts';
+import { GalleryUIPart } from '@/types/gallery';
+import { UI_PARTS } from '@/data/gallery-parts';
 import { PreviewModal } from '@/gallery/components/Card/preview/PreviewModal';
 import { CardSlider } from './CardSlider';
 import styles from './GallerySection.module.css';
 
-const message = `ギャラリーのカードからは、概要・コード・レスポンシブの表示をご確認いただけます。
+const MESSAGE = `ギャラリーのカードからは、概要・コード・レスポンシブの表示をご確認いただけます。
 プレビュー内のパーツの使用言語は、ピュアなHTML・CSS（SASS）・JavaScriptです。
 独立したサンドボックス環境からiframeタグで読み込み出力しています。
 
@@ -33,7 +33,7 @@ export const GallerySection = () => {
               variant='default'
               className='js-fuwa-fade'
             />
-            <p className={`${styles.description} js-fuwa-fade`}>{message}</p>
+            <p className={`${styles.description} js-fuwa-fade`}>{MESSAGE}</p>
           </div>
 
           <div className={`${styles.body} js-fuwa-fade`}>

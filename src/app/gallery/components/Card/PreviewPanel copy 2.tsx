@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import { GalleryUIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/types/gallery';
 import { PREVIEW_PANEL_SETTINGS } from '@/gallery/data';
 import { ZoomOutMap } from '@/components/ui/Icons';
 import { PreviewFrame } from './preview/PreviewFrame';

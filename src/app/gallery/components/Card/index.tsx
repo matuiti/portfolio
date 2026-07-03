@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { DescriptionPanel } from './DescriptionPanel';
 import { CodePanel } from './CodePanel';
 import { TabSwitcher } from './TabSwitcher';
-import { TabType, GalleryUIPart, DefaultTab } from '@/gallery/types';
+import { TabType, GalleryUIPart, DefaultTab } from '@/types/gallery';
 import dynamic from 'next/dynamic';
 
 // 実際に必要になったタイミングでコンポーネントを読み込む。クライアントサイドのみ。
@@ -34,7 +34,9 @@ export const Card = ({ item, onExpand }: CardProps) => {
   if (!item) return null;
 
   return (
-    <div className={`group shadow-gallery-card bg-white rounded-[calc(20/16*1rem)] overflow-hidden tablet:grid tablet:grid-cols-2 w-full h-auto transition-all duration-500`}>
+    <div
+      className={`group shadow-gallery-card bg-white rounded-[calc(20/16*1rem)] overflow-hidden tablet:grid tablet:grid-cols-2 w-full h-auto transition-all duration-500`}
+    >
       {/* 3tab↔2tab(tablet~) 左側エリア */}
       <div className='py-5 px-2.5 mobile:px-[calc(15/16*1rem)] tablet:px-5 flex flex-col border-b tablet:border-b-0 tablet:border-r border-medium-gray shrink-0 min-w-0'>
         <div className='mb-4 shrink-0'>

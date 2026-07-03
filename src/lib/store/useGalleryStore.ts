@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 import { useShallow } from 'zustand/shallow';
-import { UI_PARTS } from '@/gallery/data/ui-parts';
+import { UI_PARTS } from '@/data/gallery-parts';
 import {
   GalleryCategory,
   GalleryState,
   ResetFilters,
   GalleryUIPart,
-} from '@/gallery/types';
+} from '@/types/gallery';
 import { GALLERY_SETTINGS } from '@/gallery/data';
 
 // 「フィルタ条件」をリセットする際の共通の土台
@@ -53,11 +53,14 @@ export const useFilteredUIParts = () => {
   return useGalleryStore(
     useShallow((state) => {
       const { searchQuery, selectedCategory, selectedTags } = state;
-      return filterUIParts(UI_PARTS, { searchQuery, selectedCategory, selectedTags });
+      return filterUIParts(UI_PARTS, {
+        searchQuery,
+        selectedCategory,
+        selectedTags,
+      });
     }),
   );
 };
-
 
 const filterUIParts = (
   GalleryUIParts: GalleryUIPart[],

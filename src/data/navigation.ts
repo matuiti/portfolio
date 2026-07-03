@@ -3,12 +3,12 @@ import { NavItem } from "@/types/navigation";
 export const NAV_ITEMS: NavItem[] = [
   { label: "トップ", href: "/", isPublished: true },
   { label: "制作実績", href: "/works", isPublished: true },
-  { label: "UIギャラリー(開発中)", href: "/gallery", isPublished: true },// 現在未公開→開発中（true）
+  { label: "UIギャラリー", href: "/gallery", isPublished: true },
   { label: "サービス内容", href: "/#service", isPublished: true },
   { label: "スキル", href: "/skills", isPublished: true },
   { label: "私について", href: "/#about", isPublished: true },
   { label: "お問い合わせ", href: "/#contact", isPublished: true },
-  // { label: "Workbench", href: "/workbench", isPublished: true }, // UIギャラリーパーツの開発用レビューページ
+  // { label: "Workbench", href: "/workbench", isPublished: true }, // ギャラリーパーツの開発用ページ
 ];
 
 /**

@@ -11,7 +11,7 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-markup';
 
-import { GalleryUIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/types/gallery';
 
 type CodePanelProps = {
   item: GalleryUIPart;

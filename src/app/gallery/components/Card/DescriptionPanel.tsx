@@ -1,4 +1,4 @@
-import { GalleryUIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/types/gallery';
 
 export const DescriptionPanel = ({ item }: { item: GalleryUIPart }) => {
   return (
