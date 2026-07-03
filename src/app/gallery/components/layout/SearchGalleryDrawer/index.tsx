@@ -11,7 +11,7 @@ import {
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { useMemo } from 'react';
 import { GALLERY_CATEGORIES } from '@/gallery/data';
-import { GalleryCategory } from '@/gallery/types';
+import { GalleryCategory } from '@/types/gallery';
 import styles from './SearchGalleryDrawer.module.css';
 
 export function SearchGalleryDrawer() {

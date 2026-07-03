@@ -1,4 +1,4 @@
-import { GalleryUIPart } from '../types';
+import { GalleryUIPart } from '../types/gallery';
 
 export const UI_PARTS: GalleryUIPart[] = [
   {

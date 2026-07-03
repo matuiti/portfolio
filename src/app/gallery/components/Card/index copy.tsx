@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { DescriptionPanel } from './DescriptionPanel';
 import { CodePanel } from './CodePanel';
 import { TabSwitcher } from './TabSwitcher';
-import { TabType, GalleryUIPart } from '@/gallery/types';
+import { TabType, GalleryUIPart } from '@/types/gallery';
 import dynamic from 'next/dynamic';
 
 // PreviewPanelコンポーネントをクライアントサイドのみで読み込む設定

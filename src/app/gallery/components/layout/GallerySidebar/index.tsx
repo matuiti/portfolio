@@ -5,8 +5,8 @@ import { SearchBox } from '@/components/ui/SearchBox';
 import { CategoryList } from '@/components/ui/CategoryList';
 import { TagFilters } from '@/components/ui/TagFilters';
 import { scrollToTop } from '@/lib/utility/scrollToTop';
-import { GalleryCategory } from '@/gallery/types';
-import { UI_PARTS } from '@/gallery/data/ui-parts';
+import { GalleryCategory } from '@/types/gallery';
+import { UI_PARTS } from '@/data/gallery-parts';
 import { GALLERY_CATEGORIES } from '@/gallery/data';
 import styles from './GallerySidebar.module.css';
 

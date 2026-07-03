@@ -8,7 +8,7 @@ import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { GALLERY_CATEGORIES, PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
 import { LoadingGallery } from './components/LoadingGallery';
-import { GalleryUIPart } from './types';
+import { GalleryUIPart } from '../../types/gallery';
 import {
   useFilteredUIParts,
   useGalleryStore,

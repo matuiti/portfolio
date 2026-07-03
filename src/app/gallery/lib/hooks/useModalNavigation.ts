@@ -1,5 +1,5 @@
 'use client';
-import { GalleryUIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/types/gallery';
 import { useEffect, useCallback } from 'react';
 
 type UseModalNavigationProps = {

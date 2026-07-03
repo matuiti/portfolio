@@ -1,4 +1,4 @@
-import { GalleryCategorys, TabItem, TagGroup } from '@/gallery/types';
+import { GalleryCategorys, TabItem, TagGroup } from '@/types/gallery';
 
 /**
  * ギャラリー全体の基本設定

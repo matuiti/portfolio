@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { IndicatorBox } from './IndicatorBox';
 import { ModalNavigation } from './ModalNavigation';
-import { GalleryUIPart } from '@/gallery/types';
+import { GalleryUIPart } from '@/types/gallery';
 import { PREVIEW_MODAL_SETTINGS } from '@/gallery/data';
 import { useModalNavigation } from '@/gallery/lib/hooks/useModalNavigation';
 import { CloseModal } from '@/components/ui/Icons/CloseModal';
