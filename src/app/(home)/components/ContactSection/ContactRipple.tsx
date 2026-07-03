@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useUIStore } from '@/lib/hooks/useUIStore';
+import { useStore } from '@/lib/store/useStore';
 import styles from './ContactSection.module.css';
 
 /**
@@ -11,7 +11,7 @@ import styles from './ContactSection.module.css';
 export const ContactRipple = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rippleRef = useRef<HTMLDivElement>(null);
-  const { contactStatus } = useUIStore();
+  const { contactStatus } = useStore();
 
   useGSAP(
     () => {

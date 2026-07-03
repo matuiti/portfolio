@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { tv } from 'tailwind-variants';
 import { NAV_ITEMS, SEARCHABLE_PATHS } from '@/data/navigation';
-import { useUIStore } from '@/lib/hooks/useUIStore';
 import { useScrollThreshold } from '@/lib/hooks/useScrollThreshold';
 import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { Hamburger, SearchLarge } from '@/components/ui/Icons';
+import { useStore } from '@/lib/store/useStore';
 
 export const headerStyles = tv({
   slots: {
@@ -36,7 +36,7 @@ type HeaderProps = {
 export const Header = ({ onMenuOpen }: HeaderProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
-  const { setPhase, setSearchDrawerOpen } = useUIStore();
+  const { setPhase, setSearchDrawerOpen } = useStore();
 
   useEffect(() => {
     if (!isHomePage) setPhase('ready');

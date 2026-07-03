@@ -1,12 +1,11 @@
 'use client';
-
-import { UIPart } from '@/gallery/types/ui-part';
+import { GalleryUIPart } from '@/types/gallery';
 import { useEffect, useCallback } from 'react';
 
 type UseModalNavigationProps = {
-  currentItem: UIPart;
-  allItems: UIPart[];
-  onNavigate: (item: UIPart) => void;
+  currentItem: GalleryUIPart;
+  allItems: GalleryUIPart[];
+  onNavigate: (item: GalleryUIPart) => void;
   isOpen: boolean;
 };
 
@@ -21,7 +20,6 @@ export function useModalNavigation({
   const hasPrev = currentIndex > 0;
   const hasNext = currentIndex < allItems.length - 1;
 
-  // useCallbackで関数をメモ化する
   const goToPrev = useCallback(() => {
     if (hasPrev) {
       onNavigate(allItems[currentIndex - 1]);
@@ -34,18 +32,15 @@ export function useModalNavigation({
     }
   }, [hasNext, onNavigate, allItems, currentIndex]);
 
-  // キーボードイベントの登録
   useEffect(() => {
     if (!isOpen) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') goToPrev();
       if (e.key === 'ArrowRight') goToNext();
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, goToPrev, goToNext]); // 必要最小限かつ正確な依存配列
+  }, [isOpen, goToPrev, goToNext]);
 
   return {
     currentIndex,

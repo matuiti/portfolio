@@ -1,10 +1,9 @@
-// src/data/works.ts
-import { Work, WorkFilterCategory } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 
 /**
  * WORKSセクション全体で使用する共通カテゴリ定義 (SSoT)
  */
-export const WORK_CATEGORIES: { label: string; value: WorkFilterCategory }[] = [
+export const WORK_CATEGORIES: { label: string; value: WorkCategory }[] = [
   { label: 'すべて', value: 'all' },
   { label: 'Web制作', value: 'web' },
   { label: 'WordPress', value: 'wordpress' },

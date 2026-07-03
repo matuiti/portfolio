@@ -4,7 +4,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { WorkCard } from '@/app/works/components/WorkCard';
 import { WorkDetailModal } from '@/app/works/components/WorkDetailModal';
 import { ALL_WORKS } from '@/data/works';
-import { Work, WorkCategory, WorkFilterCategory } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 import { CategoryTabs } from './CategoryTabs';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { useRouter } from 'next/navigation';
@@ -12,8 +12,7 @@ import styles from './WorksSection.module.css';
 
 export const WorksSection = () => {
   const router = useRouter();
-  const [activeCategory, setActiveCategory] =
-    useState<WorkFilterCategory>('web');
+  const [activeCategory, setActiveCategory] = useState<WorkCategory>('web');
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
   // モーダル内のボタンから呼び出される遷移ロジック
@@ -28,7 +27,6 @@ export const WorksSection = () => {
   // フィルタリングロジック：カテゴリに基づいてデータを抽出
   const displayWorks = useMemo(() => {
     const filtered = ALL_WORKS.filter((work) => {
-      // "all" の場合は全てのデータを通す
       if (activeCategory === 'all') return true;
       return work.category.includes(activeCategory as WorkCategory);
     });
@@ -41,14 +39,12 @@ export const WorksSection = () => {
       <div className='section-padding-y section-padding-x bg-white'>
         <div className='container-center'>
           <div className={styles.sectionHead}>
-            {/* セクション見出し */}
             <SectionTitle
               enTitle='works'
               jpTitle='制作実績'
               variant='default'
               className='js-fuwa-fade'
             />
-            {/* カテゴリスイッチ */}
             <div className='js-fuwa-fade'>
               <CategoryTabs
                 activeCategory={activeCategory}
@@ -57,7 +53,7 @@ export const WorksSection = () => {
             </div>
           </div>
 
-          {/* 実績グリッド表示 */}
+          {/* 実績グリッド */}
           <div className={styles.cards}>
             {displayWorks.length ? (
               displayWorks.map((work) => (
@@ -88,7 +84,6 @@ export const WorksSection = () => {
             </div>
           </div>
 
-          {/* 詳細モーダル */}
           {selectedWork && (
             <WorkDetailModal
               key={selectedWork.id}

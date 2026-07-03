@@ -1,10 +1,10 @@
 'use client';
 import { memo, useState } from 'react';
-import { Work, WorkFilterCategory } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SafeImage } from '@/components/ui/SafeImage';
 import { scrollToTop } from '@/lib/utility/scrollToTop';
-import { useGetPageName } from '@/lib/hooks/useGetPageName';
+import { useGetCurrentPageName } from '@/lib/hooks/useGetCurrentPageName';
 
 const NDA_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
 const PLACEHOLDER_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
@@ -12,7 +12,7 @@ const PLACEHOLDER_THUMBNAIL_PATH = '/assets/images/common/noimage.jpg';
 type WorkCardProps = {
   work: Work;
   onClick: () => void;
-  onCategoryClick?: (cat: WorkFilterCategory) => void;
+  onCategoryClick?: (cat: WorkCategory) => void;
   className?: string;
 };
 
@@ -32,22 +32,30 @@ export const WorkCard = memo(
     const hoveredText =
       work.disclosureLevel === 'NDA' ? '非公開実績' : '詳しく見る';
 
-    const currentPageName = useGetPageName();
+    const currentPageName = useGetCurrentPageName();
+
     const handleCategoryClick = (e: React.MouseEvent, cat: string) => {
-      e.stopPropagation();
       if (!onCategoryClick) return;
-      onCategoryClick(cat as WorkFilterCategory);
+      e.stopPropagation();
+      onCategoryClick(cat as WorkCategory);
+
       if (currentPageName === 'works') {
         scrollToTop();
+      }
+      else if (currentPageName === '/') {
+        const worksSection = document.getElementById('works');
+        if (worksSection) {
+          worksSection.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     };
 
     return (
       <article
         onClick={onClick}
-        className={`group flex flex-col overflow-hidden cursor-pointer shadow-card rounded-lg ${
-          !isTagHovered ? 'hover:shadow-none' : ''
-        } ${className || ''}
+        className={`group flex flex-col overflow-hidden tablet:cursor-pointer shadow-card rounded-lg max-w-full ${
+          !isTagHovered ? 'tablet:hover:shadow-none' : ''
+        } ${className ? className : ''}
         }`}
       >
         {/* サムネイル */}
@@ -58,14 +66,16 @@ export const WorkCard = memo(
             fill
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className={`object-cover transition-transform duration-700 ${
-              !isTagHovered ? 'group-hover:scale-110' : ''
+              !isTagHovered ? 'tablet:group-hover:scale-110' : ''
             }`}
           />
 
           {/* 画像オーバーレイ */}
           <div
             className={`absolute inset-0 bg-menu-backdrop flex items-center justify-center transition-opacity duration-500 z-image-overlay ${
-              !isTagHovered ? 'opacity-0 group-hover:opacity-100' : 'opacity-0'
+              !isTagHovered
+                ? 'opacity-0 tablet:group-hover:opacity-100'
+                : 'opacity-0'
             }`}
           >
             <span className='text-white text-[calc(18/16*1rem)]'>
@@ -77,7 +87,7 @@ export const WorkCard = memo(
         {/* 情報 */}
         <div
           className={`bg-white flex flex-col flex-1 pt-[calc(28/16*1rem)] px-[calc(16/16*1rem)] pb-[calc(16/16*1rem)] ${
-            !isTagHovered ? 'group-hover:bg-light-gray' : ''
+            !isTagHovered ? 'tablet:group-hover:bg-light-gray' : ''
           }`}
         >
           <div

@@ -1,5 +1,5 @@
 'use client';
-import { useUIStore } from '@/lib/hooks/useUIStore';
+import { useStore } from '@/lib/store/useStore';
 import { clsx } from 'clsx';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
@@ -10,8 +10,8 @@ import styles from './MainVisual.module.css';
 export const MainVisual = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const setPhase = useUIStore((state) => state.setPhase);
-  const phase = useUIStore((state) => state.phase);
+  const setPhase = useStore((state) => state.setPhase);
+  const phase = useStore((state) => state.phase);
   const isReady = phase === 'ready';
 
   useGSAP(
@@ -102,9 +102,9 @@ export const MainVisual = () => {
               <span className={`${mvItemClass}`}>技術者でありたい</span>
             </h1>
             <p className={`${mvItemClass} ${styles.subCopyText}`}>
-              訪問ユーザー・コンテンツ管理者・開発メンバーの
+              ユーザー・管理者・技術者にとって
               <br />
-              利用体験を想像したサービスの提供
+              「分かりやすい」実装を目指します
             </p>
           </div>
           <div

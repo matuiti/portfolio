@@ -1,10 +1,10 @@
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { breadcrumbItems, PRIVACY_POLICY_DATA } from '@/data/privacyPolicy';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
+import { PRIVACY_POLICY_DATA } from '@/data/privacyPolicy';
+import { breadcrumbItems, PAGE_HEADER_DATA } from './data';
 import styles from './PrivacyPolicy.module.css';
-import { PAGE_HEADER_DATA } from '@/skills/data';
 
 /**
  * プライバシーポリシーページ

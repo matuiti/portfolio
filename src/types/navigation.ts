@@ -7,6 +7,3 @@ export type NavItem = {
   isPublished?: boolean; // 公開済みかどうか
   isCurrent?: boolean; // 現在のページかどうか
 };
-
-// ヘッダー用、フッター用などで型を分ける場合もここに追加
-export type NavConfig = NavItem[];

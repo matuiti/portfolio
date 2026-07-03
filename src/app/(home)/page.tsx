@@ -1,4 +1,4 @@
-import { ScrollReveal } from './ScrollReveal';
+import { ScrollReveal } from './scrollReveal';
 import { MainVisual } from './components/MainVisual';
 import { WorksSection } from './components/WorksSection';
 import { GallerySection } from './components/GallerySection';
@@ -17,7 +17,7 @@ export default function Home() {
       <div className='space-y-0'>
         {/* 2. WORKS：データ共有・カテゴリスイッチング機能付き */}
         <WorksSection />
-        {/* 3. GALLERY：（準備中コンポーネントを配置） */}
+        {/* 3. GALLERY： */}
         <GallerySection />
         {/* 4. SERVICE：メディアカードレイアウト */}
         <ServiceSection />
