@@ -1,17 +1,13 @@
-// src/data/works.ts
-import { Work, WorkFilterCategory } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 
-/**
- * WORKSセクションの共通カテゴリ定義 (SSoT)
- */
-export const WORK_CATEGORIES: { label: string; value: WorkFilterCategory }[] = [
-  { label: 'すべて', value: 'all' },
-  { label: 'Web制作', value: 'web' },
-  { label: 'WordPress', value: 'wordpress' },
-  { label: 'アプリケーション', value: 'app' },
-  { label: 'ゲーム', value: 'game' },
-  // { label: "実案件", value: "client" },
-  // { label: "非公開", value: "nda" },
+export const WORK_CATEGORIES: { label: string; id: WorkCategory }[] = [
+  { label: 'すべて', id: 'all' },
+  { label: 'Web制作', id: 'web' },
+  { label: 'WordPress', id: 'wordpress' },
+  { label: 'アプリケーション', id: 'app' },
+  { label: 'ゲーム', id: 'game' },
+  // { label: "実案件", id: "client" },
+  // { label: "非公開", id: "nda" },
 ];
 
 /**

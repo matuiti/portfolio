@@ -36,11 +36,12 @@
   padding: calc(15 / 16 * 1rem) calc(16 / 16 * 1rem) calc(15 / 16 * 1rem)
     calc(30 / 16 * 1rem);
   border-radius: calc(8 / 16 * 1rem);
-  cursor: pointer;
   transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.005);
+  @media (width >= 52.5em /* tablet */) {
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.005);
+    }
   }
 }
 

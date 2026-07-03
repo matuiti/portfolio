@@ -8,6 +8,12 @@
 
 /* 2. プロジェクト専用テーマ設定 */
 @theme {
+  /* 標準の sans フォントとして日本語と英数字フォントを登録 */
+  --font-sans: var(--font-noto-sans-jp), var(--font-inter), sans-serif;
+  /* 個別にクラスとして呼び出したい場合（例: font-inter や font-noto） */
+  --font-inter: var(--font-inter);
+  --font-noto: var(--font-noto-sans-jp);
+
   /* --- ブレイクポイント (ユーザーのフォントサイズ設定に追従) --- */
   --breakpoint-*: initial; /* 本家（Tailwind）のブレークポイントを一括削除 */
   --breakpoint-mini: 21.875em; /* 350 / 16 */
@@ -25,9 +31,6 @@
   --color-light-gray: #f2f2f0;
   --color-red: #ff6262; /* エラー・必須項目 用 */
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);
-
-  /* --- タイポグラフィ：Next.js Fontと連動 --- */
-  --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 
   /* ロゴ幅 */
   --spacing-logo-small: calc(120 / 16 * 1rem);
@@ -66,6 +69,10 @@
   /* --- シャドー --- */
   --shadow-default: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
   --shadow-card: 0px 0px 15px 0px rgba(0, 0, 0, 0.15);
+  --shadow-gallery-card: 1px 1px 15px 0px rgba(0, 0, 0, 0.1);
+  --shadow-gallery-card-tab: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-gallery-arrow-bg: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-gallery-indicator-box: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 
   /* --- ブラー --- */
   --backdrop-blur-default: 10px;
@@ -103,7 +110,7 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply font-sans bg-white text-black text-[calc(14/16*1rem)] tablet:text-[calc(16/16*1rem)] leading-none tracking-wider font-medium;
+    @apply text-black antialiased font-sans bg-[image:var(--color-gradation)] min-h-svh h-full leading-normal tracking-wider font-medium text-[calc(14/16*1rem)] tablet:text-[calc(16/16*1rem)];
   }
 
   /* 見出しの共通設定 */
@@ -117,7 +124,7 @@
   }
 
   *:focus-visible {
-    @apply outline-3 outline-blue-500 outline-offset-1;
+    @apply outline-2 outline-blue-500 outline-offset-2;
   }
 
   /* スクロールバー制御 (Firefox) */

@@ -2,7 +2,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 import Link from 'next/link';
 export const subButtonStyles = tv({
-  base: 'inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 cursor-pointer hover:opacity-hover',
+  base: 'inline-flex items-center justify-center font-medium transition-all active:scale-95 disabled:opacity-50 cursor-default tablet:cursor-pointer tablet:hover:opacity-hover',
   variants: {
     variant: {
       white: 'bg-black text-white',
@@ -60,7 +60,7 @@ export const SubButton = (props: SubButtonProps) => {
         'submit');
 
   const styles = subButtonStyles({ variant, isSubmit, className });
-  
+
   const content = (
     <>
       {Icon && <Icon size={iconSize} color={iconColor} className='shrink-0' />}

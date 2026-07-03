@@ -10,7 +10,7 @@ const pageTopButtonStyles = tv({
     'flex h-20 w-20 flex-col items-center justify-center rounded-full',
     'bg-black text-white shadow-lg',
     'transition-[opacity,transform,bottom] duration-500 ease-in-out',
-    'hover:opacity-hover active:scale-95 cursor-pointer',
+    'tablet:hover:opacity-hover active:scale-95 tablet:cursor-pointer',
     'focus:outline-none',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white',
   ],

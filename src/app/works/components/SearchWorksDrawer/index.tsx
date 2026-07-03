@@ -3,16 +3,16 @@ import { Close } from '@/components/ui/Icons';
 import { SearchBox } from '@/components/ui/SearchBox';
 import { CategoryList } from '@/components/ui/CategoryList';
 import { TagFilters } from '@/components/ui/TagFilters';
-import { useUIStore } from '@/lib/hooks/useUIStore';
-import { useFilteredWorks, useWorkStore } from '@/lib/hooks/useWorkStore';
+import { useStore } from '@/lib/store/useStore';
+import { useFilteredWorks, useWorkStore } from '@/lib/store/useWorkStore';
 import { WORK_CATEGORIES } from '@/data/works';
-import { WorkCategory, WorkFilterCategory } from '@/types/work';
+import { WorkCategory } from '@/types/work';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
 import { useMemo } from 'react';
 import styles from './SearchWorksDrawer.module.css';
 
 export function SearchWorksDrawer() {
-  const { isSearchDrawerOpen, setSearchDrawerOpen } = useUIStore();
+  const { isSearchDrawerOpen, setSearchDrawerOpen } = useStore();
   const store = useWorkStore();
   const filteredWorks = useFilteredWorks();
   const searchQuery = store.searchQuery;
@@ -31,11 +31,11 @@ export function SearchWorksDrawer() {
 
   const categoryCounts = WORK_CATEGORIES.reduce(
     (acc, cat) => {
-      if (cat.value === 'all') {
-        acc[cat.value] = filteredWorks.length;
+      if (cat.id === 'all') {
+        acc[cat.id] = filteredWorks.length;
       } else {
-        const targetCat = cat.value as WorkCategory;
-        acc[cat.value] = filteredWorks.filter((w) =>
+        const targetCat = cat.id as WorkCategory;
+        acc[cat.id] = filteredWorks.filter((w) =>
           w.category.includes(targetCat),
         ).length;
       }
@@ -48,7 +48,7 @@ export function SearchWorksDrawer() {
 
   // カテゴリーIDからラベルを取得するロジック
   const selectedCategoryLabel = WORK_CATEGORIES.find(
-    (cat) => cat.value === store.selectedCategory,
+    (cat) => cat.id === store.selectedCategory,
   )?.label;
 
   const renderedTitle = useMemo(() => {
@@ -126,7 +126,7 @@ export function SearchWorksDrawer() {
           <div className={styles.body}>
             <section className={styles.section}>
               <h3 className={styles.label}>カテゴリー</h3>
-              <CategoryList<WorkFilterCategory>
+              <CategoryList<WorkCategory>
                 items={categories}
                 selected={selectedCategory}
                 onChange={setSelectedCategory}
@@ -134,7 +134,7 @@ export function SearchWorksDrawer() {
               />
             </section>
             <section className={styles.section}>
-              <h3 className={styles.label}>キーワードタグ</h3>
+              <h3 className={styles.label}>タグ</h3>
               <TagFilters
                 tags={availableTags}
                 selectedTags={selectedTags}

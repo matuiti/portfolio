@@ -14,13 +14,13 @@ import {
   Launch,
   LibraryBooks,
 } from '@/components/ui/Icons';
-import { Work } from '@/types/work';
+import { Work, WorkCategory } from '@/types/work';
 import { CloseModal } from '@/components/ui/Icons/CloseModal';
 import { BaseTag } from '@/components/ui/BaseTag';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { SafeImage } from '@/components/ui/SafeImage';
-import styles from './WorkDetailModal.module.css';
 import { scrollToTop } from '@/lib/utility/scrollToTop';
+import styles from './WorkDetailModal.module.css';
 
 type WorkDetailModalProps = {
   work: Work;
@@ -28,7 +28,7 @@ type WorkDetailModalProps = {
   onClose: () => void;
   allFilteredWorks: Work[];
   onNavigate: Dispatch<SetStateAction<Work | null>>;
-  onCategoryClick: (cat: string) => void;
+  onCategoryClick: (cat: WorkCategory) => void;
   onTagClick: (tag: string) => void;
 };
 
@@ -83,7 +83,7 @@ export const WorkDetailModal = ({
 
   if (!isOpen) return null;
 
-  const handleCategoryClick = (cat: string): void => {
+  const handleCategoryClick = (cat: WorkCategory): void => {
     onCategoryClick(cat);
     scrollToTop();
   };
@@ -139,7 +139,7 @@ export const WorkDetailModal = ({
 
             {/* 閉じるボタン */}
             <button className={styles.closeBtn} onClick={onClose}>
-              <CloseModal color='white' size='xl' />
+              <CloseModal />
             </button>
           </div>
         </header>
@@ -315,7 +315,7 @@ export const WorkDetailModal = ({
                 </div>
               )}
               <section className={styles.section}>
-                <h3 className={styles.sectionTitle}>キーワードタグ</h3>
+                <h3 className={styles.sectionTitle}>タグ</h3>
                 <div className={styles.tagGrid}>
                   {work.tags.map((tag) => (
                     <BaseTag

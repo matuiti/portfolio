@@ -1,5 +1,4 @@
-// src / app / home / components / ContactSection / schema.ts;
-import { z } from "zod";
+import { z } from 'zod';
 
 /**
  * お問い合わせフォームのバリデーションスキーマ

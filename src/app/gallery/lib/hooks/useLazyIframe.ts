@@ -1,8 +1,7 @@
-"use client";
+'use client';
+import { useState, useEffect, useRef } from 'react';
 
-import { useState, useEffect, useRef } from "react";
-
-export const useLazyIframe = (rootMargin = "200px") => {
+export const useLazyIframe = (rootMargin = '200px') => {
   const [isInView, setIsInView] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -11,7 +10,7 @@ export const useLazyIframe = (rootMargin = "200px") => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          observer.disconnect(); // 一度検知したら監視を終了
+          observer.disconnect();
         }
       },
       { rootMargin },

@@ -1,15 +1,14 @@
-// src/data/navigation.ts
 import { NavItem } from "@/types/navigation";
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "トップ", href: "/", isPublished: true },
   { label: "制作実績", href: "/works", isPublished: true },
-  { label: "UIギャラリー", href: "/gallery", isPublished: false },// 現在未公開
+  { label: "UIギャラリー", href: "/gallery", isPublished: true },
   { label: "サービス内容", href: "/#service", isPublished: true },
   { label: "スキル", href: "/skills", isPublished: true },
   { label: "私について", href: "/#about", isPublished: true },
   { label: "お問い合わせ", href: "/#contact", isPublished: true },
-  // { label: "Workbench", href: "/workbench", isPublished: true }, // UIギャラリーパーツの開発用レビューページ
+  // { label: "Workbench", href: "/workbench", isPublished: true }, // ギャラリーパーツの開発用ページ
 ];
 
 /**
@@ -24,4 +23,4 @@ export const UTILITY_ITEMS: NavItem[] = [
 /**
  * 検索機能を持つページのパス
  */
-export const SEARCHABLE_PATHS = ["/works", "/gallery"];
+export const SEARCHABLE_PATHS = ["/works", "/gallery"] as const;

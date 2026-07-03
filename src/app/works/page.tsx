@@ -1,25 +1,26 @@
 'use client';
 import { useState, Suspense, useMemo } from 'react';
-import { useWorkStore, useFilteredWorks } from '@/lib/hooks/useWorkStore';
+import { useWorkStore, useFilteredWorks } from '@/lib/store/useWorkStore';
 import { WorkCard } from './components/WorkCard';
 import { WorkDetailModal } from './components/WorkDetailModal';
 import { Pagination } from '@/components/ui/Pagination';
 import { WorksLayout } from './components/WorksLayout';
-import { Work, WorkFilterCategory } from '@/types/work';
-import { useCommonURLSync } from '@/lib/hooks/useCommonURLSync';
+import { Work, WorkCategory } from '@/types/work';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
-import { WORK_CATEGORIES } from '@/data/works';
 import { TitleAndCount } from '@/components/ui/TitleAndCount';
+import { WORK_CATEGORIES } from '@/data/works';
 import { PAGE_HEADER_DATA } from './data';
 import { ScrollToTopComp } from '@/lib/utility/ScrollToTopComp';
-import styles from './Works.module.css';
+import { LoadingWorks } from './components/LoadingWorks';
+import { useURLSync } from '@/lib/hooks/useURLSync';
 
 function WorksPageContent() {
   const store = useWorkStore();
   const filteredWorks = useFilteredWorks();
+  const [selectedWork, setSelectedWork] = useState<Work | null>(null);
 
-  useCommonURLSync(
+  useURLSync(
     {
       category: store.selectedCategory,
       tags: store.selectedTags,
@@ -34,8 +35,6 @@ function WorksPageContent() {
     },
   );
 
-  const [selectedWork, setSelectedWork] = useState<Work | null>(null);
-
   // 表示データの計算（ページネーション適用）
   const totalPages = Math.ceil(filteredWorks.length / store.itemsPerPage);
   const displayWorks = useMemo(() => {
@@ -44,8 +43,8 @@ function WorksPageContent() {
   }, [filteredWorks, store.currentPage, store.itemsPerPage]);
 
   // 詳細モーダル用のアクション定義
-  const handleCategoryAction = (cat: string) => {
-    store.selectOnlyCategory(cat as WorkFilterCategory);
+  const handleCategoryAction = (cat: WorkCategory) => {
+    store.selectOnlyCategory(cat);
     setSelectedWork(null); // モーダルを閉じる
   };
   const handleTagAction = (tag: string) => {
@@ -53,9 +52,8 @@ function WorksPageContent() {
     setSelectedWork(null); // モーダルを閉じる
   };
 
-  // カテゴリーIDからラベルを取得するロジック
   const selectedCategoryLabel = WORK_CATEGORIES.find(
-    (cat) => cat.value === store.selectedCategory,
+    (cat) => cat.id === store.selectedCategory,
   )?.label;
 
   const breadcrumbItems = [
@@ -107,22 +105,32 @@ function WorksPageContent() {
       {/* コンテンツ */}
       <div className='section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray'>
         <TitleAndCount title={renderedTitle} count={totalHitCount} />
-        <p className={styles.pageDescription}>
+        <p className='mt-[calc(10/16*1rem)]'>
           機密保持契約を遵守するため、実案件の一部については内容を抽象化して掲載しております。
         </p>
         {/* 実績カードグリッド */}
         {displayWorks.length ? (
-          <div className={styles.cards}>
-            {displayWorks.map((work) => (
-              <WorkCard
-                key={work.id}
-                work={work}
-                onClick={() => setSelectedWork(work)}
-                onCategoryClick={store.selectOnlyCategory}
-                className={styles.card}
-              />
-            ))}
-          </div>
+          <>
+            <div className='mt-[calc(40/16*1rem)] grid justify-center gap-y-[calc(40/16*1rem)] gap-x-[calc(20/16*1rem)] grid-cols-1 tablet:grid-cols-2 base:grid-cols-3 base:mt-[calc(50/16*1rem)]'>
+              {displayWorks.map((work) => (
+                <WorkCard
+                  key={work.id}
+                  work={work}
+                  onClick={() => setSelectedWork(work)}
+                  onCategoryClick={store.selectOnlyCategory}
+                />
+              ))}
+            </div>
+            {totalPages > 1 && (
+              <div className='mt-[calc(60/16*1rem)]'>
+                <Pagination
+                  current={store.currentPage}
+                  total={totalPages}
+                  onPageChange={store.setCurrentPage}
+                />
+              </div>
+            )}
+          </>
         ) : (
           <div className='py-[calc(80/16*1rem)] text-center border-2 border-dashed border-medium-gray rounded-[calc(24/16*1rem)] mt-[calc(24/16*1rem)] default:mt-[calc(50/16*1rem)]'>
             <p className='text-dark-gray font-bold'>
@@ -131,16 +139,6 @@ function WorksPageContent() {
             <p className='text-[calc(14/16*1rem)] text-dark-gray mt-[calc(8/16*1rem)]'>
               条件を変えて再度お試しください。
             </p>
-          </div>
-        )}
-        {/* ページネーション */}
-        {totalPages > 1 && (
-          <div className={styles.paginationWrapper}>
-            <Pagination
-              current={store.currentPage}
-              total={totalPages}
-              onPageChange={store.setCurrentPage}
-            />
           </div>
         )}
       </div>
@@ -167,13 +165,7 @@ export default function WorksPage() {
   return (
     <>
       <ScrollToTopComp />
-      <Suspense
-        fallback={
-          <div className='p-[calc(80/16*1rem)] text-center font-bold'>
-            Loading Works...
-          </div>
-        }
-      >
+      <Suspense fallback={<LoadingWorks />}>
         <WorksPageContent />
       </Suspense>
     </>

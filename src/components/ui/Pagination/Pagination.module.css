@@ -30,21 +30,19 @@
 
 .pageButton,
 .arrowButton {
-  transition: all 0.3s ease-out;
-  cursor: pointer;
-
-  &:hover {
-    border-color: var(--color-white);
-    background-color: var(--color-dark-gray);
-    color: var(--color-white);
-
-    svg {
-      color: inherit;
-    }
-  }
-
   &:active {
     transform: scale(0.95);
+  }
+  @media (width >= 52.5em /* tablet */) {
+    cursor: pointer;
+    &:hover {
+      border-color: var(--color-white);
+      background-color: var(--color-dark-gray);
+      color: var(--color-white);
+      svg {
+        color: inherit;
+      }
+    }
   }
 }
 

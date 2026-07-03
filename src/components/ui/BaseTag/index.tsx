@@ -7,7 +7,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
  */
 const tagStyles = tv({
   slots: {
-    base: 'inline-flex items-center justify-center transition-all duration-300 leading-none tracking-wider cursor-pointer',
+    base: 'inline-flex items-center justify-center transition-all duration-300 leading-none tracking-wider tablet:cursor-pointer',
     countBadge:
       'ml-[calc(6/16*1rem)] text-[calc(14/16*1rem)] transition-colors tracking-widest leading-none',
   },
@@ -15,7 +15,7 @@ const tagStyles = tv({
     shape: {
       tab: { base: '' },
       tag: {
-        base: 'rounded-sm text-[calc(12/16*1rem)] py-[calc(4/16*1rem)] bg-white text-dark-gray border border-dark-gray hover:border-medium-gray hover:bg-medium-gray hover:text-white leading-none tracking-wider',
+        base: 'rounded-sm text-[calc(12/16*1rem)] py-[calc(4/16*1rem)] bg-white text-dark-gray border border-dark-gray tablet:hover:border-medium-gray tablet:hover:bg-medium-gray tablet:hover:text-white leading-none tracking-wider',
       },
     },
     // タブ
@@ -42,14 +42,14 @@ const tagStyles = tv({
       shape: 'tab',
       size: 'short',
       class: {
-        base: 'rounded-[calc(20/16*1rem)] text-[calc(14/16*1rem)] py-[calc(8/16*1rem)] px-[calc(16/16*1rem)] bg-white text-black border border-dark-gray hover:bg-dark-gray hover:text-white hover:border-dark-gray',
+        base: 'rounded-[calc(20/16*1rem)] text-[calc(14/16*1rem)] py-[calc(8/16*1rem)] px-[calc(16/16*1rem)] bg-white text-black border border-dark-gray tablet:hover:bg-dark-gray tablet:hover:text-white tablet:hover:border-dark-gray',
       },
     },
     {
       shape: 'tab',
       size: 'long',
       class: {
-        base: 'flex justify-between rounded-lg text-[calc(16/16*1rem)] leading-normal py-[calc(10/16*1rem)] px-[calc(16/16*1rem)] bg-light-gray hover:bg-dark-gray text-black hover:text-white',
+        base: 'flex justify-between rounded-lg text-[calc(16/16*1rem)] leading-normal py-[calc(10/16*1rem)] px-[calc(16/16*1rem)] bg-light-gray tablet:hover:bg-dark-gray text-black tablet:hover:text-white',
       },
     },
     {
