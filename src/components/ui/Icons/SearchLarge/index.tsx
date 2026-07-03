@@ -1,7 +1,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const iconStyles = tv({
-  base: 'inline-block shrink-0 transition-all duration-300 cursor-pointer',
+  base: 'inline-block shrink-0 transition-all duration-300 cursor-default tablet:cursor-pointer ',
   variants: {
     color: {
       black: 'text-black',

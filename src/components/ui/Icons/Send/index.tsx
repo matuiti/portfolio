@@ -1,7 +1,7 @@
 import { tv, type VariantProps } from 'tailwind-variants';
 
 const iconStyles = tv({
-  base: 'inline-block shrink-0 transition-all duration-300 hover:opacity-hover',
+  base: 'cursor-default tablet:cursor-pointer inline-block shrink-0 transition-all duration-300 hover:opacity-hover',
   variants: {
     color: {
       black: 'text-black',

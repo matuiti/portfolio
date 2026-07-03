@@ -148,9 +148,13 @@
 
   .policyLink {
     text-decoration: underline;
+    cursor: default;
 
     &:hover {
       text-decoration: none;
+    }
+    @media (width >= 52.5em /* tablet */) {
+      cursor: pointer;
     }
   }
   .errorText {
