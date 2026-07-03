@@ -64,6 +64,13 @@
     }
   }
 
+  .slidePrev {
+    left: 0;
+  }
+  .slideNext {
+    right: 0;
+  }
+
   .indicatorContainer {
     display: flex;
     justify-content: center;
