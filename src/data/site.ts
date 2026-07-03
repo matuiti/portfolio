@@ -2,9 +2,9 @@ import { SiteConfig } from "@/types/site";
 
 export const SITE_CONFIG: SiteConfig = {
   name: '松葉一八',
-  title: 'ポートフォリオサイト | 松葉一八',
+  title: '松葉一八 | フロントエンドエンジニア',
   description:
-    'フロントエンドエンジニアの松葉一八のポートフォリオサイトです。Next.js・TypeScript・TailwindCSSを中心に用いたSPAライクなサイトです。画面に見える部分はユーザーの快適さにこだわり、見えないコード部分は拡張や修正をしやすい保守性を重視した設計です。',
+    'フロントエンドエンジニア松葉一八のポートフォリオサイトです。Next.js・TypeScript・TailwindCSSを中心に用いたSPAライクなサイトです。画面に見える部分はユーザーの快適さにこだわり、見えないコード部分は拡張や修正をしやすい保守性を重視した設計です。',
   url: 'https://matuba-code.com',
   author: 'Kazuya Matuba',
   links: {

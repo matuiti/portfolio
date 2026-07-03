@@ -2,10 +2,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { tv } from 'tailwind-variants';
-import { Logo } from '@/components/ui/Logo';
+// import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { NAV_ITEMS } from '@/data/navigation';
 import { SITE_CONFIG } from '@/data/site';
+import LogoFooter from '@/components/ui/LogoFooter';
 
 const footerStyles = tv({
   slots: {
@@ -41,12 +42,12 @@ export function Footer() {
       <div className={container()}>
         <div className={topArea()}>
           <Link
-            href='/'
-            aria-label='トップページに移動する'
-            className='hover:opacity-hover transition-opacity'
-          >
-            <Logo type='footer' color='white' />
-          </Link>
+          href='/'
+          className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[120px] mobile:w-[160px] h-auto duration-300 ease-in-out'
+        >
+          <LogoFooter />
+          {/* <Logo color='black' type='header' /> */}
+        </Link>
           <nav>
             <ul className={menuList()}>
               {NAV_ITEMS.map((item) => {

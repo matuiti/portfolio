@@ -1,4 +1,3 @@
-// src/components/ui/Logo/index.tsx
 import { tv, type VariantProps } from 'tailwind-variants';
 import { SITE_CONFIG } from '@/data/site';
 
@@ -13,8 +12,8 @@ const logoStyles = tv({
       white: 'text-white',
     },
     type: {
-      header: 'w-logo-small small:w-logo-large',
-      footer: 'w-logo-small tablet:w-logo-large',
+      header: 'w-logo-sp small:w-logo-pc',
+      footer: 'w-logo-sp tablet:w-logo-pc',
     },
   },
   defaultVariants: {
