@@ -1,4 +1,3 @@
-// src/data/works.ts
 import { Work, WorkCategory } from '@/types/work';
 
 /**

@@ -17,7 +17,7 @@ export const SkillsSection = () => {
               className='js-fuwa-fade'
             />
             <p className={`${styles.description} js-fuwa-fade`}>
-              専門技術を縦に深めつつ、周辺の知見を獲得する横への拡充も楽しみます。
+              フロントエンド技術を柱としつつ、サーバーサイドなどの周辺知識も随時拡充してます。
             </p>
           </div>
           <div className={`${styles.cardGrid} js-fuwa-fade`}>
