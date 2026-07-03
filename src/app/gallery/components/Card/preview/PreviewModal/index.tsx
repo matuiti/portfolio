@@ -48,20 +48,21 @@ export const PreviewModal = ({
     if (isOpen) {
       if (!dialog.open) {
         dialog.showModal();
-        document.body.style.overflow = 'hidden';
-        console.log(1);
-        return;
       }
+      // dialog.openの状態に関わらず、開いているなら確実にhiddenにする
+      document.body.style.overflow = 'hidden';
     } else {
-      dialog.close();
-      document.body.style.overflow = 'unset';
-      console.log(2);
-      return;
+      if (dialog.open) {
+        dialog.close();
+      }
+      // 閉じているなら確実にリセットする
+      document.body.style.overflow = '';
     }
 
+    // 【最重要】モーダルが画面から消滅するとき（アンマウント時）に
+    // 本番環境でも確実にスクロールを復活させる保証を入れる
     return () => {
-      document.body.style.overflow = 'unset';
-      console.log(3);
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
@@ -150,4 +151,4 @@ export const PreviewModal = ({
       </div>
     </dialog>
   );
-};
+};;
