@@ -66,7 +66,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
   return (
     <header className={base()}>
       <div className='container-center flex items-center justify-between'>
-        <Link href='/' className='hover:opacity-hover transition-opacity'>
+        <Link href='/' className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity'>
           <Logo color='black' type='header' />
         </Link>
         <nav>

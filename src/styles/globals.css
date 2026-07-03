@@ -123,6 +123,19 @@
     @apply font-bold;
   }
 
+  a {
+    cursor: default;
+    &:hover {
+      cursor: default;
+    }
+    @media (width >= 52.5em /* tablet */) {
+      cursor: pointer;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   *:focus-visible {
     @apply outline-2 outline-blue-500 outline-offset-2;
   }

@@ -4,7 +4,7 @@ import { ArrowRight } from '@/components/ui/Icons';
 
 export const mainButtonStyles = tv({
   slots: {
-    base: 'group inline-flex items-center justify-center font-bold transition-all active:scale-95 disabled:opacity-50 cursor-pointer',
+    base: 'group inline-flex items-center justify-center font-bold transition-all active:scale-95 disabled:opacity-50 cursor-default tablet:cursor-pointer',
     separator: 'h-5.5 border-l border-current',
     icon: 'transition-transform duration-300 group-hover:translate-x-1 shrink-0',
   },

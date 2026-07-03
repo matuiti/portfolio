@@ -5,7 +5,7 @@ import { Mail } from '@/components/ui/Icons';
 import { tv } from 'tailwind-variants';
 
 const textLinkStyles = tv({
-  base: 'group inline-flex items-center gap-[calc(6/16*1rem)] transition-all cursor-pointer',
+  base: 'group inline-flex items-center gap-[calc(6/16*1rem)] transition-all',
   variants: {
     color: {
       black: 'text-black',
