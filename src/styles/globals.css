@@ -33,8 +33,8 @@
   --color-menu-backdrop: rgba(0, 0, 0, 0.5);
 
   /* ロゴ幅 */
-  --spacing-logo-small: calc(120 / 16 * 1rem);
-  --spacing-logo-large: calc(163.54 / 16 * 1rem);
+  --spacing-logo-sp: calc(120 / 16 * 1rem);
+  --spacing-logo-pc: calc(163.54 / 16 * 1rem);
 
   /* ヘッダー高 */
   --spacing-header-mini: calc(65 / 16 * 1rem);

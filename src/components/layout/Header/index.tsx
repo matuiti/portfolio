@@ -5,10 +5,11 @@ import { usePathname } from 'next/navigation';
 import { tv } from 'tailwind-variants';
 import { NAV_ITEMS, SEARCHABLE_PATHS } from '@/data/navigation';
 import { useScrollThreshold } from '@/lib/hooks/useScrollThreshold';
-import { Logo } from '@/components/ui/Logo';
+// import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { Hamburger, SearchLarge } from '@/components/ui/Icons';
 import { useStore } from '@/lib/store/useStore';
+import LogoHeader from '@/components/ui/LogoHeader';
 
 export const headerStyles = tv({
   slots: {
@@ -66,8 +67,12 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
   return (
     <header className={base()}>
       <div className='container-center flex items-center justify-between'>
-        <Link href='/' className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity'>
-          <Logo color='black' type='header' />
+        <Link
+          href='/'
+          className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[120px] small:w-[160px] h-auto duration-300 ease-in-out'
+        >
+          <LogoHeader />
+          {/* <Logo color='black' type='header' /> */}
         </Link>
         <nav>
           <ul className='hidden small:flex items-center leading-normal gap-[calc(15.6/16*1rem)] mt-[calc(6/16*1rem)] mr-[calc(3/16*1rem)]'>
