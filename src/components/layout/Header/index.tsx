@@ -1,15 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { tv } from 'tailwind-variants';
+import { usePathname } from 'next/navigation';
 import { NAV_ITEMS, SEARCHABLE_PATHS } from '@/data/navigation';
 import { useScrollThreshold } from '@/lib/hooks/useScrollThreshold';
-// import { Logo } from '@/components/ui/Logo';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { Hamburger, SearchLarge } from '@/components/ui/Icons';
 import { useStore } from '@/lib/store/useStore';
 import LogoHeader from '@/components/ui/LogoHeader';
+import { scrollToTop } from '@/lib/utility/scrollToTop';
+import { useActiveNav } from '@/lib/hooks/useActiveNav';
 
 export const headerStyles = tv({
   slots: {
@@ -38,6 +39,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const { setPhase, setSearchDrawerOpen } = useStore();
+  const { checkActive } = useActiveNav();
 
   useEffect(() => {
     if (!isHomePage) setPhase('ready');
@@ -69,17 +71,15 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
       <div className='container-center flex items-center justify-between'>
         <Link
           href='/'
+          onClick={scrollToTop}
           className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[150px] small:w-[220px] h-auto duration-300 ease-in-out'
         >
           <LogoHeader />
-          {/* <Logo color='black' type='header' /> */}
         </Link>
         <nav>
           <ul className='hidden small:flex items-center leading-normal gap-[calc(15.6/16*1rem)] mt-[calc(6/16*1rem)] mr-[calc(3/16*1rem)]'>
             {NAV_ITEMS.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href !== '/' && pathname.startsWith(item.href));
+              const isActive = checkActive(item.href);
               return (
                 <li key={item.href}>
                   <MenuItem

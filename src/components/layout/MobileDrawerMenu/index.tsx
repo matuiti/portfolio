@@ -1,10 +1,10 @@
 'use client';
-import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '@/data/navigation';
 import { MenuItem } from '@/components/ui/MenuItem';
 import { ArrowRight, GitHub, Mail, Close } from '@/components/ui/Icons';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { SITE_CONFIG } from '@/data/site';
+import { useActiveNav } from '@/lib/hooks/useActiveNav';
 
 type MobileDrawerMenuProps = {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export const MobileDrawerMenu = ({
   isOpen,
   onClose,
 }: MobileDrawerMenuProps) => {
-  const pathname = usePathname();
+  const { checkActive } = useActiveNav();
 
   return (
     <div
@@ -50,9 +50,7 @@ export const MobileDrawerMenu = ({
         <nav className='overflow-y-auto'>
           <ul className='flex flex-col overflow-hidden'>
             {NAV_ITEMS.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href !== '/' && pathname.startsWith(item.href));
+              const isActive = checkActive(item.href);
 
               return (
                 <li
