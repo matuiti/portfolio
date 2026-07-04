@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const menuItemStyles = tv({
   slots: {
-    base: 'group relative flex items-center transition-all duration-300 w-full',
+    base: 'group relative flex items-center leading-none transition-all duration-300 w-full',
     indicator: [
       'w-2 h-2 transition-all duration-300 flex items-center justify-center',
       'pb-[calc(6/16*1rem)]',
