@@ -69,7 +69,7 @@ export const Header = ({ onMenuOpen }: HeaderProps) => {
       <div className='container-center flex items-center justify-between'>
         <Link
           href='/'
-          className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[120px] small:w-[160px] h-auto duration-300 ease-in-out'
+          className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[150px] small:w-[220px] h-auto duration-300 ease-in-out'
         >
           <LogoHeader />
           {/* <Logo color='black' type='header' /> */}

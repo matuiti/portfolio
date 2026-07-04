@@ -13,9 +13,9 @@ const footerStyles = tv({
     root: 'bg-[var(--color-black)] p-[calc(20/16*1rem)] tablet:pt-[calc(20.62/16*1rem)] tablet:pb-[calc(20.62/16*1rem)] small:pt-[calc(40.5/16*1rem)] small:pb-[calc(20.5/16*1rem)] base:pb-[calc(40/16*1rem)]',
     container: 'container-center',
     topArea:
-      'flex flex-col items-start small:items-start p-5 -mb-1.5 small:-mb-px gap-y-8 small:gap-y-0 small:gap-x-5 tablet:items-center small:flex-row small:justify-between',
+      'flex flex-col items-center p-5 -mb-1.5 small:-mb-px gap-y-10 small:gap-y-0 small:gap-x-5 small:flex-row small:justify-between',
     menuList:
-      'flex flex-col justify-start items-start gap-y-2.5 gap-x-4 flex-wrap tablet:flex-row tablet:justify-center tablet:items-center mt-2.5',
+      'flex flex-col justify-start items-start ml-[calc(11/16*1rem)] mobile:ml-0 mobile:flex-row mobile:items-center mobile:justify-center gap-y-[calc(12/16*1rem)] gap-x-[calc(14/16*1rem)] flex-wrap',
     bottomArea: 'mt-5 pt-5 border-t border-dark-gray',
     privacyPolicy:
       'text-white text-[calc(14/16*1rem)] tracking-wider text-center mb-5',
@@ -43,7 +43,7 @@ export function Footer() {
         <div className={topArea()}>
           <Link
           href='/'
-          className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[120px] mobile:w-[160px] h-auto duration-300 ease-in-out'
+          className='cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[150px] mobile:w-[220px] h-auto duration-300 ease-in-out'
         >
           <LogoFooter />
           {/* <Logo color='black' type='header' /> */}
