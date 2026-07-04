@@ -1,6 +1,6 @@
 'use client';
 import { NAV_ITEMS } from '@/data/navigation';
-import { MenuItem } from '@/components/ui/MenuItem';
+import { MobileMenuItem } from '@/components/ui/MenuItem';
 import { ArrowRight, GitHub, Mail, Close } from '@/components/ui/Icons';
 import { SubButton } from '@/components/ui/Buttons/SubButton';
 import { SITE_CONFIG } from '@/data/site';
@@ -23,15 +23,14 @@ export const MobileDrawerMenu = ({
         isOpen ? 'visible' : 'invisible pointer-events-none'
       }`}
     >
-      {/* 背景オーバーレイ */}
+      {/* overlay */}
       <div
         className={`absolute inset-0 bg-menu-backdrop backdrop-blur-default transition-all duration-500 ease-in ${
           isOpen ? 'opacity-100' : 'opacity-0'
         }`}
         onClick={onClose}
       />
-
-      {/* メニュー本体 */}
+      {/* 本体 */}
       <div
         // メニュー内の操作がオーバーレイに伝わらないようにする
         onClick={(e) => e.stopPropagation()}
@@ -39,19 +38,15 @@ export const MobileDrawerMenu = ({
           isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
       >
-        {/* 1. 上部：ボタンエリア */}
         <div className='flex items-center justify-end min-h-header-mini mb-[calc(20/16*1rem)]'>
           <button type='button' onClick={onClose} aria-label='メニューを閉じる'>
             <Close />
           </button>
         </div>
-
-        {/* 2. 中央：リストアイテム */}
         <nav className='overflow-y-auto'>
           <ul className='flex flex-col overflow-hidden'>
             {NAV_ITEMS.map((item) => {
               const isActive = checkActive(item.href);
-
               return (
                 <li
                   key={item.href}
@@ -59,13 +54,11 @@ export const MobileDrawerMenu = ({
                     !item.isPublished ? 'cursor-not-allowed' : ''
                   }`}
                 >
-                  <MenuItem
+                  <MobileMenuItem
                     label={item.label}
                     href={item.href}
                     isPublished={item.isPublished}
                     isActive={isActive}
-                    color='black'
-                    indicatorLayout='floating'
                     onClick={() => {
                       if (item.isPublished) onClose();
                     }}
@@ -76,26 +69,22 @@ export const MobileDrawerMenu = ({
             })}
           </ul>
         </nav>
-
-        {/* 3. 下部：ボタンエリア */}
-        <div className='mt-5'>
-          <div className='flex gap-x-2.5 justify-end'>
-            <SubButton
-              href={SITE_CONFIG.links.github}
-              leftIcon={GitHub}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              GitHub
-            </SubButton>
-            <SubButton
-              href={SITE_CONFIG.links.contact}
-              leftIcon={Mail}
-              onClick={onClose}
-            >
-              Contact
-            </SubButton>
-          </div>
+        <div className='mt-5 flex gap-x-2.5 justify-end'>
+          <SubButton
+            href={SITE_CONFIG.links.github}
+            leftIcon={GitHub}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            GitHub
+          </SubButton>
+          <SubButton
+            href={SITE_CONFIG.links.contact}
+            leftIcon={Mail}
+            onClick={onClose}
+          >
+            Contact
+          </SubButton>
         </div>
       </div>
     </div>
