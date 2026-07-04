@@ -92,6 +92,10 @@ function GalleryPageContent() {
       </div>
       {/* コンテンツ */}
       <div className='section-padding-x pb-[calc(150/16*1rem)] pt-15 bg-light-gray'>
+        <p className='text-[calc(12/16*1rem)]'>
+          ※データ部分は表示確認用のダミーです。正式版は近日公開致します。
+        </p>
+        <br />
         <TitleAndCount title={renderedTitle} count={totalHitCount} />
         {displayUIParts.length ? (
           <>

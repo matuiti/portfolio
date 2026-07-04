@@ -12,7 +12,7 @@ const MESSAGE = `ギャラリーのカードからは、概要・コード・レ
 プレビュー内のパーツの使用言語は、ピュアなHTML・CSS（SASS）・JavaScriptです。
 独立したサンドボックス環境からiframeタグで読み込み出力しています。
 
-※現状のパーツは表示確認用です。正式版は近日公開致します。`;
+※データ部分は表示確認用のダミーです。正式版は近日公開致します。`;
 
 const SELECT_IDS = ['modal03', 'card-new', 'primary-btn4'];
 const GALLERY_CARDS = UI_PARTS.filter((item) => SELECT_IDS.includes(item.id));
