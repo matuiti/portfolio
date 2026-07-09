@@ -87,6 +87,7 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${id}</title>
   <link rel="stylesheet" href="style.css">
+  <style>body{padding:1em;background-color:#d1d5db;}</style>
 </head>
 <body>
   <div class="${prefixClassName}">
