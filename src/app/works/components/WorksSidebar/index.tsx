@@ -88,7 +88,7 @@ export function WorksSidebar() {
 
         <div className={styles.foot}>
           <p className={styles.foot__text}>
-            ※「非公開」タグの実績は、契約上の理由により最適化されたデータを掲載しています。
+            ※非公開の実績は、契約上の理由により、最適化された内容で掲載しています。
           </p>
         </div>
       </div>

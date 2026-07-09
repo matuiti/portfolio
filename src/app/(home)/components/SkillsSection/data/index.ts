@@ -1,32 +1,38 @@
 import { SkillCardData } from '../types';
 
-// スキルデータ（トップページ固有）
+// TOPページのスキルセクション専用
+
+export const SKIIL_DESCRIPTION = `
+0からのスクラッチ制作から他者の意図を読み解く安全な長期保守まで。
+現場のニーズに高い解像度で応える、実践的な技術スタンスと対応スキルの一覧です。
+`;
+
 export const SKILL_CARDS_DATA: SkillCardData[] = [
   {
-    title: 'WEBサイト',
+    title: 'フロントエンド基盤 / 保守・改修',
     infoItems: [
-      { name: 'HTML', percentage: 95 },
-      { name: 'CSS / SASS', percentage: 95 },
-      { name: 'JavaScript', percentage: 90 },
-      { name: 'WordPress / PHP', percentage: 85 },
+      { name: 'HTML / セマンティックマークアップ', percentage: 95 },
+      { name: 'CSS / Sass / Tailwind CSS', percentage: 95 },
+      { name: 'JavaScript（ES6+）', percentage: 90 },
+      { name: 'WordPress（PHP）/ CMS構築', percentage: 80 },
     ],
   },
   {
-    title: 'ライブラリ、フレームワーク',
+    title: 'モダン開発 / 応用技術',
     infoItems: [
+      { name: 'React / Next.js', percentage: 85 },
       { name: 'TypeScript', percentage: 85 },
-      { name: 'Next.js / React', percentage: 85 },
-      { name: 'TailwindCSS', percentage: 85 },
-      { name: 'jQuery', percentage: 80 },
+      { name: 'アクセシビリティへの配慮', percentage: 80 },
+      { name: 'jQuery（既存コード解析・改修）', percentage: 70 },
     ],
   },
   {
-    title: 'ツール',
+    title: 'リモートワーク / チーム開発環境',
     infoItems: [
-      { name: 'Figma', percentage: 85 },
-      { name: 'Git / GitHub', percentage: 85 },
-      { name: '生成AI', percentage: 85 },
-      { name: 'Slack / Chatwork', percentage: 80 },
+      { name: 'Figma（デザインカンプ再現）', percentage: 95 },
+      { name: 'Slack / Chatwork（確実な進捗共有）', percentage: 85 },
+      { name: 'Git / GitHub（バージョン管理）', percentage: 80 },
+      { name: '生成AI（効率的なコーディング）', percentage: 75 },
     ],
   },
 ];

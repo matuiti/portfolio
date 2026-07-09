@@ -17,8 +17,8 @@ export const ContactSection = () => {
               className='js-fuwa-fade'
             />
             <p className={`${styles.description} js-fuwa-fade`}>
-              <span>ご質問やご相談がございましたら、</span>
-              <span>お気軽にお問い合わせください。</span>
+              状況に応じた最適な品質と、リモート環境での確実な進捗共有をお約束します。<br />
+              新規制作や長期保守のご依頼は、以下フォームまたはGmailよりお気軽にご相談ください。
             </p>
           </div>
           <div className={`${styles.formContainer} js-fuwa-fade`}>

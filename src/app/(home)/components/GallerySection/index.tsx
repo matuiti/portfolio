@@ -8,11 +8,10 @@ import { PreviewModal } from '@/gallery/components/Card/preview/PreviewModal';
 import { CardSlider } from './CardSlider';
 import styles from './GallerySection.module.css';
 
-const MESSAGE = `ギャラリーのカードからは、概要・コード・レスポンシブの表示をご確認いただけます。
-プレビュー内のパーツの使用言語は、ピュアなHTML・CSS（SASS）・JavaScriptです。
-独立したサンドボックス環境からiframeタグで読み込み出力しています。
+const MESSAGE = `ピュアなHTML・CSS（Sass）・JavaScriptで構築された、コンポーネントやUIパーツの実装サンプルです。
+独立したサンドボックス環境からiframe経由で出力しており、各カードから概要・コード・レスポンシブの表示を検証できます。
 
-※データ部分は表示確認用のダミーです。正式版は近日公開致します。`;
+※現在は表示確認用のダミーデータを掲載しています。正式版は近日公開予定です。`;
 
 const GALLERY_CARDS = UI_PARTS.filter((item) => SELECT_ITEMS_ID.includes(item.id));
 

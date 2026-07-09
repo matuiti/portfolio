@@ -1,6 +1,6 @@
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
-import { SKILL_CARDS_DATA } from './data';
+import { SKIIL_DESCRIPTION, SKILL_CARDS_DATA } from './data';
 import { SkillCard } from './SkillCard';
 import styles from './SkillsSection.module.css';
 
@@ -17,7 +17,7 @@ export const SkillsSection = () => {
               className='js-fuwa-fade'
             />
             <p className={`${styles.description} js-fuwa-fade`}>
-              フロントエンド技術を柱としつつ、サーバーサイドなどの周辺知識も随時拡充してます。
+              {SKIIL_DESCRIPTION}
             </p>
           </div>
           <div className={`${styles.cardGrid} js-fuwa-fade`}>
