@@ -106,7 +106,7 @@ function WorksPageContent() {
       <div className='section-padding-x pb-15 pt-10 default:pt-12.5 bg-light-gray'>
         <TitleAndCount title={renderedTitle} count={totalHitCount} />
         <p className='mt-[calc(10/16*1rem)]'>
-          機密保持契約を遵守するため、実案件の一部については内容を抽象化して掲載しております。
+          機密保持のため、内容の一部を抽象化して掲載しています。
         </p>
         {/* 実績カードグリッド */}
         {displayWorks.length ? (

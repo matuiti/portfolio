@@ -1,4 +1,3 @@
-// src/components/ui/DirectMailTextLink/index.tsx
 'use client';
 
 import { Mail } from '@/components/ui/Icons';

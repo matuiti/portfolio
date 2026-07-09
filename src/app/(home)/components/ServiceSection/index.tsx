@@ -31,10 +31,8 @@ export const ServiceSection = () => {
             ))}
           </div>
           <div className={`${styles.sectionFoot} js-fuwa-fade`}>
-            <p className='leading-normal text-center'>
-              <span className='inline-block'>その他、ご要望に応じて</span>
-              <span className='inline-block'>柔軟に対応致します。</span>
-            </p>
+            業務内容や対応可否についてご不明な点がございましたら、<br />
+            いつでもお気軽にお問い合わせください。
             <MainButton href='/#contact'>お問い合わせはこちら</MainButton>
           </div>
         </div>

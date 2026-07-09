@@ -102,9 +102,9 @@ export const MainVisual = () => {
               <span className={`${mvItemClass}`}>技術者でありたい</span>
             </h1>
             <p className={`${mvItemClass} ${styles.subCopyText}`}>
-              ユーザー・管理者・技術者にとって
+              ユーザー、管理者、そして技術者へ。
               <br />
-              「分かりやすい」実装を目指します
+              三者の視点に寄り添う、見通しの良い実装を追求しています。
             </p>
           </div>
           <div
