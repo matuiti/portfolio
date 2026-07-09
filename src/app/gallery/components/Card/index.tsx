@@ -51,12 +51,19 @@ export const Card = ({ item, onExpand }: CardProps) => {
 
         {/* コンテンツエリア */}
         <div className='relative flex flex-col flex-1'>
-          <div className='flex-1 h-full min-h-[calc(168.82/16*1rem)] tablet:min-h-[calc(196.34/16*1rem)] overflow-hidden'>
-            <div className='aspect-[300/168.82] tablet:aspect-[350/196.34] h-full'>
+          <div className='relative flex-1 h-full min-h-[calc(168.82/16*1rem)] tablet:min-h-[calc(196.34/16*1rem)] overflow-hidden'>
+            <div
+              className={`${
+                activeTab === 'code'
+                  ? 'absolute inset-0 w-full h-full'
+                  : 'h-full aspect-[300/168.82] tablet:aspect-[350/196.34]'
+              }`}
+            >
               {activeTab === 'description' && <DescriptionPanel item={item} />}
 
               {activeTab === 'code' && (
-                <div className='h-full w-full'>
+                <div className='h-full w-full min-w-0'>
+                  {' '}
                   <CodePanel item={item} />
                 </div>
               )}
