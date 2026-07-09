@@ -27,7 +27,7 @@ export const PREVIEW_PANEL_SETTINGS = {
 export const PREVIEW_MODAL_SETTINGS = {
   MIN_WIDTH: 350,
   MAX_WIDTH: 1920,
-  DEFAULT_WIDTH: 1200,
+  DEFAULT_WIDTH: 375,
 } as const;
 
 /**
