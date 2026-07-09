@@ -24,10 +24,10 @@ export const FooterMenuItem = ({
     <>
       <span
         className={cn(
-          'absolute -left-3 w-2 h-2 rounded-full bg-current tablet:static transition-all duration-300',
+          'absolute -left-3 bottom-[0.6em] w-2 h-2 -mt-[0.1em] rounded-full bg-current transition-all duration-300',
           isActive
-            ? 'opacity-100 tablet:w-2 tablet:h-2 tablet:shrink-0'
-            : 'opacity-0 tablet:w-0 tablet:h-0',
+            ? 'opacity-100 mobile:static mobile:inline-flex mobile:align-middle mobile:items-center mobile:mb-[0.2em]'
+            : 'opacity-0',
         )}
         aria-hidden
       />
@@ -42,7 +42,7 @@ export const FooterMenuItem = ({
   return (
     <Link
       href={href}
-      className={cn(base(), 'gap-y-1', isActive && 'tablet:gap-1')}
+      className={cn(base(), 'gap-y-1', isActive && 'mobile:gap-1')}
     >
       {content}
     </Link>
