@@ -16,7 +16,7 @@ export type ServiceItem = {
 export const SERVICES: ServiceItem[] = [
   {
     id: 'service-01',
-    title: 'Webコーディング',
+    title: 'フロントエンドコーディング',
     description: `モダンフロントエンドの技術を駆使して高品質なコーディングを提供します。
     要件に応じて、SEO・アクセシビリティを考慮したサイトの強化目的の実装も可能です。`,
     Icon: ServiceWeb,

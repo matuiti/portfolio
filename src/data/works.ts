@@ -1,13 +1,10 @@
 import { Work, WorkCategory } from '@/types/work';
 
 export const WORK_CATEGORIES: { label: string; id: WorkCategory }[] = [
-  { label: 'すべて', id: 'all' },
-  { label: 'Web制作', id: 'web' },
-  { label: 'WordPress', id: 'wordpress' },
-  { label: 'アプリケーション', id: 'app' },
-  { label: 'ゲーム', id: 'game' },
-  // { label: "実案件", id: "client" },
-  // { label: "非公開", id: "nda" },
+  { label: 'ALL', id: 'all' },
+  { label: 'WEB', id: 'web' },
+  { label: 'APP', id: 'app' },
+  { label: 'GAME', id: 'game' },
 ];
 
 /**
@@ -149,7 +146,7 @@ export const ALL_WORKS: Work[] | [] = [
   {
     id: 'w-wp-maintenance-hotels',
     title: 'Web制作会社との長期業務委託 / 複数プロジェクト並行対応',
-    category: ['wordpress'],
+    category: ['web'],
     tags: [
       'WordPress',
       'PHP',
@@ -240,7 +237,7 @@ export const ALL_WORKS: Work[] | [] = [
   {
     id: 'w-wp-original-theme',
     title: 'WordPressオリジナルテーマ開発',
-    category: ['wordpress'],
+    category: ['web'],
     tags: [
       'WordPress',
       'PHP',
