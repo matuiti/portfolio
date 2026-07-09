@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { MainButton } from '@/components/ui/Buttons/MainButton';
 import { GalleryUIPart } from '@/types/gallery';
-import { UI_PARTS } from '@/data/gallery-parts';
+import { SELECT_ITEMS_ID, UI_PARTS } from '@/data/gallery-parts';
 import { PreviewModal } from '@/gallery/components/Card/preview/PreviewModal';
 import { CardSlider } from './CardSlider';
 import styles from './GallerySection.module.css';
@@ -14,8 +14,7 @@ const MESSAGE = `ギャラリーのカードからは、概要・コード・レ
 
 ※データ部分は表示確認用のダミーです。正式版は近日公開致します。`;
 
-const SELECT_IDS = ['modal03', 'card-new', 'primary-btn4'];
-const GALLERY_CARDS = UI_PARTS.filter((item) => SELECT_IDS.includes(item.id));
+const GALLERY_CARDS = UI_PARTS.filter((item) => SELECT_ITEMS_ID.includes(item.id));
 
 export const GallerySection = () => {
   const [selectedUIPart, setSelectedUIPart] = useState<GalleryUIPart | null>(

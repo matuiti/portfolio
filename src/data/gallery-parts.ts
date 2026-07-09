@@ -1,5 +1,6 @@
 import { GalleryUIPart } from '@/types/gallery';
 
+export const SELECT_ITEMS_ID = ['card-3d-tilt', 'button-ripple-effect', 'modal-accessible'];
 export const UI_PARTS: GalleryUIPart[] = [
   {
     id: 'card-3d-tilt',
