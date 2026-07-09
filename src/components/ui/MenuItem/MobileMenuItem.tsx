@@ -26,7 +26,7 @@ export const MobileMenuItem = ({
     <>
       <span
         className={cn(
-          'absolute -left-3 w-2 h-2 rounded-full bg-current transition-all duration-300',
+          'absolute -left-3 -mt-[0.2em] w-2 h-2 rounded-full bg-current transition-all duration-300',
           isActive ? 'opacity-100' : 'opacity-0',
         )}
         aria-hidden

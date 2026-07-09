@@ -18,7 +18,7 @@ const footerStyles = tv({
     logoWrapper:
       'cursor-default tablet:cursor-pointer hover:opacity-hover transition-opacity w-[150px] mobile:w-[220px] h-auto duration-300 ease-in-out',
     menuList:
-      'flex flex-col justify-start items-start ml-[calc(11/16*1rem)] mobile:ml-0 mobile:flex-row mobile:items-center mobile:justify-center gap-y-[calc(12/16*1rem)] gap-x-[calc(14/16*1rem)] flex-wrap',
+      'flex flex-col justify-start items-start ml-[calc(11/16*1rem)] mobile:ml-0 mobile:flex-row mobile:items-center mobile:justify-center gap-y-[calc(12/16*1rem)] gap-x-[calc(16/16*1rem)] flex-wrap',
     bottomArea: 'mt-5 pt-5 border-t border-dark-gray',
     privacyPolicyWrapper:
       'text-white text-[calc(14/16*1rem)] tracking-wider text-center mb-5',

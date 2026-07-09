@@ -24,7 +24,7 @@ export const HeaderMenuItem = ({
     <Link href={href} className={cn(base(), isActive ? 'gap-1' : 'gap-0')}>
       <span
         className={cn(
-          'rounded-full bg-current transition-all duration-300',
+          '-mt-[0.1em] rounded-full bg-current transition-all duration-300',
           isActive ? 'w-2 h-2 shrink-0' : 'w-0 h-0',
         )}
         aria-hidden
