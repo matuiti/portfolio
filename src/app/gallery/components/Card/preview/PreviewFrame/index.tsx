@@ -100,7 +100,7 @@ export const PreviewFrame = ({ url }: PreviewFrameProps) => {
           <iframe
             ref={iframeRef}
             src={url}
-            className={`p-[0.8em] bg-medium-gray w-full h-full border-none transition-opacity duration-700 ${
+            className={`w-full h-full border-none transition-opacity duration-700 ${
               status === 'success' ? 'opacity-100' : 'opacity-0'
             }`}
             sandbox='allow-scripts allow-same-origin'
