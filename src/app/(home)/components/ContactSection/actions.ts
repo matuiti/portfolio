@@ -1,4 +1,3 @@
-// src / app / home / components / ContactSection / actions.ts;
 'use server';
 
 import { Resend } from 'resend';
