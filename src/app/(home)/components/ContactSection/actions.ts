@@ -37,6 +37,16 @@ export async function sendContactAction(
 
   const data = validatedFields.data;
 
+  // 宛先の確認（未設定なら Turnstile の検証や送信を行わずに中断する）
+  const to = process.env.CONTACT_EMAIL_TO;
+  if (!to) {
+    console.error('[contact] CONTACT_EMAIL_TO が未設定です');
+    return {
+      status: 'error',
+      message: '現在フォームを利用できません。お手数ですが直接メールでご連絡ください。',
+    };
+  }
+
   // 2. Cloudflare Turnstile トークンの検証
   const turnstileToken = data['cf-turnstile-response'];
 
@@ -70,13 +80,21 @@ export async function sendContactAction(
   try {
     const { error: resendError } = await resend.emails.send({
       from: SITE_CONFIG.email.from,
-      to: [process.env.CONTACT_EMAIL_FROM || SITE_CONFIG.email.admin],
+      to: [to],
       subject: `【お問い合わせ】${data.subject}`,
       replyTo: data.email,
       react: ContactEmail({ ...data }),
     });
 
     if (resendError) {
+      // 宛先アドレスがログに残らないよう、メッセージ中のアドレスは伏せる
+      console.error('[contact] Resend がエラーを返しました', {
+        name: resendError.name,
+        message: resendError.message.replace(
+          /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g,
+          '[redacted]',
+        ),
+      });
       return {
         status: 'error',
         message: 'メール送信中にエラーが発生しました。',

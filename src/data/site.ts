@@ -13,7 +13,7 @@ export const SITE_CONFIG: SiteConfig = {
   },
   email: {
     from: 'Contact Form <contact@matuba-code.com>', // 認証済み独自ドメイン
-    admin: 'removed@example.invalid', // 通知を受け取る実アドレス
+    admin: process.env.CONTACT_EMAIL_TO ?? '', // 通知を受け取る宛先（環境変数 CONTACT_EMAIL_TO から読む）
     directUser: 'contact', // 直接連絡用の設定
     directDomain: 'matuba-code.com', // 直接連絡用の設定
   },
